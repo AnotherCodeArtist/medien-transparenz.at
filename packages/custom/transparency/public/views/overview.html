@@ -1,0 +1,39 @@
+<section class="container">
+
+
+    <div data-ng-controller="OverviewCtrl">
+        <div class="alert alert-danger" data-ng-show="error">{{error}}</div>
+        <h2 translate class="text-center">Payments by Transfer Type</h2>
+
+        <div data-ng-repeat="tType in types" class="text-center">
+            <h3 class="text-center">{{typeTexts[tType]|translate}}</h3>
+
+            <div class="bar">
+                <nvd3-multi-bar-chart
+                        data="data[tType]"
+                        showXAxis="true"
+                        showYAxis="false"
+                        tooltips="true"
+                        showLegend="true">
+                </nvd3-multi-bar-chart>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th translate class="text-center">Quarter</th>
+                        <th class="text-center" data-ng-repeat="entry in data[tType]">{{entry.key}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="q in [0,1,2,3]">
+                        <td>{{q+1}}</td>
+                        <td data-ng-repeat="index in years()">{{data[tType][index].values[q][1] | number:2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>

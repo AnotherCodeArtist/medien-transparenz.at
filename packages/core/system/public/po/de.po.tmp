@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of Entries according to §2 (Media Cooperation)"
+msgstr "Anzahl der Zahlungen nach §2 MedKF-TG"
+
+#: packages/transparency/public/views/upload.html
+msgid ""
+"Number of Entries according to §31 ORF-G (Charges for National Broadcasting "
+"Company)"
+msgstr "Anzahl der Zahlungen gemäß §31 ORF-G (Programmentgelt)"
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of Entries according to §4 (Funding)"
+msgstr "Anzahl der Zahlungen gemäß §4 (Förderungen)"
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of non-emtpy entries"
+msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
+
+#: packages/transparency/public/views/upload.html
+msgid "Results of the Upload"
+msgstr "Ergebnis des Uploads"
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §2 (Media Cooperation)"
+msgstr "Summer der Zahlungen gemäß §2 MedKF-TG (Medienkooperationen)"
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §31 ORF-G"
+msgstr "Summe der Zahlungen gemäß §31 ORF-G"
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §4 (Funding)"
+msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount of all entries"
+msgstr "Summe aller Zahlungen"
+
+#: packages/transparency/public/views/upload.html
+msgid "Upload new Media Transparency Report"
+msgstr "Einen neuen Quartalsbericht hochladen"

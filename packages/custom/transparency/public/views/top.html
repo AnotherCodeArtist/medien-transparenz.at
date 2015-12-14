@@ -1,0 +1,91 @@
+<section class="container">
+    <div data-ng-controller="TopEntriesCtrl">
+        <h1 translate>Top Spenders and Recipients</h1>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span translate>Settings</span>
+                <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
+                        ><i
+                        class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+            </div>
+            <div class="panel-body" collapse="!showSettings">
+
+                <div class="row">
+                    <div class="col-sm-2 col-lg-2">
+                        <div translate>Years</div>
+                        <div class="checkbox" data-ng-repeat="year in years">
+                            <label>
+                                <input id="year{{year}}" type="checkbox" name="name"
+                                       ng-model="year.checked"/>{{year.year}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-lg-2">
+                        <div translate>Quarters</div>
+                        <div class="checkbox" data-ng-repeat="quarter in quarters">
+                            <label>
+                                <input id="quarter{{quarter.quarter}}" type="checkbox" name="quarter"
+                                       ng-model="quarter.checked"/>Q{{quarter.quarter}}
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-2 col-lg-2">
+                        <div translate>Spender/Recipient</div>
+                        <div class="radio" data-ng-repeat="orgType in orgTypes">
+                            <label>
+                                <input type="radio" id="{{orgType.value}}" name="t"
+                                       ng-model="$parent.orgType" ng-value="orgType.value"/>
+                                <span>{{orgType.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-lg-5">
+                        <div translate>Payment Types</div>
+                        <div class="checkbox" data-ng-repeat="pType in typesText">
+                            <label>
+                                <input type="checkbox" name="pType" translate
+                                       ng-model="pType.checked"/><span>{{pType.text}}</span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-1 col-lg-1">
+                        <div translate>Top</div>
+                        <select data-ng-model="rank"
+                                ng-options="rank for rank in ranks"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="error" class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
+        </div>
+        <div class="pie">
+            <!--div nvd3-pie-chart
+                 data="pieData"
+                 id="pieChartTop"
+                 width="550"
+                 height="650"
+                 x="xFunction()"
+                 y="yFunction()"
+                 tooltips="true"
+                 showLabels="true"
+                 showValues="true"
+                 labelType="key"
+                 tooltips="true"
+                 tooltipcontent="toolTipContentFunction()"
+                    >
+                <svg height="500"></svg>
+            </div-->
+        </div>
+        <div class="pie">
+            <tpa-pie-chart id="myPie" data="pieData"
+                           x="x" y="y" show-legend="false"
+                           tooltip-fn="toolTipContentFunction"
+                           go-fn="go"/>
+        </div>
+    </div>
+</section>

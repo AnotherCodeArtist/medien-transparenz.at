@@ -1,0 +1,48 @@
+<section class="container">
+    <div>
+        <div class="text-center query bg-primary">
+            <form class="form-inline">
+                <input type="text" ng-model="name"
+                       class="form-control"
+                       placeholder="e.g. Ministerium" size="40"/>
+                <button ng-click="search()" translate type="submit" class="btn btn-default">Search</button>
+            </form>
+        </div>
+
+
+        <br/>
+
+        <div ng-show="result">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" ng-click="orgCollapse = !orgCollapse"><span translate>Hits for Organisations</span> <span
+                        class="badge badge-important">{{result.org.length}}</span></a>
+                    <a href="#" class="btn pull-right" ng-click="orgCollapse = !orgCollapse"><i
+                            class="glyphicon {{!orgCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                </div>
+                <div class="panel-body" collapse="orgCollapse">
+                    <ul ng-repeat="org in result.org">
+                        <li>
+                            <a ui-sref="showflow({name: org.name, years: org.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'org'})">{{org.name}}</a>
+                            <span class="label label-primary year" ng-repeat="year in org.years">{{year}}</span> <span
+                                class="pull-right badge">&euro; {{org.total | number:2}}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" ng-click="mediaCollapse = !mediaCollapse"><span translate>Hits for Media</span> <span
+                        class="badge badge-important">{{result.media.length}}</span></a>
+                    <a href="#" class="btn pull-right" ng-click="mediaCollapse = !mediaCollapse"><i
+                            class="glyphicon {{!mediaCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                </div>
+                <div class="panel-body" collapse="mediaCollapse">
+                    <ul ng-repeat="media in result.media">
+                        <li>
+                            <a ui-sref="showflow({name: media.name, years: media.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'media'})">{{media.name}}</a>
+                            <span class="label label-primary year" ng-repeat="year in media.years">{{year}}</span> <span
+                                class="pull-right badge">&euro; {{media.total | number:2}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

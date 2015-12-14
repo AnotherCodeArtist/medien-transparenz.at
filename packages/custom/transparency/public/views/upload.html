@@ -1,0 +1,46 @@
+<section class="container">
+<div data-ng-controller="UploadController">
+    <h1 translate>Upload new Media Transparency Report</h1>
+    <div class="alert alert-danger" ng-show="error">{{error}}</div>
+    <input type="file" ngf-select="onFileSelect($files)">
+    <div data-ng-show="feedback">
+        <ul class="list-group">
+            <li class="list-group-item active" translate>
+                Results of the Upload
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.entries}}</span>
+                <span translate>Number of non-emtpy entries</span>
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.sumTotal | number:2}}</span>
+                <span translate>Total amount of all entries</span>
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.paragraph2}}</span>
+                <span translate>Number of Entries according to §2 (Media Cooperation)</span>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{feedback.sumParagraph2 | number:2}}</span>
+                <span translate>Total amount according to §2 (Media Cooperation)</span>
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.paragraph4}}</span>
+                <span translate>Number of Entries according to §4 (Funding)</span>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{feedback.sumParagraph4 | number:2}}</span>
+                <span translate>Total amount according to §4 (Funding)</span>
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.paragraph31}}</span>
+                <span translate>Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)</span>
+            </li>
+            <li class="list-group-item" >
+                <span class="badge">{{feedback.sumParagraph31 | number:2}}</span>
+                <span translate>Total amount according to §31 ORF-G</span>
+            </li>
+        </ul>
+    </div>
+</div>
+    </section>

@@ -1,0 +1,13 @@
+{
+  "name": "transparency",
+  "version": "0.0.1",
+  "dependencies": {
+    "ng-file-upload": "~10.1.9",
+    "d3": "~3.4",
+    "nvd3": "~1.1",
+    "angularjs-nvd3-directives": "latest",
+    "angular-gettext": "latest",
+    "d3-plugins-sankey": "~1.1.0",
+    "angular-datatables": "~0.5.1"
+  }
+}

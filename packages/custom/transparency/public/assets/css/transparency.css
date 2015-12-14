@@ -1,0 +1,257 @@
+.transparency-example h1 {
+  background-color: purple
+}
+
+.chart {
+  width: 500px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.chartToolTip h3 {
+  font-size: 90%;
+}
+
+div.nvtooltip {
+  opacity: 0.5;
+  box-shadow: 5px 5px 5px #333;
+}
+
+div.pie,
+div.bar {
+  /*width: 600px;*/
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pie svg {
+  height: 600px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+/*svg {
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+.node rect {
+  cursor: pointer;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link.paragraph2 {
+  stroke: crimson;
+}
+
+.link.paragraph4 {
+  stroke: chartreuse;
+}
+
+.link.paragraph31 {
+  stroke: deepskyblue;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+div.sankeyChart{
+  display: block;
+  width: 100%;
+
+}
+
+.clear-filter {
+  /*color: #ffffff;*/
+  cursor: pointer;
+}
+
+.sankeyChart svg {
+  /*width: 700px;*/
+  margin-left: 10%;
+  /*margin-right: auto;*/
+}
+
+div.loadingDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 150px;
+  z-index: 1000;
+  padding: 4em;
+  margin-top: -75px;
+  margin-left: -250px;
+  background-color: #f5f5f5;
+  color: #222222;
+  box-shadow: 5px 5px 3px #666666;
+  border-radius: 5px;
+  border: 1px solid #999
+}
+
+div.loadingDialog div {
+  font-size: 120%;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  box-shadow: 5px 5px 3px #333333;
+}
+
+div.tooltip.node {
+  background: #e7201a;
+  color: #EEEEEE;
+}
+
+div.query {
+  padding: 1em;
+}
+
+.searchinput {
+  width: 200px;
+}
+.query .ng-valid.ng-dirty,
+.searchinput.ng-valid.ng-dirty {
+  border-color: #ccc;
+}
+
+.searchclear {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  height: 14px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+/*
+div.query input {
+    color: #272b2e;
+    border-bottom-color: #b3b3b3;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #b3b3b3;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #b3b3b3;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #b3b3b3;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-top-style: solid;
+    border-top-width: 1px;
+}*/
+
+.search {
+  border-radius: 40px;
+}
+
+span.label.year {
+  margin-left: 3px;
+}
+
+.intro {
+  background: rgb(64, 150, 238); /* Old browsers */
+  background: -moz-linear-gradient(45deg, rgba(64, 150, 238, 1) 0%, rgba(64, 150, 238, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(64, 150, 238, 1)), color-stop(100%, rgba(64, 150, 238, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg, rgba(64, 150, 238, 1) 0%, rgba(64, 150, 238, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg, rgba(64, 150, 238, 1) 0%, rgba(64, 150, 238, 1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, rgba(64, 150, 238, 1) 0%, rgba(64, 150, 238, 1) 100%); /* IE10+ */
+  background: linear-gradient(45deg, rgba(64, 150, 238, 1) 0%, rgba(64, 150, 238, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4096ee', endColorstr='#4096ee', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+  height: 200px;
+  padding-top: 50px;
+  padding-left: 20px;
+  margin-top: -20px;
+  color: #ecf8ff;
+}
+
+.page-header h1 {
+  text-align: left;
+  color: #ecf8ff;
+}
+
+.intro .page-header small {
+  color: #dbdbff;
+}
+
+nvd3-multi-bar-chart svg {
+  width: 600px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 700px) {
+  nvd3-multi-bar-chart svg {
+    width: 400px;
+    height: 300px;
+  }
+
+  .pie svg {
+    height: 400px;
+    width: 400px;
+  }
+
+  div.loadingDialog {
+    width: 350px;
+    height: 150px;
+    padding: 2.5em;
+    margin-top: -75px;
+    margin-left: -175px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  nvd3-multi-bar-chart svg {
+    width: 300px;
+    height: 250px;
+
+  }
+
+  .pie svg {
+    height: 300px;
+    width: 300px;
+
+  }
+
+  div.loadingDialog {
+    width: 250px;
+    height: 150px;
+    padding: 1.5em;
+    margin-top: -75px;
+    margin-left: -125px;
+  }
+}

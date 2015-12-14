@@ -1,0 +1,111 @@
+<section class="container">
+    <div data-ng-controller="FlowCtrl">
+        <div class="loadingDialog" data-ng-show="loading">
+            <div class="text-center"><span translate>Loading Data to Update Diagram ...</span><br/>
+                <progressbar value="progress" max="100" type="info" class="progress-striped active"/>
+            </div>
+
+        </div>
+        <h1 translate>Money Flow</h1>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span translate>Settings</span>
+                <a href="#" class="pull-right btn" title="hide/show"
+                   ng-click="showSettings = !showSettings"><i
+                        class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+            </div>
+            <div class="panel-body" collapse="!showSettings">
+                <div class="row">
+                    <div class="col-sm-3 col-lg-3">
+                        <div translate>Years</div>
+                        <div class="checkbox" data-ng-repeat="year in years">
+                            <label>
+                                <input id="year{{year}}" type="checkbox" name="name"
+                                       ng-model="year.checked"/>{{year.year}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <div translate>Quarters</div>
+                        <div class="checkbox" data-ng-repeat="quarter in quarters">
+                            <label>
+                                <input id="quarter{{quarter.quarter}}" type="checkbox" name="quarter"
+                                       ng-model="quarter.checked"/>Q{{quarter.quarter}}
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <div translate>Payment Types</div>
+                        <div class="checkbox" data-ng-repeat="pType in typesText">
+                            <label>
+                                <input type="checkbox" name="pType"
+                                       ng-model="pType.checked"/>{{pType.text}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div ng-show="org">
+            <h3><a href="#" class="label label-success" ng-click="clearDetails()">{{org.name}} <span class="glyphicon glyphicon-remove-circle"></span></a></h3>
+        </div>
+        <div class="text-center query bg-primary">
+            <div class="btn-group">
+                <input id="searchinput" placeholder="Filter"
+                       ng-model="filter" type="search" class="searchinput form-control">
+                <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
+            </div>
+        </div>
+        <br/>
+        <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
+        </div>
+        <div ng-show="error" class="alert alert-warning" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span translate>Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.</span>
+        </div>
+        <div ng-hide="error" class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            <span translate>Click on the rectangular boxes on either side of the chart to get more information on a particular organization</span>
+        </div>
+        <div class="sankeyChart">
+            <div data-tpa-sankey data="flows" id="mychart"
+                 prog="progress" node-click="showDetails">
+            </div>
+        </div>
+
+        <div ng-show="org">
+            <br/>
+            <h4 translate>Tabular Representation</h4>
+
+            <div class="table-responsive">
+                <table datatable="ng" dt-options="dtOptions" class="row-border hover">
+                    <thead>
+                    <tr>
+                        <th ng-show="org.orgType === 'org'" translate>Media</th>
+                        <th ng-show="org.orgType === 'media'" translate>Organisations</th>
+                        <th translate>Payment Type</th>
+                        <th translate>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in flowData">
+                        <td ng-show="org.orgType === 'org'">{{item.media}}</td>
+                        <td ng-show="org.orgType === 'media'">{{item.organisation}}</td>
+                        <td>§{{item.transferType}}</td>
+                        <td>{{item.amount|number:2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <br/>
+        </div>
+    </div>
+</section>

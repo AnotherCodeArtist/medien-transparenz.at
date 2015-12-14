@@ -1,0 +1,266 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: packages/transparency/public/views/impress.html
+msgid ""
+"All Data that is published via this site it taken from the quarterly reports published by RTR without any modifications.\n"
+"    Data quality is far from being perfect, since single media corporation occur several times due to variant forms of spelling."
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Amount"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Are they involved?"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the\n"
+"            Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die\n"
+"            Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen\n"
+"            Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report\n"
+"            on their spending in advertising and funding of media cooperations. Reported data is published by the\n"
+"            <a href=\"http://www.rtr.at\">Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use\n"
+"            interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"At a single glance checkout which organisations are the biggest spenders and which media companies benefit most\n"
+"                    from public money spent on advertising our by receiving public funding."
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Background"
+msgstr ""
+
+#: packages/transparency/public/views/top.html
+msgid "Click on a segment of the pie chart to get more information on a particular organization"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "Contact Person"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "Exclusion of Liability"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid ""
+"FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by RTR. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
+"        We are not liable for the interruption of service (eg. in cases of server down-time), incorrect representation of data or software errors."
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up\n"
+"                    in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
+msgstr ""
+
+#: packages/transparency/public/views/search.html
+msgid "Hits for Media"
+msgstr ""
+
+#: packages/transparency/public/views/search.html
+msgid "Hits for Organisations"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "How this web-site came into being"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in\n"
+"                    this reporting, check out our lists!"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"If you want to figure out whether some company or media cooperation is listed in these reports better use our\n"
+"                    search!"
+msgstr ""
+
+#: packages/system/server/views/includes/foot.html
+msgid "Impress"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid ""
+"Let's see how organisations distribute their money and where media companies get their money from!\n"
+"                    Use the filter to see what you are interested in."
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Loading Data to Update Diagram ..."
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Media"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Media Transparency Austria"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Money Flow"
+msgstr ""
+
+#: packages/transparency/public/views/list.html
+msgid "Number of Entries"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of Entries according to §2 (Media Cooperation)"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of Entries according to §4 (Funding)"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Number of non-emtpy entries"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Organisations"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Overview"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Payment Type"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+#: packages/transparency/public/views/top.html
+msgid "Payment Types"
+msgstr ""
+
+#: packages/transparency/public/views/overview.html
+msgid "Payments by Transfer Type"
+msgstr ""
+
+#: packages/transparency/public/views/overview.html
+msgid "Quarter"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+#: packages/transparency/public/views/top.html
+msgid "Quarters"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Results of the Upload"
+msgstr ""
+
+#: packages/transparency/public/views/search.html
+msgid "Search"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+#: packages/transparency/public/views/top.html
+msgid "Settings"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "Source of Data"
+msgstr ""
+
+#: packages/transparency/public/views/top.html
+msgid "Spender/Recipient"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Tabular Representation"
+msgstr ""
+
+#: packages/transparency/public/views/impress.html
+msgid "This solution was the basis for the now available site"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
+msgstr ""
+
+#: packages/transparency/public/views/top.html
+msgid "Top"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Top Player"
+msgstr ""
+
+#: packages/transparency/public/views/top.html
+msgid "Top Spenders and Recipients"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §2 (Media Cooperation)"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §31 ORF-G"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount according to §4 (Funding)"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Total amount of all entries"
+msgstr ""
+
+#: packages/transparency/public/views/upload.html
+msgid "Upload new Media Transparency Report"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "View details »"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Where the money flows?"
+msgstr ""
+
+#: packages/transparency/public/views/index.html
+msgid "Who's involved?"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+#: packages/transparency/public/views/top.html
+msgid "Years"
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
+msgstr ""
+
+#: packages/transparency/public/views/flow.html
+msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
+msgstr ""

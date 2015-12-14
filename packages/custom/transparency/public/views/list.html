@@ -1,0 +1,32 @@
+<section class="container">
+    <h1>{{title}}</h1>
+
+    <div class="pull-right">
+        <label><span translate>Number of Entries</span>
+            <select data-ng-model="size" class="btn btn-default" ng-options="size for size in sizes"></select>
+        </label>
+    </div>
+    <div class="alert alert-danger" ng-show="error">
+        {{error}}
+    </div>
+
+    <pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                boundary-links="true"></pagination>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="org in items">
+            <div class="row">
+                <div class="col-sm-10">
+                    <a ui-sref="showflow({name: org.name, years: org.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
+                    <span class="label label-primary year" ng-repeat="year in org.years">{{year}}</span>
+                </div>
+                <div class="col-sm-2">
+                    <span class="badge">&euro; {{org.total | number:2}}</span>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+    <pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                boundary-links="true"></pagination>
+</section>
