@@ -54,6 +54,7 @@
     "view-helpers": "latest"
   },
   "devDependencies": {
+    "charenc": "0.0.1",
     "connect-modrewrite": "latest",
     "del": "latest",
     "expect.js": "latest",
@@ -73,6 +74,7 @@
     "gulp-util": "latest",
     "jasmine": "latest",
     "jasmine-reporters": "latest",
+    "jshint": "^2.9.1",
     "jshint-stylish": "latest",
     "karma": "latest",
     "karma-chrome-launcher": "latest",
@@ -88,6 +90,7 @@
     "karma-requirejs": "latest",
     "karma-script-launcher": "latest",
     "mocha": "latest",
+    "phantomjs-prebuilt": "^2.1.4",
     "protractor": "latest",
     "require-dir": "latest",
     "requirejs": "latest",
