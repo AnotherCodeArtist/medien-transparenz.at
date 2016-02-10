@@ -19,7 +19,7 @@
                     <a href="#" class="btn pull-right" ng-click="orgCollapse = !orgCollapse"><i
                             class="glyphicon {{!orgCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
                 </div>
-                <div class="panel-body" collapse="orgCollapse">
+                <div class="panel-body" uib-collapse="orgCollapse">
                     <ul ng-repeat="org in result.org">
                         <li>
                             <a ui-sref="showflow({name: org.name, years: org.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'org'})">{{org.name}}</a>
@@ -34,7 +34,7 @@
                     <a href="#" class="btn pull-right" ng-click="mediaCollapse = !mediaCollapse"><i
                             class="glyphicon {{!mediaCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
                 </div>
-                <div class="panel-body" collapse="mediaCollapse">
+                <div class="panel-body" uib-collapse="mediaCollapse">
                     <ul ng-repeat="media in result.media">
                         <li>
                             <a ui-sref="showflow({name: media.name, years: media.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'media'})">{{media.name}}</a>

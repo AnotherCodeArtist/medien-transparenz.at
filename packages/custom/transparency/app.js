@@ -98,6 +98,6 @@ Transparency.register(function(app, auth, database) {
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
   Transparency.angularDependencies(['gettext','ngFileUpload','legendDirectives',
-    'nvd3ChartDirectives','datatables','datatables.buttons']);
+    'nvd3ChartDirectives','datatables','ui.bootstrap','datatables.buttons']);
   return Transparency;
 });
