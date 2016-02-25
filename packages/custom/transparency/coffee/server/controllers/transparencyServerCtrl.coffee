@@ -14,18 +14,18 @@ Q = require 'q'
 
 Transfer = mongoose.model 'Transfer'
 
-regex = /(.+?);(\d{4})(\d);(\d{1,2});\d;(.+?);(\d+(?:,\d{1,2})?).*/
+regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
 lineToTransfer = (line, feedback) ->
     m = line.match regex
     #console.log "Result: #{m} for line #{line}"
     if m
         transfer = new Transfer()
-        transfer.organisation = m[1]
+        transfer.organisation = m[1].replace '""','"'
         transfer.year = parseInt m[2]
         transfer.quarter = parseInt m[3]
         transfer.transferType = parseInt m[4]
-        transfer.media = m[5]
+        transfer.media = m[5].replace '""','"'
         transfer.period = m[3] + m[2]
         transfer.amount = parseFloat m[6].replace ',', '.'
         transfer.save()
