@@ -48,6 +48,6 @@ angular.module 'mean.transparency'
         templateUrl: 'transparency/views/list.html'
         controller: 'ListOrgCtrl'
     $stateProvider.state 'listMedia',
-        url: '/media?orgType&page&size'
+        url: '/medialist?orgType&page&size'
         templateUrl: 'transparency/views/list.html'
         controller: 'ListMediaCtrl'

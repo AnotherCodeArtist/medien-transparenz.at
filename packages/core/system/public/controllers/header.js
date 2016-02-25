@@ -31,7 +31,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     queryMenu('account', []);
 
 
-    $scope.isCollapsed = false;
+    $scope.isCollapsed = true;
 
     $rootScope.$on('loggedin', function() {
       queryMenu('main', defaultMainMenu);
