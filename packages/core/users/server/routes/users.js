@@ -28,10 +28,8 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   if(config.strategies.local.enabled)
   {
       // Setting up the users api
-      /*
       app.route('/api/register')
         .post(users.create);
-      */
 
       app.route('/api/forgot-password')
         .post(users.forgotpassword);
@@ -43,10 +41,9 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       app.route('/api/login')
         .post(passport.authenticate('local', {
           failureFlash: false
-        }), function(req, res) {      
+        }), function(req, res) {
           var payload = req.user;
-          payload.redirect = req.body.redirect;
-          var escaped = JSON.stringify(payload);      
+          var escaped = JSON.stringify(payload);
           escaped = encodeURI(escaped);
           // We are sending the payload inside the token
           var token = jwt.sign(escaped, config.secret, { expiresInMinutes: 60*5 });
@@ -58,7 +55,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
           });
           res.json({
             token: token,
-            redirect: config.strategies.landingPage
+            redirect: req.body.redirect || config.strategies.landingPage
           });
         });
   }

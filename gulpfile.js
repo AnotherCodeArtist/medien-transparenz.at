@@ -2,8 +2,6 @@
 
 var gulp = require('gulp');
 
-
-
 var env = process.env.NODE_ENV || 'development';
 /*
 var defaultTasks = ['clean', 'jshint', 'csslint','serve','watch']; // initialize with development settings

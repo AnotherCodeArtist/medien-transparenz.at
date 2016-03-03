@@ -16,8 +16,8 @@ var hasPermissions = function(req, res, next) {
       var permission = req.body.permissions[i];
       if (req.acl.user.allowed.indexOf(permission) === -1) {
             return res.status(401).send('User not allowed to assign ' + permission + ' permission.');
-        };
-    };
+        }
+    }
 
     next();
 };
@@ -32,7 +32,7 @@ module.exports = function(Articles, app, auth) {
   app.route('/api/articles/:articleId')
     .get(auth.isMongoId, articles.show)
     .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, hasPermissions, articles.update)
-    .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, articles.destroy);
+    .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, hasPermissions, articles.destroy);
 
   // Finish with setting up the articleId param
   app.param('articleId', articles.article);

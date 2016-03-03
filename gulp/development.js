@@ -65,6 +65,12 @@ gulp.task('less', function() {
     .pipe(gulp.dest('./packages'));
 });
 
+gulp.task('sass', function() {
+  return gulp.src(paths.sass)
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    .pipe(gulp.dest('./packages'));
+});
+
 gulp.task('devServe', ['env:development'], function () {
 
   plugins.nodemon({

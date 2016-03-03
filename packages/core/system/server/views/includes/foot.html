@@ -3,7 +3,7 @@
     <div class="pull-right">&copy; FH JOANNEUM, Graz</div>
 </footer>
 {% for file in aggregatedassets.footer.js %}
-<script type="text/javascript" src="{{file}}"></script>
+  <script type="text/javascript" src="{{file}}"></script>
 {% endfor %}
 
 <script type="text/javascript">
@@ -15,5 +15,5 @@
 </script>
 
 {% if (process.env.NODE_ENV == 'development') %}
-<script type="text/javascript" src="{{'//' + req.hostname + ':35729/livereload.js'}}"></script>
+  <script type="text/javascript" src="{{'//' + req.hostname + ':35729/livereload.js'}}"></script>
 {% endif %}
