@@ -16,13 +16,16 @@ Transparency.register(function(app, auth, database) {
   //We enable routing. By default the Package Object is passed to the routes
   Transparency.routes(app, auth, database);
 
+  var icons = 'transparency/assets/img/icons/';
+
   //We are adding a link to the main menu for all authenticated users
 
   Transparency.menus.add({
     title: 'Upload Report',
     link: 'add_report',
-    roles: ['authenticated'],
-    menu: 'main'
+    roles: ['admin'],
+    menu: 'admin',
+    icon: icons + 'hard-drive-upload.png'
   });
   Transparency.menus.add({
     title: 'Overview',

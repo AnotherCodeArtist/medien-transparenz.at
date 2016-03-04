@@ -37,7 +37,7 @@
                 <ul class="navbar-nav nav" ng-show="hdrctr.hdrvars.authenticated">
                     <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
                         <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                            <span>{{hdrctr.hdrvars.user.name}}</span> <b class="caret"></b>
+                            <span>{{hdrctr.hdrvars.user.name}} - {{hdrctr.hdrvars.isAdmin}}</span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#" ng-click="hdrctr.logout()">Log Out</a></li>
