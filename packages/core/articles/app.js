@@ -20,6 +20,7 @@ Articles.register(function(app, auth, database, circles, swagger) {
 
   
   //We are adding a link to the main menu for all authenticated users
+  /*
   Articles.menus.add({
     'roles': ['authenticated'],
     'title': 'Articles',
@@ -35,7 +36,7 @@ Articles.register(function(app, auth, database, circles, swagger) {
     type: 'post',
     subtype: 'article'
   });
-
+  */
 
   /*
     //Uncomment to use. Requires meanio@0.3.7 or above
