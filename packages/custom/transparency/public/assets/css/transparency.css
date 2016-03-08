@@ -78,6 +78,28 @@ div.sankeyChart{
 
 }
 
+/*fixing interference with circle module styles*/
+.label.year,
+.label.label-success,
+.label.label-default,
+.label.label-primary{
+  text-shadow: none;
+}
+
+h3 .label {
+  font-size: 100%;
+}
+
+a.label {
+  pointer-events: auto;
+}
+
+.sankeyChart .node:hover {
+  stroke-width: 1px;
+  stroke: #666;
+}
+
+
 .clear-filter {
   /*color: #ffffff;*/
   cursor: pointer;

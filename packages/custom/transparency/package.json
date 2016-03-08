@@ -14,5 +14,8 @@
     "connect-multiparty": "latest",
     "q-io": "~2"
   },
+  "scripts": {
+     "postinstall": "bower install"
+  },
   "license": "MIT"
 }

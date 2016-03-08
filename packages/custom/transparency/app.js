@@ -21,7 +21,7 @@ Transparency.register(function(app, auth, database) {
   //We are adding a link to the main menu for all authenticated users
 
   Transparency.menus.add({
-    title: 'Upload Report',
+    title: 'UPLOAD',
     link: 'add_report',
     roles: ['admin'],
     menu: 'admin',

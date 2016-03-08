@@ -180,7 +180,7 @@ module.exports = (Transparency) ->
                 }
             else
                 res.json result
-        .onReject (err) ->
+        .catch (err) ->
             res.status(500).send error: "Could not load money flow"
 
 
@@ -336,5 +336,5 @@ module.exports = (Transparency) ->
         performQuery(type)
         .then (result) ->
             res.json result.length
-        .onReject (err) ->
+        .catch (err) ->
             res.status(500).send error: "Could not determine number of items #{err}"
