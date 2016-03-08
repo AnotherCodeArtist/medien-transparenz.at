@@ -18,7 +18,7 @@ TransferSchema = new Schema
     amount: Number
     year: Number
     quarter: Number
-    period: String
+    period: Number
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]

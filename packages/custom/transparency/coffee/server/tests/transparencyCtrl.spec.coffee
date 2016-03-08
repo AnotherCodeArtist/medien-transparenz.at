@@ -15,7 +15,7 @@ describe 'Transparency Controllers', ->
             quarter: quarter
             year: year
             media: "Media#{id}"
-            period: "#{quarter}#{year}"
+            period: parseInt "#{year}#{quarter}"
             transferType: paragraph
             amount: paragraph * 100
         transfer.save()
@@ -23,9 +23,12 @@ describe 'Transparency Controllers', ->
     beforeEach (done) ->
         createTestTransfer 2, id, 4, 2013 for id in [1..10]
         createTestTransfer 4, id, 4, 2013 for id in [1..5]
-        createTestTransfer 2, id, 1, 2014 for id in [1..5]
-        createTestTransfer 4, id, 1, 2014 for id in [1..8]
-        createTestTransfer 31, id, 1, 2014 for id in [1..2]
+        createTestTransfer 2, id, 1, 2014 for id in [1..5]  #5
+        createTestTransfer 4, id, 1, 2014 for id in [1..8]      #8
+        createTestTransfer 31, id, 1, 2014 for id in [1..2]         #2
+        createTestTransfer 2, id, 2, 2014 for id in [2..10] #5
+        createTestTransfer 4, id, 2, 2014 for id in [5..12]     #4
+        createTestTransfer 31, id, 2, 2014 for id in [1..2]         #0
         done()
 
     describe 'Regex for parsing transparency report', ->
@@ -81,8 +84,10 @@ describe 'Transparency Controllers', ->
             agent.get('http://localhost:3001/api/transparency/periods')
             .end (err, res) ->
                 should.not.exist err
-                res.body.should.have.lengthOf 2
+                res.body.should.have.lengthOf 3
                 res.body[0].year.should.be.exactly 2014
+                res.body[0].quarter.should.be.exactly 2
+                res.body[0].period.should.be.exactly 20142
                 done()
 
     describe 'controller topEntries', ->
@@ -106,19 +111,31 @@ describe 'Transparency Controllers', ->
                 should.not.exist err
                 res.status.should.be.equal 200
                 result = res.body
-                result.should.have.lengthOf 20
+                result.should.have.lengthOf 24
                 should.exists result[0].organisation
                 should.exists result[0].media
                 should.exists result[0].transferType
                 done()
 
-        it "should only load those transfers for the given year", (done) ->
-            agent.get('http://localhost:3001/api/transparency/flows?years=2013')
+        it "should only load those transfers for the given period 1", (done) ->
+            agent.get('http://localhost:3001/api/transparency/flows?from=20142&to=20142&pType=2')
             .end (err,res) ->
                 should.not.exist err
                 res.status.should.be.equal 200
                 result = res.body
-                result.should.have.lengthOf 15
+                result.should.have.lengthOf 9
+                should.exists result[0].organisation
+                should.exists result[0].media
+                should.exists result[0].transferType
+                done()
+
+        it "should only load those transfers for the given period 2", (done) ->
+            agent.get('http://localhost:3001/api/transparency/flows?from=20134&to=20141')
+            .end (err,res) ->
+                should.not.exist err
+                res.status.should.be.equal 200
+                result = res.body
+                result.should.have.lengthOf 20
                 should.exists result[0].organisation
                 should.exists result[0].media
                 should.exists result[0].transferType

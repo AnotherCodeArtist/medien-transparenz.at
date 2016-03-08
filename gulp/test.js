@@ -10,7 +10,7 @@ var plugins = gulpLoadPlugins();
 process.env.NODE_ENV = 'test';
 
 
-gulp.task('test', ['startServer', 'stopServer']);
+gulp.task('test', ['coffee_transparency','startServer', 'stopServer']);
 gulp.task('startServer', function(done) {
   var promise = require('../server.js');
 

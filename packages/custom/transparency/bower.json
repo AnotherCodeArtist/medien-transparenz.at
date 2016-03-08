@@ -8,6 +8,7 @@
     "angularjs-nvd3-directives": "latest",
     "angular-gettext": "latest",
     "d3-plugins-sankey": "~1.1.0",
-    "angular-datatables": "~0.5.1"
+    "angular-datatables": "~0.5.1",
+    "angularjs-slider": "~2.10.2"
   }
 }

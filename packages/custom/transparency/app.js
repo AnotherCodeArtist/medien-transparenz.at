@@ -69,12 +69,14 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('css', 'transparency.css');
   Transparency.aggregateAsset('css', '../lib/datatables/media/css/jquery.dataTables.css');
   Transparency.aggregateAsset('css', '../lib/nvd3/nv.d3.css');
+  Transparency.aggregateAsset('css', '../lib/angularjs-slider/dist/rzslider.css',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/nvd3/nv.d3.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/datatables/media/js/jquery.dataTables.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',{weight:-1});
 
@@ -101,6 +103,6 @@ Transparency.register(function(app, auth, database) {
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
   Transparency.angularDependencies(['gettext','ngFileUpload','legendDirectives',
-    'nvd3ChartDirectives','datatables','ui.bootstrap','datatables.buttons']);
+    'nvd3ChartDirectives','datatables','ui.bootstrap','datatables.buttons','rzModule']);
   return Transparency;
 });

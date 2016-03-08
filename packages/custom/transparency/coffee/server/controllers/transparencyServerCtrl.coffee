@@ -26,7 +26,7 @@ lineToTransfer = (line, feedback) ->
         transfer.quarter = parseInt m[3]
         transfer.transferType = parseInt m[4]
         transfer.media = m[5].replace '""','"'
-        transfer.period = m[3] + m[2]
+        transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         transfer.save()
         feedback.quarter = transfer.quarter
@@ -130,59 +130,56 @@ module.exports = (Transparency) ->
 
 
     flows: (req, res) ->
-        maxLength = parseInt req.query.maxLength or "750"
-        years = req.query.years or []
-        years = [years] if years not instanceof Array
-        quarters = req.query.quarters or []
-        quarters = [quarters] if quarters not instanceof Array
-        paymentTypes = req.query.pType or []
-        paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
-        orgType = req.query.orgType or 'org'
-        name = req.query.name
-        query = {}
-        (query.year =
-            $in: years.map (e)->
-                parseInt(e)) if years.length > 0
-        (query.quarter =
-            $in: quarters.map (e)->
-                parseInt(e)) if quarters.length > 0
-        (query.transferType =
-            $in: paymentTypes.map (e)->
-                parseInt(e)) if paymentTypes.length > 0
-        query[if orgType is 'org' then 'organisation' else 'media'] = name if name
-        if req.query.filter
-            filter = req.query.filter
-            query.$or = [
-                {organisation: { $regex: ".*#{filter}.*", $options: "i"}}
-                {media: { $regex: ".*#{filter}.*", $options: "i"}}
-            ]
-        group =
-            _id:
-                organisation: "$organisation"
-                transferType: "$transferType"
-                media: "$media"
-            amount:
-                $sum: "$amount"
-        Transfer.aggregate($match: query)
-        .group(group)
-        .project(
-                organisation: "$_id.organisation"
-                transferType: "$_id.transferType",
-                media: "$_id.media"
-                _id: 0
-                amount: 1)
-        .exec()
-        .then (result) ->
-            if result.length > maxLength
-                res.status(413).send {
-                    error: "You query returns more then the specified maximum od #{maxLength}"
-                    length: result.length
-                }
-            else
-                res.json result
-        .catch (err) ->
-            res.status(500).send error: "Could not load money flow"
-
+        try
+            maxLength = parseInt req.query.maxLength or "750"
+            period = {}
+            period['$gte'] = parseInt(req.query.from) if req.query.from
+            period['$lte'] = parseInt(req.query.to) if req.query.to
+            paymentTypes = req.query.pType or []
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            orgType = req.query.orgType or 'org'
+            name = req.query.name
+            query = {}
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+            query[if orgType is 'org' then 'organisation' else 'media'] = name if name
+            if period.$gte? or period.$lte?
+                query.period = period
+            if req.query.filter
+                filter = req.query.filter
+                query.$or = [
+                    {organisation: { $regex: ".*#{filter}.*", $options: "i"}}
+                    {media: { $regex: ".*#{filter}.*", $options: "i"}}
+                ]
+            group =
+                _id:
+                    organisation: "$organisation"
+                    transferType: "$transferType"
+                    media: "$media"
+                amount:
+                    $sum: "$amount"
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(
+                    organisation: "$_id.organisation"
+                    transferType: "$_id.transferType",
+                    media: "$_id.media"
+                    _id: 0
+                    amount: 1)
+            .exec()
+            .then (result) ->
+                if result.length > maxLength
+                    res.status(413).send {
+                        error: "You query returns more then the specified maximum od #{maxLength}"
+                        length: result.length
+                    }
+                else
+                    res.json result
+            .catch (err) ->
+                res.status(500).send error: "Could not load money flow"
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
         years = req.query.years or []

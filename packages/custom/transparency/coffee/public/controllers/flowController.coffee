@@ -17,6 +17,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.progress = 20
     $scope.showSettings = true
     $scope.org = null
+    $scope.slider =
+        from: 0
+        to: 0
+        options:
+            step:5
+            floor:0
     window.scrollTo 0, 0
     $scope.clearDetails = ->
         $scope.org = null
@@ -37,13 +43,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.loading = false
     flowData = []
     nodeMap = {}
-    pY = TPAService.years()
-    pY.then (res) ->
-        $scope.years = (year:year,checked:false for year in res.data.years)
-        $scope.years[0].checked = true;
     pP = TPAService.periods()
     pP.then (res) ->
-        $scope.periods = res.data
+        $scope.periods = res.data.reverse()
+        $scope.slider.options.ceil = ($scope.periods.length - 1)*5
+        $scope.slider.from = $scope.slider.options.ceil
+        $scope.slider.to = $scope.slider.options.ceil
+        $scope.slider.options.translate = (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
         $scope.quarters[4-$scope.periods[0].quarter].checked = true
     $scope.quarters = (quarter:quarter,checked:false for quarter in [4..1])
     types = [2,4,31]
@@ -55,11 +61,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     parameters = ->
         params = {} #
         params.maxLength = $scope.maxNodes
-        years = (v.year for v in $scope.years when v.checked)
-        quarters = (v.quarter for v in $scope.quarters when v.checked)
+        params.from = $scope.periods[$scope.slider.from/5].period
+        params.to =$scope.periods[$scope.slider.to/5].period
         types = (v.type for v in $scope.typesText when v.checked)
-        (params.years = years) if years.length > 0
-        (params.quarters = quarters) if quarters.length > 0
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
         if $scope.org
@@ -103,12 +107,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org = {} if $state.params.name or $state.params.orgType
         $scope.org.name = $state.params.name if $state.params.name
         $scope.org.orgType = $state.params.orgType if $state.params.orgType
-        if $state.params.years?
-            years = toArray($state.params.years).map (v) -> parseInt v
-            y.checked = y.year in years for y in $scope.years
-        if $state.params.quarters?
-            quarters = toArray($state.params.quarters).map (v) -> parseInt v
-            q.checked = q.quarter in quarters for q in $scope.quarters
+        $scope.slider.from = $state.params.from if $state.params.from
+        $scope.slider.to = $state.params.to if $state.params.to
         if $state.params.pTypes?
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
@@ -209,10 +209,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 update()
                 filterThreshold = newValue
 
-    $q.all([pY,pP]).then (res) ->
+    $q.all([pP]).then (res) ->
         checkForStateParams()
         update()
-        $scope.$watch('years',change,true)
-        $scope.$watch('quarters',change,true)
+        $scope.$watch('slider.from',change,true)
+        $scope.$watch('slider.to',change,true)
         $scope.$watch('typesText',change,true)
 ]
