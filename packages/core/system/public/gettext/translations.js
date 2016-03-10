@@ -1,6 +1,6 @@
 angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
     /* jshint -W100 */
-    gettextCatalog.setStrings('de', {
+    gettextCatalog.setStrings('de',{
         "Loading Data to Update Diagram ...": "Daten werden geladen und das Diagramm vorbereitet ...",
         "Money Flow": "Zahlungsflüsse",
         "Number of Entries according to §2 (Media Cooperation)": "Anzahl der Zahlungen nach §2 MedKF-TG",
@@ -43,8 +43,10 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Impress": "Impressum",
         "Let's see how organisations distribute their money and where media companies get their money from!\n                    Use the filter to see what you are interested in.": "Finden Sie heraus, wie Organisationen Ihre Mittel für Medienarbeit verteilen, und woraus sich Medien in diesem Kontext finanzieren",
         "Media Transparency Austria": "Medientransparenz Austria",
+        "Move the sliders to define a range": "Bewegen Sie die blauen Marker um den Zeitraum zu verändern",
         "Number of Entries": "Anzahl der Einträge",
         "Payment Type": "Zahlungstyp",
+        "Periods": "Zeitraum",
         "Tabular Representation": "Tabellendarstellungen",
         "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian": "Damit möchte diese Web-Seite dazu beitragen, Open Government Initiativen in Österreich populärer zu machen",
         "View details »": "Details anzeigen »",

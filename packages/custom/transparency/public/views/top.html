@@ -13,12 +13,12 @@
 
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
-                        <div translate>Periods</div>
+                        <strong><div translate>Periods</div></strong>
                         <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
-                        <p class="small translate text-info">Move the sliders to define a range</p>
+                        <p class="small text-info" translate>Move the sliders to define a range</p>
                     </div>
                     <div class="col-sm-2 col-lg-2">
-                        <div translate>Spender/Recipient</div>
+                        <strong><div translate>Spender/Recipient</div></strong>
                         <div class="radio" data-ng-repeat="orgType in orgTypes">
                             <label>
                                 <input type="radio" id="{{orgType.value}}" name="t"
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="col-sm-5 col-lg-5">
-                        <div translate>Payment Types</div>
+                        <strong><div translate>Payment Types</div></strong>
                         <div class="checkbox" data-ng-repeat="pType in typesText">
                             <label>
                                 <input type="checkbox" name="pType" translate

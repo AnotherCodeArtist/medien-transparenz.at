@@ -25,7 +25,7 @@ lineToTransfer = (line, feedback) ->
         transfer.year = parseInt m[2]
         transfer.quarter = parseInt m[3]
         transfer.transferType = parseInt m[4]
-        transfer.media = m[5].replace '""','"'
+        transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         transfer.save()

@@ -230,6 +230,11 @@ msgstr "Medientransparenz Austria"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
+#: views/flow.html:23
+#: views/top.html:18
+msgid "Move the sliders to define a range"
+msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
+
 #: packages/transparency/public/views/list.html
 msgid "Number of Entries"
 msgstr "Anzahl der Einträge"
@@ -255,6 +260,11 @@ msgstr "Zahlungstypen"
 #: packages/transparency/public/views/overview.html
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Typ"
+
+#: views/flow.html:21
+#: views/top.html:16
+msgid "Periods"
+msgstr "Zeitraum"
 
 #: packages/transparency/public/views/overview.html
 msgid "Quarter"
