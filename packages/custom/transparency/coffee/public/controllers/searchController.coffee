@@ -8,7 +8,12 @@ app.controller 'SearchCtrl',['$scope','TPAService','$q','$interval','$state','$s
     $scope.name = ''
     $scope.orgCollapse = true
     $scope.mediaCollapse = true
-    TPAService.restoreState itemId, fieldsToStore, $scope
+    $scope.periods = []
+    $scope.firstInYear = (year) -> $scope.periods.filter((p) -> p.year == year).pop().period.toString()
+    $scope.lastInYear = (year) -> $scope.periods.filter((p) -> p.year == year)[0].period.toString()
+    TPAService.periods().then (res) ->
+        $scope.periods = res.data
+        TPAService.restoreState itemId, fieldsToStore, $scope
     $scope.search = ->
         if $scope.name.length > 1
             TPAService.search(name: $scope.name)

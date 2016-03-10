@@ -29,10 +29,12 @@ class TPAService
     restoreState:  (itemId, fieldsToStore, $scope) ->
         savedState = sessionStorage.getItem itemId
         if savedState
-            fieldsToStore.reduce ((s,f) -> $scope[f] = s[f];s) , JSON.parse savedState
-            true
-        else
-            false
+            fieldsToStore.reduce ((s,f) ->
+                if $scope[f] isnt null and typeof $scope[f] is 'object'
+                    angular.merge $scope[f],s[f]
+                else
+                    $scope[f] = s[f]
+                s) , JSON.parse savedState
 
     years: ->
         @$http.get 'api/transparency/years'

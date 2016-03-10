@@ -11,7 +11,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.maxNodes = 800
     $scope.maxExceeded = 0
     $scope.data = {}
-    $scope.years = []
     $scope.filter =''
     $scope.loading = true
     $scope.progress = 20
@@ -23,6 +22,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         options:
             step:5
             floor:0
+            #showTicks: true
+            onEnd: -> change(1,2)
     window.scrollTo 0, 0
     $scope.clearDetails = ->
         $scope.org = null
@@ -37,9 +38,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         catch error
         $scope.loading = true
         $scope.progress = 20
-        timer = $interval makeProgress, 100
+        #timer = $interval makeProgress, 100
     stopLoading = ->
-        $interval.cancel timer
+        #$interval.cancel timer
         $scope.loading = false
     flowData = []
     nodeMap = {}
@@ -50,8 +51,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.slider.from = $scope.slider.options.ceil
         $scope.slider.to = $scope.slider.options.ceil
         $scope.slider.options.translate = (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-        $scope.quarters[4-$scope.periods[0].quarter].checked = true
-    $scope.quarters = (quarter:quarter,checked:false for quarter in [4..1])
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
@@ -59,10 +58,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         nodes: []
         links: []
     parameters = ->
-        params = {} #
+        params = {}
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
-        params.to =$scope.periods[$scope.slider.to/5].period
+        params.to = $scope.periods[$scope.slider.to/5].period
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -79,6 +78,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         ]
     )
 
+
     angular.extend $scope.dtOptions,
         paginationType: 'simple'
         paging:   true
@@ -92,23 +92,19 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
             lengthMenu: gettextCatalog.getString "Display _MENU_ records"
 
-
     toArray = (value) ->
         if typeof value is 'string'
             value.split ','
         else
             value
 
+    #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        #console.log "YEARS"
-        #console.log $state.years
-        #console.log $state.params.years
-        #console.log "===================="
         $scope.org = {} if $state.params.name or $state.params.orgType
         $scope.org.name = $state.params.name if $state.params.name
         $scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.slider.from = $state.params.from if $state.params.from
-        $scope.slider.to = $state.params.to if $state.params.to
+        $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
+        $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.pTypes?
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
@@ -212,7 +208,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $q.all([pP]).then (res) ->
         checkForStateParams()
         update()
-        $scope.$watch('slider.from',change,true)
-        $scope.$watch('slider.to',change,true)
+        #$scope.$watch('slider.from',change,true)
+        #$scope.$watch('slider.to',change,true)
         $scope.$watch('typesText',change,true)
 ]

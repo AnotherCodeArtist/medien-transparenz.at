@@ -182,21 +182,16 @@ module.exports = (Transparency) ->
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
-        years = req.query.years or []
-        years = [years] if years not instanceof Array
-        quarters = req.query.quarters or []
-        quarters = [quarters] if quarters not instanceof Array
+        period = {}
+        period['$gte'] = parseInt(req.query.from) if req.query.from
+        period['$lte'] = parseInt(req.query.to) if req.query.to
         orgType = req.query.orgType or 'org'
         paymentTypes = req.query.pType or ['2']
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
         results = parseInt(req.query.x or '10')
         query = {}
-        (query.year =
-            $in: years.map (e)->
-                parseInt(e)) if years.length > 0
-        (query.quarter =
-            $in: quarters.map (e)->
-                parseInt(e)) if quarters.length > 0
+        if period.$gte? or period.$lte?
+            query.period = period
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)

@@ -22,8 +22,8 @@
                 <div class="panel-body" uib-collapse="orgCollapse">
                     <ul ng-repeat="org in result.org">
                         <li>
-                            <a ui-sref="showflow({name: org.name, years: org.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'org'})">{{org.name}}</a>
-                            <span class="label label-primary year" ng-repeat="year in org.years">{{year}}</span> <span
+                            <a ui-sref="showflow({name: org.name, to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: 'org'})">{{org.name}}</a>
+                            <span class="label label-primary year" ng-repeat="year in org.years.sort().reverse()">{{year}}</span> <span
                                 class="pull-right badge">&euro; {{org.total | number:2}}</span></li>
                     </ul>
                 </div>
@@ -37,8 +37,8 @@
                 <div class="panel-body" uib-collapse="mediaCollapse">
                     <ul ng-repeat="media in result.media">
                         <li>
-                            <a ui-sref="showflow({name: media.name, years: media.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: 'media'})">{{media.name}}</a>
-                            <span class="label label-primary year" ng-repeat="year in media.years">{{year}}</span> <span
+                            <a ui-sref="showflow({name: media.name,to: lastInYear(media.years[0]),from: firstInYear(media.years[media.years.length-1]),pTypes: '2,4,31', orgType: 'media'})">{{media.name}}</a>
+                            <span class="label label-primary year" ng-repeat="year in media.years.sort().reverse()">{{year}}</span> <span
                                 class="pull-right badge">&euro; {{media.total | number:2}}</span></li>
                     </ul>
                 </div>

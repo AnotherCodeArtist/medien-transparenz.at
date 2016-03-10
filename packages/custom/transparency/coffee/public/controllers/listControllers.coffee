@@ -14,12 +14,17 @@ app.controller 'ListOrgCtrl',['$scope','TPAService','$q','$interval','$state','$
     page = $scope.page
     $timeout (-> $scope.page=page),100
     $scope.count = 0
-
+    $scope.periods=[]
+    $scope.firstInYear = (year) -> $scope.periods.filter((p) -> p.year == year).pop().period.toString()
+    $scope.lastInYear = (year) -> $scope.periods.filter((p) -> p.year == year)[0].period.toString()
     $scope.sizes = [10,20,50,100]
     orgType = "org"
-    TPAService.count
-        orgType: $scope.orgType
-    .then (res) ->
+    pP = TPAService.periods()
+    pP.then (res) ->
+        $scope.periods = res.data
+    .catch (err) -> $scope.error = "Could not load Periods: #{err.data}"
+    cP = TPAService.count orgType: $scope.orgType
+    cP.then (res) ->
         $scope.count = res.data
     .catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
     update = ->
@@ -30,7 +35,7 @@ app.controller 'ListOrgCtrl',['$scope','TPAService','$q','$interval','$state','$
         .then (res) ->
             $scope.items = res.data[$scope.orgType]
         .catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
-    update()
+    $q.all([pP,cP]).then update
     changeListener = (newValue,oldValue)->
         if newValue isnt oldValue
             TPAService.saveState stateId,fieldsToRestore, $scope
@@ -57,12 +62,17 @@ app.controller 'ListMediaCtrl',['$scope','TPAService','$q','$interval','$state',
         page = $scope.page
         $timeout (-> $scope.page=page),100
         $scope.count = 0
-
+        $scope.periods=[]
+        $scope.firstInYear = (year) -> $scope.periods.filter((p) -> p.year == year).pop().period.toString()
+        $scope.lastInYear = (year) -> $scope.periods.filter((p) -> p.year == year)[0].period.toString()
         $scope.sizes = [10,20,50,100]
         $scope.orgType = "media"
-        TPAService.count
-            orgType: $scope.orgType
-        .then (res) ->
+        pP = TPAService.periods()
+        pP.then (res) ->
+            $scope.periods = res.data
+        .catch (err) -> $scope.error = "Could not load Periods: #{err.data}"
+        cP = TPAService.count orgType: $scope.orgType
+        cP.then (res) ->
             $scope.count = res.data
         .catch (err) -> $scope.error = "Could not load Media: #{err.data}"
         update = ->
@@ -73,7 +83,7 @@ app.controller 'ListMediaCtrl',['$scope','TPAService','$q','$interval','$state',
             .then (res) ->
                 $scope.items = res.data[$scope.orgType]
             .catch (err) -> $scope.error = "Could not load Media: #{err.data}"
-        update()
+        $q.all([pP,cP]).then update
         changeListener = (newValue,oldValue)->
             if newValue isnt oldValue
                 TPAService.saveState stateId,fieldsToRestore, $scope

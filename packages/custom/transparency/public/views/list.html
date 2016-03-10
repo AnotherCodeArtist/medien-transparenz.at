@@ -16,7 +16,7 @@
         <li class="list-group-item" ng-repeat="org in items">
             <div class="row">
                 <div class="col-sm-10">
-                    <a ui-sref="showflow({name: org.name, years: org.years.join(),quarters: '1,2,3,4',pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
+                    <a ui-sref="showflow({name: org.name,to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
                     <span class="label label-primary year" ng-repeat="year in org.years">{{year}}</span>
                 </div>
                 <div class="col-sm-2">

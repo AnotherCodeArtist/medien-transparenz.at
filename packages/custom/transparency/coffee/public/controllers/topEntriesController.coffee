@@ -3,42 +3,41 @@ app = angular.module 'mean.transparency'
 
 app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog',
 ($scope, TPAService, $q, $state, gettextCatalog) ->
-    params =
-        quarters: [2]
-        years: [2013, 2014]
-    fieldsToStore = ['years','periods','quarters','orgTypes','typesText','rank','orgType']
-    $scope.years = []
+    params = {}
+    stateName = "topState"
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType']
+    $scope.periods = []
+    $scope.slider =
+        from: 0
+        to: 0
+        options:
+            step:5
+            floor:0
+            onEnd: -> change(1,2)
+            translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
     $scope.showSettings = true
     $scope.ranks = [3, 5, 10, 15, 20]
     $scope.rank = 10
     $scope.pieData = []
     window.scrollTo 0, 0
 
+    # register watches to update chart when changes occur
     registerWatches = ->
-        $scope.$watch('years', change, true)
-        $scope.$watch('quarters', change, true)
         $scope.$watch('typesText', change, true)
         $scope.$watch('orgType', change, true)
         $scope.$watch('rank', change, true)
 
 
+    #construct the query parameters
     parameters = ->
         params = {}
-        years = (v.year for v in $scope.years when v.checked)
-        quarters = (v.quarter for v in $scope.quarters when v.checked)
+        params.from = $scope.periods[$scope.slider.from/5].period
+        params.to =$scope.periods[$scope.slider.to/5].period
         types = (v.type for v in $scope.typesText when v.checked)
-        (params.years = years) if years.length > 0
-        (params.quarters = quarters) if quarters.length > 0
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
         params.orgType = $scope.orgType
         params
-
-    saveState = ->
-        state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
-        sessionStorage.setItem 'topState', JSON.stringify state
-
-
 
     buildPieModel = ->
         $scope.pieData = []
@@ -56,8 +55,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                 <h3>#{key}</h3>
                 <p>#{y} &euro;  (#{parseFloat((y.replace(/,/g,''))/$scope.top.all *100).toFixed(2)}%)#{link}</p>
            </div>"""
-
-
+    #fetch data from server and update the chart
     update = ->
         TPAService.top(parameters())
         .then((res) ->
@@ -75,7 +73,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         ]
         savedState = sessionStorage.getItem 'topState'
         if savedState
-            fieldsToStore.reduce ((s,f) -> $scope[f] = s[f];s) , JSON.parse savedState
+            TPAService.restoreState stateName, fieldsToStore, $scope
             update()
             registerWatches()
         else
@@ -85,9 +83,10 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                 $scope.years[0].checked = true;
             pP = TPAService.periods()
             pP.then (res) ->
-                $scope.periods = res.data
-                $scope.quarters[4 - $scope.periods[0].quarter].checked = true
-            $scope.quarters = (quarter: quarter, checked: false for quarter in [4..1])
+                $scope.periods = res.data.reverse()
+                $scope.slider.options.ceil = ($scope.periods.length - 1)*5
+                $scope.slider.from = $scope.slider.options.ceil
+                $scope.slider.to = $scope.slider.options.ceil
             types = [2, 4, 31]
             $scope.typesText = (type: type, text: gettextCatalog.getString( TPAService.decodeType(type) ), checked: false for type in types)
             $scope.typesText[0].checked = true
@@ -110,15 +109,16 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.y = (d) ->
         d.y
 
+    #navigate to some other page
     $scope.go = (d) ->
-        saveState()
+        TPAService.saveState stateName,fieldsToStore,$scope
         window.scrollTo 0, 0
         $state.go 'showflow',
             {
                 name: d.data.key
                 orgType: $scope.orgType
-                years: $scope.years.filter((y) -> y.checked).map (y) -> y.year
-                quarters: $scope.quarters.filter((q) -> q.checked).map (q) -> q.quarter
+                from: $scope.periods[$scope.slider.from/5].period
+                to: $scope.periods[$scope.slider.to/5].period
                 pTypes: $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
             },
             location: true
