@@ -63,7 +63,6 @@ bower_components
 # --------------------
 # App Files
 # --------------------
-data/
 tests/results/**
 modules/public/
 modules/views/
