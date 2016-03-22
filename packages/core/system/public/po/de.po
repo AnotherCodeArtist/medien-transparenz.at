@@ -413,3 +413,6 @@ msgstr "Keine Einträge gefunden"
 
 msgid "Others"
 msgstr "Andere"
+
+msgid "Click for Details"
+msgstr "Klicken Sie für mehr Details"

@@ -75,7 +75,8 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Hits for Organisations": "Treffer für Organisationen",
         "Further development of this Site is sponsored by netidee": "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee ermöglicht",
         "No entries found!": "Keine Einträge gefunden",
-        "Others": "Andere"
+        "Others": "Andere",
+        "Click for Details": "Klicken Sie für mehr Details"
     });
     /* jshint +W100 */
 }]);
