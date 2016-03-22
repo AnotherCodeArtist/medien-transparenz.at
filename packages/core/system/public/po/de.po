@@ -410,3 +410,6 @@ msgstr "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der net
 #: views/list.html:21
 msgid "No entries found!"
 msgstr "Keine Einträge gefunden"
+
+msgid "Others"
+msgstr "Andere"

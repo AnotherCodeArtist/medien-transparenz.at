@@ -47,7 +47,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                 sum + entry.total
             0
         )
-        $scope.pieData.push {key: "Others", y: $scope.top.all - topSum}
+        $scope.pieData.push {key: gettextCatalog.getString("Others"), y: $scope.top.all - topSum}
 
     $scope.toolTipContentFunction = (key, y, e, graph) ->
         link = if e.pointIndex < $scope.rank then "<br/>Click for Details" else ""
@@ -111,6 +111,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 
     #navigate to some other page
     $scope.go = (d) ->
+        return if d.data.key in ["Others","Andere"]
         TPAService.saveState stateName,fieldsToStore,$scope
         window.scrollTo 0, 0
         $state.go 'showflow',
