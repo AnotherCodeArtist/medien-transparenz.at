@@ -406,3 +406,7 @@ msgstr "Treffer für Organisationen"
 
 msgid "Further development of this Site is sponsored by netidee"
 msgstr "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee ermöglicht"
+
+#: views/list.html:21
+msgid "No entries found!"
+msgstr "Keine Einträge gefunden"

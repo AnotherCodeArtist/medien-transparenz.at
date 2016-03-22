@@ -1,7 +1,7 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.directive 'tpaSankey', [ ->
+app.directive 'tpaSankey', ($rootScope) ->
     restrict: 'EA'
     scope:
         data: '='
@@ -79,7 +79,9 @@ app.directive 'tpaSankey', [ ->
                 .duration(500)
                 .style("opacity", 0)
 
-
+            #make sure that all labels are invisible once the page is left    
+            $rootScope.$on '$stateChangeStart', (stateEvent,toState,toParams,fromState,fromParams) ->
+                div.style("opacity",0)
 
 
             node = svg.append("g")
@@ -147,7 +149,7 @@ app.directive 'tpaSankey', [ ->
         $scope.$watch 'data', updateDiagram
 
         #$scope.$root.$on '$stateChangeStart', -> alert "GO"
-]
+
 
 app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
     restrict: 'E'

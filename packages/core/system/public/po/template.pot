@@ -114,13 +114,13 @@ msgid ""
 "                    Use the filter to see what you are interested in."
 msgstr ""
 
-#: controllers/listControllers.js:138
-#: controllers/listControllers.js:78
+#: controllers/listControllers.js:144
+#: controllers/listControllers.js:273
 msgid "List of Media Companies"
 msgstr ""
 
-#: controllers/listControllers.js:69
-#: controllers/listControllers.js:9
+#: controllers/listControllers.js:137
+#: controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr ""
 
@@ -150,7 +150,11 @@ msgstr ""
 msgid "next"
 msgstr ""
 
-#: views/list.html:5
+#: views/list.html:21
+msgid "No entries found!"
+msgstr ""
+
+#: views/list.html:11
 msgid "Number of Entries"
 msgstr ""
 

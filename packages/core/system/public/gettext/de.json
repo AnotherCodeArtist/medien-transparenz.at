@@ -72,6 +72,7 @@
     "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.": "Sie sehen gerade die Details für {{org.name}}, haben aber gleichzeitig einen Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im Filter-Feld um alle Zahlungen zu sehen.",
     "Hits for Media": "Treffer für Medien",
     "Hits for Organisations": "Treffer für Organisationen",
-    "Further development of this Site is sponsored by netidee": "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee ermöglicht"
+    "Further development of this Site is sponsored by netidee": "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee ermöglicht",
+    "No entries found!": "Keine Einträge gefunden"
   }
 }
