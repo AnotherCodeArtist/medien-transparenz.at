@@ -6,8 +6,12 @@ msgstr ""
 
 #: views/impress.html:22
 msgid ""
-"All Data that is published via this site it taken from the quarterly reports published by RTR without any modifications.\n"
-"    Data quality is far from being perfect, since single media corporation occur several times due to variant forms of spelling."
+"All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n"
+"        improved by correcting the most obvious errors using"
+msgstr ""
+
+#: views/impress.html:24
+msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
 #: controllers/flowController.js:13
@@ -44,6 +48,10 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
+#: controllers/topEntriesController.js:84
+msgid "Click for Details"
+msgstr ""
+
 #: views/top.html:50
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
@@ -60,14 +68,14 @@ msgstr ""
 msgid "Display _MENU_ records"
 msgstr ""
 
-#: views/impress.html:24
+#: views/impress.html:25
 msgid "Exclusion of Liability"
 msgstr ""
 
-#: views/impress.html:25
+#: views/impress.html:26
 msgid ""
-"FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by RTR. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
-"        We are not liable for the interruption of service (eg. in cases of server down-time), incorrect representation of data or software errors."
+"FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
+"        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
 #: views/index.html:33
@@ -102,6 +110,10 @@ msgstr ""
 msgid ""
 "If you want to figure out whether some company or media cooperation is listed in these reports better use our\n"
 "                    search!"
+msgstr ""
+
+#: server/views/includes/foot.html:2
+msgid "Impress"
 msgstr ""
 
 #: views/impress.html:14
@@ -180,6 +192,10 @@ msgstr ""
 
 #: views/flow.html:79
 msgid "Organisations"
+msgstr ""
+
+#: controllers/topEntriesController.js:78
+msgid "Others"
 msgstr ""
 
 #: views/index.html:38
