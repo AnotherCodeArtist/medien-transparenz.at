@@ -50,28 +50,12 @@
             <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
         </div>
         <div class="pie">
-            <!--div nvd3-pie-chart
-                 data="pieData"
-                 id="pieChartTop"
-                 width="550"
-                 height="650"
-                 x="xFunction()"
-                 y="yFunction()"
-                 tooltips="true"
-                 showLabels="true"
-                 showValues="true"
-                 labelType="key"
-                 tooltips="true"
-                 tooltipcontent="toolTipContentFunction()"
-                    >
-                <svg height="500"></svg>
-            </div-->
-        </div>
-        <div class="pie">
             <tpa-pie-chart id="myPie" data="pieData"
                            x="x" y="y" show-legend="false"
                            tooltip-fn="toolTipContentFunction"
-                           go-fn="go"/>
+                           go-fn="go"
+                           prevent-click-fn="preventClickForOthers"
+            />
         </div>
     </div>
 </section>

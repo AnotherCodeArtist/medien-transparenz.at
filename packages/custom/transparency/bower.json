@@ -10,5 +10,9 @@
     "d3-plugins-sankey": "~1.1.0",
     "angular-datatables": "~0.5.3",
     "angularjs-slider": "~2.10.2"
+  },
+  "resolutions": {
+    "d3": "~3.5",
+    "nvd3": "~1.8.2"
   }
 }

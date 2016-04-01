@@ -216,6 +216,7 @@ app.directive 'tpaPieChart', [ ->
         showLegend: '=?'
         tooltipFn: '&?'
         goFn: '&?'
+        preventClickFn: '='
     link: ($scope,element,attrs) ->
         #width = (attrs.width or 600)
         #height = (attrs.height or 600)
@@ -241,13 +242,9 @@ app.directive 'tpaPieChart', [ ->
                 .call(chart)
                 d3.selectAll('.nv-slice')
                 .on 'click', (e) ->
-                    #nv.tooltip.cleanup()
-                    tp = nv.models.tooltip()
-                    tp.hidden(true)
-                    tp.enabled(false)
+                    return if angular.isDefined($scope.preventClickFn) and $scope.preventClickFn(e)
                     d3.selectAll('div.nvtooltip').remove()
                     $scope.goFn()(e)
-
                 chart
         $scope.$watch 'data', updateDiagram, true
 

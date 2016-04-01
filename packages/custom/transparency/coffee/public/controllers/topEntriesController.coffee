@@ -51,9 +51,10 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 
     $scope.toolTipContentFunction = (e) ->
         link = if e.index < $scope.rank then "<br/>"+gettextCatalog.getString("Click for Details") else ""
+        numberOptions = {style:'currency',currency:'EUR'}
         """<div class='chartToolTip'>
                 <h3>#{e.data.key}</h3>
-                <p>#{e.data.y.toFixed(2)} &euro;  (#{(e.data.y/$scope.top.all *100).toFixed(2)}%)#{link}</p>
+                <p>#{e.data.y.toLocaleString(gettextCatalog.getCurrentLanguage(),numberOptions)} (#{(e.data.y/$scope.top.all *100).toFixed(2)}%)#{link}</p>
            </div>"""
     #fetch data from server and update the chart
     update = ->
@@ -109,9 +110,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.y = (d) ->
         d.y
 
+    #prevents clicks on "Others" to trigger a navigation        
+    $scope.preventClickForOthers = (d) -> d.data.key in ["Others","Andere"]
+        
     #navigate to some other page
     $scope.go = (d) ->
-        return if d.data.key in ["Others","Andere"]
         TPAService.saveState stateName,fieldsToStore,$scope
         window.scrollTo 0, 0
         $state.go 'showflow',
