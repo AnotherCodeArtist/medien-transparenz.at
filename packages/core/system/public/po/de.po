@@ -31,7 +31,7 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:13 views/flow.html:81
+#: controllers/flowController.js:13 views/flow.html:86
 msgid "Amount"
 msgstr "Betrag"
 
@@ -107,7 +107,7 @@ msgstr ""
 "Klicken Sie auf ein Segment des Kuchendiagramms um mehr über die jeweilige "
 "Organisation zu erfahren"
 
-#: views/flow.html:62
+#: views/flow.html:67
 msgid ""
 "Click on the rectangular boxes on either side of the chart to get more "
 "information on a particular organization"
@@ -226,7 +226,7 @@ msgstr "Organisationen"
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
-#: controllers/flowController.js:10 views/flow.html:78
+#: controllers/flowController.js:10 views/flow.html:83
 msgid "Media"
 msgstr "Medien"
 
@@ -238,7 +238,7 @@ msgstr "Medientransparenz Austria"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views/flow.html:23 views/top.html:18
+#: views/flow.html:28 views/top.html:18
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
@@ -276,7 +276,7 @@ msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 msgid "Organisation"
 msgstr "Organisation"
 
-#: views/flow.html:79
+#: views/flow.html:84
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -288,19 +288,31 @@ msgstr "Andere"
 msgid "Overview"
 msgstr "Übersicht"
 
-#: controllers/flowController.js:12 views/flow.html:80
+#: controllers/flowController.js:12 views/flow.html:85
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:27 views/top.html:31
+#: views/flow.html:32 views/top.html:31
 msgid "Payment Types"
 msgstr "Zahlungstypen"
+
+#: views/flow.html:19
+msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
+msgstr "Zahlungen gemäß §2 MedKF-TG (Medien-Kooperationen)"
+
+#: views/flow.html:21
+msgid "Payments according to §31 ORF-G (Charges)"
+msgstr "Zahlungen gemäß §31 ORF-G (Gebühren)"
+
+#: views/flow.html:20
+msgid "Payments according to §4 MedKF-TG (Funding)"
+msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 
 #: views/overview.html:6
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Zahlungstyp"
 
-#: views/flow.html:21 views/top.html:16
+#: views/flow.html:26 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
 
@@ -346,7 +358,7 @@ msgstr "Zahler"
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
-#: views/flow.html:72
+#: views/flow.html:77
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
@@ -407,7 +419,7 @@ msgstr "Wohin das Geld fließt?"
 msgid "Who's involved?"
 msgstr "Wer ist dabei?"
 
-#: views/flow.html:54
+#: views/flow.html:59
 msgid ""
 "Your are currently viewing the details of {{org.name}} together with a text "
 "filter. This limits the results! Please consider clearing the filter to see "
@@ -417,7 +429,7 @@ msgstr ""
 "Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im "
 "Filter-Feld um alle Zahlungen zu sehen."
 
-#: views/flow.html:58
+#: views/flow.html:63
 msgid ""
 "Your query returned {{error.length}} entries, which is more than the allowed "
 "maximum of {{maxNodes}}. Please use the filter to restrict the number of "
@@ -433,15 +445,6 @@ msgstr ""
 
 #~ msgid "Years"
 #~ msgstr "Jahre"
-
-#~ msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
-#~ msgstr "Zahlungen gemäß §2 MedKF-TG (Medien-Kooperationen)"
-
-#~ msgid "Payments according to §4 MedKF-TG (Funding)"
-#~ msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
-
-#~ msgid "Payments according to §31 ORF-G (Charges)"
-#~ msgstr "Zahlungen gemäß §31 ORF-G (Gebühren)"
 
 #~ msgid ""
 #~ "All Data that is published via this site it taken from the quarterly "

@@ -49,11 +49,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         )
         $scope.pieData.push {key: gettextCatalog.getString("Others"), y: $scope.top.all - topSum}
 
-    $scope.toolTipContentFunction = (key, y, e, graph) ->
-        link = if e.pointIndex < $scope.rank then "<br/>"+gettextCatalog.getString("Click for Details") else ""
+    $scope.toolTipContentFunction = (e) ->
+        link = if e.index < $scope.rank then "<br/>"+gettextCatalog.getString("Click for Details") else ""
         """<div class='chartToolTip'>
-                <h3>#{key}</h3>
-                <p>#{y} &euro;  (#{parseFloat((y.replace(/,/g,''))/$scope.top.all *100).toFixed(2)}%)#{link}</p>
+                <h3>#{e.data.key}</h3>
+                <p>#{e.data.y.toFixed(2)} &euro;  (#{(e.data.y/$scope.top.all *100).toFixed(2)}%)#{link}</p>
            </div>"""
     #fetch data from server and update the chart
     update = ->

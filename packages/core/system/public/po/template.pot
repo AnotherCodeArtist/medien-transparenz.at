@@ -15,7 +15,7 @@ msgid "Although this was meant to significantly improve the data qualtity it cou
 msgstr ""
 
 #: controllers/flowController.js:13
-#: views/flow.html:81
+#: views/flow.html:86
 msgid "Amount"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
-#: views/flow.html:62
+#: views/flow.html:67
 msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgid "Loading Data to Update Diagram ..."
 msgstr ""
 
 #: controllers/flowController.js:10
-#: views/flow.html:78
+#: views/flow.html:83
 msgid "Media"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views/flow.html:23
+#: views/flow.html:28
 #: views/top.html:18
 msgid "Move the sliders to define a range"
 msgstr ""
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Organisation"
 msgstr ""
 
-#: views/flow.html:79
+#: views/flow.html:84
 msgid "Organisations"
 msgstr ""
 
@@ -203,20 +203,32 @@ msgid "Overview"
 msgstr ""
 
 #: controllers/flowController.js:12
-#: views/flow.html:80
+#: views/flow.html:85
 msgid "Payment Type"
 msgstr ""
 
-#: views/flow.html:27
+#: views/flow.html:32
 #: views/top.html:31
 msgid "Payment Types"
+msgstr ""
+
+#: views/flow.html:19
+msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
+msgstr ""
+
+#: views/flow.html:21
+msgid "Payments according to §31 ORF-G (Charges)"
+msgstr ""
+
+#: views/flow.html:20
+msgid "Payments according to §4 MedKF-TG (Funding)"
 msgstr ""
 
 #: views/overview.html:6
 msgid "Payments by Transfer Type"
 msgstr ""
 
-#: views/flow.html:21
+#: views/flow.html:26
 #: views/top.html:16
 msgid "Periods"
 msgstr ""
@@ -264,7 +276,7 @@ msgstr ""
 msgid "Spender/Recipient"
 msgstr ""
 
-#: views/flow.html:72
+#: views/flow.html:77
 msgid "Tabular Representation"
 msgstr ""
 
@@ -324,10 +336,10 @@ msgstr ""
 msgid "Who's involved?"
 msgstr ""
 
-#: views/flow.html:54
+#: views/flow.html:59
 msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
 msgstr ""
 
-#: views/flow.html:58
+#: views/flow.html:63
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""

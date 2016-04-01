@@ -232,14 +232,20 @@ app.directive 'tpaPieChart', [ ->
                 .x($scope.x())
                 .y($scope.y())
                 .showLabels(true)
+                .labelsOutside(false)
+                .labelSunbeamLayout(true)
                 .showLegend(if angular.isDefined($scope.showLegend) then $scope.showLegend else true)
-                chart.tooltipContent $scope.tooltipFn() if angular.isDefined $scope.tooltipFn
+                chart.tooltip.contentGenerator $scope.tooltipFn() if angular.isDefined $scope.tooltipFn
                 svg.datum($scope.data)
                 .transition().duration(350)
                 .call(chart)
                 d3.selectAll('.nv-slice')
                 .on 'click', (e) ->
-                    nv.tooltip.cleanup()
+                    #nv.tooltip.cleanup()
+                    tp = nv.models.tooltip()
+                    tp.hidden(true)
+                    tp.enabled(false)
+                    d3.selectAll('div.nvtooltip').remove()
                     $scope.goFn()(e)
 
                 chart
