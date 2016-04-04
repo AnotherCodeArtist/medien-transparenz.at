@@ -10,6 +10,29 @@ app.controller 'OverviewCtrl', ($scope,TPAService,$state,gettextCatalog) ->
 
   emptyQuarters = -> [["Q1",0],["Q2",0],["Q3",0],["Q4",0]]
 
+  $scope.options = 
+    chart: 
+      type: 'multiBarChart'
+      height: 450
+      margin : 
+        top: 20
+        right: 20
+        bottom: 45
+        left: 45
+      clipEdge: true
+      #staggerLabels: true,
+      duration: 500,
+      stacked: true,
+      xAxis: 
+        axisLabel: 'Quarters'
+        showMaxMin: false
+        tickFormat: (d) -> d3.format(',f')(d)
+      yAxis: 
+        axisLabel: 'Amount'
+        axisLabelDistance: -20
+        tickFormat: (d) -> d3.format(',.1f')(d)
+
+
   initYear = (year,type) ->
     newSeries =
       key: year.year

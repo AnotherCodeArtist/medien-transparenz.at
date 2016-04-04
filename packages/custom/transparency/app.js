@@ -78,7 +78,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js',{weight:-2});
-  Transparency.aggregateAsset('js', '../lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',{weight:-1});
+  Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
@@ -102,7 +102,6 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','legendDirectives',
-    'nvd3ChartDirectives','datatables','ui.bootstrap','datatables.buttons','rzModule']);
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule']);
   return Transparency;
 });

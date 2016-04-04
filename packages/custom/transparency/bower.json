@@ -9,7 +9,8 @@
     "angular-gettext": "latest",
     "d3-plugins-sankey": "~1.1.0",
     "angular-datatables": "~0.5.3",
-    "angularjs-slider": "~2.10.2"
+    "angularjs-slider": "~2.10.2",
+    "angular-nvd3": "^1.0.5"
   },
   "resolutions": {
     "d3": "~3.5",
