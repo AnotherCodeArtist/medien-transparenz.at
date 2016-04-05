@@ -8,7 +8,7 @@ app.controller 'UploadController',['$scope','Upload', ($scope,Upload) ->
     .then(
         (resp) -> $scope.feedback = resp.data
         (msg) -> $scope.error = msg
-        (evt) -> console.log 'percent: ' + parseInt(100.0 * evt.loaded / evt.total)
+        (evt) -> $scope.percent = parseInt(100.0 * evt.loaded / evt.total)
 
     )
     return

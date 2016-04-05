@@ -3,6 +3,7 @@
     <h1 translate>Upload new Media Transparency Report</h1>
     <div class="alert alert-danger" ng-show="error">{{error}}</div>
     <input type="file" ngf-select="onFileSelect($files)">
+    <p>Uploaded: {{percent}}%</p>
     <div data-ng-show="feedback">
         <ul class="list-group">
             <li class="list-group-item active" translate>
