@@ -280,3 +280,15 @@ nvd3-multi-bar-chart svg.nvd3-svg {
     margin-left: -125px;
   }
 }
+
+.container table.dataTable thead .sorting {
+  background-image: url("/transparency/assets/img/sort_both.png");
+}
+
+.container table.dataTable thead .sorting_asc {
+  background-image: url("/transparency/assets/img/sort_asc.png");
+}
+
+.container table.dataTable thead .sorting_desc {
+  background-image: url("/transparency/assets/img/sort_desc.png");
+}
