@@ -1,16 +1,16 @@
 {
-  "name": "mean",
-  "description": "MEAN.io: A fullstack JavaScript framework powered by MongoDB, ExpressJS, AngularJS, NodeJS.",
-  "version": "0.5.5",
+  "name": "medien-transparenz.at",
+  "description": "Media Transparency Austria - Getting an Overview on How Tax Payers' Money is spent for Advertising",
+  "version": "0.1.1",
   "private": false,
-  "author": "Linnovate <mean@linnovate.net>",
-  "contributors": "https://github.com/linnovate/mean/graphs/contributors",
+  "author": "Peter Salhofer",
+  "contributors": "https://github.com/AnotherCodeArtist/medien-transparenz.at/graphs/contributors",
   "mean": "0.5.5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/linnovate/mean.git"
+    "url": "https://github.com/AnotherCodeArtist/medien-transparenz.at.git"
   },
-  "license": "MIT",
+  "license": "Apache2",
   "scripts": {
     "start": "node server",
     "mocha": "node tools/test/run-mocha.js",

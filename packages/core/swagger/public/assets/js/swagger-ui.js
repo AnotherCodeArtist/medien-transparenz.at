@@ -21,7 +21,7 @@ $(function() {
 		$(this).css('width', p_width - p_padding - this_padding);
 		});
 	};
-
+    
 	$('form.formtastic li.string input, form.formtastic textarea').stretchFormtasticInputWidthToParent();
 
 	// Vertically center these paragraphs

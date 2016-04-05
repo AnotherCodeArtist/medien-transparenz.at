@@ -23,7 +23,7 @@ var defaultTasks = ['coffee','coffee_transparency','clean', 'less', 'devServe', 
 var gettext = require('gulp-angular-gettext');
 
 gulp.task('pot', function () {
-  return gulp.src(['packages/custom/transparency/public/views**/*.html',
+  return gulp.src(['packages/custom/transparency/public/views**/*.html', 'packages/core/system/**/*.html',
     'packages/custom/transparency/public/**/*.js','!packages/custom/transparency/public/assets/**/*.js'])
       .pipe(gettext.extract('template.pot', {
         // options to pass to angular-gettext-tools...
