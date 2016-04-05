@@ -25,7 +25,7 @@ div.bar {
   margin-right: auto;
 }
 
-.pie svg {
+.pie svg.nvd3-svg {
   height: 600px;
   width: 600px;
   margin-left: auto;
@@ -109,7 +109,7 @@ a.label {
 }
 
 .sankeyChart svg {
-  /*width: 700px;*/
+  width: 100%;
   margin-left: 10%;
   /*margin-right: auto;*/
 }
@@ -232,7 +232,7 @@ span.label.year {
   color: #dbdbff;
 }
 
-nvd3-multi-bar-chart svg {
+nvd3-multi-bar-chart svg.nvd3-svg {
   width: 600px;
   height: 400px;
   margin-left: auto;
@@ -240,12 +240,12 @@ nvd3-multi-bar-chart svg {
 }
 
 @media screen and (max-width: 700px) {
-  nvd3-multi-bar-chart svg {
+  nvd3-multi-bar-chart svg.nvd3-svg {
     width: 400px;
     height: 300px;
   }
 
-  .pie svg {
+  .pie svg.nvd3-svg {
     height: 400px;
     width: 400px;
   }
@@ -260,13 +260,13 @@ nvd3-multi-bar-chart svg {
 }
 
 @media screen and (max-width: 400px) {
-  nvd3-multi-bar-chart svg {
+  nvd3-multi-bar-chart svg.nvd3-svg {
     width: 300px;
     height: 250px;
 
   }
 
-  .pie svg {
+  .pie svg.nvd3-svg {
     height: 300px;
     width: 300px;
 

@@ -9,13 +9,7 @@
             <h3 class="text-center">{{typeTexts[tType]|translate}}</h3>
 
             <div class="bar">
-                <nvd3-multi-bar-chart
-                        data="data[tType]"
-                        showXAxis="true"
-                        showYAxis="false"
-                        tooltips="true"
-                        showLegend="true">
-                </nvd3-multi-bar-chart>
+                <nvd3 options="options" data="data[tType]"></nvd3>
             </div>
             <div class="table-responsive">
                 <table class="table table-condensed">
@@ -28,7 +22,11 @@
                     <tbody>
                     <tr data-ng-repeat="q in [0,1,2,3]">
                         <td>{{q+1}}</td>
-                        <td data-ng-repeat="index in years()">{{data[tType][index].values[q][1] | number:2}}</td>
+                        <td data-ng-repeat="index in years()" class="text-right">{{data[tType][index].values[q].s}}</td>
+                    </tr>
+                    <tr>
+                        <td translate="translate">Total</td>
+                        <td data-ng-repeat="entry in data[tType]" class="text-right">{{totalPerYearAndType(data[tType],entry.key)}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -36,4 +34,5 @@
         </div>
 
     </div>
+    <br/>
 </section>
