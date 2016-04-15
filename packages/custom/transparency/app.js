@@ -27,6 +27,14 @@ Transparency.register(function(app, auth, database) {
     menu: 'admin',
     icon: icons + 'hard-drive-upload.png'
   });
+  //Menu item for address-upload
+  Transparency.menus.add({
+    title: 'ORGANISATIONS',
+    link: 'add_organisation',
+    roles: ['admin'],
+    menu: 'admin',
+    icon: icons + 'hard-drive-upload.png'
+  });
   Transparency.menus.add({
     title: 'Overview',
     link: 'overview',

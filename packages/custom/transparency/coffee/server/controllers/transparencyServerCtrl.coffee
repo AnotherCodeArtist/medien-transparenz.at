@@ -13,8 +13,24 @@ Q = require 'q'
 #iconv.extendNodeEncodings()
 
 Transfer = mongoose.model 'Transfer'
+Organisation = mongoose.model 'Organisation'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+
+#Transfer of line to Organisation
+lineToOrganisation = (line, numberOfOrganisations) ->
+    splittedLine = line.split(";")
+    #Skip first and last lines
+    if splittedLine[0] != 'Bezeichnung des Rechtsträgers' and splittedLine[0] != ''
+        organisation = new Organisation()
+        organisation.name = splittedLine[0]
+        organisation.street = splittedLine[1]
+        organisation.zipCode = splittedLine[2]
+        organisation.city_de = splittedLine[3]
+        organisation.country_de = splittedLine[4]
+        organisation.save()
+        numberOfOrganisations++
+    numberOfOrganisations
 
 lineToTransfer = (line, feedback) ->
     m = line.match regex
@@ -108,6 +124,19 @@ module.exports = (Transparency) ->
                 input = iconv.decode data,'latin1'
                 feedback = lineToTransfer line, feedback for line in input.split('\n')
                 res.send feedback
+    #Function for the upload of organisation-address-data
+    uploadOrganisation: (req, res) ->
+        file = req.files.file;
+        response =
+            newOrganisationNumber: 0
+
+        fs.readFile file.path, (err,data) ->
+            if err
+                res.status(500).send("Error #{err.message}")
+            else
+                input =  iconv.decode data, 'utf8'
+                response.newOrganisationNumber = lineToOrganisation(line,response.newOrganisationNumber) for line in input.split('\n')
+                res.status(200).send(response)
 
     periods: (req, res) ->
         Transfer.aggregate(
