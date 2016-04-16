@@ -16,6 +16,19 @@ Transfer = mongoose.model 'Transfer'
 Organisation = mongoose.model 'Organisation'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+#Search for organisation entry in database
+findOrganisationData = (organisation) ->
+    #console.log "search for organisation with name " + organisation
+    queryPromise = Organisation.findOne({ 'name': organisation }, 'name').exec()
+    queryPromise.then(
+        (result) ->
+            #console.log "Organisation Data: " + result
+            return
+        (err) ->
+            #console.log "Could not load organisation data from Database: #{err}"
+            return
+    )
+    queryPromise
 
 #Transfer of line to Organisation
 lineToOrganisation = (line, numberOfOrganisations) ->
@@ -44,7 +57,18 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
-        transfer.save()
+        #Save reference
+        transferReference = findOrganisationData transfer.organisation
+        Q.all(transferReference)
+        .then (results) ->
+            try
+                if results.name
+                    transfer.organisationReference = results._id
+                    #console.log transfer.organisationReference
+                transfer.save()
+            catch error
+                console.log error
+
         feedback.quarter = transfer.quarter
         feedback.year = transfer.year
         feedback.entries++
@@ -196,6 +220,8 @@ module.exports = (Transparency) ->
                     media: "$_id.media"
                     _id: 0
                     amount: 1)
+            #left-join
+            .lookup({ from: 'organisations', localField: 'organisation', foreignField: 'name', as: 'organisationAddressData' })
             .exec()
             .then (result) ->
                 if result.length > maxLength
