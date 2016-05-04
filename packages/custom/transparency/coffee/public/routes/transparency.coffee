@@ -36,6 +36,9 @@ angular.module 'mean.transparency'
         url: "/showflow?name&orgType&from&to&pTypes"
         templateUrl: 'transparency/views/flow.html'
         #controller: 'FlowCtrl'
+    $stateProvider.state 'showflowdetail',
+        url: "/showflowdetail?source&target"
+        templateUrl: 'transparency/views/flowdetail.html'
     $stateProvider.state 'impress',
         url: "/impress"
         templateUrl: 'transparency/views/impress.html'

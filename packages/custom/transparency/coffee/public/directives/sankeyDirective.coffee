@@ -6,6 +6,7 @@ app.directive 'tpaSankey', ($rootScope) ->
     scope:
         data: '='
         nodeClick: '&'
+        linkClick: '&'
     link: ($scope,element,attrs) ->
         margin = top: 20, right: 1, bottom: 20, left: 1
         #width = (attrs.width or 960) - margin.left - margin.right
@@ -78,6 +79,9 @@ app.directive 'tpaSankey', ($rootScope) ->
                 div.transition()
                 .duration(500)
                 .style("opacity", 0)
+            .on "click", (d) ->
+                $scope.linkClick()(d)
+
 
             #make sure that all labels are invisible once the page is left    
             $rootScope.$on '$stateChangeStart', (stateEvent,toState,toParams,fromState,fromParams) ->

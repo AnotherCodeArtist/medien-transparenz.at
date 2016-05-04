@@ -128,6 +128,69 @@ module.exports = (Transparency) ->
             (err) -> res.status(500).send("Could not load periods (#{err})!")
         )
 
+    flowdetail: (req, res) ->
+        try
+            paymentTypes = req.query.pType or []
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            source = req.query.source
+            target = req.query.target
+
+            query = {}
+            query.organisation = source;
+            query.media = target;
+
+            Transfer.find query, {}, {sort: {year: 1, quarter: 1}, transferType: 1}, (err, data) ->
+                result = {
+                    data:
+                         [
+                             {
+                                 key: "Zahlungen gemäß §2 MedKF-TG (Medien-Kooperationen)"
+                                 values: []
+                             }
+                             {
+
+                                 key: "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
+                                 values: []
+                             }
+                             {
+                                 key: "Zahlungen gemäß §31 ORF-G (Gebühren)"
+                                 values: []
+                             }
+                         ]
+                    tickvalues: []
+                }
+
+                i = 0
+
+                for year in [data[0].year...data[data.length-1].year+1]
+                    for quarter in [1...5]
+                        if year is data[0].year and quarter < data[0].quarter
+                            continue
+                        if i >= data.length
+                            break
+                        quarterDecimal = (""+(quarter-1)/4).substring 1,4
+                        result.tickvalues.push parseFloat(""+year+quarterDecimal, 10)
+                        if (i < data.length and data[i].transferType is 2)
+                            result.data[0].values.push [parseFloat(""+year+quarterDecimal, 10),data[i].amount]
+                            i++
+                        else
+                            result.data[0].values.push [parseFloat(""+year+quarterDecimal, 10),0]
+                        if (i < data.length and data[i].transferType is 4)
+                            result.data[1].values.push [parseFloat(""+year+quarterDecimal, 10),data[i].amount]
+                            i++
+                        else
+                            result.data[1].values.push [parseFloat(""+year+quarterDecimal,10),0]
+                        if (i < data.length and data[i].transferType is 31)
+                            result.data[2].values.push [parseFloat(""+year+quarterDecimal,10),data[i].amount]
+                            i++
+                        else
+                            result.data[2].values.push [parseFloat(""+year+quarterDecimal,10),0]
+
+
+                res.send result
+
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
 
     flows: (req, res) ->
         try
