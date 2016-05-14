@@ -42,6 +42,15 @@ lineToTransfer = (line, feedback) ->
         feedback.sumTotal += transfer.amount
     feedback
 
+
+mapEvent = (event,req) ->
+    event.name = req.body.name
+    event.startDate = req.body.startDate
+    event.endDate = req.body.endDate
+    event.tags = req.body.tags
+    event.region = req.body.region
+    event
+
 module.exports = (Transparency) ->
 
     overview: (req, res) ->
@@ -351,13 +360,23 @@ module.exports = (Transparency) ->
 
     createEvent: (req,res) ->
         event = new Event()
-        event.name = req.body.name
-        event.startDate = req.body.startDate
-        event.endDate = req.body.endDate
-        event.tags = req.body.tags
-        event.region = req.body.region
+        event = mapEvent event, req
         event.save (err) ->
             if err
                 res.status(500).send error: "Could not create event #{err}"
             else
                 res.json event
+
+    updateEvent: (req, res) ->
+        Event.findById req.body._id, (err, data) ->
+            if err
+                res.status(500).send error: "Could not update event #{err}"
+            if !data or data.length is 0
+                res.status(500).send error: "Could not find event #{req.body._id}"
+            else
+                event = mapEvent data, req
+                event.save (err) ->
+                    if err
+                        res.status(500).send error: "Could not create event #{err}"
+                    else
+                        res.json event
