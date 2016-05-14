@@ -41,6 +41,8 @@ module.exports = (Transparency, app, auth, database) ->
   
   app.get '/api/transparency/events', transparency.getEvents
 
-  app.post '/api/transparency/events', transparency.createEvent
+  app.post '/api/transparency/events', auth.requiresEditor, transparency.createEvent
 
-  app.put '/api/transparency/events', transparency.updateEvent
+  app.put '/api/transparency/events', auth.requiresEditor, transparency.updateEvent
+  
+  app.delete '/api/transparency/events', auth.requiresEditor, transparency.deleteEvent

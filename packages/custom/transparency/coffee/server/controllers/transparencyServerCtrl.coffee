@@ -351,6 +351,7 @@ module.exports = (Transparency) ->
             else
                 res.json data
 
+        #todo: insert parameter checking
         if req.query.region
             Event.find {region: req.query.region}, handleEventResponse
         else if req.query.id
@@ -359,6 +360,7 @@ module.exports = (Transparency) ->
             Event.find {}, handleEventResponse
 
     createEvent: (req,res) ->
+        #todo: insert parameter checking
         event = new Event()
         event = mapEvent event, req
         event.save (err) ->
@@ -368,6 +370,8 @@ module.exports = (Transparency) ->
                 res.json event
 
     updateEvent: (req, res) ->
+
+        #todo: insert parameter checking
         Event.findById req.body._id, (err, data) ->
             if err
                 res.status(500).send error: "Could not update event #{err}"
@@ -380,3 +384,13 @@ module.exports = (Transparency) ->
                         res.status(500).send error: "Could not create event #{err}"
                     else
                         res.json event
+
+    deleteEvent: (req, res) ->
+        #todo: insert parameter checking
+        Event.findById {_id: req.query.id}, (err, data) ->
+            if err
+                res.status(500).send error: "Could not find event #{err}"
+            data.remove (removeErr) ->
+                if removeErr
+                    res.status(500).send error: "Could not delete event #{removeErr}"
+            res.json data
