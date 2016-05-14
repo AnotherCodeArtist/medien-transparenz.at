@@ -13,6 +13,7 @@ Q = require 'q'
 #iconv.extendNodeEncodings()
 
 Transfer = mongoose.model 'Transfer'
+Event = mongoose.model 'Event'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
@@ -330,3 +331,33 @@ module.exports = (Transparency) ->
             res.json result.length
         .catch (err) ->
             res.status(500).send error: "Could not determine number of items #{err}"
+
+    getEvents: (req,res) ->
+
+        handleEventResponse = (err, data) ->
+            if err
+                res.status(500).send error: "Could not get events #{err}"
+            else if !data or data.length is 0
+                res.status(404).send()
+            else
+                res.json data
+
+        if req.query.region
+            Event.find {region: req.query.region}, handleEventResponse
+        else if req.query.id
+            Event.findById req.query.id, handleEventResponse
+        else
+            Event.find {}, handleEventResponse
+
+    createEvent: (req,res) ->
+        event = new Event()
+        event.name = req.body.name
+        event.startDate = req.body.startDate
+        event.endDate = req.body.endDate
+        event.tags = req.body.tags
+        event.region = req.body.region
+        event.save (err) ->
+            if err
+                res.status(500).send error: "Could not create event #{err}"
+            else
+                res.json event

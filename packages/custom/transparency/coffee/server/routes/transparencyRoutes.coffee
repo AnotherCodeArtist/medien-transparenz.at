@@ -38,3 +38,7 @@ module.exports = (Transparency, app, auth, database) ->
   app.get '/api/transparency/count', transparency.count
 
   app.post '/api/transparency/add', auth.requiresAdmin,multipartMiddleware,transparency.upload
+  
+  app.get '/api/transparency/events', transparency.getEvents
+
+  app.post '/api/transparency/events', transparency.createEvent
