@@ -46,7 +46,10 @@ lineToTransfer = (line, feedback) ->
 mapEvent = (event,req) ->
     event.name = req.body.name
     event.startDate = req.body.startDate
+    event.numericStartDate = req.body.numericStartDate
     event.endDate = req.body.endDate
+    if req.body.numericEndDate
+        event.numericEndDate = req.body.numericEndDate
     event.tags = req.body.tags
     event.region = req.body.region
     event

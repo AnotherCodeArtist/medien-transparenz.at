@@ -1,0 +1,55 @@
+<section class="container">
+    <div data-ng-controller="EventsController">
+        <h1 translate>Manage events</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Start date
+                </th>
+                <th>
+                    End date
+                </th>
+                <th>
+                    Region
+                </th>
+                <th>
+                    Tags
+                </th>
+            </tr>
+            <tr ng-repeat="event in events">
+                <td>{{event.name}}</td>
+                <td>{{event.startDate}}</td>
+                <td>{{event.endDate}}</td>
+                <td>{{event.region}}</td>
+                <td>{{event.tags.toString()}}</td>
+            </tr>
+        </table>
+        <div class="panel panel-default">
+            <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="eventName">Name</label>
+                    <input ng-model="newEvent.name" type="text" class="form-control" id="eventName" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="eventStartDate">Start date</label>
+                    <input ng-model="newEvent.startDate" type="date" class="form-control" id="eventStartDate">
+                </div>
+                <div class="form-group">
+                    <label for="eventEndDate">End date</label>
+                    <input ng-model="newEvent.endDate" type="date" class="form-control" id="eventEndDate">
+                </div>
+                <div class="form-group">
+                    <label for="eventRegion">Region</label>
+                    <select required="required" ng-model="newEvent.region" ng-options="region.name for region in regions" class="form-control" id="eventRegion"></select>
+                </div>
+                <button ng-click="createEvent()" type="submit" class="btn btn-default">Submit</button>
+            </form>
+                </div>
+        </div>
+    </div>
+</section>

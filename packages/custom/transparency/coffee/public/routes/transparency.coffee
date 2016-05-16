@@ -29,6 +29,11 @@ angular.module 'mean.transparency'
         templateUrl: 'transparency/views/upload.html'
         resolve:
             loggedin: checkLoggedIn
+    $stateProvider.state 'events',
+        url: '/transparency/events'
+        templateUrl: 'transparency/views/events.html'
+        resolve:
+            loggedin: checkLoggedIn
     $stateProvider.state 'top',
         url: "/top"
         templateUrl: 'transparency/views/top.html'

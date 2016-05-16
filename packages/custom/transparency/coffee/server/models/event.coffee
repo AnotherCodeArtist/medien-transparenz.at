@@ -13,8 +13,12 @@ EventSchema = new Schema
      startDate:
           type: Date
           required: true
+     numericStartDate:
+          type: Number
      endDate:
           type: Date
+     numericEndDate:
+          type: Number
      region:
           type: String
           required: true

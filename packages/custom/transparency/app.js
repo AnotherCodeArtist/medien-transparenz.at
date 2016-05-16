@@ -28,6 +28,13 @@ Transparency.register(function(app, auth, database) {
     icon: icons + 'hard-drive-upload.png'
   });
   Transparency.menus.add({
+    title: 'EVENTS',
+    link: 'events',
+    roles: ['admin','editor'],
+    menu: 'admin',
+    icon: icons + 'events.png'
+  })
+  Transparency.menus.add({
     title: 'Overview',
     link: 'overview',
     //roles: ['authenticated'],
