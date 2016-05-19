@@ -440,6 +440,11 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
+#~: views/uploadOrganisation.html:3
+msgid ""
+"Upload new organisation list"
+msgstr ""
+"Neue Liste der Organisationen hochladen"
 #~ msgid "Quarters"
 #~ msgstr "Quartale"
 
