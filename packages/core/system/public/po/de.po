@@ -445,6 +445,11 @@ msgid ""
 "Upload new organisation list"
 msgstr ""
 "Neue Liste der Organisationen hochladen"
+#~: views/uploadZipCode.html:3
+msgid ""
+"Upload new zip-code list"
+msgstr ""
+"Neue Liste der Postleitzahlen hochladen"
 #~ msgid "Quarters"
 #~ msgstr "Quartale"
 

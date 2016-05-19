@@ -320,6 +320,9 @@ msgstr ""
 msgid "Upload new organisation list"
 msgstr ""
 
+#: views/uploadZipCode.html:3
+msgid "Upload new zip-code list"
+msgstr ""
 #: views/index.html:43
 #: views/index.html:51
 #: views/index.html:59

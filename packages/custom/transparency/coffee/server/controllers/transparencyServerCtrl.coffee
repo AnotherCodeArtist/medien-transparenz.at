@@ -14,8 +14,21 @@ Q = require 'q'
 
 Transfer = mongoose.model 'Transfer'
 Organisation = mongoose.model 'Organisation'
+ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+
+#Transfer of line to ZipCode
+lineToZipCode = (line, numberOfZipCodes) ->
+    splittedLine = line.split(",")
+    #Skip first line
+    if splittedLine[0] != 'PLZ'
+        entry = new ZipCode()
+        entry.zipCode = splittedLine[0]
+        entry.federalState = splittedLine[1]
+        entry.save()
+        numberOfZipCodes++
+    numberOfZipCodes
 
 #Transfer of line to Organisation
 lineToOrganisation = (line, numberOfOrganisations) ->
@@ -136,6 +149,19 @@ module.exports = (Transparency) ->
             else
                 input =  iconv.decode data, 'utf8'
                 response.newOrganisationNumber = lineToOrganisation(line,response.newOrganisationNumber) for line in input.split('\n')
+                res.status(200).send(response)
+
+    #Function for the upload of organisation-address-data
+    uploadZipCode: (req, res) ->
+        file = req.files.file;
+        response =
+            newZipCodes: 0
+        fs.readFile file.path, (err,data) ->
+            if err
+                res.status(500).send("Error #{err.message}")
+            else
+                input =  iconv.decode data, 'utf8'
+                response.newZipCodes = lineToZipCode(line,response.newZipCodes) for line in input.split('\n')
                 res.status(200).send(response)
 
     periods: (req, res) ->
