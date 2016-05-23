@@ -79,3 +79,4 @@ packages/custom/transparency/server/controllers/transparencyServerCtrl.js
 packages/custom/transparency/server/models/transfer.js
 packages/custom/transparency/server/routes/transparencyRoutes.js
 packages/custom/transparency/server/tests/transparencyCtrl.spec.js
+packages/custom/transparency/server/models/event.js

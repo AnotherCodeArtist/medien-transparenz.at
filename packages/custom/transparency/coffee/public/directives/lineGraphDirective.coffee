@@ -20,9 +20,17 @@ app.directive 'tpaLinegraph', ($rootScope) ->
                         d[1]
                     .clipEdge(true)
                     .useInteractiveGuideline(true)
+
+                    events = []
+                    events[2014.37] = ["Wahl"]
+                    $scope.data.tickvalues.push 2014.37
                     chart.xAxis.axisLabel('Quartal').tickValues($scope.data.tickvalues).tickFormat (d) ->
+                        result = ""
+                        if (events[d])
+                            result = events[d][0] + "<br />"
+
                         str = ""+d
-                        result = (""+d).substring 0, 4
+                        result += (""+d).substring 0, 4
                         if (str.indexOf '.25') != -1
                             result += "/Q2"
                         if (str.indexOf '.5') != -1
