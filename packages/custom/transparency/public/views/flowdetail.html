@@ -10,7 +10,7 @@
         <h2><a ng-click="goToSource()">{{source}}</a> &rArr; <a ng-click="goToTarget()">{{target}}</a></h2>
         <style>
             /* tell the SVG path to be a thin blue line without any area fill */
-            path {
+            .linegraph path {
                 stroke: steelblue;
                 stroke-width: 1;
                 fill: none;
@@ -36,10 +36,26 @@
                 fill: none;
                 stroke: #000;
             }
+
+            .lineGraph svg{
+                height: 300px;
+                width: 100%;
+            }
+
+            .annualGraph svg {
+                height: 300px;
+                width: 100%
+            }
+
         </style>
 
-        <div class="lineGraph">
+        <div class="lineGraph col-md-12">
             <div data-tpa-linegraph data="data" id="graph" class="aGraph" ></div>
+            <svg></svg>
+        </div>
+
+        <div class="annualGraph col-md-12">
+            <div data-tpa-annualcomparison data="annualComparisonData" id="annualcomparison"></div>
             <svg></svg>
         </div>
     </div>

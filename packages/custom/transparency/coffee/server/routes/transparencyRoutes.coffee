@@ -27,6 +27,8 @@ module.exports = (Transparency, app, auth, database) ->
 
   app.get '/api/transparency/flowdetail', transparency.flowdetail
 
+  app.get '/api/transparency/annualcomparison', transparency.annualcomparison
+
   app.get '/api/transparency/search', transparency.search
 
   app.get '/api/transparency/years', transparency.years

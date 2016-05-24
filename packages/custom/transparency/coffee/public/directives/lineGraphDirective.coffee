@@ -9,11 +9,8 @@ app.directive 'tpaLinegraph', ($rootScope) ->
         updateDiagram = (oldValue, newValue) ->
             if ($scope.data and $scope.data.data and $scope.data.data.length is 3)
                 nv.addGraph () ->
-                    width = 1000
-                    height = 300
                     chart = nv.models.stackedAreaChart()
                     .margin({top: 30, right: 60, bottom: 50, left: 150})
-                    .width(width).height(height)
                     .x (d) ->
                         d[0]
                     .y (d) ->
@@ -41,7 +38,7 @@ app.directive 'tpaLinegraph', ($rootScope) ->
                             result += "/Q1"
                         result
                     chart.yAxis.axisLabel('€').tickFormat(d3.format('.02f'))
-                    d3.select('.lineGraph svg').datum(data).transition().duration(500).call(chart).style({ 'width': width, 'height': height })
+                    d3.select('.lineGraph svg').datum(data).transition().duration(500).call(chart)
                     nv.utils.windowResize(chart.update)
                     chart
 

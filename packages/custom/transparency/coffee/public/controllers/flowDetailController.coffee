@@ -104,7 +104,12 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         .then (res) ->
             data = res.data
             $scope.data = data
-            stopLoading()
+            TPAService.annualcomparison parameters()
+            .then (res2) ->
+                console.log res2
+                data2 = res2.data
+                $scope.annualComparisonData = data2
+                stopLoading()
 
         $scope.maxExceeded = 0
 
