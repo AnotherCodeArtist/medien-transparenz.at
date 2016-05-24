@@ -162,32 +162,40 @@ module.exports = (Transparency) ->
 
                 i = 0
 
-                for year in [data[0].year...data[data.length-1].year+1]
-                    for quarter in [1...5]
-                        if year is data[0].year and quarter < data[0].quarter
-                            continue
-                        if i >= data.length
-                            break
-                        quarterDecimal = (""+(quarter-1)/4).substring 1,4
-                        result.tickvalues.push parseFloat(""+year+quarterDecimal, 10)
-                        if (i < data.length and data[i].transferType is 2)
-                            result.data[0].values.push [parseFloat(""+year+quarterDecimal, 10),data[i].amount]
-                            i++
-                        else
-                            result.data[0].values.push [parseFloat(""+year+quarterDecimal, 10),0]
-                        if (i < data.length and data[i].transferType is 4)
-                            result.data[1].values.push [parseFloat(""+year+quarterDecimal, 10),data[i].amount]
-                            i++
-                        else
-                            result.data[1].values.push [parseFloat(""+year+quarterDecimal,10),0]
-                        if (i < data.length and data[i].transferType is 31)
-                            result.data[2].values.push [parseFloat(""+year+quarterDecimal,10),data[i].amount]
-                            i++
-                        else
-                            result.data[2].values.push [parseFloat(""+year+quarterDecimal,10),0]
+                tmpObj = {
+                    '2': {}
+                    '4': {}
+                    '31': {}
+                }
 
+                tickvalues = []
 
-                res.send result
+                for transfer in data
+                    if tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)]
+                        tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)] += transfer.amount
+                    else
+                        tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)] = transfer.amount
+                        tickvalues.push (transfer.year + (transfer.quarter-1)/4)
+
+                tickvalues.sort()
+
+                result.tickvalues = tickvalues
+
+                for tickvalue in tickvalues
+                    if (tmpObj['2'][tickvalue])
+                        result.data[0].values.push [tickvalue, tmpObj['2'][tickvalue]]
+                    else
+                        result.data[0].values.push [tickvalue, 0]
+                    if (tmpObj['4'][tickvalue])
+                        result.data[1].values.push [tickvalue, tmpObj['4'][tickvalue]]
+                    else
+                        result.data[1].values.push [tickvalue, 0]
+                    if (tmpObj['31'][tickvalue])
+                        result.data[2].values.push [tickvalue, tmpObj['31'][tickvalue]]
+                    else
+                        result.data[2].values.push [tickvalue, 0]
+
+                res.json result
 
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
@@ -228,7 +236,6 @@ module.exports = (Transparency) ->
                     for transfer in transfers
                         tmpResult[""+transfer.year].quarters[""+transfer.quarter] += transfer.amount
                     result = []
-                    console.log tmpResult
                     for year, quarters of tmpResult
                         quarterArr = []
                         for quarter, amount of quarters.quarters
