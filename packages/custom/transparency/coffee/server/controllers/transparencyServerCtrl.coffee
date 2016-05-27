@@ -139,7 +139,7 @@ module.exports = (Transparency) ->
             query.organisation = source;
             query.media = target;
 
-            Transfer.find query, {}, {sort: {year: 1, quarter: 1}, transferType: 1}, (err, data) ->
+            Transfer.find query, {}, {sort: {year: 1, quarter: 1}, transferType: 1}, (err, transfers) ->
                 result = {
                     data:
                          [
@@ -168,34 +168,45 @@ module.exports = (Transparency) ->
                     '31': {}
                 }
 
-                tickvalues = []
+                #find all years
+                Transfer.distinct 'year', (error, data) ->
+                    if !error
+                        years = data
+                        years.sort()
 
-                for transfer in data
-                    if tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)]
-                        tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)] += transfer.amount
+                        tmpResult = {}
+                        tickvalues = []
+                        for year in years
+                            for quarter in [0...4]
+                                for type in [2,4,31]
+                                    tmpObj[type][year + (quarter/4)] = 0
+                                tickvalues.push (year + (quarter/4))
+
+                        tickvalues.sort()
+
+                        for transfer in transfers
+                            tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)] += transfer.amount
+
+                        result.tickvalues = tickvalues
+
+                        for tickvalue in tickvalues
+                            if (tmpObj['2'][tickvalue])
+                                result.data[0].values.push [tickvalue, tmpObj['2'][tickvalue]]
+                            else
+                                result.data[0].values.push [tickvalue, 0]
+                            if (tmpObj['4'][tickvalue])
+                                result.data[1].values.push [tickvalue, tmpObj['4'][tickvalue]]
+                            else
+                                result.data[1].values.push [tickvalue, 0]
+                            if (tmpObj['31'][tickvalue])
+                                result.data[2].values.push [tickvalue, tmpObj['31'][tickvalue]]
+                            else
+                                result.data[2].values.push [tickvalue, 0]
+
+                        res.json result
                     else
-                        tmpObj[""+transfer.transferType][""+ (transfer.year + (transfer.quarter-1)/4)] = transfer.amount
-                        tickvalues.push (transfer.year + (transfer.quarter-1)/4)
-
-                tickvalues.sort()
-
-                result.tickvalues = tickvalues
-
-                for tickvalue in tickvalues
-                    if (tmpObj['2'][tickvalue])
-                        result.data[0].values.push [tickvalue, tmpObj['2'][tickvalue]]
-                    else
-                        result.data[0].values.push [tickvalue, 0]
-                    if (tmpObj['4'][tickvalue])
-                        result.data[1].values.push [tickvalue, tmpObj['4'][tickvalue]]
-                    else
-                        result.data[1].values.push [tickvalue, 0]
-                    if (tmpObj['31'][tickvalue])
-                        result.data[2].values.push [tickvalue, tmpObj['31'][tickvalue]]
-                    else
-                        result.data[2].values.push [tickvalue, 0]
-
-                res.json result
+                        res.status 500
+                        .send "Could not load years from database! #{error}"
 
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
