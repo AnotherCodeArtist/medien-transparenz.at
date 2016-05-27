@@ -19,6 +19,9 @@
                 <th>
                     Tags
                 </th>
+                <th>
+                    Remove
+                </th>
             </tr>
             <tr ng-repeat="event in events">
                 <td>{{event.name}}</td>
@@ -26,6 +29,11 @@
                 <td>{{event.endDate | date: 'fullDate'}}</td>
                 <td>{{event.region}}</td>
                 <td>{{event.tags.toString()}}</td>
+                <td>
+                    <button ng-click="removeEvent(event._id, event.name)" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </td>
             </tr>
         </table>
         <div class="panel panel-default">
@@ -47,7 +55,13 @@
                     <label for="eventRegion">Region</label>
                     <select required="required" ng-model="newEvent.region" ng-options="region.name for region in regions" class="form-control" id="eventRegion"></select>
                 </div>
-                <button ng-click="createEvent()" type="submit" class="btn btn-default">Submit</button>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <tags-input ng-model="newEvent.tags" placeholder="Tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+                <button ng-click="createEvent()" type="submit" class="btn btn-primary">Event anlegen</button>
             </form>
                 </div>
         </div>

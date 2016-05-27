@@ -32,12 +32,18 @@ class TPAService
     getEvents: (params) ->
         @$http.get 'api/transparency/events', params
 
+    getEventTags: ->
+        @$http.get 'api/transparency/events/tags'
+
     createEvent: (params) ->
-        console.log params
         params.numericStartDate = getNumericDate params.startDate
         if params.endDate
             params.numericEndDate = getNumericDate params.endDate
         @$http.post 'api/transparency/events', params
+
+    removeEvent: (params) ->
+        console.log params
+        @$http.delete 'api/transparency/events', params: params
 
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}

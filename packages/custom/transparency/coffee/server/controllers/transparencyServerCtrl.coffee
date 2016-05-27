@@ -390,6 +390,7 @@ module.exports = (Transparency) ->
 
     deleteEvent: (req, res) ->
         #todo: insert parameter checking
+        console.log req.query.id
         Event.findById {_id: req.query.id}, (err, data) ->
             if err
                 res.status(500).send error: "Could not find event #{err}"
@@ -397,3 +398,14 @@ module.exports = (Transparency) ->
                 if removeErr
                     res.status(500).send error: "Could not delete event #{removeErr}"
             res.json data
+
+    getEventTags: (req, res) ->
+        Event.find {}, (err, events) ->
+            if err
+                res.status(500).send error "Could not load events #{err}"
+            result = []
+            for event in events
+                if event.tags
+                    Array.prototype.push.apply result, event.tags
+
+            res.json Array.from(new Set(result))

@@ -24,7 +24,7 @@ EventSchema = new Schema
           required: true
           default: 'Austria'
      tags:
-          type: Array
+          type: [String]
           default: []
 
 try
