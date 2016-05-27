@@ -57,6 +57,7 @@ footer {
   fill: none;
   stroke: #000;
   stroke-opacity: .2;
+  cursor: pointer;
 }
 
 .link.paragraph2 {
