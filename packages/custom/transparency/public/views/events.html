@@ -22,8 +22,8 @@
             </tr>
             <tr ng-repeat="event in events">
                 <td>{{event.name}}</td>
-                <td>{{event.startDate}}</td>
-                <td>{{event.endDate}}</td>
+                <td>{{event.startDate | date: 'fullDate'}}</td>
+                <td>{{event.endDate | date: 'fullDate'}}</td>
                 <td>{{event.region}}</td>
                 <td>{{event.tags.toString()}}</td>
             </tr>
