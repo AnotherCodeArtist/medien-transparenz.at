@@ -28,7 +28,9 @@
                 <td>{{event.startDate | date: 'fullDate'}}</td>
                 <td>{{event.endDate | date: 'fullDate'}}</td>
                 <td>{{event.region}}</td>
-                <td>{{event.tags.toString()}}</td>
+                <td>
+                    <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
+                </td>
                 <td>
                     <button ng-click="removeEvent(event._id, event.name)" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
