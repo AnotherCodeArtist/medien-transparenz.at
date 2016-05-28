@@ -30,7 +30,7 @@ class TPAService
         @$http.get 'api/transparency/overview'
 
     getEvents: (params) ->
-        @$http.get 'api/transparency/events', params
+        @$http.get 'api/transparency/events', params: params
 
     getEventTags: ->
         @$http.get 'api/transparency/events/tags'
@@ -40,6 +40,12 @@ class TPAService
         if params.endDate
             params.numericEndDate = getNumericDate params.endDate
         @$http.post 'api/transparency/events', params
+
+    updateEvent: (params) ->
+        params.numericStartDate = getNumericDate params.startDate
+        if params.endDate
+            params.numericEndDate = getNumericDate params.endDate
+        @$http.put 'api/transparency/events', params
 
     removeEvent: (params) ->
         console.log params
