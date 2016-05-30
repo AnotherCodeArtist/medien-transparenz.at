@@ -40,3 +40,6 @@ module.exports = (Transparency, app, auth, database) ->
   app.post '/api/transparency/add', auth.requiresAdmin,multipartMiddleware,transparency.upload
   #Route for address-upload
   app.post '/api/transparency/addOrganisation', auth.requiresAdmin,multipartMiddleware,transparency.uploadOrganisation
+  #Route for zip-upload
+  app.post '/api/transparency/addZipCode', auth.requiresAdmin,multipartMiddleware,transparency.uploadZipCode
+  return

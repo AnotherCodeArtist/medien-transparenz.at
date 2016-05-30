@@ -158,10 +158,6 @@ msgstr ""
 msgid "Move the sliders to define a range"
 msgstr ""
 
-#: controllers/flowController.js:131
-msgid "next"
-msgstr ""
-
 #: views/list.html:21
 msgid "No entries found!"
 msgstr ""
@@ -170,19 +166,19 @@ msgstr ""
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:21
+#: views/upload.html:22
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:37
+#: views/upload.html:38
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:29
+#: views/upload.html:30
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:13
+#: views/upload.html:14
 msgid "Number of non-emtpy entries"
 msgstr ""
 
@@ -233,20 +229,16 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
-#: controllers/flowController.js:130
-msgid "previous"
-msgstr ""
-
-#: views/overview.html:24
+#: views/overview.html:18
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:107
-#: controllers/topEntriesController.js:166
+#: controllers/topEntriesController.js:111
+#: controllers/topEntriesController.js:170
 msgid "Recipient"
 msgstr ""
 
-#: views/upload.html:8
+#: views/upload.html:9
 msgid "Results of the Upload"
 msgstr ""
 
@@ -267,8 +259,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:104
-#: controllers/topEntriesController.js:165
+#: controllers/topEntriesController.js:108
+#: controllers/topEntriesController.js:169
 msgid "Spender"
 msgstr ""
 
@@ -300,19 +292,23 @@ msgstr ""
 msgid "Top Spenders and Recipients"
 msgstr ""
 
-#: views/upload.html:25
+#: views/overview.html:28
+msgid "Total"
+msgstr ""
+
+#: views/upload.html:26
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:41
+#: views/upload.html:42
 msgid "Total amount according to §31 ORF-G"
 msgstr ""
 
-#: views/upload.html:33
+#: views/upload.html:34
 msgid "Total amount according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:17
+#: views/upload.html:18
 msgid "Total amount of all entries"
 msgstr ""
 
@@ -320,6 +316,13 @@ msgstr ""
 msgid "Upload new Media Transparency Report"
 msgstr ""
 
+#: views/uploadOrganisation.html:3
+msgid "Upload new organisation list"
+msgstr ""
+
+#: views/uploadZipCode.html:3
+msgid "Upload new zip-code list"
+msgstr ""
 #: views/index.html:43
 #: views/index.html:51
 #: views/index.html:59
@@ -342,4 +345,12 @@ msgstr ""
 
 #: views/flow.html:63
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
+msgstr ""
+
+#: controllers/flowController.js:131
+msgid "next"
+msgstr ""
+
+#: controllers/flowController.js:130
+msgid "previous"
 msgstr ""
