@@ -31,19 +31,7 @@ findOrganisationData = (organisation) ->
     )
     queryPromise
 
-#Transfer of line to ZipCode
-lineToZipCode = (line, numberOfZipCodes) ->
-    splittedLine = line.split(",")
-    #Skip first line
-    if splittedLine[0] != 'PLZ'
-        entry = new ZipCode()
-        entry.zipCode = splittedLine[0]
-        entry.federalState = splittedLine[1]
-        entry.save()
-        numberOfZipCodes++
-    numberOfZipCodes
-
-#Transfer of line to Organisation
+#Transfer of line to Organisation (with ZipCode for federalState)
 lineToOrganisation = (line, numberOfOrganisations) ->
     splittedLine = line.split(";")
     #Skip first and last lines
@@ -54,7 +42,14 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
-        organisation.save()
+        findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
+        Q.all(findFederalState)
+        .then (results) ->
+            try
+                organisation.federalState = results.federalState
+                organisation.save()
+            catch error
+                console.log error
         numberOfOrganisations++
     numberOfOrganisations
 
@@ -211,6 +206,8 @@ module.exports = (Transparency) ->
     flows: (req, res) ->
         try
             maxLength = parseInt req.query.maxLength or "750"
+            lookupOrganisationObject = { from: 'organisations', localField: 'organisation', foreignField: 'name', as: 'organisationAddressData' }
+            federalState = req.query.federalState or ''
             period = {}
             period['$gte'] = parseInt(req.query.from) if req.query.from
             period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -231,19 +228,29 @@ module.exports = (Transparency) ->
                     {organisation: { $regex: ".*#{filter}.*", $options: "i"}}
                     {media: { $regex: ".*#{filter}.*", $options: "i"}}
                 ]
+            if federalState
+                query['organisationAddressData.federalState_de'] = federalState
             group =
                 _id:
                     organisation: "$organisation"
                     transferType: "$transferType"
                     media: "$media"
+                    addressData: '$organisationAddressData'
                 amount:
                     $sum: "$amount"
-            Transfer.aggregate($match: query)
+            Transfer.aggregate()
+            #left-join
+            .lookup(lookupOrganisationObject)
+             #unwind: opens array
+            .unwind('$organisationAddressData')
+            .match(query)
             .group(group)
             .project(
                     organisation: "$_id.organisation"
                     transferType: "$_id.transferType",
                     media: "$_id.media"
+                    federalState: "$_id.federalState"
+                    organisationAddressData: "$_id.addressData",
                     _id: 0
                     amount: 1)
             #left-join

@@ -5,7 +5,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'federalState']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -19,6 +19,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.ranks = [3, 5, 10, 15, 20]
     $scope.rank = 10
     $scope.pieData = []
+    $scope.federalState = {}
+    $scope.federalStates = [{name: 'Burgenland'}, {name: 'Kärnten'}, {name: 'Niederösterreich'}, {name: 'Oberösterreich'}, {name: 'Salzburg'}, {name: 'Steiermark'}, {name: 'Tirol'}, {name: 'Vorarlberg'}, {name: 'Wien'}]
     window.scrollTo 0, 0
 
     # register watches to update chart when changes occur
@@ -26,6 +28,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.$watch('typesText', change, true)
         $scope.$watch('orgType', change, true)
         $scope.$watch('rank', change, true)
+        $scope.$watch('selectedFederalState', change, true)
 
 
     #construct the query parameters
@@ -33,6 +36,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params = {}
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to =$scope.periods[$scope.slider.to/5].period
+        (params.federalState = $scope.selectedFederalState.name) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
@@ -91,6 +95,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             types = [2, 4, 31]
             $scope.typesText = (type: type, text: gettextCatalog.getString( TPAService.decodeType(type) ), checked: false for type in types)
             $scope.typesText[0].checked = true
+            #Variables for the selection of federalState
+            $scope.selectedFederalState = '-'
             $scope.orgType = $scope.orgTypes[0].value
             $q.all([pY, pP]).then (res) ->
                 update()

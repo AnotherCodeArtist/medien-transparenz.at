@@ -36,6 +36,10 @@
                             </label>
                         </div>
 
+                        <strong><div translate>Federal State</div></strong>
+                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates" name="federalStateSelect" id="federalStateSelect" >
+                            <option value="">-</option>
+                        </select>
                     </div>
                     <div class="col-sm-1 col-lg-1">
                         <div translate>Top</div>

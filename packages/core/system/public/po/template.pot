@@ -78,6 +78,10 @@ msgid ""
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
+#: views/flow.html:42
+msgid "Federal State"
+msgstr ""
+
 #: views/index.html:33
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
