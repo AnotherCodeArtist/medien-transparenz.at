@@ -24,21 +24,27 @@ app.directive 'tpaLinegraph', ($rootScope) ->
                     chart.xAxis.axisLabel('Quartal').tickValues($scope.data.tickvalues).tickFormat (d) ->
                         result = ""
                         if (events[d])
-                            result = events[d][0] + "<br />"
+                            result = events[d][0]
 
-                        str = ""+d
-                        result += (""+d).substring 0, 4
-                        if (str.indexOf '.25') != -1
-                            result += "/Q2"
-                        if (str.indexOf '.5') != -1
-                            result += "/Q3"
-                        if (str.indexOf '.75') != -1
-                            result += "/Q4"
-                        if (str.indexOf '.') is -1
-                            result += "/Q1"
-                        result
+                        else
+                            str = ""+d
+                            result += (""+d).substring 0, 4
+                            if (str.indexOf '.25') != -1
+                                result = "Q2"
+                            if (str.indexOf '.5') != -1
+                                result = "Q3"
+                            if (str.indexOf '.75') != -1
+                                result = "Q4"
+                            if (str.indexOf '.') is -1
+                                result += "/Q1"
+                            result
                     chart.yAxis.axisLabel('€').tickFormat(d3.format('.02f'))
                     d3.select('.lineGraph svg').datum(data).transition().duration(500).call(chart)
+                    d3.select('.lineGraph svg').selectAll('g.tick').filter((d) ->
+                        d%0.25 != 0)
+                    .select('line').style('stroke','red')
+                    d3.select('.lineGraph svg').selectAll(".tick > text")
+                    .style("font-size", 10);
                     nv.utils.windowResize(chart.update)
                     chart
 
