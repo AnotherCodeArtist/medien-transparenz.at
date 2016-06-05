@@ -28,47 +28,52 @@ Transparency.register(function(app, auth, database) {
     icon: icons + 'hard-drive-upload.png'
   });
   Transparency.menus.add({
-    title: 'EVENTS',
-    link: 'events',
-    roles: ['admin','editor'],
-    menu: 'admin',
-    icon: icons + 'events.png'
-  })
-  Transparency.menus.add({
     title: 'Overview',
     link: 'overview',
-    //roles: ['authenticated'],
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Top Player',
     link: 'top',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Money Flow',
     link: 'showflow',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Organisations',
     link: 'listOrgs',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
 
   Transparency.menus.add({
     title: 'Media',
     link: 'listMedia',
+    roles: ['authenticated', 'anonymous'],
+    menu: 'main'
+  });
+  Transparency.menus.add({
+    title: 'Events',
+    link: 'events',
+    roles: ['authenticated'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Impress',
     link: 'impress',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Search',
     link: 'search',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
 
