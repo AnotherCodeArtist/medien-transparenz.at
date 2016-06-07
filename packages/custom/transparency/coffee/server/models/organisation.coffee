@@ -22,6 +22,10 @@ OrganisationSchema = new Schema
         type: String
         trim: true
         required: true
+    federalState_de:
+        type: String
+        trim: true
+        required: true
     country_de:
         type: String
         trim: true
@@ -32,10 +36,7 @@ OrganisationSchema = new Schema
 OrganisationSchema.index(
   {
       name: 1
-      street: 1
-      zipCode: 1
-      city_de: 1
-      country_de: 1
+      federalState_de: 1
   },{
       unique: true
   }

@@ -17,6 +17,19 @@ Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+#Search for organisation entry in database
+findOrganisationData = (organisation) ->
+    #console.log "search for organisation with name " + organisation
+    queryPromise = Organisation.findOne({ 'name': organisation }, 'name').exec()
+    queryPromise.then(
+        (result) ->
+            #console.log "Organisation Data: " + result
+            return
+        (err) ->
+            #console.log "Could not load organisation data from Database: #{err}"
+            return
+    )
+    queryPromise
 
 #Transfer of line to ZipCode
 lineToZipCode = (line, numberOfZipCodes) ->
@@ -41,7 +54,14 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
-        organisation.save()
+        findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
+        Q.all(findFederalState)
+        .then (results) ->
+            try
+                organisation.federalState_de = results.federalState
+                organisation.save()
+            catch error
+                console.log error
         numberOfOrganisations++
     numberOfOrganisations
 
@@ -57,7 +77,17 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
-        transfer.save()
+        #Save reference
+        transferReference = findOrganisationData transfer.organisation
+        Q.all(transferReference)
+        .then (results) ->
+            try
+                if results.name
+                    transfer.organisationReference = results._id
+                    console.log transfer.organisationReference
+                transfer.save()
+            catch error
+                console.log error
         feedback.quarter = transfer.quarter
         feedback.year = transfer.year
         feedback.entries++
