@@ -7,10 +7,10 @@
                 <th>
                     Name
                 </th>
-                <th>
+                <th translate>
                     Start date
                 </th>
-                <th>
+                <th translate>
                     End date
                 </th>
                 <th>
@@ -19,17 +19,17 @@
                 <th>
                     Tags
                 </th>
-                <th>
+                <th translate>
                     Edit
                 </th>
-                <th>
+                <th translate>
                     Remove
                 </th>
             </tr>
             <tr ng-repeat="event in events">
                 <td>{{event.name}}</td>
-                <td>{{event.startDate | date: 'fullDate'}}</td>
-                <td>{{event.endDate | date: 'fullDate'}}</td>
+                <td>{{event.startDate | date: 'd.M.yyyy'}}</td>
+                <td>{{event.endDate | date: 'd.M.yyyy'}}</td>
                 <td>{{event.region}}</td>
                 <td>
                     <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
@@ -48,22 +48,22 @@
         </table>
         <div class="panel panel-default">
             <div class="panel-body">
-            <form>
+            <form name="eventForm">
                 <div class="form-group">
                     <label for="eventName">Name</label>
-                    <input ng-model="event.name" type="text" class="form-control" id="eventName" placeholder="Name">
+                    <input ng-model="event.name" type="text" class="form-control" id="eventName" placeholder="Name" required="required">
                 </div>
                 <div class="form-group">
-                    <label for="eventStartDate">Start date</label>
+                    <label for="eventStartDate" translate>Start date</label>
                     <input ng-model="event.startDate" type="date" class="form-control" id="eventStartDate">
                 </div>
                 <div class="form-group">
-                    <label for="eventEndDate">End date</label>
+                    <label for="eventEndDate" translate>End date</label>
                     <input ng-model="event.endDate" type="date" class="form-control" id="eventEndDate">
                 </div>
                 <div class="form-group">
                     <label for="eventRegion">Region</label>
-                    <select required="required" ng-model="event.region" ng-options="region as region for region in regions" class="form-control" id="eventRegion"></select>
+                    <select required="required" ng-model="event.region" ng-options="region as region.name for region in regions" class="form-control" id="eventRegion"></select>
                 </div>
                 <div class="form-group">
                     <label>Tags</label>
@@ -71,9 +71,9 @@
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                 </div>
-                <button ng-show="!editEnabled" ng-click="createEvent()" type="submit" class="btn btn-primary">Event anlegen</button>
-                <button ng-show="editEnabled" ng-click="updateEvent()" type="submit" class="btn btn-primary">Event speichern</button>
-                <button ng-show="editEnabled" ng-click="cancelEdit()" type="submit" class="btn btn-default">Abbrechen</button>
+                <button ng-disabled="eventForm.$invalid" ng-show="!editEnabled" ng-click="createEvent()" type="submit" class="btn btn-primary" translate>Create</button>
+                <button ng-disabled="eventForm.$invalid" ng-show="editEnabled" ng-click="updateEvent()" type="submit" class="btn btn-primary" translate>Save</button>
+                <button ng-show="editEnabled" ng-click="cancelEdit()" type="submit" class="btn btn-default" translate>Cancel</button>
             </form>
                 </div>
         </div>

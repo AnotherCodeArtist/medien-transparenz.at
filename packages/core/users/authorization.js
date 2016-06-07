@@ -57,7 +57,7 @@ exports.requiresEditor = function(req, res, next) {
     findUser(req.user._id, function(user) {
         if (!user) return res.status(401).send('User is not authorized');
 
-        if (req.user.roles.indexOf('editor') === -1) return res.status(401).send('User is not authorized');
+        if (req.user.roles.indexOf('can manage events') === -1) return res.status(401).send('User is not authorized');
         req.user = user;
         next();
     });

@@ -1,12 +1,15 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'EventsController',['$scope', 'TPAService', ($scope, TPAService) ->
+app.controller 'EventsController',['$scope', 'TPAService', 'gettextCatalog', ($scope, TPAService, gettextCatalog) ->
 
      updateTable = ->
           TPAService.getEvents({})
           .then((result) ->
                $scope.events = result.data
+
+               for event in $scope.events
+                    event.region = gettextCatalog.getString(event.region)
           )
 
      $scope.loadTags = (query) ->
@@ -21,19 +24,60 @@ app.controller 'EventsController',['$scope', 'TPAService', ($scope, TPAService) 
                .then () ->
                     updateTable()
 
-     $scope.regions = [
-          "Austria",
-          "Vorarlberg",
-          "Tyrolia",
-          "Salzburg",
-          "Upper Austria",
-          "Lower Austria",
-          "Vienna",
-          "Burgenland",
-          "Styria",
-          "Carenthia"
-     ]
-     
+     setRegions = () ->
+          if $scope.event and $scope.event.region
+               reg = $scope.event.region
+          $scope.regions = [
+               {
+                    value: "Austria"
+                    name: gettextCatalog.getString("Austria")
+               },
+               {
+                    value: "Vorarlberg"
+                    name: gettextCatalog.getString("Vorarlberg")
+               },
+               {
+                    value: "Tyrol"
+                    name: gettextCatalog.getString("Tyrol")
+               },
+               {
+                    value: "Salzburg"
+                    name: gettextCatalog.getString("Salzburg")
+               },
+               {
+                    value: "Upper Austria"
+                    name: gettextCatalog.getString("Upper Austria")
+               },
+               {
+                    value: "Lower Austria"
+                    name: gettextCatalog.getString("Lower Austria")
+               },
+               {
+                    value: "Vienna"
+                    name: gettextCatalog.getString("Vienna")
+               },
+               {
+                    value: "Burgenland"
+                    name: gettextCatalog.getString("Burgenland")
+               },
+               {
+                    value: "Styria"
+                    name: gettextCatalog.getString("Styria")
+               },
+               {
+                    value: "Carinthia"
+                    name: gettextCatalog.getString("Carinthia")
+               }
+          ]
+          if reg
+               for region in $scope.regions
+                    if region.value is reg.value
+                         $scope.event.region = region
+
+     setRegions()
+     $scope.$on 'gettextLanguageChanged', setRegions
+     $scope.$on 'gettextLanguageChanged', updateTable
+
      $scope.editEnabled = false
 
      $scope.cancelEdit = () ->
@@ -46,6 +90,8 @@ app.controller 'EventsController',['$scope', 'TPAService', ($scope, TPAService) 
           for tag in $scope.event.tags
                tags.push tag.text
           $scope.event.tags = tags
+
+          $scope.event.region = $scope.event.region.value
           TPAService.updateEvent $scope.event
           .then ()->
                updateTable()
@@ -62,8 +108,10 @@ app.controller 'EventsController',['$scope', 'TPAService', ($scope, TPAService) 
                $scope.event.startDate = new Date(result.data.startDate)
                if result.data.endDate
                     $scope.event.endDate = new Date(result.data.endDate)
-               $scope.event.region = result.data.region
-               console.log $scope.event
+
+               for region in $scope.regions
+                    if region.value is result.data.region
+                         $scope.event.region = region
 
      resetNewEvent = ->
           $scope.event = {
@@ -84,6 +132,7 @@ app.controller 'EventsController',['$scope', 'TPAService', ($scope, TPAService) 
           tags = []
           for tag in $scope.event.tags
                tags.push tag.text
+          $scope.event.region = $scope.event.region.value
           $scope.event.tags = tags
           TPAService.createEvent $scope.event
           .then((result) ->
