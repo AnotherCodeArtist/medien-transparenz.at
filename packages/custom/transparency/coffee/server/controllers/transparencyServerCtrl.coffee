@@ -84,7 +84,7 @@ lineToTransfer = (line, feedback) ->
             try
                 if results.name
                     transfer.organisationReference = results._id
-                    console.log transfer.organisationReference
+                    #console.log transfer.organisationReference
                 transfer.save()
             catch error
                 console.log error
@@ -258,36 +258,27 @@ module.exports = (Transparency) ->
             )
             .exec()
             .then (result) ->
-                if federalState.length
-                    #console.log('Populate for federal state: ' + federalState);
-                    #path: what to look for
-                    Organisation.populate(result, {path: 'organisationReference'})
+                    #populate;
+                    #path: what to look for, select without id
+                    Organisation.populate(result, {path: 'organisationReference', select: '-_id'})
                     .then (
                         (err) ->
                             console.log "Error during populate: :" + err
                         (isPopulated) ->
-                            #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
-                            #create new results based on the federalState selection
-                            federalStateResult = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
-                            #console.log("Result with " +federalState+" has length of " + federalStateResult.length)
-                            #console.log(JSON.stringify(federalStateResult))
-                            if federalStateResult.length > maxLength
+                            if federalState
+                                #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
+                                #create new results based on the federalState selection
+                                result = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
+                                #console.log("Result with " +federalState+" has length of " + result.length)
+                                #console.log(JSON.stringify(result))
+                            if  result.length > maxLength
                                 res.status(413).send {
-                                    error: "You federal state query returns more then the specified maximum of #{maxLength}"
-                                    length: federalStateResult.length
+                                    error: "You query returns more then the specified maximum of #{maxLength}"
+                                    length: result.length
                                     }
                             else
-                                res.json federalStateResult
+                                res.json result
                     )
-                else
-                    if  result.length > maxLength
-                        res.status(413).send {
-                            error: "You query returns more then the specified maximum of #{maxLength}"
-                            length: result.length
-                        }
-                    else
-                        res.json result
-
             .catch (err) ->
                 res.status(500).send error: "Could not load money flow: #{err}"
         catch error
