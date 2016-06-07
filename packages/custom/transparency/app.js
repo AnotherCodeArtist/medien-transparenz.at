@@ -61,7 +61,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.menus.add({
     title: 'Events',
     link: 'events',
-    roles: ['authenticated'],
+    roles: ['can manage events'],
     menu: 'main'
   });
   Transparency.menus.add({
