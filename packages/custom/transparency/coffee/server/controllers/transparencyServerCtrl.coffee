@@ -17,6 +17,40 @@ Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+
+#matches media to federalState (due to lack of grouping)
+mediaToFederalState = (mediaResult, limit, federalState) ->
+    #Show only media from organisations within the federalState
+    if federalState.length
+        mediaResult =  (media for media in mediaResult when media.organisationReference.federalState_de is federalState)
+
+    uniqueMedia= []
+    #console.log("Entries in result " +mediaResult.length)
+    for media in mediaResult
+        mediaNames = (name.organisation for name in uniqueMedia)
+
+        if media.organisation not in mediaNames
+           uniqueMedia.push(media)
+        else
+           # media is already there, add sum to media
+           #console.log (media.organisation + ' in media names')
+           for uniqueEntry in uniqueMedia
+               if uniqueEntry.organisation is media.organisation
+                   #console.log(uniqueEntry.organisation +  'has already ' +uniqueEntry.total)
+                   #console.log("The transfer adds "+ media.total)
+                   uniqueEntry.total += media.total
+                   #console.log("Entry has now " +uniqueEntry.total)
+                   break
+
+    #console.log ("Entries after uniqueness: " + uniqueMedia.length)
+    uniqueMedia.splice(0,limit);
+
+#function for populate
+getPopulateInformation = (sourceForPopulate, path) ->
+    #path: what to look for, select without id
+    populatePromise = Organisation.populate(sourceForPopulate, {path: path, select: '-_id'})
+    populatePromise
+
 #Search for organisation entry in database
 findOrganisationData = (organisation) ->
     #console.log "search for organisation with name " + organisation
@@ -258,33 +292,32 @@ module.exports = (Transparency) ->
             )
             .exec()
             .then (result) ->
-                    #populate;
-                    #path: what to look for, select without id
-                    Organisation.populate(result, {path: 'organisationReference', select: '-_id'})
-                    .then (
-                        (err) ->
-                            console.log "Error during populate: :" + err
-                        (isPopulated) ->
-                            if federalState
-                                #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
-                                #create new results based on the federalState selection
-                                result = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
-                                #console.log("Result with " +federalState+" has length of " + result.length)
-                                #console.log(JSON.stringify(result))
-                            if  result.length > maxLength
-                                res.status(413).send {
-                                    error: "You query returns more then the specified maximum of #{maxLength}"
-                                    length: result.length
-                                    }
-                            else
-                                res.json result
-                    )
+                   populatedPromise = getPopulateInformation(result, 'organisationReference')
+                   .then(
+                     (isPopulated) ->
+                         if federalState
+                            #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
+                            #create new results based on the federalState selection
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
+                            #console.log("Result with " +federalState+" has length of " + result.length)
+                            #console.log(JSON.stringify(result))
+
+                         if result.length > maxLength
+                            res.status(413).send {
+                             error: "You query returns more then the specified maximum of #{maxLength}"
+                             length: result.length
+                                }
+                         else
+                            res.json result
+                   )
+
             .catch (err) ->
                 res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
+        federalState = req.query.federalState or ''
         period = {}
         period['$gte'] = parseInt(req.query.from) if req.query.from
         period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -293,13 +326,20 @@ module.exports = (Transparency) ->
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
         results = parseInt(req.query.x or '10')
         query = {}
+        project =
+            organisation: '$_id.organisation'
+            organisationReference: '$_id.organisationReference'
+            _id: 0
+            total: 1
         if period.$gte? or period.$lte?
             query.period = period
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
         group =
-            _id: {organisation: if orgType is 'org' then '$organisation' else '$media'}
+            _id:
+                organisation: if orgType is 'org' then '$organisation' else '$media',
+                organisationReference: '$organisationReference'
             total:
                 $sum: '$amount'
         options = {}
@@ -312,28 +352,44 @@ module.exports = (Transparency) ->
         #console.log query
         #console.log "Group: "
         #console.log group
+        #console.log "Project: "
+        #console.log project
         topPromise = Transfer.aggregate($match: query)
         .group(group)
         .sort('-total')
-        .limit(results)
-        .project(
-            organisation: '$_id.organisation'
-            _id: 0
-            total: 1
-        )
+        .project(project)
         .exec()
         allPromise = Transfer.mapReduce options
         allPromise.then (r) ->
         Q.all([topPromise, allPromise])
-        .then (results) ->
+        .then (promiseResults) ->
             try
-                result =
-                    top: results[0]
-                    all: results[1].reduce(
-                        (sum, v)->
-                            sum + v.value
-                        0)
-                res.send result
+                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
+                .then (
+                    (isPopulated) ->
+                        try
+                            if orgType is 'org'
+                                if federalState.length
+                                    #create new results based on the federalState selection
+                                    promiseResults[0] = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_de is federalState)
+                                    #console.log("Result with " +federalState+" has length of " + result.length)
+                                    #console.log ("we have to cut the array to the limit of " + results)
+                                topResult = promiseResults[0].splice(0,results);
+
+                            else
+                                topResult =  mediaToFederalState(promiseResults[0], results, federalState)
+                            result =
+                                top: topResult,
+                                all: promiseResults[1].reduce(
+                                    (sum, v)->
+                                        sum + v.value
+                                  0)
+                            res.send result
+                        catch error
+                            console.log error
+                            res.status(500).send("No Data was found!")
+                )
+
             catch error
                 console.log error
                 res.status(500).send("No Data was found!")
