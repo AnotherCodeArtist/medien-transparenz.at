@@ -217,6 +217,7 @@ module.exports = (Transparency) ->
     flows: (req, res) ->
         try
             maxLength = parseInt req.query.maxLength or "750"
+            federalState = req.query.federalState or ''
             period = {}
             period['$gte'] = parseInt(req.query.from) if req.query.from
             period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -240,6 +241,7 @@ module.exports = (Transparency) ->
             group =
                 _id:
                     organisation: "$organisation"
+                    organisationReference: "$organisationReference"
                     transferType: "$transferType"
                     media: "$media"
                 amount:
@@ -247,22 +249,47 @@ module.exports = (Transparency) ->
             Transfer.aggregate($match: query)
             .group(group)
             .project(
-                    organisation: "$_id.organisation"
-                    transferType: "$_id.transferType",
-                    media: "$_id.media"
-                    _id: 0
-                    amount: 1)
+                organisation: "$_id.organisation",
+                organisationReference: "$_id.organisationReference",
+                transferType: "$_id.transferType",
+                media: "$_id.media"
+                _id: 0
+                amount: 1
+            )
             .exec()
             .then (result) ->
-                if result.length > maxLength
-                    res.status(413).send {
-                        error: "You query returns more then the specified maximum od #{maxLength}"
-                        length: result.length
-                    }
+                if federalState.length
+                    #console.log('Populate for federal state: ' + federalState);
+                    #path: what to look for
+                    Organisation.populate(result, {path: 'organisationReference'})
+                    .then (
+                        (err) ->
+                            console.log "Error during populate: :" + err
+                        (isPopulated) ->
+                            #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
+                            #create new results based on the federalState selection
+                            federalStateResult = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
+                            #console.log("Result with " +federalState+" has length of " + federalStateResult.length)
+                            #console.log(JSON.stringify(federalStateResult))
+                            if federalStateResult.length > maxLength
+                                res.status(413).send {
+                                    error: "You federal state query returns more then the specified maximum of #{maxLength}"
+                                    length: federalStateResult.length
+                                    }
+                            else
+                                res.json federalStateResult
+                    )
                 else
-                    res.json result
+                    if  result.length > maxLength
+                        res.status(413).send {
+                            error: "You query returns more then the specified maximum of #{maxLength}"
+                            length: result.length
+                        }
+                    else
+                        res.json result
+
             .catch (err) ->
-                res.status(500).send error: "Could not load money flow"
+                res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
