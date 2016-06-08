@@ -71,9 +71,7 @@ app.directive 'tpaLinegraph', ($rootScope) ->
                     chart.xAxis
                     .tickValues [0...16]
                     .tickFormat (d) ->
-                        dx = $scope.data.data.values[
-                        
-                        ]
+                        dx = $scope.data.data.values[d]
                         result = ""
                         if (events[dx])
                             result = events[dx][0]
