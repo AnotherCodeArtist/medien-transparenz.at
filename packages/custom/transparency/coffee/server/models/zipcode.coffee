@@ -10,11 +10,18 @@ ZipcodeSchema = new Schema
     zipCode:
         type: String
         required: true
+        unique: true
 
     federalState:
         type: String
         required: true
 
+ZipcodeSchema.index(
+  {
+      zipCode: 1
+      unique: true
+  }
+)
 
 try
     m = mongoose.model 'Zipcode'
