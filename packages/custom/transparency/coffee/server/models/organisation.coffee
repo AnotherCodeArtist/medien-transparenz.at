@@ -22,7 +22,7 @@ OrganisationSchema = new Schema
         type: String
         trim: true
         required: true
-    federalState_de:
+    federalState_en:
         type: String
         trim: true
         required: true
@@ -36,7 +36,7 @@ OrganisationSchema = new Schema
 OrganisationSchema.index(
   {
       name: 1
-      federalState_de: 1
+      federalState_en: 1
   },{
       unique: true
   }
