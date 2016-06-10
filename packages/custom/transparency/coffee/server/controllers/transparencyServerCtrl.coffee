@@ -22,7 +22,7 @@ regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 mediaToFederalState = (mediaResult, limit, federalState) ->
     #Show only media from organisations within the federalState
     if federalState.length
-        mediaResult =  (media for media in mediaResult when media.organisationReference.federalState_de is federalState)
+        mediaResult =  (media for media in mediaResult when media.organisationReference.federalState_en is federalState)
 
     uniqueMedia= []
     #console.log("Entries in result " +mediaResult.length)
@@ -92,7 +92,7 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         Q.all(findFederalState)
         .then (results) ->
             try
-                organisation.federalState_de = results.federalState
+                organisation.federalState_en = results.federalState
                 organisation.save()
             catch error
                 console.log error
@@ -296,9 +296,9 @@ module.exports = (Transparency) ->
                    .then(
                      (isPopulated) ->
                          if federalState
-                            #console.log "Federal State: " + transfer.organisationReference.federalState_de for transfer in result when transfer.organisationReference.federalState_de is federalState
+                            #console.log "Federal State: " + transfer.organisationReference.federalState_en for transfer in result when transfer.organisationReference.federalState_en is federalState
                             #create new results based on the federalState selection
-                            result = (transfer for transfer in result when transfer.organisationReference.federalState_de is federalState)
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
                             #console.log("Result with " +federalState+" has length of " + result.length)
                             #console.log(JSON.stringify(result))
 
@@ -371,7 +371,7 @@ module.exports = (Transparency) ->
                             if orgType is 'org'
                                 if federalState.length
                                     #create new results based on the federalState selection
-                                    promiseResults[0] = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_de is federalState)
+                                    promiseResults[0] = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
                                     #console.log("Result with " +federalState+" has length of " + result.length)
                                     #console.log ("we have to cut the array to the limit of " + results)
                                 topResult = promiseResults[0].splice(0,results);

@@ -79,7 +79,13 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.": "Ihre Anfrage lieferte {{error.length}} Einträge. Das ist mehr als das erlaubte Maximum von {{maxNodes}}. Bitte verwenden Sie den Filter, um die Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im Textfeld \"Filter\" ein.",
         "Upload new organisation list": "Neue Liste der Organisationen hochladen",
         "Upload new zip-code list": "Neue Liste der Postleitzahlen hochladen",
-        "Federal State": "Bundesland"
+        "Federal State": "Bundesland",
+        "Carinthia": "Kärnten",
+        "Lower Austria": "Niederösterreich",
+        "Styria": "Steiermark",
+        "Tyrol": "Tirol",
+        "Upper Austria": "Oberösterreich",
+        "Vienna": "Wien",
     });
     /* jshint +W100 */
 }]);

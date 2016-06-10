@@ -57,7 +57,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #Variables for the selection of federalState
     $scope.selectedFederalState = '-'
     $scope.federalState = {}
-    $scope.federalStates = [{name: 'Burgenland'}, {name: 'Kärnten'}, {name: 'Niederösterreich'}, {name: 'Oberösterreich'}, {name: 'Salzburg'}, {name: 'Steiermark'}, {name: 'Tirol'}, {name: 'Vorarlberg'}, {name: 'Wien'}]
+    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
         links: []
@@ -66,7 +66,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to = $scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.name) if $scope.selectedFederalState
+        (params.federalState = $scope.selectedFederalState.value) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -117,6 +117,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 
