@@ -75,3 +75,4 @@ modules/views/
 # vim Files
 # --------------------
 *.swp
+packages/custom/transparency/server/

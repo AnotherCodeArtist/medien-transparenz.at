@@ -13,6 +13,7 @@ Q = require 'q'
 #iconv.extendNodeEncodings()
 
 Transfer = mongoose.model 'Transfer'
+Event = mongoose.model 'Event'
 Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
 
@@ -113,17 +114,7 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
-        #Save reference
-        transferReference = findOrganisationData transfer.organisation
-        Q.all(transferReference)
-        .then (results) ->
-            try
-                if results.name
-                    transfer.organisationReference = results._id
-                    #console.log transfer.organisationReference
-                transfer.save()
-            catch error
-                console.log error
+        transfer.save()
         feedback.quarter = transfer.quarter
         feedback.year = transfer.year
         feedback.entries++
@@ -135,6 +126,18 @@ lineToTransfer = (line, feedback) ->
         feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
         feedback.sumTotal += transfer.amount
     feedback
+
+
+mapEvent = (event,req) ->
+    event.name = req.body.name
+    event.startDate = req.body.startDate
+    event.numericStartDate = req.body.numericStartDate
+    event.endDate = req.body.endDate
+    if req.body.numericEndDate
+        event.numericEndDate = req.body.numericEndDate
+    event.tags = req.body.tags
+    event.region = req.body.region
+    event
 
 module.exports = (Transparency) ->
 
@@ -492,3 +495,69 @@ module.exports = (Transparency) ->
             res.json result.length
         .catch (err) ->
             res.status(500).send error: "Could not determine number of items #{err}"
+
+    getEvents: (req,res) ->
+
+        handleEventResponse = (err, data) ->
+            if err
+                res.status(500).send error: "Could not get events #{err}"
+            else if !data or data.length is 0
+                res.status(404).send()
+            else
+                res.json data
+
+        #todo: insert parameter checking
+        if req.query.region
+            Event.find {region: req.query.region}, handleEventResponse
+        else if req.query.id
+            Event.findById req.query.id, handleEventResponse
+        else
+            Event.find {}, handleEventResponse
+
+    createEvent: (req,res) ->
+        #todo: insert parameter checking
+        event = new Event()
+        event = mapEvent event, req
+        event.save (err) ->
+            if err
+                res.status(500).send error: "Could not create event #{err}"
+            else
+                res.json event
+
+    updateEvent: (req, res) ->
+
+        #todo: insert parameter checking
+        Event.findById req.body._id, (err, data) ->
+            if err
+                res.status(500).send error: "Could not update event #{err}"
+            if !data or data.length is 0
+                res.status(500).send error: "Could not find event #{req.body._id}"
+            else
+                event = mapEvent data, req
+                event.save (err) ->
+                    if err
+                        res.status(500).send error: "Could not create event #{err}"
+                    else
+                        res.json event
+
+    deleteEvent: (req, res) ->
+        #todo: insert parameter checking
+        console.log req.query.id
+        Event.findById {_id: req.query.id}, (err, data) ->
+            if err
+                res.status(500).send error: "Could not find event #{err}"
+            data.remove (removeErr) ->
+                if removeErr
+                    res.status(500).send error: "Could not delete event #{removeErr}"
+            res.json data
+
+    getEventTags: (req, res) ->
+        Event.find {}, (err, events) ->
+            if err
+                res.status(500).send error "Could not load events #{err}"
+            result = []
+            for event in events
+                if event.tags
+                    Array.prototype.push.apply result, event.tags
+
+            res.json Array.from(new Set(result))

@@ -1,6 +1,13 @@
 'use strict'
 
 
+getNumericDate = (date) ->
+    start = new Date(date.getFullYear(), 0, 0);
+    diff = date - start;
+    oneDay = 1000 * 60 * 60 * 24;
+    day = Math.floor(diff / oneDay);
+    date.getFullYear() + day/365
+
 class TPAService
     constructor: (@$http) ->
 
@@ -21,6 +28,28 @@ class TPAService
 
     overview: ->
         @$http.get 'api/transparency/overview'
+
+    getEvents: (params) ->
+        @$http.get 'api/transparency/events', params: params
+
+    getEventTags: ->
+        @$http.get 'api/transparency/events/tags'
+
+    createEvent: (params) ->
+        params.numericStartDate = getNumericDate params.startDate
+        if params.endDate
+            params.numericEndDate = getNumericDate params.endDate
+        @$http.post 'api/transparency/events', params
+
+    updateEvent: (params) ->
+        params.numericStartDate = getNumericDate params.startDate
+        if params.endDate
+            params.numericEndDate = getNumericDate params.endDate
+        @$http.put 'api/transparency/events', params
+
+    removeEvent: (params) ->
+        console.log params
+        @$http.delete 'api/transparency/events', params: params
 
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
