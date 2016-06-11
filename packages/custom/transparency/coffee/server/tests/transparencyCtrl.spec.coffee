@@ -2,6 +2,7 @@
 
 should = require 'should'
 mongoose = require 'mongoose'
+Organisation = mongoose.model 'Organisation'
 Transfer = mongoose.model 'Transfer'
 controller = require('../controllers/transparencyServerCtrl')({})
 request = require 'superagent'
@@ -37,6 +38,20 @@ describe 'Transparency Controllers', ->
             regex = /(.+?);(\d{4})(\d);(\d{1,2});\d;(.+?);(\d+(?:,\d{1,2})?).*/
             m = line.match regex
             m.should.have.lengthOf 7
+
+    describe 'Saving Organisation', ->
+        it 'should match and save an valid organisation line', (done)->
+            line = "FH JOANNEUM Gesellschaft mbH;Alte Poststr. 149;8020;Graz;Österreich\r"
+            splittedLine = line.split(";")
+            splittedLine.should.have.lengthOf 5
+            testOrganisation = new Organisation
+            testOrganisation.name = splittedLine[0]
+            testOrganisation.street = splittedLine[1]
+            testOrganisation.zipCode = splittedLine[2]
+            testOrganisation.city_de = splittedLine[3]
+            testOrganisation.country_de = splittedLine[4]
+            testOrganisation.save()
+            done()
 
     describe 'controller overview', ->
         agent = request.agent()
@@ -186,4 +201,5 @@ describe 'Transparency Controllers', ->
 
     afterEach (done) ->
         Transfer.remove({}).exec()
+        Organisation.remove({}).exec()
         done()

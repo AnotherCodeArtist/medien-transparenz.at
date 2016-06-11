@@ -1,8 +1,4 @@
 'use strict';
-
-
-
-
 angular.module 'mean.transparency'
 .config ($stateProvider) ->
 
@@ -27,6 +23,18 @@ angular.module 'mean.transparency'
     $stateProvider.state 'add_report',
         url: '/transparency/add'
         templateUrl: 'transparency/views/upload.html'
+        resolve:
+            loggedin: checkLoggedIn
+    #State for the upload of the organisation-address-data
+    $stateProvider.state 'add_organisation',
+        url: '/transparency/addOrganisation'
+        templateUrl: 'transparency/views/uploadOrganisation.html'
+        resolve:
+            loggedin: checkLoggedIn
+    #State for the upload of the zipCode
+    $stateProvider.state 'add_zipCode',
+        url: '/transparency/addZipCode'
+        templateUrl: 'transparency/views/uploadZipCode.html'
         resolve:
             loggedin: checkLoggedIn
     $stateProvider.state 'top',
