@@ -19,6 +19,9 @@ TransferSchema = new Schema
     year: Number
     quarter: Number
     period: Number
+    organisationReference:
+        type:Schema.Types.ObjectId
+        ref: 'Organisation'
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]

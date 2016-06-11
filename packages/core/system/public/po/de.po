@@ -429,6 +429,11 @@ msgstr ""
 "Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im "
 "Filter-Feld um alle Zahlungen zu sehen."
 
+#: views/flow.html:42
+msgid ""
+"Federal State"
+msgstr ""
+"Bundesland"
 #: views/flow.html:63
 msgid ""
 "Your query returned {{error.length}} entries, which is more than the allowed "
