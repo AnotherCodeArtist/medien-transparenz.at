@@ -49,7 +49,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                 sum + entry.total
             0
         )
-        $scope.pieData.push {key: gettextCatalog.getString("Others"), y: $scope.top.all - topSum} if not $scope.selectedFederalState
+        $scope.pieData.push {key: gettextCatalog.getString("Others"), y: $scope.top.all - topSum}
 
     $scope.toolTipContentFunction = (e) ->
         link = if e.index < $scope.rank then "<br/>"+gettextCatalog.getString("Click for Details") else ""

@@ -18,12 +18,15 @@ ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
-#matches media to federalState (due to lack of grouping)
-mediaToFederalState = (mediaResult, limit, federalState) ->
-    #Show only media from organisations within the federalState
-    if federalState.length
-        mediaResult =  (media for media in mediaResult when media.organisationReference.federalState_en is federalState)
+#returns value for "others" / replaces promise
+getTotalAmountOfTransfers = (entries) ->
+    amounts = (entry.total for entry in entries)
+    totalAmount = amounts.reduce(((total, num) ->
+        total + num), 0)
+    totalAmount
 
+#matches media to federalState (due to lack of grouping)
+mediaToFederalState = (mediaResult) ->
     uniqueMedia= []
     #console.log("Entries in result " +mediaResult.length)
     for media in mediaResult
@@ -41,9 +44,8 @@ mediaToFederalState = (mediaResult, limit, federalState) ->
                    uniqueEntry.total += media.total
                    #console.log("Entry has now " +uniqueEntry.total)
                    break
-
     #console.log ("Entries after uniqueness: " + uniqueMedia.length)
-    uniqueMedia.splice(0,limit);
+    uniqueMedia
 
 #function for populate
 getPopulateInformation = (sourceForPopulate, path) ->
@@ -359,31 +361,32 @@ module.exports = (Transparency) ->
         .sort('-total')
         .project(project)
         .exec()
-        allPromise = Transfer.mapReduce options
-        allPromise.then (r) ->
-        Q.all([topPromise, allPromise])
+        Q.all([topPromise])
         .then (promiseResults) ->
             try
                 populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
                 .then (
                     (isPopulated) ->
                         try
-                            if orgType is 'org'
-                                if federalState.length
-                                    #create new results based on the federalState selection
-                                    promiseResults[0] = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
-                                    #console.log("Result with " +federalState+" has length of " + result.length)
-                                    #console.log ("we have to cut the array to the limit of " + results)
-                                topResult = promiseResults[0].splice(0,results);
+                            populatedTransfers = promiseResults[0]
+                            totalAmountOfTransfers = 0
 
-                            else
-                                topResult =  mediaToFederalState(promiseResults[0], results, federalState)
+                            if federalState.length
+                                #create new results based on the federalState selection
+                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
+                                #console.log("Result with " +federalState+" has length of " + populatedTransfers.length)
+
+                            if orgType is 'media'
+                                populatedTransfers = mediaToFederalState populatedTransfers
+
+                            totalAmountOfTransfers = getTotalAmountOfTransfers populatedTransfers
+                            #console.log ("we have to cut the array to the limit of " + results)
+                            topResult = populatedTransfers.splice(0,results);
+
                             result =
-                                top: topResult,
-                                all: promiseResults[1].reduce(
-                                    (sum, v)->
-                                        sum + v.value
-                                  0)
+                                top: topResult
+                                all: totalAmountOfTransfers
+
                             res.send result
                         catch error
                             console.log error
