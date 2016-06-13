@@ -126,10 +126,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
-        $scope.org.street = node.addressData.street
-        $scope.org.zipCode = node.addressData.zipCode
-        $scope.org.city = node.addressData.city_de
-        $scope.org.country = node.addressData.country_de
+        if $scope.org.orgType is 'org'
+            $scope.org.street = node.addressData.street
+            $scope.org.zipCode = node.addressData.zipCode
+            $scope.org.city = node.addressData.city_de
+            $scope.org.country = node.addressData.country_de
         update()
         window.scrollTo 0,0
 
