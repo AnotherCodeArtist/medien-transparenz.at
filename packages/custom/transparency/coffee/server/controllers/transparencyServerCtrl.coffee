@@ -13,8 +13,94 @@ Q = require 'q'
 #iconv.extendNodeEncodings()
 
 Transfer = mongoose.model 'Transfer'
+Event = mongoose.model 'Event'
+Organisation = mongoose.model 'Organisation'
+ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
+
+#returns value for "others" / replaces promise
+getTotalAmountOfTransfers = (entries) ->
+    amounts = (entry.total for entry in entries)
+    totalAmount = amounts.reduce(((total, num) ->
+        total + num), 0)
+    totalAmount
+
+#matches media to federalState (due to lack of grouping)
+mediaToFederalState = (mediaResult) ->
+    uniqueMedia= []
+    #console.log("Entries in result " +mediaResult.length)
+    for media in mediaResult
+        mediaNames = (name.organisation for name in uniqueMedia)
+
+        if media.organisation not in mediaNames
+           uniqueMedia.push(media)
+        else
+           # media is already there, add sum to media
+           #console.log (media.organisation + ' in media names')
+           for uniqueEntry in uniqueMedia
+               if uniqueEntry.organisation is media.organisation
+                   #console.log(uniqueEntry.organisation +  'has already ' +uniqueEntry.total)
+                   #console.log("The transfer adds "+ media.total)
+                   uniqueEntry.total += media.total
+                   #console.log("Entry has now " +uniqueEntry.total)
+                   break
+    #console.log ("Entries after uniqueness: " + uniqueMedia.length)
+    uniqueMedia
+
+#function for populate
+getPopulateInformation = (sourceForPopulate, path) ->
+    #path: what to look for, select without id
+    populatePromise = Organisation.populate(sourceForPopulate, {path: path, select: '-_id'})
+    populatePromise
+
+#Search for organisation entry in database
+findOrganisationData = (organisation) ->
+    #console.log "search for organisation with name " + organisation
+    queryPromise = Organisation.findOne({ 'name': organisation }, 'name').exec()
+    queryPromise.then(
+        (result) ->
+            #console.log "Organisation Data: " + result
+            return
+        (err) ->
+            #console.log "Could not load organisation data from Database: #{err}"
+            return
+    )
+    queryPromise
+
+#Transfer of line to ZipCode
+lineToZipCode = (line, numberOfZipCodes) ->
+    splittedLine = line.split(",")
+    #Skip first line
+    if splittedLine[0] != 'PLZ'
+        entry = new ZipCode()
+        entry.zipCode = splittedLine[0]
+        entry.federalState = splittedLine[1]
+        entry.save()
+        numberOfZipCodes++
+    numberOfZipCodes
+
+#Transfer of line to Organisation
+lineToOrganisation = (line, numberOfOrganisations) ->
+    splittedLine = line.split(";")
+    #Skip first and last lines
+    if splittedLine[0] != 'Bezeichnung des Rechtsträgers' and splittedLine[0] != ''
+        organisation = new Organisation()
+        organisation.name = splittedLine[0]
+        organisation.street = splittedLine[1]
+        organisation.zipCode = splittedLine[2]
+        organisation.city_de = splittedLine[3]
+        organisation.country_de = splittedLine[4]
+        findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
+        Q.all(findFederalState)
+        .then (results) ->
+            try
+                organisation.federalState_en = results.federalState
+                organisation.save()
+            catch error
+                console.log error
+        numberOfOrganisations++
+    numberOfOrganisations
 
 lineToTransfer = (line, feedback) ->
     m = line.match regex
@@ -28,7 +114,17 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
-        transfer.save()
+        #Save reference
+        transferReference = findOrganisationData transfer.organisation
+        Q.all(transferReference)
+        .then (results) ->
+            try
+                if results.name
+                    transfer.organisationReference = results._id
+                #console.log transfer.organisationReference
+                transfer.save()
+            catch error
+                console.log error
         feedback.quarter = transfer.quarter
         feedback.year = transfer.year
         feedback.entries++
@@ -40,6 +136,18 @@ lineToTransfer = (line, feedback) ->
         feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
         feedback.sumTotal += transfer.amount
     feedback
+
+
+mapEvent = (event,req) ->
+    event.name = req.body.name
+    event.startDate = req.body.startDate
+    event.numericStartDate = req.body.numericStartDate
+    event.endDate = req.body.endDate
+    if req.body.numericEndDate
+        event.numericEndDate = req.body.numericEndDate
+    event.tags = req.body.tags
+    event.region = req.body.region
+    event
 
 module.exports = (Transparency) ->
 
@@ -108,6 +216,32 @@ module.exports = (Transparency) ->
                 input = iconv.decode data,'latin1'
                 feedback = lineToTransfer line, feedback for line in input.split('\n')
                 res.send feedback
+    #Function for the upload of organisation-address-data
+    uploadOrganisation: (req, res) ->
+        file = req.files.file;
+        response =
+            newOrganisationNumber: 0
+
+        fs.readFile file.path, (err,data) ->
+            if err
+                res.status(500).send("Error #{err.message}")
+            else
+                input =  iconv.decode data, 'utf8'
+                response.newOrganisationNumber = lineToOrganisation(line,response.newOrganisationNumber) for line in input.split('\n')
+                res.status(200).send(response)
+
+    #Function for the upload of organisation-address-data
+    uploadZipCode: (req, res) ->
+        file = req.files.file;
+        response =
+            newZipCodes: 0
+        fs.readFile file.path, (err,data) ->
+            if err
+                res.status(500).send("Error #{err.message}")
+            else
+                input =  iconv.decode data, 'utf8'
+                response.newZipCodes = lineToZipCode(line,response.newZipCodes) for line in input.split('\n')
+                res.status(200).send(response)
 
     periods: (req, res) ->
         Transfer.aggregate(
@@ -132,6 +266,7 @@ module.exports = (Transparency) ->
     flows: (req, res) ->
         try
             maxLength = parseInt req.query.maxLength or "750"
+            federalState = req.query.federalState or ''
             period = {}
             period['$gte'] = parseInt(req.query.from) if req.query.from
             period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -155,6 +290,7 @@ module.exports = (Transparency) ->
             group =
                 _id:
                     organisation: "$organisation"
+                    organisationReference: "$organisationReference"
                     transferType: "$transferType"
                     media: "$media"
                 amount:
@@ -162,26 +298,41 @@ module.exports = (Transparency) ->
             Transfer.aggregate($match: query)
             .group(group)
             .project(
-                    organisation: "$_id.organisation"
-                    transferType: "$_id.transferType",
-                    media: "$_id.media"
-                    _id: 0
-                    amount: 1)
+                organisation: "$_id.organisation",
+                organisationReference: "$_id.organisationReference",
+                transferType: "$_id.transferType",
+                media: "$_id.media"
+                _id: 0
+                amount: 1
+            )
             .exec()
             .then (result) ->
-                if result.length > maxLength
-                    res.status(413).send {
-                        error: "You query returns more then the specified maximum od #{maxLength}"
-                        length: result.length
-                    }
-                else
-                    res.json result
+                   populatedPromise = getPopulateInformation(result, 'organisationReference')
+                   .then(
+                     (isPopulated) ->
+                         if federalState
+                            #console.log "Federal State: " + transfer.organisationReference.federalState_en for transfer in result when transfer.organisationReference.federalState_en is federalState
+                            #create new results based on the federalState selection
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
+                            #console.log("Result with " +federalState+" has length of " + result.length)
+                            #console.log(JSON.stringify(result))
+
+                         if result.length > maxLength
+                            res.status(413).send {
+                             error: "You query returns more then the specified maximum of #{maxLength}"
+                             length: result.length
+                                }
+                         else
+                            res.json result
+                   )
+
             .catch (err) ->
-                res.status(500).send error: "Could not load money flow"
+                res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
+        federalState = req.query.federalState or ''
         period = {}
         period['$gte'] = parseInt(req.query.from) if req.query.from
         period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -190,13 +341,20 @@ module.exports = (Transparency) ->
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
         results = parseInt(req.query.x or '10')
         query = {}
+        project =
+            organisation: '$_id.organisation'
+            organisationReference: '$_id.organisationReference'
+            _id: 0
+            total: 1
         if period.$gte? or period.$lte?
             query.period = period
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
         group =
-            _id: {organisation: if orgType is 'org' then '$organisation' else '$media'}
+            _id:
+                organisation: if orgType is 'org' then '$organisation' else '$media',
+                organisationReference: '$organisationReference'
             total:
                 $sum: '$amount'
         options = {}
@@ -209,28 +367,45 @@ module.exports = (Transparency) ->
         #console.log query
         #console.log "Group: "
         #console.log group
+        #console.log "Project: "
+        #console.log project
         topPromise = Transfer.aggregate($match: query)
         .group(group)
         .sort('-total')
-        .limit(results)
-        .project(
-            organisation: '$_id.organisation'
-            _id: 0
-            total: 1
-        )
+        .project(project)
         .exec()
-        allPromise = Transfer.mapReduce options
-        allPromise.then (r) ->
-        Q.all([topPromise, allPromise])
-        .then (results) ->
+        Q.all([topPromise])
+        .then (promiseResults) ->
             try
-                result =
-                    top: results[0]
-                    all: results[1].reduce(
-                        (sum, v)->
-                            sum + v.value
-                        0)
-                res.send result
+                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
+                .then (
+                    (isPopulated) ->
+                        try
+                            populatedTransfers = promiseResults[0]
+                            totalAmountOfTransfers = 0
+
+                            if federalState.length
+                                #create new results based on the federalState selection
+                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
+                                #console.log("Result with " +federalState+" has length of " + populatedTransfers.length)
+
+                            if orgType is 'media'
+                                populatedTransfers = mediaToFederalState populatedTransfers
+
+                            totalAmountOfTransfers = getTotalAmountOfTransfers populatedTransfers
+                            #console.log ("we have to cut the array to the limit of " + results)
+                            topResult = populatedTransfers.splice(0,results);
+
+                            result =
+                                top: topResult
+                                all: totalAmountOfTransfers
+
+                            res.send result
+                        catch error
+                            console.log error
+                            res.status(500).send("No Data was found!")
+                )
+
             catch error
                 console.log error
                 res.status(500).send("No Data was found!")
@@ -330,3 +505,69 @@ module.exports = (Transparency) ->
             res.json result.length
         .catch (err) ->
             res.status(500).send error: "Could not determine number of items #{err}"
+
+    getEvents: (req,res) ->
+
+        handleEventResponse = (err, data) ->
+            if err
+                res.status(500).send error: "Could not get events #{err}"
+            else if !data or data.length is 0
+                res.status(404).send()
+            else
+                res.json data
+
+        #todo: insert parameter checking
+        if req.query.region
+            Event.find {region: req.query.region}, handleEventResponse
+        else if req.query.id
+            Event.findById req.query.id, handleEventResponse
+        else
+            Event.find {}, handleEventResponse
+
+    createEvent: (req,res) ->
+        #todo: insert parameter checking
+        event = new Event()
+        event = mapEvent event, req
+        event.save (err) ->
+            if err
+                res.status(500).send error: "Could not create event #{err}"
+            else
+                res.json event
+
+    updateEvent: (req, res) ->
+
+        #todo: insert parameter checking
+        Event.findById req.body._id, (err, data) ->
+            if err
+                res.status(500).send error: "Could not update event #{err}"
+            if !data or data.length is 0
+                res.status(500).send error: "Could not find event #{req.body._id}"
+            else
+                event = mapEvent data, req
+                event.save (err) ->
+                    if err
+                        res.status(500).send error: "Could not create event #{err}"
+                    else
+                        res.json event
+
+    deleteEvent: (req, res) ->
+        #todo: insert parameter checking
+        console.log req.query.id
+        Event.findById {_id: req.query.id}, (err, data) ->
+            if err
+                res.status(500).send error: "Could not find event #{err}"
+            data.remove (removeErr) ->
+                if removeErr
+                    res.status(500).send error: "Could not delete event #{removeErr}"
+            res.json data
+
+    getEventTags: (req, res) ->
+        Event.find {}, (err, events) ->
+            if err
+                res.status(500).send error "Could not load events #{err}"
+            result = []
+            for event in events
+                if event.tags
+                    Array.prototype.push.apply result, event.tags
+
+            res.json Array.from(new Set(result))

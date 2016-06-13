@@ -38,3 +38,18 @@ module.exports = (Transparency, app, auth, database) ->
   app.get '/api/transparency/count', transparency.count
 
   app.post '/api/transparency/add', auth.requiresAdmin,multipartMiddleware,transparency.upload
+  #Route for address-upload
+  app.post '/api/transparency/addOrganisation', auth.requiresAdmin,multipartMiddleware,transparency.uploadOrganisation
+  #Route for zip-upload
+  app.post '/api/transparency/addZipCode', auth.requiresAdmin,multipartMiddleware,transparency.uploadZipCode
+
+  app.get '/api/transparency/events', transparency.getEvents
+
+  app.post '/api/transparency/events', auth.requiresEditor, transparency.createEvent
+
+  app.put '/api/transparency/events', auth.requiresEditor, transparency.updateEvent
+
+  app.delete '/api/transparency/events', auth.requiresEditor, transparency.deleteEvent
+
+  app.get '/api/transparency/events/tags', transparency.getEventTags
+  return

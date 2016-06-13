@@ -15,7 +15,7 @@ msgid "Although this was meant to significantly improve the data qualtity it cou
 msgstr ""
 
 #: controllers/flowController.js:13
-#: views/flow.html:86
+#: views/flow.html:97
 msgid "Amount"
 msgstr ""
 
@@ -48,15 +48,19 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: controllers/topEntriesController.js:84
+#: views/events.html:76
+msgid "Cancel"
+msgstr ""
+
+#: controllers/topEntriesController.js:88
 msgid "Click for Details"
 msgstr ""
 
-#: views/top.html:50
+#: views/top.html:54
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
-#: views/flow.html:67
+#: views/flow.html:78
 msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization"
 msgstr ""
 
@@ -64,8 +68,21 @@ msgstr ""
 msgid "Contact Person"
 msgstr ""
 
-#: controllers/flowController.js:134
+#: views/events.html:74
+msgid "Create"
+msgstr ""
+
+#: controllers/flowController.js:152
 msgid "Display _MENU_ records"
+msgstr ""
+
+#: views/events.html:22
+msgid "Edit"
+msgstr ""
+
+#: views/events.html:13
+#: views/events.html:61
+msgid "End date"
 msgstr ""
 
 #: views/impress.html:25
@@ -76,6 +93,11 @@ msgstr ""
 msgid ""
 "FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
+msgstr ""
+
+#: views/flow.html:42
+#: views/top.html:39
+msgid "Federal State"
 msgstr ""
 
 #: views/index.html:33
@@ -140,8 +162,12 @@ msgstr ""
 msgid "Loading Data to Update Diagram ..."
 msgstr ""
 
+#: views/events.html:3
+msgid "Manage events"
+msgstr ""
+
 #: controllers/flowController.js:10
-#: views/flow.html:83
+#: views/flow.html:94
 msgid "Media"
 msgstr ""
 
@@ -158,10 +184,6 @@ msgstr ""
 msgid "Move the sliders to define a range"
 msgstr ""
 
-#: controllers/flowController.js:131
-msgid "next"
-msgstr ""
-
 #: views/list.html:21
 msgid "No entries found!"
 msgstr ""
@@ -170,19 +192,19 @@ msgstr ""
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:21
+#: views/upload.html:22
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:37
+#: views/upload.html:38
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:29
+#: views/upload.html:30
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:13
+#: views/upload.html:14
 msgid "Number of non-emtpy entries"
 msgstr ""
 
@@ -190,11 +212,11 @@ msgstr ""
 msgid "Organisation"
 msgstr ""
 
-#: views/flow.html:84
+#: views/flow.html:95
 msgid "Organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:78
+#: controllers/topEntriesController.js:82
 msgid "Others"
 msgstr ""
 
@@ -203,7 +225,7 @@ msgid "Overview"
 msgstr ""
 
 #: controllers/flowController.js:12
-#: views/flow.html:85
+#: views/flow.html:96
 msgid "Payment Type"
 msgstr ""
 
@@ -233,21 +255,25 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
-#: controllers/flowController.js:130
-msgid "previous"
-msgstr ""
-
-#: views/overview.html:24
+#: views/overview.html:18
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:107
-#: controllers/topEntriesController.js:166
+#: controllers/topEntriesController.js:115
+#: controllers/topEntriesController.js:189
 msgid "Recipient"
 msgstr ""
 
-#: views/upload.html:8
+#: views/events.html:25
+msgid "Remove"
+msgstr ""
+
+#: views/upload.html:9
 msgid "Results of the Upload"
+msgstr ""
+
+#: views/events.html:75
+msgid "Save"
 msgstr ""
 
 #: views/search.html:8
@@ -259,7 +285,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:133
+#: controllers/flowController.js:151
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -267,8 +293,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:104
-#: controllers/topEntriesController.js:165
+#: controllers/topEntriesController.js:112
+#: controllers/topEntriesController.js:188
 msgid "Spender"
 msgstr ""
 
@@ -276,7 +302,12 @@ msgstr ""
 msgid "Spender/Recipient"
 msgstr ""
 
-#: views/flow.html:77
+#: views/events.html:10
+#: views/events.html:57
+msgid "Start date"
+msgstr ""
+
+#: views/flow.html:88
 msgid "Tabular Representation"
 msgstr ""
 
@@ -288,7 +319,7 @@ msgstr ""
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
-#: views/top.html:41
+#: views/top.html:45
 msgid "Top"
 msgstr ""
 
@@ -300,24 +331,36 @@ msgstr ""
 msgid "Top Spenders and Recipients"
 msgstr ""
 
-#: views/upload.html:25
+#: views/overview.html:28
+msgid "Total"
+msgstr ""
+
+#: views/upload.html:26
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:41
+#: views/upload.html:42
 msgid "Total amount according to §31 ORF-G"
 msgstr ""
 
-#: views/upload.html:33
+#: views/upload.html:34
 msgid "Total amount according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:17
+#: views/upload.html:18
 msgid "Total amount of all entries"
 msgstr ""
 
 #: views/upload.html:3
 msgid "Upload new Media Transparency Report"
+msgstr ""
+
+#: views/uploadOrganisation.html:3
+msgid "Upload new organisation list"
+msgstr ""
+
+#: views/uploadZipCode.html:3
+msgid "Upload new zip-code list"
 msgstr ""
 
 #: views/index.html:43
@@ -336,10 +379,26 @@ msgstr ""
 msgid "Who's involved?"
 msgstr ""
 
-#: views/flow.html:59
+#: views/flow.html:70
 msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
 msgstr ""
 
-#: views/flow.html:63
+#: views/flow.html:74
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
+msgstr ""
+
+#: controllers/flowController.js:149
+msgid "next"
+msgstr ""
+
+#: controllers/flowController.js:148
+msgid "previous"
+msgstr ""
+
+#: views/flow.html:53
+msgid ""
+"{{org.name}}<br>\n"
+"                {{org.street}}<br>\n"
+"                {{org.zipCode}} {{org.city}}<br>\n"
+"                {{org.country}}<br>"
 msgstr ""

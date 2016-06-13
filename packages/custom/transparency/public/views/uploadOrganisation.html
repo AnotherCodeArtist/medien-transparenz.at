@@ -1,0 +1,11 @@
+<section class="container">
+    <div data-ng-controller="UploadOrganisationController">
+        <h1 translate>Upload new organisation list</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <input type="file" ngf-select="onFileSelect($files)">
+        <p>Uploaded: {{percent}}%</p>
+        <div data-ng-show="feedbackOrganisation">
+            <p>Number of organisations found {{feedbackOrganisation.newOrganisationNumber}}</p>
+        </div>
+    </div>
+</section>

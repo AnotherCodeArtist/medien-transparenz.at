@@ -1,0 +1,11 @@
+<section class="container">
+    <div data-ng-controller="UploadZipCodeController">
+        <h1 translate>Upload new zip-code list</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <input type="file" ngf-select="onFileSelect($files)">
+        <p>Uploaded: {{percent}}%</p>
+        <div data-ng-show="feedbackZipCode">
+            <p>Number of zip-codes found {{feedbackZipCode.newZipCodes}}</p>
+        </div>
+    </div>
+</section>

@@ -1,6 +1,13 @@
 'use strict'
 
 
+getNumericDate = (date) ->
+    start = new Date(date.getFullYear(), 0, 0);
+    diff = date - start;
+    oneDay = 1000 * 60 * 60 * 24;
+    day = Math.floor(diff / oneDay);
+    date.getFullYear() + day/365
+
 class TPAService
     constructor: (@$http) ->
 
@@ -21,6 +28,28 @@ class TPAService
 
     overview: ->
         @$http.get 'api/transparency/overview'
+
+    getEvents: (params) ->
+        @$http.get 'api/transparency/events', params: params
+
+    getEventTags: ->
+        @$http.get 'api/transparency/events/tags'
+
+    createEvent: (params) ->
+        params.numericStartDate = getNumericDate params.startDate
+        if params.endDate
+            params.numericEndDate = getNumericDate params.endDate
+        @$http.post 'api/transparency/events', params
+
+    updateEvent: (params) ->
+        params.numericStartDate = getNumericDate params.startDate
+        if params.endDate
+            params.numericEndDate = getNumericDate params.endDate
+        @$http.put 'api/transparency/events', params
+
+    removeEvent: (params) ->
+        console.log params
+        @$http.delete 'api/transparency/events', params: params
 
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
@@ -47,6 +76,21 @@ class TPAService
         when 4 then "Payments according to §4 MedKF-TG (Funding)"
         when 31 then "Payments according to §31 ORF-G (Charges)"
 
+    #Function to define static data, e.g. federal states
+    staticData: (type)->
+        switch type
+            when 'federal'
+                [
+                    {name: 'Burgenland',value: 'Burgenland'}
+                    {name: 'Carinthia', value: 'Carinthia' }
+                    {name: 'Lower Austria', value: 'Lower Austria' }
+                    {name: 'Salzburg', value: 'Salzburg' }
+                    {name: 'Styria', value: 'Styria' }
+                    {name: 'Tyrol',  value: 'Tyrol' }
+                    {name: 'Upper Austria',  value: 'Upper Austria' }
+                    {name: 'Vienna',  value: 'Vienna' }
+                    {name: 'Vorarlberg',  value: 'Vorarlberg' }
+                ]
 
 app = angular.module 'mean.transparency'
 app.service 'TPAService', ["$http", TPAService]

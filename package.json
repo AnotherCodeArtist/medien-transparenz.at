@@ -39,6 +39,7 @@
     "mongoose": "latest",
     "morgan": "latest",
     "ms": "latest",
+    "ng-tags-input": "^3.1.1",
     "nodemailer": "latest",
     "npm": "^2.1.0",
     "passport-facebook": "latest",
@@ -99,6 +100,7 @@
     "should": "^8.0.1",
     "superagent": "^1.5.0",
     "supertest": "latest",
-    "through": "latest"
+    "through": "latest",
+    "iconv-lite": "~0.4.13"
   }
 }
