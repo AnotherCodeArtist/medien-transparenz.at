@@ -57,16 +57,8 @@ getPopulateInformation = (sourceForPopulate, path) ->
 #Search for organisation entry in database
 findOrganisationData = (organisation) ->
     #console.log "search for organisation with name " + organisation
-    queryPromise = Organisation.findOne({ 'name': organisation }, 'name').exec()
-    queryPromise.then(
-        (result) ->
-            #console.log "Organisation Data: " + result
-            return
-        (err) ->
-            #console.log "Could not load organisation data from Database: #{err}"
-            return
-    )
-    queryPromise
+    Organisation.findOne({ 'name': organisation }, 'name').exec()
+
 
 #Transfer of line to ZipCode
 lineToZipCode = (line, numberOfZipCodes) ->
@@ -92,17 +84,22 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
         findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
-        Q.all(findFederalState)
         .then (results) ->
-            try
+            if results
                 organisation.federalState_en = results.federalState
-                organisation.save()
-            catch error
-                console.log error
-        numberOfOrganisations++
-    numberOfOrganisations
+            else
+                organisation.federalState_en = "Unknown"
+            organisation.save()
+        .then (ok) ->
+            numberOfOrganisations++
+            numberOfOrganisations
+        .catch (err) ->
+            console.log "ERROR: Could not store organisation #{JSON.stringify organisation}: #{err}"
+            numberOfOrganisations
 
 lineToTransfer = (line, feedback) ->
+    if not feedback
+        console.log "THIS SHOULD NOT HAPPEN: Supposed to parse line #{line} but got no feedback object!"
     m = line.match regex
     #console.log "Result: #{m} for line #{line}"
     if m
@@ -115,27 +112,40 @@ lineToTransfer = (line, feedback) ->
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         #Save reference
-        transferReference = findOrganisationData transfer.organisation
-        Q.all(transferReference)
+        Organisation.findOne({ 'name': transfer.organisation }, 'name')
         .then (results) ->
-            try
-                if results.name
-                    transfer.organisationReference = results._id
-                #console.log transfer.organisationReference
+            if results
+                transfer.organisationReference = results._id
                 transfer.save()
-            catch error
-                console.log error
-        feedback.quarter = transfer.quarter
-        feedback.year = transfer.year
-        feedback.entries++
-        feedback.paragraph2++ if transfer.transferType is 2
-        feedback.paragraph4++ if transfer.transferType is 4
-        feedback.paragraph31++ if transfer.transferType is 31
-        feedback.sumParagraph2 += transfer.amount if transfer.transferType is 2
-        feedback.sumParagraph4 += transfer.amount if transfer.transferType is 4
-        feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
-        feedback.sumTotal += transfer.amount
-    feedback
+            else
+                console.log "WARNING: Could find reference for #{transfer.organisation}!!!!!!!"
+                Organisation.findOne name: "Unknown"
+                .then (unknown) ->
+                    if unknown
+                        console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
+                        transfer.organisationReference = unknown._id
+                        transfer.save()
+                    else
+                        feedback.errors+=1
+                        throw new Error("'Unknown' as placeholder was not found in organisation collection")
+        .then (ok) ->
+            feedback.quarter = transfer.quarter
+            feedback.year = transfer.year
+            feedback.entries++
+            feedback.paragraph2++ if transfer.transferType is 2
+            feedback.paragraph4++ if transfer.transferType is 4
+            feedback.paragraph31++ if transfer.transferType is 31
+            feedback.sumParagraph2 += transfer.amount if transfer.transferType is 2
+            feedback.sumParagraph4 += transfer.amount if transfer.transferType is 4
+            feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
+            feedback.sumTotal += transfer.amount
+            feedback
+        .catch (err) ->
+            feedback.errors+=1
+            console.log "Error while importing data: #{JSON.stringify err}"
+            feedback
+    else feedback
+
 
 
 mapEvent = (event,req) ->
@@ -208,14 +218,18 @@ module.exports = (Transparency) ->
             paragraph31: 0
             sumParagraph31: 0
             sumTotal: 0.0
+            errors: 0
         #qfs.read(file.path).then(
         fs.readFile file.path, (err,data) ->
             if err
                 res.send 500, "Error #{err.message}"
             else
                 input = iconv.decode data,'latin1'
-                feedback = lineToTransfer line, feedback for line in input.split('\n')
-                res.send feedback
+                input.split("\n").reduce ((p,line) -> p.then((f) -> lineToTransfer line, f)), Q.fcall(->feedback)
+                .then (ok) ->
+                    res.send feedback
+                .catch (err) ->
+                    res.send 500, "Error #{err.message}"
     #Function for the upload of organisation-address-data
     uploadOrganisation: (req, res) ->
         file = req.files.file;

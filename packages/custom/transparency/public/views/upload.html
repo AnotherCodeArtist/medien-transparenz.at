@@ -5,6 +5,9 @@
     <input type="file" ngf-select="onFileSelect($files)">
     <p>Uploaded: {{percent}}%</p>
     <div data-ng-show="feedback">
+        <div class="alert alert-danger" ng-show="feedback.errors > 0">
+            <strong>Attention:</strong> There have been {{feedback.errors}} processing errors!
+        </div>
         <ul class="list-group">
             <li class="list-group-item active" translate>
                 Results of the Upload
