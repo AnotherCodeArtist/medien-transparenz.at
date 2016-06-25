@@ -1,0 +1,5860 @@
+[
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Burgenland Tourismus GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Burgenland Tourismus GmbH"
+        ],
+        "to": "Landesverband Burgenland Tourismus"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Fernwärme Wien Gesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Fernwärme Wien Gesellschaft m.b.H."
+        ],
+        "to": "WIEN ENERGIE GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "WIEN ENERGIE Gasnetz GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "WIEN ENERGIE Gasnetz GmbH"
+        ],
+        "to": "WIENER NETZE GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "WIEN ENERGIE Stromnetz GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "WIEN ENERGIE Stromnetz GmbH"
+        ],
+        "to": "WIENER NETZE GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Kommunikationsbehörde Austria (\"KommAustria\")",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kommunikationsbehörde Austria (\"KommAustria\")"
+        ],
+        "to": "Rundfunk und Telekom Regulierungs-GmbH (RTR-GmbH)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Messe Wels GmbH & Co KG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Messe Wels GmbH & Co KG"
+        ],
+        "to": "Messe Wels GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Illwerke Seilbahn- Betriebsgesellschaft mbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Illwerke Seilbahn- Betriebsgesellschaft mbH"
+        ],
+        "to": "Illwerke Seilbahn-Betriebsgesellschaft mbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Verein Agrarmarketing Tirol",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Verein Agrarmarketing Tirol"
+        ],
+        "to": "Agrarmarketing Tirol (Verein)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesministerium für Wirtschaft, Familie und Jugend",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesministerium für Wirtschaft, Familie und Jugend"
+        ],
+        "to": "Bundesministerium für Wissenschaft, Forschung und Wirtschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Gemeinnützige Donau-Ennstaler Siedlungs- Aktiengesellschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Gemeinnützige Donau-Ennstaler Siedlungs- Aktiengesellschaft"
+        ],
+        "to": "Gemeinnützige Donau-Ennstaler Siedlungs-Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Design Center Linz Be- triebsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Design Center Linz Be- triebsgesellschaft m.b.H."
+        ],
+        "to": "Design Center Linz Betriebsgesellschaft m.b.H"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesministerium für Wissenschaft und Forschung",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesministerium für Wissenschaft und Forschung"
+        ],
+        "to": "Bundesministerium für Wissenschaft, Forschung und Wirtschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Autobahnen- und Schnellstraßen-Finanzierungs- Aktiengesellschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Autobahnen- und Schnellstraßen-Finanzierungs- Aktiengesellschaft"
+        ],
+        "to": "Autobahnen- und SchnellstraßenFinanzierungs-Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesministerium für europäische und internationale Angelegenheiten",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesministerium für europäische und internationale Angelegenheiten"
+        ],
+        "to": "Bundesministerium für Europa, Integration und Äußeres"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Innsbrucker Markthallen- Betriebsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Innsbrucker Markthallen- Betriebsgesellschaft m.b.H."
+        ],
+        "to": "Innsbrucker Markthallen-Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "AVE Österreich GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "AVE Österreich GmbH"
+        ],
+        "to": "Energie AG Oberösterreich Umwelt Service GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Burgenländische Elektrizitätswirtschafts - Aktiengesellschaft (BEWAG)",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Burgenländische Elektrizitätswirtschafts - Aktiengesellschaft (BEWAG)"
+        ],
+        "to": "Energie Burgenland AG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Amt der Landes",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Amt der Landeshauptstadt Bregenz"
+        ],
+        "to": "Stadtgemeinde Bregenz"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftsservice Burgenland Aktiengesellschaft - WiBAG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftsservice Burgenland Aktiengesellschaft - WiBAG"
+        ],
+        "to": "Wirtschaft Burgenland GmbH - WiBuG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Austrian Business Agency österreichische Industrieansiedlungs- und WirtschaftswerbungsgmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Austrian Business Agency österreichische Industrieansiedlungs- und WirtschaftswerbungsgmbH"
+        ],
+        "to": "Austrian Business Agency Österreichische Industrieansiedlungs- und WirtschaftswerbungsgmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "LINZ STROM GmbH für Energieerzeugung, -handel, -dienstleistung und Telekommunikation",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "LINZ STROM GmbH für Energieerzeugung, -handel, -dienstleistung und Telekommunikation"
+        ],
+        "to": "LINZ STROM GmbH für Energieerzeugung, -handel, -dienstleistungen und Telekommunikation"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "KELAG-Kärntner Elektrizitäts- Aktiengesellschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "KELAG-Kärntner Elektrizitäts- Aktiengesellschaft"
+        ],
+        "to": "KELAG-Kärntner Elektrizitäts-Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "FWF - Der Wissenschaftsfonds (Fonds zur Förderung der wissenschaftlichen Forschung)",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "FWF - Der Wissenschaftsfonds (Fonds zur Förderung der wissenschaftlichen Forschung)"
+        ],
+        "to": "Fonds zur Förderung der wissenschaftlichen Forschung (FWF)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Niederösterreichische Kulturszene Betriebsge- sellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Niederösterreichische Kulturszene Betriebsge- sellschaft m.b.H."
+        ],
+        "to": "Niederösterreichische Kulturszene Betriebsgesellschaft m.b.H"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "NÖ Festival-Ges.m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "NÖ Festival-Ges.m.b.H."
+        ],
+        "to": "NÖ Festival und Kino GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Friseure",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Friseure"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Friseure"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Design Center Linz Betriebsgesellschaft m.b.H",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Design Center Linz Betriebsgesellschaft m.b.H"
+        ],
+        "to": "Design Center Linz Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Design Center Linz Betriebsgesellschaft m.b.H",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Design Center Linz Betriebsgesellschaft m.b.H."
+        ],
+        "to": "Design Center Linz Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Niederösterreichische Kulturszene Betriebsgesellschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Niederösterreichische Kulturszene Betriebsgesellschaft m.b.H"
+        ],
+        "to": "Niederösterreichische Kulturszene Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Marchfeldschlösser Revitalisierungs- und Betriebsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Marchfeldschlösser Revitalisierungs- und Betriebsgesellschaft m.b.H."
+        ],
+        "to": "Schloß Schönbrunn Kultur- und Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Theater in der Josef- stadt Betriebsgesellschaft m.b.H",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Theater in der Josef- stadt Betriebsgesellschaft m.b.H."
+        ],
+        "to": "Theater in der Josefstadt Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "ÖKOMBI GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ÖKOMBI GmbH"
+        ],
+        "to": "Rail Cargo Austria Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Fonds Tiroler Zukunftsstiftung - Standortagentur Tirol",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Fonds Tiroler Zukunftsstiftung - Standortagentur Tirol"
+        ],
+        "to": "Tiroler Zukunftsstiftung"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Clusterland Oberösterreich GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Clusterland Oberösterreich GmbH"
+        ],
+        "to": "Business Upper Austria - OÖ Wirtschaftsagentur GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesministerium für Unterricht, Kunst und Kultur",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesministerium für Unterricht, Kunst und Kultur"
+        ],
+        "to": "Bundesministerium für Bildung und Frauen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Amt der Stadt Feldkirch",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Amt der Stadt Feldkirch"
+        ],
+        "to": "Stadtgemeinde Feldkirch"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "FTE",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Rat für Forschung und Technologieentwicklung \"FTE-Rat\""
+        ],
+        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Fachverband Unternehmensberatung und Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Fachverband Unternehmensberatung und Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Österreich, Fachverband Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "AustriaTech - Ges. des Bundes für technologiepolitische Maßnahmen GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "AustriaTech - Ges. des Bundes für technologiepolitische Maßnahmen GmbH"
+        ],
+        "to": "AustriaTech - Gesellschaft des Bundes für technologiepolitische Maßnahmen GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "PW Stromversorgungsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "PW Stromversorgungsgesellschaft m.b.H."
+        ],
+        "to": "Energie Steiermark AG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bestattung der Grazer Stadtwerke GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bestattung der Grazer Stadtwerke GmbH"
+        ],
+        "to": "Bestattung Graz GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Austro Control Österreichische Ges. für Zivilluftfahrt mit beschränkter Haftung",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Austro Control Österreichische Ges. für Zivilluftfahrt mit beschränkter Haftung"
+        ],
+        "to": "Austro Control Österreichische Gesellschaft für Zivilluftfahrt mit beschränkter Haftung"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Schönbrunner Tiergarten- Gesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Schönbrunner Tiergarten- Gesellschaft m.b.H."
+        ],
+        "to": "Schönbrunner Tiergarten-Gesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "ZIT - Die Technologieagentur der Stadt Wien GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ZIT - Die Technologieagentur der Stadt Wien GmbH"
+        ],
+        "to": "Wirtschaftsagentur Wien. Ein Fonds der Stadt Wien."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Entwicklungsagentur Kärnten GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Entwicklungsagentur Kärnten GmbH"
+        ],
+        "to": "Entwicklungsagentur Kärnten GmbH in Liqu."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "HYPO ALPE-ADRIA-BANK AG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "HYPO ALPE-ADRIA-BANK AG"
+        ],
+        "to": "HETA ASSET RESOLUTION AG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "STEWEAG-STEG GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "STEWEAG-STEG GmbH"
+        ],
+        "to": "STEWEAG-STEG GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Kommunalkredit Austria AG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kommunalkredit Austria AG"
+        ],
+        "to": "Kommunalkredit Vermögensverwaltungs-GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "NÖ BAWU - Niederösterreichische Beteiligungsges.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "NÖ BAWU - Niederösterreichische Beteiligungsges."
+        ],
+        "to": "NÖ BAWU - Niederösterreichische Beteiligungsgesellschaft für Abfallwirtschaft und Umweltschutz Ges.m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Niederösterreichische Verkehrsorganisationsges.m .b.H. (NÖVOG)",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Niederösterreichische Verkehrsorganisationsges.m .b.H. (NÖVOG)"
+        ],
+        "to": "Niederösterreichische Verkehrsorganisationsges.m.b.H. (NÖVOG)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Bau",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Bau"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung Bau OÖ"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Klagenfurt Marketing GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Klagenfurt Marketing GmbH"
+        ],
+        "to": "Klagenfurt Marketing GmbH in Liqu"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Klagenfurt Marketing GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Klagenfurt Marketing GmbH in Liqu"
+        ],
+        "to": "Klagenfurt Marketing GmbH in Liqu."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "OÖ Verkehrsverbund- Organisations GmbH Nfg.& Co KG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "OÖ Verkehrsverbund- Organisations GmbH Nfg.& Co KG"
+        ],
+        "to": "OÖ Verkehrsverbund-Organisations GmbH Nfg.& Co KG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Bauhilfsgewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Bauhilfsgewerbe"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Bauhilfsgewerbe"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Freizeit-, Sportbetriebe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Freizeit-, Sportbetriebe"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Freizeit- und Sportbetriebe"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Maler, Tapezierer",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Maler, Tapezierer"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Maler und Tapezierer"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Fachverband der Stein- und keramischen Industrie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Fachverband der Stein- und keramischen Industrie"
+        ],
+        "to": "Wirtschaftskammer Österreich, Fachverband Stein- und keramische Industrie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "NÖ. Landes-Sportschulanlagenbetriebsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "NÖ. Landes-Sportschulanlagenbetriebsgesellschaft m.b.H."
+        ],
+        "to": "SPORTZENTRUM Niederösterreich GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Bundesinnung der Tischler und der Holzgestaltenden Gewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Bundesinnung der Tischler und der Holzgestaltenden Gewerbe"
+        ],
+        "to": "Wirtschaftskammer Österreich, Bundesinnung der Tischler und der Holzgestalter"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Hochschülerschaft an der Johannes Kepler Universität Linz",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Hochschülerschaft an der Johannes Kepler Universität Linz"
+        ],
+        "to": "HochschülerInnenschaft an der Johannes Kepler Universität Linz"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "OÖ. Gas-Wärme GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "OÖ. Gas-Wärme GmbH"
+        ],
+        "to": "Energie AG Oberösterreich Power Solutions GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Dachdecker, Glaser, Spengler",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Dachdecker, Glaser, Spengler"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung OÖ der Dachdecker, Glaser und Spengler"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Hdl. m. Mode, Freizeitartikeln",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Hdl. m. Mode, Freizeitartikeln"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Handels mit Mode und Freizeitartikeln"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Immobilien-,Vermögenstreuhänd",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Immobilien-,Vermögenstreuhänd"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Immobilien- und Vermögenstreuhänder"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Untern.beratg, Infotechnolog.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Untern.beratg, Infotechnolog."
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Gesundheitsberufe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Gesundheitsberufe"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Gesundheitsberufe"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Tirol - Sparte Gewerbe und Handwerk, Innung der Lebensmittelgewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Tirol - Sparte Gewerbe und Handwerk, Innung der Lebensmittelgewerbe"
+        ],
+        "to": "Wirtschaftskammer Tirol, Innung der Lebensmittelgewerbe"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Salzburg, Fachgruppe Abfall- und Abwasserwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Salzburg, Fachgruppe Abfall- und Abwasserwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Salzburg, Fachgruppe Entsorgungs- und Ressourcenmanagement"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Innsbrucker Stadtmarketing GesmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Innsbrucker Stadtmarketing GesmbH"
+        ],
+        "to": "Innsbruck Marketing GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Dornbirner Stadtmarketing GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Dornbirner Stadtmarketing GmbH"
+        ],
+        "to": "Dornbirner Tourismus & Stadtmarketing GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Vorarlberg, Fachgruppe der Tischler und der holzgestaltenden Gewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Vorarlberg, Fachgruppe der Tischler und der holzgestaltenden Gewerbe"
+        ],
+        "to": "Wirtschaftskammer Vorarlberg, Fachverband der Tischler und Holzgestalter"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Österreichischer Integrationsfonds",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichischer Integrationsfonds"
+        ],
+        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
+        ],
+        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "AVE Energie AG Oberösterreich Umwelt GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "AVE Energie AG Oberösterreich Umwelt GmbH"
+        ],
+        "to": "Energie AG Oberösterreich Umwelt Service GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Baustoff-, Eisen-, Holzhandel",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Baustoff-, Eisen-, Holzhandel"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Baustoff-, Eisen-, Hartwaren und Holzhandels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Salzburg, Fachgruppe Unternehmensberatung & Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Salzburg, Fachgruppe Unternehmensberatung & Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Salzburg, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Fachgruppe Steiermark Unternehmensberatung und Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Fachgruppe Steiermark Unternehmensberatung und Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "FTE-Rat",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+        ],
+        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Alpen-Adria-Universität Klagenfurt",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Alpen-Adria-Universität Klagenfurt"
+        ],
+        "to": "Universität Klagenfurt"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "STEWEAG-STEG GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "STEWEAG-STEG GmbH"
+        ],
+        "to": "Energie Steiermark AG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Innofinanz-Steiermärkische Forschungs- und Entwicklungsförderungsges.m.b.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Innofinanz-Steiermärkische Forschungs- und Entwicklungsförderungsges.m.b."
+        ],
+        "to": "Steirische Wirtschaftsförderungsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Österreichischer Integrationsfonds",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+        ],
+        "to": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "FTE-",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+        ],
+        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "integrationsfon",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
+        ],
+        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "FTE-Rat",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+        ],
+        "to": "Rat für Forschung und Technologieentwicklung (FTE-Rat)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Landesinnung Steiermark der Kraftfahrzeugtechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Landesinnung Steiermark der Kraftfahrzeugtechniker"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Landesinnung Fahrzeugtechnik"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Kraftfahrzeugtechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Kraftfahrzeugtechniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung Fahrzeugtechnik"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Integrationsfo",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+        ],
+        "to": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "departure - Die Kreativagentur der Stadt Wien GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "departure - Die Kreativagentur der Stadt Wien GmbH"
+        ],
+        "to": "Wirtschaftsagentur Wien. Ein Fonds der Stadt Wien."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Energiehandel",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Energiehandel"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe des Energiehandels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Handel mit Arzneimitteln",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Handel mit Arzneimitteln"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Handel mit Arzneimitteln, Drogeriewaren, Chemikalien, Farben"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Papier-, Spielwarenhandel",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Papier-, Spielwarenhandel"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium Papier- und Spielwarenhandel"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Kunsthistorisches Museum mit Museum für Völkerkunde und österreichischem Theatermuseum",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kunsthistorisches Museum mit Museum für Völkerkunde und österreichischem Theatermuseum"
+        ],
+        "to": "KHM-Museumsverband"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Tirol - Sparte Transport und Verkehr, Fachgruppe der Beförderungsgewerbe mit Pkw",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Tirol - Sparte Transport und Verkehr, Fachgruppe der Beförderungsgewerbe mit Pkw"
+        ],
+        "to": "Wirtschaftskammer Tirol, Fachgruppe der Beförderungsgewerbe mit Pkw"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Vorarlberger Krankenhaus- Betriebsgesellschaft mit beschränkter Haftung",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vorarlberger Krankenhaus- Betriebsgesellschaft mit beschränkter Haftung"
+        ],
+        "to": "Vorarlberger Krankenhaus-Betriebsgesellschaft mit beschränkter Haftung"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Elektrizitätswerk Wels Aktiengesellschaf",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Elektrizitätswerk Wels Aktiengesellschaft"
+        ],
+        "to": "eww ag"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "DAKA WINKLER KANALSERVICE GMBH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "DAKA WINKLER KANALSERVICE GMBH"
+        ],
+        "to": "DAWI Kanalservice GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Landesgremium Steiermark des Handels mit Mode und Freizeitartikeln",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Landesgremium Steiermark des Handels mit Mode und Freizeitartikeln"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Landesgremium Steiermark des Handels mit Mode- und Freizeitartikeln"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "AKh Allgemeines Krankenhaus der Stadt Linz GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "AKh Allgemeines Krankenhaus der Stadt Linz GmbH"
+        ],
+        "to": "Kepler Universitätsklinikum GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Art for Art Theaterservice GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Art for Art Theaterservice GmbH"
+        ],
+        "to": "ART for ART Theaterservice GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Energie AG Oberösterreich Data GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Energie AG Oberösterreich Data GmbH"
+        ],
+        "to": "Energie AG Oberösterreich Telekom GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Energie AG Oberösterreich Fair Energy GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Energie AG Oberösterreich Fair Energy GmbH"
+        ],
+        "to": "Energie AG Oberösterreich Power Solutions GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Gasometer",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "GSE \"Gasometer\" Shopping- und Entertainment Center Vermietungs GmbH"
+        ],
+        "to": "GSE Gasometer Shopping- und Entertainment Center Vermietungs GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Instyria Kultur-Service GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Instyria Kultur-Service GmbH"
+        ],
+        "to": "Kultur Service Gesellschaft mbH des Landes Steiermark in Liqu."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "KELAG Netz GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "KELAG Netz GmbH"
+        ],
+        "to": "KNG-Kärnten Netz GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Leopold-Franzens-Universität Innsbruck",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Leopold-Franzens-Universität Innsbruck"
+        ],
+        "to": "Universität Innsbruck"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Neu Marx Standortmarketing GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Neu Marx Standortmarketing GmbH"
+        ],
+        "to": "Immobilienentwicklung St. Marx GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Oberösterreichische Technologie- und Marketinggesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Oberösterreichische Technologie- und Marketinggesellschaft m.b.H."
+        ],
+        "to": "Business Upper Austria - OÖ Wirtschaftsagentur GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "PRATER SERVICE GMBH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "PRATER SERVICE GMBH"
+        ],
+        "to": "Prater Wien GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Salzburger Tourismusförderungsfonds",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Salzburger Tourismusförderungsfonds"
+        ],
+        "to": "Salzburger Tourismus Förderungs Fonds"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Sozialfonds",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Sozialfonds"
+        ],
+        "to": "Vorarlberger Sozialfonds"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Stadtgemeinde Salzburg",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Stadtgemeinde Salzburg"
+        ],
+        "to": "Stadt Salzburg Beteiligungs GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Tiroler Flughafenbetriebs- gesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Tiroler Flughafenbetriebs- gesellschaft m.b.H."
+        ],
+        "to": "Tiroler Flughafenbetriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wiener Stadthalle - Betriebs- und Veranstaltungsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wiener Stadthalle - Betriebs- und Veranstaltungsgesellschaft m.b.H."
+        ],
+        "to": "Wiener Stadthalle Betriebs- und Veranstaltungsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Abfall-, Abwasserwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": true,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Abfall-, Abwasserwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Entsorgungs- und Ressourcenmanagement"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Elektro-,Gebäude-,Alarmtechn.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Elektro-,Gebäude-,Alarmtechn."
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Fußpfleger, Kosmetiker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Fußpfleger, Kosmetiker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Fußpfleger, Kosmetiker und Masseure"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Hafner, Platten- und Fliesenleger und Keramiker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Hafner, Platten- und Fliesenleger und Keramiker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Hafner, Platten- und Fliesenleger und Keramiker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Holzbau",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Holzbau"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung Holzbau OÖ"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Sanitär-, Heizungstechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Sanitär-, Heizungstechniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Sanitär-, Heizungs- und Lüftungstechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsagenten",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsagenten"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsmakler und Berater in Versicherungsangelegenheiten"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsmakler",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsmakler"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Versicherungsmakler und Berater in Versicherungsangelegenheiten"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Fachverband Maschinen & Metallwaren",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Fachverband Maschinen & Metallwaren"
+        ],
+        "to": "Wirtschaftskammer Österreich, Fachverband der Maschinen-, Metallwaren- und Gießereiindustrie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Fachgruppe Steiermark Abfall- und Abwasserwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Fachgruppe Steiermark Abfall- und Abwasserwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Fachgruppe Entsorgungs- und Ressourcenmanagement"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Landesgremium Steiermark des Versand-, Internet- und allgemeinen Handels",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Landesgremium Steiermark des Versand-, Internet- und allgemeinen Handels"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Landesgremium des Versand-, Internet- und allgemeinen Handels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Wien, Fachgruppe Werbung und Marktkommunikation",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Wien, Fachgruppe Werbung und Marktkommunikation"
+        ],
+        "to": "Wirtschaftskammer Wien, Fachgruppe Werbung und Marktkommunikation Wien"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Wien, Fachgruppe Wien Unternehmensberatung und Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Wien, Fachgruppe Wien Unternehmensberatung und Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Wien, Fachgruppe Wien Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftstreu",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Akademie der Wirtschaftstreuhänder GmbH",
+                "l": "Akademie der Wirtschaftstreuhänder GmbH"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Akademie der Wirtschaftstreuhänder GmbH"
+        ],
+        "to": "Akademie der Wirtschaftstreuhänder Gesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Fachhochschulstudiengänge Burgenland Gesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Fachhochschulstudiengänge Burgenland Gesellschaft m.b.H."
+        ],
+        "to": "Fachhochschule Burgenland GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Gasnetz Steiermark GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Gasnetz Steiermark GmbH"
+        ],
+        "to": "Energienetze Steiermark GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Großglockner-Hochalpenstraßen- Aktiengesellschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Großglockner-Hochalpenstraßen- Aktiengesellschaft"
+        ],
+        "to": "Großglockner-Hochalpenstraßen Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Johannes Kepler Universität Linz",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Johannes Kepler Universität Linz",
+                "l": "Johannes Kepler Universität Linz"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Johannes Kepler Universität Linz"
+        ],
+        "to": "Universität Linz"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Karree St. Marx GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Karree St. Marx GmbH"
+        ],
+        "to": "ARE Austrian Real Estate GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Kultur Service Gesellschaft mbH des Landes Steiermark",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Kultur Service Gesellschaft mbH des Landes Steiermark",
+                "l": "Kultur Service Gesellschaft mbH des Landes Steiermark"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kultur Service Gesellschaft mbH des Landes Steiermark"
+        ],
+        "to": "Kultur Service Gesellschaft mbH des Landes Steiermark in Liqu."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "LAWOG, Gemeinnützige Landeswohnungsgenossenschaft für Oberösterreich, eingetragene Genossenschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "LAWOG, Gemeinnützige Landeswohnungsgenossenschaft für Oberösterreich, eingetragene Genossenschaft m.b.H.",
+                "l": "LAWOG, Gemeinnützige Landeswohnungsgenossenschaft für Oberösterreich, eingetragene Genossenschaft m.b.H."
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "LAWOG, Gemeinnützige Landeswohnungsgenossenschaft für Oberösterreich, eingetragene Genossenschaft m.b.H."
+        ],
+        "to": "LAWOG, Gemeinnützige Landeswohnungsgenossenschaft für Oberösterreich, eingetragene Genossenschaft mit beschränkter Haftung."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "OeAD (Ö. Austauschdienst)- GmbH - A. A. f. I. C. in E. a. R. (OeAD-GmbH)",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "OeAD (Ö. Austauschdienst)- GmbH - A. A. f. I. C. in E. a. R. (OeAD-GmbH)"
+        ],
+        "to": "OeAD (Österreichische Austauschdienst)-Gesellschaft mit beschränkter Haftung - Austrian Agency for International Cooperation in Education and Research (OeAD-GmbH)"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "OÖ. Ferngas Netz GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "OÖ. Ferngas Netz GmbH"
+        ],
+        "to": "Netz Oberösterreich GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "ORF Marketing Service GmbH & Co KG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ORF Marketing Service GmbH & Co KG"
+        ],
+        "to": "ORF Marketing & Creation GmbH & Co KG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Universität für Musik und Darstellende Kunst Graz",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Universität für Musik und Darstellende Kunst Graz"
+        ],
+        "to": "Universität für Musik und darstellende Kunst Graz"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Vorarlberger Kulturhäuser- Betriebsgesellschaft mbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vorarlberger Kulturhäuser- Betriebsgesellschaft mbH"
+        ],
+        "to": "Vorarlberger KulturhäuserBetriebsgesellschaft mbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Niederösterreich, Fachgruppe Maschinen & Metallwaren NÖ",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Niederösterreich, Fachgruppe Maschinen & Metallwaren NÖ"
+        ],
+        "to": "Wirtschaftskammer Niederösterreich, Fachgruppe der Maschinen-, Metallwaren- und Gießereiindustrie NÖ"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Niederösterreich, Fachgruppe Unternehmensberatung und Informationstechnologie NÖ",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Niederösterreich, Fachgruppe Unternehmensberatung und Informationstechnologie NÖ"
+        ],
+        "to": "Wirtschaftskammer Niederösterreich, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie NÖ"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Buch-, Medienwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Buch-, Medienwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Buch- und Medienwirtschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Gärtner, Floristen",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Gärtner, Floristen"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Gärtner und Floristen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Handel mit Maschinen, Computer",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Handel mit Maschinen, Computer"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Handels mit Maschinen, Computersystemen, Sekundärrohstoffen, techn. und industriellem Bedarf"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Landesinnung der Metalltechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Landesinnung der Metalltechniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Metalltechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Mechatroniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Mechatroniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Mechatroniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Express-Interfracht Internationale Spedition GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Express-Interfracht Internationale Spedition GmbH"
+        ],
+        "to": "Rail Cargo Logistics GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Karl Landsteiner Privatuniversität für Gesundheitswissenschaften Errichtungsgesellschaft m.b.H",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Karl Landsteiner Privatuniversität für Gesundheitswissenschaften Errichtungsgesellschaft m.b.H"
+        ],
+        "to": "Karl Landsteiner Privatuniversität für Gesundheitswissenschaften GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Standortagentur Tirol",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "RECHTSTRÄGER",
+          "selectBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Standortagentur Tirol",
+                "l": "Standortagentur Tirol"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Standortagentur Tirol"
+        ],
+        "to": "Standortagentur Tirol Management GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Niederösterreich, Landesgremium des Handels mit Arzneimitteln, Drogen- und Parfümeriewaren sowie Chemikalien und Farben NÖ",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "RECHTSTRÄGER",
+          "selectBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Wirtschaftskammer Niederösterreich, Landesgremium des Handels mit Arzneimitteln, Drogen- und Parfümeriewaren sowie Chemikalien und Farben NÖ",
+                "l": "Wirtschaftskammer Niederösterreich, Landesgremium des Handels mit Arzneimitteln, Drogen- und Parfümeriewaren sowie Chemikalien und Farben NÖ"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Niederösterreich, Landesgremium des Handels mit Arzneimitteln, Drogen- und Parfümeriewaren sowie Chemikalien und Farben NÖ"
+        ],
+        "to": "Wirtschaftskammer Niederösterreich, Landesgremium des Handels mit Arzneimitteln, Drogen- und Parfümeriewaren sowie Chemikalien und Farben"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Niederösterreich, Landesinnung der Tischler und Holzgestaltenden Gewerbe NÖ",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Niederösterreich, Landesinnung der Tischler und Holzgestaltenden Gewerbe NÖ"
+        ],
+        "to": "Wirtschaftskammer Niederösterreich, Landesinnung der Tischler und Holzgestalter NÖ"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Fachverband der Film- und Musikindustrie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Fachverband der Film- und Musikindustrie"
+        ],
+        "to": "Wirtschaftskammer Österreich, Fachverband der Film- und Musikwirtschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Good for Vienna GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Good for Vienna GmbH"
+        ],
+        "to": "Good for Vienna gemeinnützige GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Illwerke Unternehmensverwaltungs AG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Illwerke Unternehmensverwaltungs AG"
+        ],
+        "to": "Vorarlberger Illwerke Aktiengesellschaft"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Oberösterreichischer Feuerwehrfonds",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Oberösterreichischer Feuerwehrfonds"
+        ],
+        "to": "Oberösterreichischer Landes-Feuerwehrverband"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Österreichische Mensen- Betriebsgesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Österreichische Mensen- Betriebsgesellschaft m.b.H."
+        ],
+        "to": "Österreichische Mensen-Betriebsgesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Direktvertrieb",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Direktvertrieb"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Direktvertriebs\n"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "E-Mobility Provider Austria GmbH & Co KG",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "E-Mobility Provider Austria GmbH & Co KG"
+        ],
+        "to": "SMATRICS GmbH & Co KG"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Gemeindeverband für Umweltschutz in der Region Amstetten",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Gemeindeverband für Umweltschutz in der Region Amstetten"
+        ],
+        "to": "Gemeindedienstleistungsverband Region Amstetten für Umwelt und Abgaben"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Kompetenzzentrum für wissensbasierte Anwendungen und Systeme Forschungs und Entwicklungs GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kompetenzzentrum für wissensbasierte Anwendungen und Systeme Forschungs und Entwicklungs GmbH"
+        ],
+        "to": "Know-Center GmbH Research Center for Data-Driven Business & Big Data Analytics"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "TILAK - Tiroler Landeskrankenanstalten GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "TILAK - Tiroler Landeskrankenanstalten GmbH"
+        ],
+        "to": "Tirol Kliniken GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Elektro-, Einrichtungsfachhdl.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Elektro-, Einrichtungsfachhdl."
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Elektro- und Einrichtungsfachhandels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Juwelen-, Uhren-, Kunsthandel",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Juwelen-, Uhren-, Kunsthandel"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Juwelen-, Uhren-, Kunst-, Antiquitäten und Briefmarkenhandels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Abfall- und Abwasserwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Abfall- und Abwasserwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Entsorgungs- und Ressourcenmanagement"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Garagen-, Tankstellen- und Servicestationsunternehmungen",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Garagen-, Tankstellen- und Servicestationsunternehmungen"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Garagen-, Tankstellen- und Serviceunternehmungen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Technische Büros - Ingenieurbüros",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Technische Büros - Ingenieurbüros"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Ingenieurbüros"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Tischler, Holzgestalt. Gewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Tischler, Holzgestalt. Gewerbe"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung Tischler und Holzgestalter"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Unternehmensberatung und Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Unternehmensberatung und Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesministerium für Europa, Intergration und Äußeres",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesministerium für Europa, Intergration und Äußeres"
+        ],
+        "to": "Bundesministerium für Europa, Integration und Äußeres"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Fachverband der Stein- und keramischen Industrie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Fachverband der Stein- und keramischen Industrie"
+        ],
+        "to": "Wirtschaftskammer Österreich, Fachverband Stein- und keramische Industrie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Landeshauptstadt Bregenz",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "RECHTSTRÄGER",
+          "selectBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Landeshauptstadt Bregenz",
+                "l": "Landeshauptstadt Bregenz"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Landeshauptstadt Bregenz"
+        ],
+        "to": "Stadtgemeinde Bregenz"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Stadt Feldkirch",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "RECHTSTRÄGER",
+          "selectBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Stadt Feldkirch",
+                "l": "Stadt Feldkirch"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Stadt Feldkirch"
+        ],
+        "to": "Stadtgemeinde Feldkirch"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Salzburg, Landesinnung der Tischler und Holzgestaltenden Gewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Salzburg, Landesinnung der Tischler und Holzgestaltenden Gewerbe"
+        ],
+        "to": "Wirtschaftskammer Salzburg, Landesinnung der Tischler und Holzgestalter"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Landesgremium des Handels mit Maschinen, Computersystemen, techn. und industriellen Bedarfs",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Landesgremium des Handels mit Maschinen, Computersystemen, techn. und industriellen Bedarfs"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des Handels mit Maschinen, Computersystemen, Sekundärrohstoffen, techn. und industriellem Bedarf"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Fachgruppe Metalltechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "regex"
+        },
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "RECHTSTRÄGER",
+          "selectBlank": false,
+          "columnName": "RECHTSTRÄGER",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "Wirtschaftskammer Oberösterreich, Fachgruppe Metalltechniker",
+                "l": "Wirtschaftskammer Oberösterreich, Fachgruppe Metalltechniker"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Fachgruppe Metalltechniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung der Metalltechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Oberösterreich, Landesinnung der Kraftfahrzeugtechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Landesinnung der Kraftfahrzeugtechniker"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesinnung Fahrzeugtechnik"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Tirol - Sparte Gewerbe und Handwerk, Innung der Tischler und der Holzgestaltenden Gewerbe",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Tirol - Sparte Gewerbe und Handwerk, Innung der Tischler und der Holzgestaltenden Gewerbe"
+        ],
+        "to": "Wirtschaftskammer Tirol - Sparte Gewerbe und Handwerk, Innung der Tischler und Holzgestalter"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Vorarlberg, Fachgruppe der Abfall- und Abwasserwirtschaft",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Vorarlberg, Fachgruppe der Abfall- und Abwasserwirtschaft"
+        ],
+        "to": "Wirtschaftskammer Vorarlberg, Fachgruppe Entsorgungs- und Ressourcenmanagement"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Burgenländische Krankenanstalten- Gesellschaft m.b.H.",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Burgenländische Krankenanstalten- Gesellschaft m.b.H."
+        ],
+        "to": "Burgenländische Krankenanstalten-Gesellschaft m.b.H."
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Max F. Perutz Laboratories GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Max F. Perutz Laboratories GmbH"
+        ],
+        "to": "Max F. Perutz Laboratories Support GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Gesundheitsland",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Verein \"Gesundheitsland Kärnten\""
+        ],
+        "to": "Verein Gesundheitsland Kärnten"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "European Contract Logistics-Austria GmbH",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "European Contract Logistics-Austria GmbH"
+        ],
+        "to": "European Contract Logistics - Austria GmbH"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Burgenland, Fachgruppe Unternehmensberatung und Informationstechnologie",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Burgenland, Fachgruppe Unternehmensberatung und Informationstechnologie"
+        ],
+        "to": "Wirtschaftskammer Burgenland, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Bundesinnung der Karosseriebautechniker, Karosserielackierer und der Wagner",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Bundesinnung der Karosseriebautechniker, Karosserielackierer und der Wagner"
+        ],
+        "to": "Wirtschaftskammer Österreich, Bundesinnung der Fahrzeugtechnik"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Österreich, Bundesinnung der Kraftfahrzeugtechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Bundesinnung der Kraftfahrzeugtechniker"
+        ],
+        "to": "Wirtschaftskammer Österreich, Bundesinnung der Fahrzeugtechnik"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Steiermark, Fachgruppe Steiermark der Garagen-, Tankstellen- und Servicestationsunternehmungen",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Steiermark, Fachgruppe Steiermark der Garagen-, Tankstellen- und Servicestationsunternehmungen"
+        ],
+        "to": "Wirtschaftskammer Steiermark, Fachgruppe Steiermark der Garagen-, Tankstellen- und Serviceunternehmungen"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Vorarlberg, Fachgruppe des Handels mit Mode und Freizeitartiklen",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Vorarlberg, Fachgruppe des Handels mit Mode und Freizeitartiklen"
+        ],
+        "to": "Wirtschaftskammer Vorarlberg, Fachgruppe des Handels mit Mode und Freizeitartikeln"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Wirtschaftskammer Wien, Landesgremium Wien des Einrichtungsfachhandels",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Wien, Landesgremium Wien des Einrichtungsfachhandels"
+        ],
+        "to": "Wirtschaftskammer Wien, Landesgremium Wien des Elektro- und Einrichtungsfachhandels"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Österreich, Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker"
+        ],
+        "to": "Wirtschaftskammer Österreich, Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker"
+        ],
+        "to": "Wirtschaftskammer Österreich, Bundesinnung der Elektro-, Gebäude-, Alarm- und Kommunikationstechniker"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "20133",
+          "name": "QUARTAL",
+          "caseSensitive": false,
+          "columnName": "QUARTAL",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "query": "2",
+          "name": "BEKANNTGABE",
+          "caseSensitive": false,
+          "columnName": "BEKANNTGABE",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "query": "0",
+          "name": "LEERMELDUNG",
+          "caseSensitive": false,
+          "columnName": "LEERMELDUNG",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "query": "Österreich",
+          "name": "MEDIUM_MEDIENINHABER",
+          "caseSensitive": false,
+          "columnName": "MEDIUM_MEDIENINHABER",
+          "type": "text",
+          "mode": "text"
+        },
+        {
+          "query": "5941",
+          "name": "EURO",
+          "caseSensitive": false,
+          "columnName": "EURO",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wirtschaftskammer Oberösterreich, Landesgremium des Direktvertriebs\n"
+        ],
+        "to": "Wirtschaftskammer Oberösterreich, Landesgremium des  Direktvertriebs"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Verein Gesundheitsland Kärnten",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Verein Gesundheitsland Kärnten"
+        ],
+        "to": "Verein Gesundheitsland Kärnten"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column RECHTSTRÄGER",
+    "engineConfig": {
+      "facets": [
+        {
+          "query": "Verein Gesundheitsland Kärnten",
+          "name": "RECHTSTRÄGER",
+          "caseSensitive": false,
+          "columnName": "RECHTSTRÄGER",
+          "type": "text",
+          "mode": "text"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "RECHTSTRÄGER",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Verein Gesundheitsland Kärnten"
+        ],
+        "to": "Verein Gesundheitsland Kärnten"
+      }
+    ]
+  }
+]
