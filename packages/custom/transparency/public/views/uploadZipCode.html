@@ -5,7 +5,13 @@
         <input type="file" ngf-select="onFileSelect($files)">
         <p>Uploaded: {{percent}}%</p>
         <div data-ng-show="feedbackZipCode">
-            <p>Number of zip-codes found {{feedbackZipCode.newZipCodes}}</p>
+            <div class="alert alert-info" data-ng-show="feedbackZipCode.integrityCheck">
+                <div><strong>Info</strong></div>
+                <p translate>Entries found</p>
+                {{feedbackZipCode.newZipCodes}}
+                <p translate>Entries stored</p>
+                {{feedbackZipCode.savedInDatabase}}</p>
+            </div>
         </div>
     </div>
 </section>

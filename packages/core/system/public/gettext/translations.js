@@ -95,6 +95,17 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Tyrol": "Tirol",
         "Upper Austria": "Oberösterreich",
         "Vienna": "Wien",
+        "Attention": "Achtung",
+        "Processing errors": "Verarbeitungsfehler",
+        "Number of entries": "Anzahl Datensätze",
+        "Entries without known federal state in Austria": "Datensätze ohne bekanntes Bundesland in Österreich",
+        "Organisations not from Austria": "Organisationen außerhalb Österreichs",
+        "Ignored": "Ignoriert",
+        "Entries found": "Einträge gefunden",
+        "Entries stored": "Einträge gespeichert",
+        "zip-code": "Postleitzahl",
+        "Organisations with unknown address-data": "Organisationen mit nicht bekannten Adressdaten",
+        "Error": "Fehler"
     });
     /* jshint +W100 */
 }]);
