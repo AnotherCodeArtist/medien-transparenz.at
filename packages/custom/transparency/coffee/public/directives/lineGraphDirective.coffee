@@ -45,6 +45,7 @@ app.directive 'tpaLinegraph', ($rootScope) ->
                     .color((d) ->
                          "steelblue"
                     )
+                    .margin({top: 30, right: 100, bottom: 75, left: 100})
                     d3.select('.lineGraph svg')
                     .datum(data)
                     .call(chart);

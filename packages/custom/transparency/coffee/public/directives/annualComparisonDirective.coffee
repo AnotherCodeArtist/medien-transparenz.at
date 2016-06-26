@@ -7,35 +7,41 @@ app.directive 'tpaAnnualcomparison', ($rootScope) ->
           data: '='
      link: ($scope,element,attrs) ->
           updateDiagram = (oldValue, newValue) ->
-               if $scope.data
-                    tickvalues = [
-                         0, 0.25, 0.5, 0.75
-                    ]
-                    nv.addGraph () ->
-                         chart = nv.models.lineChart()
-                         .margin({top: 30, right: 60, bottom: 50, left: 150})
-                         .useInteractiveGuideline(true)
-                         chart.xAxis
-                         .axisLabel('Quartal')
-                         .tickValues(tickvalues)
-                         .tickFormat (d) ->
-                              "Q" + (d*4+1)
+               data = () ->
+                    if $scope.data
+                         result = [
+                              {
+                                   key: "Difference",
+                                   values:
+                                        [
+                                        ]
+                              }
+                         ]
+                         for i in [1...$scope.data.length]
+                              for quarter in [1...5]
+                                   result[0].values.push {
+                                        label: $scope.data[i].key + "/Q" + quarter
+                                        value: $scope.data[i].values[quarter-1].y - $scope.data[i-1].values[quarter-1].y
+                                   }
+                         result
 
-                         chart.yAxis
-                         .axisLabel('€')
-                         .tickFormat(d3.format('.02f'))
+               nv.addGraph () ->
+                    chart = nv.models.discreteBarChart()
+                    .x((d) ->
+                         d.label)
+                    .y((d) ->
+                         d.value)
+                    .staggerLabels(true)
+                    .color((d) ->
+                         "steelblue"
+                    )
+                    .margin({top: 30, right: 100, bottom: 75, left: 100})
+                    d3.select('.annualGraph svg')
+                    .datum(data)
+                    .call(chart);
 
-                         d3.select('.annualGraph svg')
-                         .datum(data())
-                         .transition().duration(500)
-                         .call(chart)
+                    nv.utils.windowResize(chart.update);
 
-                         nv.utils.windowResize(chart.update);
-
-                         chart
-
-
-          data = () ->
-               $scope.data
+                    chart
 
           $scope.$watch 'data', updateDiagram, true
