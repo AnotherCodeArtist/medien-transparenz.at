@@ -99,6 +99,8 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
     $scope.showFlowDetails = (node) ->
         $state.go('top');
 
+    $scope.getCurrentLanguage = gettextCatalog.getCurrentLanguage
+
     update = ->
         TPAService.flowdetail(parameters())
         .then (res) ->

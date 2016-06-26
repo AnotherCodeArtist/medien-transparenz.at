@@ -5,6 +5,7 @@ app.directive 'tpaAnnualcomparison', ($rootScope) ->
      restrict: 'EA'
      scope:
           data: '='
+          getCurrentLanguage: '&'
      link: ($scope,element,attrs) ->
           updateDiagram = (oldValue, newValue) ->
                data = () ->
@@ -36,6 +37,9 @@ app.directive 'tpaAnnualcomparison', ($rootScope) ->
                          "steelblue"
                     )
                     .margin({top: 30, right: 100, bottom: 75, left: 100})
+
+                    chart.yAxis.tickFormat (d) -> d.toLocaleString $scope.getCurrentLanguage(), {style:"currency",currency:"EUR"}
+                    
                     d3.select('.annualGraph svg')
                     .datum(data)
                     .call(chart);
