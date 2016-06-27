@@ -70,9 +70,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
+        ###
         if $scope.org
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
+        ###
+        params.media = ["Kronen Zeitung", "Heute"]
+        params.organisations = ["Arbeitsmarktservice"]
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -145,7 +149,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     update = ->
         console.log "Starting update: " + Date.now()
         startLoading()
-        TPAService.flows(parameters())
+        TPAService.filteredflows(parameters())
         .then (res) ->
             stopLoading()
             #console.log "Got result from Server: " + Date.now()
