@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "connect-multiparty": "latest",
+    "isteven-angular-multiselect": "latest",
     "q-io": "~2"
   },
   "scripts": {

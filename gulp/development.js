@@ -72,7 +72,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('devServe', ['env:development'], function () {
-
+  gulp.src(['packages/custom/transparency/node_modules/isteven-angular-multiselect/**/*']).pipe(gulp.dest('packages/custom/transparency/public/assets/lib/isteven-angular-multiselect'));
   plugins.nodemon({
     script: 'server.js',
     ext: 'html js',

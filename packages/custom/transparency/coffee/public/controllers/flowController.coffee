@@ -4,6 +4,23 @@ app = angular.module 'mean.transparency'
 
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder'
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder) ->
+
+    TPAService.search({name: '   '})
+    .then (res) ->
+        $scope.allOrganisations = res.data.org.map (o) ->
+            {
+                name: o.name,
+                ticked: false
+            }
+        $scope.allMedia = res.data.media.map (m) ->
+            {
+                name: m.name,
+                ticked: false
+            }
+
+    $scope.selectedOrganisations = []
+    $scope.selectedMedia = []
+
     $scope.mediaLabel = gettextCatalog.getString('Media')
     $scope.organisationLabel = gettextCatalog.getString('Organisation')
     $scope.transferTypeLabel = gettextCatalog.getString('Payment Type')
@@ -75,8 +92,14 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
         ###
-        params.media = ["Kronen Zeitung", "Heute"]
-        params.organisations = ["Arbeitsmarktservice"]
+        if $scope.selectedMedia.length is 0
+            params.media = ["Kronen Zeitung", "Heute"]
+        else
+            params.media = $scope.selectedMedia.map (media) -> media.name
+        if $scope.selectedOrganisations.length is 0
+            params.organisations = ["Arbeitsmarktservice"]
+        else
+            params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -206,6 +229,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     change = (oldValue,newValue) ->
         console.log "Change: " + Date.now()
         update() if (oldValue isnt newValue)
+
+    $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
+        update()
+    $scope.$watch 'selectedMedia', (newValue, oldValue) ->
+        update()
 
     filterThreshold = "NoValue"
     $scope.$watch 'filter', (newValue,oldValue) ->

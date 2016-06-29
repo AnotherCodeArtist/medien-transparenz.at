@@ -57,6 +57,24 @@
                 {{org.country}}<br>
             </p>
         </div>
+        <div
+            isteven-multi-select
+            input-model="allOrganisations"
+            output-model="selectedOrganisations"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked"
+        >
+        </div>
+        <div
+                isteven-multi-select
+                input-model="allMedia"
+                output-model="selectedMedia"
+                button-label="name"
+                item-label="name"
+                tick-property="ticked"
+        >
+        </div>
         <div class="text-center query bg-primary">
             <div class="btn-group">
                 <input id="searchinput" placeholder="Filter"
