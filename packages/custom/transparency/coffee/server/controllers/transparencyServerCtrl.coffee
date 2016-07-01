@@ -86,9 +86,9 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
         .then (results) ->
             if results
-                organisation.federalState_en = results.federalState
+                organisation.federalState = results.federalState
             else
-                organisation.federalState_en = "Unknown"
+                organisation.federalState = "Unknown"
             organisation.save()
         .then (ok) ->
             numberOfOrganisations++
@@ -325,9 +325,9 @@ module.exports = (Transparency) ->
                    .then(
                      (isPopulated) ->
                          if federalState
-                            #console.log "Federal State: " + transfer.organisationReference.federalState_en for transfer in result when transfer.organisationReference.federalState_en is federalState
+                            #console.log "Federal State: " + transfer.organisationReference.federalState for transfer in result when transfer.organisationReference.federalState is federalState
                             #create new results based on the federalState selection
-                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState is federalState)
                             #console.log("Result with " +federalState+" has length of " + result.length)
                             #console.log(JSON.stringify(result))
 
@@ -400,7 +400,7 @@ module.exports = (Transparency) ->
 
                             if federalState.length
                                 #create new results based on the federalState selection
-                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
+                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState is federalState)
                                 #console.log("Result with " +federalState+" has length of " + populatedTransfers.length)
 
                             if orgType is 'media'
