@@ -64,3 +64,7 @@ angular.module 'mean.transparency'
         url: '/medialist?orgType&page&size'
         templateUrl: 'transparency/views/list.html'
         controller: 'ListMediaCtrl'
+    $stateProvider.state 'map',
+        url: '/map'
+        templateUrl: 'transparency/views/map.html'
+        controller: 'MapCtrl'
