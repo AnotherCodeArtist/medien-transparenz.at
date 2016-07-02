@@ -586,14 +586,86 @@ module.exports = (Transparency) ->
             res.json Array.from(new Set(result))
 
     federalstates: (req, res) ->
-        res.json {
-            "AT-1": 1000,
-            "AT-2": 2000,
-            "AT-3": 3000,
-            "AT-4": 4000,
-            "AT-5": 5000,
-            "AT-6": 6000,
-            "AT-7": 7000,
-            "AT-8": 8000,
-            "AT-9": 9000
-        }
+        result =
+            'AT-1': 0,
+            'AT-2': 0,
+            'AT-3': 0,
+            'AT-4': 0,
+            'AT-5': 0,
+            'AT-6': 0,
+            'AT-7': 0,
+            'AT-8': 0,
+            'AT-9': 0,
+        period = {}
+        period['$gte'] = parseInt(req.query.from) if req.query.from
+        period['$lte'] = parseInt(req.query.to) if req.query.to
+        orgType = req.query.orgType or 'org'
+        paymentTypes = req.query.pType or ['2']
+        paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+        query = {}
+        project =
+            organisation: '$_id.organisation'
+            organisationReference: '$_id.organisationReference'
+            _id: 0
+            total: 1
+        if period.$gte? or period.$lte?
+            query.period = period
+        query.transferType =
+            $in: paymentTypes.map (e)->
+                parseInt(e)
+        group =
+            _id:
+                organisation: if orgType is 'org' then '$organisation' else '$media',
+                organisationReference: '$organisationReference'
+            total:
+                $sum: '$amount'
+        #console.log "Query: "
+        #console.log query
+        #console.log "Group: "
+        #console.log group
+        #console.log "Project: "
+        #console.log project
+        totalPromise = Transfer.aggregate($match: query)
+        .group(group)
+        .sort('-total')
+        .project(project)
+        .exec()
+        Q.all([totalPromise])
+        .then (promiseResults) ->
+            try
+                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
+                .then (
+                    (isPopulated) ->
+                        try
+                            populatedTransfers = promiseResults[0]
+
+                            if orgType is 'media'
+                                populatedTransfers = mediaToFederalState populatedTransfers
+
+                            for transfer in populatedTransfers
+                                #TODO ! WARNING ! needs to be refined after merging the ISO-branch (example see comment)
+                                # after merging:
+                                # result[transfer.organisationReference.federalState]+=transfer.total
+
+                                switch transfer.organisationReference.federalState_en
+                                    when 'Burgenland' then result['AT-1']+= transfer.total
+                                    when 'Carinthia' then result['AT-2']+= transfer.total
+                                    when 'Lower Austria' then result['AT-3']+= transfer.total
+                                    when 'Salzburg' then result['AT-5']+= transfer.total
+                                    when 'Styria' then result['AT-6']+= transfer.total
+                                    when 'Tyrol' then result['AT-7']+= transfer.total
+                                    when 'Upper Austria' then result['AT-4']+= transfer.total
+                                    when 'Vienna' then result['AT-9']+= transfer.total
+                                    when 'Vorarlberg' then result['AT-8']+= transfer.total
+                            res.send(JSON.stringify(result))
+                        catch error
+                            console.log error
+                            res.status(500).send("Error while calculate sum for federal states!")
+                )
+            catch error
+                console.log error
+                res.status(500).send("Error while calculate sum for federal states!")
+        .catch (err) ->
+            console.log "Error in Promise.when"
+            console.log err
+            res.status(500).send("Error #{err.message}")
