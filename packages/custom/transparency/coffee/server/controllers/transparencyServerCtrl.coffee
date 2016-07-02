@@ -566,7 +566,6 @@ module.exports = (Transparency) ->
 
     deleteEvent: (req, res) ->
         #todo: insert parameter checking
-        console.log req.query.id
         Event.findById {_id: req.query.id}, (err, data) ->
             if err
                 res.status(500).send error: "Could not find event #{err}"
@@ -585,3 +584,16 @@ module.exports = (Transparency) ->
                     Array.prototype.push.apply result, event.tags
 
             res.json Array.from(new Set(result))
+
+    federalstates: (req, res) ->
+        res.json {
+            "AT-1": 1000,
+            "AT-2": 2000,
+            "AT-3": 3000,
+            "AT-4": 4000,
+            "AT-5": 5000,
+            "AT-6": 6000,
+            "AT-7": 7000,
+            "AT-8": 8000,
+            "AT-9": 9000
+        }

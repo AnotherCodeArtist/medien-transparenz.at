@@ -1,9 +1,10 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.directive 'austrianMap', ($rootScope) ->
+app.directive 'austrianMap', ($rootScope, TPAService) ->
      restrict: 'EA'
      link: ($scope,element,attrs) ->
+          transferSums = {}
           json = {}
           #Store downloaded JSON in variable
           defaults = {
@@ -13,7 +14,7 @@ app.directive 'austrianMap', ($rootScope) ->
                     '}'
                height:
                     'function(d) {\n' +
-                    '  return Math.random()*50\n' +
+                    '  return transferSums[d.iso]*250\n' +
                     '}'
           }
           latest = {
@@ -142,7 +143,6 @@ app.directive 'austrianMap', ($rootScope) ->
                #Read url from url textarea
                url = "/transparency/assets/data/oesterreich.json"
                d3.json(url, (data) ->
-                    console.log(data)
                     json = data;
                     functions = {};
                     functions.color = eval('(' + defaults.color + ')');
@@ -202,5 +202,14 @@ app.directive 'austrianMap', ($rootScope) ->
                     console.log('This tutorial only renders Polygons and MultiPolygons')
                group
           #Initalize WebGL!
-          init()
-          animate()
+          TPAService.federalstates {}
+          .then (result) ->
+               transferSums = result.data
+               maximum = Number.NEGATIVE_INFINITY
+               for k,v of transferSums
+                    if v > maximum
+                         maximum = v
+               for k,v of transferSums
+                    transferSums[k] = v/parseFloat(maximum)
+               init()
+               animate()
