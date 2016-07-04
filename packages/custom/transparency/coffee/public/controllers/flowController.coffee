@@ -92,14 +92,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
         ###
-        if $scope.selectedMedia.length is 0
-            params.media = ["Kronen Zeitung", "Heute"]
-        else
-            params.media = $scope.selectedMedia.map (media) -> media.name
-        if $scope.selectedOrganisations.length is 0
-            params.organisations = ["Arbeitsmarktservice"]
-        else
-            params.organisations = $scope.selectedOrganisations.map (org) -> org.name
+        params.media = $scope.selectedMedia.map (media) -> media.name
+        params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -170,6 +164,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
+        if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 0
+            stopLoading()
+            return
         console.log "Starting update: " + Date.now()
         startLoading()
         TPAService.filteredflows(parameters())

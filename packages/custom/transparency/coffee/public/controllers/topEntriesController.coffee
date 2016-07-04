@@ -5,7 +5,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType','selectedFederalState']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -75,7 +75,6 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             {name: gettextCatalog.getString('Recipient'), value: 'media'}
         ]
         #Federal states selection
-        $scope.federalState = {}
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
         savedState = sessionStorage.getItem 'topState'
         if savedState
