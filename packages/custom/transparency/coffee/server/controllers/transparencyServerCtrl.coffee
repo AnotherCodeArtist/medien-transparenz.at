@@ -130,9 +130,9 @@ lineToTransfer = (line, feedback) ->
                     if unknown
                         console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
                         transfer.organisationReference = unknown._id
-                        transfer.save()
                         unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
                         feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
+                        transfer.save()
                     else
                         feedback.errors+=1
                         throw new Error("'Unknown' as placeholder was not found in organisation collection")
