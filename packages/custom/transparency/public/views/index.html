@@ -10,7 +10,6 @@
     </div>
     <section class="container">
 
-        <div tabindex="0" austrian-map="austrian-map" id="webgl" style="width: 100%; height: 800px;"></div>
         <br/>
 
         <h2 translate>
@@ -29,6 +28,13 @@
 
         <p translate>
             Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian</p>
+
+        <div class="col-sm-12 col-lg-12">
+            <strong><div translate>Periods</div></strong>
+            <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
+            <p class="small text-info" translate>Move the sliders to define a range</p>
+            <div tabindex="0" austrian-map="austrian-map" id="webgl" style="width: 100%; height: 800px;"></div>
+        </div>
         <div>
 
         <img src="/transparency/assets/img/logo_netidee.gif" alt="NetIdee Logo">

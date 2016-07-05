@@ -79,7 +79,6 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                controls.handleResize();
                render()
           animate = () ->
-               console.log 'animate'
                requestAnimationFrame(animate)
                controls.update()
 
@@ -132,6 +131,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                onWindowResize();
                render();
                update();
+               animate();
 
           clearGroups = () ->
                if (json)
@@ -159,6 +159,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                          json.features.forEach (feature) ->
                               group = addFeature(feature, projection, functions)
                               feature._group = group
+                         render()
                     else if (json.type is 'Topology')
                          geojson = topojson.merge(json, json.objects[Object.keys(json.objects)[0]].geometries)
                          projection = getProjection(geojson, width, height)
@@ -167,9 +168,9 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                                    feature = topojson.feature(json, object)
                                    group = addFeature(feature, projection, functions)
                                    object._group = group
+                         render()
                     else
                          console.log('This tutorial only renders TopoJSON and GeoJSON FeatureCollections'))
-               render()
           addShape = (group, shape, extrudeSettings, material, color, x, y, z, rx, ry, rz, s) ->
                geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
                mesh = new THREE.Mesh(geometry, materials[material](color));
@@ -219,4 +220,4 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                for k,v of transferSums
                     transferSums[k] = v/parseFloat(maximum)
                init()
-               animate()
+               render()
