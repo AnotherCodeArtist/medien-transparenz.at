@@ -237,35 +237,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "Bundesministerium für Wirtschaft, Familie und Jugend",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Bundesministerium für Wirtschaft, Familie und Jugend"
-        ],
-        "to": "Bundesministerium für Wissenschaft, Forschung und Wirtschaft"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Gemeinnützige Donau-Ennstaler Siedlungs- Aktiengesellschaft",
           "name": "RECHTSTRÄGER",
           "caseSensitive": true,
@@ -324,35 +295,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "Bundesministerium für Wissenschaft und Forschung",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Bundesministerium für Wissenschaft und Forschung"
-        ],
-        "to": "Bundesministerium für Wissenschaft, Forschung und Wirtschaft"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Autobahnen- und Schnellstraßen-Finanzierungs- Aktiengesellschaft",
           "name": "RECHTSTRÄGER",
           "caseSensitive": true,
@@ -373,35 +315,6 @@
           "Autobahnen- und Schnellstraßen-Finanzierungs- Aktiengesellschaft"
         ],
         "to": "Autobahnen- und SchnellstraßenFinanzierungs-Aktiengesellschaft"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "Bundesministerium für europäische und internationale Angelegenheiten",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Bundesministerium für europäische und internationale Angelegenheiten"
-        ],
-        "to": "Bundesministerium für Europa, Integration und Äußeres"
       }
     ]
   },
@@ -991,35 +904,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "Bundesministerium für Unterricht, Kunst und Kultur",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Bundesministerium für Unterricht, Kunst und Kultur"
-        ],
-        "to": "Bundesministerium für Bildung und Frauen"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Amt der Stadt Feldkirch",
           "name": "RECHTSTRÄGER",
           "caseSensitive": true,
@@ -1068,7 +952,7 @@
         "from": [
           "Rat für Forschung und Technologieentwicklung \"FTE-Rat\""
         ],
-        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
+        "to": "Rat für Forschung und Technologieentwicklung (FTE-Rat)"
       }
     ]
   },
@@ -1330,35 +1214,6 @@
           "HYPO ALPE-ADRIA-BANK AG"
         ],
         "to": "HETA ASSET RESOLUTION AG"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "STEWEAG-STEG GmbH",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "STEWEAG-STEG GmbH"
-        ],
-        "to": "STEWEAG-STEG GmbH"
       }
     ]
   },
@@ -2112,36 +1967,7 @@
         "from": [
           "Österreichischer Integrationsfonds"
         ],
-        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": true,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
-        ],
-        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
+        "to": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
       }
     ]
   },
@@ -2267,35 +2093,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "FTE-Rat",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
-        ],
-        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Alpen-Adria-Universität Klagenfurt",
           "name": "RECHTSTRÄGER",
           "caseSensitive": false,
@@ -2383,122 +2180,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "Österreichischer Integrationsfonds",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
-        ],
-        "to": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "FTE-",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
-        ],
-        "to": "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "integrationsfon",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
-        ],
-        "to": "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "FTE-Rat",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "\"Rat für Forschung und Technologieentwicklung \"\"FTE-Rat\"\"\""
-        ],
-        "to": "Rat für Forschung und Technologieentwicklung (FTE-Rat)"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Wirtschaftskammer Steiermark, Landesinnung Steiermark der Kraftfahrzeugtechniker",
           "name": "RECHTSTRÄGER",
           "caseSensitive": false,
@@ -2548,35 +2229,6 @@
           "Wirtschaftskammer Oberösterreich, Fachgruppe Kraftfahrzeugtechniker"
         ],
         "to": "Wirtschaftskammer Oberösterreich, Landesinnung Fahrzeugtechnik"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "Integrationsfo",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Österreichischer Integrationsfonds – Fonds zur Integration von Flüchtlingen und MigrantInnen"
-        ],
-        "to": "Österreichischer Integrationsfonds - Fonds zur Integration von Flüchtlingen und MigrantInnen"
       }
     ]
   },
@@ -5049,35 +4701,6 @@
     "engineConfig": {
       "facets": [
         {
-          "query": "Bundesministerium für Europa, Intergration und Äußeres",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Bundesministerium für Europa, Intergration und Äußeres"
-        ],
-        "to": "Bundesministerium für Europa, Integration und Äußeres"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
           "query": "Fachverband der Stein- und keramischen Industrie",
           "name": "RECHTSTRÄGER",
           "caseSensitive": false,
@@ -5796,64 +5419,6 @@
           "Wirtschaftskammer Oberösterreich, Landesgremium des Direktvertriebs\n"
         ],
         "to": "Wirtschaftskammer Oberösterreich, Landesgremium des  Direktvertriebs"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "Verein Gesundheitsland Kärnten",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Verein Gesundheitsland Kärnten"
-        ],
-        "to": "Verein Gesundheitsland Kärnten"
-      }
-    ]
-  },
-  {
-    "op": "core/mass-edit",
-    "description": "Mass edit cells in column RECHTSTRÄGER",
-    "engineConfig": {
-      "facets": [
-        {
-          "query": "Verein Gesundheitsland Kärnten",
-          "name": "RECHTSTRÄGER",
-          "caseSensitive": false,
-          "columnName": "RECHTSTRÄGER",
-          "type": "text",
-          "mode": "text"
-        }
-      ],
-      "mode": "row-based"
-    },
-    "columnName": "RECHTSTRÄGER",
-    "expression": "value",
-    "edits": [
-      {
-        "fromBlank": false,
-        "fromError": false,
-        "from": [
-          "Verein Gesundheitsland Kärnten"
-        ],
-        "to": "Verein Gesundheitsland Kärnten"
       }
     ]
   }
