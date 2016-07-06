@@ -3,7 +3,10 @@ app = angular.module 'mean.transparency'
 
 app.directive 'austrianMap', ($rootScope, TPAService) ->
      restrict: 'EA'
+     scope:
+          data: '='
      link: ($scope,element,attrs) ->
+          initialized = false
           transferSums = {}
           json = {}
           #Store downloaded JSON in variable
@@ -21,6 +24,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                               when "AT-9" then new THREE.Color("rgb(255, 0, 0)")
                height:
                     (d) ->
+                         console.log d.iso + " " + transferSums[d.iso]*250
                          transferSums[d.iso]*250
           }
           latest = {
@@ -117,7 +121,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                renderer.setSize(container.clientWidth, container.clientHeight);
                container.appendChild(renderer.domElement);
                #Shadows
-               renderer.shadowMapEnabled = true;
+               renderer.shadowMap.enabled = true;
                renderer.shadowMapSoft = true;
                renderer.shadowCameraNear = 1;
                renderer.shadowCameraFar = camera.far;
@@ -209,15 +213,23 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                else
                     console.log('This tutorial only renders Polygons and MultiPolygons')
                group
-          #Initalize WebGL!
-          TPAService.federalstates {}
-          .then (result) ->
-               transferSums = result.data
-               maximum = Number.NEGATIVE_INFINITY
-               for k,v of transferSums
-                    if v > maximum
-                         maximum = v
-               for k,v of transferSums
-                    transferSums[k] = v/parseFloat(maximum)
-               init()
-               render()
+
+
+
+          dataUpdated = () ->
+               if $scope.data and Object.keys($scope.data).length isnt 0
+                    transferSums = $scope.data
+                    maximum = Number.NEGATIVE_INFINITY
+                    for k,v of transferSums
+                         if v > maximum
+                              maximum = v
+                    for k,v of transferSums
+                         transferSums[k] = v/parseFloat(maximum)
+
+                    if !initialized
+                         init()
+                         render()
+                         initialized = true
+                    if initialized
+                         update()
+          $scope.$watch 'data', dataUpdated
