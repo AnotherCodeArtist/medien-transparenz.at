@@ -141,20 +141,20 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                if (json)
                     if json.type is 'FeatureCollection'
                          json.features.forEach (feature) ->
-                              scene.remove(feature._group)
+                              scene.remove(scene.getObjectByName(feature.properties.iso))
                     else if (json.type is 'Topology')
                          Object.keys(json.objects).forEach (key) ->
                               json.objects[key].geometries.forEach (object) ->
                                    scene.remove(object._group)
                     render()
           update = () ->
-               clearGroups();
                width = container.clientWidth;
                height = container.clientHeight;
                #Read url from url textarea
                url = "/transparency/assets/data/oesterreich.json"
                d3.json(url, (data) ->
                     json = data;
+                    clearGroups();
                     functions = {};
                     functions.color = defaults.color
                     functions.height = defaults.height
@@ -187,6 +187,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                group.add(mesh);
           addFeature = (feature, projection, functions) ->
                group = new THREE.Group();
+               group.name = feature.properties.iso
                scene.add(group);
                color;
                amount;
