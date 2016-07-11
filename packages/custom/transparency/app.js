@@ -108,6 +108,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/turfjs/turf.min.js',{weight:-1});
   Transparency.aggregateAsset('js', '../js/TrackballControls.js',{weight:-3});
   Transparency.aggregateAsset('js', '../js/Detector.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../js/Projector.js',{weight:-3});
   Transparency.aggregateAsset('js', '../js/geo.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/datatables/media/js/jquery.dataTables.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});

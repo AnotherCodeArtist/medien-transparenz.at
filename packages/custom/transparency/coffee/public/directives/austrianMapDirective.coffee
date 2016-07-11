@@ -9,6 +9,28 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
           initialized = false
           transferSums = {}
           json = {}
+
+          raycaster = new THREE.Raycaster();
+          mouse = new THREE.Vector2();
+          objects = [];
+
+          onDocumentMouseDown = (e) ->
+               event = e.originalEvent
+               console.log event
+               event.preventDefault();
+
+               mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+               mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+               raycaster.setFromCamera( mouse, camera );
+
+               intersects = raycaster.intersectObjects(objects);
+               console.log intersects
+               if ( intersects.length > 0 )
+                    console.log intersects
+
+          element.bind 'click', onDocumentMouseDown
+
           #Store downloaded JSON in variable
           defaults = {
                color: (d) ->
@@ -184,6 +206,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                mesh.position.set(x, y, z);
                mesh.rotation.set(rx, ry, rz);
                mesh.scale.set(s, s, s);
+               objects.push mesh
                group.add(mesh);
           addFeature = (feature, projection, functions) ->
                group = new THREE.Group();
