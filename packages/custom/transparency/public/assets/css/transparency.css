@@ -77,8 +77,13 @@ footer {
 
 div.sankeyChart{
   display: block;
-  width: 100%;
+  width: 70%;
+  float:left;
+}
 
+.multiselectDropdown{
+  float: left;
+  width:15%;
 }
 
 /*fixing interference with circle module styles*/

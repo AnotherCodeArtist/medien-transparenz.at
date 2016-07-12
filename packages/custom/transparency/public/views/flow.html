@@ -57,43 +57,6 @@
                 {{org.country}}<br>
             </p>
         </div>
-        <oi-select
-                oi-options="item.name for item in allOrganisations track by item.name"
-                ng-model="selectedOrganisations"
-                multiple
-                placeholder="Organisations"
-        ></oi-select>
-        <oi-select
-                oi-options="item.name for item in allMedia track by item.id"
-                ng-model="selectedMedia"
-                multiple
-                placeholder="Media"
-        ></oi-select>
-        <!--<div
-            isteven-multi-select
-            input-model="allOrganisations"
-            output-model="selectedOrganisations"
-            button-label="name"
-            item-label="name"
-            tick-property="ticked"
-        >
-        </div>
-        <div
-                isteven-multi-select
-                input-model="allMedia"
-                output-model="selectedMedia"
-                button-label="name"
-                item-label="name"
-                tick-property="ticked"
-        >
-        </div>-->
-        <div class="text-center query bg-primary">
-            <div class="btn-group">
-                <input id="searchinput" placeholder="Filter"
-                       ng-model="filter" type="search" class="searchinput form-control">
-                <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
-            </div>
-        </div>
         <br/>
         <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -107,11 +70,23 @@
             <span class="glyphicon glyphicon-info-sign"></span>
             <span translate>Click on the rectangular boxes on either side of the chart to get more information on a particular organization</span>
         </div>
+        <oi-select class="multiselectDropdown"
+                oi-options="item.name for item in allOrganisations track by item.name"
+                ng-model="selectedOrganisations"
+                multiple
+                placeholder="Organisations"
+        ></oi-select>
         <div class="sankeyChart">
             <div data-tpa-sankey data="flows" id="mychart"
                  prog="progress" node-click="showDetails">
             </div>
         </div>
+        <oi-select class="multiselectDropdown"
+                oi-options="item.name for item in allMedia track by item.id"
+                ng-model="selectedMedia"
+                multiple
+                placeholder="Media"
+        ></oi-select>
 
         <div ng-show="org">
             <br/>
