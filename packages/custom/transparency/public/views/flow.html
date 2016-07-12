@@ -82,7 +82,7 @@
             </div>
         </div>
         <oi-select class="multiselectDropdown"
-                oi-options="item.name for item in allMedia track by item.id"
+                oi-options="item.name for item in allMedia track by item.name"
                 ng-model="selectedMedia"
                 multiple
                 placeholder="Media"

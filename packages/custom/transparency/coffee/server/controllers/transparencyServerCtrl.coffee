@@ -279,64 +279,71 @@ module.exports = (Transparency) ->
     filteredflows: (req, res) ->
         getOtherMedia = (organisations, media, period, paymentTypes, federalState) ->
             result = []
-            qry = {}
-            (qry.transferType = $in: paymentTypes.map (e)->
-                parseInt(e)) if paymentTypes.length > 0
-            (qry.organisation = $in: organisations) if organisations.length > 0
-            (qry.media = $nin: media) if media.length > 0
-            if period.$gte? or period.$lte?
-                qry.period = period
+            if organisations.length isnt 1 and media.length isnt 1
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $in: organisations) if organisations.length > 0
+                (qry.media = $nin: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
 
-            grp =
-                _id:
-                    organisation: "$organisation"
-                    organisationReference: "$organisationReference"
-                    transferType: "$transferType"
-                amount:
-                    $sum: "$amount"
+                grp =
+                    _id:
+                        organisation: "$organisation"
+                        organisationReference: "$organisationReference"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
 
-            Transfer.aggregate($match: qry)
-            .group grp
-            .exec()
-            .then (rslt) ->
-                for data in rslt
-                    result.push {
-                        amount: data.amount,
-                        organisation: data._id.organisation,
-                        transferType: data._id.transferType,
-                        media: "Other media"
-                    }
-                result
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            organisation: data._id.organisation,
+                            transferType: data._id.transferType,
+                            media: "Other media"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
         getOtherOrganisations = (organisations, media, period, paymentTypes, federalState) ->
             result = []
-            qry = {}
-            (qry.transferType = $in: paymentTypes.map (e)->
-                parseInt(e)) if paymentTypes.length > 0
-            (qry.organisation = $nin: organisations) if organisations.length > 0
-            (qry.media = $in: media) if media.length > 0
-            if period.$gte? or period.$lte?
-                qry.period = period
+            if media.length isnt 1 and organisations.length isnt 1
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $nin: organisations) if organisations.length > 0
+                (qry.media = $in: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
 
-            grp =
-                _id:
-                    media: "$media"
-                    transferType: "$transferType"
-                amount:
-                    $sum: "$amount"
+                grp =
+                    _id:
+                        media: "$media"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
 
-            Transfer.aggregate($match: qry)
-            .group grp
-            .exec()
-            .then (rslt) ->
-                for data in rslt
-                    result.push {
-                        amount: data.amount,
-                        media: data._id.media,
-                        transferType: data._id.transferType,
-                        organisation: "Other organisations"
-                    }
-                result
-
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            media: data._id.media,
+                            transferType: data._id.transferType,
+                            organisation: "Other organisations"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
 
         try
             maxLength = parseInt req.query.maxLength or "750"
@@ -384,10 +391,8 @@ module.exports = (Transparency) ->
                     (isPopulated) ->
                         if federalState
                             result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
-
                         getOtherMedia(organisations, media, period, paymentTypes, "").then (otherMedia) ->
                             result = result.concat otherMedia
-
                             getOtherOrganisations(organisations, media, period, paymentTypes, "").then (otherOrganisations) ->
                                 result = result.concat otherOrganisations
                                 if result.length > maxLength
