@@ -57,7 +57,19 @@
                 {{org.country}}<br>
             </p>
         </div>
-        <div
+        <oi-select
+                oi-options="item.name for item in allOrganisations track by item.name"
+                ng-model="selectedOrganisations"
+                multiple
+                placeholder="Organisations"
+        ></oi-select>
+        <oi-select
+                oi-options="item.name for item in allMedia track by item.id"
+                ng-model="selectedMedia"
+                multiple
+                placeholder="Media"
+        ></oi-select>
+        <!--<div
             isteven-multi-select
             input-model="allOrganisations"
             output-model="selectedOrganisations"
@@ -74,7 +86,7 @@
                 item-label="name"
                 tick-property="ticked"
         >
-        </div>
+        </div>-->
         <div class="text-center query bg-primary">
             <div class="btn-group">
                 <input id="searchinput" placeholder="Filter"

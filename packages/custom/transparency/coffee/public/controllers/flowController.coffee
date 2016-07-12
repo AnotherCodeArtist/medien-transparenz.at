@@ -10,12 +10,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.allOrganisations = res.data.org.map (o) ->
             {
                 name: o.name,
-                ticked: false
             }
         $scope.allMedia = res.data.media.map (m) ->
             {
                 name: m.name,
-                ticked: false
             }
 
     $scope.selectedOrganisations = []
@@ -167,6 +165,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 0
             stopLoading()
             return
+        
         console.log "Starting update: " + Date.now()
         startLoading()
         TPAService.filteredflows(parameters())
