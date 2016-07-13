@@ -200,6 +200,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         links = []
         nodesNum = 0
         nodeMap = {}
+
+        sum = 0
+
         data.forEach (entry) ->
             if not nodeMap[entry.organisation]?
                 nodeMap[entry.organisation] =
@@ -218,8 +221,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 value: entry.amount
                 type: entry.transferType
             )
+            sum += entry.amount
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
-        {nodes: nodes,links: links}
+        {nodes: nodes,links: links, sum: sum}
 
 
     change = (oldValue,newValue) ->

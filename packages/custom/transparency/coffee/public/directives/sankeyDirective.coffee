@@ -71,7 +71,7 @@ app.directive 'tpaSankey', ($rootScope) ->
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip link')
-                div.html("""#{d.source.name} → #{d.target.name}<br/>#{(format(d.value))} (§#{d.type})""")
+                div.html("""#{d.source.name} (#{d3.format(",.2f")((d.value/d.source.value)*100)}%) → #{d.target.name} (#{d3.format(",.2f")((d.value/d.target.value)*100)}%)<br/>#{(format(d.value))} (§#{d.type})""")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", (d) ->
@@ -112,7 +112,7 @@ app.directive 'tpaSankey', ($rootScope) ->
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip node')
-                div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}""")
+                div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}<br/>#{d3.format(",.0f")((d.value/$scope.data.sum)*100)}%""")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", (d) ->
