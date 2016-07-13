@@ -1,7 +1,7 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.directive 'tpaSankey', ($rootScope) ->
+app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
     restrict: 'EA'
     scope:
         data: '='
@@ -112,7 +112,7 @@ app.directive 'tpaSankey', ($rootScope) ->
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip node')
-                div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}<br/>#{d3.format(",.0f")((d.value/$scope.data.sum)*100)}%""")
+                div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}<br/>#{d3.format(",.2f")((d.value/$scope.data.sum)*100)}%""")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", (d) ->
@@ -133,7 +133,12 @@ app.directive 'tpaSankey', ($rootScope) ->
             .attr("dy", ".35em")
             .attr("text-anchor", "end")
             .attr("transform", null)
-            .text( (d) -> d.name)
+            .text( (d) ->
+                if d.name is 'Other organisations' or d.name is 'Other media'
+                    gettextCatalog.getString(d.name)
+                else
+                    d.name
+            )
             .filter((d) -> d.x < width / 2)
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
