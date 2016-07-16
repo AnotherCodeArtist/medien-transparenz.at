@@ -125,7 +125,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
         $scope.org = {} if $state.params.name or $state.params.orgType
-        $scope.org.name = $state.params.name if $state.params.name
+        if $state.params.name
+            if $state.params.orgType is 'org'
+                $scope.selectedOrganisations = [{name: $state.params.name}]
+            if $state.params.orgType is 'media'
+                $scope.selectedMedia = [{name: $state.params.name}]
         $scope.org.orgType = $state.params.orgType if $state.params.orgType
         $scope.selectedFederalState = $state.selectedFederalState if $state.selectedFederalState
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
@@ -142,6 +146,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     $scope.showDetails = (node) ->
+        if node.type is 'o'
+            $scope.selectedOrganisations = [{name: node.name}]
+            $scope.selectedMedia = []
+        else
+            $scope.selectedMedia = [{name: node.name}]
+            $scope.selectedOrganisations = []
+        ###
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
@@ -150,6 +161,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.org.zipCode = node.addressData.zipCode
             $scope.org.city = node.addressData.city_de
             $scope.org.country = node.addressData.country_de
+        ###
         update()
         window.scrollTo 0,0
 
@@ -165,7 +177,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 0
             stopLoading()
             return
-        
+
         console.log "Starting update: " + Date.now()
         startLoading()
         TPAService.filteredflows(parameters())
@@ -179,6 +191,19 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.flows = buildNodes filterData flowData
             #checkMaxLength(data)
             #console.log "Updated Data Model: " + Date.now()
+            if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
+                $scope.org = {
+                    name: $scope.selectedOrganisations[0].name
+                    orgType: 'org'
+                }
+            else if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 1
+                $scope.org = {
+                    name: $scope.selectedMedia[0].name
+                    orgType: 'media'
+                }
+            else
+                $scope.org = null
+
         .catch (res) ->
             stopLoading()
             $scope.flowData = []
