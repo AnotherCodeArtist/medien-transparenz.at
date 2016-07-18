@@ -6,7 +6,6 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
      scope:
           data: '='
      link: ($scope,element,attrs) ->
-          console.log $rootScope
           $rootScope.showTooltip = true;
           initialized = false
           transferSums = {}
@@ -82,9 +81,9 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     scene.add line
 
                intersects = raycaster.intersectObjects(objects);
+               toolTipDiv = document.getElementById 'toolTip'
                if ( intersects.length > 0 )
                     $rootScope.$broadcast 'isoChanged', transferSums[intersects[0].object.userData.bundesland]
-                    toolTipDiv = document.getElementById 'toolTip'
                     toolTipDiv.style.display = 'block';
 
                     left  = event.clientX  + "px";
@@ -93,6 +92,8 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     toolTipDiv.style.top = top;
                     if debugMode
                          console.log intersects[0].object.userData.bundesland
+               else
+                    toolTipDiv.style.display = 'none';
 
           element.bind 'click', onDocumentMouseDown
           element[0].addEventListener 'mousemove', onDocumentMouseOver, false
@@ -325,6 +326,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                          transferSums[k].height = v/parseFloat(maximum)
                          transferSums[k].sum = v
                          transferSums[k].percent = (v/sum)*100
+                         transferSums[k].iso = k
 
                     if !initialized
                          init()

@@ -8,7 +8,10 @@ angular.module 'mean.transparency'
           name: 'transparency'
 
      $scope.$on 'isoChanged', (event, data) ->
-          $scope.iso = data
+          $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
+          .name)
+          $scope.sum = d3.format(",.0f")(data.sum) + " €"
+          $scope.percent = d3.format(",.2f")(data.percent) + "%"
           $scope.$digest()
           return
 

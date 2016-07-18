@@ -688,20 +688,7 @@ module.exports = (Transparency) ->
                                 populatedTransfers = mediaToFederalState populatedTransfers
 
                             for transfer in populatedTransfers
-                                #TODO ! WARNING ! needs to be refined after merging the ISO-branch (example see comment)
-                                # after merging:
-                                # result[transfer.organisationReference.federalState]+=transfer.total
-
-                                switch transfer.organisationReference.federalState_en
-                                    when 'Burgenland' then result['AT-1']+= transfer.total
-                                    when 'Carinthia' then result['AT-2']+= transfer.total
-                                    when 'Lower Austria' then result['AT-3']+= transfer.total
-                                    when 'Salzburg' then result['AT-5']+= transfer.total
-                                    when 'Styria' then result['AT-6']+= transfer.total
-                                    when 'Tyrol' then result['AT-7']+= transfer.total
-                                    when 'Upper Austria' then result['AT-4']+= transfer.total
-                                    when 'Vienna' then result['AT-9']+= transfer.total
-                                    when 'Vorarlberg' then result['AT-8']+= transfer.total
+                                result[transfer.organisationReference.federalState]+=transfer.total
                             res.send(JSON.stringify(result))
                         catch error
                             console.log error
