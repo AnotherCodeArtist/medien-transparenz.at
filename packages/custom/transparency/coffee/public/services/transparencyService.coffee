@@ -84,15 +84,15 @@ class TPAService
         switch type
             when 'federal'
                 [
-                    {name: 'Burgenland',value: 'Burgenland'}
-                    {name: 'Carinthia', value: 'Carinthia' }
-                    {name: 'Lower Austria', value: 'Lower Austria' }
-                    {name: 'Salzburg', value: 'Salzburg' }
-                    {name: 'Styria', value: 'Styria' }
-                    {name: 'Tyrol',  value: 'Tyrol' }
-                    {name: 'Upper Austria',  value: 'Upper Austria' }
-                    {name: 'Vienna',  value: 'Vienna' }
-                    {name: 'Vorarlberg',  value: 'Vorarlberg' }
+                    {name: 'Burgenland',value: 'Burgenland', iso: 'AT-1'}
+                    {name: 'Carinthia', value: 'Carinthia', iso: 'AT-2' }
+                    {name: 'Lower Austria', value: 'Lower Austria', iso: 'AT-3' }
+                    {name: 'Salzburg', value: 'Salzburg', iso: 'AT-5' }
+                    {name: 'Styria', value: 'Styria', iso: 'AT-6' }
+                    {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
+                    {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
+                    {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
+                    {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' }
                 ]
 
 app = angular.module 'mean.transparency'
