@@ -7,6 +7,13 @@ angular.module 'mean.transparency'
      $scope.package =
           name: 'transparency'
 
+     $scope.iso = 'hallo'
+     $scope.$on 'isoChanged', (event, data) ->
+          console.log data
+          $scope.iso = data
+          console.log $scope.iso 
+          return
+
      change = (oldValue,newValue) ->
           console.log "Change: " + Date.now()
           update() if (oldValue isnt newValue)

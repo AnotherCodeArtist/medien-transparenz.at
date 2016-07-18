@@ -6,30 +6,100 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
      scope:
           data: '='
      link: ($scope,element,attrs) ->
+          console.log $rootScope
+          $rootScope.showTooltip = true;
           initialized = false
           transferSums = {}
           json = {}
 
-          raycaster = new THREE.Raycaster();
           mouse = new THREE.Vector2();
           objects = [];
 
           onDocumentMouseDown = (e) ->
+               debugMode = false;
+
+               if debugMode
+                    console.log e
                event = e.originalEvent
-               console.log event
+               if debugMode
+                    console.log event
                event.preventDefault();
 
-               mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-               mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.width * 2 - 1,
+                    -(event.offsetY ) / event.srcElement.height * 2 + 1,
+                    1.0 );
 
-               raycaster.setFromCamera( mouse, camera );
+               mouse3D.unproject(camera);
+               mouse3D.sub(camera.position);
+               mouse3D.normalize();
+               raycaster = new THREE.Raycaster(camera.position, mouse3D );
+
+               if debugMode
+                    console.log 'camera'
+                    console.log camera.position
+                    console.log 'mouse'
+                    console.log mouse3D
+
+                    geometry = new THREE.Geometry();
+                    geometry.vertices.push(raycaster.ray.origin);
+                    newV = new THREE.Vector3(raycaster.ray.direction.x, raycaster.ray.direction.y, raycaster.ray.direction.z);
+                    newV = newV.multiplyScalar(10000);
+                    newV = newV.add(raycaster.ray.origin);
+                    geometry.vertices.push(newV);
+                    line = new THREE.Line(geometry, materials.phong (new THREE.Color("rgb(241, 176, 0)")));
+
+                    scene.add line
 
                intersects = raycaster.intersectObjects(objects);
-               console.log intersects
                if ( intersects.length > 0 )
-                    console.log intersects
+                    console.log intersects[0].object.userData.bundesland
+
+          onDocumentMouseOver = (event) ->
+               debugMode = false
+               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.width * 2 - 1,
+                    -(event.offsetY ) / event.srcElement.height * 2 + 1,
+                    1.0 );
+
+               mouse3D.unproject(camera);
+               mouse3D.sub(camera.position);
+               mouse3D.normalize();
+               raycaster = new THREE.Raycaster(camera.position, mouse3D );
+
+               if debugMode
+                    console.log 'camera'
+                    console.log camera.position
+                    console.log 'mouse'
+                    console.log mouse3D
+
+                    geometry = new THREE.Geometry();
+                    geometry.vertices.push(raycaster.ray.origin);
+                    newV = new THREE.Vector3(raycaster.ray.direction.x, raycaster.ray.direction.y, raycaster.ray.direction.z);
+                    newV = newV.multiplyScalar(10000);
+                    newV = newV.add(raycaster.ray.origin);
+                    geometry.vertices.push(newV);
+                    line = new THREE.Line(geometry, materials.phong (new THREE.Color("rgb(241, 176, 0)")));
+
+                    scene.add line
+
+               intersects = raycaster.intersectObjects(objects);
+               if ( intersects.length > 0 )
+                    $rootScope.$broadcast 'isoChanged', intersects[0].object.userData.bundesland
+                    toolTipDiv = document.getElementById 'toolTip'
+                    toolTipDiv.style.display = 'block';
+
+                    left  = event.clientX  + "px";
+                    top  = event.clientY  + "px";
+                    toolTipDiv.style.left = left;
+                    toolTipDiv.style.top = top;
+                    if debugMode
+                         console.log intersects[0].object.userData.bundesland
 
           element.bind 'click', onDocumentMouseDown
+          element[0].addEventListener 'mousemove', onDocumentMouseOver, false
+          element.on('mouseleave', () ->
+               document.getElementById 'toolTip'
+               .style.display = 'none';
+          )
 
           #Store downloaded JSON in variable
           defaults = {
@@ -197,7 +267,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                          render()
                     else
                          console.log('This tutorial only renders TopoJSON and GeoJSON FeatureCollections'))
-          addShape = (group, shape, extrudeSettings, material, color, x, y, z, rx, ry, rz, s) ->
+          addShape = (group, shape, extrudeSettings, material, color, x, y, z, rx, ry, rz, s, iso) ->
                geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
                mesh = new THREE.Mesh(geometry, materials[material](color));
                #Add shadows
@@ -206,6 +276,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                mesh.position.set(x, y, z);
                mesh.rotation.set(rx, ry, rz);
                mesh.scale.set(s, s, s);
+               mesh.userData.bundesland = iso
                objects.push mesh
                group.add(mesh);
           addFeature = (feature, projection, functions) ->
@@ -227,13 +298,14 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     bevelEnabled: false
                };
                material = 'phong';
+               iso = feature.properties.iso
                if (feature.geometry.type is 'Polygon')
                     shape = createPolygonShape(feature.geometry.coordinates, projection)
-                    addShape(group, shape, extrudeSettings, material, color, 0, 0, amount, Math.PI, 0, 0, 1)
+                    addShape(group, shape, extrudeSettings, material, color, 0, 0, amount, Math.PI, 0, 0, 1, iso)
                else if (feature.geometry.type is 'MultiPolygon')
                     feature.geometry.coordinates.forEach (polygon) ->
                          shape = createPolygonShape(polygon, projection)
-                         addShape(group, shape, extrudeSettings, material, color, 0, 0, amount, Math.PI, 0, 0, 1)
+                         addShape(group, shape, extrudeSettings, material, color, 0, 0, amount, Math.PI, 0, 0, 1, iso)
                else
                     console.log('This tutorial only renders Polygons and MultiPolygons')
                group

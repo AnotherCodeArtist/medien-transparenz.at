@@ -1,4 +1,12 @@
 <div class="" data-ng-controller="TransparencyController">
+    <div id="toolTip" class="panel panel-default" style="position: fixed; display: none; z-index: 5">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{iso}}</h3>
+        </div>
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div>
     <div class="intro">
      <section class="container">
         <div class="page-header">
@@ -43,7 +51,7 @@
                 </div>
 
             </div>
-            <div austrian-map="austrian-map" data="mapData" id="webgl" style="width: 100%; height: 800px;"></div>
+            <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl" style="width: 100%; height: 800px;"></div>
         </div>
         <div>
 
