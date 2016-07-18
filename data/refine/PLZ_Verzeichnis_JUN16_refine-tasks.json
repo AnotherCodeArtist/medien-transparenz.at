@@ -1,0 +1,223 @@
+[
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Ort",
+    "columnName": "Ort"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column gültig ab",
+    "columnName": "gültig ab"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column gültig bis",
+    "columnName": "gültig bis"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column NamePLZTyp",
+    "columnName": "NamePLZTyp"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column intern_extern",
+    "columnName": "intern_extern"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column adressierbar",
+    "columnName": "adressierbar"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Postfach",
+    "columnName": "Postfach"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Bundesland to ISO-3166-2",
+    "oldColumnName": "Bundesland",
+    "newColumnName": "ISO-3166-2"
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "B"
+        ],
+        "to": "AT-1"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "K"
+        ],
+        "to": "AT-2"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "N"
+        ],
+        "to": "AT-3"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "O"
+        ],
+        "to": "AT-4"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Sa"
+        ],
+        "to": "AT-5"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "St"
+        ],
+        "to": "AT-6"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "T"
+        ],
+        "to": "AT-7"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "V"
+        ],
+        "to": "AT-8"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column ISO-3166-2",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "ISO-3166-2",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "W"
+        ],
+        "to": "AT-9"
+      }
+    ]
+  }
+]

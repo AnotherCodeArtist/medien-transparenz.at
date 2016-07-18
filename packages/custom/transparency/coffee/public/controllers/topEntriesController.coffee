@@ -34,7 +34,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params = {}
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to =$scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.value) if $scope.selectedFederalState
+        (params.federalState = $scope.selectedFederalState.iso) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
@@ -78,7 +78,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         ]
         #Federal states selection
         $scope.federalState = {}
-        $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
+        $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
         savedState = sessionStorage.getItem 'topState'
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
