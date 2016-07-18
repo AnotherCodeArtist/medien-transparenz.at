@@ -324,7 +324,7 @@ module.exports = (Transparency) ->
     filteredflows: (req, res) ->
         getOtherMedia = (organisations, media, period, paymentTypes, federalState) ->
             result = []
-            if (organisations and organisations.length > 1) and (media and media.length > 1)
+            if (organisations and organisations.length > 0) and (media and media.length > 0)
                 qry = {}
                 (qry.transferType = $in: paymentTypes.map (e)->
                     parseInt(e)) if paymentTypes.length > 0
@@ -358,7 +358,7 @@ module.exports = (Transparency) ->
                     resolve result
         getOtherOrganisations = (organisations, media, period, paymentTypes, federalState) ->
             result = []
-            if (media and media.length > 1) and (organisations and organisations.length > 1)
+            if (media and media.length > 0) and (organisations and organisations.length > 0)
                 qry = {}
                 (qry.transferType = $in: paymentTypes.map (e)->
                     parseInt(e)) if paymentTypes.length > 0
