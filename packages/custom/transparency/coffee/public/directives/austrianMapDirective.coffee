@@ -16,7 +16,6 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
 
           onDocumentMouseDown = (e) ->
                debugMode = false;
-
                if debugMode
                     console.log e
                event = e.originalEvent
@@ -81,8 +80,15 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     scene.add line
 
                intersects = raycaster.intersectObjects(objects);
+
                toolTipDiv = document.getElementById 'toolTip'
                if ( intersects.length > 0 )
+                    for object in objects
+                         if object.userData.bundesland isnt intersects[0].object.userData.bundesland
+                              object.material = materials.phong(defaults.color({iso: object.userData.bundesland}));
+                         else
+                              object.material = materials.phongNotTransparent(defaults.color({iso: object.userData.bundesland}))
+                    render()
                     $rootScope.$broadcast 'isoChanged', transferSums[intersects[0].object.userData.bundesland]
                     toolTipDiv.style.display = 'block';
 
@@ -100,6 +106,9 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
           element.on('mouseleave', () ->
                document.getElementById 'toolTip'
                .style.display = 'none';
+               for object in objects
+                    object.material = materials.phong(defaults.color({iso: object.userData.bundesland}));
+               render()
           )
 
           #Store downloaded JSON in variable
@@ -128,8 +137,15 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                phong: (color) ->
                     new THREE.MeshPhongMaterial({
                          color: color,
-                         side: THREE.DoubleSide
+                         side: THREE.DoubleSide,
+                         opacity: 0.5,
+                         transparent: true
                     #phong : new THREE.MeshPhongMaterial({ color: 0xffffff, specular: 0x000000, shininess: 60, shading: THREE.SmoothShading, transparent:true  }),
+                    })
+               phongNotTransparent: (color) ->
+                    new THREE.MeshPhongMaterial({
+                         color: color,
+                         side: THREE.DoubleSide
                     })
                meshLambert: (color) ->
                     new THREE.MeshLambertMaterial({
@@ -183,7 +199,8 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
           init = () ->
                container = document.getElementById('webgl');
                camera = new THREE.PerspectiveCamera( 80, container.clientWidth / container.clientHeight, 0.1, 10000);
-               camera.position.z = Math.min(container.clientWidth, container.clientHeight);
+               camera.position.set(0,-370,380)
+               #camera.position.z = Math.min(container.clientWidth, container.clientHeight);
                camera.zoom = 0.7;
                controls = new THREE.TrackballControls(camera, container);
                controls.rotateSpeed = 1.0;
