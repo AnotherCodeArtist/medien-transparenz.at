@@ -55,9 +55,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
     #Variables for the selection of federalState
-    $scope.selectedFederalState = '-'
-    $scope.federalState = {}
-    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
+    $scope.selectedFederalState = {}
+    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
         links: []
@@ -66,7 +65,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to = $scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.value) if $scope.selectedFederalState
+        (params.federalState = $scope.selectedFederalState.iso) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -108,7 +107,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org = {} if $state.params.name or $state.params.orgType
         $scope.org.name = $state.params.name if $state.params.name
         $scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.selectedFederalState = $state.selectedFederalState if $state.selectedFederalState
+        $scope.selectedFederalState.iso = $state.params.fedState if $state.params.fedState
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.pTypes?
