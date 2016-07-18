@@ -7,6 +7,9 @@ angular.module 'mean.transparency'
      $scope.package =
           name: 'transparency'
 
+     stateName = "index"
+     fieldsToStore = ['slider','periods','typesText']
+
      $scope.$on 'isoChanged', (event, data) ->
           $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
           .name)
@@ -16,6 +19,7 @@ angular.module 'mean.transparency'
           return
      
      $scope.$on 'federalStateClicked', (event, data) ->
+          TPAService.saveState stateName,fieldsToStore,$scope
           window.scrollTo 0, 0
           $state.go 'showflow',
                {
@@ -47,7 +51,7 @@ angular.module 'mean.transparency'
                $scope.mapData = res.data
 
      $scope.mapData = {}
-
+     $scope.periods = []
      $scope.slider =
           from: 0
           to: 0
@@ -55,17 +59,31 @@ angular.module 'mean.transparency'
                step:5
                floor:0
                onEnd: -> change(1,2)
+               translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
 
-     pP = TPAService.periods()
-     pP.then (res) ->
-          $scope.periods = res.data.reverse()
-          $scope.slider.options.ceil = ($scope.periods.length - 1)*5
-          $scope.slider.from = $scope.slider.options.ceil
-          $scope.slider.to = $scope.slider.options.ceil
-          $scope.slider.options.translate = (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-
-          types = [2,4,31]
-          $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
-          $scope.typesText[0].checked = true
-          $scope.$watch('typesText',change,true)
+     savedState = sessionStorage.getItem stateName
+     if savedState
+          TPAService.restoreState stateName, fieldsToStore, $scope
           update()
+     else
+          $scope.slider =
+               from: 0
+               to: 0
+               options:
+                    step:5
+                    floor:0
+                    onEnd: -> change(1,2)
+
+          pP = TPAService.periods()
+          pP.then (res) ->
+               $scope.periods = res.data.reverse()
+               $scope.slider.options.ceil = ($scope.periods.length - 1)*5
+               $scope.slider.from = $scope.slider.options.ceil
+               $scope.slider.to = $scope.slider.options.ceil
+               $scope.slider.options.translate = (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+
+               types = [2,4,31]
+               $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
+               $scope.typesText[0].checked = true
+               $scope.$watch('typesText',change,true)
+               update()
