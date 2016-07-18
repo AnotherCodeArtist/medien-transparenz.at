@@ -2,7 +2,7 @@
 
 #* jshint -W098 *#
 angular.module 'mean.transparency'
-.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog) ->
+.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state) ->
      $scope.global = Global
      $scope.package =
           name: 'transparency'
@@ -14,6 +14,19 @@ angular.module 'mean.transparency'
           $scope.percent = d3.format(",.2f")(data.percent) + "%"
           $scope.$digest()
           return
+     
+     $scope.$on 'federalStateClicked', (event, data) ->
+          window.scrollTo 0, 0
+          $state.go 'showflow',
+               {
+                    from: $scope.periods[$scope.slider.from/5].period
+                    to: $scope.periods[$scope.slider.to/5].period
+                    fedState: data
+                    pTypes: $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
+               },
+               location: true
+               inherit: false
+               reload: true
 
      change = (oldValue,newValue) ->
           console.log "Change: " + Date.now()

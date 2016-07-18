@@ -50,8 +50,8 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
 
                intersects = raycaster.intersectObjects(objects);
                if ( intersects.length > 0 )
-                    console.log intersects[0].object.userData.bundesland
-
+                    $rootScope.$broadcast 'federalStateClicked', intersects[0].object.userData.bundesland
+                    
           onDocumentMouseOver = (event) ->
                debugMode = false
                mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.width * 2 - 1,
