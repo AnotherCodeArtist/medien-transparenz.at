@@ -22,7 +22,8 @@ OrganisationSchema = new Schema
         type: String
         trim: true
         required: true
-    federalState_en:
+    #ISO 3166 — Codes for the representation of names of countries and their subdivisions
+    federalState:
         type: String
         trim: true
         required: true

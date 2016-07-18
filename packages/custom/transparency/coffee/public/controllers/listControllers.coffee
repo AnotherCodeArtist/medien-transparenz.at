@@ -55,7 +55,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
         if newValue isnt oldValue
             update()
     updatePage = ->
-        $scope.items = $scope.filterResult[$scope.page-1..$scope.page-1+$scope.size]
+        $scope.items = $scope.filterResult[($scope.page-1)*$scope.size..($scope.page-1)*$scope.size+$scope.size]
     applyFilter = ->
         $scope.filterResult = $scope.searchResult.filter (e) -> e.name.toLowerCase().indexOf($scope.name.toLowerCase()) > -1
         $scope.count = $scope.filterResult.length
@@ -147,7 +147,7 @@ app.controller 'ListMediaCtrl', ($scope,TPAService,$q,$interval,$state,$statePar
         if newValue isnt oldValue
             update()
     updatePage = ->
-        $scope.items = $scope.filterResult[$scope.page-1..$scope.page-1+$scope.size]
+        $scope.items = $scope.filterResult[($scope.page-1)*$scope.size..($scope.page-1)*$scope.size+$scope.size]
     applyFilter = ->
         $scope.filterResult = $scope.searchResult.filter (e) -> e.name.toLowerCase().indexOf($scope.name.toLowerCase()) > -1
         $scope.count = $scope.filterResult.length

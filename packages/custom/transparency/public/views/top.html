@@ -37,7 +37,7 @@
                         </div>
 
                         <strong><div translate>Federal State</div></strong>
-                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.value" name="federalStateSelect" id="federalStateSelect" >
+                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
                             <option value="">-</option>
                         </select>
                     </div>
@@ -53,6 +53,7 @@
             <span class="glyphicon glyphicon-info-sign"></span>
             <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
         </div>
+        <div><h3 class="text-center"><span translate >Total</span>: {{total()}} €</h3></div>
         <div class="pie">
             <tpa-pie-chart id="myPie" data="pieData"
                            x="x" y="y" show-legend="false"
@@ -61,5 +62,6 @@
                            prevent-click-fn="preventClickForOthers"
             />
         </div>
+
     </div>
 </section>
