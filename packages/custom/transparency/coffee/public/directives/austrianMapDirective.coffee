@@ -83,7 +83,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
 
                intersects = raycaster.intersectObjects(objects);
                if ( intersects.length > 0 )
-                    $rootScope.$broadcast 'isoChanged', intersects[0].object.userData.bundesland
+                    $rootScope.$broadcast 'isoChanged', transferSums[intersects[0].object.userData.bundesland]
                     toolTipDiv = document.getElementById 'toolTip'
                     toolTipDiv.style.display = 'block';
 
@@ -116,8 +116,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                               when "AT-9" then new THREE.Color("rgb(255, 0, 0)")
                height:
                     (d) ->
-                         console.log d.iso + " " + transferSums[d.iso]*250
-                         transferSums[d.iso]*250
+                         transferSums[d.iso].height*250
           }
           latest = {
                url: null
@@ -314,13 +313,18 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
 
           dataUpdated = () ->
                if $scope.data and Object.keys($scope.data).length isnt 0
-                    transferSums = $scope.data
+                    #transferSums = $scope.data
                     maximum = Number.NEGATIVE_INFINITY
-                    for k,v of transferSums
+                    sum = 0
+                    for k,v of $scope.data
+                         sum += v
                          if v > maximum
                               maximum = v
-                    for k,v of transferSums
-                         transferSums[k] = v/parseFloat(maximum)
+                    for k,v of $scope.data
+                         transferSums[k] = {}
+                         transferSums[k].height = v/parseFloat(maximum)
+                         transferSums[k].sum = v
+                         transferSums[k].percent = (v/sum)*100
 
                     if !initialized
                          init()
