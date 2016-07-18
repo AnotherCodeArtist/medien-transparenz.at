@@ -4,6 +4,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: views/flow.html:53
+msgid ""
+"{{org.name}}<br>\n"
+"                {{org.street}}<br>\n"
+"                {{org.zipCode}} {{org.city}}<br>\n"
+"                {{org.country}}<br>"
+msgstr ""
+
 #: views/impress.html:22
 msgid ""
 "All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n"
@@ -44,15 +52,27 @@ msgid ""
 "                    from public money spent on advertising our by receiving public funding."
 msgstr ""
 
+#: controllers/eventsController.js:46
+msgid "Austria"
+msgstr ""
+
 #: views/index.html:14
 msgid "Background"
+msgstr ""
+
+#: controllers/eventsController.js:67
+msgid "Burgenland"
 msgstr ""
 
 #: views/events.html:76
 msgid "Cancel"
 msgstr ""
 
-#: controllers/topEntriesController.js:88
+#: controllers/eventsController.js:73
+msgid "Carinthia"
+msgstr ""
+
+#: controllers/topEntriesController.js:91
 msgid "Click for Details"
 msgstr ""
 
@@ -89,15 +109,15 @@ msgstr ""
 msgid "Exclusion of Liability"
 msgstr ""
 
+#: views/flow.html:42
+#: views/top.html:39
+msgid "Federal State"
+msgstr ""
+
 #: views/impress.html:26
 msgid ""
 "FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
-msgstr ""
-
-#: views/flow.html:42
-#: views/top.html:39
-msgid "Federal State"
 msgstr ""
 
 #: views/index.html:33
@@ -162,6 +182,10 @@ msgstr ""
 msgid "Loading Data to Update Diagram ..."
 msgstr ""
 
+#: controllers/eventsController.js:61
+msgid "Lower Austria"
+msgstr ""
+
 #: views/events.html:3
 msgid "Manage events"
 msgstr ""
@@ -184,6 +208,10 @@ msgstr ""
 msgid "Move the sliders to define a range"
 msgstr ""
 
+#: controllers/flowController.js:149
+msgid "next"
+msgstr ""
+
 #: views/list.html:21
 msgid "No entries found!"
 msgstr ""
@@ -192,19 +220,19 @@ msgstr ""
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:22
+#: views/upload.html:25
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:38
+#: views/upload.html:41
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:30
+#: views/upload.html:33
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:14
+#: views/upload.html:17
 msgid "Number of non-emtpy entries"
 msgstr ""
 
@@ -216,7 +244,7 @@ msgstr ""
 msgid "Organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:82
+#: controllers/topEntriesController.js:85
 msgid "Others"
 msgstr ""
 
@@ -255,12 +283,16 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
+#: controllers/flowController.js:148
+msgid "previous"
+msgstr ""
+
 #: views/overview.html:18
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:115
-#: controllers/topEntriesController.js:189
+#: controllers/topEntriesController.js:118
+#: controllers/topEntriesController.js:192
 msgid "Recipient"
 msgstr ""
 
@@ -268,8 +300,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: views/upload.html:9
+#: views/upload.html:12
 msgid "Results of the Upload"
+msgstr ""
+
+#: controllers/eventsController.js:55
+msgid "Salzburg"
 msgstr ""
 
 #: views/events.html:75
@@ -293,8 +329,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:112
-#: controllers/topEntriesController.js:188
+#: controllers/topEntriesController.js:115
+#: controllers/topEntriesController.js:191
 msgid "Spender"
 msgstr ""
 
@@ -305,6 +341,10 @@ msgstr ""
 #: views/events.html:10
 #: views/events.html:57
 msgid "Start date"
+msgstr ""
+
+#: controllers/eventsController.js:70
+msgid "Styria"
 msgstr ""
 
 #: views/flow.html:88
@@ -332,23 +372,28 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views/overview.html:28
+#: views/top.html:56
 msgid "Total"
 msgstr ""
 
-#: views/upload.html:26
+#: views/upload.html:29
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:42
+#: views/upload.html:45
 msgid "Total amount according to §31 ORF-G"
 msgstr ""
 
-#: views/upload.html:34
+#: views/upload.html:37
 msgid "Total amount according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:18
+#: views/upload.html:21
 msgid "Total amount of all entries"
+msgstr ""
+
+#: controllers/eventsController.js:52
+msgid "Tyrol"
 msgstr ""
 
 #: views/upload.html:3
@@ -363,12 +408,24 @@ msgstr ""
 msgid "Upload new zip-code list"
 msgstr ""
 
+#: controllers/eventsController.js:58
+msgid "Upper Austria"
+msgstr ""
+
+#: controllers/eventsController.js:64
+msgid "Vienna"
+msgstr ""
+
 #: views/index.html:43
 #: views/index.html:51
 #: views/index.html:59
 #: views/index.html:68
 #: views/index.html:76
 msgid "View details »"
+msgstr ""
+
+#: controllers/eventsController.js:49
+msgid "Vorarlberg"
 msgstr ""
 
 #: views/index.html:54
@@ -385,20 +442,4 @@ msgstr ""
 
 #: views/flow.html:74
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
-msgstr ""
-
-#: controllers/flowController.js:149
-msgid "next"
-msgstr ""
-
-#: controllers/flowController.js:148
-msgid "previous"
-msgstr ""
-
-#: views/flow.html:53
-msgid ""
-"{{org.name}}<br>\n"
-"                {{org.street}}<br>\n"
-"                {{org.zipCode}} {{org.city}}<br>\n"
-"                {{org.country}}<br>"
 msgstr ""
