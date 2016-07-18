@@ -147,6 +147,11 @@ msgid ""
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
+#: views/flow.html:42
+#: views/top.html:39
+msgid "Federal State"
+msgstr ""
+
 #: views/index.html:33
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
@@ -255,15 +260,15 @@ msgstr ""
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:51
+#: views/upload.html:22
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:67
+#: views/upload.html:38
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:59
+#: views/upload.html:30
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 

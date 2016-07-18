@@ -22,7 +22,7 @@
                     <tbody>
                     <tr data-ng-repeat="q in [0,1,2,3]">
                         <td>{{q+1}}</td>
-                        <td data-ng-repeat="index in years()" class="text-right">{{data[tType][index].values[q].s}}</td>
+                        <td data-ng-repeat="index in years()" class="text-right">{{data[tType][index].values[q].s.toLocaleString()}}</td>
                     </tr>
                     <tr>
                         <td translate="translate">Total</td>

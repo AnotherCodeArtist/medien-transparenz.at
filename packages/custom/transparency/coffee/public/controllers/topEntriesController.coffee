@@ -41,6 +41,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params.orgType = $scope.orgType
         params
 
+    $scope.total = -> $scope.top.all.toLocaleString()
+
     buildPieModel = ->
         $scope.pieData = []
         $scope.pieData.push {key: entry.organisation, y: entry.total} for entry in $scope.top.top
