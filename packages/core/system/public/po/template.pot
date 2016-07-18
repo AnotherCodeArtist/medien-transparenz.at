@@ -77,7 +77,7 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
-#: controllers/topEntriesController.js:88
+#: controllers/topEntriesController.js:91
 msgid "Click for Details"
 msgstr ""
 
@@ -145,11 +145,6 @@ msgstr ""
 msgid ""
 "FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
-msgstr ""
-
-#: views/flow.html:42
-#: views/top.html:39
-msgid "Federal State"
 msgstr ""
 
 #: views/index.html:33
@@ -260,15 +255,15 @@ msgstr ""
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:22
+#: views/upload.html:51
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:38
+#: views/upload.html:67
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:30
+#: views/upload.html:59
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
@@ -293,7 +288,7 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: controllers/topEntriesController.js:82
+#: controllers/topEntriesController.js:85
 msgid "Others"
 msgstr ""
 
@@ -340,8 +335,8 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:115
-#: controllers/topEntriesController.js:189
+#: controllers/topEntriesController.js:118
+#: controllers/topEntriesController.js:192
 msgid "Recipient"
 msgstr ""
 
@@ -379,8 +374,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:112
-#: controllers/topEntriesController.js:188
+#: controllers/topEntriesController.js:115
+#: controllers/topEntriesController.js:191
 msgid "Spender"
 msgstr ""
 
@@ -422,6 +417,7 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views/overview.html:28
+#: views/top.html:56
 msgid "Total"
 msgstr ""
 

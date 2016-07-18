@@ -41,7 +41,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params.orgType = $scope.orgType
         params
 
-    $scope.total = -> $scope.top.all.toLocaleString()
+    $scope.total = -> if $scope.top then $scope.top.all.toLocaleString() else "0"
 
     buildPieModel = ->
         $scope.pieData = []

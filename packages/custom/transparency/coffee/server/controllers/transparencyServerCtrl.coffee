@@ -84,14 +84,14 @@ lineToOrganisation = (line, feedback) ->
         ZipCode.findOne({'zipCode': splittedLine[2]})
         .then (results) ->
             if results and organisation.country_de is 'Österreich'
-                organisation.federalState_en = results.federalState
+                organisation.federalState = results.federalState
             else
-                organisation.federalState_en = 'Unknown'
+                organisation.federalState = 'Unknown'
             organisation.save()
         .then (ok) ->
             feedback.entries++
             feedback.notAustria++ if organisation.country_de != 'Österreich'
-            if organisation.federalState_en is 'Unknown' and organisation.country_de is 'Österreich'
+            if organisation.federalState is 'Unknown' and organisation.country_de is 'Österreich'
                 feedback.unknownFederalState++
                 feedback.unknownFederalStateEntries.push organisation
             feedback
