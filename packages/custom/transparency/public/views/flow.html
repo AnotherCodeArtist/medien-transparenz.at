@@ -50,7 +50,7 @@
         </div>
         <div ng-show="org">
             <h3><a href="#" class="label label-success" ng-click="clearDetails()">{{org.name}} <span class="glyphicon glyphicon-remove-circle"></span></a></h3>
-            <p translate="no" data-ng-show="org.street">
+            <p translate="no" data-ng-show="org.street && org.street != 'Unknown'">
                 {{org.name}}<br>
                 {{org.street}}<br>
                 {{org.zipCode}} {{org.city}}<br>

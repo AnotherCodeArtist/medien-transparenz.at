@@ -52,6 +52,11 @@ msgid ""
 "                    from public money spent on advertising our by receiving public funding."
 msgstr ""
 
+#: views/upload.html:30
+#: views/uploadOrganisation.html:53
+msgid "Attention"
+msgstr ""
+
 #: controllers/eventsController.js:46
 msgid "Austria"
 msgstr ""
@@ -72,7 +77,7 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
-#: controllers/topEntriesController.js:91
+#: controllers/topEntriesController.js:88
 msgid "Click for Details"
 msgstr ""
 
@@ -105,6 +110,28 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
+#: views/upload.html:10
+#: views/uploadOrganisation.html:10
+#: views/uploadZipCode.html:10
+msgid "Entries found"
+msgstr ""
+
+#: views/upload.html:12
+#: views/uploadOrganisation.html:12
+#: views/uploadZipCode.html:12
+msgid "Entries stored"
+msgstr ""
+
+#: views/uploadOrganisation.html:40
+#: views/uploadOrganisation.html:53
+msgid "Entries without known federal state in Austria"
+msgstr ""
+
+#: views/upload.html:21
+#: views/uploadOrganisation.html:22
+msgid "Error"
+msgstr ""
+
 #: views/impress.html:25
 msgid "Exclusion of Liability"
 msgstr ""
@@ -118,6 +145,11 @@ msgstr ""
 msgid ""
 "FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
+msgstr ""
+
+#: views/flow.html:42
+#: views/top.html:39
+msgid "Federal State"
 msgstr ""
 
 #: views/index.html:33
@@ -152,6 +184,10 @@ msgstr ""
 msgid ""
 "If you want to figure out whether some company or media cooperation is listed in these reports better use our\n"
 "                    search!"
+msgstr ""
+
+#: views/uploadOrganisation.html:48
+msgid "Ignored"
 msgstr ""
 
 #: server/views/includes/foot.html:2
@@ -216,27 +252,32 @@ msgstr ""
 msgid "No entries found!"
 msgstr ""
 
+#: views/uploadOrganisation.html:36
+msgid "Number of entries"
+msgstr ""
+
 #: views/list.html:11
 msgid "Number of Entries"
 msgstr ""
 
-#: views/upload.html:25
+#: views/upload.html:22
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:41
+#: views/upload.html:38
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views/upload.html:33
+#: views/upload.html:30
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:17
+#: views/upload.html:43
 msgid "Number of non-emtpy entries"
 msgstr ""
 
 #: controllers/flowController.js:11
+#: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
@@ -244,7 +285,15 @@ msgstr ""
 msgid "Organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:85
+#: views/uploadOrganisation.html:44
+msgid "Organisations not from Austria"
+msgstr ""
+
+#: views/upload.html:31
+msgid "Organisations with unknown address-data"
+msgstr ""
+
+#: controllers/topEntriesController.js:82
 msgid "Others"
 msgstr ""
 
@@ -291,8 +340,8 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:118
-#: controllers/topEntriesController.js:192
+#: controllers/topEntriesController.js:115
+#: controllers/topEntriesController.js:189
 msgid "Recipient"
 msgstr ""
 
@@ -300,7 +349,8 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: views/upload.html:12
+#: views/upload.html:38
+#: views/uploadOrganisation.html:31
 msgid "Results of the Upload"
 msgstr ""
 
@@ -329,8 +379,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:115
-#: controllers/topEntriesController.js:191
+#: controllers/topEntriesController.js:112
+#: controllers/topEntriesController.js:188
 msgid "Spender"
 msgstr ""
 
@@ -372,23 +422,22 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views/overview.html:28
-#: views/top.html:56
 msgid "Total"
 msgstr ""
 
-#: views/upload.html:29
+#: views/upload.html:55
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views/upload.html:45
+#: views/upload.html:71
 msgid "Total amount according to §31 ORF-G"
 msgstr ""
 
-#: views/upload.html:37
+#: views/upload.html:63
 msgid "Total amount according to §4 (Funding)"
 msgstr ""
 
-#: views/upload.html:21
+#: views/upload.html:47
 msgid "Total amount of all entries"
 msgstr ""
 
@@ -442,4 +491,8 @@ msgstr ""
 
 #: views/flow.html:74
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
+msgstr ""
+
+#: views/uploadOrganisation.html:58
+msgid "zip-code"
 msgstr ""
