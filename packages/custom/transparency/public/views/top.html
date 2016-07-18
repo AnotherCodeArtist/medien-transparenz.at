@@ -37,7 +37,7 @@
                         </div>
 
                         <strong><div translate>Federal State</div></strong>
-                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates" name="federalStateSelect" id="federalStateSelect" >
+                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
                             <option value="">-</option>
                         </select>
                     </div>

@@ -55,8 +55,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
     #Variables for the selection of federalState
-    $scope.selectedFederalState = '-'
-    $scope.federalState = {}
+    $scope.selectedFederalState = {}
     $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
@@ -108,7 +107,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org = {} if $state.params.name or $state.params.orgType
         $scope.org.name = $state.params.name if $state.params.name
         $scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.selectedFederalState = $state.selectedFederalState if $state.selectedFederalState
+        $scope.selectedFederalState.iso = $state.params.fedState if $state.params.fedState
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.pTypes?
