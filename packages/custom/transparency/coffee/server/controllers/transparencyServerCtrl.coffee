@@ -119,10 +119,11 @@ lineToTransfer = (line, feedback) ->
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         #Save reference
-        Organisation.findOne({ 'name': transfer.organisation }, 'name')
+        Organisation.findOne({ 'name': transfer.organisation }, 'name federalState')
         .then (results) ->
             if results
                 transfer.organisationReference = results._id
+                transfer.federalState = results.federalState
                 transfer.save()
             else
                 console.log "WARNING: Could not find reference for #{transfer.organisation}!"
@@ -130,6 +131,7 @@ lineToTransfer = (line, feedback) ->
                 .then (unknown) ->
                     if unknown
                         console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
+                        transfer.federalState = 'Unknown'
                         transfer.organisationReference = unknown._id
                         unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
                         feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
