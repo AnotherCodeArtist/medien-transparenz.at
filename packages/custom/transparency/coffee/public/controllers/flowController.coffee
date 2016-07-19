@@ -69,9 +69,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
-    #Variables for the selection of federalState
-    $scope.selectedFederalState = {}
-    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
         links: []
@@ -80,7 +77,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to = $scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.iso) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -130,7 +126,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if $state.params.orgType is 'media'
                 $scope.selectedMedia = [{name: $state.params.name}]
         #$scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.selectedFederalState.iso = $state.params.fedState if $state.params.fedState
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.pTypes?
@@ -280,5 +275,4 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
         $scope.$watch('typesText',change,true)
-        $scope.$watch('selectedFederalState',change,true)
 ]
