@@ -81,14 +81,20 @@ Transparency.register(function(app, auth, database) {
     menu: 'main'
   });
   Transparency.menus.add({
+    title: 'Search',
+    link: 'search',
+    roles: ['authenticated', 'anonymous'],
+    menu: 'main'
+  });
+  Transparency.menus.add({
     title: 'Impress',
     link: 'impress',
     roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
-    title: 'Search',
-    link: 'search',
+    title: 'About Media Transparency Austria',
+    link: 'about',
     roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });

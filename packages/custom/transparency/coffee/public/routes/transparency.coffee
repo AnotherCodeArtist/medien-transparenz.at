@@ -52,6 +52,9 @@ angular.module 'mean.transparency'
     $stateProvider.state 'impress',
         url: "/impress"
         templateUrl: 'transparency/views/impress.html'
+    $stateProvider.state 'about',
+        url: "/about"
+        templateUrl: 'transparency/views/about.html'
     $stateProvider.state 'search',
         url: '/search'
         templateUrl: 'transparency/views/search.html'

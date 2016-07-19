@@ -61,6 +61,11 @@ angular.module 'mean.transparency'
                onEnd: -> change(1,2)
                translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
 
+     translate = ->
+          $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+
+     $scope.$on 'gettextLanguageChanged', translate
+
      savedState = sessionStorage.getItem stateName
      if savedState
           TPAService.restoreState stateName, fieldsToStore, $scope
