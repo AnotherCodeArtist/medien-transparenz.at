@@ -71,6 +71,10 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip link')
+                if d.source.name is 'Other organisations' or
+                    d.source.name = gettextCatalog.getString(d.source.name)
+                else if d.target.name is 'Other media'
+                    d.target.name = gettextCatalog.getString(d.target.name)
                 div.html("""#{d.source.name} (#{d3.format(",.2f")((d.value/d.source.value)*100)}%) → #{d.target.name} (#{d3.format(",.2f")((d.value/d.target.value)*100)}%)<br/>#{(format(d.value))} (§#{d.type})""")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
@@ -112,6 +116,8 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip node')
+                if d.name is 'Other organisations' or d.name is 'Other media'
+                    d.name = gettextCatalog.getString(d.name)
                 div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}<br/>#{d3.format(",.2f")((d.value/$scope.data.sum)*100)}%""")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
@@ -124,8 +130,9 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             if $scope.nodeClick
                 #$scope.nodeClick( name: "test", type: "o")
                 node.on 'click', (d)->
-                    angular.element(".tooltip").css("opacity", 0)
-                    $scope.nodeClick()(d)
+                    if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations')
+                        angular.element(".tooltip").css("opacity", 0)
+                        $scope.nodeClick()(d)
 
             node.append("text")
             .attr("x", -6)
