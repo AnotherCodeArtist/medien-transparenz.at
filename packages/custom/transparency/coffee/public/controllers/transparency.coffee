@@ -19,14 +19,14 @@ angular.module 'mean.transparency'
           return
      
      $scope.$on 'federalStateClicked', (event, data) ->
+          $scope.selectedFederalState = {iso: data}
+          $scope.orgType = 'org'
+          
           TPAService.saveState stateName,fieldsToStore,$scope
+          TPAService.saveState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType'], $scope
           window.scrollTo 0, 0
-          $state.go 'showflow',
+          $state.go 'top',
                {
-                    from: $scope.periods[$scope.slider.from/5].period
-                    to: $scope.periods[$scope.slider.to/5].period
-                    fedState: data
-                    pTypes: $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
                },
                location: true
                inherit: false

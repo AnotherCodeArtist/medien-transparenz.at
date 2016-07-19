@@ -114,16 +114,16 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
           #Store downloaded JSON in variable
           defaults = {
                color: (d) ->
-                    color = switch (d.iso)
-                              when "AT-1" then new THREE.Color("rgb(241, 176, 0)")
-                              when "AT-2" then new THREE.Color("rgb(255, 204, 0)")
-                              when "AT-3" then new THREE.Color("rgb(0, 102, 255)")
-                              when "AT-4" then new THREE.Color("rgb(255, 0, 0)")
-                              when "AT-5" then new THREE.Color("rgb(245, 190, 21)")
-                              when "AT-6" then new THREE.Color("rgb(0, 102, 0)")
-                              when "AT-7" then new THREE.Color("rgb(255, 0, 0)")
-                              when "AT-8" then new THREE.Color("rgb(255, 0, 0)")
-                              when "AT-9" then new THREE.Color("rgb(255, 0, 0)")
+                    switch (d.iso)
+                         when "AT-1" then new THREE.Color(0,0,0)
+                         when "AT-2" then new THREE.Color(1,1,0)
+                         when "AT-3" then new THREE.Color(1,0,1)
+                         when "AT-4" then new THREE.Color(1,0,0)
+                         when "AT-5" then new THREE.Color(0,1,1)
+                         when "AT-6" then new THREE.Color(0,1,0)
+                         when "AT-7" then new THREE.Color(0,0,1)
+                         when "AT-8" then new THREE.Color(0,0,0)
+                         when "AT-9" then new THREE.Color(0,0,1)
                height:
                     (d) ->
                          transferSums[d.iso].height*250
