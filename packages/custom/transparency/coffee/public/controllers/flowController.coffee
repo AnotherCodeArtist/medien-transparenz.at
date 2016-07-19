@@ -30,7 +30,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.loading = true
     $scope.progress = 20
     $scope.showSettings = true
-    $scope.org = null
+    #$scope.org = null
     $scope.slider =
         from: 0
         to: 0
@@ -41,7 +41,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             onEnd: -> change(1,2)
     window.scrollTo 0, 0
     $scope.clearDetails = ->
-        $scope.org = null
+        #$scope.org = null
         update()
     timer = null
     makeProgress = ->
@@ -123,13 +123,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        $scope.org = {} if $state.params.name or $state.params.orgType
+        #$scope.org = {} if $state.params.name or $state.params.orgType
         if $state.params.name
             if $state.params.orgType is 'org'
                 $scope.selectedOrganisations = [{name: $state.params.name}]
             if $state.params.orgType is 'media'
                 $scope.selectedMedia = [{name: $state.params.name}]
-        $scope.org.orgType = $state.params.orgType if $state.params.orgType
+        #$scope.org.orgType = $state.params.orgType if $state.params.orgType
         $scope.selectedFederalState.iso = $state.params.fedState if $state.params.fedState
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
@@ -190,6 +190,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.flows = buildNodes filterData flowData
             #checkMaxLength(data)
             #console.log "Updated Data Model: " + Date.now()
+            ###
             if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
                 $scope.org = {
                     name: $scope.selectedOrganisations[0].name
@@ -202,7 +203,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 }
             else
                 $scope.org = null
-
+            ###
         .catch (res) ->
             stopLoading()
             $scope.flowData = []
