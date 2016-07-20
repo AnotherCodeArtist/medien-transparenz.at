@@ -81,6 +81,12 @@ Transparency.register(function(app, auth, database) {
     menu: 'main'
   });
   Transparency.menus.add({
+    title: 'Grouping',
+    link: 'grouping',
+    roles: ['can manage grouping'],
+    menu: 'main'
+  });
+  Transparency.menus.add({
     title: 'Impress',
     link: 'impress',
     roles: ['authenticated', 'anonymous'],
@@ -133,6 +139,6 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput']);
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput', 'ui.select', 'ngSanitize']);
   return Transparency;
 });

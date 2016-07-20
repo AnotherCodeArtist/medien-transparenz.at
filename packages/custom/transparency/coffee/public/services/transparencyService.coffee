@@ -51,6 +51,12 @@ class TPAService
         console.log params
         @$http.delete 'api/transparency/events', params: params
 
+    getOrganisation: (params) ->
+        @$http.get 'api/transparency/organisation', params: params
+
+    getPossibleGroupMembers: (params) ->
+        @$http.get 'api/transparency/grouping/list', params: params
+
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
         sessionStorage.setItem itemId, JSON.stringify state

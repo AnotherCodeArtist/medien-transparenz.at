@@ -1,0 +1,95 @@
+<section class="container">
+    <div data-ng-controller="GroupingController">
+        <h1 translate>Grouping</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="groupingForm">
+                    <div class="form-group">
+                        <label for="groupName">Name</label>
+                        <input data-ng-model="group.name" type="text" class="form-control" id="groupName"
+                               placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="groupTypeOrg" translate>Group type</label><br/>
+                        <input type="radio" data-ng-model="group.type" value="org" id="groupTypeOrg"/>
+                        {{translate_GroupTypeOrg}}
+                        <input type="radio" data-ng-model="group.type" value="media" id="groupTypeMedia"/>
+                        {{translate_GroupTypeMedia}}
+                    </div>
+                    <div class="form-group">
+                        <label for="ownerSelection" data-ng-show="group.type" translate>Group owner</label><br/>
+                        <ui-select data-ng-model="group.selectedGroupOwner" theme="bootstrap" data-ng-show="group.type"
+                                   id="ownerSelection">
+                            <ui-select-match placeholder="{{translate_selectionOwnerPlaceholder}}">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="option in selection | filter: $select.search">
+                                <div data-ng-bind-html="option.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="membersSelection"
+                               data-ng-show="group.type">{{translate_selectionMember}}</label><br/>
+                        <ui-select data-ng-model="group.selectedMember" theme="bootstrap" data-ng-show="group.type"
+                                   id="membersSelection">
+                            <ui-select-match placeholder="{{translate_selectionMember}}">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="option in selection | filter: $select.search">
+                                <div data-ng-bind-html="option.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group" data-ng-show="group.members.length>0">
+                        <label for="groupRegion" translate>Region</label><br/>
+                        <input type="radio" data-ng-model="group.region" value="AT" id="groupRegion"/>
+                        {{translate_Nationwide}}
+
+                        <input type="radio" data-ng-model="group.region" value="AT-9" id="groupRegionFederal"
+                               data-ng-disabled="!enableFederalSelection"/>
+                        {{translate_withinFederalState}}
+                    </div>
+
+                    <div class="form-group" data-ng-show="group.members.length>0">
+                        <label for="enableGroup" translate>Enable Group</label><br/>
+                        <input type="radio" data-ng-model="group.isActive" id="enableGroup" data-ng-value="true"/>
+                        {{translate_EnableGroup}}
+                        <input type="radio" data-ng-model="group.isActive" id="disableGroup" data-ng-value="false"/>
+                        {{translate_DisableGroup}}
+                    </div>
+
+                    <button data-ng-click="cancel()" class="btn btn-default" translate>Cancel</button>
+                    <button data-ng-disabled="groupingForm.$invalid ||group.members.length == 0 || !group.region"
+                            data-ng-click="createGroup()" type="submit" class="btn btn-primary" translate>Create
+                    </button>
+                </form>
+
+                <div class="table-responsive" data-ng-show="group.members.length>0">
+                    <table class="table table-condensed">
+                        <caption translate>Group members</caption>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th translate class="pull-right">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="member in group.members track by $index">
+                            <td>
+                                {{member.name}}
+                            </td>
+                            <td class="pull-right">
+                                <button ng-click="removeGroupMember($index)" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

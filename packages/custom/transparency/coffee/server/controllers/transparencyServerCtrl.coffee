@@ -630,3 +630,35 @@ module.exports = (Transparency) ->
                     Array.prototype.push.apply result, event.tags
 
             res.json Array.from(new Set(result))
+
+    #Grouping
+    getPossibleGroupMembers: (req, res) ->
+        type = req.query.orgType or 'org'
+        nameField = if type is 'org' then 'organisation' else 'media'
+        query = {}
+        project =
+            name: '$_id.name'
+            _id: 0
+        group =
+            _id:
+                name: "$#{nameField}"
+        if type is 'org'
+            group._id.federalState = '$federalState'
+            project.federalState = '$_id.federalState'
+
+        #console.log 'Query:'
+        #console.log query
+        #console.log 'Group'
+        #console.log group
+        #console.log 'Project'
+        #console.log project
+        Transfer.aggregate($match: query)
+        .group(group)
+        .project(project)
+        .sort('name')
+        .exec()
+        .then (result) ->
+            res.status(200).send result
+        .catch (error) ->
+            console.log "Error query possible group members: #{error}"
+            res.status(500).send error: "Could not get events #{err}"
