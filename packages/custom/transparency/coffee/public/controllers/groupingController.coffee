@@ -2,7 +2,6 @@
 app = angular.module 'mean.transparency'
 
 app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', ($scope, TPAService, gettextCatalog) ->
-
     uniqueArray = (array) ->
         unique = []
         unique.push value for value in array when value not in unique
@@ -14,6 +13,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
         $scope.selection = {}
         $scope.group.members = []
         $scope.group.isActive = true;
+        $scope.error = ""
 
     translate = ->
         $scope.translate_GroupTypeOrg = gettextCatalog.getString("Group for organisations")
@@ -26,12 +26,12 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
         $scope.translate_DisableGroup = gettextCatalog.getString("Disable Group")
 
     getPossibleGroupMembers = ->
-    # clear selections and previous values
+# clear selections and previous values
         $scope.selection = []
         $scope.group.members = []
         $scope.group.selectedGroupOwner = ""
         $scope.group.selectedMember = ""
-    # load the selection
+        # load the selection
         TPAService.getPossibleGroupMembers
             orgType: $scope.group.type
         .then (res) ->
@@ -39,9 +39,9 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
         .catch (err) -> $scope.error = "Could not load selection!"
 
     # saves the member in array
-    addToGroup =  ->
-            if $scope.group.selectedMember.name
-                $scope.group.members.push $scope.group.selectedMember
+    addToGroup = ->
+        if $scope.group.selectedMember.name
+            $scope.group.members.push $scope.group.selectedMember
 
     # Pre select region based on member selection
     checkGroupRegion = ->
@@ -59,7 +59,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
 
     # Remove selection from grop based on index of array
     $scope.removeGroupMember = (index) ->
-        $scope.group.members.splice(index,1)
+        $scope.group.members.splice(index, 1)
         $scope.group.selectedMember = ""
 
     $scope.cancel = ->
@@ -67,9 +67,22 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
 
     #save group
     $scope.createGroup = ->
-        # remove not needed data
-        $scope.group.members = (member.name for member in $scope.group.members)
-        console.log("Group to save: " + JSON.stringify($scope.group))
+        newGrouping = {}
+        newGrouping.name = $scope.group.name
+        newGrouping.type = $scope.group.type
+        newGrouping.region = $scope.group.region
+        newGrouping.members = (member.name for member in $scope.group.members)
+        newGrouping.isActive = $scope.group.isActive
+        if $scope.group.selectedGroupOwner
+            newGrouping.owner = $scope.group.selectedGroupOwner.name
+        #console.log("Group to be saved:  " + JSON.stringify(groupToSave))
+
+        TPAService.createGrouping newGrouping
+        .then(
+            (saved) ->
+                resetGroup()
+        )
+        .catch (err) -> $scope.error = err
 
 
     resetGroup()

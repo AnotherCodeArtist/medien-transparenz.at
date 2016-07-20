@@ -51,8 +51,8 @@ class TPAService
         console.log params
         @$http.delete 'api/transparency/events', params: params
 
-    getOrganisation: (params) ->
-        @$http.get 'api/transparency/organisation', params: params
+    createGrouping: (params) ->
+        @$http.post 'api/transparency/grouping', params: params
 
     getPossibleGroupMembers: (params) ->
         @$http.get 'api/transparency/grouping/list', params: params

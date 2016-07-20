@@ -16,6 +16,7 @@ Transfer = mongoose.model 'Transfer'
 Event = mongoose.model 'Event'
 Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
+Grouping = mongoose.model 'Grouping'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
@@ -661,4 +662,21 @@ module.exports = (Transparency) ->
             res.status(200).send result
         .catch (error) ->
             console.log "Error query possible group members: #{error}"
-            res.status(500).send error: "Could not get events #{err}"
+            res.status(500).send error: "Could not get group members #{error}"
+
+    createGrouping: (req, res) ->
+        grouping  = new Grouping()
+        grouping.name = req.body.params.name
+        grouping.type = req.body.params.type
+        grouping.region = req.body.params.region
+        grouping.members = req.body.params.members
+        grouping.isActive = req.body.params.isActive
+        if  req.body.params.owner?
+            grouping.owner = req.body.params.owner
+            console.log JSON.stringify(grouping)
+        grouping.save (err) ->
+            if err
+                res.status(500).send error: "Could not create grouping #{err}"
+            else
+                res.status(200).send grouping
+
