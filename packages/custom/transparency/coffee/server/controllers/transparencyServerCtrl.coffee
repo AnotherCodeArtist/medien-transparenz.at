@@ -673,10 +673,49 @@ module.exports = (Transparency) ->
         grouping.isActive = req.body.params.isActive
         if  req.body.params.owner?
             grouping.owner = req.body.params.owner
-            console.log JSON.stringify(grouping)
         grouping.save (err) ->
             if err
                 res.status(500).send error: "Could not create grouping #{err}"
             else
                 res.status(200).send grouping
-
+    getGroupings: (req, res) ->
+        query = {}
+        if req.query.id?
+            query._id = req.query.id
+        Grouping
+        .find(query)
+        .sort('name')
+        .exec()
+        .then(
+            (result) ->
+                res.status(200).send result
+        )
+        .catch (
+            (err) ->
+                res.status(500).send error: "Could not read grouping(s) #{err}"
+        )
+    updateGrouping: (req, res) ->
+        if req.body.params._id?
+            Grouping.findById(_id: req.body.params._id).exec()
+            .then(
+                (result) ->
+                    grouping = result
+                    grouping.name = req.body.params.name
+                    grouping.type = req.body.params.type
+                    grouping.region = req.body.params.region
+                    grouping.isActive = req.body.params.isActive
+                    grouping.members = req.body.params.members
+                    if req.body.params.owner?
+                        grouping.owner = req.body.params.owner
+                    else
+                        grouping.owner = ''
+                    grouping.save()
+                    .then (
+                      (updated) ->
+                          res.status(200).send updated
+                        )
+                    )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not update grouping #{err}"
+                )

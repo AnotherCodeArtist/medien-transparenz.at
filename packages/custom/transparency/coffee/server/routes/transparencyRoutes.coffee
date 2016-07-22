@@ -57,4 +57,9 @@ module.exports = (Transparency, app, auth, database) ->
   app.get '/api/transparency/grouping/list', transparency.getPossibleGroupMembers
   #Grouping - save grouping
   app.post '/api/transparency/grouping', auth.requiresEditor, transparency.createGrouping
+  #Grouping . get groupings
+  app.get '/api/transparency/grouping', transparency.getGroupings
+
+  #Grouping . get groupings
+  app.put '/api/transparency/grouping', auth.requiresEditor, transparency.updateGrouping
   return

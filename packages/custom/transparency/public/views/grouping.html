@@ -2,6 +2,53 @@
     <div data-ng-controller="GroupingController">
         <h1 translate>Grouping</h1>
         <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th translate>
+                    Type
+                </th>
+                <th translate>
+                    Region
+                </th>
+                <th translate>
+                    Owner
+                </th>
+                <th translate>
+                    Active
+                </th>
+                <th translate>
+                    Edit
+                </th>
+                <th translate>
+                    Remove
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="grouping in groupings">
+                <td>{{grouping.name}}</td>
+                <td>{{grouping.type}}</td>
+                <td>{{grouping.region}}</td>
+                <td>{{grouping.owner}}</td>
+                <td>{{grouping.isActive}}</td>
+                <td>
+                    <button ng-click="editGrouping(grouping._id)" class="btn btn-info">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                </td>
+                <td>
+                    <button ng-click="removeEvent(event._id, event.name)" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
         <div class="panel panel-default">
             <div class="panel-body">
                 <form name="groupingForm">
@@ -28,6 +75,7 @@
                                 <div data-ng-bind-html="option.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
+                        <button data-ng-click="resetOwner()" class="btn btn-default" translate>Reset</button>
                     </div>
                     <div class="form-group">
                         <label for="membersSelection"
@@ -42,7 +90,7 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                    <div class="form-group" data-ng-show="group.members.length>0">
+                    <div class="form-group" data-ng-show="group.members.length>0 && group.type == 'org' ">
                         <label for="groupRegion" translate>Region</label><br/>
                         <input type="radio" data-ng-model="group.region" value="AT" id="groupRegion"/>
                         {{translate_Nationwide}}
@@ -62,8 +110,13 @@
 
                     <button data-ng-click="cancel()" class="btn btn-default" translate>Cancel</button>
                     <button data-ng-disabled="groupingForm.$invalid ||group.members.length == 0 || !group.region"
-                            data-ng-click="createGroup()" type="submit" class="btn btn-primary" translate>Create
+                            data-ng-click="createGroup()" data-ng-show="!edit" type="submit" class="btn btn-primary"
+                            translate>Create
                     </button>
+                    <button data-ng-disabled="groupingForm.$invalid ||group.members.length == 0 || !group.region" ng-show="edit" data-ng-click="updateGrouping()"
+                            type="submit" class="btn btn-primary" translate>Save
+                    </button>
+
                 </form>
 
                 <div class="table-responsive" data-ng-show="group.members.length>0">

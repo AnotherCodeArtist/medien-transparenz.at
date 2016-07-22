@@ -117,7 +117,13 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Nationwide": "Bundesweit",
         "Within federal state": "Innerhalb des Bundeslandes",
         "Enable Group": "Gruppe aktivieren",
-        "Disable Group": "Gruppe dekativieren"
+        "Disable Group": "Gruppe dekativieren",
+        "Active": "Aktiv",
+        "Owner": "Eigentümer",
+        "Yes": "Ja",
+        "No": "Nein",
+        "Type": "Typ",
+        "Reset": "Zurücksetzen"
     });
     /* jshint +W100 */
 }]);
