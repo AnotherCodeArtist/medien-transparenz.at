@@ -719,3 +719,16 @@ module.exports = (Transparency) ->
                 (err) ->
                     res.status(500).send error: "Could not update grouping #{err}"
                 )
+    deleteGroupings: (req, res) ->
+        if req.query.id?
+            Grouping.findByIdAndRemove(req.query.id).exec()
+            .then(
+              (removed) ->
+                  res.status(200).send removed
+            )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not delete grouping #{err}"
+            )
+        else
+            res.status(500).send error: "Could not delete grouping #{err}"

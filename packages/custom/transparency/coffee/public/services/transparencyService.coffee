@@ -60,6 +60,9 @@ class TPAService
     getGroupings: (params) ->
         @$http.get 'api/transparency/grouping', params: params
 
+    deleteGroupings: (params) ->
+        @$http.delete 'api/transparency/grouping', params: params
+
     getPossibleGroupMembers: (params) ->
         @$http.get 'api/transparency/grouping/list', params: params
 

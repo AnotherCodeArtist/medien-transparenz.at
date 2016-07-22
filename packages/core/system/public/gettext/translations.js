@@ -123,7 +123,8 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Yes": "Ja",
         "No": "Nein",
         "Type": "Typ",
-        "Reset": "Zurücksetzen"
+        "Reset": "Zurücksetzen",
+        "Delete": "Löschen"
     });
     /* jshint +W100 */
 }]);

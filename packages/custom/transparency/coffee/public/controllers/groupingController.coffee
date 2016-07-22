@@ -146,6 +146,17 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
                 $scope.error = err
         )
 
+    #Remove grouping
+    $scope.removeGrouping = (id, name) ->
+        deleteString = gettextCatalog.getString("Delete")
+        if confirm(deleteString + "? " + name)
+            TPAService.deleteGroupings {id:id}
+            .then(
+              (removed) ->
+                  listGroupings()
+            )
+            .catch (err) -> $scope.error = err
+
     # update grouping
     $scope.updateGrouping = ->
         TPAService.updateGrouping groupToGrouping($scope.group)
