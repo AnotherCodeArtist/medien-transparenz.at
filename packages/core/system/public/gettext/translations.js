@@ -124,7 +124,8 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "No": "Nein",
         "Type": "Typ",
         "Reset": "Zurücksetzen",
-        "Delete": "Löschen"
+        "With groupings enabled single transfers will be taken together (f.e. to show umbrella organisations)": "Wenn Gruppierung aktiviert, werden einzelne Transfers zusammengefasst (z.B. um Dachorganisationen abzubilden) ",
+
     });
     /* jshint +W100 */
 }]);
