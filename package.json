@@ -52,6 +52,7 @@
     "request": "latest",
     "serve-favicon": "latest",
     "shelljs": "latest",
+    "sorty": "latest",
     "swig": "latest",
     "view-helpers": "latest"
   },

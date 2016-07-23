@@ -9,6 +9,7 @@ _ = require 'lodash'
 #mongooseWhen = require 'mongoose-when'
 Q = require 'q'
 #Promise = mongoose.Promise
+sorty = require 'sorty'
 
 #iconv.extendNodeEncodings()
 
@@ -171,6 +172,26 @@ mapEvent = (event,req) ->
     event.tags = req.body.tags
     event.region = req.body.region
     event
+handleGroupings = (groupings, transfers, limit) ->
+    console.log ("found " + groupings.length + " gropings");
+    console.log ("found " + transfers.length + " transfers");
+    transfersWithGrouping = transfers
+    for grouping in groupings
+        groupingTransfersAmount = (transfer.total for transfer in transfersWithGrouping when transfer.organisation in grouping.members)
+        groupingTransfersNames = (transfer.organisation  for transfer in transfersWithGrouping when transfer.organisation in grouping.members)
+        groupingTotalAmount = groupingTransfersAmount.reduce (total, sum) -> total + sum
+        #console.log("Grouping " + grouping.name + " with the member(s):"
+        #JSON.stringify(grouping.members)+ " has the sum of " + groupingTotalAmount+ "("+ groupingTransfersAmount.length+" transfer(s))")
+        #remove ALL transfers (filter) from results
+        transfersWithGrouping = transfersWithGrouping.filter((transfer) ->
+            transfer.organisation not in groupingTransfersNames
+        )
+
+        transfersWithGrouping.push({total: groupingTotalAmount, organisation: grouping.name})
+        #console.log( "Group entry added: " + JSON.stringify(transfersWithGrouping[transfersWithGrouping.length-1]))
+    #Sort array of transfers by total amount
+    sorty([{name: 'total',  dir: 'desc', type: 'number'}], transfersWithGrouping)
+    transfersWithGrouping.splice(0,limit)
 
 module.exports = (Transparency) ->
 
@@ -382,14 +403,16 @@ module.exports = (Transparency) ->
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
+        promiseToFullfill = []
         federalState = req.query.federalState if req.query.federalState
+        includeGroupings = req.query.groupings if req.query.groupings
         period = {}
         period['$gte'] = parseInt(req.query.from) if req.query.from
         period['$lte'] = parseInt(req.query.to) if req.query.to
         orgType = req.query.orgType or 'org'
         paymentTypes = req.query.pType or ['2']
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
-        results = parseInt(req.query.x or '10')
+        limitOfResults = parseInt(req.query.x or '10')
         query = {}
         project =
             organisation: '$_id.organisation'
@@ -419,15 +442,37 @@ module.exports = (Transparency) ->
         #console.log group
         #console.log "Project: "
         #console.log project
-        topPromise = Transfer.aggregate($match: query)
-        .group(group)
-        .sort('-total')
-        .limit(results)
-        .project(project)
-        .exec()
+        if not includeGroupings
+            topPromise = Transfer.aggregate($match: query)
+            .group(group)
+            .sort('-total')
+            .limit(limitOfResults)
+            .project(project)
+            .exec()
+        else
+            topPromise = Transfer.aggregate($match: query)
+            .group(group)
+            .sort('-total')
+            .project(project)
+            .exec()
+        promiseToFullfill.push(topPromise)
+
+
         allPromise = Transfer.mapReduce options
+        promiseToFullfill.push allPromise
+        if includeGroupings
+            groupingQuery = {}
+            groupingQuery.isActive = true
+            groupingQuery.type = orgType
+            groupingQuery.region = if federalState then federalState else 'AT'
+
+            groupingsPromise = Grouping.find(groupingQuery)
+            .select('name owner members -_id')
+            .exec()
+            promiseToFullfill.push(groupingsPromise)
+
         allPromise.then (r) ->
-        Q.all([topPromise, allPromise])
+        Q.all(promiseToFullfill)
         .then (results) ->
             try
                 result =
@@ -436,6 +481,11 @@ module.exports = (Transparency) ->
                         (sum, v)->
                             sum + v.value
                         0)
+                    groupings: results[2] if results[2]
+
+                if result.groupings?
+                    result.top = handleGroupings(result.groupings, result.top, limitOfResults)
+
                 res.send result
             catch error
                 console.log error

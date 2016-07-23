@@ -5,7 +5,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -27,6 +27,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.$watch('orgType', change, true)
         $scope.$watch('rank', change, true)
         $scope.$watch('selectedFederalState', change, true)
+        $scope.$watch('includeGroupings', change, true)
 
 
     #construct the query parameters
@@ -35,6 +36,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to =$scope.periods[$scope.slider.to/5].period
         params.federalState = $scope.selectedFederalState.iso if $scope.selectedFederalState
+        params.groupings = $scope.includeGroupings if $scope.includeGroupings
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
@@ -100,6 +102,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             #Variables for the selection of federalState
             $scope.selectedFederalState = {}
             $scope.orgType = $scope.orgTypes[0].value
+            $scope.includeGroupings = false
             $q.all([pY, pP]).then (res) ->
                 update()
                 registerWatches()
