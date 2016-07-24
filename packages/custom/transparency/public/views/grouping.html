@@ -1,6 +1,11 @@
 <section class="container">
     <div data-ng-controller="GroupingController">
         <h1 translate>Grouping</h1>
+        <div class="pull-right">
+            <label><span translate>Number of Entries</span>
+                <select data-ng-model="size" class="btn btn-default" data-ng-options="size for size in sizes"></select>
+            </label>
+        </div>
         <div class="alert alert-danger" data-ng-show="error">{{error}}</div>
         <table class="table">
             <thead>
@@ -48,7 +53,8 @@
             </tr>
             </tbody>
         </table>
-
+        <uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                        boundary-links="true"></uib-pagination>
         <div class="panel panel-default">
             <div class="panel-body">
                 <form name="groupingForm">
