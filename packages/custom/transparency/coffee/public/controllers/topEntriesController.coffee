@@ -80,6 +80,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         ]
         #Federal states selection
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
+        #remove Austria
+        if $scope.federalStates.length is 10
+            $scope.federalStates.pop()
         savedState = sessionStorage.getItem 'topState'
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope

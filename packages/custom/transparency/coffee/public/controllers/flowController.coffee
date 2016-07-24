@@ -57,6 +57,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #Variables for the selection of federalState
     $scope.selectedFederalState = {}
     $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
+    #remove Austria
+    if $scope.federalStates.length is 10
+        $scope.federalStates.pop()
     $scope.flows =
         nodes: []
         links: []
