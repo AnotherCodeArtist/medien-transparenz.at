@@ -8,23 +8,31 @@
         </div>
     </div>
     <div class="pull-right">
+        <label data-ng-show="orgType=='org'"><span translate>Federal State</span>
+            <select data-ng-model="selectedFederalState" class="btn btn-default"
+                    ng-options="state.name for state in federalStates track by state.iso" data-ng-show="orgType=='org'">
+                <option value="">-</option>
+            </select>
+        </label>
         <label><span translate>Number of Entries</span>
             <select data-ng-model="size" class="btn btn-default" ng-options="size for size in sizes"></select>
         </label>
+
     </div>
     <div class="alert alert-danger" ng-show="error">
         {{error}}
     </div>
 
     <uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-                boundary-links="true"></uib-pagination>
+                    boundary-links="true"></uib-pagination>
     <div class="alert alert-info" translate="translate" ng-show="count === 0">No entries found!</div>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="org in items">
             <div class="row">
                 <div class="col-sm-10">
                     <a ui-sref="showflow({name: org.name,to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
-                    <span class="label label-primary year" ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
+                    <span class="label label-primary year"
+                          ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
                 </div>
                 <div class="col-sm-2">
                     <span class="badge">&euro; {{org.total | number:2}}</span>
@@ -35,7 +43,7 @@
     </ul>
 
     <uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-                boundary-links="true"></uib-pagination>
+                    boundary-links="true"></uib-pagination>
     <div style="clear:both;"><br></div>
 
 </section>

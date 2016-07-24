@@ -489,9 +489,19 @@ module.exports = (Transparency) ->
         types = if req.query.orgType then [req.query.orgType] else ['org','media']
         page = parseInt req.query.page or "0"
         size = parseInt req.query.size or "50"
+        federalState = req.query.federalState
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             query = {}
+            if federalState?
+                query.federalState = federalState
+            project ={}
+            project =
+                name: '$_id.name'
+                _id: 0
+                years: 1
+                total: 1
+                transferTypes: 1
             group =
                 _id:
                     name: "$#{nameField}"
@@ -502,13 +512,7 @@ module.exports = (Transparency) ->
                 transferTypes: $addToSet: "$transferType"
             Transfer.aggregate($match: query)
             .group(group)
-            .project(
-                name: '$_id.name'
-                _id: 0
-                years: 1
-                total: 1
-                transferTypes: 1
-            )
+            .project(project)
             .sort('name').skip(page*size).limit(size)
             .exec()
         all = Q.all types.map (t) ->
