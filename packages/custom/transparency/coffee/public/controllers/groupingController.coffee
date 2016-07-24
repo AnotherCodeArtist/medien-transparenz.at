@@ -2,7 +2,17 @@
 app = angular.module 'mean.transparency'
 
 app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', ($scope, TPAService, gettextCatalog) ->
-#list groupings
+    countGroupings = ->
+        TPAService.countGroupings {}
+        .then(
+            (result) ->
+                $scope.count = parseInt result.data.count
+        )
+        .catch (
+            (err) ->
+                $scope.error = err
+        )
+    #list groupings
     listGroupings = ->
         prepareGrouping = (grouping) ->
             if grouping.type is 'org'
@@ -16,7 +26,9 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
 
             grouping.region = gettextCatalog.getString(TPAService.staticData('findOneFederalState', grouping.region).name)
             $scope.groupings.push grouping
-        TPAService.getGroupings {}
+
+
+        TPAService.getGroupings {page: parseInt($scope.page - 1), size: parseInt($scope.size)}
         .then(
             (res) ->
                 $scope.groupings = []
@@ -117,12 +129,13 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
         .then(
             (saved) ->
                 resetGroup()
+                countGroupings()
                 listGroupings()
         )
         .catch (err) -> $scope.error = err
     # edit grouping
     $scope.editGrouping = (id) ->
-        TPAService.getGroupings {id: id}
+        TPAService.getGroupings {id: id, page: $scope.page - 1, size: $scope.size}
         .then (
             (result) ->
                 foundGrouping = result.data[0]
@@ -150,10 +163,11 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
     $scope.removeGrouping = (id, name) ->
         deleteString = gettextCatalog.getString("Delete")
         if confirm(deleteString + "? " + name)
-            TPAService.deleteGroupings {id:id}
+            TPAService.deleteGroupings {id: id}
             .then(
-              (removed) ->
-                  listGroupings()
+                (removed) ->
+                    countGroupings()
+                    listGroupings()
             )
             .catch (err) -> $scope.error = err
 
@@ -167,7 +181,13 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
         )
         .catch (err) -> $scope.error = err
 
+    $scope.page =  1
+    $scope.size =  5
+    $scope.sizes = [5, 10, 20, 50, 100]
+    $scope.count = 0
+
     $scope.groupings = []
+    countGroupings()
     translate()
     resetGroup()
 
@@ -176,4 +196,6 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog', 
     $scope.$watch('group.type', getPossibleGroupMembers, true)
     $scope.$watch('group.selectedMember', addToGroup, true)
     $scope.$watch('group.members', checkGroupRegion, true)
+    $scope.$watch('size', listGroupings, true)
+    $scope.$watch('page', listGroupings, true)
 ]

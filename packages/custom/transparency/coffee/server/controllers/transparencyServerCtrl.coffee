@@ -682,9 +682,17 @@ module.exports = (Transparency) ->
         query = {}
         if req.query.id?
             query._id = req.query.id
+            page =  parseInt "0"
+            size = parseInt "1"
+        else
+            page = parseInt req.query.page or "0"
+            size = parseInt req.query.size or "50"
+
         Grouping
         .find(query)
         .sort('name')
+        .skip(page*size)
+        .limit(parseInt(size))
         .exec()
         .then(
             (result) ->
@@ -732,3 +740,14 @@ module.exports = (Transparency) ->
             )
         else
             res.status(500).send error: "Could not delete grouping #{err}"
+
+    countGroupings: (req, res) ->
+            Grouping.count().exec()
+            .then(
+                (counted) ->
+                    res.status(200).send({count :counted})
+            )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not count groupings #{err}"
+            )
