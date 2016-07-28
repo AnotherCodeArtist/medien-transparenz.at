@@ -4,6 +4,21 @@ app = angular.module 'mean.transparency'
 
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder'
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder) ->
+
+    TPAService.search({name: '   '})
+    .then (res) ->
+        $scope.allOrganisations = res.data.org.map (o) ->
+            {
+                name: o.name,
+            }
+        $scope.allMedia = res.data.media.map (m) ->
+            {
+                name: m.name,
+            }
+
+    $scope.selectedOrganisations = []
+    $scope.selectedMedia = []
+
     $scope.mediaLabel = gettextCatalog.getString('Media')
     $scope.organisationLabel = gettextCatalog.getString('Organisation')
     $scope.transferTypeLabel = gettextCatalog.getString('Payment Type')
@@ -15,7 +30,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.loading = true
     $scope.progress = 20
     $scope.showSettings = true
-    $scope.org = null
+    #$scope.org = null
+    $scope.isDetails = false
     $scope.slider =
         from: 0
         to: 0
@@ -26,7 +42,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             onEnd: -> change(1,2)
     window.scrollTo 0, 0
     $scope.clearDetails = ->
-        $scope.org = null
+        #$scope.org = null
         update()
     timer = null
     makeProgress = ->
@@ -54,9 +70,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
-    #Variables for the selection of federalState
-    $scope.selectedFederalState = {}
-    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
         links: []
@@ -65,13 +78,16 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to = $scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.iso) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
+        ###
         if $scope.org
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
+        ###
+        params.media = $scope.selectedMedia.map (media) -> media.name
+        params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -104,10 +120,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        $scope.org = {} if $state.params.name or $state.params.orgType
-        $scope.org.name = $state.params.name if $state.params.name
-        $scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.selectedFederalState.iso = $state.params.fedState if $state.params.fedState
+        #$scope.org = {} if $state.params.name or $state.params.orgType
+        if $state.params.name
+            if $state.params.orgType is 'org'
+                $scope.selectedOrganisations = [{name: $state.params.name}]
+            if $state.params.orgType is 'media'
+                $scope.selectedMedia = [{name: $state.params.name}]
+        #$scope.org.orgType = $state.params.orgType if $state.params.orgType
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.pTypes?
@@ -116,12 +135,19 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
-        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 
 
     $scope.showDetails = (node) ->
+        $scope.isDetails = true;
+        if node.type is 'o'
+            $scope.selectedOrganisations = [{name: node.name}]
+            $scope.selectedMedia = []
+        else
+            $scope.selectedMedia = [{name: node.name}]
+            $scope.selectedOrganisations = []
+        ###
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
@@ -137,9 +163,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
+        if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 0
+            stopLoading()
+            return
+
         console.log "Starting update: " + Date.now()
         startLoading()
-        TPAService.flows(parameters())
+        TPAService.filteredflows(parameters())
         .then (res) ->
             stopLoading()
             #console.log "Got result from Server: " + Date.now()
@@ -150,6 +180,20 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.flows = buildNodes filterData flowData
             #checkMaxLength(data)
             #console.log "Updated Data Model: " + Date.now()
+            ###
+            if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
+                $scope.org = {
+                    name: $scope.selectedOrganisations[0].name
+                    orgType: 'org'
+                }
+            else if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 1
+                $scope.org = {
+                    name: $scope.selectedMedia[0].name
+                    orgType: 'media'
+                }
+            else
+                $scope.org = null
+            ###
         .catch (res) ->
             stopLoading()
             $scope.flowData = []
@@ -171,6 +215,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         links = []
         nodesNum = 0
         nodeMap = {}
+
+        sum = 0
+
         data.forEach (entry) ->
             if not nodeMap[entry.organisation]?
                 nodeMap[entry.organisation] =
@@ -189,13 +236,24 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 value: entry.amount
                 type: entry.transferType
             )
+            sum += entry.amount
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
-        {nodes: nodes,links: links}
+        {nodes: nodes,links: links, sum: sum}
 
 
     change = (oldValue,newValue) ->
         console.log "Change: " + Date.now()
         update() if (oldValue isnt newValue)
+
+    $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
+        if not $scope.isDetails
+            update()
+
+    $scope.$watch 'selectedMedia', (newValue, oldValue) ->
+        if not $scope.isDetails
+            update()
+        else
+            $scope.isDetails = false;
 
     filterThreshold = "NoValue"
     $scope.$watch 'filter', (newValue,oldValue) ->
@@ -217,5 +275,4 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
         $scope.$watch('typesText',change,true)
-        $scope.$watch('selectedFederalState',change,true)
 ]
