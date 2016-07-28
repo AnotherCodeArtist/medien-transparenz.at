@@ -20,6 +20,9 @@ class TPAService
     flows: (params) ->
         @$http.get 'api/transparency/flows', params: params
 
+    filteredflows: (params) ->
+        @$http.get 'api/transparency/filteredflows', params: params
+
     list: (params) ->
         @$http.get 'api/transparency/list', params: params
 
@@ -88,6 +91,9 @@ class TPAService
 
     periods: ->
         @$http.get 'api/transparency/periods'
+
+    federalstates: (params) ->
+        @$http.get 'api/transparency/federalstates', params: params
 
     decodeType: (type) -> switch type
         when 2 then "Payments according to §2 MedKF-TG (Media Cooperations)"
