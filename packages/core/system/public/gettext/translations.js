@@ -109,7 +109,26 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Entries stored": "Einträge gespeichert",
         "zip-code": "Postleitzahl",
         "Organisations with unknown address-data": "Organisationen mit nicht bekannten Adressdaten",
-        "Error": "Fehler"
+        "Error": "Fehler",
+        "Grouping": "Gruppierung",
+        "Group type": "Gruppentyp",
+        "Group for organisations": "Gruppe für Organisationen",
+        "Group for media": "Gruppe für Medien",
+        "Add member to group": "Gruppenteilnehmer hinzufügen",
+        "Group owner": "Eigentümer der Gruppe",
+        "Group members": "Gruppenteilnehmer",
+        "Region": "Region",
+        "Nationwide": "Bundesweit",
+        "Within federal state": "Innerhalb des Bundeslandes",
+        "Enable Group": "Gruppe aktivieren",
+        "Disable Group": "Gruppe dekativieren",
+        "Active": "Aktiv",
+        "Owner": "Eigentümer",
+        "Yes": "Ja",
+        "No": "Nein",
+        "Type": "Typ",
+        "Reset": "Zurücksetzen",
+        "Delete": "Löschen"
     });
     /* jshint +W100 */
 }]);

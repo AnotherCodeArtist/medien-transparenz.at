@@ -16,6 +16,7 @@ Transfer = mongoose.model 'Transfer'
 Event = mongoose.model 'Event'
 Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
+Grouping = mongoose.model 'Grouping'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
@@ -804,3 +805,124 @@ module.exports = (Transparency) ->
             console.log "Error in Promise.when"
             console.log err
             res.status(500).send("Error #{err.message}")
+
+
+    #Grouping
+    getPossibleGroupMembers: (req, res) ->
+        type = req.query.orgType or 'org'
+        nameField = if type is 'org' then 'organisation' else 'media'
+        query = {}
+        project =
+            name: '$_id.name'
+            _id: 0
+        group =
+            _id:
+                name: "$#{nameField}"
+        if type is 'org'
+            group._id.federalState = '$federalState'
+            project.federalState = '$_id.federalState'
+
+        #console.log 'Query:'
+        #console.log query
+        #console.log 'Group'
+        #console.log group
+        #console.log 'Project'
+        #console.log project
+        Transfer.aggregate($match: query)
+        .group(group)
+        .project(project)
+        .sort('name')
+        .exec()
+        .then (result) ->
+            res.status(200).send result
+        .catch (error) ->
+            console.log "Error query possible group members: #{error}"
+            res.status(500).send error: "Could not get group members #{error}"
+
+    createGrouping: (req, res) ->
+        grouping  = new Grouping()
+        grouping.name = req.body.params.name
+        grouping.type = req.body.params.type
+        grouping.region = req.body.params.region
+        grouping.members = req.body.params.members
+        grouping.isActive = req.body.params.isActive
+        if  req.body.params.owner?
+            grouping.owner = req.body.params.owner
+        grouping.save (err) ->
+            if err
+                res.status(500).send error: "Could not create grouping #{err}"
+            else
+                res.status(200).send grouping
+    getGroupings: (req, res) ->
+        query = {}
+        if req.query.id?
+            query._id = req.query.id
+            page =  parseInt "0"
+            size = parseInt "1"
+        else
+            page = parseInt req.query.page or "0"
+            size = parseInt req.query.size or "50"
+
+        Grouping
+        .find(query)
+        .sort('name')
+        .skip(page*size)
+        .limit(parseInt(size))
+        .exec()
+        .then(
+            (result) ->
+                res.status(200).send result
+        )
+        .catch (
+            (err) ->
+                res.status(500).send error: "Could not read grouping(s) #{err}"
+        )
+    updateGrouping: (req, res) ->
+        if req.body.params._id?
+            Grouping.findById(_id: req.body.params._id).exec()
+            .then(
+                (result) ->
+                    grouping = result
+                    grouping.name = req.body.params.name
+                    grouping.type = req.body.params.type
+                    grouping.region = req.body.params.region
+                    grouping.isActive = req.body.params.isActive
+                    grouping.members = req.body.params.members
+                    if req.body.params.owner?
+                        grouping.owner = req.body.params.owner
+                    else
+                        grouping.owner = ''
+                    grouping.save()
+                    .then (
+                      (updated) ->
+                          res.status(200).send updated
+                        )
+                    )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not update grouping #{err}"
+                )
+    deleteGroupings: (req, res) ->
+        if req.query.id?
+            Grouping.findByIdAndRemove(req.query.id).exec()
+            .then(
+              (removed) ->
+                  res.status(200).send removed
+            )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not delete grouping #{err}"
+            )
+        else
+            res.status(500).send error: "Could not delete grouping #{err}"
+
+    countGroupings: (req, res) ->
+            Grouping.count().exec()
+            .then(
+                (counted) ->
+                    res.status(200).send({count :counted})
+            )
+            .catch (
+                (err) ->
+                    res.status(500).send error: "Could not count groupings #{err}"
+            )

@@ -54,6 +54,19 @@ module.exports = (Transparency, app, auth, database) ->
   app.delete '/api/transparency/events', auth.requiresEditor, transparency.deleteEvent
 
   app.get '/api/transparency/events/tags', transparency.getEventTags
-  
+
+  #Grouping - get selection
+  app.get '/api/transparency/grouping/list', auth.requiresEditor,  transparency.getPossibleGroupMembers
+  #Grouping - save grouping
+  app.post '/api/transparency/grouping', auth.requiresEditor, transparency.createGrouping
+  #Grouping - get groupings
+  app.get '/api/transparency/grouping', transparency.getGroupings
+  #Grouping - update groupings
+  app.put '/api/transparency/grouping', auth.requiresEditor, transparency.updateGrouping
+  #Grouping - delete groupings
+  app.delete '/api/transparency/grouping', auth.requiresEditor, transparency.deleteGroupings
+  #Grouping - count
+  app.get '/api/transparency/grouping/count', auth.requiresEditor, transparency.countGroupings
+
   app.get '/api/transparency/federalstates', transparency.federalstates
   return
