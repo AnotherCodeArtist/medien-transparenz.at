@@ -31,6 +31,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.progress = 20
     $scope.showSettings = true
     #$scope.org = null
+    $scope.isDetails = false
     $scope.slider =
         from: 0
         to: 0
@@ -139,6 +140,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     $scope.showDetails = (node) ->
+        $scope.isDetails = true;
         if node.type is 'o'
             $scope.selectedOrganisations = [{name: node.name}]
             $scope.selectedMedia = []
@@ -250,9 +252,14 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         update() if (oldValue isnt newValue)
 
     $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
-        update()
+        if not $scope.isDetails
+            update()
+
     $scope.$watch 'selectedMedia', (newValue, oldValue) ->
-        update()
+        if not $scope.isDetails
+            update()
+        else
+            $scope.isDetails = false;
 
     filterThreshold = "NoValue"
     $scope.$watch 'filter', (newValue,oldValue) ->
