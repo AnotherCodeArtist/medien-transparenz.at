@@ -134,7 +134,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
-        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 
