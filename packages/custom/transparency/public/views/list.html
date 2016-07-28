@@ -7,6 +7,7 @@
             <span id="searchclear" ng-click="name=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
         </div>
     </div>
+    <div class="row">
     <div class="pull-right">
         <label data-ng-show="orgType=='org'"><span translate>Federal State</span>
             <select data-ng-model="selectedFederalState" class="btn btn-default"
@@ -18,6 +19,7 @@
             <select data-ng-model="size" class="btn btn-default" ng-options="size for size in sizes"></select>
         </label>
 
+    </div>
     </div>
     <div class="alert alert-danger" ng-show="error">
         {{error}}
