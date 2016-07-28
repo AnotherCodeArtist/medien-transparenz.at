@@ -151,6 +151,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
+        ###
         update()
         window.scrollTo 0,0
 
@@ -181,6 +182,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             #checkMaxLength(data)
             #console.log "Updated Data Model: " + Date.now()
             ###
+
             if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
                 $scope.org = {
                     name: $scope.selectedOrganisations[0].name
