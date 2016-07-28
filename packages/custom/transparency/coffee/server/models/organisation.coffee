@@ -37,7 +37,7 @@ OrganisationSchema = new Schema
 OrganisationSchema.index(
   {
       name: 1
-      federalState_en: 1
+      federalState: 1
   },{
       unique: true
   }

@@ -22,6 +22,9 @@ TransferSchema = new Schema
     organisationReference:
         type:Schema.Types.ObjectId
         ref: 'Organisation'
+    federalState:
+        type: String
+        trim: true
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]
@@ -35,6 +38,7 @@ TransferSchema.index(
     year: 1
     media: 1
     amount: 1
+    federalState : 1
     },{
     unique: true
     #dropDups: true
