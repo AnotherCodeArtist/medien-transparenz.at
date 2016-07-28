@@ -53,7 +53,7 @@
     "request": "latest",
     "serve-favicon": "latest",
     "shelljs": "latest",
-    "sorty": "latest",
+    "sorty": "^1.2.2",
     "swig": "latest",
     "view-helpers": "latest"
   },
