@@ -15,6 +15,9 @@
     "isteven-angular-multiselect": "latest",
     "q-io": "~2"
   },
+  "devDependencies": {
+    "del": "^2.2.1"
+  },
   "scripts": {
      "postinstall": "bower install"
   },
