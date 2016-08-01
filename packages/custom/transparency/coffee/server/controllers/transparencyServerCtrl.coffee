@@ -323,6 +323,138 @@ module.exports = (Transparency) ->
             (err) -> res.status(500).send("Could not load periods (#{err})!")
         )
 
+    filteredflows: (req, res) ->
+        getOtherMedia = (organisations, media, period, paymentTypes, federalState) ->
+            result = []
+            if (organisations and organisations.length > 0) and (media and media.length > 0)
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $in: organisations) if organisations.length > 0
+                (qry.media = $nin: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
+
+                grp =
+                    _id:
+                        organisation: "$organisation"
+                        organisationReference: "$organisationReference"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
+
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            organisation: data._id.organisation,
+                            transferType: data._id.transferType,
+                            media: "Other media"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
+        getOtherOrganisations = (organisations, media, period, paymentTypes, federalState) ->
+            result = []
+            if (media and media.length > 0) and (organisations and organisations.length > 0)
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $nin: organisations) if organisations.length > 0
+                (qry.media = $in: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
+
+                grp =
+                    _id:
+                        media: "$media"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
+
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            media: data._id.media,
+                            transferType: data._id.transferType,
+                            organisation: "Other organisations"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
+
+        try
+            maxLength = parseInt req.query.maxLength or "750"
+            federalState = req.query.federalState or ''
+            period = {}
+            period['$gte'] = parseInt(req.query.from) if req.query.from
+            period['$lte'] = parseInt(req.query.to) if req.query.to
+            paymentTypes = req.query.pType or []
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            query = {}
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+            organisations = req.query.organisations or []
+            organisations = [organisations] if organisations not instanceof Array
+            media = req.query.media or []
+            media = [media] if media not instanceof Array
+            (query.organisation = $in: organisations) if organisations.length > 0
+            (query.media = $in: media) if media.length > 0
+            if period.$gte? or period.$lte?
+                query.period = period
+
+            group =
+                _id:
+                    organisation: "$organisation"
+                    organisationReference: "$organisationReference"
+                    transferType: "$transferType"
+                    media: "$media"
+                amount:
+                    $sum: "$amount"
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(
+                organisation: "$_id.organisation",
+                organisationReference: "$_id.organisationReference",
+                transferType: "$_id.transferType",
+                media: "$_id.media"
+                _id: 0
+                amount: 1
+            )
+            .exec()
+            .then (result) ->
+                populatedPromise = getPopulateInformation(result, 'organisationReference')
+                .then(
+                    (isPopulated) ->
+                        if federalState
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
+                        getOtherMedia(organisations, media, period, paymentTypes, "").then (otherMedia) ->
+                            result = result.concat otherMedia
+                            getOtherOrganisations(organisations, media, period, paymentTypes, "").then (otherOrganisations) ->
+                                result = result.concat otherOrganisations
+                                if result.length > maxLength
+                                    res.status(413).send {
+                                        error: "You query returns more then the specified maximum of #{maxLength}"
+                                        length: result.length
+                                    }
+                                else
+                                    res.json result
+                )
+
+            .catch (err) ->
+                res.status(500).send error: "Could not load money flow: #{err}"
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
 
     flows: (req, res) ->
         try

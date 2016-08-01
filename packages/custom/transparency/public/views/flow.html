@@ -59,10 +59,13 @@
             </div>
         </div>
         <br/>
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
         <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
             <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
         </div>
+
         <div ng-show="error" class="alert alert-warning" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
             <span translate>Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.</span>
@@ -71,39 +74,53 @@
             <span class="glyphicon glyphicon-info-sign"></span>
             <span translate>Click on the rectangular boxes on either side of the chart to get more information on a particular organization</span>
         </div>
+        </div>
+        </div>
+        <div class="row">
+        <oi-select class="multiselectDropdown"
+                oi-options="item.name for item in allOrganisations track by item.name"
+                ng-model="selectedOrganisations"
+                multiple
+                placeholder="Organisations"
+        ></oi-select>
         <div class="sankeyChart">
             <div data-tpa-sankey data="flows" id="mychart"
                  prog="progress" node-click="showDetails">
             </div>
         </div>
+        <oi-select class="multiselectDropdown"
+                oi-options="item.name for item in allMedia track by item.name"
+                ng-model="selectedMedia"
+                multiple
+                placeholder="Media"
+        ></oi-select>
 
-        <div ng-show="org">
-            <br/>
+</div>
+        <div class="row" data-ng-show="flowData.length>0">
+
             <h4 translate>Tabular Representation</h4>
 
             <div class="table-responsive">
                 <table datatable="ng" dt-options="dtOptions" class="row-border hover">
                     <thead>
                     <tr>
-                        <th ng-show="org.orgType === 'org'" translate>Media</th>
-                        <th ng-show="org.orgType === 'media'" translate>Organisations</th>
+                        <th translate>Media</th>
+                        <th translate>Organisations</th>
                         <th translate>Payment Type</th>
                         <th translate>Amount</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in flowData">
-                        <td ng-show="org.orgType === 'org'">{{item.media}}</td>
-                        <td ng-show="org.orgType === 'media'">{{item.organisation}}</td>
+                        <td>{{item.media}}</td>
+                        <td>{{item.organisation}}</td>
                         <td>§{{item.transferType}}</td>
                         <td>{{item.amount|number:2}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <br/>
-            <br/>
         </div>
-    </div>
+        </div>
     <br/>
 </section>
