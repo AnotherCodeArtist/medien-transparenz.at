@@ -25,8 +25,8 @@
         {{error}}
     </div>
 
-    <uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-                    boundary-links="true"></uib-pagination>
+    <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                    boundary-links="true"></ul>
     <div class="alert alert-info" translate="translate" ng-show="count === 0">No entries found!</div>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="org in items">
@@ -44,8 +44,8 @@
         </li>
     </ul>
 
-    <uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-                    boundary-links="true"></uib-pagination>
+    <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                    boundary-links="true"></ul>
     <div style="clear:both;"><br></div>
 
 </section>

@@ -30,7 +30,10 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     page = $scope.page
     $timeout (-> $scope.page=page),100
     updateCount = ->
-        prom = TPAService.count orgType: $scope.orgType
+        searchObject =
+            orgType: $scope.orgType
+            federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState
+        prom = TPAService.count searchObject
         prom.then (res) ->
             $scope.count = res.data
         prom.catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
@@ -73,7 +76,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
         newName = newName or ''
         if newName.length > oldName.length
             if $scope.searchResult.length is 0 and newName.length > 2
-                TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso})
+                TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState})
                 .then (res) ->
                     $scope.searchResult = res.data[$scope.orgType]
                     $scope.filterResult = $scope.searchResult
@@ -89,9 +92,20 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
                 update()
             if newName.length > 2
                 applyFilter()
+    changeFederalState = ->
+        updateCount()
+        update()
+        if $scope.name
+            TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState})
+            .then (res) ->
+                $scope.searchResult = res.data[$scope.orgType]
+                $scope.filterResult = $scope.searchResult
+                $scope.count = $scope.filterResult.length
+                updatePage()
+            .catch (err) -> $scope.error = err.data
     $scope.$watch 'page', changeListener
     $scope.$watch 'size', changeListener
-    $scope.$watch 'selectedFederalState', changeListener
+    $scope.$watch 'selectedFederalState', changeFederalState
     $scope.$watch 'name', updateFilter
     $rootScope.$on '$stateChangeStart', ->
         TPAService.saveState stateId,fieldsToRestore, $scope
