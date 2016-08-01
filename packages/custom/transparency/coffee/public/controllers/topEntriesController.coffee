@@ -138,4 +138,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             location: true
             inherit: false
             reload: true
+
+
+
+
+
+
+
 ]
