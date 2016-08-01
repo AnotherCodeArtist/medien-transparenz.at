@@ -578,6 +578,7 @@ module.exports = (Transparency) ->
 
     search: (req,res) ->
         name = req.query.name
+        federalState = req.query.federalState if req.query.federalState
         if not name
             res.status(400).send error: "'name' is required!"
             return
@@ -588,8 +589,6 @@ module.exports = (Transparency) ->
             q
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
-            $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
-            query = $or: $or
             group =
                 _id:
                     name: "$#{nameField}"
@@ -598,15 +597,22 @@ module.exports = (Transparency) ->
                     $addToSet: "$year"
                 total: $sum: "$amount"
                 transferTypes: $addToSet: "$transferType"
-            Transfer.aggregate($match: query)
-            .group(group)
-            .project(
+            project =
                 name: '$_id.name'
                 _id: 0
                 years: 1
                 total: 1
                 transferTypes: 1
-            )
+
+            $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
+            if not federalState
+                    query = $or: $or
+                else
+                    query = $and: $or
+                    query.$and.push {"federalState": federalState}
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(project)
             .sort('name')
             .exec()
         all = Q.all types.map (t) ->
@@ -621,9 +627,19 @@ module.exports = (Transparency) ->
         types = if req.query.orgType then [req.query.orgType] else ['org','media']
         page = parseInt req.query.page or "0"
         size = parseInt req.query.size or "50"
+        federalState = req.query.federalState
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             query = {}
+            if federalState?
+                query.federalState = federalState
+            project ={}
+            project =
+                name: '$_id.name'
+                _id: 0
+                years: 1
+                total: 1
+                transferTypes: 1
             group =
                 _id:
                     name: "$#{nameField}"
@@ -634,13 +650,7 @@ module.exports = (Transparency) ->
                 transferTypes: $addToSet: "$transferType"
             Transfer.aggregate($match: query)
             .group(group)
-            .project(
-                name: '$_id.name'
-                _id: 0
-                years: 1
-                total: 1
-                transferTypes: 1
-            )
+            .project(project)
             .sort('name').skip(page*size).limit(size)
             .exec()
         all = Q.all types.map (t) ->
@@ -653,12 +663,16 @@ module.exports = (Transparency) ->
 
     count: (req,res) ->
         type = req.query.orgType or 'org'
+        federalState = req.query.federalState if req.query.federalState
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             query = {}
             group =
                 _id:
                     name: "$#{nameField}"
+            if federalState
+                query.federalState = federalState
+                group._id.federalState = federalState
             Transfer.aggregate($match: query)
             .group(group)
             .exec()
