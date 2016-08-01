@@ -73,7 +73,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
         newName = newName or ''
         if newName.length > oldName.length
             if $scope.searchResult.length is 0 and newName.length > 2
-                TPAService.search( {name: $scope.name, orgType: $scope.orgType})
+                TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso})
                 .then (res) ->
                     $scope.searchResult = res.data[$scope.orgType]
                     $scope.filterResult = $scope.searchResult

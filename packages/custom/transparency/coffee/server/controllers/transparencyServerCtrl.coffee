@@ -446,6 +446,7 @@ module.exports = (Transparency) ->
 
     search: (req,res) ->
         name = req.query.name
+        federalState = req.query.federalState if req.query.federalState
         if not name
             res.status(400).send error: "'name' is required!"
             return
@@ -457,7 +458,10 @@ module.exports = (Transparency) ->
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
+
             query = $or: $or
+            if federalState?
+                query = $and = {}
             group =
                 _id:
                     name: "$#{nameField}"
