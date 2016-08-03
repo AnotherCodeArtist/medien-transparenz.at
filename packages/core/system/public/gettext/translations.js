@@ -48,6 +48,8 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Number of non-emtpy entries": "Anzahl der Meldungen (ohne Leermeldungen)",
         "Organisation": "Organisation",
         "Organisations": "Organisationen",
+        "Other media": "Andere Medien",
+        "Other organisations": "Andere Organisationen",
         "Others": "Andere",
         "Overview": "Übersicht",
         "Payment Type": "Zahlungstyp",
