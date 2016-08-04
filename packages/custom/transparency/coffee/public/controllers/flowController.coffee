@@ -252,11 +252,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         update() if (oldValue isnt newValue)
 
     $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
-        if not $scope.isDetails
+        if not $scope.isDetails and not ($scope.selectedMedia or $scope.selectedOrganisations)
             update()
 
     $scope.$watch 'selectedMedia', (newValue, oldValue) ->
-        if not $scope.isDetails
+        if not $scope.isDetails and not ($scope.selectedMedia or $scope.selectedOrganisations)
             update()
         else
             $scope.isDetails = false;
