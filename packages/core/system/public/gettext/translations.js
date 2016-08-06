@@ -1,7 +1,7 @@
 angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
     /* jshint -W100 */
     gettextCatalog.setStrings('de',{
-        "About Media Transparency Austria": "Über Medientransparenz Österreich",
+        "About Us": "Über uns",
         "All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n        improved by correcting the most obvious errors using": "Alle Daten, die über diese Website veröffentlicht werden, stammen aus den Quartalsberichten, die von der KommAustria veröffentlicht werden. Anschließend wurden dann die offensichtlichsten Fehler halbautomatisch korrigiert. Dies erfolgte unter Verwendung von ",
         "Although this was meant to significantly improve the data qualtity it could have also introduced some errors": "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, kann es dadurch aber auch zu zusätzlichen Fehlern kommen.",
         "Amount": "Betrag",

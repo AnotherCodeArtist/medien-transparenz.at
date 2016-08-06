@@ -75,7 +75,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     newV = newV.multiplyScalar(10000);
                     newV = newV.add(raycaster.ray.origin);
                     geometry.vertices.push(newV);
-                    line = new THREE.Line(geometry, materials.phong (new THREE.Color("rgb(241, 176, 0)")));
+                    line = new THREE.Line(geometry, materials.phongNotTransparent (new THREE.Color("rgb(241, 176, 0)")));
 
                     scene.add line
 
@@ -83,12 +83,13 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
 
                toolTipDiv = document.getElementById 'toolTip'
                if ( intersects.length > 0 )
+                    ###
                     for object in objects
                          if object.userData.bundesland isnt intersects[0].object.userData.bundesland
                               object.material = materials.phong(defaults.color({iso: object.userData.bundesland}));
                          else
                               object.material = materials.phongNotTransparent(defaults.color({iso: object.userData.bundesland}))
-                    render()
+                    render()###
                     $rootScope.$broadcast 'isoChanged', transferSums[intersects[0].object.userData.bundesland]
                     toolTipDiv.style.display = 'block';
 
@@ -106,9 +107,10 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
           element.on('mouseleave', () ->
                document.getElementById 'toolTip'
                .style.display = 'none';
-               for object in objects
+               ###for object in objects
                     object.material = materials.phong(defaults.color({iso: object.userData.bundesland}));
                render()
+###
           )
 
           #Store downloaded JSON in variable
@@ -314,7 +316,7 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     amount: amount,
                     bevelEnabled: false
                };
-               material = 'phong';
+               material = 'phongNotTransparent';
                iso = feature.properties.iso
                if (feature.geometry.type is 'Polygon')
                     shape = createPolygonShape(feature.geometry.coordinates, projection)
