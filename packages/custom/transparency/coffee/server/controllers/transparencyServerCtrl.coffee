@@ -187,7 +187,7 @@ handleGroupings = (groupings, transfers, limit) ->
             transfer.organisation not in groupingTransfersNames
         )
 
-        transfersWithGrouping.push({total: groupingTotalAmount, organisation: grouping.name})
+        transfersWithGrouping.push({total: groupingTotalAmount, organisation: grouping.name, isGrouping: true})
         #console.log( "Group entry added: " + JSON.stringify(transfersWithGrouping[transfersWithGrouping.length-1]))
     #Sort array of transfers by total amount
     sorty([{name: 'total',  dir: 'desc', type: 'number'}], transfersWithGrouping)

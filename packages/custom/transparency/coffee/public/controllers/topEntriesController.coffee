@@ -47,7 +47,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 
     buildPieModel = ->
         $scope.pieData = []
-        $scope.pieData.push {key: entry.organisation, y: entry.total} for entry in $scope.top.top
+        $scope.pieData.push {key: entry.organisation, y: entry.total, isGrouping: entry.isGrouping} for entry in $scope.top.top
         topSum = $scope.top.top.reduce(
             (sum, entry) ->
                 sum + entry.total
@@ -127,15 +127,16 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 
     #prevents clicks on "Others" to trigger a navigation        
     $scope.preventClickForOthers = (d) -> d.data.key in ["Others","Andere"]
-        
+
     #navigate to some other page
     $scope.go = (d) ->
         TPAService.saveState stateName,fieldsToStore,$scope
         window.scrollTo 0, 0
         $state.go 'showflow',
             {
-                name: d.data.key
+                name: d.data.key if not d.data.isGrouping
                 orgType: $scope.orgType
+                grouping: d.data.key if d.data.isGrouping
                 from: $scope.periods[$scope.slider.from/5].period
                 to: $scope.periods[$scope.slider.to/5].period
                 fedState: $scope.selectedFederalState.iso if $scope.selectedFederalState
