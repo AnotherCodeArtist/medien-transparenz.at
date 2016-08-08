@@ -5,8 +5,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'fixedRange']
     $scope.periods = []
+    $scope.fixedRange = false
     $scope.slider =
         from: 0
         to: 0
@@ -15,6 +16,16 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             floor:0
             onEnd: -> change(1,2)
             translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+    $scope.slider2 =
+        options:
+            step:5
+            floor:0
+            onEnd: -> change(1,2)
+            translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+            draggableRangeOnly: true
+
+    $scope.fixRangeLabel = gettextCatalog.getString 'Fix slider range'
+
     $scope.showSettings = true
     $scope.ranks = [3, 5, 10, 15, 20]
     $scope.rank = 10
@@ -109,6 +120,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.orgTypes[1].name = gettextCatalog.getString('Recipient')
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
+        $scope.fixRangeLabel = gettextCatalog.getString 'Fix slider range'
 
     $scope.$on 'gettextLanguageChanged', translate
 

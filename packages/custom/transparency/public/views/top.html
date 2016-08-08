@@ -14,7 +14,11 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
                         <strong><div translate>Periods</div></strong>
-                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
+                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
+                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider2.options" ng-show="fixedRange"></rzslider>
+                        <div class="checkbox">
+                            <label translate><input id="fixRange" type="checkbox" ng-model="fixedRange" />{{fixRangeLabel}}</label>
+                        </div>
                         <p class="small text-info" translate>Move the sliders to define a range</p>
                     </div>
                     <div class="col-sm-2 col-lg-2">
