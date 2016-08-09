@@ -66,7 +66,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params = {}
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
-        params.to = $scope.periods[$scope.slider.to/5].period
+        (params.to = $scope.periods[$scope.slider.to/5].period) if $scope.periods
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -75,8 +75,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
         ###
-        params.media = $scope.selectedMedia.map (media) -> media.name
-        params.organisations = $scope.selectedOrganisations.map (org) -> org.name
+        if $scope.selectedMedia
+            params.media = $scope.selectedMedia.map (media) -> media.name
+        if $scope.selectedOrganisations
+            params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
