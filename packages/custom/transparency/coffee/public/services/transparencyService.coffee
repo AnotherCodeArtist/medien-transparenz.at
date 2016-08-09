@@ -20,6 +20,9 @@ class TPAService
     flows: (params) ->
         @$http.get 'api/transparency/flows', params: params
 
+    filteredflows: (params) ->
+        @$http.get 'api/transparency/filteredflows', params: params
+
     list: (params) ->
         @$http.get 'api/transparency/list', params: params
 

@@ -1,8 +1,8 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog',
-($scope, TPAService, $q, $state, gettextCatalog) ->
+app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope',
+($scope, TPAService, $q, $state, gettextCatalog, $rootScope) ->
     params = {}
     stateName = "topState"
     fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
@@ -128,9 +128,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     #prevents clicks on "Others" to trigger a navigation        
     $scope.preventClickForOthers = (d) -> d.data.key in ["Others","Andere"]
 
+    $rootScope.$on '$stateChangeStart', ->
+        TPAService.saveState stateName,fieldsToStore, $scope
+
     #navigate to some other page
     $scope.go = (d) ->
-        TPAService.saveState stateName,fieldsToStore,$scope
         window.scrollTo 0, 0
         $state.go 'showflow',
             {

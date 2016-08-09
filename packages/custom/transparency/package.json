@@ -13,7 +13,11 @@
   "dependencies": {
     "connect-multiparty": "latest",
     "q-io": "~2",
-    "sorty": "^1.2.2"
+    "isteven-angular-multiselect": "latest",
+    "q-io": "~2"
+  },
+  "devDependencies": {
+    "del": "^2.2.1"
   },
   "scripts": {
      "postinstall": "bower install"

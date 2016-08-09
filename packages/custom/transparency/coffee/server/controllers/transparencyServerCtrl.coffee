@@ -345,6 +345,138 @@ module.exports = (Transparency) ->
             (err) -> res.status(500).send("Could not load periods (#{err})!")
         )
 
+    filteredflows: (req, res) ->
+        getOtherMedia = (organisations, media, period, paymentTypes, federalState) ->
+            result = []
+            if (organisations and organisations.length > 0) and (media and media.length > 0)
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $in: organisations) if organisations.length > 0
+                (qry.media = $nin: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
+
+                grp =
+                    _id:
+                        organisation: "$organisation"
+                        organisationReference: "$organisationReference"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
+
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            organisation: data._id.organisation,
+                            transferType: data._id.transferType,
+                            media: "Other media"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
+        getOtherOrganisations = (organisations, media, period, paymentTypes, federalState) ->
+            result = []
+            if (media and media.length > 0) and (organisations and organisations.length > 0)
+                qry = {}
+                (qry.transferType = $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+                (qry.organisation = $nin: organisations) if organisations.length > 0
+                (qry.media = $in: media) if media.length > 0
+                if period.$gte? or period.$lte?
+                    qry.period = period
+
+                grp =
+                    _id:
+                        media: "$media"
+                        transferType: "$transferType"
+                    amount:
+                        $sum: "$amount"
+
+                Transfer.aggregate($match: qry)
+                .group grp
+                .exec()
+                .then (rslt) ->
+                    for data in rslt
+                        result.push {
+                            amount: data.amount,
+                            media: data._id.media,
+                            transferType: data._id.transferType,
+                            organisation: "Other organisations"
+                        }
+                    result
+            else
+                new Promise (resolve, reject) ->
+                    resolve result
+
+        try
+            maxLength = parseInt req.query.maxLength or "750"
+            federalState = req.query.federalState or ''
+            period = {}
+            period['$gte'] = parseInt(req.query.from) if req.query.from
+            period['$lte'] = parseInt(req.query.to) if req.query.to
+            paymentTypes = req.query.pType or []
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            query = {}
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+            organisations = req.query.organisations or []
+            organisations = [organisations] if organisations not instanceof Array
+            media = req.query.media or []
+            media = [media] if media not instanceof Array
+            (query.organisation = $in: organisations) if organisations.length > 0
+            (query.media = $in: media) if media.length > 0
+            if period.$gte? or period.$lte?
+                query.period = period
+
+            group =
+                _id:
+                    organisation: "$organisation"
+                    organisationReference: "$organisationReference"
+                    transferType: "$transferType"
+                    media: "$media"
+                amount:
+                    $sum: "$amount"
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(
+                organisation: "$_id.organisation",
+                organisationReference: "$_id.organisationReference",
+                transferType: "$_id.transferType",
+                media: "$_id.media"
+                _id: 0
+                amount: 1
+            )
+            .exec()
+            .then (result) ->
+                populatedPromise = getPopulateInformation(result, 'organisationReference')
+                .then(
+                    (isPopulated) ->
+                        if federalState
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
+                        getOtherMedia(organisations, media, period, paymentTypes, "").then (otherMedia) ->
+                            result = result.concat otherMedia
+                            getOtherOrganisations(organisations, media, period, paymentTypes, "").then (otherOrganisations) ->
+                                result = result.concat otherOrganisations
+                                if result.length > maxLength
+                                    res.status(413).send {
+                                        error: "You query returns more then the specified maximum of #{maxLength}"
+                                        length: result.length
+                                    }
+                                else
+                                    res.json result
+                )
+
+            .catch (err) ->
+                res.status(500).send error: "Could not load money flow: #{err}"
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
 
     flows: (req, res) ->
         try
@@ -497,6 +629,7 @@ module.exports = (Transparency) ->
 
     search: (req,res) ->
         name = req.query.name
+        federalState = req.query.federalState if req.query.federalState
         if not name
             res.status(400).send error: "'name' is required!"
             return
@@ -507,8 +640,6 @@ module.exports = (Transparency) ->
             q
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
-            $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
-            query = $or: $or
             group =
                 _id:
                     name: "$#{nameField}"
@@ -517,15 +648,22 @@ module.exports = (Transparency) ->
                     $addToSet: "$year"
                 total: $sum: "$amount"
                 transferTypes: $addToSet: "$transferType"
-            Transfer.aggregate($match: query)
-            .group(group)
-            .project(
+            project =
                 name: '$_id.name'
                 _id: 0
                 years: 1
                 total: 1
                 transferTypes: 1
-            )
+
+            $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
+            if not federalState
+                    query = $or: $or
+                else
+                    query = $and: $or
+                    query.$and.push {"federalState": federalState}
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(project)
             .sort('name')
             .exec()
         all = Q.all types.map (t) ->
@@ -540,9 +678,19 @@ module.exports = (Transparency) ->
         types = if req.query.orgType then [req.query.orgType] else ['org','media']
         page = parseInt req.query.page or "0"
         size = parseInt req.query.size or "50"
+        federalState = req.query.federalState
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             query = {}
+            if federalState?
+                query.federalState = federalState
+            project ={}
+            project =
+                name: '$_id.name'
+                _id: 0
+                years: 1
+                total: 1
+                transferTypes: 1
             group =
                 _id:
                     name: "$#{nameField}"
@@ -553,13 +701,7 @@ module.exports = (Transparency) ->
                 transferTypes: $addToSet: "$transferType"
             Transfer.aggregate($match: query)
             .group(group)
-            .project(
-                name: '$_id.name'
-                _id: 0
-                years: 1
-                total: 1
-                transferTypes: 1
-            )
+            .project(project)
             .sort('name').skip(page*size).limit(size)
             .exec()
         all = Q.all types.map (t) ->
@@ -572,12 +714,16 @@ module.exports = (Transparency) ->
 
     count: (req,res) ->
         type = req.query.orgType or 'org'
+        federalState = req.query.federalState if req.query.federalState
         performQuery = (orgType) ->
             nameField = if orgType is 'org' then 'organisation' else 'media'
             query = {}
             group =
                 _id:
                     name: "$#{nameField}"
+            if federalState
+                query.federalState = federalState
+                group._id.federalState = federalState
             Transfer.aggregate($match: query)
             .group(group)
             .exec()
