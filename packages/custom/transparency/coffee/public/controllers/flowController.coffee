@@ -128,7 +128,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
-        update()
+
 
     $scope.$on 'gettextLanguageChanged', translate
 
@@ -275,10 +275,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         savedState = sessionStorage.getItem stateName
         if stateParamsExist
             checkForStateParams()
-            update()
         else if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
-            update()
         else
             startLoading()
             TPAService.search({name: '   '})
@@ -297,17 +295,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.selectedOrganisations = [];
                 $scope.selectedMedia = [];
                 stopLoading()
-                update()
 
-        $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
-            if not $scope.isDetails
-                update()
-
-        $scope.$watch 'selectedMedia', (newValue, oldValue) ->
-            if not $scope.isDetails
-                update()
-            else
-                $scope.isDetails = false;
+        $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
+            update()
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
