@@ -58,6 +58,21 @@ class TPAService
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
         sessionStorage.setItem itemId, JSON.stringify state
 
+    saveClientGroup: (type, groupName, elements) ->
+        clientGroups = TPAService.prototype.getClientGroups type
+        clientGroups.push {
+            groupName: groupName
+            elements: elements
+        }
+        sessionStorage.setItem type, JSON.stringify clientGroups
+
+    getClientGroups: (type) ->
+        clientGroups = sessionStorage.getItem type
+        if clientGroups
+            JSON.parse clientGroups
+        else
+            []
+
     restoreState:  (itemId, fieldsToStore, $scope) ->
         savedState = sessionStorage.getItem itemId
         if savedState

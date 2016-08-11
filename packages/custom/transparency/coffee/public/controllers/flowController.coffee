@@ -61,6 +61,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.mediaLabel = gettextCatalog.getString 'Media'
     $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+    $scope.organisationGroupsLabel = gettextCatalog.getString 'Organisation groups'
+    $scope.mediaGroupsLabel = gettextCatalog.getString 'Media groups'
+    $scope.groupNameLabel = gettextCatalog.getString 'Group name'
 
     parameters = ->
         params = {}
@@ -128,6 +131,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+        $scope.organisationGroupsLabel = gettextCatalog.getString 'Organisation groups'
+        $scope.mediaGroupsLabel = gettextCatalog.getString 'Media groups'
+        $scope.groupNameLabel = gettextCatalog.getString 'Group name'
         update()
 
     $scope.$on 'gettextLanguageChanged', translate
@@ -266,6 +272,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $rootScope.$on '$stateChangeStart', ->
         TPAService.saveState stateName,fieldsToStore, $scope
 
+    $scope.allOrganisationGroups = TPAService.getClientGroups 'OrganisationGroups'
+    $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
+    $scope.selectedMediaGroups = []
+    $scope.selectedOrganisationGroups = []
+
     $q.all([pP]).then (res) ->
         stateParamsExist = false
         if $state.params
@@ -313,4 +324,28 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
         $scope.$watch('typesText',change,true)
+        
+    $scope.groupOrganisations = () ->
+        groupName = $scope.organisationGroupName
+        elements = $scope.selectedOrganisations.map (org) -> org.name
+        TPAService.saveClientGroup 'OrganisationGroups', groupName, elements
+        $scope.organisationGroupName = ""
+        $scope.allOrganisationGroups = TPAService.getClientGroups 'OrganisationGroups'
+        array = $scope.selectedOrganisationGroups.concat [{
+            groupName: groupName
+            elements: elements
+        }]
+        $scope.selectedOrganisationGroups = array
+
+    $scope.groupMedia = () ->
+        groupName = $scope.mediaGroupName
+        elements = $scope.selectedMedia.map (media) -> media.name
+        TPAService.saveClientGroup 'MediaGroups', $scope.mediaGroupName, $scope.selectedMedia.map (media) -> media.name
+        $scope.mediaGroupName = ""
+        $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
+        array = $scope.selectedMediaGroups.concat [{
+            groupName: groupName
+            elements: elements
+        }]
+        $scope.selectedMediaGroups = array
 ]

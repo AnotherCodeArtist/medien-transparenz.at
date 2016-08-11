@@ -82,57 +82,97 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <span>{{organisationsLabel}}:</span>
-                <oi-select class="multiselectDropdown"
-                           oi-options="item.name for item in allOrganisations track by item.name"
-                           ng-model="selectedOrganisations"
-                           multiple
-                           placeholder="{{organisationsLabel}}"
-                >
+                <form class="form-horizontal" role="form" name="organisationGroupForm">
+                    <div class="form-group nomargin">
+                        <label>{{organisationGroupsLabel}}:</label>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.groupName for item in allOrganisationGroups track by item.groupName"
+                                   ng-model="selectedOrganisationGroups"
+                                   multiple
+                                   placeholder="{{organisationGroupsLabel}}"
+                        >
 
-                </oi-select></div>
+                        </oi-select>
+                    </div>
+                    <div class="form-group nomargin">
+                        <label>{{organisationsLabel}}:</label>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allOrganisations track by item.name"
+                                   ng-model="selectedOrganisations"
+                                   multiple
+                                   placeholder="{{organisationsLabel}}"
+                        >
+
+                        </oi-select>
+                    </div>
+                    <div class="form-group nomargin">
+                        <label for="groupNameOrganisation">{{groupNameLabel}}:</label>
+                        <input id="groupNameOrganisation" type="text" required ng-model="organisationGroupName"/>
+                        <button translate class="btn btn-primary" ng-click="groupOrganisations()" ng-disabled="organisationGroupForm.$invalid">Group current selection</button>
+                    </div>
+                </form>
+            </div>
             <div class="col-md-6">
-                <span>{{mediaLabel}}:</span>
-                <oi-select class="multiselectDropdown"
-                           oi-options="item.name for item in allMedia track by item.name"
-                           ng-model="selectedMedia"
-                           multiple
-                           placeholder="{{mediaLabel}}"
-                ></oi-select></div>
-        </div>
-        <div class="row">
-            <div class="sankeyChart col-md-12">
-                <div data-tpa-sankey data="flows" id="mychart"
-                     prog="progress" node-click="showDetails">
+                <form class="form-horizontal" role="form" name="mediaGroupForm">
+                    <div class="form-group nomargin">
+                        <label>{{mediaGroupsLabel}}:</label>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.groupName for item in allMediaGroups track by item.groupName"
+                                   ng-model="selectedMediaGroups"
+                                   multiple
+                                   placeholder="{{mediaGroupsLabel}}"
+                        >
+
+                        </oi-select>
+                    </div>
+                    <div class="form-group nomargin">
+                        <label>{{mediaLabel}}:</label>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allMedia track by item.name"
+                                   ng-model="selectedMedia"
+                                   multiple
+                                   placeholder="{{mediaLabel}}"
+                        ></oi-select></div>
+                    <div class="form-group nomargin">
+                        <label for="groupNameMedia">{{groupNameLabel}}:</label>
+                        <input id="groupNameMedia" type="text" required ng-model="mediaGroupName" />
+                        <button translate class="btn btn-primary" ng-click="groupMedia()" ng-disabled="mediaGroupForm.$invalid">Group current selection</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="sankeyChart col-md-12">
+                    <div data-tpa-sankey data="flows" id="mychart"
+                         prog="progress" node-click="showDetails">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" data-ng-show="flowData.length>0">
+
+                <h4 translate>Tabular Representation</h4>
+
+                <div class="table-responsive">
+                    <table datatable="ng" dt-options="dtOptions" class="row-border hover">
+                        <thead>
+                        <tr>
+                            <th translate>Media</th>
+                            <th translate>Organisations</th>
+                            <th translate>Payment Type</th>
+                            <th translate>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in flowData">
+                            <td>{{item.media}}</td>
+                            <td>{{item.organisation}}</td>
+                            <td>§{{item.transferType}}</td>
+                            <td>{{item.amount|number:2}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
-        <div class="row" data-ng-show="flowData.length>0">
-
-            <h4 translate>Tabular Representation</h4>
-
-            <div class="table-responsive">
-                <table datatable="ng" dt-options="dtOptions" class="row-border hover">
-                    <thead>
-                    <tr>
-                        <th translate>Media</th>
-                        <th translate>Organisations</th>
-                        <th translate>Payment Type</th>
-                        <th translate>Amount</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in flowData">
-                        <td>{{item.media}}</td>
-                        <td>{{item.organisation}}</td>
-                        <td>§{{item.transferType}}</td>
-                        <td>{{item.amount|number:2}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <br/>
+        <br/>
 </section>
