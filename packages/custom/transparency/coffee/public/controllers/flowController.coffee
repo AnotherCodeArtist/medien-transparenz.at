@@ -70,16 +70,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
-        ###
-        if $scope.org
-            params.name = $scope.org.name
-            params.orgType = $scope.org.orgType
-        ###
         if $scope.selectedMedia
             params.media = $scope.selectedMedia.map (media) -> media.name
         if $scope.selectedOrganisations
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
-        console.log ("PARAMS" + JSON.stringify(params))
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -110,36 +104,36 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         else
             value
 
-    loadGroupingMembers = (groupingName) ->
-        groupingMembers = []
-        TPAService.getGroupingMembers({name: groupingName})
-        .then (res) ->
-            if res.data[0].members
-                for member in res.data[0].members
-                    groupingMembers.push {name: member}
-                groupingType = res.data[0].type
-                if groupingType is 'org'
-                    $scope.selectedOrganisations = groupingMembers
-                else if groupingType is 'media'
-                    $scope.selectedMedia = groupingMembers
-
-        .catch (err) ->
-            console.log err
-
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
         #$scope.org = {} if $state.params.name or $state.params.orgType
-        if $state.params.grouping
-            loadGroupingMembers($state.params.grouping)
-        else if $state.params.name
+         if $state.params.name
             if $state.params.orgType is 'org'
                 $scope.selectedOrganisations = [{name: $state.params.name}]
-            if $state.params.orgType is 'media'
+            else if $state.params.orgType is 'media'
                 $scope.selectedMedia = [{name: $state.params.name}]
-        #$scope.org.orgType = $state.params.orgType if $state.params.orgType
-        $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
-        $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
-        if $state.params.pTypes?
+         # Load grouping
+         else if  $state.params.grouping
+             groupingMembers = []
+             # Load grouping by name
+             TPAService.getGroupingMembers({name: $state.params.grouping})
+             .then (res) ->
+                 if res.data[0].members
+                     for member in res.data[0].members
+                         #create entry used by controller
+                         groupingMembers.push {name: member}
+                     #save group members for selection
+                     if res.data[0].type is 'org'
+                        $scope.selectedOrganisations = groupingMembers
+                     else if res.data[0].type is 'media'
+                         $scope.selectedMedia = groupingMembers
+             .catch (err) ->
+                 console.log err
+
+         #$scope.org.orgType = $state.params.orgType if $state.params.orgType
+         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
+         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
+         if $state.params.pTypes?
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
 
@@ -186,41 +180,42 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
         console.log "Starting update: " + Date.now()
         startLoading()
-        TPAService.filteredflows(parameters())
-        .then (res) ->
-            stopLoading()
-            #console.log "Got result from Server: " + Date.now()
-            $scope.error = null
-            init = true
-            flowData = res.data
-            for flowDatum in flowData
-                if flowDatum.organisation is 'Other organisations'
-                    flowDatum.organisation = gettextCatalog.getString flowDatum.organisation
-                if flowDatum.media is 'Other media'
-                    flowDatum.media = gettextCatalog.getString flowDatum.media
-            $scope.flowData = flowData
-            $scope.flows = buildNodes filterData flowData
-            #checkMaxLength(data)
-            #console.log "Updated Data Model: " + Date.now()
-            ###
-            if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
-                $scope.org = {
-                    name: $scope.selectedOrganisations[0].name
-                    orgType: 'org'
-                }
-            else if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 1
-                $scope.org = {
-                    name: $scope.selectedMedia[0].name
-                    orgType: 'media'
-                }
-            else
-                $scope.org = null
-            ###
-        .catch (res) ->
-            stopLoading()
-            $scope.flowData = []
-            $scope.flows = nodes:[],links:[]
-            $scope.error = res.data
+        if $scope.selectedOrganisations or $scope.selectedMedia
+            TPAService.filteredflows(parameters())
+            .then (res) ->
+                stopLoading()
+                #console.log "Got result from Server: " + Date.now()
+                $scope.error = null
+                init = true
+                flowData = res.data
+                for flowDatum in flowData
+                    if flowDatum.organisation is 'Other organisations'
+                        flowDatum.organisation = gettextCatalog.getString flowDatum.organisation
+                    if flowDatum.media is 'Other media'
+                        flowDatum.media = gettextCatalog.getString flowDatum.media
+                $scope.flowData = flowData
+                $scope.flows = buildNodes filterData flowData
+                #checkMaxLength(data)
+                #console.log "Updated Data Model: " + Date.now()
+                ###
+                if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
+                    $scope.org = {
+                        name: $scope.selectedOrganisations[0].name
+                        orgType: 'org'
+                    }
+                else if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 1
+                    $scope.org = {
+                        name: $scope.selectedMedia[0].name
+                        orgType: 'media'
+                    }
+                else
+                    $scope.org = null
+                ###
+            .catch (res) ->
+                stopLoading()
+                $scope.flowData = []
+                $scope.flows = nodes:[],links:[]
+                $scope.error = res.data
 
 
     checkMaxLength = (data) ->
@@ -298,22 +293,22 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             TPAService.restoreState stateName, fieldsToStore, $scope
         else
             startLoading()
-            TPAService.search({name: '   '})
-            .then (res) ->
-                $scope.mediaLabel = gettextCatalog.getString('Media')
-                $scope.organisationLabel = gettextCatalog.getString('Organisation')
-                $scope.allOrganisations = res.data.org.map (o) ->
-                    {
-                        name: o.name,
-                    }
-                $scope.allMedia = res.data.media.map (m) ->
-                    {
-                        name: m.name,
-                    }
+            $scope.selectedOrganisations = [];
+            $scope.selectedMedia = [];
+            stopLoading()
+        TPAService.search({name: '   '})
+        .then (res) ->
+            $scope.mediaLabel = gettextCatalog.getString('Media')
+            $scope.organisationLabel = gettextCatalog.getString('Organisation')
+            $scope.allOrganisations = res.data.org.map (o) ->
+                {
+                    name: o.name,
+                }
+            $scope.allMedia = res.data.media.map (m) ->
+                {
+                    name: m.name,
+                }
 
-                $scope.selectedOrganisations = [];
-                $scope.selectedMedia = [];
-                stopLoading()
 
         $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
             update()
