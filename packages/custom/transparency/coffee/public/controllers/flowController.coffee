@@ -6,7 +6,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope) ->
 
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia', 'selectedMediaGroups', 'selectedOrganisationGroups']
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -407,8 +407,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.allOrganisationGroups = TPAService.getClientGroups 'OrganisationGroups'
     $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
-    $scope.selectedMediaGroups = []
-    $scope.selectedOrganisationGroups = []
 
     $q.all([pP]).then (res) ->
         stateParamsExist = false
@@ -441,6 +439,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
                 $scope.selectedOrganisations = [];
                 $scope.selectedMedia = [];
+                $scope.selectedMediaGroups = []
+                $scope.selectedOrganisationGroups = []
                 stopLoading()
                 update()
 
