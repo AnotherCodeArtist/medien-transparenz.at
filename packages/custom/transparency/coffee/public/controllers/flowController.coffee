@@ -79,6 +79,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.media = $scope.selectedMedia.map (media) -> media.name
         if $scope.selectedOrganisations
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
+        console.log ("PARAMS" + JSON.stringify(params))
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -109,10 +110,28 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         else
             value
 
+    loadGroupingMembers = (groupingName) ->
+        groupingMembers = []
+        TPAService.getGroupingMembers({name: groupingName})
+        .then (res) ->
+            if res.data[0].members
+                for member in res.data[0].members
+                    groupingMembers.push {name: member}
+                groupingType = res.data[0].type
+                if groupingType is 'org'
+                    $scope.selectedOrganisations = groupingMembers
+                else if groupingType is 'media'
+                    $scope.selectedMedia = groupingMembers
+
+        .catch (err) ->
+            console.log err
+
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
         #$scope.org = {} if $state.params.name or $state.params.orgType
-        if $state.params.name
+        if $state.params.grouping
+            loadGroupingMembers($state.params.grouping)
+        else if $state.params.name
             if $state.params.orgType is 'org'
                 $scope.selectedOrganisations = [{name: $state.params.name}]
             if $state.params.orgType is 'media'
@@ -158,7 +177,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
-        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0)
+        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
