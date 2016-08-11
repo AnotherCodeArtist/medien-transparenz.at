@@ -167,6 +167,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0)
             TPAService.top parameters()
             .then (res) ->
+
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
                 return
             return
@@ -254,7 +255,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         sum = 0
 
         groupNodes = buildGroupNodes nodesNum
-        console.log groupNodes
         nodesNum += Object.keys(groupNodes.groupNodeMap).length
         angular.merge nodeMap, groupNodes.groupNodeMap
 
@@ -378,7 +378,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     type: entry.transferType
                 )
             sum += entry.amount
-            console.log links
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
@@ -445,17 +444,59 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 update()
 
         $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
+            $scope.selectedOrganisationGroups.forEach (orgGrp) ->
+                orgGrp.elements.forEach (org) ->
+                    found = false
+                    for organisation in $scope.selectedOrganisations
+                        if organisation.name is org
+                            found = true
+                            break
+
+                    if !found
+                        $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
+
             if not $scope.isDetails
                 update()
 
         $scope.$watch 'selectedMedia', (newValue, oldValue) ->
+            $scope.selectedMediaGroups.forEach (mediaGrp) ->
+                mediaGrp.elements.forEach (med) ->
+                    found = false
+                    for media in $scope.selectedMedia
+                        if media.name is med
+                            found = true
+                            break
+
+                    if !found
+                        $scope.selectedMedia = $scope.selectedMedia.concat [{name: med}]
             if not $scope.isDetails
                 update()
             else
                 $scope.isDetails = false;
         $scope.$watch 'selectedOrganisationGroups', (newValue, oldValue) ->
+            if newValue.length > oldValue.length
+                newValue[newValue.length-1].elements.forEach (org) ->
+                    found = false
+                    for organisation in $scope.selectedOrganisations
+                        if organisation.name is org
+                            found = true
+                            break
+
+                    if !found
+                        $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
+
             update()
         $scope.$watch 'selectedMediaGroups', (newValue, oldValue) ->
+            if newValue.length > oldValue.length
+                newValue[newValue.length-1].elements.forEach (media) ->
+                    found = false
+                    for med in $scope.selectedMedia
+                        if media.name is med
+                            found = true
+                            break
+
+                    if !found
+                        $scope.selectedMedia = $scope.selectedMedia.concat [{name: media}]
             update()
 
         #$scope.$watch('slider.from',change,true)
