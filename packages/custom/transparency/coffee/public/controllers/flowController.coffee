@@ -219,6 +219,32 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.maxExceeded = 0
         $scope.flows = data
 
+    buildGroupNodes = (nodesNum) ->
+        groupNodeMap = []
+        organisationsInGroups = {}
+        mediaInGroups = {}
+        $scope.selectedOrganisationGroups.forEach (group) ->
+            group.elements.forEach (org) ->
+                organisationsInGroups[org] = group.groupName
+            if not groupNodeMap[group.groupName]?
+                groupNodeMap[group.groupName] =
+                    index: nodesNum
+                    type: 'og'
+                nodesNum++
+        $scope.selectedMediaGroups.forEach (group) ->
+            group.elements.forEach (media) ->
+                mediaInGroups[media] = group.groupName
+            if not groupNodeMap[group.groupName]?
+                groupNodeMap[group.groupName] =
+                    index: nodesNum
+                    type: 'mg'
+                nodesNum++
+        {
+            groupNodeMap: groupNodeMap
+            organisationsInGroups: organisationsInGroups
+            mediaInGroups: mediaInGroups
+        }
+
     buildNodes = (data) ->
         nodes = []
         links = []
@@ -226,6 +252,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         nodeMap = {}
 
         sum = 0
+
+        groupNodes = buildGroupNodes nodesNum
+        console.log groupNodes
+        nodesNum += Object.keys(groupNodes.groupNodeMap).length
+        angular.merge nodeMap, groupNodes.groupNodeMap
 
         data.forEach (entry) ->
             if not nodeMap[entry.organisation]?
@@ -239,13 +270,115 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     index: nodesNum
                     type: 'm'
                 nodesNum++
-            links.push(
-                source: nodeMap[entry.organisation].index
-                target: nodeMap[entry.media].index
-                value: entry.amount
-                type: entry.transferType
-            )
+
+            link1 = {}
+            link2 = {}
+            link3 = {}
+            #organisation and media are in group
+            if typeof groupNodes.organisationsInGroups[entry.organisation] isnt "undefined" and typeof groupNodes.mediaInGroups[entry.media] isnt "undefined"
+
+                for link in links
+                    if Object.keys(link1).length isnt 0 and Object.keys(link2).length isnt 0 and Object.keys(link3).length isnt 0
+                        break
+                    if (Object.keys(link1).length is 0 and link.source is nodeMap[entry.organisation].index and link.target is nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index and link.type is entry.transferType)
+                        link1 = link
+                    else if (Object.keys(link2).length is 0 and link.source is nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index and link.target is nodeMap[groupNodes.mediaInGroups[entry.media]].index and link.type is entry.transferType)
+                        link2 = link
+                    else if (Object.keys(link3).length is 0 and link.source is nodeMap[groupNodes.mediaInGroups[entry.media]].index and link.target is nodeMap[entry.media].index and link.type is entry.transferType)
+                        link3 = link
+
+                if Object.keys(link1).length is 0
+                    links.push(
+                        source: nodeMap[entry.organisation].index
+                        target: nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index
+                        value: entry.amount
+                        type: entry.transferType
+                    )
+                else
+                    link1.value += entry.amount
+                if Object.keys(link2).length is 0
+                    links.push(
+                        source: nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index
+                        target: nodeMap[groupNodes.mediaInGroups[entry.media]].index
+                        value: entry.amount
+                        type: entry.transferType
+                    )
+                else
+                    link2.value += entry.amount
+                if Object.keys(link3).length is 0
+                    links.push(
+                        source: nodeMap[groupNodes.mediaInGroups[entry.media]].index
+                        target: nodeMap[entry.media].index
+                        value: entry.amount
+                        type: entry.transferType
+                    )
+                else
+                    link3.value += entry.amount
+            #organisation is in group
+            else if typeof groupNodes.organisationsInGroups[entry.organisation] isnt "undefined" and typeof groupNodes.mediaInGroups[entry.media] is "undefined"
+
+                for link in links
+                    if Object.keys(link1).length isnt 0 and Object.keys(link2).length isnt 0
+                        break
+                    if (Object.keys(link1).length is 0 and link.source is nodeMap[entry.organisation].index and link.target is nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index and link.type is entry.transferType)
+                        link1 = link
+                    else if (Object.keys(link2).length is 0 and link.source is nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index and link.target is nodeMap[entry.media].index and link.type is entry.transferType)
+                        link2 = link
+                if Object.keys(link1).length is 0
+                    links.push(
+                            source: nodeMap[entry.organisation].index
+                            target: nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index
+                            value: entry.amount
+                            type: entry.transferType
+                    )
+                else
+                    link1.value += entry.amount
+                if Object.keys(link2).length is 0
+                    links.push(
+                            source: nodeMap[groupNodes.organisationsInGroups[entry.organisation]].index
+                            target: nodeMap[entry.media].index
+                            value: entry.amount
+                            type: entry.transferType
+                    )
+                else
+                    link2.value += entry.amount
+            #media is in group
+            else if typeof groupNodes.organisationsInGroups[entry.organisation] is "undefined" and typeof groupNodes.mediaInGroups[entry.media] isnt "undefined"
+                for link in links
+                    if Object.keys(link1).length isnt 0 and Object.keys(link2).length isnt 0
+                        break
+                    if (Object.keys(link1).length is 0 and link.source is nodeMap[entry.organisation].index and link.target is nodeMap[groupNodes.mediaInGroups[entry.media]].index and link.type is entry.transferType)
+                        link1 = link
+                    else if (Object.keys(link2).length is 0 and link.source is nodeMap[groupNodes.mediaInGroups[entry.media]].index and link.target is nodeMap[entry.media].index and link.type is entry.transferType)
+                        link2 = link
+                if Object.keys(link1).length is 0
+                    links.push(
+                        source: nodeMap[entry.organisation].index
+                        target: nodeMap[groupNodes.mediaInGroups[entry.media]].index
+                        value: entry.amount
+                        type: entry.transferType
+                    )
+                else
+                    link1.value += entry.amount
+                if Object.keys(link2).length is 0
+                    links.push(
+                        source: nodeMap[groupNodes.mediaInGroups[entry.media]].index
+                        target: nodeMap[entry.media].index
+                        value: entry.amount
+                        type: entry.transferType
+                    )
+                else
+                    link2.value += entry.amount
+            #nothing is in a group
+            else
+                links.push(
+                    source: nodeMap[entry.organisation].index
+                    target: nodeMap[entry.media].index
+                    value: entry.amount
+                    type: entry.transferType
+                )
             sum += entry.amount
+            console.log links
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
@@ -320,6 +453,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 update()
             else
                 $scope.isDetails = false;
+        $scope.$watch 'selectedOrganisationGroups', (newValue, oldValue) ->
+            update()
+        $scope.$watch 'selectedMediaGroups', (newValue, oldValue) ->
+            update()
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
