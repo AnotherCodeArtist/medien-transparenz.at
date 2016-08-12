@@ -488,28 +488,56 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.isDetails = false;
         $scope.$watch 'selectedOrganisationGroups', (newValue, oldValue) ->
             if newValue.length > oldValue.length
-                newValue[newValue.length-1].elements.forEach (org) ->
-                    found = false
-                    for organisation in $scope.selectedOrganisations
-                        if organisation.name is org
-                            found = true
-                            break
+                duplicateFound = false
 
-                    if !found
-                        $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
+                organisationsInGroups = []
+                for grp in oldValue
+                    organisationsInGroups = organisationsInGroups.concat grp.elements
+
+                for element in newValue[newValue.length-1].elements
+                    if organisationsInGroups.indexOf(element) isnt -1
+                        duplicateFound = true
+                        break
+
+                if not duplicateFound
+                    newValue[newValue.length-1].elements.forEach (org) ->
+                        found = false
+                        for organisation in $scope.selectedOrganisations
+                            if organisation.name is org
+                                found = true
+                                break
+
+                        if !found
+                            $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
+                else
+                    $scope.selectedOrganisationGroups = oldValue
 
             update()
         $scope.$watch 'selectedMediaGroups', (newValue, oldValue) ->
             if newValue.length > oldValue.length
-                newValue[newValue.length-1].elements.forEach (media) ->
-                    found = false
-                    for med in $scope.selectedMedia
-                        if media.name is med
-                            found = true
-                            break
+                duplicateFound = false
 
-                    if !found
-                        $scope.selectedMedia = $scope.selectedMedia.concat [{name: media}]
+                mediaInGroups = []
+                for grp in oldValue
+                    mediaInGroups = mediaInGroups.concat grp.elements
+
+                for element in newValue[newValue.length-1].elements
+                    if mediaInGroups.indexOf(element) isnt -1
+                        duplicateFound = true
+                        break
+
+                if not duplicateFound
+                    newValue[newValue.length-1].elements.forEach (media) ->
+                        found = false
+                        for med in $scope.selectedMedia
+                            if media.name is med
+                                found = true
+                                break
+
+                        if !found
+                            $scope.selectedMedia = $scope.selectedMedia.concat [{name: media}]
+                else
+                    $scope.selectedMediaGroups = oldValue
             update()
 
         #$scope.$watch('slider.from',change,true)
