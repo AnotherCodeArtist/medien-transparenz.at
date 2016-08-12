@@ -2,6 +2,15 @@
 
 app = angular.module 'mean.transparency'
 
+app.filter('myDropdownFilter', ($sce) ->
+    (label, query, item, options, element) ->
+        if typeof item.region is "undefined"
+            html = '<span class="label label-primary">Custom</span> ' + label
+        else
+            html = label
+        $sce.trustAsHtml(html)
+)
+
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder', '$rootScope',
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope) ->
 

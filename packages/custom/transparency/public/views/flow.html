@@ -90,6 +90,10 @@
                                    ng-model="selectedOrganisationGroups"
                                    multiple
                                    placeholder="{{organisationGroupsLabel}}"
+                                   oi-select-options="{
+                                        dropdownFilter: 'myDropdownFilter',
+                                        searchFilter: 'myDropdownFilter'
+                                    }"
                         >
 
                         </oi-select>
@@ -122,6 +126,10 @@
                                    ng-model="selectedMediaGroups"
                                    multiple
                                    placeholder="{{mediaGroupsLabel}}"
+                                   oi-select-options="{
+                                        dropdownFilter: 'myDropdownFilter',
+                                        searchFilter: 'myDropdownFilter'
+                                    }"
                         >
 
                         </oi-select>
