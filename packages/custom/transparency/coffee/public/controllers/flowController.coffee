@@ -134,8 +134,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
 
-
-
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
@@ -147,6 +145,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.organisationGroupError = gettextCatalog.getString "Group already exists. Please use another group name."
         if $scope.mediaGroupError and $scope.mediaGroupError.length > 0
             $scope.mediaGroupError = gettextCatalog.getString "Group already exists. Please use another group name."
+        if $scope.organisationGroupSelectionError and $scope.organisationGroupSelectionError.length > 0
+            $scope.organisationGroupSelectionError = gettextCatalog.getString "Group could not be selected because it contains an organisations, which is in an already selected group."
+        if $scope.mediaGroupSelectionError and $scope.mediaGroupSelectionError.length > 0
+            $scope.mediaGroupSelectionError = gettextCatalog.getString "Group could not be selected because it contains a media, which is in an already selected group."
         update()
 
     $scope.$on 'gettextLanguageChanged', translate
@@ -488,6 +490,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.isDetails = false;
         $scope.$watch 'selectedOrganisationGroups', (newValue, oldValue) ->
             if newValue.length > oldValue.length
+                $scope.organisationGroupSelectionError = ""
                 duplicateFound = false
 
                 organisationsInGroups = []
@@ -510,11 +513,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                         if !found
                             $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
                 else
+                    $scope.organisationGroupSelectionError = gettextCatalog.getString "Group could not be selected because it contains an organisations, which is in an already selected group."
                     $scope.selectedOrganisationGroups = oldValue
 
             update()
         $scope.$watch 'selectedMediaGroups', (newValue, oldValue) ->
             if newValue.length > oldValue.length
+                $scope.mediaGroupSelectionError = ""
                 duplicateFound = false
 
                 mediaInGroups = []
@@ -537,6 +542,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                         if !found
                             $scope.selectedMedia = $scope.selectedMedia.concat [{name: media}]
                 else
+                    $scope.mediaGroupSelectionError = gettextCatalog.getString "Group could not be selected because it contains a media, which is in an already selected group."
                     $scope.selectedMediaGroups = oldValue
             update()
 
