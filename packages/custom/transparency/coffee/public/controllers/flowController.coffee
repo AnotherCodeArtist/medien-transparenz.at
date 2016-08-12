@@ -134,6 +134,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.organisationGroupsLabel = gettextCatalog.getString 'Organisation groups'
         $scope.mediaGroupsLabel = gettextCatalog.getString 'Media groups'
         $scope.groupNameLabel = gettextCatalog.getString 'Group name'
+        if $scope.organisationGroupError and $scope.organisationGroupError.length > 0
+            $scope.organisationGroupError = gettextCatalog.getString "Group already exists. Please use another group name."
+        if $scope.mediaGroupError and $scope.mediaGroupError.length > 0
+            $scope.mediaGroupError = gettextCatalog.getString "Group already exists. Please use another group name."
         update()
 
     $scope.$on 'gettextLanguageChanged', translate
@@ -504,26 +508,66 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.$watch('typesText',change,true)
         
     $scope.groupOrganisations = () ->
-        groupName = $scope.organisationGroupName
-        elements = $scope.selectedOrganisations.map (org) -> org.name
-        TPAService.saveClientGroup 'OrganisationGroups', groupName, elements
-        $scope.organisationGroupName = ""
-        $scope.allOrganisationGroups = TPAService.getClientGroups 'OrganisationGroups'
-        array = $scope.selectedOrganisationGroups.concat [{
-            groupName: groupName
-            elements: elements
-        }]
-        $scope.selectedOrganisationGroups = array
+        $scope.organisationGroupError = ""
+        existingGroups = TPAService.getClientGroups 'OrganisationGroups'
+        groupmembers = []
+        found = false
+        for group in existingGroups
+            if group.groupName is $scope.organisationGroupName
+                found = true
+                break
+
+        organisationsInGroups = []
+        for group in $scope.selectedOrganisationGroups
+            organisationsInGroups = organisationsInGroups.concat group.elements
+
+        $scope.selectedOrganisations.map((org) -> org.name).forEach (org) ->
+            if organisationsInGroups.indexOf(org) is - 1
+                groupmembers.push org
+
+        if not found and groupmembers.length > 0
+            groupName = $scope.organisationGroupName
+            elements = groupmembers
+            TPAService.saveClientGroup 'OrganisationGroups', groupName, elements
+            $scope.organisationGroupName = ""
+            $scope.allOrganisationGroups = TPAService.getClientGroups 'OrganisationGroups'
+            array = $scope.selectedOrganisationGroups.concat [{
+                groupName: groupName
+                elements: elements
+            }]
+            $scope.selectedOrganisationGroups = array
+        else
+            $scope.organisationGroupError = gettextCatalog.getString "Group could not be created. Either a group with the entered group name already exists or there are no elements that are not already in groups."
 
     $scope.groupMedia = () ->
-        groupName = $scope.mediaGroupName
-        elements = $scope.selectedMedia.map (media) -> media.name
-        TPAService.saveClientGroup 'MediaGroups', $scope.mediaGroupName, $scope.selectedMedia.map (media) -> media.name
-        $scope.mediaGroupName = ""
-        $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
-        array = $scope.selectedMediaGroups.concat [{
-            groupName: groupName
-            elements: elements
-        }]
-        $scope.selectedMediaGroups = array
+        $scope.mediaGroupError = ""
+        existingGroups = TPAService.getClientGroups 'MediaGroups'
+        found = false
+        for group in existingGroups
+            if group.groupName is $scope.mediaGroupName
+                found = true
+                break
+
+        mediaInGroups = []
+        groupMembers = []
+        for group in $scope.selectedMediaGroups
+            mediaInGroups = mediaInGroups.concat group.elements
+
+        $scope.selectedMediaGroups.map((med) -> med.name).forEach (med) ->
+            if mediaInGroups.indexOf(med) is - 1
+                groupMembers.push med
+
+        if not found and groupMembers.length > 0
+            groupName = $scope.mediaGroupName
+            elements = groupMembers
+            TPAService.saveClientGroup 'MediaGroups', $scope.mediaGroupName, $scope.selectedMedia.map (media) -> media.name
+            $scope.mediaGroupName = ""
+            $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
+            array = $scope.selectedMediaGroups.concat [{
+                groupName: groupName
+                elements: elements
+            }]
+            $scope.selectedMediaGroups = array
+        else
+            $scope.mediaGroupError = gettextCatalog.getString "Group could not be created. Either a group with the entered group name already exists or there are no elements that are not already in groups."
 ]

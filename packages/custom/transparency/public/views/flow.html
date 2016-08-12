@@ -108,8 +108,9 @@
                     <div class="form-group nomargin">
                         <label for="groupNameOrganisation">{{groupNameLabel}}:</label>
                         <input id="groupNameOrganisation" type="text" required ng-model="organisationGroupName"/>
-                        <button translate class="btn btn-primary" ng-click="groupOrganisations()" ng-disabled="organisationGroupForm.$invalid">Group current selection</button>
+                        <button translate class="btn btn-primary" ng-click="groupOrganisations()" ng-disabled="organisationGroupForm.$invalid">Group current selection without group</button>
                     </div>
+                    <div class="alert alert-danger" role="alert" ng-show="organisationGroupError">{{organisationGroupError}}</div>
                 </form>
             </div>
             <div class="col-md-6">
@@ -136,8 +137,9 @@
                     <div class="form-group nomargin">
                         <label for="groupNameMedia">{{groupNameLabel}}:</label>
                         <input id="groupNameMedia" type="text" required ng-model="mediaGroupName" />
-                        <button translate class="btn btn-primary" ng-click="groupMedia()" ng-disabled="mediaGroupForm.$invalid">Group current selection</button>
+                        <button translate class="btn btn-primary" ng-click="groupMedia()" ng-disabled="mediaGroupForm.$invalid">Group current selection without group</button>
                     </div>
+                    <div class="alert alert-danger" role="alert" ng-show="mediaGroupError">{{mediaGroupError}}</div>
                 </form>
             </div>
             <div class="row">

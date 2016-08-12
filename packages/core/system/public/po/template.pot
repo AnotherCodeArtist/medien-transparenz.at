@@ -20,7 +20,7 @@ msgstr ""
 
 #: controllers\flowController.js:28
 #: controllers\flowDetailController.js:12
-#: views\flow.html:162
+#: views\flow.html:164
 msgid "Amount"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers\flowController.js:145
+#: controllers\flowController.js:146
 #: controllers\flowDetailController.js:102
 msgid "Display _MENU_ records"
 msgstr ""
@@ -167,9 +167,16 @@ msgid ""
 "                    in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
+#: controllers\flowController.js:207
+#: controllers\flowController.js:210
+#: controllers\flowController.js:730
+#: controllers\flowController.js:763
+msgid "Group already exists. Please use another group name."
+msgstr ""
+
 #: views\flow.html:111
-#: views\flow.html:139
-msgid "Group current selection"
+#: views\flow.html:140
+msgid "Group current selection without group"
 msgstr ""
 
 #: controllers\groupingController.js:52
@@ -180,9 +187,9 @@ msgstr ""
 msgid "Group for organisations"
 msgstr ""
 
-#: views\flow.html:109
-#: views\flow.html:137
-msgid "Group name:"
+#: controllers\flowController.js:205
+#: controllers\flowController.js:94
+msgid "Group name"
 msgstr ""
 
 #: controllers\groupingController.js:53
@@ -257,12 +264,12 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers\flowController.js:200
-#: controllers\flowController.js:406
+#: controllers\flowController.js:201
+#: controllers\flowController.js:566
 #: controllers\flowController.js:90
 #: controllers\flowDetailController.js:9
 #: controllers\groupingController.js:23
-#: views\flow.html:159
+#: views\flow.html:161
 msgid "Media"
 msgstr ""
 
@@ -270,6 +277,7 @@ msgstr ""
 msgid "Media Transparency Austria"
 msgstr ""
 
+#: controllers\flowController.js:204
 #: controllers\flowController.js:93
 msgid "Media groups"
 msgstr ""
@@ -319,20 +327,21 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers\flowController.js:407
+#: controllers\flowController.js:567
 #: controllers\flowDetailController.js:10
 #: controllers\groupingController.js:21
 #: views\uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
+#: controllers\flowController.js:203
 #: controllers\flowController.js:92
 msgid "Organisation groups"
 msgstr ""
 
-#: controllers\flowController.js:201
+#: controllers\flowController.js:202
 #: controllers\flowController.js:91
-#: views\flow.html:160
+#: views\flow.html:162
 msgid "Organisations"
 msgstr ""
 
@@ -362,7 +371,7 @@ msgstr ""
 
 #: controllers\flowController.js:27
 #: controllers\flowDetailController.js:11
-#: views\flow.html:161
+#: views\flow.html:163
 msgid "Payment Type"
 msgstr ""
 
@@ -427,7 +436,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers\flowController.js:144
+#: controllers\flowController.js:145
 #: controllers\flowDetailController.js:101
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
@@ -454,7 +463,7 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views\flow.html:153
+#: views\flow.html:155
 msgid "Tabular Representation"
 msgstr ""
 
@@ -559,12 +568,12 @@ msgstr ""
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""
 
-#: controllers\flowController.js:142
+#: controllers\flowController.js:143
 #: controllers\flowDetailController.js:99
 msgid "next"
 msgstr ""
 
-#: controllers\flowController.js:141
+#: controllers\flowController.js:142
 #: controllers\flowDetailController.js:98
 msgid "previous"
 msgstr ""
