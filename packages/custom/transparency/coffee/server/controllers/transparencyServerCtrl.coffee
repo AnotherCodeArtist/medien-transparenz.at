@@ -751,3 +751,33 @@ module.exports = (Transparency) ->
                 (err) ->
                     res.status(500).send error: "Could not count groupings #{err}"
             )
+    getGroupingMembers: (req, res) ->
+        query = {}
+        query.isActive = true
+        query.name = req.query.name
+
+        Grouping.find(query)
+        .select('members type -_id')
+        .then(
+            (members) ->
+                res.status(200).send(members)
+        )
+        .catch (
+            (err) ->
+                res.status(500).send error: "Could not load grouping's member #{err}"
+        )
+
+    getGroupingNames: (req, res) ->
+        groupingQuery = {}
+        groupingQuery.isActive = true
+        Grouping.find(groupingQuery)
+        .select('name type -_id')
+        .then (
+            (result) ->
+                res.status(200).send result
+        )
+        .catch (
+            (err) ->
+                console.log err
+                res.status(500).send("Error loading groupings!")
+        )

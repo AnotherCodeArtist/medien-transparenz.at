@@ -72,6 +72,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         update() if (oldValue isnt newValue)
 
     initState = ->
+        TPAService.getGroupingNames()
+        .then (
+            (res) ->
+                TPAService.saveGroupingsToStore('globalGroupings',res.data)
+        )
         $scope.orgTypes = [
             {name: gettextCatalog.getString('Spender'), value: 'org'},
             {name: gettextCatalog.getString('Recipient'), value: 'media'}

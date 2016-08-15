@@ -65,4 +65,7 @@ module.exports = (Transparency, app, auth, database) ->
   app.delete '/api/transparency/grouping', auth.requiresEditor, transparency.deleteGroupings
   #Grouping - count
   app.get '/api/transparency/grouping/count', auth.requiresEditor, transparency.countGroupings
+  #Grouping - get names
+  app.get '/api/transparency/grouping/names', transparency.getGroupingNames
+
   return

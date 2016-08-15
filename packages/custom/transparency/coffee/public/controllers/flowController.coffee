@@ -4,6 +4,12 @@ app = angular.module 'mean.transparency'
 
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder'
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder) ->
+
+    TPAService.getGroupingNames()
+    .then (
+        (res) ->
+            TPAService.saveGroupingsToStore('globalGroupings',res.data)
+    )
     $scope.mediaLabel = gettextCatalog.getString('Media')
     $scope.organisationLabel = gettextCatalog.getString('Organisation')
     $scope.transferTypeLabel = gettextCatalog.getString('Payment Type')

@@ -69,6 +69,9 @@ class TPAService
     getPossibleGroupMembers: (params) ->
         @$http.get 'api/transparency/grouping/list', params: params
 
+    getGroupingNames: (params) ->
+        @$http.get 'api/transparency/grouping/names', params: params
+
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
         sessionStorage.setItem itemId, JSON.stringify state
@@ -118,6 +121,20 @@ class TPAService
                     if federalState.iso is data
                         result = federalState
                 result
+
+    saveGroupingsToStore: (type, groupings) ->
+        groupingsString = JSON.stringify(groupings)
+        okToSave = false;
+
+        if sessionStorage.getItem(type)
+            oldItem = sessionStorage.getItem(type)
+            if oldItem.length !=  groupingsString.length
+                okToSave = true;
+        else
+            okToSave = true
+
+        if okToSave
+            sessionStorage.setItem type, groupingsString
 
 app = angular.module 'mean.transparency'
 app.service 'TPAService', ["$http", TPAService]
