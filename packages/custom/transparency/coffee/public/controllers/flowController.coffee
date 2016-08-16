@@ -123,8 +123,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
 
-
-
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
@@ -263,11 +261,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             else if newValue.length >= 3 or (newValue.length < 3 and oldValue.length >= 3)
                 update()
                 filterThreshold = newValue
-
-    $scope.$watch 'fixedRange', (newValue, oldValue) ->
-        $timeout () ->
-            $scope.$broadcast('rzSliderForceRender')
-
 
     $rootScope.$on '$stateChangeStart', ->
         TPAService.saveState stateName,fieldsToStore, $scope
