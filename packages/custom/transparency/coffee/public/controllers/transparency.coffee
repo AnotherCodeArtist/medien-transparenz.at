@@ -21,9 +21,16 @@ angular.module 'mean.transparency'
      $scope.$on 'federalStateClicked', (event, data) ->
           $scope.selectedFederalState = {iso: data}
           $scope.orgType = 'org'
-          
+
+          dummyScope = {}
+          TPAService.restoreState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType', 'rank'], dummyScope
           TPAService.saveState stateName,fieldsToStore,$scope
-          TPAService.saveState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType'], $scope
+          dummyScope.slider = $scope.slider
+          dummyScope.periods = $scope.periods
+          dummyScope.typesText = $scope.typesText
+          dummyScope.selectedFederalState = $scope.selectedFederalState
+          dummyScope.orgType = $scope.orgType
+          TPAService.saveState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType','rank'], dummyScope
           window.scrollTo 0, 0
           $state.go 'top',
                {
@@ -66,9 +73,13 @@ angular.module 'mean.transparency'
 
      $scope.$on 'gettextLanguageChanged', translate
 
+     registerWatchers = -> $scope.$watch('typesText',change,true)
+
+
      savedState = sessionStorage.getItem stateName
      if savedState
           TPAService.restoreState stateName, fieldsToStore, $scope
+          registerWatchers()
           update()
      else
           $scope.slider =
@@ -90,5 +101,5 @@ angular.module 'mean.transparency'
                types = [2,4,31]
                $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
                $scope.typesText[0].checked = true
-               $scope.$watch('typesText',change,true)
+               registerWatchers()
                update()

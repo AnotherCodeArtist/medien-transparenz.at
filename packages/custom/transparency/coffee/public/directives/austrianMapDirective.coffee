@@ -23,8 +23,8 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     console.log event
                event.preventDefault();
 
-               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.width * 2 - 1,
-                    -(event.offsetY ) / event.srcElement.height * 2 + 1,
+               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.clientWidth * 2 - 1,
+                    -(event.offsetY ) / event.srcElement.clientHeight * 2 + 1,
                     1.0 );
 
                mouse3D.unproject(camera);
@@ -54,8 +54,8 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     
           onDocumentMouseOver = (event) ->
                debugMode = false
-               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.width * 2 - 1,
-                    -(event.offsetY ) / event.srcElement.height * 2 + 1,
+               mouse3D = new THREE.Vector3(event.offsetX / event.srcElement.clientWidth * 2 - 1,
+                    -(event.offsetY ) / event.srcElement.clientHeight * 2 + 1,
                     1.0 );
 
                mouse3D.unproject(camera);
