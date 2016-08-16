@@ -1,6 +1,6 @@
 angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
     /* jshint -W100 */
-    gettextCatalog.setStrings('de',{
+    gettextCatalog.setStrings('de', {
         "All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n        improved by correcting the most obvious errors using": "Alle Daten, die über diese Website veröffentlicht werden, stammen aus den Quartalsberichten, die von der KommAustria veröffentlicht werden. Anschließend wurden dann die offensichtlichsten Fehler halbautomatisch korrigiert. Dies erfolgte unter Verwendung von ",
         "Although this was meant to significantly improve the data qualtity it could have also introduced some errors": "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, kann es dadurch aber auch zu zusätzlichen Fehlern kommen.",
         "Amount": "Betrag",
@@ -108,7 +108,27 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "Entries stored": "Einträge gespeichert",
         "zip-code": "Postleitzahl",
         "Organisations with unknown address-data": "Organisationen mit nicht bekannten Adressdaten",
-        "Error": "Fehler"
+        "Error": "Fehler",
+        "Grouping": "Gruppierung",
+        "Group type": "Gruppentyp",
+        "Group for organisations": "Gruppe für Organisationen",
+        "Group for media": "Gruppe für Medien",
+        "Add member to group": "Gruppenteilnehmer hinzufügen",
+        "Group owner": "Eigentümer der Gruppe",
+        "Group members": "Gruppenteilnehmer",
+        "Region": "Region",
+        "Nationwide": "Bundesweit",
+        "Within federal state": "Innerhalb des Bundeslandes",
+        "Enable Group": "Gruppe aktivieren",
+        "Disable Group": "Gruppe dekativieren",
+        "Active": "Aktiv",
+        "Owner": "Eigentümer",
+        "Yes": "Ja",
+        "No": "Nein",
+        "Type": "Typ",
+        "Reset": "Zurücksetzen",
+        "With groupings enabled single transfers will be taken together (f.e. to show umbrella organisations)": "Wenn Gruppierung aktiviert, werden einzelne Transfers zusammengefasst (z.B. um Dachorganisationen abzubilden) ",
+
     });
     /* jshint +W100 */
 }]);

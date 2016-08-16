@@ -30,6 +30,11 @@ angular.module 'mean.transparency'
         templateUrl: 'transparency/views/events.html'
         resolve:
             loggedin: checkLoggedIn
+    $stateProvider.state 'grouping',
+        url: '/transparency/grouping'
+        templateUrl: 'transparency/views/grouping.html'
+        resolve:
+            loggedin: checkLoggedIn
     #State for the upload of the organisation-address-data
     $stateProvider.state 'add_organisation',
         url: '/transparency/addOrganisation'
@@ -46,7 +51,7 @@ angular.module 'mean.transparency'
         url: "/top"
         templateUrl: 'transparency/views/top.html'
     $stateProvider.state 'showflow',
-        url: "/showflow?name&orgType&from&to&pTypes&fedState"
+        url: "/showflow?name&grouping&orgType&from&to&pTypes&fedState"
         templateUrl: 'transparency/views/flow.html'
         #controller: 'FlowCtrl'
     $stateProvider.state 'impress',

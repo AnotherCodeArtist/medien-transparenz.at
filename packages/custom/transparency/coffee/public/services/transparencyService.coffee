@@ -54,6 +54,26 @@ class TPAService
         console.log params
         @$http.delete 'api/transparency/events', params: params
 
+    createGrouping: (params) ->
+        @$http.post 'api/transparency/grouping', params: params
+
+    updateGrouping: (params) ->
+        @$http.put 'api/transparency/grouping', params: params
+
+    getGroupings: (params) ->
+        @$http.get 'api/transparency/grouping', params: params
+
+    getGroupingMembers: (params) ->
+        @$http.get 'api/transparency/grouping/members', params: params
+    deleteGroupings: (params) ->
+        @$http.delete 'api/transparency/grouping', params: params
+
+    countGroupings: (params) ->
+        @$http.get 'api/transparency/grouping/count', params: params
+
+    getPossibleGroupMembers: (params) ->
+        @$http.get 'api/transparency/grouping/list', params: params
+
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
         sessionStorage.setItem itemId, JSON.stringify state
@@ -94,7 +114,8 @@ class TPAService
                  {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
                  {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
                  {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
-                 {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' }
+                 {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' },
+                 {name: 'Austria',  value: 'Austria', iso: 'AT' }
              ]
         switch type
             when 'federal'
