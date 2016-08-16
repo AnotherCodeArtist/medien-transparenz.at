@@ -4,6 +4,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: views\flow.html:29
+#: views\top.html:19
+msgid "<input id=\"fixRange\" type=\"checkbox\" ng-model=\"slider.options.draggableRangeOnly\">{{fixRangeLabel}}"
+msgstr ""
+
+#: controllers\groupingController.js:54
+msgid "Add member to group"
+msgstr ""
+
 #: views\impress.html:22
 msgid ""
 "All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\r\n"
@@ -14,9 +23,9 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers\flowController.js:13
+#: controllers\flowController.js:29
 #: controllers\flowDetailController.js:12
-#: views\flow.html:97
+#: views\flow.html:113
 msgid "Amount"
 msgstr ""
 
@@ -61,11 +70,11 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
-#: controllers\topEntriesController.js:95
+#: controllers\topEntriesController.js:98
 msgid "Click for Details"
 msgstr ""
 
-#: views\top.html:54
+#: views\top.html:57
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
@@ -81,13 +90,25 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: controllers\flowController.js:152
+#: controllers\groupingController.js:222
+msgid "Delete"
+msgstr ""
+
+#: controllers\groupingController.js:58
+msgid "Disable Group"
+msgstr ""
+
+#: controllers\flowController.js:148
 #: controllers\flowDetailController.js:102
 msgid "Display _MENU_ records"
 msgstr ""
 
 #: views\events.html:22
 msgid "Edit"
+msgstr ""
+
+#: controllers\groupingController.js:57
+msgid "Enable Group"
 msgstr ""
 
 #: views\events.html:13
@@ -127,9 +148,16 @@ msgid ""
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
-#: views\flow.html:42
-#: views\top.html:39
+#: views\list.html:12
+#: views\top.html:42
 msgid "Federal State"
+msgstr ""
+
+#: controllers\flowController.js:27
+#: controllers\topEntriesController.js:206
+#: controllers\topEntriesController.js:31
+#: views\index.html:27
+msgid "Fix slider range"
 msgstr ""
 
 #: views\about.html:58
@@ -138,6 +166,18 @@ msgstr ""
 
 #: views\about.html:16
 msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
+msgstr ""
+
+#: controllers\groupingController.js:52
+msgid "Group for media"
+msgstr ""
+
+#: controllers\groupingController.js:51
+msgid "Group for organisations"
+msgstr ""
+
+#: controllers\groupingController.js:53
+msgid "Group owner"
 msgstr ""
 
 #: views\search.html:32
@@ -176,12 +216,12 @@ msgstr ""
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
-#: controllers\listControllers.js:144
-#: controllers\listControllers.js:273
+#: controllers\listControllers.js:188
+#: controllers\listControllers.js:317
 msgid "List of Media Companies"
 msgstr ""
 
-#: controllers\listControllers.js:137
+#: controllers\listControllers.js:178
 #: controllers\listControllers.js:8
 msgid "List of Organisations"
 msgstr ""
@@ -198,9 +238,12 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers\flowController.js:10
+#: controllers\flowController.js:203
+#: controllers\flowController.js:410
+#: controllers\flowController.js:91
 #: controllers\flowDetailController.js:9
-#: views\flow.html:94
+#: controllers\groupingController.js:23
+#: views\flow.html:110
 msgid "Media"
 msgstr ""
 
@@ -212,17 +255,25 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views\flow.html:28
-#: views\index.html:26
-#: views\top.html:18
+#: views\flow.html:31
+#: views\index.html:29
+#: views\top.html:21
 msgid "Move the sliders to define a range"
 msgstr ""
 
-#: views\list.html:21
+#: controllers\groupingController.js:55
+msgid "Nationwide"
+msgstr ""
+
+#: controllers\groupingController.js:28
+msgid "No"
+msgstr ""
+
+#: views\list.html:30
 msgid "No entries found!"
 msgstr ""
 
-#: views\list.html:11
+#: views\list.html:18
 msgid "Number of Entries"
 msgstr ""
 
@@ -246,13 +297,16 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers\flowController.js:11
+#: controllers\flowController.js:411
 #: controllers\flowDetailController.js:10
+#: controllers\groupingController.js:21
 #: views\uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
-#: views\flow.html:95
+#: controllers\flowController.js:204
+#: controllers\flowController.js:92
+#: views\flow.html:111
 msgid "Organisations"
 msgstr ""
 
@@ -264,7 +318,15 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: controllers\topEntriesController.js:89
+#: directives\sankeyDirective.js:92
+msgid "Other media"
+msgstr ""
+
+#: directives\sankeyDirective.js:92
+msgid "Other organisations"
+msgstr ""
+
+#: controllers\topEntriesController.js:92
 msgid "Others"
 msgstr ""
 
@@ -272,15 +334,15 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: controllers\flowController.js:12
+#: controllers\flowController.js:28
 #: controllers\flowDetailController.js:11
-#: views\flow.html:96
+#: views\flow.html:112
 msgid "Payment Type"
 msgstr ""
 
-#: views\flow.html:32
-#: views\index.html:29
-#: views\top.html:31
+#: views\flow.html:35
+#: views\index.html:32
+#: views\top.html:34
 msgid "Payment Types"
 msgstr ""
 
@@ -310,8 +372,8 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers\topEntriesController.js:122
-#: controllers\topEntriesController.js:196
+#: controllers\topEntriesController.js:125
+#: controllers\topEntriesController.js:199
 msgid "Recipient"
 msgstr ""
 
@@ -341,7 +403,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers\flowController.js:151
+#: controllers\flowController.js:147
 #: controllers\flowDetailController.js:101
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
@@ -350,12 +412,12 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers\topEntriesController.js:119
-#: controllers\topEntriesController.js:195
+#: controllers\topEntriesController.js:122
+#: controllers\topEntriesController.js:198
 msgid "Spender"
 msgstr ""
 
-#: views\top.html:21
+#: views\top.html:24
 msgid "Spender/Recipient"
 msgstr ""
 
@@ -368,11 +430,11 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views\flow.html:88
+#: views\flow.html:104
 msgid "Tabular Representation"
 msgstr ""
 
-#: views\index.html:39
+#: views\index.html:42
 msgid "The map can be turned by holding the left mouse button and dragging within the frame. It is possible to zoom into the map by scrolling."
 msgstr ""
 
@@ -384,7 +446,7 @@ msgstr ""
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
-#: views\top.html:45
+#: views\top.html:48
 msgid "Top"
 msgstr ""
 
@@ -397,7 +459,7 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views\overview.html:28
-#: views\top.html:56
+#: views\top.html:59
 msgid "Total"
 msgstr ""
 
@@ -461,7 +523,15 @@ msgstr ""
 msgid "Who's involved?"
 msgstr ""
 
-#: views\flow.html:70
+#: controllers\groupingController.js:56
+msgid "Within federal state"
+msgstr ""
+
+#: controllers\groupingController.js:26
+msgid "Yes"
+msgstr ""
+
+#: views\flow.html:69
 msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
 msgstr ""
 
@@ -469,24 +539,16 @@ msgstr ""
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""
 
-#: controllers\flowController.js:149
+#: controllers\flowController.js:145
 #: controllers\flowDetailController.js:99
 msgid "next"
 msgstr ""
 
-#: controllers\flowController.js:148
+#: controllers\flowController.js:144
 #: controllers\flowDetailController.js:98
 msgid "previous"
 msgstr ""
 
 #: views\uploadOrganisation.html:58
 msgid "zip-code"
-msgstr ""
-
-#: views\flow.html:53
-msgid ""
-"{{org.name}}<br>\r\n"
-"                {{org.street}}<br>\r\n"
-"                {{org.zipCode}} {{org.city}}<br>\r\n"
-"                {{org.country}}<br>"
 msgstr ""

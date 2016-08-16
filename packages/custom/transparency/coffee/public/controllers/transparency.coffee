@@ -2,7 +2,7 @@
 
 #* jshint -W098 *#
 angular.module 'mean.transparency'
-.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state) ->
+.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state, $rootScope) ->
      $scope.global = Global
      $scope.package =
           name: 'transparency'
@@ -24,7 +24,6 @@ angular.module 'mean.transparency'
 
           dummyScope = {}
           TPAService.restoreState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType', 'rank'], dummyScope
-          TPAService.saveState stateName,fieldsToStore,$scope
           dummyScope.slider = $scope.slider
           dummyScope.periods = $scope.periods
           dummyScope.typesText = $scope.typesText
@@ -67,11 +66,15 @@ angular.module 'mean.transparency'
                floor:0
                onEnd: -> change(1,2)
                translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+               draggableRangeOnly: false
 
      translate = ->
           $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
 
      $scope.$on 'gettextLanguageChanged', translate
+
+     $rootScope.$on '$stateChangeStart', () ->
+          TPAService.saveState stateName,fieldsToStore,$scope
 
      registerWatchers = -> $scope.$watch('typesText',change,true)
 
