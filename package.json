@@ -22,8 +22,8 @@
   "dependencies": {
     "assetmanager": "latest",
     "async": "latest",
-    "bower": "latest",
     "body-parser": "latest",
+    "bower": "latest",
     "compression": "latest",
     "connect-flash": "latest",
     "connect-modrewrite": "latest",
@@ -58,12 +58,12 @@
   "devDependencies": {
     "charenc": "0.0.1",
     "connect-modrewrite": "latest",
-    "del": "latest",
     "expect.js": "latest",
     "gulp": "latest",
     "gulp-angular-gettext": "^2.1.0",
     "gulp-coffee": "latest",
     "gulp-concat": "latest",
+    "gulp-contains": "^1.1.0",
     "gulp-csslint": "latest",
     "gulp-cssmin": "latest",
     "gulp-jshint": "latest",
@@ -72,9 +72,11 @@
     "gulp-load-plugins": "latest",
     "gulp-mocha": "latest",
     "gulp-nodemon": "latest",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "latest",
     "gulp-uglify": "latest",
     "gulp-util": "latest",
+    "iconv-lite": "~0.4.13",
     "jasmine": "latest",
     "jasmine-reporters": "latest",
     "jshint": "^2.9.1",
@@ -100,7 +102,6 @@
     "should": "^8.0.1",
     "superagent": "^1.5.0",
     "supertest": "latest",
-    "through": "latest",
-    "iconv-lite": "~0.4.13"
+    "through": "latest"
   }
 }

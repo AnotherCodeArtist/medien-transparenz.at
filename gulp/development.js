@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   plugins = gulpLoadPlugins(),
   coffee = require('gulp-coffee'),
+  replace = require('gulp-replace'),
   paths = {
     js: ['./*.js', 'config/**/*.js', 'gulp/**/*.js', 'tools/**/*.js', 'packages/**/*.js', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**', '!packages/**/assets/**/js/**'],
     html: ['packages/**/*.html', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**'],
@@ -72,7 +73,9 @@ gulp.task('sass', function() {
 });
 
 gulp.task('devServe', ['env:development'], function () {
-
+  gulp.src(['packages/custom/transparency/public/assets/lib/oi.select/dist/select.min.js'])
+      .pipe(replace('templateUrl:"src/template.html"', 'templateUrl:"transparency/assets/lib/oi.select/src/template.html"'))
+      .pipe(gulp.dest('packages/custom/transparency/public/assets/lib/oi.select/dist', {overwrite: true}));
   plugins.nodemon({
     script: 'server.js',
     ext: 'html js',

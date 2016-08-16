@@ -17,6 +17,12 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     $scope.firstInYear = (year) -> $scope.periods.filter((p) -> p.year == year).pop().period.toString()
     $scope.lastInYear = (year) -> $scope.periods.filter((p) -> p.year == year)[0].period.toString()
     $scope.sizes = [10,20,50,100]
+    $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
+    #remove Austria
+    if $scope.federalStates.length is 10
+        $scope.federalStates.pop()
+
+    $scope.selectedFederalState = {}
     $scope.orgType = "org"
     $scope.searchResult = []
     $scope.filterResult = []
@@ -24,7 +30,10 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     page = $scope.page
     $timeout (-> $scope.page=page),100
     updateCount = ->
-        prom = TPAService.count orgType: $scope.orgType
+        searchObject =
+            orgType: $scope.orgType
+            federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState
+        prom = TPAService.count searchObject
         prom.then (res) ->
             $scope.count = res.data
         prom.catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
@@ -37,6 +46,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
                 page: $scope.page - 1
                 size: $scope.size
                 orgType: $scope.orgType
+                federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState
             .then (res) ->
                 $scope.items = res.data[$scope.orgType]
             .catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
@@ -66,7 +76,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
         newName = newName or ''
         if newName.length > oldName.length
             if $scope.searchResult.length is 0 and newName.length > 2
-                TPAService.search( {name: $scope.name, orgType: $scope.orgType})
+                TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState})
                 .then (res) ->
                     $scope.searchResult = res.data[$scope.orgType]
                     $scope.filterResult = $scope.searchResult
@@ -82,14 +92,27 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
                 update()
             if newName.length > 2
                 applyFilter()
+    changeFederalState = ->
+        updateCount()
+        update()
+        if $scope.name
+            TPAService.search( {name: $scope.name, orgType: $scope.orgType, federalState: $scope.selectedFederalState.iso if $scope.selectedFederalState})
+            .then (res) ->
+                $scope.searchResult = res.data[$scope.orgType]
+                $scope.filterResult = $scope.searchResult
+                $scope.count = $scope.filterResult.length
+                updatePage()
+            .catch (err) -> $scope.error = err.data
     $scope.$watch 'page', changeListener
     $scope.$watch 'size', changeListener
+    $scope.$watch 'selectedFederalState', changeFederalState
     $scope.$watch 'name', updateFilter
     $rootScope.$on '$stateChangeStart', ->
         TPAService.saveState stateId,fieldsToRestore, $scope
 
     translate = ->
         $scope.title=gettextCatalog.getString "List of Organisations"
+        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 
