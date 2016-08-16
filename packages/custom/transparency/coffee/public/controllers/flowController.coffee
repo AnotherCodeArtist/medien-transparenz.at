@@ -158,7 +158,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
-        update()
         window.scrollTo 0,0
 
     filterData = (data) ->
