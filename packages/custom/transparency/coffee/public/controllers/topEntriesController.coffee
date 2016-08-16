@@ -122,8 +122,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     #prevents clicks on "Others" to trigger a navigation        
     $scope.preventClickForOthers = (d) -> d.data.key in ["Others","Andere"]
 
-    $rootScope.$on '$stateChangeStart', ->
-        TPAService.saveState stateName,fieldsToStore, $scope
+    $rootScope.$on '$stateChangeStart', (event,toState) ->
+        if toState.name isnt "top"
+            TPAService.saveState stateName,fieldsToStore, $scope
 
     #navigate to some other page
     $scope.go = (d) ->

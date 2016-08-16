@@ -262,8 +262,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 update()
                 filterThreshold = newValue
 
-    $rootScope.$on '$stateChangeStart', ->
-        TPAService.saveState stateName,fieldsToStore, $scope
+    $rootScope.$on '$stateChangeStart', (event, toState)->
+        if toState.name isnt 'home'
+            TPAService.saveState stateName,fieldsToStore, $scope
 
     $q.all([pP]).then (res) ->
         stateParamsExist = false

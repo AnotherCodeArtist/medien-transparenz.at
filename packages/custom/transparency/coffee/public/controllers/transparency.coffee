@@ -73,8 +73,9 @@ angular.module 'mean.transparency'
 
      $scope.$on 'gettextLanguageChanged', translate
 
-     $rootScope.$on '$stateChangeStart', () ->
-          TPAService.saveState stateName,fieldsToStore,$scope
+     $rootScope.$on '$stateChangeStart', (event,toState) ->
+          if toState.name isnt 'map'
+               TPAService.saveState stateName,fieldsToStore,$scope
 
      registerWatchers = -> $scope.$watch('typesText',change,true)
 
