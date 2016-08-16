@@ -135,11 +135,13 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     #navigate to some other page
     $scope.go = (d) ->
         window.scrollTo 0, 0
+        if d.data.isGrouping
+            groupName = d.data.key.slice(4) # removing the group prefix "(G) "
         $state.go 'showflow',
             {
                 name: d.data.key if not d.data.isGrouping
                 orgType: $scope.orgType
-                grouping: d.data.key if d.data.isGrouping
+                grouping: groupName if d.data.isGrouping
                 from: $scope.periods[$scope.slider.from/5].period
                 to: $scope.periods[$scope.slider.to/5].period
                 fedState: $scope.selectedFederalState.iso if $scope.selectedFederalState
