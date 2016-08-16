@@ -182,9 +182,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0)
             TPAService.top parameters()
             .then (res) ->
-
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
-                return
             return
 
         console.log "Starting update: " + Date.now()
@@ -596,7 +594,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         for group in $scope.selectedMediaGroups
             mediaInGroups = mediaInGroups.concat group.elements
 
-        $scope.selectedMediaGroups.map((med) -> med.name).forEach (med) ->
+        $scope.selectedMedia.map((med) -> med.name).forEach (med) ->
             if mediaInGroups.indexOf(med) is - 1
                 groupMembers.push med
 
