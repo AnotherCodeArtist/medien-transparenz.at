@@ -6,7 +6,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope, $timeout) ->
 
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia', 'fixedRange']
+    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -50,14 +50,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 floor:0
                 onEnd: -> change(1,2)
                 translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-        $scope.slider2 =
-            options:
-                ceil: ($scope.periods.length - 1)*5
-                step:5
-                floor:0
-                onEnd: -> change(1,2)
-                translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-                draggableRangeOnly: true
+                draggableRangeOnly: false
         $scope.fixedRange = false
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
