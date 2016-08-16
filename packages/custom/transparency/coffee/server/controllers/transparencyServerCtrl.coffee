@@ -779,7 +779,6 @@ module.exports = (Transparency) ->
 
     deleteEvent: (req, res) ->
         #todo: insert parameter checking
-        console.log req.query.id
         Event.findById {_id: req.query.id}, (err, data) ->
             if err
                 res.status(500).send error: "Could not find event #{err}"
@@ -798,6 +797,79 @@ module.exports = (Transparency) ->
                     Array.prototype.push.apply result, event.tags
 
             res.json Array.from(new Set(result))
+
+    federalstates: (req, res) ->
+        result =
+            'AT-1': 0,
+            'AT-2': 0,
+            'AT-3': 0,
+            'AT-4': 0,
+            'AT-5': 0,
+            'AT-6': 0,
+            'AT-7': 0,
+            'AT-8': 0,
+            'AT-9': 0,
+        period = {}
+        period['$gte'] = parseInt(req.query.from) if req.query.from
+        period['$lte'] = parseInt(req.query.to) if req.query.to
+        orgType = req.query.orgType or 'org'
+        paymentTypes = req.query.pType or ['2']
+        paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+        query = {}
+        project =
+            organisation: '$_id.organisation'
+            organisationReference: '$_id.organisationReference'
+            _id: 0
+            total: 1
+        if period.$gte? or period.$lte?
+            query.period = period
+        query.transferType =
+            $in: paymentTypes.map (e)->
+                parseInt(e)
+        group =
+            _id:
+                organisation: if orgType is 'org' then '$organisation' else '$media',
+                organisationReference: '$organisationReference'
+            total:
+                $sum: '$amount'
+        #console.log "Query: "
+        #console.log query
+        #console.log "Group: "
+        #console.log group
+        #console.log "Project: "
+        #console.log project
+        totalPromise = Transfer.aggregate($match: query)
+        .group(group)
+        .sort('-total')
+        .project(project)
+        .exec()
+        Q.all([totalPromise])
+        .then (promiseResults) ->
+            try
+                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
+                .then (
+                    (isPopulated) ->
+                        try
+                            populatedTransfers = promiseResults[0]
+
+                            if orgType is 'media'
+                                populatedTransfers = mediaToFederalState populatedTransfers
+
+                            for transfer in populatedTransfers
+                                result[transfer.organisationReference.federalState]+=transfer.total
+                            res.send(JSON.stringify(result))
+                        catch error
+                            console.log error
+                            res.status(500).send("Error while calculate sum for federal states!")
+                )
+            catch error
+                console.log error
+                res.status(500).send("Error while calculate sum for federal states!")
+        .catch (err) ->
+            console.log "Error in Promise.when"
+            console.log err
+            res.status(500).send("Error #{err.message}")
+
 
     #Grouping
     getPossibleGroupMembers: (req, res) ->

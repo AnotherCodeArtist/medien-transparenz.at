@@ -94,6 +94,9 @@ class TPAService
     periods: ->
         @$http.get 'api/transparency/periods'
 
+    federalstates: (params) ->
+        @$http.get 'api/transparency/federalstates', params: params
+
     decodeType: (type) -> switch type
         when 2 then "Payments according to §2 MedKF-TG (Media Cooperations)"
         when 4 then "Payments according to §4 MedKF-TG (Funding)"
@@ -102,18 +105,18 @@ class TPAService
     #Function to define static data, e.g. federal states
     staticData: (type, data)->
         federalStates =
-            [
-                {name: 'Burgenland',value: 'Burgenland', iso: 'AT-1'}
-                {name: 'Carinthia', value: 'Carinthia', iso: 'AT-2' }
-                {name: 'Lower Austria', value: 'Lower Austria', iso: 'AT-3' }
-                {name: 'Salzburg', value: 'Salzburg', iso: 'AT-5' }
-                {name: 'Styria', value: 'Styria', iso: 'AT-6' }
-                {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
-                {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
-                {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
-                {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' }
-                {name: 'Austria',  value: 'Austria', iso: 'AT' }
-            ]
+             [
+                 {name: 'Burgenland',value: 'Burgenland', iso: 'AT-1'}
+                 {name: 'Carinthia', value: 'Carinthia', iso: 'AT-2' }
+                 {name: 'Lower Austria', value: 'Lower Austria', iso: 'AT-3' }
+                 {name: 'Salzburg', value: 'Salzburg', iso: 'AT-5' }
+                 {name: 'Styria', value: 'Styria', iso: 'AT-6' }
+                 {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
+                 {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
+                 {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
+                 {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' },
+                 {name: 'Austria',  value: 'Austria', iso: 'AT' }
+             ]
         switch type
             when 'federal'
                 federalStates
@@ -123,6 +126,7 @@ class TPAService
                     if federalState.iso is data
                         result = federalState
                 result
+
 
 app = angular.module 'mean.transparency'
 app.service 'TPAService', ["$http", TPAService]

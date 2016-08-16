@@ -57,6 +57,9 @@ angular.module 'mean.transparency'
     $stateProvider.state 'impress',
         url: "/impress"
         templateUrl: 'transparency/views/impress.html'
+    $stateProvider.state 'about',
+        url: "/about"
+        templateUrl: 'transparency/views/about.html'
     $stateProvider.state 'search',
         url: '/search'
         templateUrl: 'transparency/views/search.html'
@@ -69,3 +72,7 @@ angular.module 'mean.transparency'
         url: '/medialist?orgType&page&size'
         templateUrl: 'transparency/views/list.html'
         controller: 'ListMediaCtrl'
+    $stateProvider.state 'map',
+        url: '/map'
+        templateUrl: 'transparency/views/map.html'
+        controller: 'MapCtrl'
