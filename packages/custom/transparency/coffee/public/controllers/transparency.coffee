@@ -22,7 +22,7 @@ angular.module 'mean.transparency'
           $scope.selectedFederalState = {iso: data}
           $scope.orgType = 'org'
 
-          dummyScope = {}
+          dummyScope = {rank: 10}
           TPAService.restoreState 'topState', ['slider','periods','typesText', 'selectedFederalState', 'orgType', 'rank'], dummyScope
           dummyScope.slider = $scope.slider
           dummyScope.periods = $scope.periods
