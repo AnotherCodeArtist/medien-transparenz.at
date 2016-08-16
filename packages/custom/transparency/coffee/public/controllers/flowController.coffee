@@ -2,8 +2,8 @@
 
 app = angular.module 'mean.transparency'
 
-app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder', '$rootScope',
-($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope) ->
+app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder', '$rootScope', '$timeout',
+($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope, $timeout) ->
 
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
@@ -27,14 +27,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.showSettings = true
     #$scope.org = null
     $scope.isDetails = false
-    $scope.slider =
-        from: 0
-        to: 0
-        options:
-            step:5
-            floor:0
-            #showTicks: true
-            onEnd: -> change(1,2)
     window.scrollTo 0, 0
     $scope.clearDetails = ->
         #$scope.org = null
@@ -48,10 +40,17 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     pP = TPAService.periods()
     pP.then (res) ->
         $scope.periods = res.data.reverse()
-        $scope.slider.options.ceil = ($scope.periods.length - 1)*5
-        $scope.slider.from = $scope.slider.options.ceil
-        $scope.slider.to = $scope.slider.options.ceil
-        $scope.slider.options.translate = (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+        $scope.slider =
+            from: ($scope.periods.length - 1)*5
+            to: ($scope.periods.length - 1)*5
+            options:
+                ceil: ($scope.periods.length - 1)*5
+                step:5
+                floor:0
+                onEnd: -> change(1,2)
+                translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+                draggableRangeOnly: false
+        $scope.fixedRange = false
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
@@ -75,8 +74,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.name = $scope.org.name
             params.orgType = $scope.org.orgType
         ###
-        params.media = $scope.selectedMedia.map (media) -> media.name
-        params.organisations = $scope.selectedOrganisations.map (org) -> org.name
+        if $scope.selectedMedia and $scope.selectedMedia.length > 0
+            params.media = $scope.selectedMedia.map (media) -> media.name
+        if $scope.selectedOrganisations and $scope.selectedOrganisations.length > 0
+            params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
@@ -121,8 +122,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if $state.params.pTypes?
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
-
-
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
