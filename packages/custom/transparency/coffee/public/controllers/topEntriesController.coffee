@@ -114,7 +114,6 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.orgTypes[1].name = gettextCatalog.getString('Recipient')
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
-        $scope.fixRangeLabel = gettextCatalog.getString 'Fix slider range'
 
     $scope.$on 'gettextLanguageChanged', translate
 

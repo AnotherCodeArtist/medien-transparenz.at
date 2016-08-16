@@ -15,7 +15,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.progress = 20
     stopLoading = ->
         $scope.loading = false
-    $scope.fixRangeLabel = gettextCatalog.getString 'Fix slider range'
 
     $scope.transferTypeLabel = gettextCatalog.getString('Payment Type')
     $scope.amountLabel = gettextCatalog.getString('Amount')
