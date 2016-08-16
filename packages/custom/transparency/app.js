@@ -86,13 +86,13 @@ Transparency.register(function(app, auth, database) {
         roles: ['can manage grouping'],
         menu: 'main'
     });
-    
+  /*
   Transparency.menus.add({
     title: 'Impress',
     link: 'impress',
     roles: ['authenticated', 'anonymous'],
     menu: 'main'
-  });
+  });*/
   Transparency.menus.add({
     title: 'About Us',
     link: 'about',

@@ -30,7 +30,7 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
         "How this web-site came into being": "Wie diese Seite entstand",
         "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, check out our lists!": "Wenn Sie einfach nur sehen möchten, welche <a ui-sref=\"listOrgs\">Organisationen</a> und <a ui-sref=\"listMedia\">Medien</a> in den RTR-Meldungen\nerfasst sind, durchblättern Sie einfach unsere Listen!",
         "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!": "Um herauszufinden, ob bestimmte Organisationen Meldungen abgegeben haben bzw. ob bestimmte Medien derartige\nZahlungen erhalten, verwenden Sie am besten unsere Suche",
-        "Impress": "Impressum",
+        "Imprint": "Impressum",
         "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:": "Alles begann mit einem Programmierprojekt in einer Lehrveranstaltung. Dabei wurde ein erster Prototyp von folgenden Studierenden entwickelt:",
         "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in.": "Finden Sie heraus, wie Organisationen Ihre Mittel für Medienarbeit verteilen, und woraus sich Medien in diesem Kontext finanzieren",
         "List of Media Companies": "Medien",
