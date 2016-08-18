@@ -77,14 +77,12 @@ footer {
 
 div.sankeyChart{
   display: block;
-  width: 70%;
   float:left;
   padding-bottom:50px;
 }
 
 .multiselectDropdown{
   float: left;
-  width:15%;
 }
 
 /*fixing interference with circle module styles*/
@@ -245,6 +243,10 @@ nvd3-multi-bar-chart svg.nvd3-svg {
   margin-right: auto;
 }
 
+div.austrianMap {
+  height: 600px;
+}
+
 @media screen and (max-width: 700px) {
   nvd3-multi-bar-chart svg.nvd3-svg {
     width: 400px;
@@ -254,6 +256,10 @@ nvd3-multi-bar-chart svg.nvd3-svg {
   .pie svg.nvd3-svg {
     height: 400px;
     width: 400px;
+  }
+
+  div.austrianMap {
+    height: 400px;
   }
 
   div.loadingDialog {
@@ -270,6 +276,10 @@ nvd3-multi-bar-chart svg.nvd3-svg {
     width: 300px;
     height: 250px;
 
+  }
+
+  div.austrianMap {
+    height: 300px;
   }
 
   .pie svg.nvd3-svg {
