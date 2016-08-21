@@ -540,7 +540,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     newValue[newValue.length-1].elements.forEach (media) ->
                         found = false
                         for med in $scope.selectedMedia
-                            if media.name is med
+                            if media is med.name
                                 found = true
                                 break
 
@@ -549,6 +549,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 else
                     $scope.mediaGroupSelectionError = gettextCatalog.getString "Group could not be selected because it contains a media, which is in an already selected group."
                     $scope.selectedMediaGroups = oldValue
+
             update()
 
         #$scope.$watch('slider.from',change,true)
@@ -616,6 +617,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 elements: elements
             }]
             $scope.selectedMediaGroups = array
+            update()
         else
             $scope.mediaGroupError = gettextCatalog.getString "Group could not be created. Either a group with the entered group name already exists or there are no elements that are not already in groups."
 ]
