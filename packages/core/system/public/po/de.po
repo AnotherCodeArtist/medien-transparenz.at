@@ -12,6 +12,14 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: views/grouping.html:25
+msgid "Active"
+msgstr "Aktiv"
+
+#: controllers/groupingController.js:54
+msgid "Add member to group"
+msgstr "Gruppenteilnehmer hinzufügen"
+
 #: views/impress.html:22
 msgid ""
 "All Data that is published via this site it taken from the quarterly reports "
@@ -31,37 +39,34 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:13 views/flow.html:86
+#: controllers/flowController.js:28 views/flow.html:125
 msgid "Amount"
 msgstr "Betrag"
 
-#: views/index.html:6
+#: views/index.html:15
 msgid ""
 "An Overview of Public Money spent on Media-Cooperations and -Funding in "
 "Austria"
 msgstr ""
 "Eine Übersicht über steuerfinanzierte Medien-Kooperationen und -Förderungen"
 
-#: views/index.html:71
+#: views/about.html:45
 msgid "Are they involved?"
 msgstr "Einträge finden"
 
-#: views/index.html:18
+#: views/about.html:6
 msgid ""
 "As a consequence of ongoing discussions about potential misuse of tax-"
-"payers' money spent in advertising, the\n"
-"            Austrian Parliament has released the so called Media "
-"Transparency Act (\"Bundesverfassungsgesetz über die\n"
-"            Transparenz von Medienkooperationen sowie von Werbeaufträgen und "
-"Förderungen an Medieninhaber eines periodischen\n"
-"            Mediums und das KommAustria-Gesetz\") in 2011. This regulation "
-"requires certain organizations to quarterly report\n"
-"            on their spending in advertising and funding of media "
-"cooperations. Reported data is published by the\n"
-"            <a href=\"http://www.rtr.at\">Rundfunk und Telekom Regulierungs "
-"GesmbH</a>. This web-site tries to provide an easy-to-use\n"
-"            interface to this very data so that all interested citizens are "
-"able to get the information relevant to them out of it."
+"payers' money spent in advertising, the Austrian Parliament has released the "
+"so called Media Transparency Act (\"Bundesverfassungsgesetz über die "
+"Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen "
+"an Medieninhaber eines periodischen Mediums und das KommAustria-Gesetz\") in "
+"2011. This regulation requires certain organizations to quarterly report on "
+"their spending in advertising and funding of media cooperations. Reported "
+"data is published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom "
+"Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use "
+"interface to this very data so that all interested citizens are able to get "
+"the information relevant to them out of it."
 msgstr ""
 "Im Gefolge von Diskussionen rund um vermeintlichen Missbrauch bei der "
 "Bezahlung von Inseraten aus Steuergeld\n"
@@ -80,26 +85,45 @@ msgstr ""
 " bzw. jeder Staatsbürger relativ einfach an relevante Informationen gelangen "
 "kann."
 
-#: views/index.html:47
+#: views/about.html:24
 msgid ""
 "At a single glance checkout which organisations are the biggest spenders and "
-"which media companies benefit most\n"
-"                    from public money spent on advertising our by receiving "
-"public funding."
+"which media companies benefit most from public money spent on advertising "
+"our by receiving public funding."
 msgstr ""
 "Erfahren Sie auf einen Blick, welche öffentlichen Einrichtungen und "
 "Organisationen am meisten ausgeben\n"
 " und welche Medien davon am stärksten profitieren."
 
-#: views/index.html:14
+#: views/upload.html:30 views/uploadOrganisation.html:53
+msgid "Attention"
+msgstr "Achtung"
+
+#: controllers/eventsController.js:46
+msgid "Austria"
+msgstr "Österreich"
+
+#: views/about.html:2
 msgid "Background"
 msgstr "Hintergrund"
 
-#: controllers/topEntriesController.js:84
+#: controllers/eventsController.js:67
+msgid "Burgenland"
+msgstr "Burgenland"
+
+#: views/events.html:76 views/grouping.html:119
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: controllers/eventsController.js:73
+msgid "Carinthia"
+msgstr "Kärnten"
+
+#: controllers/topEntriesController.js:100
 msgid "Click for Details"
 msgstr "Klicken Sie für mehr Details"
 
-#: views/top.html:50
+#: views/top.html:64
 msgid ""
 "Click on a segment of the pie chart to get more information on a particular "
 "organization"
@@ -107,10 +131,10 @@ msgstr ""
 "Klicken Sie auf ein Segment des Kuchendiagramms um mehr über die jeweilige "
 "Organisation zu erfahren"
 
-#: views/flow.html:67
+#: views/flow.html:78
 msgid ""
 "Click on the rectangular boxes on either side of the chart to get more "
-"information on a particular organization"
+"information on a particular organization."
 msgstr ""
 "Klicken Sie auf die Rechtecke am linken oder rechten Rand des Diagramms um "
 "mehr über die jeweilige Organisation zu erfahren"
@@ -119,7 +143,19 @@ msgstr ""
 msgid "Contact Person"
 msgstr "Ansprechpartner"
 
-#: controllers/flowController.js:134
+#: views/events.html:74 views/grouping.html:120
+msgid "Create"
+msgstr "Anlegen"
+
+#: controllers/groupingController.js:222
+msgid "Delete"
+msgstr "Löschen"
+
+#: controllers/groupingController.js:58
+msgid "Disable Group"
+msgstr "Gruppe dekativieren"
+
+#: controllers/flowController.js:143
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -143,18 +179,25 @@ msgstr ""
 "Unterbrechung des Dienstes (z. B. in Fällen von Server-Ausfallzeit), "
 "Datenfehler, falsche Darstellung von Daten oder Softwarefehler."
 
-#: views/index.html:33
+#: views/list.html:12 views/top.html:49
+msgid "Federal State"
+msgstr "Bundesland"
+
+#: views/flow.html:29 views/index.html:27 views/top.html:19
+msgid "Fix slider range"
+msgstr "Zeitspanne fixieren"
+
+#: views/about.html:59
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee "
 "ermöglicht"
 
-#: views/index.html:39
+#: views/about.html:17
 msgid ""
 "Get an overview of how much money is actually spent every single quarter of "
-"the year. The statistics is split up\n"
-"                    in media cooperation and funding. You'll see this "
-"involves a lot of tay-payers' money!"
+"the year. The statistics is split up in media cooperation and funding. "
+"You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 "Erhalten Sie eine Übersicht darüber, wie viel Geld jedes Quartal in Medien-"
 "Kooperationen und Förderungen fließt. Sie werden sehen, es geht dabei um "
@@ -172,22 +215,30 @@ msgstr "Treffer für Organisationen"
 msgid "How this web-site came into being"
 msgstr "Wie diese Seite entstand"
 
-#: views/index.html:64
+#: views/about.html:39
 msgid ""
 "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and "
-"<a ui-sref=\"listMedia\">media companies</a> are involved in\n"
-"                    this reporting, check out our lists!"
+"<a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, "
+"check out our lists!"
 msgstr ""
 "Wenn Sie einfach nur sehen möchten, welche <a ui-sref=\"listOrgs"
 "\">Organisationen</a> und <a ui-sref=\"listMedia\">Medien</a> in den RTR-"
 "Meldungen\n"
 "erfasst sind, durchblättern Sie einfach unsere Listen!"
 
-#: views/index.html:72
+#: views/flow.html:82
+msgid ""
+"If you neither choose an organisation nor a media the top spender based on "
+"your chosen payment types and period is selected."
+msgstr ""
+"Wenn Sie weder eine Organisation noch ein Medium auswählen, wird automatisch "
+"der größte Zahler basierend auf Ihrer Zahlungstyp- und Zeitraumauswahl "
+"selektiert"
+
+#: views/about.html:46
 msgid ""
 "If you want to figure out whether some company or media cooperation is "
-"listed in these reports better use our\n"
-"                    search!"
+"listed in these reports better use our search!"
 msgstr ""
 "Um herauszufinden, ob bestimmte Organisationen Meldungen abgegeben haben "
 "bzw. ob bestimmte Medien derartige\n"
@@ -205,20 +256,19 @@ msgstr ""
 "Alles begann mit einem Programmierprojekt in einer Lehrveranstaltung. Dabei "
 "wurde ein erster Prototyp von folgenden Studierenden entwickelt:"
 
-#: views/index.html:55
+#: views/about.html:31
 msgid ""
 "Let's see how organisations distribute their money and where media companies "
-"get their money from!\n"
-"                    Use the filter to see what you are interested in."
+"get their money from! Use the filter to see what you are interested in."
 msgstr ""
 "Finden Sie heraus, wie Organisationen Ihre Mittel für Medienarbeit "
 "verteilen, und woraus sich Medien in diesem Kontext finanzieren"
 
-#: controllers/listControllers.js:144 controllers/listControllers.js:273
+#: controllers/listControllers.js:188 controllers/listControllers.js:317
 msgid "List of Media Companies"
 msgstr "Medien"
 
-#: controllers/listControllers.js:137 controllers/listControllers.js:8
+#: controllers/listControllers.js:178 controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr "Organisationen"
 
@@ -226,11 +276,21 @@ msgstr "Organisationen"
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
-#: controllers/flowController.js:10 views/flow.html:83
+#: controllers/eventsController.js:61
+msgid "Lower Austria"
+msgstr "Niederösterreich"
+
+#: views/events.html:3
+msgid "Manage events"
+msgstr "Events verwalten"
+
+#: controllers/flowController.js:220 controllers/flowController.js:426
+#: controllers/flowController.js:90 controllers/groupingController.js:23
+#: views/flow.html:122
 msgid "Media"
 msgstr "Medien"
 
-#: views/index.html:5
+#: views/index.html:14
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
@@ -238,61 +298,91 @@ msgstr "Medientransparenz Austria"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views/flow.html:28 views/top.html:18
+#: views/flow.html:31 views/index.html:29 views/top.html:21
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
-#: controllers/flowController.js:131
-msgid "next"
-msgstr "nächste"
+#: controllers/groupingController.js:55
+msgid "Nationwide"
+msgstr "Bundesweit"
 
-#: views/list.html:21
+#: controllers/groupingController.js:28
+msgid "No"
+msgstr "Nein"
+
+#: views/list.html:30
 msgid "No entries found!"
 msgstr "Keine Einträge gefunden"
 
-#: views/list.html:11
+#: views/grouping.html:5 views/list.html:18
 msgid "Number of Entries"
 msgstr "Anzahl der Einträge"
 
-#: views/upload.html:21
+#: views/upload.html:51
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr "Anzahl der Zahlungen nach §2 MedKF-TG"
 
-#: views/upload.html:37
+#: views/upload.html:67
 msgid ""
 "Number of Entries according to §31 ORF-G (Charges for National Broadcasting "
 "Company)"
 msgstr "Anzahl der Zahlungen gemäß §31 ORF-G (Programmentgelt)"
 
-#: views/upload.html:29
+#: views/upload.html:59
 msgid "Number of Entries according to §4 (Funding)"
 msgstr "Anzahl der Zahlungen gemäß §4 (Förderungen)"
 
-#: views/upload.html:13
+#: views/uploadOrganisation.html:36
+msgid "Number of entries"
+msgstr "Anzahl der Einträge"
+
+#: views/upload.html:43
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:11
+#: controllers/flowController.js:427 controllers/groupingController.js:21
+#: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
-#: views/flow.html:84
+#: controllers/flowController.js:221 controllers/flowController.js:91
+#: views/flow.html:123
 msgid "Organisations"
 msgstr "Organisationen"
 
-#: controllers/topEntriesController.js:78
+#: views/uploadOrganisation.html:44
+msgid "Organisations not from Austria"
+msgstr "Organisationen außerhalb Österreichs"
+
+#: views/upload.html:31
+msgid "Organisations with unknown address-data"
+msgstr "Organisationen mit nicht bekannten Adressdaten"
+
+#: directives/sankeyDirective.js:92
+msgid "Other media"
+msgstr "Andere Medien"
+
+#: directives/sankeyDirective.js:92
+msgid "Other organisations"
+msgstr "Andere Organisationen"
+
+#: controllers/topEntriesController.js:94
 msgid "Others"
 msgstr "Andere"
 
-#: views/index.html:38
+#: views/about.html:16
 msgid "Overview"
 msgstr "Übersicht"
 
-#: controllers/flowController.js:12 views/flow.html:85
+#: views/grouping.html:22
+msgid "Owner"
+msgstr "Eigentümer"
+
+#: controllers/flowController.js:27 views/flow.html:124
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:32 views/top.html:31
+#: views/flow.html:35 views/index.html:32 views/top.html:41
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
@@ -312,24 +402,32 @@ msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Zahlungstyp"
 
-#: views/flow.html:26 views/top.html:16
+#: views/flow.html:26 views/index.html:24 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
 
-#: controllers/flowController.js:130
-msgid "previous"
-msgstr "vorherige"
-
-#: views/overview.html:24
+#: views/overview.html:18
 msgid "Quarter"
 msgstr "Quartal"
 
-#: controllers/topEntriesController.js:107
-#: controllers/topEntriesController.js:166
+#: controllers/topEntriesController.js:127
+#: controllers/topEntriesController.js:205
 msgid "Recipient"
 msgstr "Empfänger"
 
-#: views/upload.html:8
+#: views/grouping.html:102 views/grouping.html:19
+msgid "Region"
+msgstr "Region"
+
+#: views/events.html:25 views/grouping.html:137 views/grouping.html:31
+msgid "Remove"
+msgstr "Löschen"
+
+#: views/grouping.html:84
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: views/upload.html:38 views/uploadOrganisation.html:31
 msgid "Results of the Upload"
 msgstr "Ergebnis des Uploads"
 
@@ -341,7 +439,7 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:133
+#: controllers/flowController.js:142
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -349,16 +447,24 @@ msgstr "Zeige Seite _PAGE_ von _PAGES_"
 msgid "Source of Data"
 msgstr "Datenherkunft"
 
-#: controllers/topEntriesController.js:104
-#: controllers/topEntriesController.js:165
+#: controllers/topEntriesController.js:124
+#: controllers/topEntriesController.js:204
 msgid "Spender"
 msgstr "Zahler"
 
-#: views/top.html:21
+#: views/top.html:31
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
-#: views/flow.html:77
+#: views/events.html:10 views/events.html:57
+msgid "Start date"
+msgstr "Startdatum"
+
+#: controllers/eventsController.js:70
+msgid "Styria"
+msgstr "Steiermark"
+
+#: views/flow.html:116
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
@@ -366,7 +472,7 @@ msgstr "Tabellendarstellungen"
 msgid "This solution was the basis for the now available site"
 msgstr "Diese Lösung war die Grundlage für die nun vorliegende Seite"
 
-#: views/index.html:28
+#: views/about.html:10
 msgid ""
 "Thus, this web-site wants to contribute to making Open Government Data more "
 "popular in Austrian"
@@ -374,11 +480,11 @@ msgstr ""
 "Damit möchte diese Web-Seite dazu beitragen, Open Government Initiativen in "
 "Österreich populärer zu machen"
 
-#: views/top.html:41
+#: views/top.html:55
 msgid "Top"
 msgstr "Top"
 
-#: views/index.html:46
+#: views/about.html:23
 msgid "Top Player"
 msgstr "Spitzenwerte"
 
@@ -386,19 +492,23 @@ msgstr "Spitzenwerte"
 msgid "Top Spenders and Recipients"
 msgstr "Spitzenzahler und -Empfänger"
 
-#: views/upload.html:25
+#: views/overview.html:28 views/top.html:66
+msgid "Total"
+msgstr "Total"
+
+#: views/upload.html:55
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr "Summer der Zahlungen gemäß §2 MedKF-TG (Medienkooperationen)"
 
-#: views/upload.html:41
+#: views/upload.html:71
 msgid "Total amount according to §31 ORF-G"
 msgstr "Summe der Zahlungen gemäß §31 ORF-G"
 
-#: views/upload.html:33
+#: views/upload.html:63
 msgid "Total amount according to §4 (Funding)"
 msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 
-#: views/upload.html:17
+#: views/upload.html:47
 msgid "Total amount of all entries"
 msgstr "Summe aller Zahlungen"
 
@@ -406,20 +516,56 @@ msgstr "Summe aller Zahlungen"
 msgid "Upload new Media Transparency Report"
 msgstr "Einen neuen Quartalsbericht hochladen"
 
-#: views/index.html:43 views/index.html:51 views/index.html:59
-#: views/index.html:68 views/index.html:76
+#: views/uploadOrganisation.html:3
+msgid "Upload new organisation list"
+msgstr "Neue Liste der Organisationen hochladen"
+
+#: views/uploadZipCode.html:3
+msgid "Upload new zip-code list"
+msgstr "Neue Liste der Postleitzahlen hochladen"
+
+#: controllers/eventsController.js:58
+msgid "Upper Austria"
+msgstr "Oberösterreich"
+
+#: controllers/eventsController.js:64
+msgid "Vienna"
+msgstr "Wien"
+
+#: views/about.html:20 views/about.html:27 views/about.html:34
+#: views/about.html:42 views/about.html:49
 msgid "View details »"
 msgstr "Details anzeigen »"
 
-#: views/index.html:54
+#: controllers/eventsController.js:49
+msgid "Vorarlberg"
+msgstr "Vorarlberg"
+
+#: views/about.html:30
 msgid "Where the money flows?"
 msgstr "Wohin das Geld fließt?"
 
-#: views/index.html:63
+#: views/about.html:38
 msgid "Who's involved?"
 msgstr "Wer ist dabei?"
 
-#: views/flow.html:59
+#: views/top.html:28
+msgid ""
+"With groupings enabled single transfers will be taken together (f.e. to show "
+"umbrella organisations)"
+msgstr ""
+"Wenn Gruppierung aktiviert, werden einzelne Transfers zusammengefasst (z.B. "
+"um Dachorganisationen abzubilden)"
+
+#: controllers/groupingController.js:56
+msgid "Within federal state"
+msgstr "Innerhalb des Bundeslandes"
+
+#: controllers/groupingController.js:26
+msgid "Yes"
+msgstr "Ja"
+
+#: views/flow.html:69
 msgid ""
 "Your are currently viewing the details of {{org.name}} together with a text "
 "filter. This limits the results! Please consider clearing the filter to see "
@@ -429,12 +575,7 @@ msgstr ""
 "Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im "
 "Filter-Feld um alle Zahlungen zu sehen."
 
-#: views/flow.html:42
-msgid ""
-"Federal State"
-msgstr ""
-"Bundesland"
-#: views/flow.html:63
+#: views/flow.html:74
 msgid ""
 "Your query returned {{error.length}} entries, which is more than the allowed "
 "maximum of {{maxNodes}}. Please use the filter to restrict the number of "
@@ -445,52 +586,14 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
+#: controllers/flowController.js:140
+msgid "next"
+msgstr "nächste"
 
-#: views/overview.html:28
-#: views/top.html:56
-msgid "Total"
-msgstr "Gesamtbetrag"
+#: controllers/flowController.js:139
+msgid "previous"
+msgstr "vorherige"
 
-
-msgid ""
-"Upload new organisation list"
-msgstr ""
-"Neue Liste der Organisationen hochladen"
-#~: views/uploadZipCode.html:3
-msgid ""
-"Upload new zip-code list"
-msgstr ""
-"Neue Liste der Postleitzahlen hochladen"
-#~ msgid "Quarters"
-#~ msgstr "Quartale"
-
-#~ msgid "Years"
-#~ msgstr "Jahre"
-
-#~ msgid ""
-#~ "All Data that is published via this site it taken from the quarterly "
-#~ "reports published by RTR without any modifications.\n"
-#~ "    Data quality is far from being perfect, since single media "
-#~ "corporation occur several times due to variant forms of spelling."
-#~ msgstr ""
-#~ "Die Daten, die über dieses System zu Verfügung gestellt werden, stammen "
-#~ "unverändert aus den von der RTR veröffentlichten Listen. Die "
-#~ "Datenqualität ist auch etwas durchwachsen, da zahlreiche Medien in "
-#~ "unterschiedlichen Schreibweisen angeführt werden, obwohl sich dahinter "
-#~ "nur ein Medieninhaber verbirgt"
-
-#~ msgid ""
-#~ "FH Joanneum Gesellschaft mbH is not liable for the correctness of data "
-#~ "provided by RTR. FH Joanneum Gesellschaft mbH stores and processes this "
-#~ "raw data in order to facilitate the process of information extraction.\n"
-#~ "        We are not liable for the interruption of service (eg. in cases "
-#~ "of server down-time), incorrect representation of data or software errors."
-#~ msgstr ""
-#~ "Die FH Joanneum Gesellschaft mbH haftet nicht für die Richtigkeit der von "
-#~ "RTR zur Verfügung gestellten Daten. Die FH Joanneum Gesellschaft mbH "
-#~ "bereitet die Daten lediglich auf und macht sie bewirtschaftbar. Für "
-#~ "Serverausfälle, unrichtige Darstellung sowie Programmfehler wird nicht "
-#~ "gehaftet."
-
-#~ msgid "Upload Report"
-#~ msgstr "Quartalsbericht hochladen"
+#: views/uploadOrganisation.html:58
+msgid "zip-code"
+msgstr "Postleitzahl"
