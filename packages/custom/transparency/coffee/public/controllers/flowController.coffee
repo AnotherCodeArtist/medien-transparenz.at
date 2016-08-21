@@ -2,7 +2,16 @@
 
 app = angular.module 'mean.transparency'
 
-app.filter('myDropdownFilter', ($sce) ->
+app.filter('searchFilter', ($sce) ->
+    (label, query, item, options, element) ->
+        if typeof item.region is "undefined"
+            html = '<span class="label label-primary">Custom</span> ' + label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        else
+            html = label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        $sce.trustAsHtml(html)
+)
+
+app.filter('dropdownFilter', ($sce) ->
     (label, query, item, options, element) ->
         if typeof item.region is "undefined"
             html = '<span class="label label-primary">Custom</span> ' + label
@@ -467,7 +476,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
                     if !found
                         $scope.selectedOrganisations = $scope.selectedOrganisations.concat [{name: org}]
-
             if not $scope.isDetails
                 update()
 
@@ -484,8 +492,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                         $scope.selectedMedia = $scope.selectedMedia.concat [{name: med}]
             if not $scope.isDetails
                 update()
-            else
-                $scope.isDetails = false;
+
         $scope.$watch 'selectedOrganisationGroups', (newValue, oldValue) ->
             if newValue.length > oldValue.length
                 $scope.organisationGroupSelectionError = ""
@@ -583,6 +590,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.groupMedia = () ->
         $scope.mediaGroupError = ""
         existingGroups = TPAService.getClientGroups 'MediaGroups'
+        groupmembers = []
         found = false
         for group in existingGroups
             if group.groupName is $scope.mediaGroupName
@@ -590,18 +598,17 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 break
 
         mediaInGroups = []
-        groupMembers = []
         for group in $scope.selectedMediaGroups
             mediaInGroups = mediaInGroups.concat group.elements
 
         $scope.selectedMedia.map((med) -> med.name).forEach (med) ->
             if mediaInGroups.indexOf(med) is - 1
-                groupMembers.push med
+                groupmembers.push med
 
-        if not found and groupMembers.length > 0
+        if not found and groupmembers.length > 0
             groupName = $scope.mediaGroupName
-            elements = groupMembers
-            TPAService.saveClientGroup 'MediaGroups', $scope.mediaGroupName, $scope.selectedMedia.map (media) -> media.name
+            elements = groupmembers
+            TPAService.saveClientGroup 'MediaGroups',groupName, elements
             $scope.mediaGroupName = ""
             $scope.allMediaGroups = TPAService.getClientGroups 'MediaGroups'
             array = $scope.selectedMediaGroups.concat [{
