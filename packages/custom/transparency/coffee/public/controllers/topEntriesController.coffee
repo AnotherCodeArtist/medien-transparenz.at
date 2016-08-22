@@ -5,7 +5,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog, $rootScope) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -27,6 +27,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.$watch('orgType', change, true)
         $scope.$watch('rank', change, true)
         $scope.$watch('selectedFederalState', change, true)
+        $scope.$watch('includeGroupings', change, true)
 
 
     #construct the query parameters
@@ -35,6 +36,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to =$scope.periods[$scope.slider.to/5].period
         params.federalState = $scope.selectedFederalState.iso if $scope.selectedFederalState
+        params.groupings = $scope.includeGroupings if $scope.includeGroupings
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
@@ -45,7 +47,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 
     buildPieModel = ->
         $scope.pieData = []
-        $scope.pieData.push {key: entry.organisation, y: entry.total} for entry in $scope.top.top
+        $scope.pieData.push {key: entry.organisation, y: entry.total, isGrouping: entry.isGrouping} for entry in $scope.top.top
         topSum = $scope.top.top.reduce(
             (sum, entry) ->
                 sum + entry.total
@@ -78,6 +80,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         ]
         #Federal states selection
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
+        #remove Austria
+        if $scope.federalStates.length is 10
+            $scope.federalStates.pop()
         savedState = sessionStorage.getItem 'topState'
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
@@ -100,6 +105,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             #Variables for the selection of federalState
             $scope.selectedFederalState = {}
             $scope.orgType = $scope.orgTypes[0].value
+            $scope.includeGroupings = false
             $q.all([pY, pP]).then (res) ->
                 update()
                 registerWatches()
@@ -122,16 +128,20 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     #prevents clicks on "Others" to trigger a navigation        
     $scope.preventClickForOthers = (d) -> d.data.key in ["Others","Andere"]
 
-    $rootScope.$on '$stateChangeStart', ->
-        TPAService.saveState stateName,fieldsToStore, $scope
+    $rootScope.$on '$stateChangeStart', (event,toState) ->
+        if toState.name isnt "top"
+            TPAService.saveState stateName,fieldsToStore, $scope
 
     #navigate to some other page
     $scope.go = (d) ->
         window.scrollTo 0, 0
+        if d.data.isGrouping
+            groupName = d.data.key.slice(4) # removing the group prefix "(G) "
         $state.go 'showflow',
             {
-                name: d.data.key
+                name: d.data.key if not d.data.isGrouping
                 orgType: $scope.orgType
+                grouping: groupName if d.data.isGrouping
                 from: $scope.periods[$scope.slider.from/5].period
                 to: $scope.periods[$scope.slider.to/5].period
                 fedState: $scope.selectedFederalState.iso if $scope.selectedFederalState
@@ -140,11 +150,4 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             location: true
             inherit: false
             reload: true
-
-
-
-
-
-
-
 ]

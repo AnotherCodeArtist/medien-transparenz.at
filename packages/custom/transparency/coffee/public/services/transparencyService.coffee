@@ -54,6 +54,26 @@ class TPAService
         console.log params
         @$http.delete 'api/transparency/events', params: params
 
+    createGrouping: (params) ->
+        @$http.post 'api/transparency/grouping', params: params
+
+    updateGrouping: (params) ->
+        @$http.put 'api/transparency/grouping', params: params
+
+    getGroupings: (params) ->
+        @$http.get 'api/transparency/grouping', params: params
+
+    getGroupingMembers: (params) ->
+        @$http.get 'api/transparency/grouping/members', params: params
+    deleteGroupings: (params) ->
+        @$http.delete 'api/transparency/grouping', params: params
+
+    countGroupings: (params) ->
+        @$http.get 'api/transparency/grouping/count', params: params
+
+    getPossibleGroupMembers: (params) ->
+        @$http.get 'api/transparency/grouping/list', params: params
+
     saveState:  (itemId, fieldsToStore,$scope)->
         state = fieldsToStore.reduce ((s,f) -> s[f] = $scope[f];s),{}
         sessionStorage.setItem itemId, JSON.stringify state
@@ -89,26 +109,39 @@ class TPAService
     periods: ->
         @$http.get 'api/transparency/periods'
 
+    federalstates: (params) ->
+        @$http.get 'api/transparency/federalstates', params: params
+
     decodeType: (type) -> switch type
         when 2 then "Payments according to §2 MedKF-TG (Media Cooperations)"
         when 4 then "Payments according to §4 MedKF-TG (Funding)"
         when 31 then "Payments according to §31 ORF-G (Charges)"
 
     #Function to define static data, e.g. federal states
-    staticData: (type)->
+    staticData: (type, data)->
+        federalStates =
+             [
+                 {name: 'Burgenland',value: 'Burgenland', iso: 'AT-1'}
+                 {name: 'Carinthia', value: 'Carinthia', iso: 'AT-2' }
+                 {name: 'Lower Austria', value: 'Lower Austria', iso: 'AT-3' }
+                 {name: 'Salzburg', value: 'Salzburg', iso: 'AT-5' }
+                 {name: 'Styria', value: 'Styria', iso: 'AT-6' }
+                 {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
+                 {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
+                 {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
+                 {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' },
+                 {name: 'Austria',  value: 'Austria', iso: 'AT' }
+             ]
         switch type
             when 'federal'
-                [
-                    {name: 'Burgenland',value: 'Burgenland', iso: 'AT-1'}
-                    {name: 'Carinthia', value: 'Carinthia', iso: 'AT-2' }
-                    {name: 'Lower Austria', value: 'Lower Austria', iso: 'AT-3' }
-                    {name: 'Salzburg', value: 'Salzburg', iso: 'AT-5' }
-                    {name: 'Styria', value: 'Styria', iso: 'AT-6' }
-                    {name: 'Tyrol',  value: 'Tyrol', iso: 'AT-7' }
-                    {name: 'Upper Austria',  value: 'Upper Austria', iso: 'AT-4' }
-                    {name: 'Vienna',  value: 'Vienna', iso: 'AT-9' }
-                    {name: 'Vorarlberg',  value: 'Vorarlberg', iso: 'AT-8' }
-                ]
+                federalStates
+            when 'findOneFederalState'
+                result = null
+                for federalState in federalStates
+                    if federalState.iso is data
+                        result = federalState
+                result
+
 
 app = angular.module 'mean.transparency'
 app.service 'TPAService', ["$http", TPAService]

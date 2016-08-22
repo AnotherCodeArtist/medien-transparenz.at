@@ -24,7 +24,10 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
                         <strong><div translate>Periods</div></strong>
-                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
+                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
+                        <div class="checkbox">
+                            <label><input id="fixRange" type="checkbox" ng-model="slider.options.draggableRangeOnly" /><span translate>Fix slider range</span></label>
+                        </div>
                         <p class="small text-info" translate>Move the sliders to define a range</p>
 
                     </div>
@@ -57,7 +60,7 @@
                        ng-model="filter" type="search" class="searchinput form-control">
                 <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
             </div>
-        </div-->
+        </div>-->
         <br/>
         <div class="row">
             <div class="col-sm-12 col-lg-12">
@@ -159,32 +162,33 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="row" data-ng-show="flowData.length>0">
+        </div>
+        <div class="row" data-ng-show="flowData.length>0">
 
-                <h4 translate>Tabular Representation</h4>
+            <h4 translate>Tabular Representation</h4>
 
-                <div class="table-responsive">
-                    <table datatable="ng" dt-options="dtOptions" class="row-border hover">
-                        <thead>
-                        <tr>
-                            <th translate>Media</th>
-                            <th translate>Organisations</th>
-                            <th translate>Payment Type</th>
-                            <th translate>Amount</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in flowData">
-                            <td>{{item.media}}</td>
-                            <td>{{item.organisation}}</td>
-                            <td>§{{item.transferType}}</td>
-                            <td>{{item.amount|number:2}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table datatable="ng" dt-options="dtOptions" class="row-border hover">
+                    <thead>
+                    <tr>
+                        <th translate>Media</th>
+                        <th translate>Organisations</th>
+                        <th translate>Payment Type</th>
+                        <th translate>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in flowData">
+                        <td>{{item.media}}</td>
+                        <td>{{item.organisation}}</td>
+                        <td>§{{item.transferType}}</td>
+                        <td>{{item.amount|number:2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <br/>
+    </div>
+    <br/>
+    </div>
 </section>

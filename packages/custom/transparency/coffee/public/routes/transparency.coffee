@@ -30,6 +30,11 @@ angular.module 'mean.transparency'
         templateUrl: 'transparency/views/events.html'
         resolve:
             loggedin: checkLoggedIn
+    $stateProvider.state 'grouping',
+        url: '/transparency/grouping'
+        templateUrl: 'transparency/views/grouping.html'
+        resolve:
+            loggedin: checkLoggedIn
     #State for the upload of the organisation-address-data
     $stateProvider.state 'add_organisation',
         url: '/transparency/addOrganisation'
@@ -46,12 +51,15 @@ angular.module 'mean.transparency'
         url: "/top"
         templateUrl: 'transparency/views/top.html'
     $stateProvider.state 'showflow',
-        url: "/showflow?name&orgType&from&to&pTypes&fedState"
+        url: "/showflow?name&grouping&orgType&from&to&pTypes&fedState"
         templateUrl: 'transparency/views/flow.html'
         #controller: 'FlowCtrl'
-    $stateProvider.state 'impress',
-        url: "/impress"
+    $stateProvider.state 'imprint',
+        url: "/imprint"
         templateUrl: 'transparency/views/impress.html'
+    $stateProvider.state 'about',
+        url: "/about"
+        templateUrl: 'transparency/views/about.html'
     $stateProvider.state 'search',
         url: '/search'
         templateUrl: 'transparency/views/search.html'
@@ -64,3 +72,7 @@ angular.module 'mean.transparency'
         url: '/medialist?orgType&page&size'
         templateUrl: 'transparency/views/list.html'
         controller: 'ListMediaCtrl'
+    $stateProvider.state 'map',
+        url: '/map'
+        templateUrl: 'transparency/views/map.html'
+        controller: 'MapCtrl'
