@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: views/about.html:2
+msgid "About Us"
+msgstr ""
+
 #: views/grouping.html:25
 msgid "Active"
 msgstr ""
@@ -31,15 +35,15 @@ msgstr ""
 msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
 msgstr ""
 
-#: views/about.html:45
+#: views/about.html:46
 msgid "Are they involved?"
 msgstr ""
 
-#: views/about.html:6
+#: views/about.html:7
 msgid "As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report on their spending in advertising and funding of media cooperations. Reported data is published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
 msgstr ""
 
-#: views/about.html:24
+#: views/about.html:25
 msgid "At a single glance checkout which organisations are the biggest spenders and which media companies benefit most from public money spent on advertising our by receiving public funding."
 msgstr ""
 
@@ -52,7 +56,7 @@ msgstr ""
 msgid "Austria"
 msgstr ""
 
-#: views/about.html:2
+#: views/about.html:3
 msgid "Background"
 msgstr ""
 
@@ -160,11 +164,11 @@ msgstr ""
 msgid "Fix slider range"
 msgstr ""
 
-#: views/about.html:59
+#: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 
-#: views/about.html:17
+#: views/about.html:18
 msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
@@ -206,7 +210,7 @@ msgstr ""
 msgid "How this web-site came into being"
 msgstr ""
 
-#: views/about.html:39
+#: views/about.html:40
 msgid "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, check out our lists!"
 msgstr ""
 
@@ -214,7 +218,7 @@ msgstr ""
 msgid "If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected."
 msgstr ""
 
-#: views/about.html:46
+#: views/about.html:47
 msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
 msgstr ""
 
@@ -226,7 +230,7 @@ msgstr ""
 msgid "Impress"
 msgstr ""
 
-#: views/about.html:12
+#: views/about.html:13
 msgid "Imprint"
 msgstr ""
 
@@ -234,7 +238,7 @@ msgstr ""
 msgid "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:"
 msgstr ""
 
-#: views/about.html:31
+#: views/about.html:32
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
@@ -351,7 +355,7 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
-#: views/about.html:16
+#: views/about.html:17
 msgid "Overview"
 msgstr ""
 
@@ -477,7 +481,7 @@ msgstr ""
 msgid "This solution was the basis for the now available site"
 msgstr ""
 
-#: views/about.html:10
+#: views/about.html:11
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
@@ -485,7 +489,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: views/about.html:23
+#: views/about.html:24
 msgid "Top Player"
 msgstr ""
 
@@ -542,11 +546,11 @@ msgstr ""
 msgid "Vienna"
 msgstr ""
 
-#: views/about.html:20
-#: views/about.html:27
-#: views/about.html:34
-#: views/about.html:42
-#: views/about.html:49
+#: views/about.html:21
+#: views/about.html:28
+#: views/about.html:35
+#: views/about.html:43
+#: views/about.html:50
 msgid "View details »"
 msgstr ""
 
@@ -554,11 +558,11 @@ msgstr ""
 msgid "Vorarlberg"
 msgstr ""
 
-#: views/about.html:30
+#: views/about.html:31
 msgid "Where the money flows?"
 msgstr ""
 
-#: views/about.html:38
+#: views/about.html:39
 msgid "Who's involved?"
 msgstr ""
 

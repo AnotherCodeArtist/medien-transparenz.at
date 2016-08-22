@@ -12,6 +12,10 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: views/about.html:2
+msgid "About Us"
+msgstr "Über uns"
+
 #: views/grouping.html:25
 msgid "Active"
 msgstr "Aktiv"
@@ -50,11 +54,11 @@ msgid ""
 msgstr ""
 "Eine Übersicht über steuerfinanzierte Medien-Kooperationen und -Förderungen"
 
-#: views/about.html:45
+#: views/about.html:46
 msgid "Are they involved?"
 msgstr "Einträge finden"
 
-#: views/about.html:6
+#: views/about.html:7
 msgid ""
 "As a consequence of ongoing discussions about potential misuse of tax-"
 "payers' money spent in advertising, the Austrian Parliament has released the "
@@ -85,7 +89,7 @@ msgstr ""
 " bzw. jeder Staatsbürger relativ einfach an relevante Informationen gelangen "
 "kann."
 
-#: views/about.html:24
+#: views/about.html:25
 msgid ""
 "At a single glance checkout which organisations are the biggest spenders and "
 "which media companies benefit most from public money spent on advertising "
@@ -103,7 +107,7 @@ msgstr "Achtung"
 msgid "Austria"
 msgstr "Österreich"
 
-#: views/about.html:2
+#: views/about.html:3
 msgid "Background"
 msgstr "Hintergrund"
 
@@ -159,6 +163,36 @@ msgstr "Gruppe dekativieren"
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
+#: views/events.html:22 views/grouping.html:28
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: controllers/groupingController.js:57 views/grouping.html:112
+msgid "Enable Group"
+msgstr "Gruppe aktivieren"
+
+#: views/events.html:13 views/events.html:61
+msgid "End date"
+msgstr "Enddatum"
+
+#: views/upload.html:10 views/uploadOrganisation.html:10
+#: views/uploadZipCode.html:10
+msgid "Entries found"
+msgstr "Einträge gefunden"
+
+#: views/upload.html:12 views/uploadOrganisation.html:12
+#: views/uploadZipCode.html:12
+msgid "Entries stored"
+msgstr "Einträge gespeichert"
+
+#: views/uploadOrganisation.html:40 views/uploadOrganisation.html:53
+msgid "Entries without known federal state in Austria"
+msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
+
+#: views/upload.html:21 views/uploadOrganisation.html:22
+msgid "Error"
+msgstr "Fehler"
+
 #: views/impress.html:25
 msgid "Exclusion of Liability"
 msgstr "Haftungsausschluss"
@@ -187,13 +221,13 @@ msgstr "Bundesland"
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
-#: views/about.html:59
+#: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 "Die Weiterentwicklung dieser Web-Site wird durch eine Förderung der netidee "
 "ermöglicht"
 
-#: views/about.html:17
+#: views/about.html:18
 msgid ""
 "Get an overview of how much money is actually spent every single quarter of "
 "the year. The statistics is split up in media cooperation and funding. "
@@ -202,6 +236,30 @@ msgstr ""
 "Erhalten Sie eine Übersicht darüber, wie viel Geld jedes Quartal in Medien-"
 "Kooperationen und Förderungen fließt. Sie werden sehen, es geht dabei um "
 "eine Menge (Steuer-)Geld"
+
+#: controllers/groupingController.js:52
+msgid "Group for media"
+msgstr "Gruppe für Medien"
+
+#: controllers/groupingController.js:51
+msgid "Group for organisations"
+msgstr "Gruppe für Organisationen"
+
+#: views/grouping.html:133
+msgid "Group members"
+msgstr "Gruppenteilnehmer"
+
+#: controllers/groupingController.js:53 views/grouping.html:74
+msgid "Group owner"
+msgstr "Eigentümer der Gruppe"
+
+#: views/grouping.html:67
+msgid "Group type"
+msgstr "Gruppentyp"
+
+#: views/grouping.html:3 views/top.html:25
+msgid "Grouping"
+msgstr "Gruppierung"
 
 #: views/search.html:32
 msgid "Hits for Media"
@@ -215,7 +273,7 @@ msgstr "Treffer für Organisationen"
 msgid "How this web-site came into being"
 msgstr "Wie diese Seite entstand"
 
-#: views/about.html:39
+#: views/about.html:40
 msgid ""
 "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and "
 "<a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, "
@@ -235,7 +293,7 @@ msgstr ""
 "der größte Zahler basierend auf Ihrer Zahlungstyp- und Zeitraumauswahl "
 "selektiert"
 
-#: views/about.html:46
+#: views/about.html:47
 msgid ""
 "If you want to figure out whether some company or media cooperation is "
 "listed in these reports better use our search!"
@@ -244,8 +302,16 @@ msgstr ""
 "bzw. ob bestimmte Medien derartige\n"
 "Zahlungen erhalten, verwenden Sie am besten unsere Suche"
 
+#: views/uploadOrganisation.html:48
+msgid "Ignored"
+msgstr "Ignoriert"
+
 #: server/views/includes/foot.html:2
 msgid "Impress"
+msgstr "Impressum"
+
+#: views/about.html:13
+msgid "Imprint"
 msgstr "Impressum"
 
 #: views/impress.html:14
@@ -256,7 +322,7 @@ msgstr ""
 "Alles begann mit einem Programmierprojekt in einer Lehrveranstaltung. Dabei "
 "wurde ein erster Prototyp von folgenden Studierenden entwickelt:"
 
-#: views/about.html:31
+#: views/about.html:32
 msgid ""
 "Let's see how organisations distribute their money and where media companies "
 "get their money from! Use the filter to see what you are interested in."
@@ -370,7 +436,7 @@ msgstr "Andere Organisationen"
 msgid "Others"
 msgstr "Andere"
 
-#: views/about.html:16
+#: views/about.html:17
 msgid "Overview"
 msgstr "Übersicht"
 
@@ -431,6 +497,14 @@ msgstr "Zurücksetzen"
 msgid "Results of the Upload"
 msgstr "Ergebnis des Uploads"
 
+#: controllers/eventsController.js:55
+msgid "Salzburg"
+msgstr "Salzburg"
+
+#: views/events.html:75 views/grouping.html:124
+msgid "Save"
+msgstr "Speichern"
+
 #: views/search.html:8
 msgid "Search"
 msgstr "Suchen"
@@ -468,11 +542,19 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
+#: views/index.html:42
+msgid ""
+"The map can be turned by holding the left mouse button and dragging within "
+"the frame. It is possible to zoom into the map by scrolling."
+msgstr ""
+"Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
+"werden. Mittels Scrollen kann in die Karte gezoomt werden."
+
 #: views/impress.html:20
 msgid "This solution was the basis for the now available site"
 msgstr "Diese Lösung war die Grundlage für die nun vorliegende Seite"
 
-#: views/about.html:10
+#: views/about.html:11
 msgid ""
 "Thus, this web-site wants to contribute to making Open Government Data more "
 "popular in Austrian"
@@ -484,7 +566,7 @@ msgstr ""
 msgid "Top"
 msgstr "Top"
 
-#: views/about.html:23
+#: views/about.html:24
 msgid "Top Player"
 msgstr "Spitzenwerte"
 
@@ -512,6 +594,14 @@ msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Total amount of all entries"
 msgstr "Summe aller Zahlungen"
 
+#: views/grouping.html:16
+msgid "Type"
+msgstr "Typ"
+
+#: controllers/eventsController.js:52
+msgid "Tyrol"
+msgstr "Tirol"
+
 #: views/upload.html:3
 msgid "Upload new Media Transparency Report"
 msgstr "Einen neuen Quartalsbericht hochladen"
@@ -532,8 +622,8 @@ msgstr "Oberösterreich"
 msgid "Vienna"
 msgstr "Wien"
 
-#: views/about.html:20 views/about.html:27 views/about.html:34
-#: views/about.html:42 views/about.html:49
+#: views/about.html:21 views/about.html:28 views/about.html:35
+#: views/about.html:43 views/about.html:50
 msgid "View details »"
 msgstr "Details anzeigen »"
 
@@ -541,11 +631,11 @@ msgstr "Details anzeigen »"
 msgid "Vorarlberg"
 msgstr "Vorarlberg"
 
-#: views/about.html:30
+#: views/about.html:31
 msgid "Where the money flows?"
 msgstr "Wohin das Geld fließt?"
 
-#: views/about.html:38
+#: views/about.html:39
 msgid "Who's involved?"
 msgstr "Wer ist dabei?"
 
