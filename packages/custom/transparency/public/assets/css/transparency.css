@@ -94,7 +94,8 @@ div.sankeyChart{
 .label.year,
 .label.label-success,
 .label.label-default,
-.label.label-primary{
+.label.label-primary,
+.label.label-danger{
   text-shadow: none;
 }
 
