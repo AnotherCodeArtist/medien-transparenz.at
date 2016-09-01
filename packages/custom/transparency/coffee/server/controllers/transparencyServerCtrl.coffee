@@ -44,9 +44,25 @@ lineToOrganisation = (line, feedback) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
-        feedback.entries++
-        feedback.notAustria++ if organisation.country_de != 'Österreich'
-        organisation.save()
+        ZipCode.findOne({'zipCode': splittedLine[2]})
+        .then (results) ->
+            if results and organisation.country_de is 'Österreich'
+                organisation.federalState_en = results.federalState
+            else
+                organisation.federalState_en = 'Unknown'
+            organisation.save()
+        .then (ok) ->
+            feedback.entries++
+            feedback.notAustria++ if organisation.country_de != 'Österreich'
+            if organisation.federalState_en is 'Unknown' and organisation.country_de is 'Österreich'
+                feedback.unknownFederalState++
+                feedback.unknownFederalStateEntries.push organisation
+            feedback
+        .catch (err) ->
+            feedback.errors+=1
+            feedback.errorEntries.push {organisation: organisation, errorMessage: err.errmsg, errorCode: err.code}
+            console.log "ERROR: Could not store organisation #{organisation.name}"
+            feedback
     else
         feedback.ignoredEntries++;
         feedback
@@ -282,7 +298,7 @@ module.exports = (Transparency) ->
                     {media: { $regex: ".*#{filter}.*", $options: "i"}}
                 ]
             if federalState
-                query['organisationAddressData.federalState_de'] = federalState
+                query['organisationAddressData.federalState_en'] = federalState
             group =
                 _id:
                     organisation: "$organisation"

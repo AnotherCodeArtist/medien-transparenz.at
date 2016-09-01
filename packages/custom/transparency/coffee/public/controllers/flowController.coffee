@@ -57,7 +57,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #Variables for the selection of federalState
     $scope.selectedFederalState = '-'
     $scope.federalState = {}
-    $scope.federalStates = [{name: 'Burgenland', iso: '1'}, {name: 'Kärnten', iso: '2'}, {name: 'Niederösterreich', iso: '3'}, {name: 'Oberösterreich', iso: '4'}, {name: 'Salzburg', iso: '5'}, {name: 'Steiermark', iso: '6'}, {name: 'Tirol', iso: '7'}, {name: 'Vorarlberg', iso: '8'}, {name: 'Wien', iso: '9'}]
+    $scope.federalStates = [{name: 'Burgenland', iso: '1'}, {name: 'Carinthia', iso: '2'}, {name: 'Lower Austria', iso: '3'}, {name: 'Upper Austria', iso: '4'}, {name: 'Salzburg', iso: '5'}, {name: 'Styria', iso: '6'}, {name: 'Tyrol', iso: '7'}, {name: 'Vorarlberg', iso: '8'}, {name: 'Vienna', iso: '9'}]
     $scope.flows =
         nodes: []
         links: []

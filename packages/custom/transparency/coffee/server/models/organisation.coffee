@@ -22,6 +22,10 @@ OrganisationSchema = new Schema
         type: String
         trim: true
         required: true
+    federalState_en:
+        type: String
+        trim: true
+        required: true
     country_de:
         type: String
         trim: true
