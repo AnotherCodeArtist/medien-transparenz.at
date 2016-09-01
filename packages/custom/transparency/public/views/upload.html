@@ -1,47 +1,76 @@
 <section class="container">
-<div data-ng-controller="UploadController">
-    <h1 translate>Upload new Media Transparency Report</h1>
-    <div class="alert alert-danger" ng-show="error">{{error}}</div>
-    <input type="file" ngf-select="onFileSelect($files)">
-    <p>Uploaded: {{percent}}%</p>
-    <div data-ng-show="feedback">
-        <ul class="list-group">
-            <li class="list-group-item active" translate>
-                Results of the Upload
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.entries}}</span>
-                <span translate>Number of non-emtpy entries</span>
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.sumTotal | number:2}}</span>
-                <span translate>Total amount of all entries</span>
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.paragraph2}}</span>
-                <span translate>Number of Entries according to §2 (Media Cooperation)</span>
-            </li>
-            <li class="list-group-item">
-                <span class="badge">{{feedback.sumParagraph2 | number:2}}</span>
-                <span translate>Total amount according to §2 (Media Cooperation)</span>
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.paragraph4}}</span>
-                <span translate>Number of Entries according to §4 (Funding)</span>
-            </li>
-            <li class="list-group-item">
-                <span class="badge">{{feedback.sumParagraph4 | number:2}}</span>
-                <span translate>Total amount according to §4 (Funding)</span>
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.paragraph31}}</span>
-                <span translate>Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)</span>
-            </li>
-            <li class="list-group-item" >
-                <span class="badge">{{feedback.sumParagraph31 | number:2}}</span>
-                <span translate>Total amount according to §31 ORF-G</span>
-            </li>
-        </ul>
+    <div data-ng-controller="UploadController">
+        <h1 translate>Upload new Media Transparency Report</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <input type="file" ngf-select="onFileSelect($files)">
+        <p>Uploaded: {{percent}}%</p>
+        <div data-ng-show="feedback">
+            <div class="alert alert-info" data-ng-show="feedback.integrityCheck">
+                <div><strong>Info</strong></div>
+                <p translate>Entries found</p>
+                {{feedback.entries}}
+                <p translate>Entries stored</p>
+                {{feedback.savedInDatabase}}</p>
+            </div>
+            <div class="alert alert-danger" ng-show="feedback.errors > 0">
+                <strong>Attention:</strong> There have been {{feedback.errors}} processing errors!
+            </div>
+            <table data-ng-show="feedback.errorEntries.length>0" class="table table-striped">
+                <tr>
+                    <th>Code</th>
+                    <th translate>Error</th>
+                </tr>
+
+                <tr ng-repeat="error in feedback.errorEntries">
+                    <td>{{ error.errorCode }}</td>
+                    <td>{{ error.errorMessage }}</td>
+                </tr>
+            </table>
+            <div class="alert alert-warning" data-ng-show="feedback.unknownOrganisations.length>0">
+                <strong><div translate>Attention</div></strong>
+                <p translate>Organisations with unknown address-data</p>
+            </div>
+            <ul>
+                <li ng-repeat="entry in feedback.unknownOrganisations">{{entry.organisation}}</li>
+            </ul>
+
+            <ul class="list-group">
+                <li class="list-group-item active" translate>
+                    Results of the Upload
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.entries}}</span>
+                    <span translate>Number of non-emtpy entries</span>
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.sumTotal | number:2}}</span>
+                    <span translate>Total amount of all entries</span>
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.paragraph2}}</span>
+                    <span translate>Number of Entries according to §2 (Media Cooperation)</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.sumParagraph2 | number:2}}</span>
+                    <span translate>Total amount according to §2 (Media Cooperation)</span>
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.paragraph4}}</span>
+                    <span translate>Number of Entries according to §4 (Funding)</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.sumParagraph4 | number:2}}</span>
+                    <span translate>Total amount according to §4 (Funding)</span>
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.paragraph31}}</span>
+                    <span translate>Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)</span>
+                </li>
+                <li class="list-group-item" >
+                    <span class="badge">{{feedback.sumParagraph31 | number:2}}</span>
+                    <span translate>Total amount according to §31 ORF-G</span>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-    </section>
+</section>

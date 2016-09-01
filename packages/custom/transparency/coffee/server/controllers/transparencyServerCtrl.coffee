@@ -17,24 +17,26 @@ Organisation = mongoose.model 'Organisation'
 ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
-#Search for organisation entry in database
-findOrganisationData = (organisation) ->
-    #console.log "search for organisation with name " + organisation
-    queryPromise = Organisation.findOne({ 'name': organisation }, 'name').exec()
-    queryPromise.then(
-        (result) ->
-            #console.log "Organisation Data: " + result
-            return
-        (err) ->
-            #console.log "Could not load organisation data from Database: #{err}"
-            return
-    )
-    queryPromise
 
-#Transfer of line to Organisation (with ZipCode for federalState)
-lineToOrganisation = (line, numberOfOrganisations) ->
+#Transfer of line to ZipCode
+lineToZipCode = (line, numberOfZipCodes) ->
+    splittedLine = line.split(",")
+    if splittedLine.length != 2
+        throw new Error('Upload expects another file format')
+    #Skip first line
+    if splittedLine[0] != 'PLZ'
+        entry = new ZipCode()
+        entry.zipCode = splittedLine[0]
+        entry.federalState = splittedLine[1]
+        entry.save()
+        numberOfZipCodes++
+    numberOfZipCodes
+
+#Transfer of line to Organisation
+lineToOrganisation = (line, feedback) ->
+    if not feedback
+        console.log "THIS SHOULD NOT HAPPEN: Supposed to parse line #{line} but got no feedback object!"
     splittedLine = line.split(";")
-    #Skip first and last lines
     if splittedLine[0] != 'Bezeichnung des Rechtsträgers' and splittedLine[0] != ''
         organisation = new Organisation()
         organisation.name = splittedLine[0]
@@ -42,18 +44,17 @@ lineToOrganisation = (line, numberOfOrganisations) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
-        findFederalState = ZipCode.findOne({'zipCode': splittedLine[2]}).exec()
-        Q.all(findFederalState)
-        .then (results) ->
-            try
-                organisation.federalState = results.federalState
-                organisation.save()
-            catch error
-                console.log error
-        numberOfOrganisations++
-    numberOfOrganisations
+        feedback.entries++
+        feedback.notAustria++ if organisation.country_de != 'Österreich'
+        organisation.save()
+    else
+        feedback.ignoredEntries++;
+        feedback
+
 
 lineToTransfer = (line, feedback) ->
+    if not feedback
+        console.log "THIS SHOULD NOT HAPPEN: Supposed to parse line #{line} but got no feedback object!"
     m = line.match regex
     #console.log "Result: #{m} for line #{line}"
     if m
@@ -66,28 +67,42 @@ lineToTransfer = (line, feedback) ->
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         #Save reference
-        transferReference = findOrganisationData transfer.organisation
-        Q.all(transferReference)
+        Organisation.findOne({ 'name': transfer.organisation }, 'name')
         .then (results) ->
-            try
-                if results.name
-                    transfer.organisationReference = results._id
-                    #console.log transfer.organisationReference
+            if results
+                transfer.organisationReference = results._id
                 transfer.save()
-            catch error
-                console.log error
-
-        feedback.quarter = transfer.quarter
-        feedback.year = transfer.year
-        feedback.entries++
-        feedback.paragraph2++ if transfer.transferType is 2
-        feedback.paragraph4++ if transfer.transferType is 4
-        feedback.paragraph31++ if transfer.transferType is 31
-        feedback.sumParagraph2 += transfer.amount if transfer.transferType is 2
-        feedback.sumParagraph4 += transfer.amount if transfer.transferType is 4
-        feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
-        feedback.sumTotal += transfer.amount
-    feedback
+            else
+                console.log "WARNING: Could not find reference for #{transfer.organisation}!"
+                Organisation.findOne name: "Unknown"
+                .then (unknown) ->
+                    if unknown
+                        console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
+                        transfer.organisationReference = unknown._id
+                        unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
+                        feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
+                        transfer.save()
+                    else
+                        feedback.errors+=1
+                        throw new Error("'Unknown' as placeholder was not found in organisation collection")
+        .then (ok) ->
+            feedback.quarter = transfer.quarter
+            feedback.year = transfer.year
+            feedback.entries++
+            feedback.paragraph2++ if transfer.transferType is 2
+            feedback.paragraph4++ if transfer.transferType is 4
+            feedback.paragraph31++ if transfer.transferType is 31
+            feedback.sumParagraph2 += transfer.amount if transfer.transferType is 2
+            feedback.sumParagraph4 += transfer.amount if transfer.transferType is 4
+            feedback.sumParagraph31 += transfer.amount if transfer.transferType is 31
+            feedback.sumTotal += transfer.amount
+            feedback
+        .catch (err) ->
+            feedback.errors+=1
+            feedback.errorEntries.push {errorMessage: err.errmsg, errorCode: err.code}
+            console.log "Error while importing data: " +err
+            feedback
+    else feedback
 
 module.exports = (Transparency) ->
 
@@ -148,40 +163,78 @@ module.exports = (Transparency) ->
             paragraph31: 0
             sumParagraph31: 0
             sumTotal: 0.0
+            unknownOrganisations: []
+            errors: 0
+            errorEntries: []
         #qfs.read(file.path).then(
         fs.readFile file.path, (err,data) ->
             if err
                 res.send 500, "Error #{err.message}"
             else
                 input = iconv.decode data,'latin1'
-                feedback = lineToTransfer line, feedback for line in input.split('\n')
-                res.send feedback
+                input.split("\n").reduce ((p,line) -> p.then((f) -> lineToTransfer line, f)), Q.fcall(->feedback)
+                .then (ok) ->
+                    Transfer.count()
+                .then(
+                    (transfersInDatabase) ->
+                        feedback.savedInDatabase = transfersInDatabase
+                        feedback.integrityCheck = true
+                        res.status(200).send(feedback)
+                )
+                .catch (err) ->
+                    res.send 500, "Error #{err.message}"
     #Function for the upload of organisation-address-data
     uploadOrganisation: (req, res) ->
         file = req.files.file;
-        response =
-            newOrganisationNumber: 0
+        feedback =
+            entries: 0
+            ignoredEntries: 0
+            unknownFederalState: 0,
+            unknownFederalStateEntries: [],
+            notAustria: 0,
+            errors:0
+            errorEntries: []
 
         fs.readFile file.path, (err,data) ->
             if err
                 res.status(500).send("Error #{err.message}")
             else
                 input =  iconv.decode data, 'utf8'
-                response.newOrganisationNumber = lineToOrganisation(line,response.newOrganisationNumber) for line in input.split('\n')
-                res.status(200).send(response)
+                input.split("\n").reduce ((p,line) -> p.then((f) -> lineToOrganisation line, f)), Q.fcall(->feedback)
+                .then (ok) ->
+                    Organisation.count()
+                    .then(
+                        (organisationsInDatabase) ->
+                            feedback.savedInDatabase = organisationsInDatabase
+                            feedback.integrityCheck = true
+                            res.status(200).send(feedback)
+                    )
+                    .catch (err) ->
+                        res.send 500, "Error #{err.message}"
 
-    #Function for the upload of organisation-address-data
+#Function for the upload of zipCodes
     uploadZipCode: (req, res) ->
         file = req.files.file;
         response =
             newZipCodes: 0
+            integrityCheck: false
+            savedInDatabase: 0
+
         fs.readFile file.path, (err,data) ->
             if err
                 res.status(500).send("Error #{err.message}")
             else
                 input =  iconv.decode data, 'utf8'
                 response.newZipCodes = lineToZipCode(line,response.newZipCodes) for line in input.split('\n')
-                res.status(200).send(response)
+                ZipCode.count()
+                .then(
+                    (codesInDatabase) ->
+                        response.savedInDatabase = codesInDatabase
+                        response.integrityCheck = true
+                        res.status(200).send(response)
+                    (error) ->
+                        res.send 500, "Error #{error}"
+                )
 
     periods: (req, res) ->
         Transfer.aggregate(
