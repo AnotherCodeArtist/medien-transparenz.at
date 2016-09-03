@@ -5,7 +5,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
 ($scope, TPAService, $q, $state, gettextCatalog) ->
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'federalState']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -97,7 +97,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             $scope.typesText = (type: type, text: gettextCatalog.getString( TPAService.decodeType(type) ), checked: false for type in types)
             $scope.typesText[0].checked = true
             #Variables for the selection of federalState
-            $scope.selectedFederalState = '-'
+            $scope.selectedFederalState = {}
             $scope.orgType = $scope.orgTypes[0].value
             $q.all([pY, pP]).then (res) ->
                 update()
@@ -131,6 +131,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                 orgType: $scope.orgType
                 from: $scope.periods[$scope.slider.from/5].period
                 to: $scope.periods[$scope.slider.to/5].period
+                fedState: $scope.selectedFederalState.value if $scope.selectedFederalState
                 pTypes: $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
             },
             location: true

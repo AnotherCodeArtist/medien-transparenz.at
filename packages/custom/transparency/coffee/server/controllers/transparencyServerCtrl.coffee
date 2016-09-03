@@ -83,14 +83,14 @@ lineToOrganisation = (line, feedback) ->
         ZipCode.findOne({'zipCode': splittedLine[2]})
         .then (results) ->
             if results and organisation.country_de is 'Österreich'
-                organisation.federalState_en = results.federalState
+                organisation.federalState = results.federalState
             else
-                organisation.federalState_en = 'Unknown'
+                organisation.federalState = 'Unknown'
             organisation.save()
         .then (ok) ->
             feedback.entries++
             feedback.notAustria++ if organisation.country_de != 'Österreich'
-            if organisation.federalState_en is 'Unknown' and organisation.country_de is 'Österreich'
+            if organisation.federalState is 'Unknown' and organisation.country_de is 'Österreich'
                 feedback.unknownFederalState++
                 feedback.unknownFederalStateEntries.push organisation
             feedback
@@ -119,10 +119,11 @@ lineToTransfer = (line, feedback) ->
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         #Save reference
-        Organisation.findOne({ 'name': transfer.organisation })
+        Organisation.findOne({ 'name': transfer.organisation }, 'name federalState')
         .then (results) ->
             if results
                 transfer.organisationReference = results._id
+                transfer.federalState = results.federalState
                 transfer.save()
             else
                 console.log "WARNING: Could not find reference for #{transfer.organisation}!"
@@ -130,6 +131,7 @@ lineToTransfer = (line, feedback) ->
                 .then (unknown) ->
                     if unknown
                         console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
+                        transfer.federalState = 'Unknown'
                         transfer.organisationReference = unknown._id
                         unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
                         feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
@@ -332,10 +334,11 @@ module.exports = (Transparency) ->
                     {organisation: { $regex: ".*#{filter}.*", $options: "i"}}
                     {media: { $regex: ".*#{filter}.*", $options: "i"}}
                 ]
+            if federalState?
+                query.federalState = federalState
             group =
                 _id:
                     organisation: "$organisation"
-                    organisationReference: "$organisationReference"
                     transferType: "$transferType"
                     media: "$media"
                 amount:
@@ -344,7 +347,6 @@ module.exports = (Transparency) ->
             .group(group)
             .project(
                 organisation: "$_id.organisation",
-                organisationReference: "$_id.organisationReference",
                 transferType: "$_id.transferType",
                 media: "$_id.media"
                 _id: 0
@@ -352,32 +354,20 @@ module.exports = (Transparency) ->
             )
             .exec()
             .then (result) ->
-                   populatedPromise = getPopulateInformation(result, 'organisationReference')
-                   .then(
-                     (isPopulated) ->
-                         if federalState
-                            #console.log "Federal State: " + transfer.organisationReference.federalState_en for transfer in result when transfer.organisationReference.federalState_en is federalState
-                            #create new results based on the federalState selection
-                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
-                            #console.log("Result with " +federalState+" has length of " + result.length)
-                            #console.log(JSON.stringify(result))
-
-                         if result.length > maxLength
-                            res.status(413).send {
-                             error: "You query returns more then the specified maximum of #{maxLength}"
-                             length: result.length
-                                }
-                         else
-                            res.json result
-                   )
-
+                if result.length > maxLength
+                    res.status(413).send {
+                        error: "You query returns more then the specified maximum of #{maxLength}"
+                        length: result.length
+                    }
+                else
+                    res.json result
             .catch (err) ->
                 res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
-        federalState = req.query.federalState or ''
+        federalState = req.query.federalState if req.query.federalState
         period = {}
         period['$gte'] = parseInt(req.query.from) if req.query.from
         period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -388,7 +378,6 @@ module.exports = (Transparency) ->
         query = {}
         project =
             organisation: '$_id.organisation'
-            organisationReference: '$_id.organisationReference'
             _id: 0
             total: 1
         if period.$gte? or period.$lte?
@@ -396,10 +385,11 @@ module.exports = (Transparency) ->
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
+        if federalState?
+            query.federalState = federalState
         group =
             _id:
                 organisation: if orgType is 'org' then '$organisation' else '$media',
-                organisationReference: '$organisationReference'
             total:
                 $sum: '$amount'
         options = {}
@@ -417,40 +407,21 @@ module.exports = (Transparency) ->
         topPromise = Transfer.aggregate($match: query)
         .group(group)
         .sort('-total')
+        .limit(results)
         .project(project)
         .exec()
-        Q.all([topPromise])
-        .then (promiseResults) ->
+        allPromise = Transfer.mapReduce options
+        allPromise.then (r) ->
+        Q.all([topPromise, allPromise])
+        .then (results) ->
             try
-                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
-                .then (
-                    (isPopulated) ->
-                        try
-                            populatedTransfers = promiseResults[0]
-                            totalAmountOfTransfers = 0
-
-                            if federalState.length
-                                #create new results based on the federalState selection
-                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
-                                #console.log("Result with " +federalState+" has length of " + populatedTransfers.length)
-
-                            if orgType is 'media'
-                                populatedTransfers = mediaToFederalState populatedTransfers
-
-                            totalAmountOfTransfers = getTotalAmountOfTransfers populatedTransfers
-                            #console.log ("we have to cut the array to the limit of " + results)
-                            topResult = populatedTransfers.splice(0,results);
-
-                            result =
-                                top: topResult
-                                all: totalAmountOfTransfers
-
-                            res.send result
-                        catch error
-                            console.log error
-                            res.status(500).send("No Data was found!")
-                )
-
+                result =
+                    top: results[0]
+                    all: results[1].reduce(
+                        (sum, v)->
+                            sum + v.value
+                        0)
+                res.send result
             catch error
                 console.log error
                 res.status(500).send("No Data was found!")
