@@ -316,7 +316,7 @@ module.exports = (Transparency) ->
                     organisation_zipCode: "$organisation_zipCode"
                     organisation_city_de: "$organisation_city_de"
                     organisation_country_de: "$organisation_country_de"
-                    organisation_federalState_de: "$organisation_federalState_de"
+                    organisation_federalState_en: "$organisation_federalState_en"
                     media: "$media"
                 amount:
                     $sum: "$amount"
@@ -329,7 +329,7 @@ module.exports = (Transparency) ->
                     organisation_zipCode: "$_id.organisation_zipCode",
                     organisation_city_de: "$_id.organisation_city_de",
                     organisation_country_de: "$_id.organisation_country_de",
-                    organisation_federalState_de: "$_id.organisation_federalState_de",
+                    organisation_federalState_en: "$_id.organisation_federalState_en",
                     media: "$_id.media"
                     _id: 0
                     amount: 1)
