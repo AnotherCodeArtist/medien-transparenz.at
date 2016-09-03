@@ -57,7 +57,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #Variables for the selection of federalState
     $scope.selectedFederalState = '-'
     $scope.federalState = {}
-    $scope.federalStates = [{name: 'Burgenland', iso: '1'}, {name: 'Carinthia', iso: '2'}, {name: 'Lower Austria', iso: '3'}, {name: 'Upper Austria', iso: '4'}, {name: 'Salzburg', iso: '5'}, {name: 'Styria', iso: '6'}, {name: 'Tyrol', iso: '7'}, {name: 'Vorarlberg', iso: '8'}, {name: 'Vienna', iso: '9'}]
+    $scope.federalStates =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
     $scope.flows =
         nodes: []
         links: []
@@ -66,7 +66,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params.maxLength = $scope.maxNodes
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to = $scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.name) if $scope.selectedFederalState
+        (params.federalState = $scope.selectedFederalState.value) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         (params.filter = $scope.filter) if $scope.filter.length >= 3
@@ -117,6 +117,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 
@@ -124,12 +125,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.showDetails = (node) ->
         $scope.org = {}
         $scope.org.name = node.name
-        $scope.org.street = node.addressData.street
-        $scope.org.zipCode = node.addressData.zipCode
-        $scope.org.city = node.addressData.city_de
-        $scope.org.country = node.addressData.country_de
-        $scope.org.federalState = node.addressData.federalState_en
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
+        if $scope.org.orgType is 'org'
+            $scope.org.street = node.addressData.street
+            $scope.org.zipCode = node.addressData.zipCode
+            $scope.org.city = node.addressData.city_de
+            $scope.org.country = node.addressData.country_de
         update()
         window.scrollTo 0,0
 
@@ -181,12 +182,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 nodeMap[entry.organisation] =
                     index: nodesNum
                     type: 'o'
-                    addressData:
-                        street: entry.organisation_street
-                        zipCode: entry.organisation_zipCode
-                        city_de: entry.organisation_city_de
-                        country_de: entry.organisation_country_de
-                        federalState_de: entry.organisation_federalState_en
+                    addressData: entry.organisationReference
                 nodesNum++
             if not nodeMap[entry.media]?
                 nodeMap[entry.media] =
@@ -199,7 +195,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 value: entry.amount
                 type: entry.transferType
             )
-
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links}
 

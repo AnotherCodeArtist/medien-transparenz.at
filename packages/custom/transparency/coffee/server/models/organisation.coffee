@@ -36,10 +36,7 @@ OrganisationSchema = new Schema
 OrganisationSchema.index(
   {
       name: 1
-      street: 1
-      zipCode: 1
-      city_de: 1
-      country_de: 1
+      federalState_en: 1
   },{
       unique: true
   }

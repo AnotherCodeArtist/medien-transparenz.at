@@ -19,8 +19,6 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.ranks = [3, 5, 10, 15, 20]
     $scope.rank = 10
     $scope.pieData = []
-    $scope.federalState = {}
-    $scope.federalStates = [{name: 'Burgenland', iso: '1'}, {name: 'Carinthia', iso: '2'}, {name: 'Lower Austria', iso: '3'}, {name: 'Upper Austria', iso: '4'}, {name: 'Salzburg', iso: '5'}, {name: 'Styria', iso: '6'}, {name: 'Tyrol', iso: '7'}, {name: 'Vorarlberg', iso: '8'}, {name: 'Vienna', iso: '9'}]
     window.scrollTo 0, 0
 
     # register watches to update chart when changes occur
@@ -36,7 +34,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params = {}
         params.from = $scope.periods[$scope.slider.from/5].period
         params.to =$scope.periods[$scope.slider.to/5].period
-        (params.federalState = $scope.selectedFederalState.name) if $scope.selectedFederalState
+        (params.federalState = $scope.selectedFederalState.value) if $scope.selectedFederalState
         types = (v.type for v in $scope.typesText when v.checked)
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
@@ -76,6 +74,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             {name: gettextCatalog.getString('Spender'), value: 'org'},
             {name: gettextCatalog.getString('Recipient'), value: 'media'}
         ]
+        #Federal states selection
+        $scope.federalState = {}
+        $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value for state in TPAService.staticData 'federal')
         savedState = sessionStorage.getItem 'topState'
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
@@ -106,6 +107,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.orgTypes[0].name = gettextCatalog.getString('Spender')
         $scope.orgTypes[1].name = gettextCatalog.getString('Recipient')
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+        $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
 
     $scope.$on 'gettextLanguageChanged', translate
 

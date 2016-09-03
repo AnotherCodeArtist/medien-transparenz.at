@@ -18,6 +18,41 @@ ZipCode = mongoose.model 'Zipcode'
 
 regex = /"?(.+?)"?;(\d{4})(\d);(\d{1,2});\d;"?(.+?)"?;(\d+(?:,\d{1,2})?).*/
 
+#returns value for "others" / replaces promise
+getTotalAmountOfTransfers = (entries) ->
+    amounts = (entry.total for entry in entries)
+    totalAmount = amounts.reduce(((total, num) ->
+        total + num), 0)
+    totalAmount
+
+#matches media to federalState (due to lack of grouping)
+mediaToFederalState = (mediaResult) ->
+    uniqueMedia= []
+    #console.log("Entries in result " +mediaResult.length)
+    for media in mediaResult
+        mediaNames = (name.organisation for name in uniqueMedia)
+
+        if media.organisation not in mediaNames
+           uniqueMedia.push(media)
+        else
+           # media is already there, add sum to media
+           #console.log (media.organisation + ' in media names')
+           for uniqueEntry in uniqueMedia
+               if uniqueEntry.organisation is media.organisation
+                   #console.log(uniqueEntry.organisation +  'has already ' +uniqueEntry.total)
+                   #console.log("The transfer adds "+ media.total)
+                   uniqueEntry.total += media.total
+                   #console.log("Entry has now " +uniqueEntry.total)
+                   break
+    #console.log ("Entries after uniqueness: " + uniqueMedia.length)
+    uniqueMedia
+
+#function for populate
+getPopulateInformation = (sourceForPopulate, path) ->
+    #path: what to look for, select without id
+    populatePromise = Organisation.populate(sourceForPopulate, {path: path, select: '-_id'})
+    populatePromise
+
 #Transfer of line to ZipCode
 lineToZipCode = (line, numberOfZipCodes) ->
     splittedLine = line.split(",")
@@ -37,6 +72,7 @@ lineToOrganisation = (line, feedback) ->
     if not feedback
         console.log "THIS SHOULD NOT HAPPEN: Supposed to parse line #{line} but got no feedback object!"
     splittedLine = line.split(";")
+    #Skip first and last lines
     if splittedLine[0] != 'Bezeichnung des Rechtsträgers' and splittedLine[0] != ''
         organisation = new Organisation()
         organisation.name = splittedLine[0]
@@ -87,11 +123,6 @@ lineToTransfer = (line, feedback) ->
         .then (results) ->
             if results
                 transfer.organisationReference = results._id
-                transfer.organisation_street = results.street
-                transfer.organisation_zipCode = results.zipCode
-                transfer.organisation_city_de = results.city_de
-                transfer.organisation_country_de = results.country_de
-                transfer.organisation_federalState_en = results.federalState_en
                 transfer.save()
             else
                 console.log "WARNING: Could not find reference for #{transfer.organisation}!"
@@ -100,11 +131,6 @@ lineToTransfer = (line, feedback) ->
                     if unknown
                         console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
                         transfer.organisationReference = unknown._id
-                        transfer.organisation_street = unknown.street
-                        transfer.organisation_zipCode = unknown.zipCode
-                        transfer.organisation_city_de = unknown.city_de
-                        transfer.organisation_country_de = unknown.country_de
-                        transfer.organisation_federalState_en = unknown.federalState_en
                         unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
                         feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
                         transfer.save()
@@ -306,44 +332,47 @@ module.exports = (Transparency) ->
                     {organisation: { $regex: ".*#{filter}.*", $options: "i"}}
                     {media: { $regex: ".*#{filter}.*", $options: "i"}}
                 ]
-            if federalState
-                query.organisation_federalState_en = federalState
             group =
                 _id:
                     organisation: "$organisation"
+                    organisationReference: "$organisationReference"
                     transferType: "$transferType"
-                    organisation_street: "$organisation_street"
-                    organisation_zipCode: "$organisation_zipCode"
-                    organisation_city_de: "$organisation_city_de"
-                    organisation_country_de: "$organisation_country_de"
-                    organisation_federalState_en: "$organisation_federalState_en"
                     media: "$media"
                 amount:
                     $sum: "$amount"
             Transfer.aggregate($match: query)
             .group(group)
             .project(
-                    organisation: "$_id.organisation"
-                    transferType: "$_id.transferType",
-                    organisation_street: "$_id.organisation_street",
-                    organisation_zipCode: "$_id.organisation_zipCode",
-                    organisation_city_de: "$_id.organisation_city_de",
-                    organisation_country_de: "$_id.organisation_country_de",
-                    organisation_federalState_en: "$_id.organisation_federalState_en",
-                    media: "$_id.media"
-                    _id: 0
-                    amount: 1)
+                organisation: "$_id.organisation",
+                organisationReference: "$_id.organisationReference",
+                transferType: "$_id.transferType",
+                media: "$_id.media"
+                _id: 0
+                amount: 1
+            )
             .exec()
             .then (result) ->
-                if result.length > maxLength
-                    res.status(413).send {
-                        error: "You query returns more then the specified maximum of #{maxLength}"
-                        length: result.length
-                    }
-                else
-                    res.json result
+                   populatedPromise = getPopulateInformation(result, 'organisationReference')
+                   .then(
+                     (isPopulated) ->
+                         if federalState
+                            #console.log "Federal State: " + transfer.organisationReference.federalState_en for transfer in result when transfer.organisationReference.federalState_en is federalState
+                            #create new results based on the federalState selection
+                            result = (transfer for transfer in result when transfer.organisationReference.federalState_en is federalState)
+                            #console.log("Result with " +federalState+" has length of " + result.length)
+                            #console.log(JSON.stringify(result))
+
+                         if result.length > maxLength
+                            res.status(413).send {
+                             error: "You query returns more then the specified maximum of #{maxLength}"
+                             length: result.length
+                                }
+                         else
+                            res.json result
+                   )
+
             .catch (err) ->
-                res.status(500).send error: "Could not load money flow"
+                res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
@@ -357,17 +386,20 @@ module.exports = (Transparency) ->
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
         results = parseInt(req.query.x or '10')
         query = {}
+        project =
+            organisation: '$_id.organisation'
+            organisationReference: '$_id.organisationReference'
+            _id: 0
+            total: 1
         if period.$gte? or period.$lte?
             query.period = period
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
-        if federalState
-            console.log federalState + ' selected'
-            query.organisation_federalState_en =
-                $in: [federalState]
         group =
-            _id: {organisation: if orgType is 'org' then '$organisation' else '$media'}
+            _id:
+                organisation: if orgType is 'org' then '$organisation' else '$media',
+                organisationReference: '$organisationReference'
             total:
                 $sum: '$amount'
         options = {}
@@ -380,28 +412,45 @@ module.exports = (Transparency) ->
         #console.log query
         #console.log "Group: "
         #console.log group
+        #console.log "Project: "
+        #console.log project
         topPromise = Transfer.aggregate($match: query)
         .group(group)
         .sort('-total')
-        .limit(results)
-        .project(
-            organisation: '$_id.organisation'
-            _id: 0
-            total: 1
-        )
+        .project(project)
         .exec()
-        allPromise = Transfer.mapReduce options
-        allPromise.then (r) ->
-        Q.all([topPromise, allPromise])
-        .then (results) ->
+        Q.all([topPromise])
+        .then (promiseResults) ->
             try
-                result =
-                    top: results[0]
-                    all: results[1].reduce(
-                        (sum, v)->
-                            sum + v.value
-                        0)
-                res.send result
+                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
+                .then (
+                    (isPopulated) ->
+                        try
+                            populatedTransfers = promiseResults[0]
+                            totalAmountOfTransfers = 0
+
+                            if federalState.length
+                                #create new results based on the federalState selection
+                                populatedTransfers = (transfer for transfer in promiseResults[0] when transfer.organisationReference.federalState_en is federalState)
+                                #console.log("Result with " +federalState+" has length of " + populatedTransfers.length)
+
+                            if orgType is 'media'
+                                populatedTransfers = mediaToFederalState populatedTransfers
+
+                            totalAmountOfTransfers = getTotalAmountOfTransfers populatedTransfers
+                            #console.log ("we have to cut the array to the limit of " + results)
+                            topResult = populatedTransfers.splice(0,results);
+
+                            result =
+                                top: topResult
+                                all: totalAmountOfTransfers
+
+                            res.send result
+                        catch error
+                            console.log error
+                            res.status(500).send("No Data was found!")
+                )
+
             catch error
                 console.log error
                 res.status(500).send("No Data was found!")
