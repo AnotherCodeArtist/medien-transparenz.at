@@ -124,12 +124,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.showDetails = (node) ->
         $scope.org = {}
         $scope.org.name = node.name
-        if node.type is 'o'
-            $scope.org.street = node.addressData.street
-            $scope.org.zipCode = node.addressData.zipCode
-            $scope.org.city = node.addressData.city_de
-            $scope.org.country = node.addressData.country_de
-        #console.log node.addressData
+        $scope.org.street = node.addressData.street
+        $scope.org.zipCode = node.addressData.zipCode
+        $scope.org.city = node.addressData.city_de
+        $scope.org.country = node.addressData.country_de
+        $scope.org.federalState = node.addressData.federalState_en
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         update()
         window.scrollTo 0,0
@@ -182,7 +181,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 nodeMap[entry.organisation] =
                     index: nodesNum
                     type: 'o'
-                    addressData: entry.organisationAddressData[0]
+                    addressData:
+                        street: entry.organisation_street
+                        zipCode: entry.organisation_zipCode
+                        city_de: entry.organisation_city_de
+                        country_de: entry.organisation_country_de
+                        federalState_de: entry.organisation_federalState_en
                 nodesNum++
             if not nodeMap[entry.media]?
                 nodeMap[entry.media] =

@@ -10,6 +10,26 @@ TransferSchema = new Schema
         type: String
         required: true
         trim: true
+    organisation_street:
+        type: String
+        required: true
+        trim: true
+    organisation_zipCode:
+        type: String
+        required: true
+        trim: true
+    organisation_city_de:
+        type: String
+        required: true
+        trim: true
+    organisation_country_de:
+        type: String
+        required: true
+        trim: true
+    organisation_federalState_en:
+        type: String
+        required: true
+        trim: true
     transferType: Number
     media:
         type: String

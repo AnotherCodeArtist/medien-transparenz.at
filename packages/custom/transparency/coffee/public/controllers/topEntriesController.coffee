@@ -20,7 +20,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.rank = 10
     $scope.pieData = []
     $scope.federalState = {}
-    $scope.federalStates = [{name: 'Burgenland'}, {name: 'Kärnten'}, {name: 'Niederösterreich'}, {name: 'Oberösterreich'}, {name: 'Salzburg'}, {name: 'Steiermark'}, {name: 'Tirol'}, {name: 'Vorarlberg'}, {name: 'Wien'}]
+    $scope.federalStates = [{name: 'Burgenland', iso: '1'}, {name: 'Carinthia', iso: '2'}, {name: 'Lower Austria', iso: '3'}, {name: 'Upper Austria', iso: '4'}, {name: 'Salzburg', iso: '5'}, {name: 'Styria', iso: '6'}, {name: 'Tyrol', iso: '7'}, {name: 'Vorarlberg', iso: '8'}, {name: 'Vienna', iso: '9'}]
     window.scrollTo 0, 0
 
     # register watches to update chart when changes occur

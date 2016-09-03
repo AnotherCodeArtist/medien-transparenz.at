@@ -83,10 +83,15 @@ lineToTransfer = (line, feedback) ->
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
         #Save reference
-        Organisation.findOne({ 'name': transfer.organisation }, 'name')
+        Organisation.findOne({ 'name': transfer.organisation })
         .then (results) ->
             if results
                 transfer.organisationReference = results._id
+                transfer.organisation_street = results.street
+                transfer.organisation_zipCode = results.zipCode
+                transfer.organisation_city_de = results.city_de
+                transfer.organisation_country_de = results.country_de
+                transfer.organisation_federalState_en = results.federalState_en
                 transfer.save()
             else
                 console.log "WARNING: Could not find reference for #{transfer.organisation}!"
@@ -95,6 +100,11 @@ lineToTransfer = (line, feedback) ->
                     if unknown
                         console.log "Setting org-reference for #{transfer.organisation} to 'Unknown' (#{unknown._id})"
                         transfer.organisationReference = unknown._id
+                        transfer.organisation_street = unknown.street
+                        transfer.organisation_zipCode = unknown.zipCode
+                        transfer.organisation_city_de = unknown.city_de
+                        transfer.organisation_country_de = unknown.country_de
+                        transfer.organisation_federalState_en = unknown.federalState_en
                         unknownOrganisationNames = (org.organisation for org in feedback.unknownOrganisations)
                         feedback.unknownOrganisations.push {organisation: transfer.organisation} if transfer.organisation not in unknownOrganisationNames
                         transfer.save()
@@ -275,7 +285,6 @@ module.exports = (Transparency) ->
     flows: (req, res) ->
         try
             maxLength = parseInt req.query.maxLength or "750"
-            lookupOrganisationObject = { from: 'organisations', localField: 'organisation', foreignField: 'name', as: 'organisationAddressData' }
             federalState = req.query.federalState or ''
             period = {}
             period['$gte'] = parseInt(req.query.from) if req.query.from
@@ -298,37 +307,37 @@ module.exports = (Transparency) ->
                     {media: { $regex: ".*#{filter}.*", $options: "i"}}
                 ]
             if federalState
-                query['organisationAddressData.federalState_en'] = federalState
+                query.organisation_federalState_en = federalState
             group =
                 _id:
                     organisation: "$organisation"
                     transferType: "$transferType"
+                    organisation_street: "$organisation_street"
+                    organisation_zipCode: "$organisation_zipCode"
+                    organisation_city_de: "$organisation_city_de"
+                    organisation_country_de: "$organisation_country_de"
+                    organisation_federalState_de: "$organisation_federalState_de"
                     media: "$media"
-                    addressData: '$organisationAddressData'
                 amount:
                     $sum: "$amount"
-            Transfer.aggregate()
-            #left-join
-            .lookup(lookupOrganisationObject)
-             #unwind: opens array
-            .unwind('$organisationAddressData')
-            .match(query)
+            Transfer.aggregate($match: query)
             .group(group)
             .project(
                     organisation: "$_id.organisation"
                     transferType: "$_id.transferType",
+                    organisation_street: "$_id.organisation_street",
+                    organisation_zipCode: "$_id.organisation_zipCode",
+                    organisation_city_de: "$_id.organisation_city_de",
+                    organisation_country_de: "$_id.organisation_country_de",
+                    organisation_federalState_de: "$_id.organisation_federalState_de",
                     media: "$_id.media"
-                    federalState: "$_id.federalState"
-                    organisationAddressData: "$_id.addressData",
                     _id: 0
                     amount: 1)
-            #left-join
-            .lookup({ from: 'organisations', localField: 'organisation', foreignField: 'name', as: 'organisationAddressData' })
             .exec()
             .then (result) ->
                 if result.length > maxLength
                     res.status(413).send {
-                        error: "You query returns more then the specified maximum od #{maxLength}"
+                        error: "You query returns more then the specified maximum of #{maxLength}"
                         length: result.length
                     }
                 else
@@ -339,6 +348,7 @@ module.exports = (Transparency) ->
             res.status(500).send error: "Could not load money flow: #{error}"
 
     topEntries: (req, res) ->
+        federalState = req.query.federalState or ''
         period = {}
         period['$gte'] = parseInt(req.query.from) if req.query.from
         period['$lte'] = parseInt(req.query.to) if req.query.to
@@ -352,6 +362,10 @@ module.exports = (Transparency) ->
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
+        if federalState
+            console.log federalState + ' selected'
+            query.organisation_federalState_en =
+                $in: [federalState]
         group =
             _id: {organisation: if orgType is 'org' then '$organisation' else '$media'}
             total:
