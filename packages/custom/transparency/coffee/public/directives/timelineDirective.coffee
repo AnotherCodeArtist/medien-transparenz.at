@@ -1,7 +1,7 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.directive 'tpaLinegraph', ($rootScope) ->
+app.directive 'tpaTimeline', ($rootScope) ->
      restrict: 'EA'
      scope:
           data: '='
