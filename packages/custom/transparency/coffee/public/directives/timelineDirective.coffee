@@ -11,13 +11,20 @@ app.directive 'tpaTimeline', ($rootScope) ->
                data = () ->
                     result = [
                          {
-                              key: "Difference",
                               values:
                                    [
                                    ]
                          }
                     ]
                     if $scope.data and $scope.data.data and $scope.data.data.values
+                         max = Number.NEGATIVE_INFINITY
+                         min = Number.POSITIVE_INFINITY
+                         for transfer in $scope.data.data.values
+                              if max < transfer[1] and transfer[1] isnt 0
+                                   max = transfer[1]
+                              if min > transfer[1] and transfer[1] isnt 0
+                                   min = transfer[1]
+
                          for transfer in $scope.data.data.values
                               str = ""+transfer[0]
                               label = (""+transfer[0]).substring 0, 4
@@ -30,9 +37,16 @@ app.directive 'tpaTimeline', ($rootScope) ->
                               if (str.indexOf '.') is -1
                                    label += "/Q1"
 
+                              color = "steelblue"
+                              if (transfer[1] is min)
+                                   color = "lightgreen"
+                              else if (transfer[1] is max)
+                                   color = "lightcoral"
+
                               result[0].values.push {
                                    label: label,
-                                   value: transfer[1]
+                                   value: transfer[1],
+                                   color: color
                               }
                     result
 
@@ -43,9 +57,6 @@ app.directive 'tpaTimeline', ($rootScope) ->
                     .y((d) ->
                          d.value)
                     .staggerLabels(true)
-                    .color((d) ->
-                         "steelblue"
-                    )
                     .margin({top: 30, right: 100, bottom: 75, left: 100})
 
                     chart.yAxis.tickFormat (d) -> d.toLocaleString $scope.getCurrentLanguage(), {style:"currency",currency:"EUR"}
