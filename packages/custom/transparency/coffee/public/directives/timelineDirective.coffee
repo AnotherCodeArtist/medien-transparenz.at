@@ -61,7 +61,7 @@ app.directive 'tpaTimeline', ($rootScope) ->
 
                     chart.yAxis.tickFormat (d) -> d.toLocaleString $scope.getCurrentLanguage(), {style:"currency",currency:"EUR"}
 
-                    d3.select('.lineGraph svg')
+                    d3.select('.timeline svg')
                     .datum(data)
                     .call(chart);
 

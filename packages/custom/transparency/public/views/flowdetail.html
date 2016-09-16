@@ -37,25 +37,20 @@
                 stroke: #000;
             }
 
-            .lineGraph svg{
-                height: 300px;
-                width: 100%;
-            }
-
-            .annualGraph svg {
+            .quartercomparison, .timeline svg {
                 height: 300px;
                 width: 100%
             }
 
         </style>
 
-        <div class="lineGraph col-md-12">
+        <div class="timeline col-md-12">
             <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()"></div>
             <svg></svg>
         </div>
 
-        <div class="annualGraph col-md-12">
-            <div data-tpa-annualcomparison data="annualComparisonData" id="annualcomparison" get-current-language="getCurrentLanguage()"></div>
+        <div class="quartercomparison col-md-12">
+            <div tpa-quartercomparison data="annualComparisonData" id="annualcomparison" get-current-language="getCurrentLanguage()"></div>
             <svg></svg>
         </div>
     </div>
