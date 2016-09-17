@@ -77,12 +77,12 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         startDate: new Date(2013, 5, 15, 0, 0, 0, 0),
         endDate: new Date(2014, 7, 1, 0, 0, 0, 0),
         numericEndDate: 2014.5,
-        predictable: true
+        predictable: false
     }, {
         name: 'Predictable Event',
         numericStartDate: '2015.625',
         startDate: new Date(2015, 8, 15, 0, 0, 0, 0),
-        predictable: false
+        predictable: true
     }]
 
 

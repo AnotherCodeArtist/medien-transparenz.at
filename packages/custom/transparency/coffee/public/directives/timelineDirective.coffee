@@ -9,7 +9,6 @@ app.directive 'tpaTimeline', ($rootScope) ->
           getCurrentLanguage: '&'
      link: ($scope,element,attrs) ->
           margin = {top: 30, right: 100, bottom: 75, left: 100}
-          svgNS = "http://www.w3.org/2000/svg";
 
           updateDiagram = (oldValue, newValue) ->
                data = () ->
@@ -54,6 +53,9 @@ app.directive 'tpaTimeline', ($rootScope) ->
                               }
                     result
 
+
+               svgNS = "http://www.w3.org/2000/svg";
+
                drawText = (x, y, text, color) ->
                     newText = document.createElementNS(svgNS,"text");
                     newText.setAttributeNS(null,"x",x);
@@ -81,7 +83,9 @@ app.directive 'tpaTimeline', ($rootScope) ->
                drawEventGuideline = (numericDate, date, bars, color, eventName, y1, y2, additionalText) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - $scope.data.data.values[0][0]) / 0.25)
-                    x = margin.left +  (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1)) + (bars[index].transform.animVal[0].matrix.e)
+                    x = margin.left
+                    x += (bars[index].transform.animVal[0].matrix.e)
+                    x += (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1))
                     drawLine(x, y1, y2, color)
                     if additionalText
                          drawText(x, y1 - margin.top + 12, additionalText + eventName, color)
@@ -99,8 +103,8 @@ app.directive 'tpaTimeline', ($rootScope) ->
                     y2 = margin.top + groupOfBars[0][0].transform.animVal[0].matrix.f + groupOfBars[0][0].firstChild.height.animVal.value
 
                     for event in events
-                         color = "black"
-                         if event.predictable
+                         color = "darkblue"
+                         if !event.predictable
                               color = "red"
 
                          if !event.numericEndDate
