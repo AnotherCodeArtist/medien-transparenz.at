@@ -10,6 +10,7 @@ TransferSchema = new Schema
         type: String
         required: true
         trim: true
+        index: true
     transferType: Number
     media:
         type: String

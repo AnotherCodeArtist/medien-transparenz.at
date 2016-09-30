@@ -1,5 +1,7 @@
 'use strict'
 mongoose = require 'mongoose'
+
+
 Schema = mongoose.Schema
 
 ###*
@@ -10,6 +12,7 @@ OrganisationSchema = new Schema
         type: String
         required: true
         trim: true
+        index:true
     street:
         type: String
         required: true
