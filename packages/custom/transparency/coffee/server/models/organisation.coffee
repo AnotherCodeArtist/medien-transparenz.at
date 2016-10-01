@@ -29,6 +29,7 @@ OrganisationSchema = new Schema
         type: String
         trim: true
         required: true
+        index: 'hashed'
     country_de:
         type: String
         trim: true

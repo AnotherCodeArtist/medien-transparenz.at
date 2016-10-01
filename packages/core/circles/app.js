@@ -6,7 +6,7 @@
 var Module = require('meanio').Module;
 
 var mongoose = require('mongoose');
-
+mongoose.set('debug', true);
 var Circles = new Module('circles');
 
 /*
