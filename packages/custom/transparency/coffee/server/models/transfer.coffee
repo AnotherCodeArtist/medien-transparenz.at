@@ -25,6 +25,7 @@ TransferSchema = new Schema
     federalState:
         type: String
         trim: true
+        index: 'hashed'
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]
