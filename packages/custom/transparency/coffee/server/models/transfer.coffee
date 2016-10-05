@@ -10,15 +10,25 @@ TransferSchema = new Schema
         type: String
         required: true
         trim: true
-    transferType: Number
+    transferType:
+        type: Number
+        index: 'hashed'
     media:
         type: String
         trim: true
         required: true
-    amount: Number
-    year: Number
-    quarter: Number
-    period: Number
+    amount:
+      type: Number
+      index: true
+    year:
+        type: Number
+        index: true
+    quarter:
+      type: Number
+      index: true
+    period:
+      type: Number
+      index: true
     organisationReference:
         type:Schema.Types.ObjectId
         ref: 'Organisation'
