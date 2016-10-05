@@ -31,14 +31,26 @@ gulp.task('pot', function () {
       }))
       .pipe(gulp.dest('packages/core/system/public/po/'));
 });
+// Solution based on : https://github.com/gabegorelick/gulp-angular-gettext/issues/13#issuecomment-69728371
+var extend = require('gulp-extend');
+var wrap = require('gulp-wrap');
+var rename = require('gulp-rename');
 
-gulp.task('translations', function () {
-  return gulp.src('packages/core/system/public/po/**/*.po')
-      .pipe(gettext.compile({
-        // options to pass to angular-gettext-tools...
-        format: 'json'
-      }))
-      .pipe(gulp.dest('packages/core/system/public/gettext'));
+gulp.task('translations', function() {
+  return gulp.src('packages/core/system/public/po/**/*.po') // Stream PO translation files.
+      .pipe(gettext.compile({format: 'json'})) // Compile to json
+      .pipe(extend('.tmp.json')) // use .json extension for gulp-wrap to load json content
+      .pipe(wrap( // Build the translation module using gulp-wrap and lodash.template
+          'angular.module(\'gettext\').run([\'gettextCatalog\', function (gettextCatalog) {\n' +
+          '/* jshint -W100 */\n' +
+          '<% var langs = Object.keys(contents); var i = langs.length; while (i--) {' +
+          'var lang = langs[i]; var translations = contents[lang]; %>'+
+          '  gettextCatalog.setStrings(\'<%= lang %>\', <%= JSON.stringify(translations, undefined, 2) %>);\n'+
+          '<% }; %>' +
+          '/* jshint +W100*/\n' +
+          '}]);'))
+      .pipe(rename('translations.js')) // Rename to final javascript filename
+      .pipe(gulp.dest('packages/core/system/public/gettext')); // output to "src/scripts" directory
 });
 
 gulp.task('env:development', function () {
