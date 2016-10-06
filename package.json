@@ -52,6 +52,8 @@
     "request": "latest",
     "serve-favicon": "latest",
     "shelljs": "latest",
+    "sorty": "^1.2.2",
+    "stacksight": "^1.0.20",
     "swig": "latest",
     "view-helpers": "latest"
   },
