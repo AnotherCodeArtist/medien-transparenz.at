@@ -130,7 +130,8 @@
                         <td>{{item.media}}</td>
                         <td>{{item.organisation}}</td>
                         <td>§{{item.transferType}}</td>
-                        <td>{{item.amount|number:2}}</td>
+                        <!--td class="numeric">{{item.amount.toLocaleString(language,{minimumFractionDigits: 2})}}</td-->
+                        <td class="numeric">{{item.amount|number:2}}</td>
                     </tr>
                     </tbody>
                 </table>
