@@ -9,14 +9,16 @@ TransferSchema = new Schema
     organisation:
         type: String
         required: true
-        trim: true
+        trim: true,
+        index: 'hashed'
     transferType:
         type: Number
         index: 'hashed'
     media:
         type: String
         trim: true
-        required: true
+        required: true,
+        index: 'hashed'
     amount:
       type: Number
       index: true

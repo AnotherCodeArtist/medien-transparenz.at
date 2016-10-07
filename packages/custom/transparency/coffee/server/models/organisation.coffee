@@ -9,7 +9,8 @@ OrganisationSchema = new Schema
     name:
         type: String
         required: true
-        trim: true
+        trim: true,
+        index: 'hashed'
     street:
         type: String
         required: true
