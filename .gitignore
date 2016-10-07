@@ -11,7 +11,7 @@
 Icon
 ._*
 .Spotlight-V100
-.Trashes
+.Trashesmean-prod-preding.tar.bz2
 
 # --------------------
 # Eclipse or Nodeclipse "Enide Studio" Files
@@ -69,6 +69,9 @@ modules/views/
 /public/build/
 /packages/contrib/
 /packages/**/**/public/assets/lib
+/packages/core/system/public/po/*.mo
+/packages/core/system/public/po/*.tmp
+/packages/core/system/public/gettext/translations.js
 
 
 # --------------------
@@ -76,3 +79,4 @@ modules/views/
 # --------------------
 *.swp
 packages/custom/transparency/server/
+/transfer/

@@ -9,22 +9,35 @@ TransferSchema = new Schema
     organisation:
         type: String
         required: true
-        trim: true
-    transferType: Number
+        trim: true,
+        index: 'hashed'
+    transferType:
+        type: Number
+        index: 'hashed'
     media:
         type: String
         trim: true
-        required: true
-    amount: Number
-    year: Number
-    quarter: Number
-    period: Number
+        required: true,
+        index: 'hashed'
+    amount:
+      type: Number
+      index: true
+    year:
+        type: Number
+        index: true
+    quarter:
+      type: Number
+      index: true
+    period:
+      type: Number
+      index: true
     organisationReference:
         type:Schema.Types.ObjectId
         ref: 'Organisation'
     federalState:
         type: String
         trim: true
+        index: 'hashed'
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]
