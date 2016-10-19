@@ -1,7 +1,7 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.directive 'tpaTimeline', ($rootScope) ->
+app.directive 'tpaTimeline', ($rootScope, $window) ->
      restrict: 'EA'
      scope:
           data: '='
@@ -123,6 +123,7 @@ app.directive 'tpaTimeline', ($rootScope) ->
                          d.value)
                     .staggerLabels(true)
                     .margin(margin)
+                    .duration(0)
 
                     chart.yAxis.tickFormat (d) -> d.toLocaleString $scope.getCurrentLanguage(), {style:"currency",currency:"EUR"}
 
@@ -130,10 +131,13 @@ app.directive 'tpaTimeline', ($rootScope) ->
                     .datum(data)
                     .call(chart);
 
-                    nv.utils.windowResize(updateDiagram);
+                    angular.element($window).bind('resize', () ->
+                         updateDiagram()
+                         scope.$digest())
+
+                    #nv.utils.windowResize(updateDiagram)
                     if $scope.events and $scope.events.length > 0
                          drawEvents($scope.events)
-
                     chart
 
           $scope.$watch 'data', updateDiagram, true
