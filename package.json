@@ -29,6 +29,7 @@
     "connect-modrewrite": "latest",
     "consolidate": "latest",
     "cookie-parser": "latest",
+    "del": "^2.2.2",
     "errorhandler": "latest",
     "express": "latest",
     "forever": "latest",

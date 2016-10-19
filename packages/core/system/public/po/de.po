@@ -43,7 +43,7 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:28 views/flow.html:125
+#: controllers/flowController.js:41 views/flow.html:137
 msgid "Amount"
 msgstr "Betrag"
 
@@ -135,7 +135,7 @@ msgstr ""
 "Klicken Sie auf ein Segment des Kuchendiagramms um mehr über die jeweilige "
 "Organisation zu erfahren"
 
-#: views/flow.html:78
+#: views/flow.html:87
 msgid ""
 "Click on the rectangular boxes on either side of the chart to get more "
 "information on a particular organization."
@@ -159,7 +159,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:143
+#: controllers/flowController.js:156
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -217,7 +217,7 @@ msgstr ""
 msgid "Federal State"
 msgstr "Bundesland"
 
-#: views/flow.html:29 views/index.html:27 views/top.html:19
+#: views/flow.html:36 views/index.html:27 views/top.html:19
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
@@ -284,7 +284,7 @@ msgstr ""
 "Meldungen\n"
 "erfasst sind, durchblättern Sie einfach unsere Listen!"
 
-#: views/flow.html:82
+#: views/flow.html:91
 msgid ""
 "If you neither choose an organisation nor a media the top spender based on "
 "your chosen payment types and period is selected."
@@ -338,7 +338,7 @@ msgstr "Medien"
 msgid "List of Organisations"
 msgstr "Organisationen"
 
-#: views/flow.html:4
+#: views/flow.html:5
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
@@ -350,9 +350,9 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:220 controllers/flowController.js:426
-#: controllers/flowController.js:90 controllers/groupingController.js:23
-#: views/flow.html:122
+#: controllers/flowController.js:103 controllers/flowController.js:233
+#: controllers/flowController.js:439 controllers/groupingController.js:23
+#: views/flow.html:134
 msgid "Media"
 msgstr "Medien"
 
@@ -360,11 +360,11 @@ msgstr "Medien"
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
-#: views/flow.html:9
+#: views/flow.html:10
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views/flow.html:31 views/index.html:29 views/top.html:21
+#: views/flow.html:38 views/index.html:29 views/top.html:21
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
@@ -406,13 +406,13 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:427 controllers/groupingController.js:21
+#: controllers/flowController.js:440 controllers/groupingController.js:21
 #: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:221 controllers/flowController.js:91
-#: views/flow.html:123
+#: controllers/flowController.js:104 controllers/flowController.js:234
+#: views/flow.html:135
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -444,23 +444,23 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:27 views/flow.html:124
+#: controllers/flowController.js:40 views/flow.html:136
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:35 views/index.html:32 views/top.html:41
+#: views/flow.html:43 views/index.html:32 views/top.html:41
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
-#: views/flow.html:19
+#: views/flow.html:22
 msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
 msgstr "Zahlungen gemäß §2 MedKF-TG (Medien-Kooperationen)"
 
-#: views/flow.html:21
+#: views/flow.html:24
 msgid "Payments according to §31 ORF-G (Charges)"
 msgstr "Zahlungen gemäß §31 ORF-G (Gebühren)"
 
-#: views/flow.html:20
+#: views/flow.html:23
 msgid "Payments according to §4 MedKF-TG (Funding)"
 msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 
@@ -468,7 +468,7 @@ msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Zahlungstyp"
 
-#: views/flow.html:26 views/index.html:24 views/top.html:16
+#: views/flow.html:30 views/index.html:24 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
 
@@ -509,11 +509,11 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
-#: views/flow.html:13 views/top.html:7
+#: views/flow.html:16 views/top.html:7
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:142
+#: controllers/flowController.js:155
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -538,7 +538,7 @@ msgstr "Startdatum"
 msgid "Styria"
 msgstr "Steiermark"
 
-#: views/flow.html:116
+#: views/flow.html:128
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
@@ -655,7 +655,7 @@ msgstr "Innerhalb des Bundeslandes"
 msgid "Yes"
 msgstr "Ja"
 
-#: views/flow.html:69
+#: views/flow.html:78
 msgid ""
 "Your are currently viewing the details of {{org.name}} together with a text "
 "filter. This limits the results! Please consider clearing the filter to see "
@@ -665,7 +665,7 @@ msgstr ""
 "Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im "
 "Filter-Feld um alle Zahlungen zu sehen."
 
-#: views/flow.html:74
+#: views/flow.html:83
 msgid ""
 "Your query returned {{error.length}} entries, which is more than the allowed "
 "maximum of {{maxNodes}}. Please use the filter to restrict the number of "
@@ -676,14 +676,18 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/flowController.js:140
+#: controllers/flowController.js:153
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:139
+#: controllers/flowController.js:152
 msgid "previous"
 msgstr "vorherige"
 
 #: views/uploadOrganisation.html:58
 msgid "zip-code"
 msgstr "Postleitzahl"
+
+#: views/top.html:45
+msgid "{{pType.text}}"
+msgstr "{{pType.text}}"

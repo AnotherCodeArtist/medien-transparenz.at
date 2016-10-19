@@ -7,6 +7,19 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    $scope.IntroOptions =
+        steps: [
+            {
+                element: document.querySelector('#organisationSelect')
+                intro: '<span translate>Specify some organisations to build the flow. Per default the top organisation is selected</span>'
+            }
+        ]
+        showStepNumbers: false
+        exitOnOverlayClick: true
+        exitOnEsc: true
+        nextLabel: '<span translate>next</span>'
+        prevLabel: '<span translate">back</span>'
+
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null

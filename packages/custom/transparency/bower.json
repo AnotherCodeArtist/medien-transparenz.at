@@ -15,7 +15,9 @@
     "three.js": "^0.78.0",
     "topojson": "^1.6.26",
     "turfjs": "*",
-    "oi.select": "latest"
+    "oi.select": "latest",
+    "intro.js": "latest",
+    "angular-intro.js": "latest"
   },
   "resolutions": {
     "d3": "~3.5",

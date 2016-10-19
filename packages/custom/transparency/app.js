@@ -108,6 +108,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.min.css', {weight:-5})
   Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.bootstrap.min.css', {weight:-4});
   Transparency.aggregateAsset('css', '../lib/oi.select/dist/select.min.css');
+  Transparency.aggregateAsset('css', '../lib/intro.js/minified/introjs.min.css');
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/nvd3/build/nv.d3.js',{weight:-3});
@@ -118,7 +119,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../js/Detector.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../js/Projector.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../js/geo.js',{global:true,weight:-2});
-  Transparency.aggregateAsset('js', '../lib/datatables.net/js/jquery.dataTables.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../lib/datatables/media/js/jquery.dataTables.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});
@@ -126,6 +127,8 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
   Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js');
+  Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js');
+  Transparency.aggregateAsset('js', '../lib/angular-intro.js/build/angular-intro.min.js');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
@@ -149,6 +152,6 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize']);
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize', 'angular-intro']);
   return Transparency;
 });
