@@ -60,10 +60,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     newText = document.createElementNS(svgNS,"text");
                     newText.setAttributeNS(null,"x",x);
                     newText.setAttributeNS(null,"y",y);
-                    #newText.setAttributeNS(null,"style","text-anchor: middle;");
                     newText.setAttributeNS(null, "class", "event eventText " + className);
-                    #newText.setAttributeNS(null, "fill", color)
-                    #newText.setAttributeNS(null, "font-size", "10")
                     textNode = document.createTextNode(text);
                     newText.appendChild(textNode);
                     document.getElementById("timeline").appendChild(newText);
@@ -75,8 +72,6 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     line.setAttributeNS(null,"x2",x);
                     line.setAttributeNS(null,"y1",y1);
                     line.setAttributeNS(null,"y2",y2);
-                    #line.setAttributeNS(null,"stroke",color);
-                    #line.setAttributeNS(null,"stroke-width",1);
                     line.setAttributeNS(null, "class", "event eventLine " + className);
                     document.getElementById("timeline").appendChild(line);
 
@@ -134,7 +129,6 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     angular.element($window).bind('resize', () ->
                          updateDiagram())
 
-                    #nv.utils.windowResize(updateDiagram)
                     if $scope.events and $scope.events.length > 0
                          drawEvents($scope.events)
                     chart
