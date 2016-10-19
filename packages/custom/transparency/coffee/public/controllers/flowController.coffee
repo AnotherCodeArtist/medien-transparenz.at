@@ -159,6 +159,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
         window.scrollTo 0,0
+        
+    $scope.showFlowDetails = (node) ->
+        console.log(node);
+        $state.go(
+            'showflowdetail'
+            {
+              source: node.source.name
+              target: node.target.name
+            })
 
     filterData = (data) ->
         if $scope.filter.trim().length > 2
