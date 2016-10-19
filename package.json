@@ -41,7 +41,7 @@
     "ms": "latest",
     "ng-tags-input": "^3.1.1",
     "nodemailer": "latest",
-    "npm": "^2.1.0",
+    "npm": "^3.10.8",
     "passport-facebook": "latest",
     "passport-github": "latest",
     "passport-google-oauth": "latest",
@@ -104,8 +104,8 @@
     "protractor": "latest",
     "require-dir": "latest",
     "requirejs": "latest",
-    "should": "^8.0.1",
-    "superagent": "^1.5.0",
+    "should": "^11.1.1",
+    "superagent": "^2.3.0",
     "supertest": "latest",
     "through": "latest"
   }
