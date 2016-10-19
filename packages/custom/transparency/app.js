@@ -27,41 +27,76 @@ Transparency.register(function(app, auth, database) {
     menu: 'admin',
     icon: icons + 'hard-drive-upload.png'
   });
+  //Menu item for address-upload
+  Transparency.menus.add({
+    title: 'ORGANISATIONS',
+    link: 'add_organisation',
+    roles: ['admin'],
+    menu: 'admin',
+    icon: icons + 'hard-drive-upload.png'
+  });
+  //Menu item for address-upload
+  Transparency.menus.add({
+    title: 'ZIP',
+    link: 'add_zipCode',
+    roles: ['admin'],
+    menu: 'admin',
+    icon: icons + 'hard-drive-upload.png'
+  });
   Transparency.menus.add({
     title: 'Overview',
     link: 'overview',
-    //roles: ['authenticated'],
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Top Player',
     link: 'top',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Money Flow',
     link: 'showflow',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
   Transparency.menus.add({
     title: 'Organisations',
     link: 'listOrgs',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
 
   Transparency.menus.add({
     title: 'Media',
     link: 'listMedia',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
+  Transparency.menus.add({
+    title: 'Events',
+    link: 'events',
+    roles: ['can manage events'],
+    menu: 'main'
+  });
+    Transparency.menus.add({
+        title: 'Grouping',
+        link: 'grouping',
+        roles: ['can manage grouping'],
+        menu: 'main'
+    });
+  /*
   Transparency.menus.add({
     title: 'Impress',
     link: 'impress',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
-  });
+  });*/
   Transparency.menus.add({
-    title: 'Search',
-    link: 'search',
+    title: 'About Us',
+    link: 'about',
+    roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
 
@@ -70,17 +105,27 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('css', '../lib/datatables/media/css/jquery.dataTables.css');
   Transparency.aggregateAsset('css', '../lib/nvd3/build/nv.d3.css');
   Transparency.aggregateAsset('css', '../lib/angularjs-slider/dist/rzslider.css',{weight:-2});
-  Transparency.aggregateAsset('css', '../lib/c3/c3.css', {weight:-3});
+  Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.min.css', {weight:-5})
+  Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.bootstrap.min.css', {weight:-4});
+  Transparency.aggregateAsset('css', '../lib/oi.select/dist/select.min.css');
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/nvd3/build/nv.d3.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../lib/three.js/three.js',{global:true, weight:-8});
+  Transparency.aggregateAsset('js', '../lib/topojson/topojson.js',{weight:-4});
+  Transparency.aggregateAsset('js', '../lib/turfjs/turf.min.js',{weight:-1});
+  Transparency.aggregateAsset('js', '../js/TrackballControls.js',{global:true,weight:-3});
+  Transparency.aggregateAsset('js', '../js/Detector.js',{global:true,weight:-3});
+  Transparency.aggregateAsset('js', '../js/Projector.js',{global:true,weight:-3});
+  Transparency.aggregateAsset('js', '../js/geo.js',{global:true,weight:-2});
   Transparency.aggregateAsset('js', '../lib/datatables/media/js/jquery.dataTables.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
-  Transparency.aggregateAsset('js', '../lib/c3/c3.js',{weight:-4});
+  Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
+  Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
@@ -104,6 +149,6 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule']);
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize']);
   return Transparency;
 });

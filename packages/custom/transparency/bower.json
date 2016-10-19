@@ -11,10 +11,15 @@
     "angular-datatables": "~0.5.3",
     "angularjs-slider": "~2.10.2",
     "angular-nvd3": "^1.0.5",
-    "c3": "~0.4.10"
+    "ng-tags-input": "~3.1.1",
+    "three.js": "^0.78.0",
+    "topojson": "^1.6.26",
+    "turfjs": "*",
+    "oi.select": "latest"
   },
   "resolutions": {
     "d3": "~3.5",
-    "nvd3": "~1.8.2"
+    "nvd3": "~1.8.2",
+    "angular": "1.5.8"
   }
 }

@@ -29,6 +29,8 @@ module.exports = (Transparency, app, auth, database) ->
 
   app.get '/api/transparency/annualcomparison', transparency.annualcomparison
 
+  app.get '/api/transparency/filteredflows', transparency.filteredflows
+
   app.get '/api/transparency/search', transparency.search
 
   app.get '/api/transparency/years', transparency.years
@@ -42,3 +44,35 @@ module.exports = (Transparency, app, auth, database) ->
   app.get '/api/transparency/count', transparency.count
 
   app.post '/api/transparency/add', auth.requiresAdmin,multipartMiddleware,transparency.upload
+  #Route for address-upload
+  app.post '/api/transparency/addOrganisation', auth.requiresAdmin,multipartMiddleware,transparency.uploadOrganisation
+  #Route for zip-upload
+  app.post '/api/transparency/addZipCode', auth.requiresAdmin,multipartMiddleware,transparency.uploadZipCode
+
+  app.get '/api/transparency/events', transparency.getEvents
+
+  app.post '/api/transparency/events', auth.requiresEditor, transparency.createEvent
+
+  app.put '/api/transparency/events', auth.requiresEditor, transparency.updateEvent
+
+  app.delete '/api/transparency/events', auth.requiresEditor, transparency.deleteEvent
+
+  app.get '/api/transparency/events/tags', transparency.getEventTags
+  
+  app.get '/api/transparency/federalstates', transparency.federalstates
+
+  #Grouping - get selection
+  app.get '/api/transparency/grouping/list', auth.requiresEditor,  transparency.getPossibleGroupMembers
+  #Grouping - save grouping
+  app.post '/api/transparency/grouping', auth.requiresEditor, transparency.createGrouping
+  #Grouping - get groupings
+  app.get '/api/transparency/grouping', transparency.getGroupings
+  #Grouping - get members of grouping
+  app.get '/api/transparency/grouping/members', transparency.getGroupingMembers
+  #Grouping - update groupings
+  app.put '/api/transparency/grouping', auth.requiresEditor, transparency.updateGrouping
+  #Grouping - delete groupings
+  app.delete '/api/transparency/grouping', auth.requiresEditor, transparency.deleteGroupings
+  #Grouping - count
+  app.get '/api/transparency/grouping/count', auth.requiresEditor, transparency.countGroupings
+  return

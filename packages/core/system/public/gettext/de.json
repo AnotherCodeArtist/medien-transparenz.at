@@ -75,6 +75,10 @@
     "Where the money flows?": "Wohin das Geld fließt?",
     "Who's involved?": "Wer ist dabei?",
     "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.": "Sie sehen gerade die Details für {{org.name}}, haben aber gleichzeitig einen Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im Filter-Feld um alle Zahlungen zu sehen.",
-    "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.": "Ihre Anfrage lieferte {{error.length}} Einträge. Das ist mehr als das erlaubte Maximum von {{maxNodes}}. Bitte verwenden Sie den Filter, um die Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im Textfeld \"Filter\" ein."
+    "Federal State": "Bundesland",
+    "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.": "Ihre Anfrage lieferte {{error.length}} Einträge. Das ist mehr als das erlaubte Maximum von {{maxNodes}}. Bitte verwenden Sie den Filter, um die Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im Textfeld \"Filter\" ein.",
+    "Total": "Gesamtbetrag",
+    "Upload new organisation list": "Neue Liste der Organisationen hochladen: views/uploadZipCode.html:3",
+    "Upload new zip-code list": "Neue Liste der Postleitzahlen hochladen"
   }
 }

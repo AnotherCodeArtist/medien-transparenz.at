@@ -15,7 +15,17 @@
                     <div class="col-sm-6 col-lg-6">
                         <strong><div translate>Periods</div></strong>
                         <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
+                        <div class="checkbox">
+                            <label><input id="fixRange" type="checkbox" ng-model="slider.options.draggableRangeOnly" /><span translate>Fix slider range</span></label>
+                        </div>
                         <p class="small text-info" translate>Move the sliders to define a range</p>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-ng-model="includeGroupings">
+                                <strong><span translate>Grouping</span></strong>
+                            </label>
+                        </div>
+                        <p class="small text-info" translate>With groupings enabled single transfers will be taken together (f.e. to show umbrella organisations)</p>
                     </div>
                     <div class="col-sm-2 col-lg-2">
                         <strong><div translate>Spender/Recipient</div></strong>
@@ -31,11 +41,15 @@
                         <strong><div translate>Payment Types</div></strong>
                         <div class="checkbox" data-ng-repeat="pType in typesText">
                             <label>
-                                <input type="checkbox" name="pType" translate
-                                       ng-model="pType.checked"/><span>{{pType.text}}</span>
+                                <input type="checkbox" name="pType"
+                                       ng-model="pType.checked"/><span translate>{{pType.text}}</span>
                             </label>
                         </div>
 
+                        <strong><div translate>Federal State</div></strong>
+                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
+                            <option value="">-</option>
+                        </select>
                     </div>
                     <div class="col-sm-1 col-lg-1">
                         <div translate>Top</div>
@@ -49,6 +63,7 @@
             <span class="glyphicon glyphicon-info-sign"></span>
             <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
         </div>
+        <div><h3 class="text-center"><span translate >Total</span>: {{total()}} €</h3></div>
         <div class="pie">
             <tpa-pie-chart id="myPie" data="pieData"
                            x="x" y="y" show-legend="false"
@@ -57,5 +72,6 @@
                            prevent-click-fn="preventClickForOthers"
             />
         </div>
+
     </div>
 </section>

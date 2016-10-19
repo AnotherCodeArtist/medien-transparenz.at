@@ -70,20 +70,10 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
             'print'
         ]
     )
-    
-    $scope.events = [{
-        name: 'Unpredictable Event',
-        numericStartDate: '2013.375',
-        startDate: new Date(2013, 5, 15, 0, 0, 0, 0),
-        endDate: new Date(2014, 7, 1, 0, 0, 0, 0),
-        numericEndDate: 2014.5,
-        predictable: false
-    }, {
-        name: 'Predictable Event',
-        numericStartDate: '2015.625',
-        startDate: new Date(2015, 8, 15, 0, 0, 0, 0),
-        predictable: true
-    }]
+
+    TPAService.getEvents().then (res)->
+        $scope.events = res.data
+
 
 
     angular.extend $scope.dtOptions,

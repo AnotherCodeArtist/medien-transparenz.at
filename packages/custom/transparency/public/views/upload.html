@@ -5,6 +5,35 @@
     <input type="file" ngf-select="onFileSelect($files)">
     <p>Uploaded: {{percent}}%</p>
     <div data-ng-show="feedback">
+        <div class="alert alert-info" data-ng-show="feedback.integrityCheck">
+            <div><strong>Info</strong></div>
+            <p translate>Entries found</p>
+            {{feedback.entries}}
+            <p translate>Entries stored</p>
+            {{feedback.savedInDatabase}}</p>
+        </div>
+        <div class="alert alert-danger" ng-show="feedback.errors > 0">
+            <strong>Attention:</strong> There have been {{feedback.errors}} processing errors!
+        </div>
+        <table data-ng-show="feedback.errorEntries.length>0" class="table table-striped">
+            <tr>
+                <th>Code</th>
+                <th translate>Error</th>
+            </tr>
+
+            <tr ng-repeat="error in feedback.errorEntries">
+                <td>{{ error.errorCode }}</td>
+                <td>{{ error.errorMessage }}</td>
+            </tr>
+        </table>
+        <div class="alert alert-warning" data-ng-show="feedback.unknownOrganisations.length>0">
+            <strong><div translate>Attention</div></strong>
+            <p translate>Organisations with unknown address-data</p>
+        </div>
+        <ul>
+            <li ng-repeat="entry in feedback.unknownOrganisations">{{entry.organisation}}</li>
+        </ul>
+
         <ul class="list-group">
             <li class="list-group-item active" translate>
                 Results of the Upload

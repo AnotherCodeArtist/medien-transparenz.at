@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   plugins = gulpLoadPlugins(),
   coffee = require('gulp-coffee'),
+  replace = require('gulp-replace'),
   paths = {
     js: ['./*.js', 'config/**/*.js', 'gulp/**/*.js', 'tools/**/*.js', 'packages/**/*.js', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**', '!packages/**/assets/**/js/**'],
     html: ['packages/**/*.html', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**'],
@@ -30,14 +31,26 @@ gulp.task('pot', function () {
       }))
       .pipe(gulp.dest('packages/core/system/public/po/'));
 });
+// Solution based on : https://github.com/gabegorelick/gulp-angular-gettext/issues/13#issuecomment-69728371
+var extend = require('gulp-extend');
+var wrap = require('gulp-wrap');
+var rename = require('gulp-rename');
 
-gulp.task('translations', function () {
-  return gulp.src('packages/core/system/public/po/**/*.po')
-      .pipe(gettext.compile({
-        // options to pass to angular-gettext-tools...
-        format: 'json'
-      }))
-      .pipe(gulp.dest('packages/core/system/public/gettext'));
+gulp.task('translations', function() {
+  return gulp.src('packages/core/system/public/po/**/*.po') // Stream PO translation files.
+      .pipe(gettext.compile({format: 'json'})) // Compile to json
+      .pipe(extend('.tmp.json')) // use .json extension for gulp-wrap to load json content
+      .pipe(wrap( // Build the translation module using gulp-wrap and lodash.template
+          'angular.module(\'gettext\').run([\'gettextCatalog\', function (gettextCatalog) {\n' +
+          '/* jshint -W100 */\n' +
+          '<% var langs = Object.keys(contents); var i = langs.length; while (i--) {' +
+          'var lang = langs[i]; var translations = contents[lang]; %>'+
+          '  gettextCatalog.setStrings(\'<%= lang %>\', <%= JSON.stringify(translations, undefined, 2) %>);\n'+
+          '<% }; %>' +
+          '/* jshint +W100*/\n' +
+          '}]);'))
+      .pipe(rename('translations.js')) // Rename to final javascript filename
+      .pipe(gulp.dest('packages/core/system/public/gettext')); // output to "src/scripts" directory
 });
 
 gulp.task('env:development', function () {
@@ -72,7 +85,9 @@ gulp.task('sass', function() {
 });
 
 gulp.task('devServe', ['env:development'], function () {
-
+  gulp.src(['packages/custom/transparency/public/assets/lib/oi.select/dist/select.min.js'])
+      .pipe(replace('templateUrl:"src/template.html"', 'templateUrl:"transparency/assets/lib/oi.select/src/template.html"'))
+      .pipe(gulp.dest('packages/custom/transparency/public/assets/lib/oi.select/dist', {overwrite: true}));
   plugins.nodemon({
     script: 'server.js',
     ext: 'html js',

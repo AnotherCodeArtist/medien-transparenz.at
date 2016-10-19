@@ -4,346 +4,596 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: views\impress.html:22
+#: views/about.html:2
+msgid "About Us"
+msgstr ""
+
+#: views/grouping.html:25
+msgid "Active"
+msgstr ""
+
+#: controllers/groupingController.js:54
+msgid "Add member to group"
+msgstr ""
+
+#: views/impress.html:22
 msgid ""
-"All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\r\n"
+"All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n"
 "        improved by correcting the most obvious errors using"
 msgstr ""
 
-#: views\impress.html:24
+#: views/impress.html:24
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers\flowController.js:13
-#: views\flow.html:86
+#: controllers/flowController.js:28
+#: views/flow.html:125
 msgid "Amount"
 msgstr ""
 
-#: views\index.html:6
+#: views/index.html:15
 msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
 msgstr ""
 
-#: views\index.html:71
+#: views/about.html:46
 msgid "Are they involved?"
 msgstr ""
 
-#: views\index.html:18
-msgid ""
-"As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the\r\n"
-"            Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die\r\n"
-"            Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen\r\n"
-"            Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report\r\n"
-"            on their spending in advertising and funding of media cooperations. Reported data is published by the\r\n"
-"            <a href=\"http://www.rtr.at\">Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use\r\n"
-"            interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
+#: views/about.html:7
+msgid "As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report on their spending in advertising and funding of media cooperations. Reported data is published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
 msgstr ""
 
-#: views\index.html:47
-msgid ""
-"At a single glance checkout which organisations are the biggest spenders and which media companies benefit most\r\n"
-"                    from public money spent on advertising our by receiving public funding."
+#: views/about.html:25
+msgid "At a single glance checkout which organisations are the biggest spenders and which media companies benefit most from public money spent on advertising our by receiving public funding."
 msgstr ""
 
-#: views\index.html:14
+#: views/upload.html:30
+#: views/uploadOrganisation.html:53
+msgid "Attention"
+msgstr ""
+
+#: controllers/eventsController.js:46
+msgid "Austria"
+msgstr ""
+
+#: views/about.html:3
 msgid "Background"
 msgstr ""
 
-#: controllers\topEntriesController.js:84
+#: controllers/eventsController.js:67
+msgid "Burgenland"
+msgstr ""
+
+#: views/events.html:76
+#: views/grouping.html:119
+msgid "Cancel"
+msgstr ""
+
+#: controllers/eventsController.js:73
+msgid "Carinthia"
+msgstr ""
+
+#: controllers/topEntriesController.js:100
 msgid "Click for Details"
 msgstr ""
 
-#: views\top.html:50
+#: views/top.html:64
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
-#: views\flow.html:67
-msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization"
+#: views/flow.html:78
+msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization."
 msgstr ""
 
-#: views\impress.html:11
+#: views/impress.html:11
 msgid "Contact Person"
 msgstr ""
 
-#: controllers\flowController.js:134
+#: views/events.html:74
+#: views/grouping.html:120
+msgid "Create"
+msgstr ""
+
+#: controllers/groupingController.js:222
+msgid "Delete"
+msgstr ""
+
+#: controllers/groupingController.js:58
+msgid "Disable Group"
+msgstr ""
+
+#: controllers/flowController.js:143
 msgid "Display _MENU_ records"
 msgstr ""
 
-#: views\impress.html:25
+#: views/events.html:22
+#: views/grouping.html:28
+msgid "Edit"
+msgstr ""
+
+#: controllers/groupingController.js:57
+#: views/grouping.html:112
+msgid "Enable Group"
+msgstr ""
+
+#: views/events.html:13
+#: views/events.html:61
+msgid "End date"
+msgstr ""
+
+#: views/upload.html:10
+#: views/uploadOrganisation.html:10
+#: views/uploadZipCode.html:10
+msgid "Entries found"
+msgstr ""
+
+#: views/upload.html:12
+#: views/uploadOrganisation.html:12
+#: views/uploadZipCode.html:12
+msgid "Entries stored"
+msgstr ""
+
+#: views/uploadOrganisation.html:40
+#: views/uploadOrganisation.html:53
+msgid "Entries without known federal state in Austria"
+msgstr ""
+
+#: views/upload.html:21
+#: views/uploadOrganisation.html:22
+msgid "Error"
+msgstr ""
+
+#: views/impress.html:25
 msgid "Exclusion of Liability"
 msgstr ""
 
-#: views\impress.html:26
+#: views/impress.html:26
 msgid ""
-"FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\r\n"
+"FH Joanneum Gesellschaft mbH is not liable for the correctness of data provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes this raw data in order to facilitate the process of information extraction.\n"
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
-#: views\index.html:33
+#: views/list.html:12
+#: views/top.html:49
+msgid "Federal State"
+msgstr ""
+
+#: views/flow.html:29
+#: views/index.html:27
+#: views/top.html:19
+msgid "Fix slider range"
+msgstr ""
+
+#: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 
-#: views\index.html:39
-msgid ""
-"Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up\r\n"
-"                    in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
+#: views/about.html:18
+msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
-#: views\search.html:32
+#: controllers/groupingController.js:52
+msgid "Group for media"
+msgstr ""
+
+#: controllers/groupingController.js:51
+msgid "Group for organisations"
+msgstr ""
+
+#: views/grouping.html:133
+msgid "Group members"
+msgstr ""
+
+#: controllers/groupingController.js:53
+#: views/grouping.html:74
+msgid "Group owner"
+msgstr ""
+
+#: views/grouping.html:67
+msgid "Group type"
+msgstr ""
+
+#: views/grouping.html:3
+#: views/top.html:25
+msgid "Grouping"
+msgstr ""
+
+#: views/search.html:32
 msgid "Hits for Media"
 msgstr ""
 
-#: views\search.html:17
+#: views/search.html:17
 msgid "Hits for Organisations"
 msgstr ""
 
-#: views\impress.html:13
+#: views/impress.html:13
 msgid "How this web-site came into being"
 msgstr ""
 
-#: views\index.html:64
-msgid ""
-"If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in\r\n"
-"                    this reporting, check out our lists!"
+#: views/about.html:40
+msgid "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, check out our lists!"
 msgstr ""
 
-#: views\index.html:72
-msgid ""
-"If you want to figure out whether some company or media cooperation is listed in these reports better use our\r\n"
-"                    search!"
+#: views/flow.html:82
+msgid "If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected."
 msgstr ""
 
-#: server\views\includes\foot.html:2
+#: views/about.html:47
+msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
+msgstr ""
+
+#: views/uploadOrganisation.html:48
+msgid "Ignored"
+msgstr ""
+
+#: server/views/includes/foot.html:2
 msgid "Impress"
 msgstr ""
 
-#: views\impress.html:14
+#: views/about.html:13
+msgid "Imprint"
+msgstr ""
+
+#: views/impress.html:14
 msgid "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:"
 msgstr ""
 
-#: views\index.html:55
-msgid ""
-"Let's see how organisations distribute their money and where media companies get their money from!\r\n"
-"                    Use the filter to see what you are interested in."
+#: views/about.html:32
+msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
-#: controllers\listControllers.js:144
-#: controllers\listControllers.js:273
+#: controllers/listControllers.js:188
+#: controllers/listControllers.js:317
 msgid "List of Media Companies"
 msgstr ""
 
-#: controllers\listControllers.js:137
-#: controllers\listControllers.js:8
+#: controllers/listControllers.js:178
+#: controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr ""
 
-#: views\flow.html:4
+#: views/flow.html:4
 msgid "Loading Data to Update Diagram ..."
 msgstr ""
 
-#: controllers\flowController.js:10
-#: views\flow.html:83
+#: controllers/eventsController.js:61
+msgid "Lower Austria"
+msgstr ""
+
+#: views/events.html:3
+msgid "Manage events"
+msgstr ""
+
+#: controllers/flowController.js:220
+#: controllers/flowController.js:426
+#: controllers/flowController.js:90
+#: controllers/groupingController.js:23
+#: views/flow.html:122
 msgid "Media"
 msgstr ""
 
-#: views\index.html:5
+#: views/index.html:14
 msgid "Media Transparency Austria"
 msgstr ""
 
-#: views\flow.html:9
+#: views/flow.html:9
 msgid "Money Flow"
 msgstr ""
 
-#: views\flow.html:28
-#: views\top.html:18
+#: views/flow.html:31
+#: views/index.html:29
+#: views/top.html:21
 msgid "Move the sliders to define a range"
 msgstr ""
 
-#: controllers\flowController.js:131
-msgid "next"
+#: controllers/groupingController.js:55
+msgid "Nationwide"
 msgstr ""
 
-#: views\list.html:21
+#: controllers/groupingController.js:28
+msgid "No"
+msgstr ""
+
+#: views/list.html:30
 msgid "No entries found!"
 msgstr ""
 
-#: views\list.html:11
+#: views/grouping.html:5
+#: views/list.html:18
 msgid "Number of Entries"
 msgstr ""
 
-#: views\upload.html:22
+#: views/upload.html:51
 msgid "Number of Entries according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views\upload.html:38
+#: views/upload.html:67
 msgid "Number of Entries according to §31 ORF-G (Charges for National Broadcasting Company)"
 msgstr ""
 
-#: views\upload.html:30
+#: views/upload.html:59
 msgid "Number of Entries according to §4 (Funding)"
 msgstr ""
 
-#: views\upload.html:14
+#: views/uploadOrganisation.html:36
+msgid "Number of entries"
+msgstr ""
+
+#: views/upload.html:43
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers\flowController.js:11
+#: controllers/flowController.js:427
+#: controllers/groupingController.js:21
+#: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
-#: views\flow.html:84
+#: controllers/flowController.js:221
+#: controllers/flowController.js:91
+#: views/flow.html:123
 msgid "Organisations"
 msgstr ""
 
-#: controllers\topEntriesController.js:78
+#: views/uploadOrganisation.html:44
+msgid "Organisations not from Austria"
+msgstr ""
+
+#: views/upload.html:31
+msgid "Organisations with unknown address-data"
+msgstr ""
+
+#: directives/sankeyDirective.js:92
+msgid "Other media"
+msgstr ""
+
+#: directives/sankeyDirective.js:92
+msgid "Other organisations"
+msgstr ""
+
+#: controllers/topEntriesController.js:94
 msgid "Others"
 msgstr ""
 
-#: views\index.html:38
+#: views/about.html:17
 msgid "Overview"
 msgstr ""
 
-#: controllers\flowController.js:12
-#: views\flow.html:85
+#: views/grouping.html:22
+msgid "Owner"
+msgstr ""
+
+#: controllers/flowController.js:27
+#: views/flow.html:124
 msgid "Payment Type"
 msgstr ""
 
-#: views\flow.html:32
-#: views\top.html:31
+#: views/flow.html:35
+#: views/index.html:32
+#: views/top.html:41
 msgid "Payment Types"
 msgstr ""
 
-#: views\flow.html:19
+#: views/flow.html:19
 msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
 msgstr ""
 
-#: views\flow.html:21
+#: views/flow.html:21
 msgid "Payments according to §31 ORF-G (Charges)"
 msgstr ""
 
-#: views\flow.html:20
+#: views/flow.html:20
 msgid "Payments according to §4 MedKF-TG (Funding)"
 msgstr ""
 
-#: views\overview.html:6
+#: views/overview.html:6
 msgid "Payments by Transfer Type"
 msgstr ""
 
-#: views\flow.html:26
-#: views\top.html:16
+#: views/flow.html:26
+#: views/index.html:24
+#: views/top.html:16
 msgid "Periods"
 msgstr ""
 
-#: controllers\flowController.js:130
-msgid "previous"
-msgstr ""
-
-#: views\overview.html:18
+#: views/overview.html:18
 msgid "Quarter"
 msgstr ""
 
-#: controllers\topEntriesController.js:111
-#: controllers\topEntriesController.js:170
+#: controllers/topEntriesController.js:127
+#: controllers/topEntriesController.js:205
 msgid "Recipient"
 msgstr ""
 
-#: views\upload.html:9
+#: views/grouping.html:102
+#: views/grouping.html:19
+msgid "Region"
+msgstr ""
+
+#: views/events.html:25
+#: views/grouping.html:137
+#: views/grouping.html:31
+msgid "Remove"
+msgstr ""
+
+#: views/grouping.html:84
+msgid "Reset"
+msgstr ""
+
+#: views/upload.html:38
+#: views/uploadOrganisation.html:31
 msgid "Results of the Upload"
 msgstr ""
 
-#: views\search.html:8
+#: controllers/eventsController.js:55
+msgid "Salzburg"
+msgstr ""
+
+#: views/events.html:75
+#: views/grouping.html:124
+msgid "Save"
+msgstr ""
+
+#: views/search.html:8
 msgid "Search"
 msgstr ""
 
-#: views\flow.html:13
-#: views\top.html:7
+#: views/flow.html:13
+#: views/top.html:7
 msgid "Settings"
 msgstr ""
 
-#: controllers\flowController.js:133
+#: controllers/flowController.js:142
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
-#: views\impress.html:21
+#: views/impress.html:21
 msgid "Source of Data"
 msgstr ""
 
-#: controllers\topEntriesController.js:108
-#: controllers\topEntriesController.js:169
+#: controllers/topEntriesController.js:124
+#: controllers/topEntriesController.js:204
 msgid "Spender"
 msgstr ""
 
-#: views\top.html:21
+#: views/top.html:31
 msgid "Spender/Recipient"
 msgstr ""
 
-#: views\flow.html:77
+#: views/events.html:10
+#: views/events.html:57
+msgid "Start date"
+msgstr ""
+
+#: controllers/eventsController.js:70
+msgid "Styria"
+msgstr ""
+
+#: views/flow.html:116
 msgid "Tabular Representation"
 msgstr ""
 
-#: views\impress.html:20
+#: views/index.html:42
+msgid "The map can be turned by holding the left mouse button and dragging within the frame. It is possible to zoom into the map by scrolling."
+msgstr ""
+
+#: views/impress.html:20
 msgid "This solution was the basis for the now available site"
 msgstr ""
 
-#: views\index.html:28
+#: views/about.html:11
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
-#: views\top.html:41
+#: views/top.html:55
 msgid "Top"
 msgstr ""
 
-#: views\index.html:46
+#: views/about.html:24
 msgid "Top Player"
 msgstr ""
 
-#: views\top.html:3
+#: views/top.html:3
 msgid "Top Spenders and Recipients"
 msgstr ""
 
-#: views\overview.html:28
+#: views/overview.html:28
+#: views/top.html:66
 msgid "Total"
 msgstr ""
 
-#: views\upload.html:26
+#: views/upload.html:55
 msgid "Total amount according to §2 (Media Cooperation)"
 msgstr ""
 
-#: views\upload.html:42
+#: views/upload.html:71
 msgid "Total amount according to §31 ORF-G"
 msgstr ""
 
-#: views\upload.html:34
+#: views/upload.html:63
 msgid "Total amount according to §4 (Funding)"
 msgstr ""
 
-#: views\upload.html:18
+#: views/upload.html:47
 msgid "Total amount of all entries"
 msgstr ""
 
-#: views\upload.html:3
+#: views/grouping.html:16
+msgid "Type"
+msgstr ""
+
+#: controllers/eventsController.js:52
+msgid "Tyrol"
+msgstr ""
+
+#: views/upload.html:3
 msgid "Upload new Media Transparency Report"
 msgstr ""
 
-#: views\index.html:43
-#: views\index.html:51
-#: views\index.html:59
-#: views\index.html:68
-#: views\index.html:76
+#: views/uploadOrganisation.html:3
+msgid "Upload new organisation list"
+msgstr ""
+
+#: views/uploadZipCode.html:3
+msgid "Upload new zip-code list"
+msgstr ""
+
+#: controllers/eventsController.js:58
+msgid "Upper Austria"
+msgstr ""
+
+#: controllers/eventsController.js:64
+msgid "Vienna"
+msgstr ""
+
+#: views/about.html:21
+#: views/about.html:28
+#: views/about.html:35
+#: views/about.html:43
+#: views/about.html:50
 msgid "View details »"
 msgstr ""
 
-#: views\index.html:54
+#: controllers/eventsController.js:49
+msgid "Vorarlberg"
+msgstr ""
+
+#: views/about.html:31
 msgid "Where the money flows?"
 msgstr ""
 
-#: views\index.html:63
+#: views/about.html:39
 msgid "Who's involved?"
 msgstr ""
 
-#: views\flow.html:59
+#: views/top.html:28
+msgid "With groupings enabled single transfers will be taken together (f.e. to show umbrella organisations)"
+msgstr ""
+
+#: controllers/groupingController.js:56
+msgid "Within federal state"
+msgstr ""
+
+#: controllers/groupingController.js:26
+msgid "Yes"
+msgstr ""
+
+#: views/flow.html:69
 msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
 msgstr ""
 
-#: views\flow.html:63
+#: views/flow.html:74
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
+msgstr ""
+
+#: controllers/flowController.js:140
+msgid "next"
+msgstr ""
+
+#: controllers/flowController.js:139
+msgid "previous"
+msgstr ""
+
+#: views/uploadOrganisation.html:58
+msgid "zip-code"
 msgstr ""

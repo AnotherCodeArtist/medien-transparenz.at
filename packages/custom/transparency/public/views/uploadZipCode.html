@@ -1,0 +1,17 @@
+<section class="container">
+    <div data-ng-controller="UploadZipCodeController">
+        <h1 translate>Upload new zip-code list</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <input type="file" ngf-select="onFileSelect($files)">
+        <p>Uploaded: {{percent}}%</p>
+        <div data-ng-show="feedbackZipCode">
+            <div class="alert alert-info" data-ng-show="feedbackZipCode.integrityCheck">
+                <div><strong>Info</strong></div>
+                <p translate>Entries found</p>
+                {{feedbackZipCode.newZipCodes}}
+                <p translate>Entries stored</p>
+                {{feedbackZipCode.savedInDatabase}}</p>
+            </div>
+        </div>
+    </div>
+</section>

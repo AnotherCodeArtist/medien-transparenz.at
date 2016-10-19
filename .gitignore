@@ -69,14 +69,14 @@ modules/views/
 /public/build/
 /packages/contrib/
 /packages/**/**/public/assets/lib
+/packages/core/system/public/po/*.mo
+/packages/core/system/public/po/*.tmp
+/packages/core/system/public/gettext/translations.js
 
 
 # --------------------
 # vim Files
 # --------------------
 *.swp
-packages/custom/transparency/server/controllers/transparencyServerCtrl.js
-packages/custom/transparency/server/models/transfer.js
-packages/custom/transparency/server/routes/transparencyRoutes.js
-packages/custom/transparency/server/tests/transparencyCtrl.spec.js
-packages/custom/transparency/server/models/event.js
+packages/custom/transparency/server/
+/transfer/

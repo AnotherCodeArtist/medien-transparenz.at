@@ -109,10 +109,10 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
                               className = "inpredictable"
 
                          if !event.numericEndDate
-                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], className, event.name, y1, y2
+                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2
                          else
-                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], className, event.name, y1, y2, "Start: "
-                              drawEventGuideline event.numericEndDate, event.endDate, groupOfBars[0], className, event.name, y1, y2, "End: "
+                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "Start: "
+                              drawEventGuideline event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "End: "
 
 
 

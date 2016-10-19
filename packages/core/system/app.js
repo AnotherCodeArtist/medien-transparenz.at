@@ -21,7 +21,7 @@ SystemPackage.register(function(app, auth, database, circles) {
 
   SystemPackage.aggregateAsset('css', 'common.css');
   SystemPackage.angularDependencies(['ui.router', 'mean-factory-interceptor']);
-  SystemPackage.aggregateAsset('js', 'public/assets/lib/gettext/translations.js');
+  //SystemPackage.aggregateAsset('js', 'public/assets/lib/gettext/translations.js');
   
 
   // The middleware in config/express will run before this code

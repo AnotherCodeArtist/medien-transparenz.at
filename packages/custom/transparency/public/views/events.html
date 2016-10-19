@@ -1,0 +1,81 @@
+<section class="container">
+    <div data-ng-controller="EventsController">
+        <h1 translate>Manage events</h1>
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th translate>
+                    Start date
+                </th>
+                <th translate>
+                    End date
+                </th>
+                <th>
+                    Region
+                </th>
+                <th>
+                    Tags
+                </th>
+                <th translate>
+                    Edit
+                </th>
+                <th translate>
+                    Remove
+                </th>
+            </tr>
+            <tr ng-repeat="event in events">
+                <td>{{event.name}}</td>
+                <td>{{event.startDate | date: 'd.M.yyyy'}}</td>
+                <td>{{event.endDate | date: 'd.M.yyyy'}}</td>
+                <td>{{event.region}}</td>
+                <td>
+                    <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
+                </td>
+                <td>
+                    <button ng-click="editEvent(event._id)" class="btn btn-info">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                </td>
+                <td>
+                    <button ng-click="removeEvent(event._id, event.name)" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div class="panel panel-default">
+            <div class="panel-body">
+            <form name="eventForm">
+                <div class="form-group">
+                    <label for="eventName">Name</label>
+                    <input ng-model="event.name" type="text" class="form-control" id="eventName" placeholder="Name" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="eventStartDate" translate>Start date</label>
+                    <input ng-model="event.startDate" type="date" class="form-control" id="eventStartDate">
+                </div>
+                <div class="form-group">
+                    <label for="eventEndDate" translate>End date</label>
+                    <input ng-model="event.endDate" type="date" class="form-control" id="eventEndDate">
+                </div>
+                <div class="form-group">
+                    <label for="eventRegion">Region</label>
+                    <select required="required" ng-model="event.region" ng-options="region as region.name for region in regions" class="form-control" id="eventRegion"></select>
+                </div>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <tags-input ng-model="event.tags" placeholder="Tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+                <button ng-disabled="eventForm.$invalid" ng-show="!editEnabled" ng-click="createEvent()" type="submit" class="btn btn-primary" translate>Create</button>
+                <button ng-disabled="eventForm.$invalid" ng-show="editEnabled" ng-click="updateEvent()" type="submit" class="btn btn-primary" translate>Save</button>
+                <button ng-show="editEnabled" ng-click="cancelEdit()" type="submit" class="btn btn-default" translate>Cancel</button>
+            </form>
+                </div>
+        </div>
+    </div>
+</section>
