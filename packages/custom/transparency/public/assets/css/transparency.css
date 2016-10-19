@@ -418,6 +418,7 @@ footer {
   fill: none;
   stroke: #000;
   stroke-opacity: .2;
+  cursor: pointer;
 }
 
 .link.paragraph2 {
@@ -460,6 +461,30 @@ h3 .label {
 
 a.label {
   pointer-events: auto;
+}
+
+.predictable{
+  fill: blue;
+}
+
+.inpredictable{
+  fill:red;
+}
+
+.eventLine.predictable{
+  stroke:blue;
+}
+.eventLine.inpredictable{
+  stroke:red;
+}
+
+.eventLine{
+  stroke-width: 1.5;
+}
+
+.eventText{
+  font-size: 10px;
+  text-anchor: middle;
 }
 
 .sankeyChart .node:hover {

@@ -1,0 +1,58 @@
+<section class="container">
+    <div data-ng-controller="FlowDetailCtrl">
+        <div class="loadingDialog" data-ng-show="loading">
+            <div class="text-center"><span translate>Loading Data to Update Diagram ...</span><br/>
+                <progressbar value="progress" max="100" type="info" class="progress-striped active"/>
+            </div>
+
+        </div>
+        <h1 translate>Money Flow</h1>
+        <h2><a ng-click="goToSource()">{{source}}</a> &rArr; <a ng-click="goToTarget()">{{target}}</a></h2>
+        <style>
+            /* tell the SVG path to be a thin blue line without any area fill */
+            .linegraph path {
+                stroke: steelblue;
+                stroke-width: 1;
+                fill: none;
+            }
+
+            .axis {
+                shape-rendering: crispEdges;
+            }
+
+            .x.axis line {
+                stroke: lightgrey;
+            }
+
+            .x.axis .minor {
+                stroke-opacity: .5;
+            }
+
+            .x.axis path {
+                display: none;
+            }
+
+            .y.axis line, .y.axis path {
+                fill: none;
+                stroke: #000;
+            }
+
+            .quartercomparison, .timeline svg {
+                height: 500px;
+                width: 100%
+            }
+
+        </style>
+
+        <div class="timeline col-md-12">
+            <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()" events="events"></div>
+            <svg id = "timeline"></svg>
+        </div>
+
+        <div class="quartercomparison col-md-12">
+            <div tpa-quartercomparison data="annualComparisonData" get-current-language="getCurrentLanguage()" events="events"></div>
+            <svg id="quarterComparison"></svg>
+        </div>
+    </div>
+    <br/>
+</section>

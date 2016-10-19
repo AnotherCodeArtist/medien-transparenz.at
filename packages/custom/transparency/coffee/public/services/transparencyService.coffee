@@ -23,6 +23,12 @@ class TPAService
     filteredflows: (params) ->
         @$http.get 'api/transparency/filteredflows', params: params
 
+    flowdetail: (params) ->
+        @$http.get 'api/transparency/flowdetail', params: params
+
+    annualcomparison: (params) ->
+        @$http.get 'api/transparency/annualcomparison', params: params
+
     list: (params) ->
         @$http.get 'api/transparency/list', params: params
 
