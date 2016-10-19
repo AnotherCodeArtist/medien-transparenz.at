@@ -98,6 +98,30 @@ a.label {
   pointer-events: auto;
 }
 
+.predictable{
+  fill: blue;
+}
+
+.inpredictable{
+  fill:red;
+}
+
+.eventLine.predictable{
+  stroke:blue;
+}
+.eventLine.inpredictable{
+  stroke:red;
+}
+
+.eventLine{
+  stroke-width: 1.5;
+}
+
+.eventText{
+  font-size: 10px;
+  text-anchor: middle;
+}
+
 .sankeyChart .node:hover {
   stroke-width: 1px;
   stroke: #666;

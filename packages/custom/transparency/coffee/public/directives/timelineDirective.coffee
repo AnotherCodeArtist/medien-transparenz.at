@@ -56,42 +56,42 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
 
                svgNS = "http://www.w3.org/2000/svg";
 
-               drawText = (x, y, text, color) ->
+               drawText = (x, y, text, className) ->
                     newText = document.createElementNS(svgNS,"text");
                     newText.setAttributeNS(null,"x",x);
                     newText.setAttributeNS(null,"y",y);
-                    newText.setAttributeNS(null,"style","text-anchor: middle;");
-                    newText.setAttributeNS(null, "class", "event");
-                    newText.setAttributeNS(null, "fill", color)
-                    newText.setAttributeNS(null, "font-size", "10")
+                    #newText.setAttributeNS(null,"style","text-anchor: middle;");
+                    newText.setAttributeNS(null, "class", "event eventText " + className);
+                    #newText.setAttributeNS(null, "fill", color)
+                    #newText.setAttributeNS(null, "font-size", "10")
                     textNode = document.createTextNode(text);
                     newText.appendChild(textNode);
                     document.getElementById("timeline").appendChild(newText);
 
-               drawLine = (x, y1, y2, color) ->
+               drawLine = (x, y1, y2, className) ->
                     line = document.createElementNS(svgNS,"line");
                     line.setAttributeNS(null,"id","line");
                     line.setAttributeNS(null,"x1",x);
                     line.setAttributeNS(null,"x2",x);
                     line.setAttributeNS(null,"y1",y1);
                     line.setAttributeNS(null,"y2",y2);
-                    line.setAttributeNS(null,"stroke",color);
-                    line.setAttributeNS(null,"stroke-width",1);
-                    line.setAttributeNS(null, "class", "event");
+                    #line.setAttributeNS(null,"stroke",color);
+                    #line.setAttributeNS(null,"stroke-width",1);
+                    line.setAttributeNS(null, "class", "event eventLine " + className);
                     document.getElementById("timeline").appendChild(line);
 
-               drawEventGuideline = (numericDate, date, bars, color, eventName, y1, y2, additionalText) ->
+               drawEventGuideline = (numericDate, date, bars, className, eventName, y1, y2, additionalText) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - $scope.data.data.values[0][0]) / 0.25)
                     x = margin.left
                     x += (bars[index].transform.animVal[0].matrix.e)
                     x += (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1))
-                    drawLine(x, y1, y2, color)
+                    drawLine(x, y1, y2, className)
                     if additionalText
-                         drawText(x, y1 - margin.top + 12, additionalText + eventName, color)
+                         drawText(x, y1 - margin.top + 12, additionalText + eventName, className)
                     else
-                         drawText(x, y1 - margin.top + 12, eventName, color)
-                    drawText(x, y1 - margin.top + 24,  date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(), color)
+                         drawText(x, y1 - margin.top + 12, eventName, className)
+                    drawText(x, y1 - margin.top + 24,  date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(), className)
 
 
 
@@ -103,15 +103,15 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     y2 = margin.top + groupOfBars[0][0].transform.animVal[0].matrix.f + groupOfBars[0][0].firstChild.height.animVal.value
 
                     for event in events
-                         color = "darkblue"
+                         className = "predictable"
                          if !event.predictable
-                              color = "red"
+                              className = "inpredictable"
 
                          if !event.numericEndDate
-                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], color, event.name, y1, y2
+                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], className, event.name, y1, y2
                          else
-                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], color, event.name, y1, y2, "Start: "
-                              drawEventGuideline event.numericEndDate, event.endDate, groupOfBars[0], color, event.name, y1, y2, "End: "
+                              drawEventGuideline event.numericStartDate, event.startDate, groupOfBars[0], className, event.name, y1, y2, "Start: "
+                              drawEventGuideline event.numericEndDate, event.endDate, groupOfBars[0], className, event.name, y1, y2, "End: "
 
 
                nv.addGraph () ->
@@ -132,8 +132,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     .call(chart);
 
                     angular.element($window).bind('resize', () ->
-                         updateDiagram()
-                         scope.$digest())
+                         updateDiagram())
 
                     #nv.utils.windowResize(updateDiagram)
                     if $scope.events and $scope.events.length > 0
