@@ -477,13 +477,13 @@ module.exports = (Transparency) ->
                 res.status(500).send error: "Could not load money flow: #{err}"
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
+
     flowdetail: (req, res) ->
         try
             paymentTypes = req.query.pType or ['2']
             paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
             source = req.query.source
             target = req.query.target
-
             query = {}
             query.organisation = source;
             query.media = target;

@@ -1,4 +1,8 @@
 'use strict';
+
+
+
+
 angular.module 'mean.transparency'
 .config ($stateProvider) ->
 

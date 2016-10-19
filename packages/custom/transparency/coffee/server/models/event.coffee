@@ -26,6 +26,9 @@ EventSchema = new Schema
      tags:
           type: [String]
           default: []
+     predictable:
+          type: Boolean
+          default: true
 
 try
      m = mongoose.model 'Event'

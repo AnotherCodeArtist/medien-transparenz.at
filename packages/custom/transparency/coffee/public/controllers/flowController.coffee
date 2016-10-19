@@ -162,12 +162,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         
     $scope.showFlowDetails = (node) ->
         console.log(node);
-        $state.go(
-            'showflowdetail'
-            {
-              source: node.source.name
-              target: node.target.name
-            })
+        if (node.source.type is "o" and node.target.type is "m")
+            $state.go(
+                'showflowdetail'
+                {
+                  source: node.source.name
+                  target: node.target.name
+                })
 
     filterData = (data) ->
         if $scope.filter.trim().length > 2
