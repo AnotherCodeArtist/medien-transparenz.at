@@ -31,26 +31,45 @@
                 <li class="list-group-item active" translate>
                     Results of the Upload
                 </li>
-                <li class="list-group-item" >
+                <li class="list-group-item">
                     <span class="badge">{{feedback.entries}}</span>
                     <span translate>Number of entries</span>
                 </li>
-                <li class="list-group-item" >
+                <li class="list-group-item">
                     <span class="badge">{{feedback.unknownFederalState}}</span>
                     <span translate>Entries without known federal state in Austria</span>
                 </li>
-                <li class="list-group-item" >
+                <li class="list-group-item">
                     <span class="badge">{{feedback.notAustria}}</span>
                     <span translate>Organisations not from Austria</span>
                 </li>
-                <li class="list-group-item" >
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeCompany}}</span>
+                    <span translate>Organisations with organisation type: Company</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeAssociation}}</span>
+                    <span translate>Organisations with organisation type: Association</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeFoundation}}</span>
+                    <span translate>Organisations with organisation type: Foundation</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.unknownOrganisationType}}</span>
+                    <span translate>Organisations with unknown organisation type</span>
+                </li>
+                <li class="list-group-item">
                     <span class="badge">{{feedback.ignoredEntries}}</span>
                     <span translate>Ignored</span>
                 </li>
 
             </ul>
             <div class="alert alert-warning" data-ng-show="feedback.unknownFederalStateEntries.length>0">
-                <strong><div translate>Attention</div></strong><p translate> Entries without known federal state in Austria</p>
+                <strong>
+                    <div translate>Attention</div>
+                </strong>
+                <p translate> Entries without known federal state in Austria</p>
             </div>
             <table class="table" data-ng-show="feedback.unknownFederalStateEntries.length >0">
                 <tr>

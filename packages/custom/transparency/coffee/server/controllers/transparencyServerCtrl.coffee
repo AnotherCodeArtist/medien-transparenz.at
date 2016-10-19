@@ -1,4 +1,7 @@
 'use strict'
+# http://stackoverflow.com/a/646643
+String::startsWith ?= (s) -> @slice(0, s.length) == s
+String::endsWith   ?= (s) -> s == '' or @slice(-s.length) == s
 
 qfs = require 'q-io/fs'
 fs = require 'fs'
@@ -70,6 +73,29 @@ lineToZipCode = (line, numberOfZipCodes) ->
         numberOfZipCodes++
     numberOfZipCodes
 
+# determines org type by name
+determineOrganisationType = (organisationName) ->
+    returnValue = 'Unknown'
+    regexAssociation = /.*(verband)|(Verband).*/
+    regexFoundation = /.*(Stiftung).*|.*(stiftung).*./
+    if organisationName.indexOf('m.b.H.') isnt -1
+        returnValue = 'company'
+    else if organisationName.indexOf('GmbH') isnt -1
+        returnValue = 'company'
+    else if organisationName.indexOf('Ges.m.b.H.') isnt -1
+        returnValue = 'company'
+    else if organisationName.indexOf('GesmbH') isnt -1
+        returnValue = 'company'
+    else if organisationName.indexOf('Gesellschaft m.b.H') isnt -1
+        returnValue = 'company'
+    else if organisationName.endsWith 'AG'
+        returnValue = 'company'
+    else if organisationName.match regexAssociation
+        returnValue = 'association'
+    else if organisationName.match regexFoundation
+        returnValue = 'foundation'
+
+    returnValue
 #Transfer of line to Organisation
 lineToOrganisation = (line, feedback) ->
     if not feedback
@@ -83,6 +109,8 @@ lineToOrganisation = (line, feedback) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
+        # Setting the org type
+        organisation.type = determineOrganisationType splittedLine[0]
         ZipCode.findOne({'zipCode': splittedLine[2]})
         .then (results) ->
             if results and organisation.country_de is 'Österreich'
@@ -96,6 +124,12 @@ lineToOrganisation = (line, feedback) ->
             if organisation.federalState is 'Unknown' and organisation.country_de is 'Österreich'
                 feedback.unknownFederalState++
                 feedback.unknownFederalStateEntries.push organisation
+            # Feedback for org type
+            switch organisation.type
+                when 'Unknown' then feedback.unknownOrganisationType++
+                when 'company' then feedback.organisationTypeCompany++
+                when 'association' then feedback.organisationTypeAssociation++
+                when 'foundation' then feedback.organisationTypeFoundation++
             feedback
         .catch (err) ->
             feedback.errors+=1
@@ -280,6 +314,10 @@ module.exports = (Transparency) ->
             ignoredEntries: 0
             unknownFederalState: 0,
             unknownFederalStateEntries: [],
+            unknownOrganisationType: 0,
+            organisationTypeCompany: 0,
+            organisationTypeAssociation: 0,
+            organisationTypeFoundation: 0,
             notAustria: 0,
             errors:0
             errorEntries: []
