@@ -5,8 +5,8 @@
     "ng-file-upload": "~10.1.9",
     "d3": "~3.5",
     "nvd3": "~1.8.2",
-    "angularjs-nvd3-directives": "latest",
-    "angular-gettext": "latest",
+    "angularjs-nvd3-directives": "^0.0.7",
+    "angular-gettext": "^2.2.1",
     "d3-plugins-sankey": "~1.1.0",
     "angular-datatables": "~0.5.3",
     "angularjs-slider": "~2.10.2",
@@ -14,10 +14,10 @@
     "ng-tags-input": "~3.1.1",
     "three.js": "^0.78.0",
     "topojson": "^1.6.26",
-    "turfjs": "*",
-    "oi.select": "latest",
-    "intro.js": "latest",
-    "angular-intro.js": "latest"
+    "turfjs": "^1.4.0",
+    "oi.select": "^0.2.21",
+    "intro.js": "^2.1.1",
+    "angular-intro.js": "^2.3.0"
   },
   "resolutions": {
     "d3": "~3.5",
