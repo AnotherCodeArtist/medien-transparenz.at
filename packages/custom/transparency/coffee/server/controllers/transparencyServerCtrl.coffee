@@ -75,9 +75,15 @@ lineToZipCode = (line, numberOfZipCodes) ->
 
 # determines org type by name
 determineOrganisationType = (organisationName) ->
+    #public: provincial (Land), national, municipal (Stadt / Gemeinde)
     returnValue = 'Unknown'
-    regexAssociation = /.*(verband)|(Verband).*/
-    regexFoundation = /.*(Stiftung).*|.*(stiftung).*./
+    regexAssociation = /.*(verband).*/i
+    regexFoundation = /.*(Stiftung).*/i
+    regexCities = /^Stadt .+/i
+    regexVillage = /^(?:Markt)?gemeinde .*/i
+    regexProvincial = /^Land .+/ #Sonderfall: Stadt Wien -- provincial
+    regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
+    regexAmt = /.*(Bundesamt|Patentamt).*/ #national - public agentcy
     if organisationName.indexOf('m.b.H.') isnt -1
         returnValue = 'company'
     else if organisationName.indexOf('GmbH') isnt -1
@@ -85,6 +91,8 @@ determineOrganisationType = (organisationName) ->
     else if organisationName.indexOf('Ges.m.b.H.') isnt -1
         returnValue = 'company'
     else if organisationName.indexOf('GesmbH') isnt -1
+        returnValue = 'company'
+    else if organisationName.endsWith 'KG'
         returnValue = 'company'
     else if organisationName.indexOf('Gesellschaft m.b.H') isnt -1
         returnValue = 'company'
