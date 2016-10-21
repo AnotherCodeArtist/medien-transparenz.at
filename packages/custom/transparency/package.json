@@ -11,8 +11,8 @@
     "npm": "1.4.x"
   },
   "dependencies": {
-    "connect-multiparty": "latest",
-    "isteven-angular-multiselect": "latest",
+    "connect-multiparty": "^2.0.0",
+    "isteven-angular-multiselect": "4.0.0",
     "q-io": "~2"
   },
   "devDependencies": {
