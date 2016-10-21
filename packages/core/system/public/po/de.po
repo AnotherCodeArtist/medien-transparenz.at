@@ -43,7 +43,8 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:28 views/flow.html:125
+#: controllers/flowController.js:28 controllers/flowDetailController.js:12
+#: views/flow.html:125
 msgid "Amount"
 msgstr "Betrag"
 
@@ -103,7 +104,7 @@ msgstr ""
 msgid "Attention"
 msgstr "Achtung"
 
-#: controllers/eventsController.js:46
+#: controllers/eventsController.js:51
 msgid "Austria"
 msgstr "Österreich"
 
@@ -111,15 +112,15 @@ msgstr "Österreich"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: controllers/eventsController.js:67
+#: controllers/eventsController.js:72
 msgid "Burgenland"
 msgstr "Burgenland"
 
-#: views/events.html:76 views/grouping.html:119
+#: views/events.html:86 views/grouping.html:119
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: controllers/eventsController.js:73
+#: controllers/eventsController.js:78
 msgid "Carinthia"
 msgstr "Kärnten"
 
@@ -147,7 +148,7 @@ msgstr ""
 msgid "Contact Person"
 msgstr "Ansprechpartner"
 
-#: views/events.html:74 views/grouping.html:120
+#: views/events.html:84 views/grouping.html:120
 msgid "Create"
 msgstr "Anlegen"
 
@@ -159,11 +160,11 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:143
+#: controllers/flowController.js:143 controllers/flowDetailController.js:105
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
-#: views/events.html:22 views/grouping.html:28
+#: views/events.html:25 views/grouping.html:28
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -171,7 +172,7 @@ msgstr "Bearbeiten"
 msgid "Enable Group"
 msgstr "Gruppe aktivieren"
 
-#: views/events.html:13 views/events.html:61
+#: views/events.html:13 views/events.html:67
 msgid "End date"
 msgstr "Enddatum"
 
@@ -338,11 +339,11 @@ msgstr "Medien"
 msgid "List of Organisations"
 msgstr "Organisationen"
 
-#: views/flow.html:4
+#: views/flow.html:4 views/flowdetail.html:4
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
-#: controllers/eventsController.js:61
+#: controllers/eventsController.js:66
 msgid "Lower Austria"
 msgstr "Niederösterreich"
 
@@ -350,9 +351,9 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:220 controllers/flowController.js:426
-#: controllers/flowController.js:90 controllers/groupingController.js:23
-#: views/flow.html:122
+#: controllers/flowController.js:220 controllers/flowController.js:435
+#: controllers/flowController.js:90 controllers/flowDetailController.js:9
+#: controllers/groupingController.js:23 views/flow.html:122
 msgid "Media"
 msgstr "Medien"
 
@@ -360,7 +361,7 @@ msgstr "Medien"
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
-#: views/flow.html:9
+#: views/flow.html:9 views/flowdetail.html:9
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
@@ -372,7 +373,7 @@ msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 msgid "Nationwide"
 msgstr "Bundesweit"
 
-#: controllers/groupingController.js:28
+#: controllers/eventsController.js:21 controllers/groupingController.js:28
 msgid "No"
 msgstr "Nein"
 
@@ -406,8 +407,8 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:427 controllers/groupingController.js:21
-#: views/uploadOrganisation.html:57
+#: controllers/flowController.js:436 controllers/flowDetailController.js:10
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -424,11 +425,11 @@ msgstr "Organisationen außerhalb Österreichs"
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other media"
 msgstr "Andere Medien"
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
@@ -444,7 +445,8 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:27 views/flow.html:124
+#: controllers/flowController.js:27 controllers/flowDetailController.js:11
+#: views/flow.html:124
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -472,6 +474,10 @@ msgstr "Zahlungen nach Zahlungstyp"
 msgid "Periods"
 msgstr "Zeitraum"
 
+#: views/events.html:22 views/events.html:81
+msgid "Predictable"
+msgstr "Vorhersehbar"
+
 #: views/overview.html:18
 msgid "Quarter"
 msgstr "Quartal"
@@ -485,7 +491,7 @@ msgstr "Empfänger"
 msgid "Region"
 msgstr "Region"
 
-#: views/events.html:25 views/grouping.html:137 views/grouping.html:31
+#: views/events.html:28 views/grouping.html:137 views/grouping.html:31
 msgid "Remove"
 msgstr "Löschen"
 
@@ -497,11 +503,11 @@ msgstr "Zurücksetzen"
 msgid "Results of the Upload"
 msgstr "Ergebnis des Uploads"
 
-#: controllers/eventsController.js:55
+#: controllers/eventsController.js:60
 msgid "Salzburg"
 msgstr "Salzburg"
 
-#: views/events.html:75 views/grouping.html:124
+#: views/events.html:85 views/grouping.html:124
 msgid "Save"
 msgstr "Speichern"
 
@@ -513,7 +519,7 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:142
+#: controllers/flowController.js:142 controllers/flowDetailController.js:104
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -530,11 +536,11 @@ msgstr "Zahler"
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
-#: views/events.html:10 views/events.html:57
+#: views/events.html:10 views/events.html:63
 msgid "Start date"
 msgstr "Startdatum"
 
-#: controllers/eventsController.js:70
+#: controllers/eventsController.js:75
 msgid "Styria"
 msgstr "Steiermark"
 
@@ -598,7 +604,7 @@ msgstr "Summe aller Zahlungen"
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/eventsController.js:52
+#: controllers/eventsController.js:57
 msgid "Tyrol"
 msgstr "Tirol"
 
@@ -614,11 +620,11 @@ msgstr "Neue Liste der Organisationen hochladen"
 msgid "Upload new zip-code list"
 msgstr "Neue Liste der Postleitzahlen hochladen"
 
-#: controllers/eventsController.js:58
+#: controllers/eventsController.js:63
 msgid "Upper Austria"
 msgstr "Oberösterreich"
 
-#: controllers/eventsController.js:64
+#: controllers/eventsController.js:69
 msgid "Vienna"
 msgstr "Wien"
 
@@ -627,7 +633,7 @@ msgstr "Wien"
 msgid "View details »"
 msgstr "Details anzeigen »"
 
-#: controllers/eventsController.js:49
+#: controllers/eventsController.js:54
 msgid "Vorarlberg"
 msgstr "Vorarlberg"
 
@@ -651,7 +657,7 @@ msgstr ""
 msgid "Within federal state"
 msgstr "Innerhalb des Bundeslandes"
 
-#: controllers/groupingController.js:26
+#: controllers/eventsController.js:19 controllers/groupingController.js:26
 msgid "Yes"
 msgstr "Ja"
 
@@ -676,14 +682,18 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/flowController.js:140
+#: controllers/flowController.js:140 controllers/flowDetailController.js:102
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:139
+#: controllers/flowController.js:139 controllers/flowDetailController.js:101
 msgid "previous"
 msgstr "vorherige"
 
 #: views/uploadOrganisation.html:58
 msgid "zip-code"
 msgstr "Postleitzahl"
+
+#: views/top.html:45
+msgid "{{pType.text}}"
+msgstr "{{pType.text}}"
