@@ -43,8 +43,8 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:52 controllers/flowDetailController.js:12
-#: views/flow.html:132
+#: controllers/flowController.js:54 controllers/flowDetailController.js:12
+#: views/flow.html:133
 msgid "Amount"
 msgstr "Betrag"
 
@@ -152,7 +152,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:167 controllers/flowDetailController.js:105
+#: controllers/flowController.js:169 controllers/flowDetailController.js:105
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -167,6 +167,10 @@ msgstr "Gruppe aktivieren"
 #: views/events.html:13 views/events.html:61
 msgid "End date"
 msgstr "Enddatum"
+
+#: controllers/flowController.js:35
+msgid "End tour"
+msgstr "Tour beenden"
 
 #: views/upload.html:10 views/uploadOrganisation.html:10
 #: views/uploadZipCode.html:10
@@ -343,9 +347,9 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:114 controllers/flowController.js:246
-#: controllers/flowController.js:462 controllers/flowDetailController.js:9
-#: controllers/groupingController.js:23 views/flow.html:129
+#: controllers/flowController.js:116 controllers/flowController.js:248
+#: controllers/flowController.js:464 controllers/flowDetailController.js:9
+#: controllers/groupingController.js:23 views/flow.html:130
 msgid "Media"
 msgstr "Medien"
 
@@ -364,6 +368,10 @@ msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 #: controllers/groupingController.js:55
 msgid "Nationwide"
 msgstr "Bundesweit"
+
+#: controllers/flowController.js:32
+msgid "Next info"
+msgstr "Nächste Info"
 
 #: controllers/groupingController.js:28
 msgid "No"
@@ -399,13 +407,13 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:463 controllers/flowDetailController.js:10
+#: controllers/flowController.js:465 controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21 views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:115 controllers/flowController.js:247
-#: views/flow.html:130
+#: controllers/flowController.js:117 controllers/flowController.js:249
+#: views/flow.html:131
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -437,8 +445,8 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:51 controllers/flowDetailController.js:11
-#: views/flow.html:131
+#: controllers/flowController.js:53 controllers/flowDetailController.js:11
+#: views/flow.html:132
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -465,6 +473,10 @@ msgstr "Zahlungen nach Zahlungstyp"
 #: views/flow.html:33 views/index.html:24 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
+
+#: controllers/flowController.js:33
+msgid "Previous info"
+msgstr "Vorherige Info"
 
 #: views/overview.html:18
 msgid "Quarter"
@@ -507,9 +519,13 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:166 controllers/flowDetailController.js:104
+#: controllers/flowController.js:168 controllers/flowDetailController.js:104
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
+
+#: controllers/flowController.js:34
+msgid "Skip info"
+msgstr "Info überspringen"
 
 #: views/impress.html:21
 msgid "Source of Data"
@@ -532,7 +548,7 @@ msgstr "Startdatum"
 msgid "Styria"
 msgstr "Steiermark"
 
-#: views/flow.html:123
+#: views/flow.html:124
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
@@ -693,11 +709,11 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/flowController.js:164 controllers/flowDetailController.js:102
+#: controllers/flowController.js:166 controllers/flowDetailController.js:102
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:163 controllers/flowDetailController.js:101
+#: controllers/flowController.js:165 controllers/flowDetailController.js:101
 msgid "previous"
 msgstr "vorherige"
 

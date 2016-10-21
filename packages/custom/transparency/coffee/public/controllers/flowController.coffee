@@ -32,8 +32,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             showStepNumbers: false
             exitOnOverlayClick: true
             exitOnEsc: true
-            nextLabel: '<span translate>next</span>'
-            prevLabel: '<span translate">back</span>'
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
 
     startLoading = ->
         try
