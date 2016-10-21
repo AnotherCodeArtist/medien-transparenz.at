@@ -1,5 +1,5 @@
 <section class="container">
-    <div data-ng-controller="TopEntriesCtrl">
+    <div data-ng-controller="TopEntriesCtrl as topCtrl">
         <h1 translate>Top Spenders and Recipients</h1>
 
         <div class="panel panel-default">
@@ -72,6 +72,10 @@
                            prevent-click-fn="preventClickForOthers"
             />
         </div>
+        <div>
 
+            <table datatable="" dt-options="td.dtOptions" dt-columns="td.dtColumns" class="table table-striped table-bordered row-border hover"></table>
+        </div>
+        <br/><br/><br/><br/>
     </div>
 </section>

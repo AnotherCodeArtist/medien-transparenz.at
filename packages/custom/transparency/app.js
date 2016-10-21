@@ -102,7 +102,11 @@ Transparency.register(function(app, auth, database) {
 
 
   Transparency.aggregateAsset('css', 'transparency.css');
-  Transparency.aggregateAsset('css', '../lib/datatables/media/css/jquery.dataTables.css');
+  Transparency.aggregateAsset('css', '../lib/datatables.net-bs/css/dataTables.bootstrap.css');
+  Transparency.aggregateAsset('css', '../lib/datatables.net-buttons-bs/css/buttons.bootstrap.css');
+  //Transparency.aggregateAsset('css', '../lib/datatables.net-dt/css/jquery.dataTables.css');
+  //Transparency.aggregateAsset('css', '../lib/datatables.net-buttons-dt/css/buttons.bootstrap.css');
+  Transparency.aggregateAsset('css', '../lib/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css');
   Transparency.aggregateAsset('css', '../lib/nvd3/build/nv.d3.css');
   Transparency.aggregateAsset('css', '../lib/angularjs-slider/dist/rzslider.css',{weight:-2});
   Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.min.css', {weight:-5})
@@ -113,16 +117,25 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/nvd3/build/nv.d3.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/three.js/three.js',{global:true, weight:-8});
   Transparency.aggregateAsset('js', '../lib/topojson/topojson.js',{weight:-4});
+  Transparency.aggregateAsset('js', '../lib/jszip/dist/jszip.js',{weight:-4});
+  Transparency.aggregateAsset('js', '../lib/pdfmake/build/pdfmake.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/turfjs/turf.min.js',{weight:-1});
   Transparency.aggregateAsset('js', '../js/TrackballControls.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../js/Detector.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../js/Projector.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../js/geo.js',{global:true,weight:-2});
-  Transparency.aggregateAsset('js', '../lib/datatables/media/js/jquery.dataTables.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../lib/datatables.net/js/jquery.dataTables.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../lib/datatables.net-bs/js/dataTables.bootstrap.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/dataTables.buttons.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../lib/datatables.net-buttons-bs/js/buttons.bootstrap.js',{weight:-2});
+  //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/dataTables.buttons.js',{weight:-2});
+  //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/buttons.bootstrap.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../js/buttons.html5.js',{global:true,weight:-1});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
   Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js');
@@ -149,6 +162,6 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize']);
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','datatables.bootstrap','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize']);
   return Transparency;
 });

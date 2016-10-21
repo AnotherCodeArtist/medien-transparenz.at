@@ -1,8 +1,10 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope',
-($scope, TPAService, $q, $state, gettextCatalog, $rootScope) ->
+app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder'
+($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder) ->
+    tc = this
+    $scope.td = {}
     params = {}
     stateName = "topState"
     fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
@@ -20,6 +22,25 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.rank = 10
     $scope.pieData = []
     window.scrollTo 0, 0
+    $scope.td.dtOptions = DTOptionsBuilder.fromFnPromise( ->
+        defer = $q.defer()
+        TPAService.top(parameters()).then (result) ->
+            defer.resolve(result.data.top);
+            defer.promise
+    )
+    .withPaginationType('full_numbers')
+    .withButtons(['copy','csv','excel'])
+    .withBootstrap()
+    $scope.td.dtColumns = [
+        DTColumnBuilder.newColumn('organisation').withTitle('Organisation'),
+        DTColumnBuilder.newColumn('total').withTitle('Total')
+        .renderWith((total,type) ->
+            if type is 'display'
+                total.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
+            else
+                total)
+        .withClass('text-right')
+    ];
 
     # register watches to update chart when changes occur
     registerWatches = ->
