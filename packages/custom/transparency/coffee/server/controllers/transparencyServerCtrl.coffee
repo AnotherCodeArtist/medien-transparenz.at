@@ -215,7 +215,7 @@ module.exports = (Transparency) ->
             total:
                 $sum: "$total")
         .project(year: "$_id.year", _id: 0, quarters: 1, total: 1)
-        .sort("-year")
+        .sort("year")
         .exec()
         queryPromise.then(
             (result) ->
