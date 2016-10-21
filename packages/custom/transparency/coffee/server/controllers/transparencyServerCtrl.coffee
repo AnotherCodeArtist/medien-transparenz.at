@@ -167,6 +167,7 @@ mapEvent = (event,req) ->
     event.startDate = req.body.startDate
     event.numericStartDate = req.body.numericStartDate
     event.endDate = req.body.endDate
+    event.predictable = req.body.predictable
     if req.body.numericEndDate
         event.numericEndDate = req.body.numericEndDate
     event.tags = req.body.tags
