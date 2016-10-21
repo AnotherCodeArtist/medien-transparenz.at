@@ -5,6 +5,7 @@
     "ng-file-upload": "~10.1.9",
     "d3": "~3.5",
     "nvd3": "~1.8.2",
+    "datatables": "^1.10.12",
     "angularjs-nvd3-directives": "latest",
     "angular-gettext": "latest",
     "d3-plugins-sankey": "~1.1.0",
