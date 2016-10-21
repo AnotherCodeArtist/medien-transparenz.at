@@ -478,6 +478,118 @@ module.exports = (Transparency) ->
         catch error
             res.status(500).send error: "Could not load money flow: #{error}"
 
+    flowdetail: (req, res) ->
+        try
+            paymentTypes = req.query.pType or ['2']
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            source = req.query.source
+            target = req.query.target
+            query = {}
+            query.organisation = source;
+            query.media = target;
+
+
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+
+            Transfer.find query, {}, {sort: {year: 1, quarter: 1}}, (err, transfers) ->
+                result = {
+                    data:
+                         {
+                             key: "Zahlungen"
+                             values: []
+                         }
+                    tickvalues: []
+                }
+
+                i = 0
+
+                tmpObj = {
+                }
+
+                #find all years
+                Transfer.distinct 'year', (error, data) ->
+                    if !error
+                        years = data
+                        years.sort()
+
+                        tmpResult = {}
+                        tickvalues = []
+                        for year in years
+                            for quarter in [0...4]
+                                tmpObj[year + (quarter/4)] = 0
+                                tickvalues.push (year + (quarter/4))
+
+                        tickvalues.sort()
+
+                        for transfer in transfers
+                            tmpObj[""+ (transfer.year + (transfer.quarter-1)/4)] += transfer.amount
+
+                        result.tickvalues = tickvalues
+
+                        for tickvalue in tickvalues
+                            result.data.values.push [tickvalue, tmpObj[tickvalue]]
+
+                        res.json result
+                    else
+                        res.status 500
+                        .send "Could not load years from database! #{error}"
+
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
+
+    annualcomparison: (req, res) ->
+        try
+            source = req.query.source
+            target = req.query.target
+
+            query = {}
+            query.organisation = source;
+            query.media = target;
+
+            years = []
+
+            #find all years
+            Transfer.distinct 'year', (error, data) ->
+                if !error
+                    years = data
+                    years.sort()
+
+                    tmpResult = {}
+                    for year in years
+                        tmpResult[""+year] = {
+                            quarters: {
+                                '1': 0
+                                '2': 0
+                                '3': 0
+                                '4': 0
+                            }
+                        }
+                else
+                    res.status 500
+                    .send "Could not load years from database! #{error}"
+
+
+                Transfer.find query, {}, {sort: {year: 1, quarter: 1}, transferType: 1}, (err, transfers) ->
+                    for transfer in transfers
+                        tmpResult[""+transfer.year].quarters[""+transfer.quarter] += transfer.amount
+                    result = []
+                    for year, quarters of tmpResult
+                        quarterArr = []
+                        for quarter, amount of quarters.quarters
+                            quarterArr.push {
+                                x: (Number(quarter)-1)/4
+                                y: amount
+                            }
+                        result.push {
+                            key: year
+                            color: '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+                            values: quarterArr
+                        }
+                    res.json result
+        catch error
+            res.status(500).send error: "Could not load money flow: #{error}"
     flows: (req, res) ->
         try
             maxLength = parseInt req.query.maxLength or "750"
