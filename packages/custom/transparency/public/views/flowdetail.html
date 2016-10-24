@@ -6,8 +6,14 @@
             </div>
 
         </div>
-        <h1 translate>Money Flow</h1>
-        <h2><a ng-click="goToSource()">{{source}}</a> &rArr; <a ng-click="goToTarget()">{{target}}</a></h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 translate>Money Flow</h1>
+                <h2><span translate>Flow in detail</span>: <a ng-click="goToSource()">{{source}}</a> &rArr; <a
+                        ng-click="goToTarget()">{{target}}</a>
+                </h2>
+            </div>
+        </div>
         <style>
             /* tell the SVG path to be a thin blue line without any area fill */
             .linegraph path {
@@ -43,16 +49,33 @@
             }
 
         </style>
-
-        <div class="timeline col-md-12">
-            <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()" events="events"></div>
-            <svg id = "timeline"></svg>
+        <div class="row">
+            <div class="alert alert-info col-md-12" role="alert">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>
+            </div>
         </div>
 
-        <div class="quartercomparison col-md-12">
-            <div tpa-quartercomparison data="annualComparisonData" get-current-language="getCurrentLanguage()" events="events"></div>
-            <svg id="quarterComparison"></svg>
+        <div class="row">
+            <div class="timeline col-md-12">
+                <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()"
+                     events="events"></div>
+                <svg id="timeline"></svg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="alert alert-info col-md-12" role="alert">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <span translate>The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown.</span>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="quartercomparison col-md-12">
+                <div tpa-quartercomparison data="annualComparisonData" get-current-language="getCurrentLanguage()"
+                     events="events"></div>
+                <svg id="quarterComparison"></svg>
+            </div>
         </div>
     </div>
-    <br/>
 </section>

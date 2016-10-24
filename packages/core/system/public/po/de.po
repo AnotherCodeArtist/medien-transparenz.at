@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: views/about.html:2
@@ -43,7 +43,8 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:28 views/flow.html:125
+#: controllers/flowController.js:28 controllers/flowDetailController.js:12
+#: views/flow.html:125
 msgid "Amount"
 msgstr "Betrag"
 
@@ -159,7 +160,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:143
+#: controllers/flowController.js:143 controllers/flowDetailController.js:105
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -220,6 +221,10 @@ msgstr "Bundesland"
 #: views/flow.html:29 views/index.html:27 views/top.html:19
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
+
+#: views/flowdetail.html:12
+msgid "Flow in detail"
+msgstr "Zahlungsfluss im Detail"
 
 #: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
@@ -338,7 +343,7 @@ msgstr "Medien"
 msgid "List of Organisations"
 msgstr "Organisationen"
 
-#: views/flow.html:4
+#: views/flow.html:4 views/flowdetail.html:4
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
@@ -350,9 +355,9 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:220 controllers/flowController.js:426
-#: controllers/flowController.js:90 controllers/groupingController.js:23
-#: views/flow.html:122
+#: controllers/flowController.js:220 controllers/flowController.js:435
+#: controllers/flowController.js:90 controllers/flowDetailController.js:9
+#: controllers/groupingController.js:23 views/flow.html:122
 msgid "Media"
 msgstr "Medien"
 
@@ -360,7 +365,7 @@ msgstr "Medien"
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
-#: views/flow.html:9
+#: views/flow.html:9 views/flowdetail.html:11
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
@@ -406,8 +411,8 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:427 controllers/groupingController.js:21
-#: views/uploadOrganisation.html:57
+#: controllers/flowController.js:436 controllers/flowDetailController.js:10
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -424,11 +429,11 @@ msgstr "Organisationen außerhalb Österreichs"
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other media"
 msgstr "Andere Medien"
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
@@ -444,7 +449,8 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:27 views/flow.html:124
+#: controllers/flowController.js:27 controllers/flowDetailController.js:11
+#: views/flow.html:124
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -513,7 +519,7 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:142
+#: controllers/flowController.js:142 controllers/flowDetailController.js:104
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -542,6 +548,16 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
+#: views/flowdetail.html:55
+msgid ""
+"The first chart on that page shows the flow of money over the available "
+"period of time. The highest and the lowest value is highlighted. In case of "
+"events during a quarter, the events are emphasized."
+msgstr ""
+"Das erste Diagramm zeigt den Geldfluss im Verlauf der Zeit. Der höchste und "
+"der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
+"verfügbar, so werden diese angezeigt."
+
 #: views/index.html:42
 msgid ""
 "The map can be turned by holding the left mouse button and dragging within "
@@ -549,6 +565,16 @@ msgid ""
 msgstr ""
 "Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
 "werden. Mittels Scrollen kann in die Karte gezoomt werden."
+
+#: views/flowdetail.html:69
+msgid ""
+"The second chart shows differences between the money flow compared to the "
+"previous quarter. The highest and lowest value is highlighted. If available, "
+"events are shown."
+msgstr ""
+"Das zweite Diagramm vergleicht den Geldfluss zum jeweils vorangegangenen "
+"Quartal. Der höchste und der niedrigste Wert ist hervorgehoben. Sind "
+"Ereignisse in einem Quartal verfügbar, so werden diese angezeigt."
 
 #: views/impress.html:20
 msgid "This solution was the basis for the now available site"
@@ -676,14 +702,18 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/flowController.js:140
+#: controllers/flowController.js:140 controllers/flowDetailController.js:102
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:139
+#: controllers/flowController.js:139 controllers/flowDetailController.js:101
 msgid "previous"
 msgstr "vorherige"
 
 #: views/uploadOrganisation.html:58
 msgid "zip-code"
 msgstr "Postleitzahl"
+
+#: views/top.html:45
+msgid "{{pType.text}}"
+msgstr "{{pType.text}}"
