@@ -75,34 +75,41 @@ lineToZipCode = (line, numberOfZipCodes) ->
 
 # determines org type by name
 determineOrganisationType = (organisationName) ->
-    #public: provincial (Land), national, municipal (Stadt / Gemeinde)
+    #public: state (Land), city (Stadt), municipality (Gemeinde)
     returnValue = 'Unknown'
+    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*GmbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$/i
     regexAssociation = /.*(verband).*/i
     regexFoundation = /.*(Stiftung).*/i
-    regexCities = /^Stadt .+/i
-    regexVillage = /^(?:Markt)?gemeinde .*/i
-    regexProvincial = /^Land .+/ #Sonderfall: Stadt Wien -- provincial
+    regexCity = /^Stadt .+/i
+    regexMunicipality = /^(?:Markt)?gemeinde?.*|Stadtgemeinde .*/i
+    regexState = /^Land .+/ #Sonderfall: Stadt Wien -- provincial
     regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
-    regexAmt = /.*(Bundesamt|Patentamt).*/ #national - public agentcy
-    if organisationName.indexOf('m.b.H.') isnt -1
-        returnValue = 'company'
-    else if organisationName.indexOf('GmbH') isnt -1
-        returnValue = 'company'
-    else if organisationName.indexOf('Ges.m.b.H.') isnt -1
-        returnValue = 'company'
-    else if organisationName.indexOf('GesmbH') isnt -1
-        returnValue = 'company'
-    else if organisationName.endsWith 'KG'
-        returnValue = 'company'
-    else if organisationName.indexOf('Gesellschaft m.b.H') isnt -1
-        returnValue = 'company'
-    else if organisationName.endsWith 'AG'
+    regexAgency = /.*(Bundesamt|Patentamt).*/ #national - public agency
+    regexFund = /.*Fonds?.*/i
+    regexChamber = /.*?Kammer?.*/i
+
+    if organisationName.match regexCompany
         returnValue = 'company'
     else if organisationName.match regexAssociation
         returnValue = 'association'
     else if organisationName.match regexFoundation
         returnValue = 'foundation'
-
+    else if organisationName.match regexMunicipality
+        returnValue = 'municipality'
+    else if organisationName.match regexState
+        returnValue = 'state'
+    else if organisationName.match regexCity
+        returnValue = 'city'
+    else if organisationName.match regexMinistry
+        returnValue = 'ministry'
+    else if organisationName.match regexAgency
+        returnValue = 'agency'
+    else if organisationName.match regexFund
+        returnValue = 'fund'
+    else if organisationName.match regexChamber
+        returnValue = 'chamber'
+#    if returnValue is 'Unknown'
+#        console.log organisationName
     returnValue
 #Transfer of line to Organisation
 lineToOrganisation = (line, feedback) ->
@@ -138,6 +145,14 @@ lineToOrganisation = (line, feedback) ->
                 when 'company' then feedback.organisationTypeCompany++
                 when 'association' then feedback.organisationTypeAssociation++
                 when 'foundation' then feedback.organisationTypeFoundation++
+                when 'municipality' then feedback.organisationTypeMunicipality++
+                when 'state' then feedback.organisationTypeState++
+                when 'city' then feedback.organisationTypeCity++
+                when 'ministry' then feedback.organisationTypeMinistry++
+                when 'agency' then feedback.organisationTypeAgency++
+                when 'fund' then feedback.organisationTypeFund++
+                when 'chamber' then feedback.organisationTypeChamber++
+
             feedback
         .catch (err) ->
             feedback.errors+=1
@@ -326,6 +341,13 @@ module.exports = (Transparency) ->
             organisationTypeCompany: 0,
             organisationTypeAssociation: 0,
             organisationTypeFoundation: 0,
+            organisationTypeMunicipality: 0,
+            organisationTypeState: 0,
+            organisationTypeCity: 0,
+            organisationTypeMinistry: 0,
+            organisationTypeAgency: 0,
+            organisationTypeFund: 0,
+            organisationTypeChamber: 0,
             notAustria: 0,
             errors:0
             errorEntries: []

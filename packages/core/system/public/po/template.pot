@@ -16,6 +16,10 @@ msgstr ""
 msgid "Add member to group"
 msgstr ""
 
+#: views/uploadOrganisation.html:76
+msgid "Agency"
+msgstr ""
+
 #: views/impress.html:22
 msgid ""
 "All Data that is published via this site it taken from the quarterly reports published by KommAustria. It was then semi-automatically\n"
@@ -26,7 +30,8 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers/flowController.js:41
+#: controllers/flowController.js:28
+#: controllers/flowDetailController.js:12
 #: views/flow.html:125
 msgid "Amount"
 msgstr ""
@@ -43,12 +48,16 @@ msgstr ""
 msgid "As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report on their spending in advertising and funding of media cooperations. Reported data is published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
 msgstr ""
 
+#: views/uploadOrganisation.html:52
+msgid "Association"
+msgstr ""
+
 #: views/about.html:25
 msgid "At a single glance checkout which organisations are the biggest spenders and which media companies benefit most from public money spent on advertising our by receiving public funding."
 msgstr ""
 
 #: views/upload.html:30
-#: views/uploadOrganisation.html:70
+#: views/uploadOrganisation.html:97
 msgid "Attention"
 msgstr ""
 
@@ -73,6 +82,14 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
+#: views/uploadOrganisation.html:84
+msgid "Chamber"
+msgstr ""
+
+#: views/uploadOrganisation.html:68
+msgid "City"
+msgstr ""
+
 #: controllers/topEntriesController.js:100
 msgid "Click for Details"
 msgstr ""
@@ -83,6 +100,10 @@ msgstr ""
 
 #: views/flow.html:78
 msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization."
+msgstr ""
+
+#: views/uploadOrganisation.html:48
+msgid "Company"
 msgstr ""
 
 #: views/impress.html:11
@@ -102,7 +123,8 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers/flowController.js:156
+#: controllers/flowController.js:143
+#: controllers/flowDetailController.js:105
 msgid "Display _MENU_ records"
 msgstr ""
 
@@ -134,7 +156,7 @@ msgid "Entries stored"
 msgstr ""
 
 #: views/uploadOrganisation.html:40
-#: views/uploadOrganisation.html:72
+#: views/uploadOrganisation.html:99
 msgid "Entries without known federal state in Austria"
 msgstr ""
 
@@ -158,10 +180,22 @@ msgstr ""
 msgid "Federal State"
 msgstr ""
 
+#: views/uploadOrganisation.html:64
+msgid "Federal state"
+msgstr ""
+
 #: views/flow.html:29
 #: views/index.html:27
 #: views/top.html:19
 msgid "Fix slider range"
+msgstr ""
+
+#: views/uploadOrganisation.html:56
+msgid "Foundation"
+msgstr ""
+
+#: views/uploadOrganisation.html:80
+msgid "Fund"
 msgstr ""
 
 #: views/about.html:60
@@ -222,7 +256,7 @@ msgstr ""
 msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
 msgstr ""
 
-#: views/uploadOrganisation.html:64
+#: views/uploadOrganisation.html:91
 msgid "Ignored"
 msgstr ""
 
@@ -264,9 +298,10 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers/flowController.js:103
-#: controllers/flowController.js:233
-#: controllers/flowController.js:439
+#: controllers/flowController.js:220
+#: controllers/flowController.js:426
+#: controllers/flowController.js:90
+#: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 #: views/flow.html:122
 msgid "Media"
@@ -274,6 +309,10 @@ msgstr ""
 
 #: views/index.html:14
 msgid "Media Transparency Austria"
+msgstr ""
+
+#: views/uploadOrganisation.html:72
+msgid "Ministry"
 msgstr ""
 
 #: views/flow.html:9
@@ -284,6 +323,10 @@ msgstr ""
 #: views/index.html:29
 #: views/top.html:21
 msgid "Move the sliders to define a range"
+msgstr ""
+
+#: views/uploadOrganisation.html:60
+msgid "Municipality"
 msgstr ""
 
 #: controllers/groupingController.js:55
@@ -323,14 +366,15 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers/flowController.js:440
+#: controllers/flowController.js:427
+#: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
-#: views/uploadOrganisation.html:76
+#: views/uploadOrganisation.html:103
 msgid "Organisation"
 msgstr ""
 
-#: controllers/flowController.js:104
-#: controllers/flowController.js:234
+#: controllers/flowController.js:221
+#: controllers/flowController.js:91
 #: views/flow.html:123
 msgid "Organisations"
 msgstr ""
@@ -339,23 +383,24 @@ msgstr ""
 msgid "Organisations not from Austria"
 msgstr ""
 
-#: views/uploadOrganisation.html:52
-msgid "Organisations with organisation type: Association"
-msgstr ""
-
 #: views/uploadOrganisation.html:48
-msgid "Organisations with organisation type: Company"
-msgstr ""
-
+#: views/uploadOrganisation.html:52
 #: views/uploadOrganisation.html:56
-msgid "Organisations with organisation type: Foundation"
+#: views/uploadOrganisation.html:60
+#: views/uploadOrganisation.html:64
+#: views/uploadOrganisation.html:68
+#: views/uploadOrganisation.html:72
+#: views/uploadOrganisation.html:76
+#: views/uploadOrganisation.html:80
+#: views/uploadOrganisation.html:84
+msgid "Organisations with organisation type"
 msgstr ""
 
 #: views/upload.html:31
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: views/uploadOrganisation.html:60
+#: views/uploadOrganisation.html:87
 msgid "Organisations with unknown organisation type"
 msgstr ""
 
@@ -379,7 +424,8 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: controllers/flowController.js:40
+#: controllers/flowController.js:27
+#: controllers/flowDetailController.js:11
 #: views/flow.html:124
 msgid "Payment Type"
 msgstr ""
@@ -459,7 +505,8 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:155
+#: controllers/flowController.js:142
+#: controllers/flowDetailController.js:104
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -602,15 +649,17 @@ msgstr ""
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""
 
-#: controllers/flowController.js:153
+#: controllers/flowController.js:140
+#: controllers/flowDetailController.js:102
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:152
+#: controllers/flowController.js:139
+#: controllers/flowDetailController.js:101
 msgid "previous"
 msgstr ""
 
-#: views/uploadOrganisation.html:77
+#: views/uploadOrganisation.html:104
 msgid "zip-code"
 msgstr ""
 
