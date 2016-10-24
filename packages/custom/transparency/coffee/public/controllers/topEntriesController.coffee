@@ -4,7 +4,9 @@ app = angular.module 'mean.transparency'
 app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder'
 ($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder) ->
     tc = this
+    dataPromise = $q.defer()
     $scope.td = {}
+    $scope.td.dtInstance = {}
     params = {}
     stateName = "topState"
     fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
@@ -22,25 +24,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.rank = 10
     $scope.pieData = []
     window.scrollTo 0, 0
-    $scope.td.dtOptions = DTOptionsBuilder.fromFnPromise( ->
-        defer = $q.defer()
-        TPAService.top(parameters()).then (result) ->
-            defer.resolve(result.data.top);
-            defer.promise
-    )
-    .withPaginationType('full_numbers')
-    .withButtons(['copy','csv','excel'])
-    .withBootstrap()
-    $scope.td.dtColumns = [
-        DTColumnBuilder.newColumn('organisation').withTitle('Organisation'),
-        DTColumnBuilder.newColumn('total').withTitle('Total')
-        .renderWith((total,type) ->
-            if type is 'display'
-                total.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
-            else
-                total)
-        .withClass('text-right')
-    ];
+
 
     # register watches to update chart when changes occur
     registerWatches = ->
@@ -89,12 +73,17 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         .then((res) ->
             init = true
             $scope.top = res.data
+            dataPromise.resolve()
             buildPieModel()
         )
     change = (oldValue, newValue) ->
-        update() if (oldValue isnt newValue)
+        if (oldValue isnt newValue)
+            dataPromise = $q.defer()
+            $scope.td.dtInstance.reloadData()
+            update()
 
     initState = ->
+
         $scope.orgTypes = [
             {name: gettextCatalog.getString('Spender'), value: 'org'},
             {name: gettextCatalog.getString('Recipient'), value: 'media'}
@@ -140,6 +129,37 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.$on 'gettextLanguageChanged', translate
 
     initState()
+
+    $scope.td.dtOptions = DTOptionsBuilder.fromFnPromise( ->
+        defer = $q.defer()
+        dataPromise.promise.then (result) ->
+            defer.resolve($scope.top.top);
+        defer.promise
+    )
+    .withPaginationType('full_numbers')
+    .withButtons(['copy','csv','excel'])
+    .withBootstrap()
+    angular.extend $scope.td.dtOptions,
+        language:
+            paginate:
+                previous: gettextCatalog.getString('previous')
+                next: gettextCatalog.getString('next')
+                first: gettextCatalog.getString('first')
+                last: gettextCatalog.getString('last')
+            search: gettextCatalog.getString('search')
+            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
+            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
+
+    $scope.td.dtColumns = [
+        DTColumnBuilder.newColumn('organisation').withTitle('Organisation'),
+        DTColumnBuilder.newColumn('total').withTitle('Total')
+        .renderWith((total,type) ->
+            if type is 'display'
+                total.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
+            else
+                total)
+        .withClass('text-right')
+    ];
 
     $scope.x = (d) ->
         d.key

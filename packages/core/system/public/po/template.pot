@@ -27,7 +27,7 @@ msgid "Although this was meant to significantly improve the data qualtity it cou
 msgstr ""
 
 #: controllers/flowController.js:28
-#: views/flow.html:125
+#: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
-#: controllers/topEntriesController.js:100
+#: controllers/topEntriesController.js:104
 msgid "Click for Details"
 msgstr ""
 
@@ -103,6 +103,8 @@ msgid "Disable Group"
 msgstr ""
 
 #: controllers/flowController.js:143
+#: controllers/flowDetailController.js:105
+#: controllers/topEntriesController.js:240
 msgid "Display _MENU_ records"
 msgstr ""
 
@@ -253,6 +255,7 @@ msgid "List of Organisations"
 msgstr ""
 
 #: views/flow.html:4
+#: views/flowdetail.html:4
 msgid "Loading Data to Update Diagram ..."
 msgstr ""
 
@@ -265,10 +268,10 @@ msgid "Manage events"
 msgstr ""
 
 #: controllers/flowController.js:220
-#: controllers/flowController.js:426
+#: controllers/flowController.js:435
 #: controllers/flowController.js:90
+#: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
-#: views/flow.html:122
 msgid "Media"
 msgstr ""
 
@@ -277,6 +280,7 @@ msgid "Media Transparency Austria"
 msgstr ""
 
 #: views/flow.html:9
+#: views/flowdetail.html:9
 msgid "Money Flow"
 msgstr ""
 
@@ -323,7 +327,8 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers/flowController.js:427
+#: controllers/flowController.js:436
+#: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
 #: views/uploadOrganisation.html:57
 msgid "Organisation"
@@ -331,7 +336,6 @@ msgstr ""
 
 #: controllers/flowController.js:221
 #: controllers/flowController.js:91
-#: views/flow.html:123
 msgid "Organisations"
 msgstr ""
 
@@ -343,15 +347,15 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other media"
 msgstr ""
 
-#: directives/sankeyDirective.js:92
+#: directives/sankeyDirective.js:95
 msgid "Other organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:94
+#: controllers/topEntriesController.js:98
 msgid "Others"
 msgstr ""
 
@@ -364,7 +368,7 @@ msgid "Owner"
 msgstr ""
 
 #: controllers/flowController.js:27
-#: views/flow.html:124
+#: controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr ""
 
@@ -400,8 +404,8 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/topEntriesController.js:127
-#: controllers/topEntriesController.js:205
+#: controllers/topEntriesController.js:134
+#: controllers/topEntriesController.js:212
 msgid "Recipient"
 msgstr ""
 
@@ -444,6 +448,8 @@ msgid "Settings"
 msgstr ""
 
 #: controllers/flowController.js:142
+#: controllers/flowDetailController.js:104
+#: controllers/topEntriesController.js:239
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -451,8 +457,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:124
-#: controllers/topEntriesController.js:204
+#: controllers/topEntriesController.js:131
+#: controllers/topEntriesController.js:211
 msgid "Spender"
 msgstr ""
 
@@ -586,14 +592,34 @@ msgstr ""
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""
 
+#: controllers/topEntriesController.js:235
+msgid "first"
+msgstr ""
+
+#: controllers/topEntriesController.js:236
+msgid "last"
+msgstr ""
+
 #: controllers/flowController.js:140
+#: controllers/flowDetailController.js:102
+#: controllers/topEntriesController.js:234
 msgid "next"
 msgstr ""
 
 #: controllers/flowController.js:139
+#: controllers/flowDetailController.js:101
+#: controllers/topEntriesController.js:233
 msgid "previous"
+msgstr ""
+
+#: controllers/topEntriesController.js:238
+msgid "search"
 msgstr ""
 
 #: views/uploadOrganisation.html:58
 msgid "zip-code"
+msgstr ""
+
+#: views/top.html:45
+msgid "{{pType.text}}"
 msgstr ""
