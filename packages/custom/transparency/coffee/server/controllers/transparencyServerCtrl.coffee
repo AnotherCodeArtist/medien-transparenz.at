@@ -76,19 +76,23 @@ lineToZipCode = (line, numberOfZipCodes) ->
 # determines org type by name
 determineOrganisationType = (organisationName) ->
     #public: state (Land), city (Stadt), municipality (Gemeinde)
-    returnValue = 'Unknown'
-    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*GmbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$/i
+    returnValue = 'undetermined'
+    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.)|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S.R.L.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|*.S.P.A./i
+    regexIncorporatedCompany = /.* AG.*/
     regexAssociation = /.*(verband).*/i
-    regexFoundation = /.*(Stiftung).*/i
+    regexFoundation = /.*(Stiftung).*|.*(Holding)/i
     regexCity = /^Stadt .+/i
     regexMunicipality = /^(?:Markt)?gemeinde?.*|Stadtgemeinde .*/i
     regexState = /^Land .+/ #Sonderfall: Stadt Wien -- provincial
     regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
-    regexAgency = /.*(Bundesamt|Patentamt).*/ #national - public agency
+    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft).*/ #national - public agency
     regexFund = /.*Fonds?.*/i
     regexChamber = /.*?Kammer?.*/i
+    regexPolicyRelevant = /^(Alternativregion).*|.*BIFIE|.*FMA|.*Sprengel?.*|^Kleinregion .*/i
 
     if organisationName.match regexCompany
+        returnValue = 'company'
+    else if organisationName.match regexIncorporatedCompany
         returnValue = 'company'
     else if organisationName.match regexAssociation
         returnValue = 'association'
@@ -108,8 +112,10 @@ determineOrganisationType = (organisationName) ->
         returnValue = 'fund'
     else if organisationName.match regexChamber
         returnValue = 'chamber'
-#    if returnValue is 'Unknown'
-#        console.log organisationName
+    else if organisationName.match regexPolicyRelevant
+        returnValue = 'policy-relevant'
+
+    console.log "Undetermined organisation type for: " + organisationName if returnValue is 'undetermined'
     returnValue
 #Transfer of line to Organisation
 lineToOrganisation = (line, feedback) ->
@@ -141,7 +147,7 @@ lineToOrganisation = (line, feedback) ->
                 feedback.unknownFederalStateEntries.push organisation
             # Feedback for org type
             switch organisation.type
-                when 'Unknown' then feedback.unknownOrganisationType++
+                when 'undetermined' then feedback.undeterminedOrganisationType++
                 when 'company' then feedback.organisationTypeCompany++
                 when 'association' then feedback.organisationTypeAssociation++
                 when 'foundation' then feedback.organisationTypeFoundation++
@@ -152,6 +158,7 @@ lineToOrganisation = (line, feedback) ->
                 when 'agency' then feedback.organisationTypeAgency++
                 when 'fund' then feedback.organisationTypeFund++
                 when 'chamber' then feedback.organisationTypeChamber++
+                when 'policy-relevant' then feedback.organisationTypePolicyRelevant++
 
             feedback
         .catch (err) ->
@@ -337,7 +344,7 @@ module.exports = (Transparency) ->
             ignoredEntries: 0
             unknownFederalState: 0,
             unknownFederalStateEntries: [],
-            unknownOrganisationType: 0,
+            undeterminedOrganisationType: 0,
             organisationTypeCompany: 0,
             organisationTypeAssociation: 0,
             organisationTypeFoundation: 0,
@@ -348,6 +355,7 @@ module.exports = (Transparency) ->
             organisationTypeAgency: 0,
             organisationTypeFund: 0,
             organisationTypeChamber: 0,
+            organisationTypePolicyRelevant: 0,
             notAustria: 0,
             errors:0
             errorEntries: []

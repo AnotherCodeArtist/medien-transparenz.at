@@ -108,7 +108,7 @@ msgstr ""
 "Organisationen am meisten ausgeben\n"
 " und welche Medien davon am stärksten profitieren."
 
-#: views/upload.html:30 views/uploadOrganisation.html:97
+#: views/upload.html:30 views/uploadOrganisation.html:102
 msgid "Attention"
 msgstr "Achtung"
 
@@ -206,7 +206,7 @@ msgstr "Einträge gefunden"
 msgid "Entries stored"
 msgstr "Einträge gespeichert"
 
-#: views/uploadOrganisation.html:40 views/uploadOrganisation.html:99
+#: views/uploadOrganisation.html:104 views/uploadOrganisation.html:40
 msgid "Entries without known federal state in Austria"
 msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 
@@ -335,7 +335,7 @@ msgstr ""
 "bzw. ob bestimmte Medien derartige\n"
 "Zahlungen erhalten, verwenden Sie am besten unsere Suche"
 
-#: views/uploadOrganisation.html:91
+#: views/uploadOrganisation.html:96
 msgid "Ignored"
 msgstr "Ignoriert"
 
@@ -448,7 +448,7 @@ msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
 #: controllers/flowController.js:427 controllers/flowDetailController.js:10
-#: controllers/groupingController.js:21 views/uploadOrganisation.html:103
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:108
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -466,16 +466,17 @@ msgstr "Organisationen außerhalb Österreichs"
 #: views/uploadOrganisation.html:64 views/uploadOrganisation.html:68
 #: views/uploadOrganisation.html:72 views/uploadOrganisation.html:76
 #: views/uploadOrganisation.html:80 views/uploadOrganisation.html:84
+#: views/uploadOrganisation.html:88
 msgid "Organisations with organisation type"
 msgstr "Organisationen mit Organisationstyp"
+
+#: views/uploadOrganisation.html:92
+msgid "Organisations with undetermined organisation type"
+msgstr "Organisationen mit nicht definiertem Organisationstyp"
 
 #: views/upload.html:31
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
-
-#: views/uploadOrganisation.html:87
-msgid "Organisations with unknown organisation type"
-msgstr "Organisationen mit unbekanntem Organisationstyp"
 
 #: directives/sankeyDirective.js:92
 msgid "Other media"
@@ -525,6 +526,10 @@ msgstr "Zahlungen nach Zahlungstyp"
 #: views/flow.html:26 views/index.html:24 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
+
+#: views/uploadOrganisation.html:88
+msgid "Policy-relevant"
+msgstr "Politiknah"
 
 #: views/overview.html:18
 msgid "Quarter"
@@ -738,7 +743,7 @@ msgstr "nächste"
 msgid "previous"
 msgstr "vorherige"
 
-#: views/uploadOrganisation.html:104
+#: views/uploadOrganisation.html:109
 msgid "zip-code"
 msgstr "Postleitzahl"
 

@@ -57,7 +57,7 @@ msgid "At a single glance checkout which organisations are the biggest spenders 
 msgstr ""
 
 #: views/upload.html:30
-#: views/uploadOrganisation.html:97
+#: views/uploadOrganisation.html:102
 msgid "Attention"
 msgstr ""
 
@@ -155,8 +155,8 @@ msgstr ""
 msgid "Entries stored"
 msgstr ""
 
+#: views/uploadOrganisation.html:104
 #: views/uploadOrganisation.html:40
-#: views/uploadOrganisation.html:99
 msgid "Entries without known federal state in Austria"
 msgstr ""
 
@@ -256,7 +256,7 @@ msgstr ""
 msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
 msgstr ""
 
-#: views/uploadOrganisation.html:91
+#: views/uploadOrganisation.html:96
 msgid "Ignored"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgstr ""
 #: controllers/flowController.js:427
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
-#: views/uploadOrganisation.html:103
+#: views/uploadOrganisation.html:108
 msgid "Organisation"
 msgstr ""
 
@@ -393,15 +393,16 @@ msgstr ""
 #: views/uploadOrganisation.html:76
 #: views/uploadOrganisation.html:80
 #: views/uploadOrganisation.html:84
+#: views/uploadOrganisation.html:88
 msgid "Organisations with organisation type"
+msgstr ""
+
+#: views/uploadOrganisation.html:92
+msgid "Organisations with undetermined organisation type"
 msgstr ""
 
 #: views/upload.html:31
 msgid "Organisations with unknown address-data"
-msgstr ""
-
-#: views/uploadOrganisation.html:87
-msgid "Organisations with unknown organisation type"
 msgstr ""
 
 #: directives/sankeyDirective.js:92
@@ -456,6 +457,10 @@ msgstr ""
 #: views/index.html:24
 #: views/top.html:16
 msgid "Periods"
+msgstr ""
+
+#: views/uploadOrganisation.html:88
+msgid "Policy-relevant"
 msgstr ""
 
 #: views/overview.html:18
@@ -659,7 +664,7 @@ msgstr ""
 msgid "previous"
 msgstr ""
 
-#: views/uploadOrganisation.html:104
+#: views/uploadOrganisation.html:109
 msgid "zip-code"
 msgstr ""
 
