@@ -5,13 +5,13 @@
         <input type="file" ngf-select="onFileSelect($files)">
         <p>Uploaded: {{percent}}%</p>
         <div data-ng-show="feedback">
-                <div class="alert alert-info" data-ng-show="feedback.integrityCheck">
-                    <div><strong>Info</strong></div>
-                    <p translate>Entries found</p>
-                    {{feedback.entries}}
-                    <p translate>Entries stored</p>
-                    {{feedback.savedInDatabase}}</p>
-                </div>
+            <div class="alert alert-info" data-ng-show="feedback.integrityCheck">
+                <div><strong>Info</strong></div>
+                <p translate>Entries found</p>
+                {{feedback.entries}}
+                <p translate>Entries stored</p>
+                {{feedback.savedInDatabase}}</p>
+            </div>
 
             <div class="alert alert-danger" ng-show="feedback.errors > 0">
                 <strong>Attention:</strong> There have been {{feedback.errors}} processing errors!
@@ -44,44 +44,48 @@
                     <span translate>Organisations not from Austria</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeCompany}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Company</span>
+                    <span class="badge">{{feedback.organisationTypeAgency}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Agency</span>
                 </li>
                 <li class="list-group-item">
                     <span class="badge">{{feedback.organisationTypeAssociation}}</span>
                     <span translate>Organisations with organisation type</span>: <span translate>Association</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeFoundation}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Foundation</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeMunicipality}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Municipality</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeState}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Federal state</span>
+                    <span class="badge">{{feedback.organisationTypeChamber}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Chamber</span>
                 </li>
                 <li class="list-group-item">
                     <span class="badge">{{feedback.organisationTypeCity}}</span>
                     <span translate>Organisations with organisation type</span>: <span translate>City</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeMinistry}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Ministry</span>
+                    <span class="badge">{{feedback.organisationTypeCompany}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Company</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeAgency}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Agency</span>
+                    <span class="badge">{{feedback.organisationTypeEducation}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Education</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeState}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Federal state</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeFoundation}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Foundation</span>
                 </li>
                 <li class="list-group-item">
                     <span class="badge">{{feedback.organisationTypeFund}}</span>
                     <span translate>Organisations with organisation type</span>: <span translate>Fund</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{feedback.organisationTypeChamber}}</span>
-                    <span translate>Organisations with organisation type</span>: <span translate>Chamber</span>
+                    <span class="badge">{{feedback.organisationTypeMinistry}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Ministry</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{feedback.organisationTypeMunicipality}}</span>
+                    <span translate>Organisations with organisation type</span>: <span translate>Municipality</span>
                 </li>
                 <li class="list-group-item">
                     <span class="badge">{{feedback.organisationTypePolicyRelevant}}</span>

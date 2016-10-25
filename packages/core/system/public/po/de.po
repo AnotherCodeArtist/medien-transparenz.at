@@ -24,7 +24,7 @@ msgstr "Aktiv"
 msgid "Add member to group"
 msgstr "Gruppenteilnehmer hinzufügen"
 
-#: views/uploadOrganisation.html:76
+#: views/uploadOrganisation.html:48
 msgid "Agency"
 msgstr "Amt"
 
@@ -108,7 +108,7 @@ msgstr ""
 "Organisationen am meisten ausgeben\n"
 " und welche Medien davon am stärksten profitieren."
 
-#: views/upload.html:30 views/uploadOrganisation.html:102
+#: views/upload.html:30 views/uploadOrganisation.html:106
 msgid "Attention"
 msgstr "Achtung"
 
@@ -132,11 +132,11 @@ msgstr "Abbrechen"
 msgid "Carinthia"
 msgstr "Kärnten"
 
-#: views/uploadOrganisation.html:84
+#: views/uploadOrganisation.html:56
 msgid "Chamber"
 msgstr "Kammer"
 
-#: views/uploadOrganisation.html:68
+#: views/uploadOrganisation.html:60
 msgid "City"
 msgstr "Stadt"
 
@@ -160,7 +160,7 @@ msgstr ""
 "Klicken Sie auf die Rechtecke am linken oder rechten Rand des Diagramms um "
 "mehr über die jeweilige Organisation zu erfahren"
 
-#: views/uploadOrganisation.html:48
+#: views/uploadOrganisation.html:64
 msgid "Company"
 msgstr "Unternehmen"
 
@@ -188,6 +188,10 @@ msgstr "Zeige _MENU_ Einträge"
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#: views/uploadOrganisation.html:68
+msgid "Education"
+msgstr "Bildung"
+
 #: controllers/groupingController.js:57 views/grouping.html:112
 msgid "Enable Group"
 msgstr "Gruppe aktivieren"
@@ -206,7 +210,7 @@ msgstr "Einträge gefunden"
 msgid "Entries stored"
 msgstr "Einträge gespeichert"
 
-#: views/uploadOrganisation.html:104 views/uploadOrganisation.html:40
+#: views/uploadOrganisation.html:108 views/uploadOrganisation.html:40
 msgid "Entries without known federal state in Austria"
 msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 
@@ -238,7 +242,7 @@ msgstr ""
 msgid "Federal State"
 msgstr "Bundesland"
 
-#: views/uploadOrganisation.html:64
+#: views/uploadOrganisation.html:72
 msgid "Federal state"
 msgstr "Bundesland"
 
@@ -246,7 +250,7 @@ msgstr "Bundesland"
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
-#: views/uploadOrganisation.html:56
+#: views/uploadOrganisation.html:76
 msgid "Foundation"
 msgstr "Stiftung"
 
@@ -335,7 +339,7 @@ msgstr ""
 "bzw. ob bestimmte Medien derartige\n"
 "Zahlungen erhalten, verwenden Sie am besten unsere Suche"
 
-#: views/uploadOrganisation.html:96
+#: views/uploadOrganisation.html:100
 msgid "Ignored"
 msgstr "Ignoriert"
 
@@ -393,7 +397,7 @@ msgstr "Medien"
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
-#: views/uploadOrganisation.html:72
+#: views/uploadOrganisation.html:84
 msgid "Ministry"
 msgstr "Ministerium"
 
@@ -405,7 +409,7 @@ msgstr "Zahlungsflüsse"
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
-#: views/uploadOrganisation.html:60
+#: views/uploadOrganisation.html:88
 msgid "Municipality"
 msgstr "Gemeinde"
 
@@ -448,7 +452,7 @@ msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
 #: controllers/flowController.js:427 controllers/flowDetailController.js:10
-#: controllers/groupingController.js:21 views/uploadOrganisation.html:108
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:112
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -466,11 +470,11 @@ msgstr "Organisationen außerhalb Österreichs"
 #: views/uploadOrganisation.html:64 views/uploadOrganisation.html:68
 #: views/uploadOrganisation.html:72 views/uploadOrganisation.html:76
 #: views/uploadOrganisation.html:80 views/uploadOrganisation.html:84
-#: views/uploadOrganisation.html:88
+#: views/uploadOrganisation.html:88 views/uploadOrganisation.html:92
 msgid "Organisations with organisation type"
 msgstr "Organisationen mit Organisationstyp"
 
-#: views/uploadOrganisation.html:92
+#: views/uploadOrganisation.html:96
 msgid "Organisations with undetermined organisation type"
 msgstr "Organisationen mit nicht definiertem Organisationstyp"
 
@@ -527,7 +531,7 @@ msgstr "Zahlungen nach Zahlungstyp"
 msgid "Periods"
 msgstr "Zeitraum"
 
-#: views/uploadOrganisation.html:88
+#: views/uploadOrganisation.html:92
 msgid "Policy-relevant"
 msgstr "Politiknah"
 
@@ -743,7 +747,7 @@ msgstr "nächste"
 msgid "previous"
 msgstr "vorherige"
 
-#: views/uploadOrganisation.html:109
+#: views/uploadOrganisation.html:113
 msgid "zip-code"
 msgstr "Postleitzahl"
 

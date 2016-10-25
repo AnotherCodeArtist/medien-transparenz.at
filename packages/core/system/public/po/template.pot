@@ -16,7 +16,7 @@ msgstr ""
 msgid "Add member to group"
 msgstr ""
 
-#: views/uploadOrganisation.html:76
+#: views/uploadOrganisation.html:48
 msgid "Agency"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgid "At a single glance checkout which organisations are the biggest spenders 
 msgstr ""
 
 #: views/upload.html:30
-#: views/uploadOrganisation.html:102
+#: views/uploadOrganisation.html:106
 msgid "Attention"
 msgstr ""
 
@@ -82,11 +82,11 @@ msgstr ""
 msgid "Carinthia"
 msgstr ""
 
-#: views/uploadOrganisation.html:84
+#: views/uploadOrganisation.html:56
 msgid "Chamber"
 msgstr ""
 
-#: views/uploadOrganisation.html:68
+#: views/uploadOrganisation.html:60
 msgid "City"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Click on the rectangular boxes on either side of the chart to get more information on a particular organization."
 msgstr ""
 
-#: views/uploadOrganisation.html:48
+#: views/uploadOrganisation.html:64
 msgid "Company"
 msgstr ""
 
@@ -133,6 +133,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: views/uploadOrganisation.html:68
+msgid "Education"
+msgstr ""
+
 #: controllers/groupingController.js:57
 #: views/grouping.html:112
 msgid "Enable Group"
@@ -155,7 +159,7 @@ msgstr ""
 msgid "Entries stored"
 msgstr ""
 
-#: views/uploadOrganisation.html:104
+#: views/uploadOrganisation.html:108
 #: views/uploadOrganisation.html:40
 msgid "Entries without known federal state in Austria"
 msgstr ""
@@ -180,7 +184,7 @@ msgstr ""
 msgid "Federal State"
 msgstr ""
 
-#: views/uploadOrganisation.html:64
+#: views/uploadOrganisation.html:72
 msgid "Federal state"
 msgstr ""
 
@@ -190,7 +194,7 @@ msgstr ""
 msgid "Fix slider range"
 msgstr ""
 
-#: views/uploadOrganisation.html:56
+#: views/uploadOrganisation.html:76
 msgid "Foundation"
 msgstr ""
 
@@ -256,7 +260,7 @@ msgstr ""
 msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
 msgstr ""
 
-#: views/uploadOrganisation.html:96
+#: views/uploadOrganisation.html:100
 msgid "Ignored"
 msgstr ""
 
@@ -311,7 +315,7 @@ msgstr ""
 msgid "Media Transparency Austria"
 msgstr ""
 
-#: views/uploadOrganisation.html:72
+#: views/uploadOrganisation.html:84
 msgid "Ministry"
 msgstr ""
 
@@ -325,7 +329,7 @@ msgstr ""
 msgid "Move the sliders to define a range"
 msgstr ""
 
-#: views/uploadOrganisation.html:60
+#: views/uploadOrganisation.html:88
 msgid "Municipality"
 msgstr ""
 
@@ -369,7 +373,7 @@ msgstr ""
 #: controllers/flowController.js:427
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
-#: views/uploadOrganisation.html:108
+#: views/uploadOrganisation.html:112
 msgid "Organisation"
 msgstr ""
 
@@ -394,10 +398,11 @@ msgstr ""
 #: views/uploadOrganisation.html:80
 #: views/uploadOrganisation.html:84
 #: views/uploadOrganisation.html:88
+#: views/uploadOrganisation.html:92
 msgid "Organisations with organisation type"
 msgstr ""
 
-#: views/uploadOrganisation.html:92
+#: views/uploadOrganisation.html:96
 msgid "Organisations with undetermined organisation type"
 msgstr ""
 
@@ -459,7 +464,7 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
-#: views/uploadOrganisation.html:88
+#: views/uploadOrganisation.html:92
 msgid "Policy-relevant"
 msgstr ""
 
@@ -664,7 +669,7 @@ msgstr ""
 msgid "previous"
 msgstr ""
 
-#: views/uploadOrganisation.html:109
+#: views/uploadOrganisation.html:113
 msgid "zip-code"
 msgstr ""
 
