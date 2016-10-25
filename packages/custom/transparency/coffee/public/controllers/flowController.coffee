@@ -158,6 +158,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
+        update()
         window.scrollTo 0,0
         
     $scope.showFlowDetails = (node) ->
@@ -320,7 +321,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
         $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
-            update()
+            update() if not $scope.isDetails
+            $scope.isDetails = false;
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)
