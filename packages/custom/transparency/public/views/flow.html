@@ -114,28 +114,11 @@
         <div class="row" data-ng-show="flowData.length>0">
 
             <h4 translate>Tabular Representation</h4>
-
             <div class="table-responsive">
-                <table datatable="ng" dt-options="dtOptions" class="row-border hover">
-                    <thead>
-                    <tr>
-                        <th translate>Media</th>
-                        <th translate>Organisations</th>
-                        <th translate>Payment Type</th>
-                        <th translate>Amount</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in flowData">
-                        <td>{{item.media}}</td>
-                        <td>{{item.organisation}}</td>
-                        <td>§{{item.transferType}}</td>
-                        <!--td class="numeric">{{item.amount.toLocaleString(language,{minimumFractionDigits: 2})}}</td-->
-                        <td class="numeric">{{item.amount|number:2}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-striped"></table>
             </div>
+            <br/><br/><br/><br/>
+
         </div>
     </div>
     <br/>

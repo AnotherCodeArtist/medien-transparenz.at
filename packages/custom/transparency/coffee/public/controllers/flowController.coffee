@@ -2,9 +2,10 @@
 
 app = angular.module 'mean.transparency'
 
-app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder', '$rootScope', '$timeout',
-($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope, $timeout) ->
-
+app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
+($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
+    #console.log "initialize dataPromise"
+    dataPromise = $q.defer()
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
     startLoading = ->
@@ -75,27 +76,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
-    $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
-        [
-            'colvis',
-            'excel',
-            'print'
-        ]
-    )
-
-
-    angular.extend $scope.dtOptions,
-        paginationType: 'simple'
-        paging:   true
-        ordering: true
-        info:     true
-        searching: false
-        language:
-            paginate:
-                previous: gettextCatalog.getString('previous')
-                next: gettextCatalog.getString('next')
-            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
-            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
 
     toArray = (value) ->
         if typeof value is 'string'
@@ -183,10 +163,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
-                return
             return
 
-        console.log "Starting update: " + Date.now()
+        #console.log "Starting update: " + Date.now()
         startLoading()
         if $scope.selectedOrganisations or $scope.selectedMedia
             TPAService.filteredflows(parameters())
@@ -202,6 +181,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     if flowDatum.media is 'Other media'
                         flowDatum.media = gettextCatalog.getString flowDatum.media
                 $scope.flowData = flowData
+                #console.log "resolve dataPromise after update2"
+                dataPromise.resolve()
                 $scope.flows = buildNodes filterData flowData
                 #checkMaxLength(data)
                 #console.log "Updated Data Model: " + Date.now()
@@ -224,6 +205,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.flowData = []
                 $scope.flows = nodes:[],links:[]
                 $scope.error = res.data
+                #console.log "resolve dataPromise after exception"
+                dataPromise.resolve()
 
 
     checkMaxLength = (data) ->
@@ -265,10 +248,64 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
+    $scope.dtOptions = {}
+    $scope.dtOptions = DTOptionsBuilder.fromFnPromise( ->
+        defer = $q.defer()
+        #console.log "register dataPromise then-handler"
+        dataPromise.promise.then (result) ->
+            #console.log "dataPromise got resolved"
+            defer.resolve($scope.flowData);
+        defer.promise
+    )
+    .withPaginationType('full_numbers')
+    .withButtons(['copy','csv','excel'])
+    .withBootstrap()
+
+    angular.extend $scope.dtOptions,
+        language:
+            paginate:
+                previous: gettextCatalog.getString('previous')
+                next: gettextCatalog.getString('next')
+                first: gettextCatalog.getString('first')
+                last: gettextCatalog.getString('last')
+            search: gettextCatalog.getString('search')
+            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
+            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
+
+    getExplanation = (paymentType) -> switch paymentType
+        when 2 then gettextCatalog.getString('§2 MedKF-TG (Media Cooperations)')
+        when 4 then gettextCatalog.getString('§4 MedKF-TG (Funding)')
+        when 31 then gettextCatalog.getString('§31 ORF-G (Charges)')
+
+    $scope.dtColumns = [
+        DTColumnBuilder.newColumn('organisation').withTitle(gettextCatalog.getString('Payer'))
+        DTColumnBuilder.newColumn('media').withTitle(gettextCatalog.getString('Recipient')),
+        DTColumnBuilder.newColumn('transferType').withTitle(gettextCatalog.getString('Type'))
+        .renderWith((paragraph,type)->
+            if type is 'display'
+                getExplanation(paragraph)
+            else
+                paragraph
+        )
+        DTColumnBuilder.newColumn('amount').withTitle(gettextCatalog.getString('Amount'))
+        .renderWith((amount,type) ->
+            if type is 'display'
+                amount.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
+            else
+                amount)
+        .withClass('text-right')
+    ]
+
+    $scope.dtInstance = {}
+
+
 
     change = (oldValue,newValue) ->
         console.log "Change: " + Date.now()
-        update() if (oldValue isnt newValue)
+        if (oldValue isnt newValue)
+            dataPromise = $q.defer()
+            $scope.dtInstance.reloadData()
+            update()
 
     filterThreshold = "NoValue"
     $scope.$watch 'filter', (newValue,oldValue) ->
