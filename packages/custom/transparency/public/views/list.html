@@ -37,7 +37,7 @@
                           ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
                 </div>
                 <div class="col-sm-2">
-                    <span class="badge">&euro; {{org.total | number:2}}</span>
+                    <span class="badge">&euro; {{org.total.toLocaleString(language,{minimumFractionDigits:2,maximumFractionDigits:2})}}</span>
                 </div>
             </div>
 

@@ -4,6 +4,7 @@ app = angular.module 'mean.transparency'
 
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
+    #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
@@ -162,7 +163,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
-                dataPromise.resolve()
             return
 
         #console.log "Starting update: " + Date.now()
@@ -181,6 +181,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     if flowDatum.media is 'Other media'
                         flowDatum.media = gettextCatalog.getString flowDatum.media
                 $scope.flowData = flowData
+                #console.log "resolve dataPromise after update2"
                 dataPromise.resolve()
                 $scope.flows = buildNodes filterData flowData
                 #checkMaxLength(data)
@@ -204,6 +205,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.flowData = []
                 $scope.flows = nodes:[],links:[]
                 $scope.error = res.data
+                #console.log "resolve dataPromise after exception"
                 dataPromise.resolve()
 
 
@@ -249,7 +251,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.dtOptions = {}
     $scope.dtOptions = DTOptionsBuilder.fromFnPromise( ->
         defer = $q.defer()
+        #console.log "register dataPromise then-handler"
         dataPromise.promise.then (result) ->
+            #console.log "dataPromise got resolved"
             defer.resolve($scope.flowData);
         defer.promise
     )

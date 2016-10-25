@@ -126,9 +126,9 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../js/geo.js',{global:true,weight:-2});
   Transparency.aggregateAsset('js', '../lib/datatables.net/js/jquery.dataTables.js',{weight:-3});
   Transparency.aggregateAsset('js', '../lib/datatables.net-bs/js/dataTables.bootstrap.js',{weight:-2});
-  Transparency.aggregateAsset('js', '../lib/datatables-colvis/js/dataTables.colVis.js',{weight:-2});
+  //Transparency.aggregateAsset('js', '../lib/datatables-colvis/js/dataTables.colVis.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/dataTables.buttons.js',{weight:-2});
-  Transparency.aggregateAsset('js', '../lib/datatables.net-buttons-bs/js/buttons.bootstrap.js',{weight:-2});
+  Transparency.aggregateAsset('js', '../lib/datatables.net-buttons-bs/js/buttons.bootstrap.js',{weight:+1});
   //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/dataTables.buttons.js',{weight:-2});
   //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/buttons.bootstrap.js',{weight:-2});
   Transparency.aggregateAsset('js', '../js/buttons.html5.js',{global:true,weight:-1});
