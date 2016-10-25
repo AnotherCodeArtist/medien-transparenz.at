@@ -26,7 +26,8 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers/flowController.js:28
+#: controllers/flowController.js:29
+#: controllers/flowController.js:406
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr ""
@@ -102,7 +103,7 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers/flowController.js:143
+#: controllers/flowController.js:386
 #: controllers/flowDetailController.js:105
 #: controllers/topEntriesController.js:240
 msgid "Display _MENU_ records"
@@ -267,9 +268,9 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers/flowController.js:220
-#: controllers/flowController.js:435
-#: controllers/flowController.js:90
+#: controllers/flowController.js:205
+#: controllers/flowController.js:476
+#: controllers/flowController.js:91
 #: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 msgid "Media"
@@ -327,15 +328,15 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers/flowController.js:436
+#: controllers/flowController.js:477
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
 #: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
-#: controllers/flowController.js:221
-#: controllers/flowController.js:91
+#: controllers/flowController.js:206
+#: controllers/flowController.js:92
 msgid "Organisations"
 msgstr ""
 
@@ -367,7 +368,11 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: controllers/flowController.js:27
+#: controllers/flowController.js:400
+msgid "Payer"
+msgstr ""
+
+#: controllers/flowController.js:28
 #: controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr ""
@@ -404,6 +409,7 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
+#: controllers/flowController.js:400
 #: controllers/topEntriesController.js:134
 #: controllers/topEntriesController.js:212
 msgid "Recipient"
@@ -447,7 +453,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:142
+#: controllers/flowController.js:385
 #: controllers/flowDetailController.js:104
 #: controllers/topEntriesController.js:239
 msgid "Showing page _PAGE_ of _PAGES_"
@@ -524,6 +530,7 @@ msgstr ""
 msgid "Total amount of all entries"
 msgstr ""
 
+#: controllers/flowController.js:400
 #: views/grouping.html:16
 msgid "Type"
 msgstr ""
@@ -592,26 +599,29 @@ msgstr ""
 msgid "Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results."
 msgstr ""
 
+#: controllers/flowController.js:381
 #: controllers/topEntriesController.js:235
 msgid "first"
 msgstr ""
 
+#: controllers/flowController.js:382
 #: controllers/topEntriesController.js:236
 msgid "last"
 msgstr ""
 
-#: controllers/flowController.js:140
+#: controllers/flowController.js:380
 #: controllers/flowDetailController.js:102
 #: controllers/topEntriesController.js:234
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:139
+#: controllers/flowController.js:379
 #: controllers/flowDetailController.js:101
 #: controllers/topEntriesController.js:233
 msgid "previous"
 msgstr ""
 
+#: controllers/flowController.js:384
 #: controllers/topEntriesController.js:238
 msgid "search"
 msgstr ""
@@ -622,4 +632,16 @@ msgstr ""
 
 #: views/top.html:45
 msgid "{{pType.text}}"
+msgstr ""
+
+#: controllers/flowController.js:392
+msgid "§2 MedKF-TG (Media Cooperations)"
+msgstr ""
+
+#: controllers/flowController.js:396
+msgid "§31 ORF-G (Charges)"
+msgstr ""
+
+#: controllers/flowController.js:394
+msgid "§4 MedKF-TG (Funding)"
 msgstr ""

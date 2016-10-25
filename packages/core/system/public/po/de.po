@@ -43,7 +43,8 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:28 controllers/flowDetailController.js:12
+#: controllers/flowController.js:29 controllers/flowController.js:406
+#: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr "Betrag"
 
@@ -159,7 +160,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:143 controllers/flowDetailController.js:105
+#: controllers/flowController.js:386 controllers/flowDetailController.js:105
 #: controllers/topEntriesController.js:240
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
@@ -351,8 +352,8 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:220 controllers/flowController.js:435
-#: controllers/flowController.js:90 controllers/flowDetailController.js:9
+#: controllers/flowController.js:205 controllers/flowController.js:476
+#: controllers/flowController.js:91 controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 msgid "Media"
 msgstr "Medien"
@@ -407,12 +408,12 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:436 controllers/flowDetailController.js:10
+#: controllers/flowController.js:477 controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21 views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:221 controllers/flowController.js:91
+#: controllers/flowController.js:206 controllers/flowController.js:92
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -444,7 +445,11 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:27 controllers/flowDetailController.js:11
+#: controllers/flowController.js:400
+msgid "Payer"
+msgstr "Zahler"
+
+#: controllers/flowController.js:28 controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -476,7 +481,7 @@ msgstr "Zeitraum"
 msgid "Quarter"
 msgstr "Quartal"
 
-#: controllers/topEntriesController.js:134
+#: controllers/flowController.js:400 controllers/topEntriesController.js:134
 #: controllers/topEntriesController.js:212
 msgid "Recipient"
 msgstr "Empfänger"
@@ -513,7 +518,7 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:142 controllers/flowDetailController.js:104
+#: controllers/flowController.js:385 controllers/flowDetailController.js:104
 #: controllers/topEntriesController.js:239
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
@@ -595,7 +600,7 @@ msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Total amount of all entries"
 msgstr "Summe aller Zahlungen"
 
-#: views/grouping.html:16
+#: controllers/flowController.js:400 views/grouping.html:16
 msgid "Type"
 msgstr "Typ"
 
@@ -677,25 +682,25 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/topEntriesController.js:235
+#: controllers/flowController.js:381 controllers/topEntriesController.js:235
 msgid "first"
 msgstr "Erste"
 
-#: controllers/topEntriesController.js:236
+#: controllers/flowController.js:382 controllers/topEntriesController.js:236
 msgid "last"
 msgstr "Letzte"
 
-#: controllers/flowController.js:140 controllers/flowDetailController.js:102
+#: controllers/flowController.js:380 controllers/flowDetailController.js:102
 #: controllers/topEntriesController.js:234
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:139 controllers/flowDetailController.js:101
+#: controllers/flowController.js:379 controllers/flowDetailController.js:101
 #: controllers/topEntriesController.js:233
 msgid "previous"
 msgstr "vorherige"
 
-#: controllers/topEntriesController.js:238
+#: controllers/flowController.js:384 controllers/topEntriesController.js:238
 msgid "search"
 msgstr "Suche"
 
@@ -706,3 +711,15 @@ msgstr "Postleitzahl"
 #: views/top.html:45
 msgid "{{pType.text}}"
 msgstr ""
+
+#: controllers/flowController.js:392
+msgid "§2 MedKF-TG (Media Cooperations)"
+msgstr "§2 MedKF-TG (Medien-Kooperationen)"
+
+#: controllers/flowController.js:396
+msgid "§31 ORF-G (Charges)"
+msgstr "§31 ORF-G (Gebühren)"
+
+#: controllers/flowController.js:394
+msgid "§4 MedKF-TG (Funding)"
+msgstr "§4 MedKF-TG (Förderungen)"

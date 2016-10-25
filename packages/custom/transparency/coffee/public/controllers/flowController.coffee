@@ -268,12 +268,22 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
             lengthMenu: gettextCatalog.getString "Display _MENU_ records"
 
+    getExplanation = (paymentType) -> switch paymentType
+        when 2 then gettextCatalog.getString('§2 MedKF-TG (Media Cooperations)')
+        when 4 then gettextCatalog.getString('§4 MedKF-TG (Funding)')
+        when 31 then gettextCatalog.getString('§31 ORF-G (Charges)')
 
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('organisation').withTitle('Payer')
-        DTColumnBuilder.newColumn('media').withTitle('Recipient'),
-        DTColumnBuilder.newColumn('transferType').withTitle('Type')
-        DTColumnBuilder.newColumn('amount').withTitle('Amount')
+        DTColumnBuilder.newColumn('organisation').withTitle(gettextCatalog.getString('Payer'))
+        DTColumnBuilder.newColumn('media').withTitle(gettextCatalog.getString('Recipient')),
+        DTColumnBuilder.newColumn('transferType').withTitle(gettextCatalog.getString('Type'))
+        .renderWith((paragraph,type)->
+            if type is 'display'
+                getExplanation(paragraph)
+            else
+                paragraph
+        )
+        DTColumnBuilder.newColumn('amount').withTitle(gettextCatalog.getString('Amount'))
         .renderWith((amount,type) ->
             if type is 'display'
                 amount.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
