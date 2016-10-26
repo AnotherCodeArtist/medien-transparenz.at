@@ -60,8 +60,8 @@
   },
   "devDependencies": {
     "charenc": "0.0.1",
-    "supertest": "^2.0.1",
     "connect-modrewrite": "0.9.0",
+    "del": "^2.2.2",
     "expect.js": "^0.3.1",
     "gulp": "latest",
     "gulp-angular-gettext": "^2.1.0",
