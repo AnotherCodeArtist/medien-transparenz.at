@@ -71,7 +71,7 @@
 
                 <div ng-show="error" class="alert alert-warning" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    <span translate>Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.</span>
+                    <span translate>Please select at least one organisation or media.</span>
                 </div>
                 <div ng-hide="error" class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-info-sign"></span>
@@ -79,7 +79,7 @@
                 </div>
                 <div ng-hide="error" class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected.</span>
+                    <span translate>Per default the top spender based on your chosen payment types and period is selected.</span>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    $scope.init = 'init';
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -179,7 +180,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
-        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping
+        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'
+            $scope.init = 'preselected'
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
@@ -194,7 +196,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 stopLoading()
                 #console.log "Got result from Server: " + Date.now()
                 $scope.error = null
-                init = true
                 flowData = res.data
                 for flowDatum in flowData
                     if flowDatum.organisation is 'Other organisations'
