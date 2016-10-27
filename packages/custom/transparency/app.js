@@ -141,7 +141,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
   Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js');
-  Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js');
+  Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js',{global:true});
   Transparency.aggregateAsset('js', '../lib/angular-intro.js/build/angular-intro.min.js');
 
   /**
