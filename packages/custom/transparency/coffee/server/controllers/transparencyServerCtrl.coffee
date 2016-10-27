@@ -70,6 +70,53 @@ lineToZipCode = (line, numberOfZipCodes) ->
         numberOfZipCodes++
     numberOfZipCodes
 
+# determines org type by name
+determineOrganisationType = (organisationName) ->
+    #public: state (Land), city (Stadt), municipality (Gemeinde)
+    returnValue = 'undetermined'
+    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.)|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S.R.L.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL/i
+    regexIncorporatedCompany = /.* AG.*/
+    regexAssociation = /.*(Verband).*|.*(Verein).*/i
+    regexFoundation = /.*(Stiftung).*|.*(Holding)/i
+    regexCity = /^Stadt .+/i
+    regexMunicipality = /^(?:Markt)?gemeinde?.*|Stadtgemeinde .*|.*Sanitäts.*/i
+    regexState = /^Land .+/ #Stadt Wien -- provincial
+    regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
+    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft|.*Agency.*|Arbeitsmarktservice)/i #national - public agency
+    regexFund = /.*Fonds?.*/i
+    regexChamber = /.*?Kammer?.*/i
+    regexPolicyRelevant = /^(Alternativregion).*|.*BIFIE|.*FMA|.*Sprengel?.*|^Kleinregion .*|Arbeitsmarktservice|Verwaltungsgerichtshof/i
+    regexEducation = /.*(Alumni).*|.*(Universit).*|.*(Hochsch).*|.*Mittelschul.*|.*Schul.*|.*Päda.*/i
+
+    if organisationName.match regexCompany
+        returnValue = 'company'
+    else if organisationName.match regexIncorporatedCompany
+        returnValue = 'company'
+    else if organisationName.match regexAssociation
+        returnValue = 'association'
+    else if organisationName.match regexChamber
+        returnValue = 'chamber'
+    else if organisationName.match regexEducation
+        returnValue = 'education'
+    else if organisationName.match regexFoundation
+        returnValue = 'foundation'
+    else if organisationName.match regexMunicipality
+        returnValue = 'municipality'
+    else if organisationName.match regexFund
+        returnValue = 'fund'
+    else if organisationName.match regexPolicyRelevant
+        returnValue = 'policy-relevant'
+    else if organisationName.match regexMinistry
+        returnValue = 'ministry'
+    else if organisationName.match regexCity
+        returnValue = 'city'
+    else if organisationName.match regexState
+        returnValue = 'state'
+    else if organisationName.match regexAgency
+        returnValue = 'agency'
+
+    console.log "Undetermined organisation type for: " + organisationName if returnValue is 'undetermined'
+    returnValue
 #Transfer of line to Organisation
 lineToOrganisation = (line, feedback) ->
     if not feedback
@@ -83,6 +130,8 @@ lineToOrganisation = (line, feedback) ->
         organisation.zipCode = splittedLine[2]
         organisation.city_de = splittedLine[3]
         organisation.country_de = splittedLine[4]
+        # Setting the org type
+        organisation.type = determineOrganisationType splittedLine[0]
         ZipCode.findOne({'zipCode': splittedLine[2]})
         .then (results) ->
             if results and organisation.country_de is 'Österreich'
@@ -96,6 +145,22 @@ lineToOrganisation = (line, feedback) ->
             if organisation.federalState is 'Unknown' and organisation.country_de is 'Österreich'
                 feedback.unknownFederalState++
                 feedback.unknownFederalStateEntries.push organisation
+            # Feedback for org type
+            switch organisation.type
+                when 'company' then feedback.organisationTypeCompany++
+                when 'association' then feedback.organisationTypeAssociation++
+                when 'chamber' then feedback.organisationTypeChamber++
+                when 'education' then feedback.organisationTypeEducation++
+                when 'foundation' then feedback.organisationTypeFoundation++
+                when 'municipality' then feedback.organisationTypeMunicipality++
+                when 'fund' then feedback.organisationTypeFund++
+                when 'undetermined' then feedback.undeterminedOrganisationType++
+                when 'policy-relevant' then feedback.organisationTypePolicyRelevant++
+                when 'ministry' then feedback.organisationTypeMinistry++
+                when 'city' then feedback.organisationTypeCity++
+                when 'state' then feedback.organisationTypeState++
+                when 'agency' then feedback.organisationTypeAgency++
+
             feedback
         .catch (err) ->
             feedback.errors+=1
@@ -280,6 +345,19 @@ module.exports = (Transparency) ->
             ignoredEntries: 0
             unknownFederalState: 0,
             unknownFederalStateEntries: [],
+            undeterminedOrganisationType: 0,
+            organisationTypeCompany: 0,
+            organisationTypeAssociation: 0,
+            organisationTypeFoundation: 0,
+            organisationTypeMunicipality: 0,
+            organisationTypeState: 0,
+            organisationTypeCity: 0,
+            organisationTypeMinistry: 0,
+            organisationTypeAgency: 0,
+            organisationTypeFund: 0,
+            organisationTypeChamber: 0,
+            organisationTypePolicyRelevant: 0,
+            organisationTypeEducation: 0,
             notAustria: 0,
             errors:0
             errorEntries: []
