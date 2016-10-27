@@ -81,59 +81,55 @@
                         <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
                     </div>
 
-                <div ng-show="error" class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    <span translate>Please select at least one organisation or media.</span>
+                    <div ng-show="error" class="alert alert-warning" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        <span translate>Please select at least one organisation or media.</span>
+                    </div>
                 </div>
-                <div ng-hide="error" class="alert alert-info" role="alert">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>Click on the rectangular boxes on either side of the chart to get more information on a particular organization.</span>
-                </div>
-                <div ng-hide="error" class="alert alert-info" role="alert">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>Per default the top spender based on your chosen payment types and period is selected.</span>
-                </div>
-            </div>
-            <div class="row" id="sankeyRow">
-                <div class="col-md-6">
-                    <span>{{organisationsLabel}}:</span>
-                    <oi-select class="multiselectDropdown"
-                               oi-options="item.name for item in allOrganisations track by item.name"
-                               ng-model="selectedOrganisations"
-                               multiple
-                               placeholder="{{organisationsLabel}}"
-                               id="multiselectOrg"
-                    >
+                <div class="row" id="sankeyRow">
+                    <div class="col-md-6">
+                        <span>{{organisationsLabel}}:</span>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allOrganisations track by item.name"
+                                   ng-model="selectedOrganisations"
+                                   multiple
+                                   placeholder="{{organisationsLabel}}"
+                                   id="multiselectOrg"
+                        >
 
-                    </oi-select>
+                        </oi-select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>{{mediaLabel}}:</span>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allMedia track by item.name"
+                                   ng-model="selectedMedia"
+                                   multiple
+                                   placeholder="{{mediaLabel}}"
+                                   id="multiselectMedia"
+                        ></oi-select>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <span>{{mediaLabel}}:</span>
-                    <oi-select class="multiselectDropdown"
-                               oi-options="item.name for item in allMedia track by item.name"
-                               ng-model="selectedMedia"
-                               multiple
-                               placeholder="{{mediaLabel}}"
-                               id="multiselectMedia"
-                    ></oi-select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
-                    <div data-tpa-sankey data="flows" id="mychart"
-                         prog="progress" node-click="showDetails" link-click="showFlowDetails">
+                <div class="row">
+                    <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
+                        <div data-tpa-sankey data="flows" id="mychart"
+                             prog="progress" node-click="showDetails" link-click="showFlowDetails">
 
+                        </div>
                     </div>
 
                 </div>
                 <div class="row" data-ng-show="flowData.length>0">
 
-            <h4 translate>Tabular Representation</h4>
-            <div class="table-responsive">
-                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-striped"></table>
-            </div>
-            <br/><br/><br/><br/>
+                    <h4 translate>Tabular Representation</h4>
+                    <div class="table-responsive">
+                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"
+                               class="table table-striped"></table>
+                    </div>
+                    <br/><br/><br/><br/>
 
+                </div>
+            </div>
         </div>
     </div>
     <br/>

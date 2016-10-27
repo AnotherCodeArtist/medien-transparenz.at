@@ -9,7 +9,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
     $scope.init = 'init';
-        
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
         $scope.IntroOptions =
@@ -24,7 +23,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 },
                 {
                     element: document.querySelector('#sankeyRow')
-                    intro: gettextCatalog.getString 'If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected.'
+                    intro: gettextCatalog.getString 'Per default the top spender based on your chosen payment types and period is selected.'
                 },
                 {
                     element: document.querySelector('#sankeyRow')
@@ -107,24 +106,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if $scope.selectedOrganisations and $scope.selectedOrganisations.length > 0
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
-    
+
+
     # init the introOptions and call the method
     $scope.IntroOptions = null;
     setIntroOptions()
-
-
-    angular.extend $scope.dtOptions,
-        paginationType: 'simple'
-        paging:   true
-        ordering: true
-        info:     true
-        searching: false
-        language:
-            paginate:
-                previous: gettextCatalog.getString('previous')
-                next: gettextCatalog.getString('next')
-            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
-            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
 
     toArray = (value) ->
         if typeof value is 'string'
