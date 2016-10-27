@@ -179,7 +179,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:169 controllers/flowDetailController.js:105
+#: controllers/flowController.js:143
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -323,15 +323,6 @@ msgstr ""
 "\">Organisationen</a> und <a ui-sref=\"listMedia\">Medien</a> in den RTR-"
 "Meldungen\n"
 "erfasst sind, durchblättern Sie einfach unsere Listen!"
-
-#: views/flow.html:82
-msgid ""
-"If you neither choose an organisation nor a media the top spender based on "
-"your chosen payment types and period is selected."
-msgstr ""
-"Wenn Sie weder eine Organisation noch ein Medium auswählen, wird automatisch "
-"der größte Zahler basierend auf Ihrer Zahlungstyp- und Zeitraumauswahl "
-"selektiert"
 
 #: views/about.html:47
 msgid ""
@@ -537,6 +528,14 @@ msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Zahlungstyp"
 
+#: views/flow.html:82
+msgid ""
+"Per default the top spender based on your chosen payment types and period is "
+"selected."
+msgstr ""
+"Standardmäßig wird automatisch der größte Zahler basierend auf Ihrer "
+"Zahlungstyp- und Zeitraumauswahl selektiert"
+
 #: views/flow.html:26 views/index.html:24 views/top.html:16
 msgid "Periods"
 msgstr "Zeitraum"
@@ -548,6 +547,10 @@ msgstr "Politiknah"
 #: controllers/flowController.js:33
 msgid "Previous info"
 msgstr "Vorherige Info"
+
+#: views/flow.html:74
+msgid "Please select at least one organisation or media."
+msgstr "Bitte wählen sie zumindest eine Organisation oder ein Medium aus."
 
 #: views/overview.html:18
 msgid "Quarter"
@@ -590,7 +593,7 @@ msgstr "Suchen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:142 controllers/flowDetailController.js:104
+#: controllers/flowController.js:142
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -780,21 +783,11 @@ msgstr ""
 "Anzahl der Ergebnisse zu reduzieren. Geben Sie dazu einen Suchbegriff im "
 "Textfeld \"Filter\" ein."
 
-#: controllers/flowController.js:381 controllers/topEntriesController.js:235
-msgid "first"
-msgstr "Erste"
-
-#: controllers/flowController.js:382 controllers/topEntriesController.js:236
-msgid "last"
-msgstr "Letzte"
-
-#: controllers/flowController.js:380 controllers/flowDetailController.js:102
-#: controllers/topEntriesController.js:234
+#: controllers/flowController.js:140
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:379 controllers/flowDetailController.js:101
-#: controllers/topEntriesController.js:233
+#: controllers/flowController.js:139
 msgid "previous"
 msgstr "vorherige"
 

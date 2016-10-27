@@ -30,9 +30,8 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers/flowController.js:434
-#: controllers/flowController.js:55
-#: controllers/flowDetailController.js:12
+#: controllers/flowController.js:28
+#: views/flow.html:125
 msgid "Amount"
 msgstr ""
 
@@ -57,7 +56,7 @@ msgid "At a single glance checkout which organisations are the biggest spenders 
 msgstr ""
 
 #: views/upload.html:30
-#: views/uploadOrganisation.html:106
+#: views/uploadOrganisation.html:53
 msgid "Attention"
 msgstr ""
 
@@ -162,6 +161,7 @@ msgstr ""
 
 #: views/uploadOrganisation.html:108
 #: views/uploadOrganisation.html:40
+#: views/uploadOrganisation.html:53
 msgid "Entries without known federal state in Austria"
 msgstr ""
 
@@ -309,6 +309,7 @@ msgstr ""
 #: controllers/flowController.js:504
 #: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
+#: views/flow.html:122
 msgid "Media"
 msgstr ""
 
@@ -325,7 +326,7 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views/flow.html:41
+#: views/flow.html:31
 #: views/index.html:29
 #: views/top.html:21
 msgid "Move the sliders to define a range"
@@ -376,15 +377,15 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers/flowController.js:505
-#: controllers/flowDetailController.js:10
+#: controllers/flowController.js:427
 #: controllers/groupingController.js:21
-#: views/uploadOrganisation.html:112
+#: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr ""
 
-#: controllers/flowController.js:118
-#: controllers/flowController.js:234
+#: controllers/flowController.js:221
+#: controllers/flowController.js:91
+#: views/flow.html:123
 msgid "Organisations"
 msgstr ""
 
@@ -415,15 +416,15 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:92
 msgid "Other media"
 msgstr ""
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:92
 msgid "Other organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:98
+#: controllers/topEntriesController.js:94
 msgid "Others"
 msgstr ""
 
@@ -444,21 +445,21 @@ msgstr ""
 msgid "Payment Type"
 msgstr ""
 
-#: views/flow.html:46
+#: views/flow.html:35
 #: views/index.html:32
 #: views/top.html:41
 msgid "Payment Types"
 msgstr ""
 
-#: views/flow.html:25
+#: views/flow.html:19
 msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
 msgstr ""
 
-#: views/flow.html:27
+#: views/flow.html:21
 msgid "Payments according to §31 ORF-G (Charges)"
 msgstr ""
 
-#: views/flow.html:26
+#: views/flow.html:20
 msgid "Payments according to §4 MedKF-TG (Funding)"
 msgstr ""
 
@@ -466,27 +467,26 @@ msgstr ""
 msgid "Payments by Transfer Type"
 msgstr ""
 
-#: views/flow.html:33
+#: views/flow.html:82
+msgid "Per default the top spender based on your chosen payment types and period is selected."
+msgstr ""
+
+#: views/flow.html:26
 #: views/index.html:24
 #: views/top.html:16
 msgid "Periods"
 msgstr ""
 
-#: views/uploadOrganisation.html:92
-msgid "Policy-relevant"
-msgstr ""
-
-#: controllers/flowController.js:34
-msgid "Previous info"
+#: views/flow.html:74
+msgid "Please select at least one organisation or media."
 msgstr ""
 
 #: views/overview.html:18
 msgid "Quarter"
 msgstr ""
 
-#: controllers/flowController.js:428
-#: controllers/topEntriesController.js:134
-#: controllers/topEntriesController.js:212
+#: controllers/topEntriesController.js:127
+#: controllers/topEntriesController.js:205
 msgid "Recipient"
 msgstr ""
 
@@ -523,14 +523,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: views/flow.html:19
+#: views/flow.html:13
 #: views/top.html:7
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:413
-#: controllers/flowDetailController.js:104
-#: controllers/topEntriesController.js:239
+#: controllers/flowController.js:142
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -542,8 +540,8 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:131
-#: controllers/topEntriesController.js:211
+#: controllers/topEntriesController.js:124
+#: controllers/topEntriesController.js:204
 msgid "Spender"
 msgstr ""
 
@@ -560,7 +558,7 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:124
+#: views/flow.html:116
 msgid "Tabular Representation"
 msgstr ""
 
@@ -706,9 +704,7 @@ msgstr ""
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:407
-#: controllers/flowDetailController.js:101
-#: controllers/topEntriesController.js:233
+#: controllers/flowController.js:139
 msgid "previous"
 msgstr ""
 
@@ -735,4 +731,8 @@ msgstr ""
 
 #: controllers/flowController.js:422
 msgid "§4 MedKF-TG (Funding)"
+msgstr ""
+
+#: views/top.html:45
+msgid "{{pType.text}}"
 msgstr ""

@@ -8,7 +8,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     dataPromise = $q.defer()
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
-
+    $scope.init = 'init';
+        
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
         $scope.IntroOptions =
@@ -106,11 +107,24 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if $scope.selectedOrganisations and $scope.selectedOrganisations.length > 0
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
-
-
+    
     # init the introOptions and call the method
     $scope.IntroOptions = null;
     setIntroOptions()
+
+
+    angular.extend $scope.dtOptions,
+        paginationType: 'simple'
+        paging:   true
+        ordering: true
+        info:     true
+        searching: false
+        language:
+            paginate:
+                previous: gettextCatalog.getString('previous')
+                next: gettextCatalog.getString('next')
+            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
+            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
 
     toArray = (value) ->
         if typeof value is 'string'
@@ -196,7 +210,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
-        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping
+        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'
+            $scope.init = 'preselected'
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
@@ -210,7 +225,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 stopLoading()
                 #console.log "Got result from Server: " + Date.now()
                 $scope.error = null
-                init = true
                 flowData = res.data
                 for flowDatum in flowData
                     if flowDatum.organisation is 'Other organisations'
