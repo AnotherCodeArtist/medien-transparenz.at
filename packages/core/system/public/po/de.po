@@ -47,8 +47,7 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:436 controllers/flowController.js:56
-#: controllers/flowDetailController.js:12
+#: controllers/flowController.js:28 views/flow.html:125
 msgid "Amount"
 msgstr "Betrag"
 
@@ -255,6 +254,10 @@ msgstr "Stiftung"
 msgid "Fund"
 msgstr "Fonds"
 
+#: views/flowdetail.html:12
+msgid "Flow in detail"
+msgstr "Zahlungsfluss im Detail"
+
 #: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
@@ -443,12 +446,13 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:507 controllers/flowDetailController.js:10
-#: controllers/groupingController.js:21 views/uploadOrganisation.html:112
+#: controllers/flowController.js:427 controllers/groupingController.js:21
+#: views/uploadOrganisation.html:57
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:119 controllers/flowController.js:235
+#: controllers/flowController.js:221 controllers/flowController.js:91
+#: views/flow.html:123
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -498,6 +502,8 @@ msgid "Payer"
 msgstr "Zahler"
 
 #: controllers/flowController.js:55 controllers/flowDetailController.js:11
+#: controllers/flowController.js:27 controllers/flowDetailController.js:11
+#: views/flow.html:124
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -620,6 +626,16 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
+#: views/flowdetail.html:55
+msgid ""
+"The first chart on that page shows the flow of money over the available "
+"period of time. The highest and the lowest value is highlighted. In case of "
+"events during a quarter, the events are emphasized."
+msgstr ""
+"Das erste Diagramm zeigt den Geldfluss im Verlauf der Zeit. Der höchste und "
+"der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
+"verfügbar, so werden diese angezeigt."
+
 #: views/index.html:42
 msgid ""
 "The map can be turned by holding the left mouse button and dragging within "
@@ -627,6 +643,16 @@ msgid ""
 msgstr ""
 "Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
 "werden. Mittels Scrollen kann in die Karte gezoomt werden."
+
+#: views/flowdetail.html:69
+msgid ""
+"The second chart shows differences between the money flow compared to the "
+"previous quarter. The highest and lowest value is highlighted. If available, "
+"events are shown."
+msgstr ""
+"Das zweite Diagramm vergleicht den Geldfluss zum jeweils vorangegangenen "
+"Quartal. Der höchste und der niedrigste Wert ist hervorgehoben. Sind "
+"Ereignisse in einem Quartal verfügbar, so werden diese angezeigt."
 
 #: views/impress.html:20
 msgid "This solution was the basis for the now available site"
