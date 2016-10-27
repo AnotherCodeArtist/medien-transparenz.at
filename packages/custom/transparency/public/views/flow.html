@@ -1,117 +1,125 @@
 <section class="container">
     <div data-ng-controller="FlowCtrl">
-        <div class="loadingDialog" data-ng-show="loading">
-            <div class="text-center"><span translate>Loading Data to Update Diagram ...</span><br/>
-                <progressbar value="progress" max="100" type="info" class="progress-striped active"/>
+        <div ng-intro-options="IntroOptions" ng-intro-method="FlowIntro" ng-intro-autostart="false">
+            <div class="loadingDialog" data-ng-show="loading">
+                <div class="text-center"><span translate>Loading Data to Update Diagram ...</span><br/>
+                    <progressbar value="progress" max="100" type="info" class="progress-striped active"/>
+                </div>
             </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" aria-label="?" data-ng-click="FlowIntro()">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </button>
+            </div>
+            <h1 translate>Money Flow</h1>
 
-        </div>
-        <h1 translate>Money Flow</h1>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span translate>Settings</span>
-                <a href="#" class="pull-right btn" title="hide/show"
-                   ng-click="showSettings = !showSettings"><i
-                        class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-            </div>
-            <div style="display: none">
-                <p translate="translate">Payments according to §2 MedKF-TG (Media Cooperations)</p>
-                <p translate="translate">Payments according to §4 MedKF-TG (Funding)</p>
-                <p translate="translate">Payments according to §31 ORF-G (Charges)</p>
-            </div>
-            <div class="panel-body" uib-collapse="!showSettings">
-                <div class="row">
-                    <div class="col-sm-6 col-lg-6">
-                        <strong><div translate>Periods</div></strong>
-                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
-                        <div class="checkbox">
-                            <label><input id="fixRange" type="checkbox" ng-model="slider.options.draggableRangeOnly" /><span translate>Fix slider range</span></label>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span translate>Settings</span>
+                    <a href="#" class="pull-right btn" title="hide/show"
+                       ng-click="showSettings = !showSettings"><i
+                            class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                </div>
+                <div style="display: none">
+                    <p translate="translate">Payments according to §2 MedKF-TG (Media Cooperations)</p>
+                    <p translate="translate">Payments according to §4 MedKF-TG (Funding)</p>
+                    <p translate="translate">Payments according to §31 ORF-G (Charges)</p>
+                </div>
+                <div class="panel-body" uib-collapse="!showSettings">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-6">
+                            <strong>
+                                <div translate>Periods</div>
+                            </strong>
+                            <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                      rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
+                            <div class="checkbox">
+                                <label><input id="fixRange" type="checkbox"
+                                              ng-model="slider.options.draggableRangeOnly"/><span translate>Fix slider range</span></label>
+                            </div>
+                            <p class="small text-info" translate>Move the sliders to define a range</p>
+
                         </div>
-                        <p class="small text-info" translate>Move the sliders to define a range</p>
+                        <div class="col-sm3 col-lg-3">
+                            <strong>
+                                <div translate>Payment Types</div>
+                            </strong>
+                            <div class="checkbox" data-ng-repeat="pType in typesText">
+                                <label>
+                                    <input type="checkbox" name="pType"
+                                           ng-model="pType.checked"/>{{pType.text}}
+                                </label>
+                            </div>
+
+                        </div>
+                        <!--div class="col-sm3 col-lg-3">
+                            <strong><div translate>Federal State</div></strong>
+                           <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
+                               <option value="">-</option>
+                           </select>
+                        </div-->
+                    </div>
+
+                </div>
+            </div>
+            <!--<div ng-show="org">
+                <h3><a href="#" class="label label-success" ng-click="clearDetails()">{{org.name}} <span class="glyphicon glyphicon-remove-circle"></span></a></h3>
+            </div>
+            <!--div class="text-center query bg-primary">
+                <div class="btn-group">
+                    <input id="searchinput" placeholder="Filter"
+                           ng-model="filter" type="search" class="searchinput form-control">
+                    <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
+                </div>
+            </div-->
+            <br/>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
+                    </div>
+
+                    <div ng-show="error" class="alert alert-warning" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        <span translate>Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="sankeyRow">
+                <div class="col-md-6">
+                    <span>{{organisationsLabel}}:</span>
+                    <oi-select class="multiselectDropdown"
+                               oi-options="item.name for item in allOrganisations track by item.name"
+                               ng-model="selectedOrganisations"
+                               multiple
+                               placeholder="{{organisationsLabel}}"
+                               id="multiselectOrg"
+                    >
+
+                    </oi-select>
+                </div>
+                <div class="col-md-6">
+                    <span>{{mediaLabel}}:</span>
+                    <oi-select class="multiselectDropdown"
+                               oi-options="item.name for item in allMedia track by item.name"
+                               ng-model="selectedMedia"
+                               multiple
+                               placeholder="{{mediaLabel}}"
+                               id="multiselectMedia"
+                    ></oi-select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
+                    <div data-tpa-sankey data="flows" id="mychart"
+                         prog="progress" node-click="showDetails" link-click="showFlowDetails">
 
                     </div>
-                    <div class="col-sm3 col-lg-3">
-                        <strong><div translate>Payment Types</div></strong>
-                        <div class="checkbox" data-ng-repeat="pType in typesText">
-                            <label>
-                                <input type="checkbox" name="pType"
-                                       ng-model="pType.checked"/>{{pType.text}}
-                            </label>
-                        </div>
 
-                    </div>
-                    <!--div class="col-sm3 col-lg-3">
-                        <strong><div translate>Federal State</div></strong>
-                       <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
-                           <option value="">-</option>
-                       </select>
-                    </div-->
                 </div>
-
-            </div>
-        </div>
-        <!--<div ng-show="org">
-            <h3><a href="#" class="label label-success" ng-click="clearDetails()">{{org.name}} <span class="glyphicon glyphicon-remove-circle"></span></a></h3>
-        </div>
-        <!--div class="text-center query bg-primary">
-            <div class="btn-group">
-                <input id="searchinput" placeholder="Filter"
-                       ng-model="filter" type="search" class="searchinput form-control">
-                <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
-            </div>
-        </div-->
-        <br/>
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-                <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
-                </div>
-
-                <div ng-show="error" class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    <span translate>Your query returned {{error.length}} entries, which is more than the allowed maximum of {{maxNodes}}. Please use the filter to restrict the number of results.</span>
-                </div>
-                <div ng-hide="error" class="alert alert-info" role="alert">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>Click on the rectangular boxes on either side of the chart to get more information on a particular organization.</span>
-                </div>
-                <div ng-hide="error" class="alert alert-info" role="alert">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected.</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <span>{{organisationsLabel}}:</span>
-                <oi-select class="multiselectDropdown"
-                           oi-options="item.name for item in allOrganisations track by item.name"
-                           ng-model="selectedOrganisations"
-                           multiple
-                           placeholder="{{organisationsLabel}}"
-                >
-
-                </oi-select></div>
-            <div class="col-md-6">
-                <span>{{mediaLabel}}:</span>
-                <oi-select class="multiselectDropdown"
-                           oi-options="item.name for item in allMedia track by item.name"
-                           ng-model="selectedMedia"
-                           multiple
-                           placeholder="{{mediaLabel}}"
-                ></oi-select></div>
-        </div>
-        <div class="row">
-            <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
-                <div data-tpa-sankey data="flows" id="mychart"
-                     prog="progress" node-click="showDetails" link-click="showFlowDetails">
-                </div>
-            </div>
-
-        </div>
-        <div class="row" data-ng-show="flowData.length>0">
+                <div class="row" data-ng-show="flowData.length>0">
 
             <h4 translate>Tabular Representation</h4>
             <div class="table-responsive">

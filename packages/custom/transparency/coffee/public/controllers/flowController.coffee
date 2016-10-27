@@ -8,6 +8,37 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     dataPromise = $q.defer()
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+
+    # Method for setting the intro-options (e.g. after translations)
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#multiselectOrg')
+                    intro: gettextCatalog.getString 'You can add organisations to the flow. Go into detail by clicking on the rectangular box.'
+                },
+                {
+                    element: document.querySelector('#multiselectMedia')
+                    intro: gettextCatalog.getString 'You can add media to the flow too. Click on the rectangular box for details.'
+                },
+                {
+                    element: document.querySelector('#sankeyRow')
+                    intro: gettextCatalog.getString 'If you neither choose an organisation nor a media the top spender based on your chosen payment types and period is selected.'
+                },
+                {
+                    element: document.querySelector('#sankeyRow')
+                    intro: gettextCatalog.getString 'To discover the flow in detail just click on the flow between an organisation and a media entry.'
+                }
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
+
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -77,6 +108,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         params
 
 
+    # init the introOptions and call the method
+    $scope.IntroOptions = null;
+    setIntroOptions()
+
     toArray = (value) ->
         if typeof value is 'string'
             value.split ','
@@ -120,6 +155,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+        setIntroOptions()
 
 
     $scope.$on 'gettextLanguageChanged', translate

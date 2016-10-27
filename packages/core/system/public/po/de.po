@@ -179,7 +179,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:143
+#: controllers/flowController.js:169 controllers/flowDetailController.js:105
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -198,6 +198,10 @@ msgstr "Gruppe aktivieren"
 #: views/events.html:13 views/events.html:61
 msgid "End date"
 msgstr "Enddatum"
+
+#: controllers/flowController.js:35
+msgid "End tour"
+msgstr "Tour beenden"
 
 #: views/upload.html:10 views/uploadOrganisation.html:10
 #: views/uploadZipCode.html:10
@@ -416,6 +420,10 @@ msgstr "Gemeinde"
 msgid "Nationwide"
 msgstr "Bundesweit"
 
+#: controllers/flowController.js:32
+msgid "Next info"
+msgstr "Nächste Info"
+
 #: controllers/groupingController.js:28
 msgid "No"
 msgstr "Nein"
@@ -537,6 +545,10 @@ msgstr "Zeitraum"
 msgid "Policy-relevant"
 msgstr "Politiknah"
 
+#: controllers/flowController.js:33
+msgid "Previous info"
+msgstr "Vorherige Info"
+
 #: views/overview.html:18
 msgid "Quarter"
 msgstr "Quartal"
@@ -582,6 +594,10 @@ msgstr "Einstellungen"
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
+#: controllers/flowController.js:34
+msgid "Skip info"
+msgstr "Info überspringen"
+
 #: views/impress.html:21
 msgid "Source of Data"
 msgstr "Datenherkunft"
@@ -626,6 +642,14 @@ msgid ""
 msgstr ""
 "Damit möchte diese Web-Seite dazu beitragen, Open Government Initiativen in "
 "Österreich populärer zu machen"
+
+#: controllers/flowController.js:26
+msgid ""
+"To discover the flow in detail just click on the flow between an "
+"organisation and a media entry."
+msgstr ""
+"Um den Geldfluss im Detail zu entdecken, klicken Sie auf den Geldfluss "
+"zwischen Organisation und Medium."
 
 #: views/top.html:55
 msgid "Top"
@@ -720,7 +744,22 @@ msgstr "Innerhalb des Bundeslandes"
 msgid "Yes"
 msgstr "Ja"
 
-#: views/flow.html:69
+#: controllers/flowController.js:20
+msgid ""
+"You can add media to the flow too. Click on the rectangular box for details."
+msgstr ""
+"Sie können auch Medien zum Diagramm hinzufügen. Klicken Sie auf das Rechteck "
+"für mehr Details."
+
+#: controllers/flowController.js:17
+msgid ""
+"You can add organisations to the flow. Go into detail by clicking on the "
+"rectangular box."
+msgstr ""
+"Sie können weitere Organisationen zum Diagramm hinzufügen. Klicken Sie auf "
+"das Rechteck für mehr Details."
+
+#: views/flow.html:81
 msgid ""
 "Your are currently viewing the details of {{org.name}} together with a text "
 "filter. This limits the results! Please consider clearing the filter to see "
@@ -782,3 +821,7 @@ msgstr "§31 ORF-G (Gebühren)"
 #: controllers/flowController.js:394
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#: views/top.html:45
+msgid "{{pType.text}}"
+msgstr "{{pType.text}}"
