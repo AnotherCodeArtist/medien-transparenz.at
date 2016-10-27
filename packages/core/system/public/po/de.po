@@ -47,7 +47,8 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:28 views/flow.html:125
+#: controllers/flowController.js:436 controllers/flowController.js:56
+#: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr "Betrag"
 
@@ -246,6 +247,10 @@ msgstr "Bundesland"
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
+#: views/flowdetail.html:12
+msgid "Flow in detail"
+msgstr "Zahlungsfluss im Detail"
+
 #: views/uploadOrganisation.html:76
 msgid "Foundation"
 msgstr "Stiftung"
@@ -253,10 +258,6 @@ msgstr "Stiftung"
 #: views/uploadOrganisation.html:80
 msgid "Fund"
 msgstr "Fonds"
-
-#: views/flowdetail.html:12
-msgid "Flow in detail"
-msgstr "Zahlungsfluss im Detail"
 
 #: views/about.html:60
 msgid "Further development of this Site is sponsored by netidee"
@@ -392,7 +393,7 @@ msgstr "Medientransparenz Austria"
 msgid "Ministry"
 msgstr "Ministerium"
 
-#: views/flow.html:14 views/flowdetail.html:9
+#: views/flow.html:14 views/flowdetail.html:11
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
@@ -446,13 +447,12 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:427 controllers/groupingController.js:21
-#: views/uploadOrganisation.html:57
+#: controllers/flowController.js:507 controllers/flowDetailController.js:10
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:112
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:221 controllers/flowController.js:91
-#: views/flow.html:123
+#: controllers/flowController.js:119 controllers/flowController.js:235
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -502,8 +502,6 @@ msgid "Payer"
 msgstr "Zahler"
 
 #: controllers/flowController.js:55 controllers/flowDetailController.js:11
-#: controllers/flowController.js:27 controllers/flowDetailController.js:11
-#: views/flow.html:124
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
@@ -622,7 +620,7 @@ msgstr "Startdatum"
 msgid "Styria"
 msgstr "Steiermark"
 
-#: views/flow.html:123
+#: views/flow.html:124
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
