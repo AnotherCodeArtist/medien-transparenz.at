@@ -124,7 +124,7 @@ msgstr "Hintergrund"
 msgid "Burgenland"
 msgstr "Burgenland"
 
-#: views/events.html:76 views/grouping.html:119
+#: views/events.html:86 views/grouping.html:119
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -160,7 +160,7 @@ msgstr "Unternehmen"
 msgid "Contact Person"
 msgstr "Ansprechpartner"
 
-#: views/events.html:74 views/grouping.html:120
+#: views/events.html:84 views/grouping.html:120
 msgid "Create"
 msgstr "Anlegen"
 
@@ -177,7 +177,7 @@ msgstr "Gruppe dekativieren"
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
-#: views/events.html:22 views/grouping.html:28
+#: views/events.html:25 views/grouping.html:28
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -189,7 +189,7 @@ msgstr "Bildung"
 msgid "Enable Group"
 msgstr "Gruppe aktivieren"
 
-#: views/events.html:13 views/events.html:61
+#: views/events.html:13 views/events.html:67
 msgid "End date"
 msgstr "Enddatum"
 
@@ -545,6 +545,10 @@ msgstr "Bitte wählen sie zumindest eine Organisation oder ein Medium aus."
 msgid "Policy-relevant"
 msgstr "Politiknah"
 
+#: views/events.html:22 views/events.html:81
+msgid "Predictable"
+msgstr "Vorhersehbar"
+
 #: controllers/flowController.js:35
 msgid "Previous info"
 msgstr "Vorherige Info"
@@ -562,7 +566,7 @@ msgstr "Empfänger"
 msgid "Region"
 msgstr "Region"
 
-#: views/events.html:25 views/grouping.html:137 views/grouping.html:31
+#: views/events.html:28 views/grouping.html:137 views/grouping.html:31
 msgid "Remove"
 msgstr "Löschen"
 
@@ -578,7 +582,7 @@ msgstr "Ergebnis des Uploads"
 msgid "Salzburg"
 msgstr "Salzburg"
 
-#: views/events.html:75 views/grouping.html:124
+#: views/events.html:85 views/grouping.html:124
 msgid "Save"
 msgstr "Speichern"
 
@@ -612,7 +616,7 @@ msgstr "Zahler"
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
-#: views/events.html:10 views/events.html:57
+#: views/events.html:10 views/events.html:63
 msgid "Start date"
 msgstr "Startdatum"
 

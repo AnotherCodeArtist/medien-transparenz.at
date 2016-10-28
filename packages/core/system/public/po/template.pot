@@ -73,7 +73,7 @@ msgstr ""
 msgid "Burgenland"
 msgstr ""
 
-#: views/events.html:76
+#: views/events.html:86
 #: views/grouping.html:119
 msgid "Cancel"
 msgstr ""
@@ -106,7 +106,7 @@ msgstr ""
 msgid "Contact Person"
 msgstr ""
 
-#: views/events.html:74
+#: views/events.html:84
 #: views/grouping.html:120
 msgid "Create"
 msgstr ""
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Display _MENU_ records"
 msgstr ""
 
-#: views/events.html:22
+#: views/events.html:25
 #: views/grouping.html:28
 msgid "Edit"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "Enable Group"
 msgstr ""
 
 #: views/events.html:13
-#: views/events.html:61
+#: views/events.html:67
 msgid "End date"
 msgstr ""
 
@@ -484,6 +484,11 @@ msgstr ""
 msgid "Policy-relevant"
 msgstr ""
 
+#: views/events.html:22
+#: views/events.html:81
+msgid "Predictable"
+msgstr ""
+
 #: controllers/flowController.js:35
 msgid "Previous info"
 msgstr ""
@@ -503,7 +508,7 @@ msgstr ""
 msgid "Region"
 msgstr ""
 
-#: views/events.html:25
+#: views/events.html:28
 #: views/grouping.html:137
 #: views/grouping.html:31
 msgid "Remove"
@@ -522,7 +527,7 @@ msgstr ""
 msgid "Salzburg"
 msgstr ""
 
-#: views/events.html:75
+#: views/events.html:85
 #: views/grouping.html:124
 msgid "Save"
 msgstr ""
@@ -560,7 +565,7 @@ msgid "Spender/Recipient"
 msgstr ""
 
 #: views/events.html:10
-#: views/events.html:57
+#: views/events.html:63
 msgid "Start date"
 msgstr ""
 

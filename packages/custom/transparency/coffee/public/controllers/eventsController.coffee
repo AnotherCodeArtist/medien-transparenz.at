@@ -10,6 +10,10 @@ app.controller 'EventsController',['$scope', 'TPAService', 'gettextCatalog', ($s
 
                for event in $scope.events
                     event.region = gettextCatalog.getString(event.region)
+                    if event.predictable
+                         event.predictable = gettextCatalog.getString "Yes"
+                    else
+                         event.predictable = gettextCatalog.getString "No"
           )
 
      $scope.loadTags = (query) ->
@@ -122,6 +126,7 @@ app.controller 'EventsController',['$scope', 'TPAService', 'gettextCatalog', ($s
                numericEndDate: 0
                region: $scope.regions[0]
                tags: []
+               predictable: true
           }
           $scope.event.startDate.setHours 0,0,0,0
           updateTable()
