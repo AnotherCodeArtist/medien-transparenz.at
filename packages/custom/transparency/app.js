@@ -132,7 +132,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/datatables.net-buttons-bs/js/buttons.bootstrap.js',{weight:+1});
   //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/dataTables.buttons.js',{weight:-2});
   //Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/buttons.bootstrap.js',{weight:-2});
-  Transparency.aggregateAsset('js', '../js/buttons.html5.js',{global:true,weight:-1});
+  Transparency.aggregateAsset('js', '../lib/datatables.net-buttons/js/buttons.html5.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/d3-plugins-sankey/sankey.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/angular-datatables.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angularjs-slider/dist/rzslider.js',{weight:-2});

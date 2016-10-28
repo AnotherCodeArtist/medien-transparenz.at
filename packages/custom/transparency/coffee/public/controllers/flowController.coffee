@@ -218,7 +218,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     if flowDatum.media is 'Other media'
                         flowDatum.media = gettextCatalog.getString flowDatum.media
                 $scope.flowData = flowData
-                #console.log "resolve dataPromise after update2"
+                if dataPromise.promise.$$state.status == 1
+                    dataPromise = $q.defer()
+                    $scope.dtInstance.reloadData()
                 dataPromise.resolve()
                 $scope.flows = buildNodes filterData flowData
                 #checkMaxLength(data)
@@ -394,7 +396,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
         $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
-            update() if not $scope.isDetails
+            if not $scope.isDetails
+                update()
             $scope.isDetails = false;
 
         #$scope.$watch('slider.from',change,true)
