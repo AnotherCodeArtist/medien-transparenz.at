@@ -141,7 +141,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
-  Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js',{global:true});
+  Transparency.aggregateAsset('js', '../lib/oi.select/dist/select-tpls.js',{global:true});
   //Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/angular-intro.js/src/angular-intro.js',{weight:-1});
 
