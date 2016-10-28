@@ -102,7 +102,6 @@ Transparency.register(function(app, auth, database) {
 
 
   Transparency.aggregateAsset('css', 'transparency.css');
-  Transparency.aggregateAsset('css', '../lib/font-awesome/css/font-awesome.css');
   Transparency.aggregateAsset('css', '../lib/datatables.net-bs/css/dataTables.bootstrap.css');
   Transparency.aggregateAsset('css', '../lib/datatables.net-buttons-bs/css/buttons.bootstrap.css');
   //Transparency.aggregateAsset('css', '../lib/datatables.net-dt/css/jquery.dataTables.css');
@@ -142,7 +141,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',{weight:-2});
   Transparency.aggregateAsset('js', '../lib/angular-nvd3/dist/angular-nvd3.js',{weight:-1});
   Transparency.aggregateAsset('js', '../lib/ng-tags-input/ng-tags-input.min.js', {weight:-6});
-  Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js');
+  Transparency.aggregateAsset('js', '../lib/oi.select/dist/select.min.js',{global:true});
   //Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/angular-intro.js/src/angular-intro.js',{weight:-1});
 
