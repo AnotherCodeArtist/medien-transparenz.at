@@ -14,7 +14,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
         #console.log element.css()
         height = Math.max 500, $scope.data.nodes.length*20
         h = height + margin.top + margin.bottom
-        formatNumber = d3.format(",.0f")
+        formatNumber = (n) -> n.toLocaleString($scope.language,{minimumFractionDigits:2,maximumFractionDigits:2})
         format = (d) -> formatNumber(d) + " &euro;"
         color = d3.scale.category20()
         if not attrs.id
@@ -40,6 +40,8 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .style("opacity", 0)
 
         path = sankey.link()
+
+
 
         updateDiagram = (oldValue,newValue)->
             svg.selectAll("g").remove()
@@ -76,7 +78,9 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                     d.source.name = gettextCatalog.getString(d.source.name)
                 else if d.target.name is 'Other media'
                     d.target.name = gettextCatalog.getString(d.target.name)
-                div.html("""#{d.source.name} (#{d3.format(",.2f")((d.value/d.source.value)*100)}%) → #{d.target.name} (#{d3.format(",.2f")((d.value/d.target.value)*100)}%)<br/>#{(format(d.value))} (§#{d.type})""")
+                div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})
+                            <div><i class="fa fa-bar-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
+                         """)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", (d) ->
@@ -122,7 +126,9 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .attr('class','tooltip node')
                 if d.name is 'Other organisations' or d.name is 'Other media'
                     d.name = gettextCatalog.getString(d.name)
-                div.html("""#{d.name} (#{d.type})<br/>#{format(d.value)}<br/>#{d3.format(",.2f")((d.value/$scope.data.sum)*100)}%""")
+                div.html("""<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>#{(formatNumber(d.value/$scope.data.sum*100))}%
+                        <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
+                         """)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", (d) ->

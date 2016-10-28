@@ -290,9 +290,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.dtOptions = {}
     $scope.dtOptions = DTOptionsBuilder.fromFnPromise( ->
         defer = $q.defer()
-        #console.log "register dataPromise then-handler"
         dataPromise.promise.then (result) ->
-            #console.log "dataPromise got resolved"
             defer.resolve($scope.flowData);
         defer.promise
     )

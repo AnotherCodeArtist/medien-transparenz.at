@@ -61,7 +61,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.pieData.push {key: gettextCatalog.getString("Others"), y: $scope.top.all - topSum}
 
     $scope.toolTipContentFunction = (e) ->
-        link = if e.index < $scope.rank then "<br/>"+gettextCatalog.getString("Click for Details") else ""
+        link = if e.index < $scope.rank then '<br/><i class="fa fa-line-chart" aria-hidden="true"></i> '+gettextCatalog.getString("Click for Details") else ""
         numberOptions = {style:'currency',currency:'EUR'}
         """<div class='chartToolTip'>
                 <h3>#{e.data.key}</h3>
