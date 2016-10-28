@@ -2,11 +2,43 @@
 
 app = angular.module 'mean.transparency'
 
-app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder', '$rootScope', '$timeout',
-($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,$rootScope, $timeout) ->
-
+app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
+($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
+    #console.log "initialize dataPromise"
+    dataPromise = $q.defer()
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    $scope.init = 'init';
+    # Method for setting the intro-options (e.g. after translations)
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#multiselectOrg')
+                    intro: gettextCatalog.getString 'You can add organisations to the flow. Go into detail by clicking on the rectangular box.'
+                },
+                {
+                    element: document.querySelector('#multiselectMedia')
+                    intro: gettextCatalog.getString 'You can add media to the flow too. Click on the rectangular box for details.'
+                },
+                {
+                    element: document.querySelector('#sankeyRow')
+                    intro: gettextCatalog.getString 'Per default the top spender based on your chosen payment types and period is selected.'
+                },
+                {
+                    element: document.querySelector('#sankeyRow')
+                    intro: gettextCatalog.getString 'To discover the flow in detail just click on the flow between an organisation and a media entry.'
+                }
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
+
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -75,27 +107,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
         params
 
-    $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
-        [
-            'colvis',
-            'excel',
-            'print'
-        ]
-    )
 
-
-    angular.extend $scope.dtOptions,
-        paginationType: 'simple'
-        paging:   true
-        ordering: true
-        info:     true
-        searching: false
-        language:
-            paginate:
-                previous: gettextCatalog.getString('previous')
-                next: gettextCatalog.getString('next')
-            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
-            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
+    # init the introOptions and call the method
+    $scope.IntroOptions = null;
+    setIntroOptions()
 
     toArray = (value) ->
         if typeof value is 'string'
@@ -140,6 +155,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+        setIntroOptions()
 
 
     $scope.$on 'gettextLanguageChanged', translate
@@ -158,6 +174,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
+        update()
         window.scrollTo 0,0
         
     $scope.showFlowDetails = (node) ->
@@ -179,14 +196,14 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     update = ->
-        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping
+        if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'
+            $scope.init = 'preselected'
             TPAService.top parameters()
             .then (res) ->
                 $scope.selectedOrganisations = [{name: res.data.top[0].organisation}]
-                return
             return
 
-        console.log "Starting update: " + Date.now()
+        #console.log "Starting update: " + Date.now()
         startLoading()
         if $scope.selectedOrganisations or $scope.selectedMedia
             TPAService.filteredflows(parameters())
@@ -194,7 +211,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 stopLoading()
                 #console.log "Got result from Server: " + Date.now()
                 $scope.error = null
-                init = true
                 flowData = res.data
                 for flowDatum in flowData
                     if flowDatum.organisation is 'Other organisations'
@@ -202,6 +218,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     if flowDatum.media is 'Other media'
                         flowDatum.media = gettextCatalog.getString flowDatum.media
                 $scope.flowData = flowData
+                if dataPromise.promise.$$state.status == 1
+                    dataPromise = $q.defer()
+                    $scope.dtInstance.reloadData()
+                dataPromise.resolve()
                 $scope.flows = buildNodes filterData flowData
                 #checkMaxLength(data)
                 #console.log "Updated Data Model: " + Date.now()
@@ -224,6 +244,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.flowData = []
                 $scope.flows = nodes:[],links:[]
                 $scope.error = res.data
+                #console.log "resolve dataPromise after exception"
+                dataPromise.resolve()
 
 
     checkMaxLength = (data) ->
@@ -265,10 +287,64 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
+    $scope.dtOptions = {}
+    $scope.dtOptions = DTOptionsBuilder.fromFnPromise( ->
+        defer = $q.defer()
+        #console.log "register dataPromise then-handler"
+        dataPromise.promise.then (result) ->
+            #console.log "dataPromise got resolved"
+            defer.resolve($scope.flowData);
+        defer.promise
+    )
+    .withPaginationType('full_numbers')
+    .withButtons(['copy','csv','excel'])
+    .withBootstrap()
+
+    angular.extend $scope.dtOptions,
+        language:
+            paginate:
+                previous: gettextCatalog.getString('previous')
+                next: gettextCatalog.getString('next')
+                first: gettextCatalog.getString('first')
+                last: gettextCatalog.getString('last')
+            search: gettextCatalog.getString('search')
+            info: gettextCatalog.getString('Showing page _PAGE_ of _PAGES_')
+            lengthMenu: gettextCatalog.getString "Display _MENU_ records"
+
+    getExplanation = (paymentType) -> switch paymentType
+        when 2 then gettextCatalog.getString('§2 MedKF-TG (Media Cooperations)')
+        when 4 then gettextCatalog.getString('§4 MedKF-TG (Funding)')
+        when 31 then gettextCatalog.getString('§31 ORF-G (Charges)')
+
+    $scope.dtColumns = [
+        DTColumnBuilder.newColumn('organisation').withTitle(gettextCatalog.getString('Payer'))
+        DTColumnBuilder.newColumn('media').withTitle(gettextCatalog.getString('Recipient')),
+        DTColumnBuilder.newColumn('transferType').withTitle(gettextCatalog.getString('Type'))
+        .renderWith((paragraph,type)->
+            if type is 'display'
+                getExplanation(paragraph)
+            else
+                paragraph
+        )
+        DTColumnBuilder.newColumn('amount').withTitle(gettextCatalog.getString('Amount'))
+        .renderWith((amount,type) ->
+            if type is 'display'
+                amount.toLocaleString($rootScope.language,{currency: "EUR", maximumFractionDigits:2,minimumFractionDigits:2})
+            else
+                amount)
+        .withClass('text-right')
+    ]
+
+    $scope.dtInstance = {}
+
+
 
     change = (oldValue,newValue) ->
         console.log "Change: " + Date.now()
-        update() if (oldValue isnt newValue)
+        if (oldValue isnt newValue)
+            dataPromise = $q.defer()
+            $scope.dtInstance.reloadData()
+            update()
 
     filterThreshold = "NoValue"
     $scope.$watch 'filter', (newValue,oldValue) ->
@@ -320,7 +396,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
         $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
-            update()
+            if not $scope.isDetails
+                update()
+            $scope.isDetails = false;
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)

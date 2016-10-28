@@ -20,6 +20,9 @@
                     Tags
                 </th>
                 <th translate>
+                    Predictable
+                </th>
+                <th translate>
                     Edit
                 </th>
                 <th translate>
@@ -33,6 +36,9 @@
                 <td>{{event.region}}</td>
                 <td>
                     <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
+                </td>
+                <td>
+                    {{event.predictable}}
                 </td>
                 <td>
                     <button ng-click="editEvent(event._id)" class="btn btn-info">
@@ -70,6 +76,10 @@
                     <tags-input ng-model="event.tags" placeholder="Tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
+                </div>
+                <div class="form-group">
+                    <label for="eventPredictable" translate>Predictable</label>
+                    <input id="eventPredictable" type="checkbox" ng-model="event.predictable">
                 </div>
                 <button ng-disabled="eventForm.$invalid" ng-show="!editEnabled" ng-click="createEvent()" type="submit" class="btn btn-primary" translate>Create</button>
                 <button ng-disabled="eventForm.$invalid" ng-show="editEnabled" ng-click="updateEvent()" type="submit" class="btn btn-primary" translate>Save</button>
