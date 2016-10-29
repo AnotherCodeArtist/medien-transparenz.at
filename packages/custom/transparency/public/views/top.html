@@ -20,8 +20,11 @@
                         <div class="col-sm-6 col-lg-6">
                             <div id="topSlider">
                                 <strong>
-                                    <div translate>Periods</div>
+                                    <div><span translate>Periods</span> <sup><a href ng-click="TopIntro(1);">?</a></sup>
+                                    </div>
                                 </strong>
+
+
                                 <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
                                           rz-slider-options="slider.options"></rzslider>
                             </div>
@@ -30,7 +33,8 @@
                                 <div class="checkbox">
                                     <label><input id="fixRange" type="checkbox"
                                                   ng-model="slider.options.draggableRangeOnly"/><span
-                                            translate>Fix slider range</span></label>
+                                            translate>Fix slider range</span></label> <sup><a href
+                                                                                              ng-click="TopIntro(2);">?</a></sup>
                                 </div>
                             </div>
                             <div id="grouping">
@@ -39,13 +43,16 @@
                                         <input type="checkbox" data-ng-model="includeGroupings">
                                         <strong><span translate>Grouping</span></strong>
                                     </label>
+                                    <sup><a href ng-click="TopIntro(3);">?</a></sup>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-2 col-lg-2" id="spenderRecipient">
                             <strong>
-                                <div translate>Spender/Recipient</div>
+                                <div><span translate>Spender/Recipient</span> <sup><a href ng-click="TopIntro(4);">?</a></sup>
+                                </div>
                             </strong>
+
                             <div class="radio" data-ng-repeat="orgType in orgTypes">
                                 <label>
                                     <input type="radio" id="{{orgType.value}}" name="t"
@@ -57,7 +64,8 @@
                         <div class="col-sm-5 col-lg-5">
                             <div id="paymentTypes">
                                 <strong>
-                                    <div translate>Payment Types</div>
+                                    <div><span translate>Payment Types</span> <sup><a href ng-click="TopIntro(5);">?</a></sup>
+                                    </div>
                                 </strong>
 
                                 <div class="checkbox" data-ng-repeat="pType in typesText">
@@ -69,7 +77,8 @@
                             </div>
                             <div id="fedStateSelection">
                                 <strong>
-                                    <div translate>Federal State</div>
+                                    <div><span translate>Federal State</span> <sup><a href ng-click="TopIntro(6);">?</a></sup>
+                                    </div>
                                 </strong>
                                 <select ng-model="selectedFederalState"
                                         ng-options="state.name for state in federalStates track by state.iso"
@@ -80,7 +89,9 @@
                         </div>
                         <div class="col-sm-1 col-lg-1">
                             <div id="rank">
-                                <div translate>Top</div>
+                                <div><span translate>Top</span> <sup><a href ng-click="TopIntro(7);">?</a></sup>
+                                </div>
+
                                 <select data-ng-model="rank"
                                         ng-options="rank for rank in ranks"/>
                             </div>
