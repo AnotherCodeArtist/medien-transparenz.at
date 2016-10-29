@@ -185,6 +185,7 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
+        transfer.organisationType = determineOrganisationType transfer.organisation
         #Save reference
         Organisation.findOne({ 'name': transfer.organisation }, 'name federalState')
         .then (results) ->
