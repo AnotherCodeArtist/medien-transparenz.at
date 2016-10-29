@@ -14,6 +14,21 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.IntroOptions =
             steps: [
                 {
+                    element: document.querySelector('#flowSettings')
+                    intro: gettextCatalog.getString 'It is possible to customize the pie chart. To do so, use the settings.'
+                },
+                {
+                    element: document.querySelector('#flowSlider')
+                    intro: gettextCatalog.getString 'Move the sliders to define a range.'
+                }, {
+                    element: document.querySelector('#fixSliderRange')
+                    intro: gettextCatalog.getString 'Fix slider range. With that it is possible to keep the range constant.'
+                },
+                {
+                    element: document.querySelector('#paymentTypes')
+                    intro: gettextCatalog.getString 'Transfers are divided in different payment types. Select the types to display.'
+                },
+                {
                     element: document.querySelector('#multiselectOrg')
                     intro: gettextCatalog.getString 'You can add organisations to the flow. Go into detail by clicking on the rectangular box.'
                 },
@@ -176,7 +191,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         ###
         update()
         window.scrollTo 0,0
-        
+
     $scope.showFlowDetails = (node) ->
         console.log(node);
         if (node.source.type is "o" and node.target.type is "m")

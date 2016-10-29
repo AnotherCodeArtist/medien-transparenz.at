@@ -30,8 +30,8 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers/flowController.js:440
-#: controllers/flowController.js:56
+#: controllers/flowController.js:452
+#: controllers/flowController.js:68
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr ""
@@ -91,10 +91,12 @@ msgid "City"
 msgstr ""
 
 #: controllers/topEntriesController.js:105
+#: directives/sankeyDirective.js:68
+#: directives/sankeyDirective.js:94
 msgid "Click for Details"
 msgstr ""
 
-#: views/top.html:93
+#: views/top.html:103
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
@@ -119,7 +121,7 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers/flowController.js:420
+#: controllers/flowController.js:432
 #: controllers/flowDetailController.js:105
 #: controllers/topEntriesController.js:281
 msgid "Display _MENU_ records"
@@ -148,7 +150,7 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
-#: controllers/flowController.js:37
+#: controllers/flowController.js:49
 #: controllers/topEntriesController.js:163
 msgid "End tour"
 msgstr ""
@@ -186,7 +188,7 @@ msgid ""
 msgstr ""
 
 #: views/list.html:12
-#: views/top.html:72
+#: views/top.html:78
 msgid "Federal State"
 msgstr ""
 
@@ -194,12 +196,13 @@ msgstr ""
 msgid "Federal state"
 msgstr ""
 
-#: views/flow.html:39
+#: views/flow.html:42
 #: views/index.html:27
-#: views/top.html:32
+#: views/top.html:33
 msgid "Fix slider range"
 msgstr ""
 
+#: controllers/flowController.js:25
 #: controllers/topEntriesController.js:139
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr ""
@@ -246,7 +249,7 @@ msgid "Group type"
 msgstr ""
 
 #: views/grouping.html:3
-#: views/top.html:40
+#: views/top.html:42
 msgid "Grouping"
 msgstr ""
 
@@ -286,11 +289,12 @@ msgstr ""
 msgid "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:"
 msgstr ""
 
+#: controllers/flowController.js:19
 #: controllers/topEntriesController.js:133
 msgid "It is possible to customize the pie chart. To do so, use the settings."
 msgstr ""
 
-#: controllers/topEntriesController.js:154
+#: controllers/topEntriesController.js:151
 msgid "It is possible to show the chart for a specific federal state."
 msgstr ""
 
@@ -321,9 +325,9 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers/flowController.js:118
-#: controllers/flowController.js:234
-#: controllers/flowController.js:510
+#: controllers/flowController.js:130
+#: controllers/flowController.js:246
+#: controllers/flowController.js:522
 #: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 msgid "Media"
@@ -342,11 +346,11 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views/flow.html:41
 #: views/index.html:29
 msgid "Move the sliders to define a range"
 msgstr ""
 
+#: controllers/flowController.js:22
 #: controllers/topEntriesController.js:136
 msgid "Move the sliders to define a range."
 msgstr ""
@@ -359,7 +363,7 @@ msgstr ""
 msgid "Nationwide"
 msgstr ""
 
-#: controllers/flowController.js:34
+#: controllers/flowController.js:46
 #: controllers/topEntriesController.js:160
 msgid "Next info"
 msgstr ""
@@ -398,15 +402,15 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: controllers/flowController.js:511
+#: controllers/flowController.js:523
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
 #: views/uploadOrganisation.html:112
 msgid "Organisation"
 msgstr ""
 
-#: controllers/flowController.js:119
-#: controllers/flowController.js:235
+#: controllers/flowController.js:131
+#: controllers/flowController.js:247
 msgid "Organisations"
 msgstr ""
 
@@ -437,11 +441,11 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:100
 msgid "Other media"
 msgstr ""
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:100
 msgid "Other organisations"
 msgstr ""
 
@@ -457,18 +461,18 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: controllers/flowController.js:434
+#: controllers/flowController.js:446
 msgid "Payer"
 msgstr ""
 
-#: controllers/flowController.js:55
+#: controllers/flowController.js:67
 #: controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr ""
 
-#: views/flow.html:46
+#: views/flow.html:51
 #: views/index.html:32
-#: views/top.html:60
+#: views/top.html:65
 msgid "Payment Types"
 msgstr ""
 
@@ -488,7 +492,7 @@ msgstr ""
 msgid "Payments by Transfer Type"
 msgstr ""
 
-#: controllers/flowController.js:25
+#: controllers/flowController.js:37
 msgid "Per default the top spender based on your chosen payment types and period is selected."
 msgstr ""
 
@@ -498,7 +502,7 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
-#: views/flow.html:86
+#: views/flow.html:94
 msgid "Please select at least one organisation or media."
 msgstr ""
 
@@ -511,7 +515,7 @@ msgstr ""
 msgid "Predictable"
 msgstr ""
 
-#: controllers/flowController.js:35
+#: controllers/flowController.js:47
 #: controllers/topEntriesController.js:161
 msgid "Previous info"
 msgstr ""
@@ -520,7 +524,7 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/flowController.js:434
+#: controllers/flowController.js:446
 #: controllers/topEntriesController.js:173
 #: controllers/topEntriesController.js:252
 msgid "Recipient"
@@ -559,7 +563,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: controllers/topEntriesController.js:151
+#: controllers/topEntriesController.js:154
 msgid "Select the numbers of elements in the pie chart"
 msgstr ""
 
@@ -568,13 +572,13 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:419
+#: controllers/flowController.js:431
 #: controllers/flowDetailController.js:104
 #: controllers/topEntriesController.js:280
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
-#: controllers/flowController.js:36
+#: controllers/flowController.js:48
 #: controllers/topEntriesController.js:162
 msgid "Skip info"
 msgstr ""
@@ -588,7 +592,7 @@ msgstr ""
 msgid "Spender"
 msgstr ""
 
-#: views/top.html:47
+#: views/top.html:50
 msgid "Spender/Recipient"
 msgstr ""
 
@@ -601,7 +605,7 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:124
+#: views/flow.html:132
 msgid "Tabular Representation"
 msgstr ""
 
@@ -625,11 +629,11 @@ msgstr ""
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
-#: controllers/flowController.js:28
+#: controllers/flowController.js:40
 msgid "To discover the flow in detail just click on the flow between an organisation and a media entry."
 msgstr ""
 
-#: views/top.html:83
+#: views/top.html:91
 msgid "Top"
 msgstr ""
 
@@ -642,7 +646,7 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views/overview.html:28
-#: views/top.html:95
+#: views/top.html:105
 msgid "Total"
 msgstr ""
 
@@ -662,11 +666,12 @@ msgstr ""
 msgid "Total amount of all entries"
 msgstr ""
 
+#: controllers/flowController.js:28
 #: controllers/topEntriesController.js:148
 msgid "Transfers are divided in different payment types. Select the types to display."
 msgstr ""
 
-#: controllers/flowController.js:434
+#: controllers/flowController.js:446
 #: views/grouping.html:16
 msgid "Type"
 msgstr ""
@@ -728,41 +733,41 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: controllers/flowController.js:22
+#: controllers/flowController.js:34
 msgid "You can add media to the flow too. Click on the rectangular box for details."
 msgstr ""
 
-#: controllers/flowController.js:19
+#: controllers/flowController.js:31
 msgid "You can add organisations to the flow. Go into detail by clicking on the rectangular box."
 msgstr ""
 
-#: views/flow.html:81
+#: views/flow.html:89
 msgid "Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation."
 msgstr ""
 
-#: controllers/flowController.js:415
+#: controllers/flowController.js:427
 #: controllers/topEntriesController.js:276
 msgid "first"
 msgstr ""
 
-#: controllers/flowController.js:416
+#: controllers/flowController.js:428
 #: controllers/topEntriesController.js:277
 msgid "last"
 msgstr ""
 
-#: controllers/flowController.js:414
+#: controllers/flowController.js:426
 #: controllers/flowDetailController.js:102
 #: controllers/topEntriesController.js:275
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:413
+#: controllers/flowController.js:425
 #: controllers/flowDetailController.js:101
 #: controllers/topEntriesController.js:274
 msgid "previous"
 msgstr ""
 
-#: controllers/flowController.js:418
+#: controllers/flowController.js:430
 #: controllers/topEntriesController.js:279
 msgid "search"
 msgstr ""
@@ -771,18 +776,18 @@ msgstr ""
 msgid "zip-code"
 msgstr ""
 
-#: views/top.html:66
+#: views/top.html:72
 msgid "{{pType.text}}"
 msgstr ""
 
-#: controllers/flowController.js:426
+#: controllers/flowController.js:438
 msgid "§2 MedKF-TG (Media Cooperations)"
 msgstr ""
 
-#: controllers/flowController.js:430
+#: controllers/flowController.js:442
 msgid "§31 ORF-G (Charges)"
 msgstr ""
 
-#: controllers/flowController.js:428
+#: controllers/flowController.js:440
 msgid "§4 MedKF-TG (Funding)"
 msgstr ""
