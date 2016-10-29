@@ -1197,3 +1197,22 @@ module.exports = (Transparency) ->
             (err) ->
                 res.status(500).send error: "Could not load grouping's member #{err}"
         )
+
+    organisationTypes: (req, res) ->
+        Transfer.aggregate(
+            $match: {}
+        )
+        .group(
+            _id:
+                organisationType: "$organisationType"
+        )
+        .project(
+            type: "$_id.organisationType", _id: 0
+        )
+        .sort("type")
+        .exec()
+        .then(
+            (data) ->
+                res.send data
+            (err) -> res.status(500).send("Could not load organisation types (#{err})!")
+        )
