@@ -74,19 +74,20 @@ lineToZipCode = (line, numberOfZipCodes) ->
 determineOrganisationType = (organisationName) ->
     #public: state (Land), city (Stadt), municipality (Gemeinde)
     returnValue = 'undetermined'
-    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.)|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S.R.L.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL/i
+    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.).*|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S\.R\.L\.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL|.*likvidaci.*|.*p\.l\.c\./i
     regexIncorporatedCompany = /.* AG.*/
     regexAssociation = /.*(Verband).*|.*(Verein).*/i
     regexFoundation = /.*(Stiftung).*|.*(Holding)/i
-    regexCity = /^Stadt .+/i
+    regexCity = /^Stadt .+|.*Stadtwerke.*/i
     regexMunicipality = /^(?:Markt)?gemeinde?.*|Stadtgemeinde .*|.*Sanitäts.*/i
     regexState = /^Land .+/ #Stadt Wien -- provincial
     regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
-    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft|.*Agency.*|Arbeitsmarktservice)/i #national - public agency
+    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft|.*Agency.*|Arbeitsmarktservice|Agentur.*)/i #national - public agency
     regexFund = /.*Fonds?.*/i
     regexChamber = /.*?Kammer?.*/i
     regexPolicyRelevant = /^(Alternativregion).*|.*BIFIE|.*FMA|.*Sprengel?.*|^Kleinregion .*|Arbeitsmarktservice|Verwaltungsgerichtshof/i
     regexEducation = /.*(Alumni).*|.*(Universit).*|.*(Hochsch).*|.*Mittelschul.*|.*Schul.*|.*Päda.*/i
+    regexMuseum = /Albertina|.*Museum.*|.*Belvedere.*/i
 
     if organisationName.match regexCompany
         returnValue = 'company'
@@ -114,6 +115,8 @@ determineOrganisationType = (organisationName) ->
         returnValue = 'state'
     else if organisationName.match regexAgency
         returnValue = 'agency'
+    else if organisationName.match regexMuseum
+        returnValue = 'museum'
 
     console.log "Undetermined organisation type for: " + organisationName if returnValue is 'undetermined'
     returnValue
@@ -160,6 +163,7 @@ lineToOrganisation = (line, feedback) ->
                 when 'city' then feedback.organisationTypeCity++
                 when 'state' then feedback.organisationTypeState++
                 when 'agency' then feedback.organisationTypeAgency++
+                when 'museum' then feedback.organisationTypeMuseum++
 
             feedback
         .catch (err) ->
@@ -359,6 +363,7 @@ module.exports = (Transparency) ->
             organisationTypeChamber: 0,
             organisationTypePolicyRelevant: 0,
             organisationTypeEducation: 0,
+            organisationTypeMuseum: 0,
             notAustria: 0,
             errors:0
             errorEntries: []
