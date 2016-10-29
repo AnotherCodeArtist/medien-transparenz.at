@@ -1,81 +1,112 @@
 <section class="container">
     <div data-ng-controller="TopEntriesCtrl as topCtrl">
-        <h1 translate>Top Spenders and Recipients</h1>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span translate>Settings</span>
-                <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
-                        ><i
-                        class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+        <div ng-intro-options="IntroOptions" ng-intro-method="TopIntro" ng-intro-autostart="false">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" aria-label="?" data-ng-click="TopIntro()">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </button>
             </div>
-            <div class="panel-body" uib-collapse="!showSettings">
+            <h1 translate>Top Spenders and Recipients</h1>
+            <div class="panel panel-default" id="topSettings">
+                <div class="panel-heading">
+                    <span translate>Settings</span>
+                    <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
+                    ><i
+                            class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                </div>
+                <div class="panel-body" uib-collapse="!showSettings">
 
-                <div class="row">
-                    <div class="col-sm-6 col-lg-6">
-                        <strong><div translate>Periods</div></strong>
-                        <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
-                        <div class="checkbox">
-                            <label><input id="fixRange" type="checkbox" ng-model="slider.options.draggableRangeOnly" /><span translate>Fix slider range</span></label>
-                        </div>
-                        <p class="small text-info" translate>Move the sliders to define a range</p>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" data-ng-model="includeGroupings">
-                                <strong><span translate>Grouping</span></strong>
-                            </label>
-                        </div>
-                        <p class="small text-info" translate>With groupings enabled single transfers will be taken together (f.e. to show umbrella organisations)</p>
-                    </div>
-                    <div class="col-sm-2 col-lg-2">
-                        <strong><div translate>Spender/Recipient</div></strong>
-                        <div class="radio" data-ng-repeat="orgType in orgTypes">
-                            <label>
-                                <input type="radio" id="{{orgType.value}}" name="t"
-                                       ng-model="$parent.orgType" ng-value="orgType.value"/>
-                                <span>{{orgType.name}}</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-5 col-lg-5">
-                        <strong><div translate>Payment Types</div></strong>
-                        <div class="checkbox" data-ng-repeat="pType in typesText">
-                            <label>
-                                <input type="checkbox" name="pType"
-                                       ng-model="pType.checked"/><span translate>{{pType.text}}</span>
-                            </label>
-                        </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-6">
+                            <div id="topSlider">
+                                <strong>
+                                    <div translate>Periods</div>
+                                </strong>
+                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                          rz-slider-options="slider.options"></rzslider>
+                            </div>
 
-                        <strong><div translate>Federal State</div></strong>
-                        <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
-                            <option value="">-</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-1 col-lg-1">
-                        <div translate>Top</div>
-                        <select data-ng-model="rank"
-                                ng-options="rank for rank in ranks"/>
+                            <div id="fixSliderRange">
+                                <div class="checkbox">
+                                    <label><input id="fixRange" type="checkbox"
+                                                  ng-model="slider.options.draggableRangeOnly"/><span
+                                            translate>Fix slider range</span></label>
+                                </div>
+                            </div>
+                            <div id="grouping">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="includeGroupings">
+                                        <strong><span translate>Grouping</span></strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-lg-2" id="spenderRecipient">
+                            <strong>
+                                <div translate>Spender/Recipient</div>
+                            </strong>
+                            <div class="radio" data-ng-repeat="orgType in orgTypes">
+                                <label>
+                                    <input type="radio" id="{{orgType.value}}" name="t"
+                                           ng-model="$parent.orgType" ng-value="orgType.value"/>
+                                    <span>{{orgType.name}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-lg-5">
+                            <div id="paymentTypes">
+                                <strong>
+                                    <div translate>Payment Types</div>
+                                </strong>
+
+                                <div class="checkbox" data-ng-repeat="pType in typesText">
+                                    <label>
+                                        <input type="checkbox" name="pType"
+                                               ng-model="pType.checked"/><span translate>{{pType.text}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="fedStateSelection">
+                                <strong>
+                                    <div translate>Federal State</div>
+                                </strong>
+                                <select ng-model="selectedFederalState"
+                                        ng-options="state.name for state in federalStates track by state.iso"
+                                        name="federalStateSelect" id="federalStateSelect">
+                                    <option value="">-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-lg-1">
+                            <div id="rank">
+                                <div translate>Top</div>
+                                <select data-ng-model="rank"
+                                        ng-options="rank for rank in ranks"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div ng-hide="error" class="alert alert-info" role="alert">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
-        </div>
-        <div><h3 class="text-center"><span translate >Total</span>: {{total()}} €</h3></div>
-        <div class="pie">
-            <tpa-pie-chart id="myPie" data="pieData"
-                           x="x" y="y" show-legend="false"
-                           tooltip-fn="toolTipContentFunction"
-                           go-fn="go"
-                           prevent-click-fn="preventClickForOthers"
-            />
-        </div>
-        <div>
+            <div ng-hide="error" class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
+            </div>
+            <div><h3 class="text-center"><span translate>Total</span>: {{total()}} €</h3></div>
+            <div class="pie">
+                <tpa-pie-chart id="myPie" data="pieData"
+                               x="x" y="y" show-legend="false"
+                               tooltip-fn="toolTipContentFunction"
+                               go-fn="go"
+                               prevent-click-fn="preventClickForOthers"
+                />
+            </div>
+            <div>
 
-            <table datatable="" dt-options="td.dtOptions" dt-columns="td.dtColumns" class="table table-striped table-bordered row-border hover"
-                   dt-instance="td.dtInstance"></table>
+                <table datatable="" dt-options="td.dtOptions" dt-columns="td.dtColumns"
+                       class="table table-striped table-bordered row-border hover"
+                       dt-instance="td.dtInstance"></table>
+            </div>
         </div>
         <br/><br/><br/><br/>
     </div>

@@ -49,6 +49,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         params
 
     $scope.total = -> if $scope.top then $scope.top.all.toLocaleString() else "0"
+    $scope.IntroOptions = null;
 
     buildPieModel = ->
         $scope.pieData = []
@@ -82,12 +83,59 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             $scope.td.dtInstance.reloadData()
             update()
 
+
+
+    # Method for setting the intro-options (e.g. after translations)
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#topSettings')
+                    intro: gettextCatalog.getString 'It is possible to customize the pie chart. To do so, use the settings.'
+                }
+                {
+                    element: document.querySelector('#topSlider')
+                    intro: gettextCatalog.getString 'Move the sliders to define a range.'
+                }, {
+                    element: document.querySelector('#fixSliderRange')
+                    intro: gettextCatalog.getString 'Fix slider range. With that it is possible to keep the range constant.'
+                }, {
+                    element: document.querySelector('#grouping')
+                    intro: gettextCatalog.getString 'With groupings enabled single transfers will be taken together (e.g. to show umbrella organisations)'
+                },
+                {
+                    element: document.querySelector('#spenderRecipient')
+                    intro: gettextCatalog.getString 'Display top spender or top recipient'
+                },
+                {
+                    element: document.querySelector('#paymentTypes')
+                    intro: gettextCatalog.getString 'Transfers are divided in different payment types. Select the types to display.'
+                },
+                {
+                    element: document.querySelector('#fedStateSelection')
+                    intro: gettextCatalog.getString 'It is possible to show the chart for a specific federal state.'
+                },
+                {
+                    element: document.querySelector('#rank')
+                    intro: gettextCatalog.getString 'Select the numbers of elements in the pie chart'
+                }
+
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
     initState = ->
 
         $scope.orgTypes = [
             {name: gettextCatalog.getString('Spender'), value: 'org'},
             {name: gettextCatalog.getString('Recipient'), value: 'media'}
         ]
+        setIntroOptions()
         #Federal states selection
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
         #remove Austria
@@ -125,6 +173,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.orgTypes[1].name = gettextCatalog.getString('Recipient')
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
+        setIntroOptions()
 
     $scope.$on 'gettextLanguageChanged', translate
 
