@@ -1007,6 +1007,8 @@ module.exports = (Transparency) ->
         orgType = req.query.orgType or 'org'
         paymentTypes = req.query.pType or ['2']
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+        organisationTypes = req.query.orgTypes or []
+        organisationTypes = [organisationTypes] if organisationTypes not instanceof Array
         query = {}
         project =
             organisation: '$_id.organisation'
@@ -1018,6 +1020,10 @@ module.exports = (Transparency) ->
         query.transferType =
             $in: paymentTypes.map (e)->
                 parseInt(e)
+        if organisationTypes.length > 0
+            query.organisationType =
+                $in: organisationTypes.map (e)->
+                    (e)
         group =
             _id:
                 organisation: if orgType is 'org' then '$organisation' else '$media',
