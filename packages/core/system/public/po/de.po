@@ -620,7 +620,7 @@ msgstr "Suchen"
 msgid "Select the numbers of elements in the pie chart"
 msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 
-#: views/flow.html:19 views/top.html:12
+#: views/flow.html:19 views/top.html:7
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -793,7 +793,7 @@ msgstr "Wer ist dabei?"
 
 #: views/top.html:28
 msgid ""
-"With groupings enabled single transfers will be taken together (f.e. to show "
+"With groupings enabled single transfers will be taken together (e.g. to show "
 "umbrella organisations)"
 msgstr ""
 "Wenn Gruppierung aktiviert, werden einzelne Transfers zusammengefasst (z.B. "
