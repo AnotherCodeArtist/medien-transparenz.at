@@ -14,7 +14,7 @@
             <h1 translate>Money Flow</h1>
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="flowSettings">
                 <div class="panel-heading">
                     <span translate>Settings</span>
                     <a href="#" class="pull-right btn" title="hide/show"
@@ -29,22 +29,32 @@
                 <div class="panel-body" uib-collapse="!showSettings">
                     <div class="row">
                         <div class="col-sm-6 col-lg-6">
-                            <strong>
-                                <div translate>Periods</div>
-                            </strong>
-                            <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
-                                      rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
-                            <div class="checkbox">
-                                <label><input id="fixRange" type="checkbox"
-                                              ng-model="slider.options.draggableRangeOnly"/><span translate>Fix slider range</span></label>
+                            <div id="flowSlider">
+                                <strong>
+                                    <div><span translate>Periods</span> <sup><a href
+                                                                                ng-click="FlowIntro(1);">?</a></sup>
+                                    </div>
+                                </strong>
+                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                          rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
                             </div>
-                            <p class="small text-info" translate>Move the sliders to define a range</p>
-
+                            <div id="fixSliderRange">
+                                <div class="checkbox">
+                                    <label><input id="fixRange" type="checkbox"
+                                                  ng-model="slider.options.draggableRangeOnly"/><span
+                                            translate>Fix slider range</span></label> <sup><a href
+                                                                                              ng-click="FlowIntro(2);">?</a></sup>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm3 col-lg-3">
-                            <strong>
-                                <div translate>Payment Types</div>
-                            </strong>
+                            <div id="paymentTypes">
+                                <strong>
+                                    <div><span translate>Payment Types</span> <sup><a href
+                                                                                      ng-click="FlowIntro(3);">?</a></sup>
+                                    </div>
+                                </strong>
+                            </div>
                             <div class="checkbox" data-ng-repeat="pType in typesText">
                                 <label>
                                     <input type="checkbox" name="pType"
@@ -88,7 +98,7 @@
                 </div>
                 <div class="row" id="sankeyRow">
                     <div class="col-md-6">
-                        <span>{{organisationsLabel}}:</span>
+                        <span>{{organisationsLabel}}:</span> <sup><a href ng-click="FlowIntro(4);">?</a></sup>
                         <oi-select class="multiselectDropdown"
                                    oi-options="item.name for item in allOrganisations track by item.name"
                                    ng-model="selectedOrganisations"
@@ -100,7 +110,7 @@
                         </oi-select>
                     </div>
                     <div class="col-md-6">
-                        <span>{{mediaLabel}}:</span>
+                        <span>{{mediaLabel}}:</span> <sup><a href ng-click="FlowIntro(4);">?</a></sup>
                         <oi-select class="multiselectDropdown"
                                    oi-options="item.name for item in allMedia track by item.name"
                                    ng-model="selectedMedia"
