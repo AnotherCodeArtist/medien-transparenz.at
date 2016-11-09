@@ -103,6 +103,9 @@ class TPAService
     federalstates: (params) ->
         @$http.get 'api/transparency/federalstates', params: params
 
+    organisationTypes: ->
+        @$http.get 'api/transparency/orgTypes'
+
     decodeType: (type) -> switch type
         when 2 then "Payments according to §2 MedKF-TG (Media Cooperations)"
         when 4 then "Payments according to §4 MedKF-TG (Funding)"

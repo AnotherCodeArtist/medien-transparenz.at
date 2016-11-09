@@ -17,7 +17,7 @@ angular.module 'mean.transparency'
           $scope.percent = d3.format(",.2f")(data.percent) + "%"
           $scope.$digest()
           return
-     
+
      $scope.$on 'federalStateClicked', (event, data) ->
           $scope.selectedFederalState = {iso: data}
           $scope.orgType = 'org'
@@ -49,6 +49,8 @@ angular.module 'mean.transparency'
           params.to = $scope.periods[$scope.slider.to/5].period
           types = (v.type for v in $scope.typesText when v.checked)
           (params.pType = types) if types.length > 0
+          params.orgTypes = $scope.orgTypes if $scope.orgTypes.length > 0
+          #TEST #params.orgTypes = ["city", "chamber"]
           params
 
      update = () ->
@@ -56,6 +58,7 @@ angular.module 'mean.transparency'
           .then (res) ->
                $scope.mapData = res.data
 
+     $scope.orgTypes = []
      $scope.mapData = {}
      $scope.periods = []
      $scope.slider =
@@ -81,6 +84,11 @@ angular.module 'mean.transparency'
 
 
      savedState = sessionStorage.getItem stateName
+     orgTypePromise = TPAService.organisationTypes()
+     orgTypePromise.then (res) ->
+        for orgTypeObject in res.data
+            $scope.orgTypes.push orgTypeObject.type
+
      if savedState
           TPAService.restoreState stateName, fieldsToStore, $scope
           registerWatchers()
