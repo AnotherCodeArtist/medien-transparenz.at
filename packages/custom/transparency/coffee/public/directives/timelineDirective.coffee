@@ -8,7 +8,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
           events: '='
           getCurrentLanguage: '&'
      link: ($scope,element,attrs) ->
-          margin = {top: 30, right: 100, bottom: 75, left: 100}
+          margin = {top: 50, right: 100, bottom: 75, left: 100}
 
           updateDiagram = (oldValue, newValue) ->
                data = () ->
@@ -75,20 +75,43 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     line.setAttributeNS(null, "class", "event eventLine " + className);
                     document.getElementById("timeline").appendChild(line);
 
-               drawEventGuideline = (numericDate, date, bars, className, eventName, y1, y2, additionalText) ->
+               drawSymbol = (x, y, className, type) ->
+                    document.getElementById "timeline"
+                    symbol = document.createElementNS(svgNS, "text");
+                    symbol.setAttributeNS(null,"x",x);
+                    symbol.setAttributeNS(null,"y",y);
+                    symbol.setAttributeNS(null, 'font-family', 'Glyphicons Halflings')
+                    symbol.setAttributeNS(null, 'font-size', '10pt')
+                    if type and type is "start"
+                         symbol.setAttributeNS(null, "class", "event eventText start " + className);
+                         textNode = document.createTextNode(" " + String.fromCharCode(0xE069));
+                    else if type and type is "end"
+                         symbol.setAttributeNS(null, "class", "event eventText end " + className);
+                         textNode = document.createTextNode(String.fromCharCode(0xE077) + " ");
+                    else if type and type is "standard"
+                         symbol.setAttributeNS(null, "class", "event eventText " + className);
+                         textNode = document.createTextNode(String.fromCharCode(0xE069) + " " + String.fromCharCode(0xE077));
+                    else if className is "predictable"
+                         symbol.setAttributeNS(null, "class", "event eventText " + className);
+                         textNode = document.createTextNode(String.fromCharCode(0xE023));
+                    else if className is "inpredictable"
+                         symbol.setAttributeNS(null, "class", "event eventText " + className);
+                         textNode = document.createTextNode(String.fromCharCode(0xE162));
+
+                    symbol.appendChild(textNode);
+                    document.getElementById("timeline").appendChild(symbol);
+
+               drawEventGuideline = (numericDate, date, bars, className, eventName, y1, y2, type) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - $scope.data.data.values[0][0]) / 0.25)
                     x = margin.left
                     x += (bars[index].transform.animVal[0].matrix.e)
                     x += (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1))
                     drawLine(x, y1, y2, className)
-                    if additionalText
-                         drawText(x, y1 - margin.top + 12, additionalText + eventName, className)
-                    else
-                         drawText(x, y1 - margin.top + 12, eventName, className)
-                    drawText(x, y1 - margin.top + 24,  date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(), className)
-
-
+                    drawSymbol x, y1 - margin.top + 12, className
+                    drawText(x, y1 - margin.top + 24, eventName, className)
+                    drawText(x, y1 - margin.top + 36,  date.getDate() + '.' + (date.getMonth() + 1), className)
+                    drawSymbol x, y1 - margin.top + 48, className, type
 
                drawEvents = (events) ->
                     groupOfBars = d3.select('.timeline svg').selectAll('.nv-bar')
@@ -103,10 +126,10 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                               className = "inpredictable"
 
                          if !event.numericEndDate
-                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2
+                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "standard"
                          else
-                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "Start: "
-                              drawEventGuideline event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "End: "
+                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "start"
+                              drawEventGuideline event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "end"
 
 
                nv.addGraph () ->

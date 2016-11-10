@@ -127,6 +127,15 @@ a.label {
     text-anchor: middle;
 }
 
+.eventText.start
+{
+    text-anchor: end;
+}
+
+.eventText.end{
+    text-anchor: start;
+}
+
 .sankeyChart .node:hover {
     stroke-width: 1px;
     stroke: #666;
