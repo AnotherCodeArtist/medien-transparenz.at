@@ -8,7 +8,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
           events: '='
           getCurrentLanguage: '&'
      link: ($scope,element,attrs) ->
-          margin = {top: 50, right: 100, bottom: 75, left: 100}
+          margin = {top: 75, right: 100, bottom: 75, left: 100}
 
           updateDiagram = (oldValue, newValue) ->
                data = () ->
@@ -56,16 +56,16 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
 
                svgNS = "http://www.w3.org/2000/svg";
 
-               drawText = (x, y, text, className) ->
+               drawText = (id, x, y, text, className) ->
                     newText = document.createElementNS(svgNS,"text");
                     newText.setAttributeNS(null,"x",x);
                     newText.setAttributeNS(null,"y",y);
-                    newText.setAttributeNS(null, "class", "event eventText " + className);
+                    newText.setAttributeNS(null, "class", "event eventText " + className + " id" + id);
                     textNode = document.createTextNode(text);
                     newText.appendChild(textNode);
                     document.getElementById("timeline").appendChild(newText);
 
-               drawLine = (x, y1, y2, className) ->
+               drawLine = (id, x, y1, y2, className) ->
                     line = document.createElementNS(svgNS,"line");
                     line.setAttributeNS(null,"id","line");
                     line.setAttributeNS(null,"x1",x);
@@ -73,45 +73,58 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     line.setAttributeNS(null,"y1",y1);
                     line.setAttributeNS(null,"y2",y2);
                     line.setAttributeNS(null, "class", "event eventLine " + className);
+                    line.setAttributeNS(null, "onclick", "for (let el of document.querySelectorAll('.id" + id + "')) el.style.visibility = (el.style.visibility === 'hidden') ? 'visible' : 'hidden';");
                     document.getElementById("timeline").appendChild(line);
 
-               drawSymbol = (x, y, className, type) ->
-                    document.getElementById "timeline"
+               drawSymbol = (id, x, y, className, type) ->
                     symbol = document.createElementNS(svgNS, "text");
                     symbol.setAttributeNS(null,"x",x);
                     symbol.setAttributeNS(null,"y",y);
                     symbol.setAttributeNS(null, 'font-family', 'Glyphicons Halflings')
                     symbol.setAttributeNS(null, 'font-size', '10pt')
                     if type and type is "start"
-                         symbol.setAttributeNS(null, "class", "event eventText start " + className);
-                         textNode = document.createTextNode(" " + String.fromCharCode(0xE069));
+                         symbol.setAttributeNS(null, "class", "event eventText start " + className + " id" + id);
+                         textNode = document.createTextNode(" " + String.fromCharCode(0xE077));
                     else if type and type is "end"
-                         symbol.setAttributeNS(null, "class", "event eventText end " + className);
-                         textNode = document.createTextNode(String.fromCharCode(0xE077) + " ");
+                         symbol.setAttributeNS(null, "class", "event eventText end " + className + " id" + id);
+                         textNode = document.createTextNode(String.fromCharCode(0xE069) + " ");
                     else if type and type is "standard"
-                         symbol.setAttributeNS(null, "class", "event eventText " + className);
-                         textNode = document.createTextNode(String.fromCharCode(0xE069) + " " + String.fromCharCode(0xE077));
+                         symbol.setAttributeNS(null, "class", "event eventText " + className + " id" + id);
+                         textNode = document.createTextNode(String.fromCharCode(0xE077) + " " + String.fromCharCode(0xE069));
                     else if className is "predictable"
-                         symbol.setAttributeNS(null, "class", "event eventText " + className);
+                         symbol.setAttributeNS(null, "class", "event eventText " + className + " id" + id);
                          textNode = document.createTextNode(String.fromCharCode(0xE023));
                     else if className is "inpredictable"
-                         symbol.setAttributeNS(null, "class", "event eventText " + className);
+                         symbol.setAttributeNS(null, "class", "event eventText " + className + " id" + id);
                          textNode = document.createTextNode(String.fromCharCode(0xE162));
 
                     symbol.appendChild(textNode);
                     document.getElementById("timeline").appendChild(symbol);
 
-               drawEventGuideline = (numericDate, date, bars, className, eventName, y1, y2, type) ->
+               drawToggleLabel = (id, x, y, className) ->
+                    circle = document.createElementNS(svgNS, "circle");
+                    circle.setAttributeNS(null, "cx", x);
+                    circle.setAttributeNS(null, "cy", y);
+                    circle.setAttributeNS(null, "r",  4);
+                    circle.setAttributeNS(null, "id", "id" + id);
+                    circle.setAttributeNS(null, "class", "event labelToggle " + className + " circle" + id);
+                    circle.setAttributeNS(null, "onclick", "for (let el of document.querySelectorAll('.id" + id + "')) el.style.visibility = (el.style.visibility === 'hidden') ? 'visible' : 'hidden';
+                                                            for (let el of document.querySelectorAll('.circle" + id + "')) console.log(el.fill);
+                                                            for (let el of document.querySelectorAll('.circle" + id + "')) el.style.fill = (el.style.fill === 'transparent') ? '' : 'transparent';");
+                    document.getElementById("timeline").appendChild(circle);
+
+               drawEventGuideline = (id, numericDate, date, bars, className, eventName, y1, y2, type) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - $scope.data.data.values[0][0]) / 0.25)
                     x = margin.left
                     x += (bars[index].transform.animVal[0].matrix.e)
                     x += (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1))
-                    drawLine(x, y1, y2, className)
-                    drawSymbol x, y1 - margin.top + 12, className
-                    drawText(x, y1 - margin.top + 24, eventName, className)
-                    drawText(x, y1 - margin.top + 36,  date.getDate() + '.' + (date.getMonth() + 1), className)
-                    drawSymbol x, y1 - margin.top + 48, className, type
+                    drawLine(id, x, y1, y2, className)
+                    drawToggleLabel id, x, y1 - margin.top + 60, className
+                    drawSymbol id, x, y1 - margin.top + 12, className
+                    drawText(id, x, y1 - margin.top + 24, eventName, className)
+                    drawText(id, x, y1 - margin.top + 36,  date.getDate() + '.' + (date.getMonth() + 1), className)
+                    drawSymbol id, x, y1 - margin.top + 48, className, type
 
                drawEvents = (events) ->
                     groupOfBars = d3.select('.timeline svg').selectAll('.nv-bar')
@@ -126,10 +139,10 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                               className = "inpredictable"
 
                          if !event.numericEndDate
-                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "standard"
+                              drawEventGuideline event._id, event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "standard"
                          else
-                              drawEventGuideline event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "start"
-                              drawEventGuideline event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "end"
+                              drawEventGuideline event._id, event.numericStartDate, new Date(event.startDate), groupOfBars[0], className, event.name, y1, y2, "start"
+                              drawEventGuideline event._id, event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "end"
 
 
                nv.addGraph () ->
@@ -153,8 +166,14 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                          updateDiagram())
 
                     if $scope.events and $scope.events.length > 0
-                         drawEvents($scope.events)
+                         events = []
+                         for event in $scope.events
+                              if event.selected
+                                   events.push event
+
+                         drawEvents(events)
                     chart
 
           $scope.$watch 'data', updateDiagram, true
           $scope.$watch 'events', updateDiagram, true
+          $scope.$on 'updateEvents', updateDiagram

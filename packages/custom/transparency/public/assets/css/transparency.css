@@ -90,7 +90,8 @@ div.sankeyChart {
 .label.year,
 .label.label-success,
 .label.label-default,
-.label.label-primary {
+.label.label-primary,
+.label.label-danger{
     text-shadow: none;
 }
 
@@ -118,8 +119,20 @@ a.label {
     stroke: red;
 }
 
+.labelToggle{
+    stroke-width: 1;
+}
+
+.labelToggle.predictable {
+    stroke: blue;
+}
+
+.labelToggle.inpredictable{
+    stroke: red;
+}
+
 .eventLine {
-    stroke-width: 1.5;
+    stroke-width: 3.5;
 }
 
 .eventText {

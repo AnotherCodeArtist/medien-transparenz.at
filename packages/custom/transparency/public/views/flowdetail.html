@@ -50,6 +50,64 @@
 
         </style>
         <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>Select Events</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox" ng-repeat="event in events">
+                            <label>
+                                <input
+                                        type="checkbox"
+                                        ng-model="event.selected"
+                                        ng-click="updateEvents()"
+                                > {{event.name}}
+                            </label>
+                            <span><span class="label label-danger">{{event.region}}</span></span>
+                            <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>Select by Tag</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label ng-repeat="tag in tags track by tag.name" ng-click="toggleTag(tag)">
+                                <input
+                                        type="checkbox"
+                                        ng-model="tag.selected"
+                                >
+                                <span><span class="label label-primary">{{tag.name}}</span> </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>Select by Region</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label ng-repeat="region in regions track by region.name" ng-click="toggleRegion(region)">
+                                <input
+                                        type="checkbox"
+                                        ng-model="region.selected"
+                                >
+                                <span><span class="label label-danger">{{region.name}}</span> </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="alert alert-info col-md-12" role="alert">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>

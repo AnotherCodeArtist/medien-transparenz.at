@@ -71,9 +71,41 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         ]
     )
 
+    $scope.updateEvents = () ->
+        $scope.$broadcast 'updateEvents'
+
     TPAService.getEvents().then (res)->
         $scope.events = res.data
+        $scope.regions = []
+        addedregions = []
+        for event in $scope.events
+            if addedregions.indexOf(event.region) is -1
+                $scope.regions.push {
+                    name: event.region
+                    selected: false
+                }
+                addedregions.push event.region
 
+    $scope.toggleRegion = (region) ->
+        for event in $scope.events
+            if event.region is region.name
+                event.selected = region.selected
+        $scope.updateEvents()
+
+    $scope.toggleTag = (tag) ->
+        for event in $scope.events
+            if event.tags.indexOf(tag.name) isnt -1
+                event.selected = tag.selected
+
+
+    TPAService.getEventTags().then (res) ->
+        tags = []
+        for tag in res.data
+            tags.push {
+                name: tag,
+                selected: false
+            }
+        $scope.tags = tags
 
 
     angular.extend $scope.dtOptions,
