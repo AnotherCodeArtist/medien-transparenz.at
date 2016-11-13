@@ -104,19 +104,19 @@ a.label {
 }
 
 .predictable {
-    fill: blue;
+    fill: black;
 }
 
 .inpredictable {
-    fill: red;
+    fill: black;
 }
 
 .eventLine.predictable {
-    stroke: blue;
+    stroke: black;
 }
 
 .eventLine.inpredictable {
-    stroke: red;
+    stroke: black;
 }
 
 .labelToggle{
@@ -124,11 +124,11 @@ a.label {
 }
 
 .labelToggle.predictable {
-    stroke: blue;
+    stroke: black;
 }
 
 .labelToggle.inpredictable{
-    stroke: red;
+    stroke: black;
 }
 
 .eventLine {
