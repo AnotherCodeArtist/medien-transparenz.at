@@ -10,6 +10,8 @@ angular.module 'mean.transparency'
      stateName = "index"
      fieldsToStore = ['slider','periods','typesText']
 
+     $scope.showSettings = true
+
      $scope.$on 'isoChanged', (event, data) ->
           $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
           .name)

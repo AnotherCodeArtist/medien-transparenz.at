@@ -1,46 +1,69 @@
-<div class="" data-ng-controller="TransparencyController">
+<div class="container" data-ng-controller="TransparencyController">
     <div id="toolTip" class="panel panel-default" style="position: fixed; display: none; z-index: 5">
         <div class="panel-heading">
             <h3 class="panel-title">{{federalState}}</h3>
         </div>
         <div class="panel-body">
-            {{sum}}<br />
+            {{sum}}<br/>
             {{percent}}
         </div>
     </div>
-    <section class="container">
-        <div class="intro">
-            <div class="page-header">
-                <h1><span translate>Media Transparency Austria</span>
-                    <small class="hidden-xs"><br/><span translate>An Overview of Public Money spent on Media-Cooperations and -Funding in Austria</span></small>
-                </h1>
+    <div class="row">
+        <section class="container">
+            <div class="intro">
+                <div class="page-header">
+                    <h1><span translate>Media Transparency Austria</span>
+                        <small class="hidden-xs"><br/><span translate>An Overview of Public Money spent on Media-Cooperations and -Funding in Austria</span>
+                        </small>
+                    </h1>
+                </div>
             </div>
-        </div>
-    </section>
-    <section class="container">
+        </section>
+    </div>
+    <div class="row paddingBottom">
+        <section class="container">
+                <div class="panel panel-default" id="mapSettings">
+                    <div class="panel-heading">
+                        <span translate>Settings</span>
+                        <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
+                        ><i
+                                class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                    </div>
+                    <div class="panel-body" uib-collapse="!showSettings">
 
-        <div class="col-sm-12 col-lg-12" style="padding-top: 50px; padding-bottom: 50px">
-            <div class="col-sm-6 col-lg-6">
-                <strong><div translate>Periods</div></strong>
-                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to" rz-slider-options="slider.options"></rzslider>
-                <div class="checkbox">
-                    <label><input id="fixRange" type="checkbox" ng-model="slider.options.draggableRangeOnly" /><span translate>Fix slider range</span></label>
+                        <div class="col-sm-12 col-lg-12" style="padding-top: 50px; padding-bottom: 50px">
+                            <div class="col-sm-6 col-lg-6">
+                                <strong>
+                                    <div translate>Periods</div>
+                                </strong>
+                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                          rz-slider-options="slider.options"></rzslider>
+                                <div class="checkbox">
+                                    <label><input id="fixRange" type="checkbox"
+                                                  ng-model="slider.options.draggableRangeOnly"/><span
+                                            translate>Fix slider range</span></label>
+                                </div>
+                                <p class="small text-info" translate>Move the sliders to define a range</p>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <strong>
+                                    <div translate>Payment Types</div>
+                                </strong>
+                                <div class="checkbox" data-ng-repeat="pType in typesText">
+                                    <label>
+                                        <input type="checkbox" name="pType"
+                                               ng-model="pType.checked"/>{{pType.text}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="small text-info" translate>Move the sliders to define a range</p>
-            </div>
-            <div class="col-sm-6 col-lg-6">
-                <strong><div translate>Payment Types</div></strong>
-                <div class="checkbox" data-ng-repeat="pType in typesText">
-                    <label>
-                        <input type="checkbox" name="pType"
-                               ng-model="pType.checked"/>{{pType.text}}
-                    </label>
+                <div class="panel panel-default col-sm-12 col-lg-12">
+                    <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
+                    <p class="small text-info" translate>The map can be turned by holding the left mouse button and
+                        dragging within the frame. It is possible to zoom into the map by scrolling.</p>
                 </div>
-            </div>
-            <div class="panel panel-default col-sm-12 col-lg-12">
-                <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl" ></div>
-                <p class="small text-info" translate>The map can be turned by holding the left mouse button and dragging within the frame. It is possible to zoom into the map by scrolling.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
