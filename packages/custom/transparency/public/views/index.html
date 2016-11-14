@@ -56,6 +56,17 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <strong>
+                                    <div translate>Organisation Types</div>
+                                </strong>
+                                <div class="checkbox" data-ng-repeat="oType in orgTypes track by oType.value">
+                                    <label translate>
+                                        <input type="checkbox" name="oType"
+                                                ng-model="oType.selected" />{{oType.name}}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

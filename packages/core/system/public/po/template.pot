@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: views\index.html:64
+msgid "<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.checked\">{{oType}}"
+msgstr ""
+
 #: views\about.html:2
 msgid "About Us"
 msgstr ""
@@ -36,7 +40,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: views\index.html:15
+#: views\index.html:16
 msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
 msgstr ""
 
@@ -69,7 +73,7 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: views\flowdetail.html:123
+#: views\flowdetail.html:139
 msgid "Begin of Event"
 msgstr ""
 
@@ -154,7 +158,7 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
-#: views\flowdetail.html:127
+#: views\flowdetail.html:143
 msgid "End of Event"
 msgstr ""
 
@@ -205,7 +209,7 @@ msgid "Federal state"
 msgstr ""
 
 #: views\flow.html:44
-#: views\index.html:27
+#: views\index.html:43
 #: views\top.html:35
 msgid "Fix slider range"
 msgstr ""
@@ -306,15 +310,15 @@ msgstr ""
 msgid "It is possible to show the chart for a specific federal state."
 msgstr ""
 
-#: views\flowdetail.html:140
+#: views\flowdetail.html:156
 msgid "Labels hidden"
 msgstr ""
 
-#: views\flowdetail.html:136
+#: views\flowdetail.html:152
 msgid "Labels visible"
 msgstr ""
 
-#: views\flowdetail.html:112
+#: views\flowdetail.html:127
 msgid "Legend"
 msgstr ""
 
@@ -353,7 +357,7 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: views\index.html:14
+#: views\index.html:15
 msgid "Media Transparency Austria"
 msgstr ""
 
@@ -366,7 +370,7 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views\index.html:29
+#: views\index.html:46
 msgid "Move the sliders to define a range"
 msgstr ""
 
@@ -426,7 +430,7 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: views\flowdetail.html:132
+#: views\flowdetail.html:148
 msgid "One-day Event"
 msgstr ""
 
@@ -435,6 +439,10 @@ msgstr ""
 #: controllers\groupingController.js:21
 #: views\uploadOrganisation.html:116
 msgid "Organisation"
+msgstr ""
+
+#: views\index.html:61
+msgid "Organisation Types"
 msgstr ""
 
 #: controllers\flowController.js:131
@@ -446,6 +454,7 @@ msgstr ""
 msgid "Organisations not from Austria"
 msgstr ""
 
+#: views\uploadOrganisation.html:100
 #: views\uploadOrganisation.html:48
 #: views\uploadOrganisation.html:52
 #: views\uploadOrganisation.html:56
@@ -460,10 +469,6 @@ msgstr ""
 #: views\uploadOrganisation.html:92
 #: views\uploadOrganisation.html:96
 msgid "Organisations with organisation type"
-msgstr ""
-
-#: views\uploadOrganisation.html:100
-msgid "Organisations with undetermined organisation type"
 msgstr ""
 
 #: views\upload.html:31
@@ -500,7 +505,7 @@ msgid "Payment Type"
 msgstr ""
 
 #: views\flow.html:53
-#: views\index.html:32
+#: views\index.html:50
 #: views\top.html:67
 msgid "Payment Types"
 msgstr ""
@@ -526,7 +531,7 @@ msgid "Per default the top spender based on your chosen payment types and period
 msgstr ""
 
 #: views\flow.html:34
-#: views\index.html:24
+#: views\index.html:37
 #: views\top.html:23
 msgid "Periods"
 msgstr ""
@@ -544,7 +549,7 @@ msgstr ""
 msgid "Predictable"
 msgstr ""
 
-#: views\flowdetail.html:116
+#: views\flowdetail.html:131
 msgid "Predictable Event"
 msgstr ""
 
@@ -596,15 +601,15 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: views\flowdetail.html:56
+#: views\flowdetail.html:66
 msgid "Select Events"
 msgstr ""
 
-#: views\flowdetail.html:94
+#: views\flowdetail.html:106
 msgid "Select by Region"
 msgstr ""
 
-#: views\flowdetail.html:76
+#: views\flowdetail.html:88
 msgid "Select by Tag"
 msgstr ""
 
@@ -613,6 +618,8 @@ msgid "Select the numbers of elements in the pie chart"
 msgstr ""
 
 #: views\flow.html:19
+#: views\flowdetail.html:54
+#: views\index.html:27
 #: views\top.html:12
 msgid "Settings"
 msgstr ""
@@ -654,15 +661,17 @@ msgstr ""
 msgid "Tabular Representation"
 msgstr ""
 
-#: views\flowdetail.html:149
+#: views\flowdetail.html:167
 msgid "The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized."
 msgstr ""
 
-#: views\index.html:42
-msgid "The map can be turned by holding the left mouse button and dragging within the frame. It is possible to zoom into the map by scrolling."
+#: views\index.html:75
+msgid ""
+"The map can be turned by holding the left mouse button and\r\n"
+"                        dragging within the frame. It is possible to zoom into the map by scrolling."
 msgstr ""
 
-#: views\flowdetail.html:163
+#: views\flowdetail.html:181
 msgid "The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown."
 msgstr ""
 
@@ -725,7 +734,11 @@ msgstr ""
 msgid "Tyrol"
 msgstr ""
 
-#: views\flowdetail.html:119
+#: views\uploadOrganisation.html:100
+msgid "Undetermined"
+msgstr ""
+
+#: views\flowdetail.html:134
 msgid "Unpredictable Event"
 msgstr ""
 

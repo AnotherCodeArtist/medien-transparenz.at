@@ -12,6 +12,12 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: views\index.html:64
+msgid ""
+"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.checked\">{{oType}}"
+msgstr ""
+"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.checked\">{{oType}}"
+
 #: views\about.html:2
 msgid "About Us"
 msgstr "Über uns"
@@ -48,7 +54,7 @@ msgstr ""
 msgid "Amount"
 msgstr "Betrag"
 
-#: views\index.html:15
+#: views\index.html:16
 msgid ""
 "An Overview of Public Money spent on Media-Cooperations and -Funding in "
 "Austria"
@@ -116,7 +122,7 @@ msgstr "Österreich"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: views\flowdetail.html:123
+#: views\flowdetail.html:139
 msgid "Begin of Event"
 msgstr "Beginn des Events"
 
@@ -198,7 +204,7 @@ msgstr "Gruppe aktivieren"
 msgid "End date"
 msgstr "Enddatum"
 
-#: views\flowdetail.html:127
+#: views\flowdetail.html:143
 msgid "End of Event"
 msgstr "Ende des Events"
 
@@ -247,7 +253,7 @@ msgstr "Bundesland"
 msgid "Federal state"
 msgstr "Bundesland"
 
-#: views\flow.html:44 views\index.html:27 views\top.html:35
+#: views\flow.html:44 views\index.html:43 views\top.html:35
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
@@ -369,15 +375,15 @@ msgstr ""
 msgid "It is possible to show the chart for a specific federal state."
 msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
 
-#: views\flowdetail.html:140
+#: views\flowdetail.html:156
 msgid "Labels hidden"
 msgstr "Labels nicht sichtbar"
 
-#: views\flowdetail.html:136
+#: views\flowdetail.html:152
 msgid "Labels visible"
 msgstr "Labels sichtbar"
 
-#: views\flowdetail.html:112
+#: views\flowdetail.html:127
 msgid "Legend"
 msgstr "Legende"
 
@@ -415,7 +421,7 @@ msgstr "Events verwalten"
 msgid "Media"
 msgstr "Medien"
 
-#: views\index.html:14
+#: views\index.html:15
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
@@ -427,7 +433,7 @@ msgstr "Ministerium"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views\index.html:29
+#: views\index.html:46
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
@@ -485,7 +491,7 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: views\flowdetail.html:132
+#: views\flowdetail.html:148
 msgid "One-day Event"
 msgstr "Eintägiges Event"
 
@@ -493,6 +499,10 @@ msgstr "Eintägiges Event"
 #: controllers\groupingController.js:21 views\uploadOrganisation.html:116
 msgid "Organisation"
 msgstr "Organisation"
+
+#: views\index.html:61
+msgid "Organisation Types"
+msgstr "Organisationstypen"
 
 #: controllers\flowController.js:131 controllers\flowController.js:247
 msgid "Organisations"
@@ -502,19 +512,15 @@ msgstr "Organisationen"
 msgid "Organisations not from Austria"
 msgstr "Organisationen außerhalb Österreichs"
 
-#: views\uploadOrganisation.html:48 views\uploadOrganisation.html:52
-#: views\uploadOrganisation.html:56 views\uploadOrganisation.html:60
-#: views\uploadOrganisation.html:64 views\uploadOrganisation.html:68
-#: views\uploadOrganisation.html:72 views\uploadOrganisation.html:76
-#: views\uploadOrganisation.html:80 views\uploadOrganisation.html:84
-#: views\uploadOrganisation.html:88 views\uploadOrganisation.html:92
-#: views\uploadOrganisation.html:96
+#: views\uploadOrganisation.html:100 views\uploadOrganisation.html:48
+#: views\uploadOrganisation.html:52 views\uploadOrganisation.html:56
+#: views\uploadOrganisation.html:60 views\uploadOrganisation.html:64
+#: views\uploadOrganisation.html:68 views\uploadOrganisation.html:72
+#: views\uploadOrganisation.html:76 views\uploadOrganisation.html:80
+#: views\uploadOrganisation.html:84 views\uploadOrganisation.html:88
+#: views\uploadOrganisation.html:92 views\uploadOrganisation.html:96
 msgid "Organisations with organisation type"
 msgstr "Organisationen mit Organisationstyp"
-
-#: views\uploadOrganisation.html:100
-msgid "Organisations with undetermined organisation type"
-msgstr "Organisationen mit nicht definiertem Organisationstyp"
 
 #: views\upload.html:31
 msgid "Organisations with unknown address-data"
@@ -548,7 +554,7 @@ msgstr "Zahler"
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views\flow.html:53 views\index.html:32 views\top.html:67
+#: views\flow.html:53 views\index.html:50 views\top.html:67
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
@@ -576,7 +582,7 @@ msgstr ""
 "Standardmäßig wird automatisch der größte Zahler basierend auf Ihrer "
 "Zahlungstyp- und Zeitraumauswahl selektiert"
 
-#: views\flow.html:34 views\index.html:24 views\top.html:23
+#: views\flow.html:34 views\index.html:37 views\top.html:23
 msgid "Periods"
 msgstr "Zeitraum"
 
@@ -592,7 +598,7 @@ msgstr "Politiknah"
 msgid "Predictable"
 msgstr "Vorhersehbar"
 
-#: views\flowdetail.html:116
+#: views\flowdetail.html:131
 msgid "Predictable Event"
 msgstr "Vorhersehbares Event"
 
@@ -637,15 +643,15 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
-#: views\flowdetail.html:56
+#: views\flowdetail.html:66
 msgid "Select Events"
 msgstr "Events auswählen"
 
-#: views\flowdetail.html:94
+#: views\flowdetail.html:106
 msgid "Select by Region"
 msgstr "Nach Region auswählen"
 
-#: views\flowdetail.html:76
+#: views\flowdetail.html:88
 msgid "Select by Tag"
 msgstr "Nach Tag auswählen"
 
@@ -653,7 +659,8 @@ msgstr "Nach Tag auswählen"
 msgid "Select the numbers of elements in the pie chart"
 msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 
-#: views\flow.html:19 views\top.html:12
+#: views\flow.html:19 views\flowdetail.html:54 views\index.html:27
+#: views\top.html:12
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -691,7 +698,7 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
-#: views\flowdetail.html:149
+#: views\flowdetail.html:167
 msgid ""
 "The first chart on that page shows the flow of money over the available "
 "period of time. The highest and the lowest value is highlighted. In case of "
@@ -701,15 +708,16 @@ msgstr ""
 "der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
 "verfügbar, so werden diese angezeigt."
 
-#: views\index.html:42
+#: views\index.html:75
 msgid ""
-"The map can be turned by holding the left mouse button and dragging within "
-"the frame. It is possible to zoom into the map by scrolling."
+"The map can be turned by holding the left mouse button and\r\n"
+"                        dragging within the frame. It is possible to zoom "
+"into the map by scrolling."
 msgstr ""
-"Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
-"werden. Mittels Scrollen kann in die Karte gezoomt werden."
+"Die Karte kann mittels Halten der linken Maus-Taste gedreht werden.\r\n"
+"Mittels Scrollen kann in die Karte gezoomt werden."
 
-#: views\flowdetail.html:163
+#: views\flowdetail.html:181
 msgid ""
 "The second chart shows differences between the money flow compared to the "
 "previous quarter. The highest and lowest value is highlighted. If available, "
@@ -787,7 +795,11 @@ msgstr "Typ"
 msgid "Tyrol"
 msgstr "Tirol"
 
-#: views\flowdetail.html:119
+#: views\uploadOrganisation.html:100
+msgid "Undetermined"
+msgstr "Unbestimmt"
+
+#: views\flowdetail.html:134
 msgid "Unpredictable Event"
 msgstr "Nicht vorhersehbares Event"
 
@@ -910,6 +922,16 @@ msgstr "§31 ORF-G (Gebühren)"
 #: controllers\flowController.js:440
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#~ msgid "Organisations with undetermined organisation type"
+#~ msgstr "Organisationen mit nicht definiertem Organisationstyp"
+
+#~ msgid ""
+#~ "The map can be turned by holding the left mouse button and dragging "
+#~ "within the frame. It is possible to zoom into the map by scrolling."
+#~ msgstr ""
+#~ "Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
+#~ "werden. Mittels Scrollen kann in die Karte gezoomt werden."
 
 #~ msgid ""
 #~ "All Data that is published via this site it taken from the quarterly "
