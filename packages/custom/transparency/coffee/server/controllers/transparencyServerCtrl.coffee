@@ -73,7 +73,7 @@ lineToZipCode = (line, numberOfZipCodes) ->
 # determines org type by name
 determineOrganisationType = (organisationName) ->
     #public: state (Land), city (Stadt), municipality (Gemeinde)
-    returnValue = 'undetermined'
+    returnValue = 'Undetermined'
     regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.).*|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S\.R\.L\.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL|.*likvidaci.*|.*p\.l\.c\./i
     regexIncorporatedCompany = /.* AG.*/
     regexAssociation = /.*(Verband).*|.*(Verein).*/i
@@ -90,33 +90,33 @@ determineOrganisationType = (organisationName) ->
     regexMuseum = /Albertina|.*Museum.*|.*Belvedere.*/i
 
     if organisationName.match regexCompany
-        returnValue = 'company'
+        returnValue = 'Company'
     else if organisationName.match regexIncorporatedCompany
-        returnValue = 'company'
+        returnValue = 'Company'
     else if organisationName.match regexAssociation
-        returnValue = 'association'
+        returnValue = 'Association'
     else if organisationName.match regexChamber
-        returnValue = 'chamber'
+        returnValue = 'Chamber'
     else if organisationName.match regexEducation
-        returnValue = 'education'
+        returnValue = 'Education'
     else if organisationName.match regexFoundation
-        returnValue = 'foundation'
+        returnValue = 'Foundation'
     else if organisationName.match regexMunicipality
-        returnValue = 'municipality'
+        returnValue = 'Municipality'
     else if organisationName.match regexFund
-        returnValue = 'fund'
+        returnValue = 'Fund'
     else if organisationName.match regexPolicyRelevant
-        returnValue = 'policy-relevant'
+        returnValue = 'Policy-relevant'
     else if organisationName.match regexMinistry
-        returnValue = 'ministry'
+        returnValue = 'Ministry'
     else if organisationName.match regexCity
-        returnValue = 'city'
+        returnValue = 'City'
     else if organisationName.match regexState
-        returnValue = 'state'
+        returnValue = 'Federal state'
     else if organisationName.match regexAgency
-        returnValue = 'agency'
+        returnValue = 'Agency'
     else if organisationName.match regexMuseum
-        returnValue = 'museum'
+        returnValue = 'Museum'
 
     console.log "Undetermined organisation type for: " + organisationName if returnValue is 'undetermined'
     returnValue
@@ -150,20 +150,20 @@ lineToOrganisation = (line, feedback) ->
                 feedback.unknownFederalStateEntries.push organisation
             # Feedback for org type
             switch organisation.type
-                when 'company' then feedback.organisationTypeCompany++
-                when 'association' then feedback.organisationTypeAssociation++
-                when 'chamber' then feedback.organisationTypeChamber++
-                when 'education' then feedback.organisationTypeEducation++
-                when 'foundation' then feedback.organisationTypeFoundation++
-                when 'municipality' then feedback.organisationTypeMunicipality++
-                when 'fund' then feedback.organisationTypeFund++
-                when 'undetermined' then feedback.undeterminedOrganisationType++
-                when 'policy-relevant' then feedback.organisationTypePolicyRelevant++
-                when 'ministry' then feedback.organisationTypeMinistry++
-                when 'city' then feedback.organisationTypeCity++
-                when 'state' then feedback.organisationTypeState++
-                when 'agency' then feedback.organisationTypeAgency++
-                when 'museum' then feedback.organisationTypeMuseum++
+                when 'Company' then feedback.organisationTypeCompany++
+                when 'Association' then feedback.organisationTypeAssociation++
+                when 'Chamber' then feedback.organisationTypeChamber++
+                when 'Education' then feedback.organisationTypeEducation++
+                when 'Foundation' then feedback.organisationTypeFoundation++
+                when 'Municipality' then feedback.organisationTypeMunicipality++
+                when 'Fund' then feedback.organisationTypeFund++
+                when 'Undetermined' then feedback.undeterminedOrganisationType++
+                when 'Policy-relevant' then feedback.organisationTypePolicyRelevant++
+                when 'Ministry' then feedback.organisationTypeMinistry++
+                when 'City' then feedback.organisationTypeCity++
+                when 'State' then feedback.organisationTypeState++
+                when 'Agency' then feedback.organisationTypeAgency++
+                when 'Museum' then feedback.organisationTypeMuseum++
 
             feedback
         .catch (err) ->
@@ -1028,7 +1028,19 @@ module.exports = (Transparency) ->
             .sort('federalState')
             .exec()
             .then (result) ->
-              res.status(200).send result
+                for i in [1...10]
+                    found = false
+                    for r in result
+                        found = false
+                        if r.federalState is "AT-" + i
+                            found = true
+                            break
+                    if !found
+                        result.push {
+                            amount: 0,
+                            federalState: "AT-" + i
+                        }
+                res.status(200).send result
             .catch (error) ->
                 console.log "Error query data for map: #{error}"
                 res.status(500).send error: "Could not get data for map #{error}"
