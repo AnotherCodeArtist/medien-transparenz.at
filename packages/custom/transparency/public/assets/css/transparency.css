@@ -272,7 +272,12 @@ span.label.year {
     padding-top: 50px;
     padding-left: 20px;
     margin-top: -20px;
+    margin-bottom: 20px;
     color: #ecf8ff;
+}
+
+.paddingBottom{
+    padding-bottom: 20px;
 }
 
 .page-header h1 {

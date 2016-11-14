@@ -109,7 +109,6 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     circle.setAttributeNS(null, "id", "id" + id);
                     circle.setAttributeNS(null, "class", "event labelToggle " + className + " circle" + id);
                     circle.setAttributeNS(null, "onclick", "for (let el of document.querySelectorAll('.id" + id + "')) el.style.visibility = (el.style.visibility === 'hidden') ? 'visible' : 'hidden';
-                                                            for (let el of document.querySelectorAll('.circle" + id + "')) console.log(el.fill);
                                                             for (let el of document.querySelectorAll('.circle" + id + "')) el.style.fill = (el.style.fill === 'transparent') ? '' : 'transparent';");
                     document.getElementById("timeline").appendChild(circle);
 
