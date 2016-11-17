@@ -125,6 +125,10 @@ msgstr ""
 msgid "Display _MENU_ records"
 msgstr ""
 
+#: controllers/topEntriesController.js:145
+msgid "Display top spender or top recipient"
+msgstr ""
+
 #: views/events.html:25
 #: views/grouping.html:28
 msgid "Edit"
@@ -193,6 +197,11 @@ msgstr ""
 #: views/index.html:27
 #: views/top.html:19
 msgid "Fix slider range"
+msgstr ""
+
+#: controllers/flowController.js:25
+#: controllers/topEntriesController.js:139
+msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr ""
 
 #: views/flowdetail.html:12
@@ -277,6 +286,15 @@ msgstr ""
 msgid "It all started with computer programming project as part of one our courses. This led to a prototypic solution created by the following students:"
 msgstr ""
 
+#: controllers/flowController.js:19
+#: controllers/topEntriesController.js:133
+msgid "It is possible to customize the pie chart. To do so, use the settings."
+msgstr ""
+
+#: controllers/topEntriesController.js:151
+msgid "It is possible to show the chart for a specific federal state."
+msgstr ""
+
 #: views/about.html:32
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
@@ -331,8 +349,17 @@ msgstr ""
 msgid "Move the sliders to define a range"
 msgstr ""
 
+#: controllers/flowController.js:22
+#: controllers/topEntriesController.js:136
+msgid "Move the sliders to define a range."
+msgstr ""
+
 #: views/uploadOrganisation.html:88
 msgid "Municipality"
+msgstr ""
+
+#: views/uploadOrganisation.html:92
+msgid "Museum"
 msgstr ""
 
 #: controllers/groupingController.js:55
@@ -536,6 +563,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: controllers/topEntriesController.js:154
+msgid "Select the numbers of elements in the pie chart"
+msgstr ""
+
 #: views/flow.html:19
 #: views/top.html:7
 msgid "Settings"
@@ -634,7 +665,12 @@ msgstr ""
 msgid "Total amount of all entries"
 msgstr ""
 
-#: controllers/flowController.js:430
+#: controllers/flowController.js:28
+#: controllers/topEntriesController.js:148
+msgid "Transfers are divided in different payment types. Select the types to display."
+msgstr ""
+
+#: controllers/flowController.js:446
 #: views/grouping.html:16
 msgid "Type"
 msgstr ""

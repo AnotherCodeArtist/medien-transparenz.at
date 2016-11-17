@@ -38,6 +38,10 @@ TransferSchema = new Schema
         type: String
         trim: true
         index: 'hashed'
+    organisationType:
+        type: String
+        trim: true
+        index:'hashed'
 
 TransferSchema.path('transferType').validate(
     (transferType) -> transferType in [2,4,31]

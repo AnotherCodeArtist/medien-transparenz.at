@@ -177,6 +177,10 @@ msgstr "Gruppe dekativieren"
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
+#: controllers/topEntriesController.js:145
+msgid "Display top spender or top recipient"
+msgstr "Wählen Sie zwischen Spitzenzahler und Spitzenempfänger aus"
+
 #: views/events.html:25 views/grouping.html:28
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -246,6 +250,10 @@ msgstr "Bundesland"
 #: views/flow.html:39 views/index.html:27 views/top.html:19
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
+
+#: controllers/flowController.js:25 controllers/topEntriesController.js:139
+msgid "Fix slider range. With that it is possible to keep the range constant."
+msgstr "Zeitspanne fixieren. Damit ist es möglich den Bereich festzusetzen."
 
 #: views/flowdetail.html:12
 msgid "Flow in detail"
@@ -351,6 +359,16 @@ msgstr ""
 "Alles begann mit einem Programmierprojekt in einer Lehrveranstaltung. Dabei "
 "wurde ein erster Prototyp von folgenden Studierenden entwickelt:"
 
+#: controllers/flowController.js:19 controllers/topEntriesController.js:133
+msgid "It is possible to customize the pie chart. To do so, use the settings."
+msgstr ""
+"Sie können die Eigenschaften des Diagrammes verändern. Nutzen Sie dafür die "
+"Einstellungen."
+
+#: controllers/topEntriesController.js:151
+msgid "It is possible to show the chart for a specific federal state."
+msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
+
 #: views/about.html:32
 msgid ""
 "Let's see how organisations distribute their money and where media companies "
@@ -401,9 +419,17 @@ msgstr "Zahlungsflüsse"
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
+#: controllers/flowController.js:22 controllers/topEntriesController.js:136
+msgid "Move the sliders to define a range."
+msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern."
+
 #: views/uploadOrganisation.html:88
 msgid "Municipality"
 msgstr "Gemeinde"
+
+#: views/uploadOrganisation.html:92
+msgid "Museum"
+msgstr "Museum"
 
 #: controllers/groupingController.js:55
 msgid "Nationwide"
@@ -590,6 +616,10 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
+#: controllers/topEntriesController.js:154
+msgid "Select the numbers of elements in the pie chart"
+msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
+
 #: views/flow.html:19 views/top.html:7
 msgid "Settings"
 msgstr "Einstellungen"
@@ -708,7 +738,15 @@ msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Total amount of all entries"
 msgstr "Summe aller Zahlungen"
 
-#: controllers/flowController.js:430 views/grouping.html:16
+#: controllers/flowController.js:28 controllers/topEntriesController.js:148
+msgid ""
+"Transfers are divided in different payment types. Select the types to "
+"display."
+msgstr ""
+"Transfers sind in verschiedenen Zahlungstypen unterteilt. Treffen Sie eine "
+"Auswahl."
+
+#: controllers/flowController.js:446 views/grouping.html:16
 msgid "Type"
 msgstr "Typ"
 
@@ -755,7 +793,7 @@ msgstr "Wer ist dabei?"
 
 #: views/top.html:28
 msgid ""
-"With groupings enabled single transfers will be taken together (f.e. to show "
+"With groupings enabled single transfers will be taken together (e.g. to show "
 "umbrella organisations)"
 msgstr ""
 "Wenn Gruppierung aktiviert, werden einzelne Transfers zusammengefasst (z.B. "

@@ -337,16 +337,17 @@ app.directive 'austrianMap', ($rootScope, TPAService) ->
                     maximum = Number.NEGATIVE_INFINITY
                     sum = 0
                     for k,v of $scope.data
-                         sum += v
-                         if v > maximum
-                              maximum = v
+                         if v.federalState != 'Unknown'
+                              sum += v.amount
+                              if v.amount > maximum
+                                   maximum = v.amount
                     for k,v of $scope.data
-                         transferSums[k] = {}
-                         transferSums[k].height = v/parseFloat(maximum)
-                         transferSums[k].sum = v
-                         transferSums[k].percent = (v/sum)*100
-                         transferSums[k].iso = k
-
+                         if v.federalState != 'Unknown'
+                              transferSums[v.federalState] = {}
+                              transferSums[v.federalState].height = v.amount/parseFloat(maximum)
+                              transferSums[v.federalState].sum = v.amount
+                              transferSums[v.federalState].percent = (v.amount/sum)*100
+                              transferSums[v.federalState].iso = v.federalState
                     if !initialized
                          init()
                          render()

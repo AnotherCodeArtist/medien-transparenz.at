@@ -74,19 +74,20 @@ lineToZipCode = (line, numberOfZipCodes) ->
 determineOrganisationType = (organisationName) ->
     #public: state (Land), city (Stadt), municipality (Gemeinde)
     returnValue = 'undetermined'
-    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.)|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S.R.L.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL/i
+    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.).*|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S\.R\.L\.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL|.*likvidaci.*|.*p\.l\.c\./i
     regexIncorporatedCompany = /.* AG.*/
     regexAssociation = /.*(Verband).*|.*(Verein).*/i
     regexFoundation = /.*(Stiftung).*|.*(Holding)/i
-    regexCity = /^Stadt .+/i
+    regexCity = /^Stadt .+|.*Stadtwerke.*/i
     regexMunicipality = /^(?:Markt)?gemeinde?.*|Stadtgemeinde .*|.*Sanitäts.*/i
     regexState = /^Land .+/ #Stadt Wien -- provincial
     regexMinistry = /^(?:Bundesministerium|Bundeskanzleramt)/
-    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft|.*Agency.*|Arbeitsmarktservice)/i #national - public agency
+    regexAgency = /.*(Bundesamt|Patentamt|Parlamentsdirektion|Präsidentschaftskanzlei|Verfassungsgerichtshof|Volksanwaltschaft|.*Agency.*|Arbeitsmarktservice|Agentur.*)/i #national - public agency
     regexFund = /.*Fonds?.*/i
     regexChamber = /.*?Kammer?.*/i
     regexPolicyRelevant = /^(Alternativregion).*|.*BIFIE|.*FMA|.*Sprengel?.*|^Kleinregion .*|Arbeitsmarktservice|Verwaltungsgerichtshof/i
     regexEducation = /.*(Alumni).*|.*(Universit).*|.*(Hochsch).*|.*Mittelschul.*|.*Schul.*|.*Päda.*/i
+    regexMuseum = /Albertina|.*Museum.*|.*Belvedere.*/i
 
     if organisationName.match regexCompany
         returnValue = 'company'
@@ -114,6 +115,8 @@ determineOrganisationType = (organisationName) ->
         returnValue = 'state'
     else if organisationName.match regexAgency
         returnValue = 'agency'
+    else if organisationName.match regexMuseum
+        returnValue = 'museum'
 
     console.log "Undetermined organisation type for: " + organisationName if returnValue is 'undetermined'
     returnValue
@@ -160,6 +163,7 @@ lineToOrganisation = (line, feedback) ->
                 when 'city' then feedback.organisationTypeCity++
                 when 'state' then feedback.organisationTypeState++
                 when 'agency' then feedback.organisationTypeAgency++
+                when 'museum' then feedback.organisationTypeMuseum++
 
             feedback
         .catch (err) ->
@@ -185,6 +189,7 @@ lineToTransfer = (line, feedback) ->
         transfer.media = m[5].replace('""','"').replace(/http:\/\//i,'').replace('www.','').replace(/([\w\.-]+(?:\.at|\.com))/,(m)->m.toLowerCase())
         transfer.period = parseInt(m[2] + m[3])
         transfer.amount = parseFloat m[6].replace ',', '.'
+        transfer.organisationType = determineOrganisationType transfer.organisation
         #Save reference
         Organisation.findOne({ 'name': transfer.organisation }, 'name federalState')
         .then (results) ->
@@ -359,6 +364,7 @@ module.exports = (Transparency) ->
             organisationTypeChamber: 0,
             organisationTypePolicyRelevant: 0,
             organisationTypeEducation: 0,
+            organisationTypeMuseum: 0,
             notAustria: 0,
             errors:0
             errorEntries: []
@@ -990,76 +996,46 @@ module.exports = (Transparency) ->
             res.json Array.from(new Set(result))
 
     federalstates: (req, res) ->
-        result =
-            'AT-1': 0,
-            'AT-2': 0,
-            'AT-3': 0,
-            'AT-4': 0,
-            'AT-5': 0,
-            'AT-6': 0,
-            'AT-7': 0,
-            'AT-8': 0,
-            'AT-9': 0,
-        period = {}
-        period['$gte'] = parseInt(req.query.from) if req.query.from
-        period['$lte'] = parseInt(req.query.to) if req.query.to
-        orgType = req.query.orgType or 'org'
-        paymentTypes = req.query.pType or ['2']
-        paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
-        query = {}
-        project =
-            organisation: '$_id.organisation'
-            organisationReference: '$_id.organisationReference'
-            _id: 0
-            total: 1
-        if period.$gte? or period.$lte?
-            query.period = period
-        query.transferType =
-            $in: paymentTypes.map (e)->
-                parseInt(e)
-        group =
-            _id:
-                organisation: if orgType is 'org' then '$organisation' else '$media',
-                organisationReference: '$organisationReference'
-            total:
-                $sum: '$amount'
-        #console.log "Query: "
-        #console.log query
-        #console.log "Group: "
-        #console.log group
-        #console.log "Project: "
-        #console.log project
-        totalPromise = Transfer.aggregate($match: query)
-        .group(group)
-        .sort('-total')
-        .project(project)
-        .exec()
-        Q.all([totalPromise])
-        .then (promiseResults) ->
-            try
-                populatedPromise = getPopulateInformation(promiseResults[0], 'organisationReference')
-                .then (
-                    (isPopulated) ->
-                        try
-                            populatedTransfers = promiseResults[0]
+        try
+            period = {}
+            period['$gte'] = parseInt(req.query.from) if req.query.from
+            period['$lte'] = parseInt(req.query.to) if req.query.to
+            paymentTypes = req.query.pType or []
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            organisationTypes = req.query.orgTypes or []
+            organisationTypes = [organisationTypes] if organisationTypes not instanceof Array
+            query = {}
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
+            (query.organisationType =
+                $in: organisationTypes.map (e)->
+                    (e)) if organisationTypes.length > 0
+            if period.$gte? or period.$lte?
+                query.period = period
+            group =
+                _id:
+                    federalState: "$federalState"
+                amount:
+                    $sum: "$amount"
+            Transfer.aggregate($match: query)
+            .group(group)
+            .project(
+                federalState: "$_id.federalState",
+                _id: 0
+                amount: 1
+            )
+            .sort('federalState')
+            .exec()
+            .then (result) ->
+              res.status(200).send result
+            .catch (error) ->
+                console.log "Error query data for map: #{error}"
+                res.status(500).send error: "Could not get data for map #{error}"
+        catch error
+            console.log error
+            res.status(500).send("Error with query for map")
 
-                            if orgType is 'media'
-                                populatedTransfers = mediaToFederalState populatedTransfers
-
-                            for transfer in populatedTransfers
-                                result[transfer.organisationReference.federalState]+=transfer.total
-                            res.send(JSON.stringify(result))
-                        catch error
-                            console.log error
-                            res.status(500).send("Error while calculate sum for federal states!")
-                )
-            catch error
-                console.log error
-                res.status(500).send("Error while calculate sum for federal states!")
-        .catch (err) ->
-            console.log "Error in Promise.when"
-            console.log err
-            res.status(500).send("Error #{err.message}")
 
 
     #Grouping
@@ -1195,4 +1171,23 @@ module.exports = (Transparency) ->
         .catch (
             (err) ->
                 res.status(500).send error: "Could not load grouping's member #{err}"
+        )
+
+    organisationTypes: (req, res) ->
+        Transfer.aggregate(
+            $match: {}
+        )
+        .group(
+            _id:
+                organisationType: "$organisationType"
+        )
+        .project(
+            type: "$_id.organisationType", _id: 0
+        )
+        .sort("type")
+        .exec()
+        .then(
+            (data) ->
+                res.send data
+            (err) -> res.status(500).send("Could not load organisation types (#{err})!")
         )
