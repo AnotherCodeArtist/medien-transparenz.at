@@ -74,7 +74,7 @@ lineToZipCode = (line, numberOfZipCodes) ->
 determineOrganisationType = (organisationName) ->
     #public: state (Land), city (Stadt), municipality (Gemeinde)
     returnValue = 'Undetermined'
-    regexCompany = /(.* G?.m?.b?.H?.?$)|.* Ges?.*m?.b?.H?.|.*G?(es)?mbH|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.).*|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S\.R\.L\.$|.* in Liq.*|.*ges.m.b.H.?.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL|.*likvidaci.*|.*p\.l\.c\./i
+    regexCompany = /(.+G(?:es|esellschaft)?\.?m\.?b\.?H\.?.?$)|.*Gesellschaft?.*|.*AG$|.*OG$|.*KG$|(.* d.o.o?.).*|.*s.r.o?.$|.*Sp.? z?.*|.*spol.r.s.o.|.*Sp.z.o.o..*|.* S\.R\.L\.$|.* in Liq.*|.*unternehmung|.*Limited.*|.*AD$|.*S.P.A.*|.*S.P.R.L.|.*Iberica SL|.*likvidaci.*|.*p\.l\.c\./i
     regexIncorporatedCompany = /.* AG.*/
     regexAssociation = /.*(Verband).*|.*(Verein).*/i
     regexFoundation = /.*(Stiftung).*|.*(Holding)/i
@@ -89,7 +89,9 @@ determineOrganisationType = (organisationName) ->
     regexEducation = /.*(Alumni).*|.*(Universit).*|.*(Hochsch).*|.*Mittelschul.*|.*Schul.*|.*Päda.*/i
     regexMuseum = /Albertina|.*Museum.*|.*Belvedere.*/i
 
-    if organisationName.match regexCompany
+    if organisationName is 'Stadt Wien'
+        returnValue = 'Federal state'
+    else if organisationName.match regexCompany
         returnValue = 'Company'
     else if organisationName.match regexIncorporatedCompany
         returnValue = 'Company'
@@ -161,7 +163,7 @@ lineToOrganisation = (line, feedback) ->
                 when 'Policy-relevant' then feedback.organisationTypePolicyRelevant++
                 when 'Ministry' then feedback.organisationTypeMinistry++
                 when 'City' then feedback.organisationTypeCity++
-                when 'State' then feedback.organisationTypeState++
+                when 'Federal state' then feedback.organisationTypeState++
                 when 'Agency' then feedback.organisationTypeAgency++
                 when 'Museum' then feedback.organisationTypeMuseum++
 
