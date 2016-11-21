@@ -16,6 +16,7 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
     $scope.progress = 20
     $scope.showSettings = true
     $scope.org = null
+    $scope.IntroOptions = null;
     $scope.slider =
         from: 0
         to: 0
@@ -70,6 +71,34 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
             'print'
         ]
     )
+
+    # Method for setting the intro-options (e.g. after translations)
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#eventsSelection')
+                    intro: gettextCatalog.getString 'It is possible to show specific events. Per default, all events are selected.'
+                }
+                {
+                    element: document.querySelector('#tagSelection')
+                    intro: gettextCatalog.getString 'Events can be related to tags. To select specific tags, use this option.'
+                }, {
+                    element: document.querySelector('#regionSelection')
+                    intro: gettextCatalog.getString 'Events are connected to regions. To show events from a specific region, use this option.'
+                }, {
+                    element: document.querySelector('#flowDetailLegend')
+                    intro: gettextCatalog.getString 'The legend describes the possible icons used for the charts.'
+                }
+
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
 
     $scope.updateEvents = () ->
         $scope.$broadcast 'updateEvents'
@@ -130,6 +159,7 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+        setIntroOptions()
 
     $scope.$on 'gettextLanguageChanged', translate
         
@@ -148,6 +178,7 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
                 data2 = res2.data
                 $scope.annualComparisonData = data2
                 stopLoading()
+                setIntroOptions()
 
         $scope.maxExceeded = 0
 

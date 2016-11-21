@@ -130,7 +130,7 @@ msgstr "Österreich"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: views/flowdetail.html:139
+#: views/flowdetail.html:152
 msgid "Begin of Event"
 msgstr "Beginn des Events"
 
@@ -187,7 +187,7 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:432 controllers/flowDetailController.js:164
+#: controllers/flowController.js:432 controllers/flowDetailController.js:192
 #: controllers/topEntriesController.js:281
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
@@ -212,11 +212,12 @@ msgstr "Gruppe aktivieren"
 msgid "End date"
 msgstr "Enddatum"
 
-#: views/flowdetail.html:143
+#: views/flowdetail.html:156
 msgid "End of Event"
 msgstr "Ende des Events"
 
-#: controllers/flowController.js:49 controllers/topEntriesController.js:163
+#: controllers/flowController.js:49 controllers/flowDetailController.js:114
+#: controllers/topEntriesController.js:163
 msgid "End tour"
 msgstr "Tour beenden"
 
@@ -237,6 +238,21 @@ msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 #: views/upload.html:21 views/uploadOrganisation.html:22
 msgid "Error"
 msgstr "Fehler"
+
+#: controllers/flowDetailController.js:102
+msgid ""
+"Events are connected to regions. To show events from a specific region, use "
+"this option."
+msgstr ""
+"Events sind Regionen zugewiesen. Um Events von bestimmten Regionen "
+"anzuzeigen, benutzen Sie diese Option."
+
+#: controllers/flowDetailController.js:99
+msgid ""
+"Events can be related to tags. To select specific tags, use this option."
+msgstr ""
+"Events können Tags zugeordnet werden. Um bestimmte Tags auszuwählen, "
+"benutzen Sie diese Option."
 
 #: views/impress.html:30
 msgid "Exclusion of Liability"
@@ -384,19 +400,26 @@ msgstr ""
 "Sie können die Eigenschaften des Diagrammes verändern. Nutzen Sie dafür die "
 "Einstellungen."
 
+#: controllers/flowDetailController.js:96
+msgid ""
+"It is possible to show specific events. Per default, all events are selected."
+msgstr ""
+"Es ist möglich, bestimmte Events anzuzeigen. Standardmäßig sind alle Events "
+"ausgewählt."
+
 #: controllers/topEntriesController.js:151
 msgid "It is possible to show the chart for a specific federal state."
 msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
 
-#: views/flowdetail.html:156
+#: views/flowdetail.html:169
 msgid "Labels hidden"
 msgstr "Labels nicht sichtbar"
 
-#: views/flowdetail.html:152
+#: views/flowdetail.html:165
 msgid "Labels visible"
 msgstr "Labels sichtbar"
 
-#: views/flowdetail.html:127
+#: views/flowdetail.html:140
 msgid "Legend"
 msgstr "Legende"
 
@@ -466,7 +489,8 @@ msgstr "Museum"
 msgid "Nationwide"
 msgstr "Bundesweit"
 
-#: controllers/flowController.js:46 controllers/topEntriesController.js:160
+#: controllers/flowController.js:46 controllers/flowDetailController.js:111
+#: controllers/topEntriesController.js:160
 msgid "Next info"
 msgstr "Nächste Info"
 
@@ -504,7 +528,7 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: views/flowdetail.html:148
+#: views/flowdetail.html:161
 msgid "One-day Event"
 msgstr "Eintägiges Event"
 
@@ -611,11 +635,12 @@ msgstr "Politiknah"
 msgid "Predictable"
 msgstr "Vorhersehbar"
 
-#: views/flowdetail.html:131
+#: views/flowdetail.html:144
 msgid "Predictable Event"
 msgstr "Vorhersehbares Event"
 
-#: controllers/flowController.js:47 controllers/topEntriesController.js:161
+#: controllers/flowController.js:47 controllers/flowDetailController.js:112
+#: controllers/topEntriesController.js:161
 msgid "Previous info"
 msgstr "Vorherige Info"
 
@@ -656,15 +681,15 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
-#: views/flowdetail.html:66
+#: views/flowdetail.html:75
 msgid "Select Events"
 msgstr "Events auswählen"
 
-#: views/flowdetail.html:106
+#: views/flowdetail.html:118
 msgid "Select by Region"
 msgstr "Nach Region auswählen"
 
-#: views/flowdetail.html:88
+#: views/flowdetail.html:99
 msgid "Select by Tag"
 msgstr "Nach Tag auswählen"
 
@@ -672,17 +697,18 @@ msgstr "Nach Tag auswählen"
 msgid "Select the numbers of elements in the pie chart"
 msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 
-#: views/flow.html:19 views/flowdetail.html:54 views/index.html:27
+#: views/flow.html:19 views/flowdetail.html:62 views/index.html:27
 #: views/top.html:12
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:431 controllers/flowDetailController.js:163
+#: controllers/flowController.js:431 controllers/flowDetailController.js:191
 #: controllers/topEntriesController.js:280
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
-#: controllers/flowController.js:48 controllers/topEntriesController.js:162
+#: controllers/flowController.js:48 controllers/flowDetailController.js:113
+#: controllers/topEntriesController.js:162
 msgid "Skip info"
 msgstr "Info überspringen"
 
@@ -711,7 +737,7 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
-#: views/flowdetail.html:167
+#: views/flowdetail.html:180
 msgid ""
 "The first chart on that page shows the flow of money over the available "
 "period of time. The highest and the lowest value is highlighted. In case of "
@@ -721,16 +747,22 @@ msgstr ""
 "der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
 "verfügbar, so werden diese angezeigt."
 
-#: views\index.html:75
+#: controllers/flowDetailController.js:105
+msgid "The legend describes the possible icons used for the charts."
+msgstr ""
+"Die Legende beschreibt Symbole, die in den Diagrammen vorkommen können."
+
+#: views/index.html:75
+#, fuzzy
 msgid ""
-"The map can be turned by holding the left mouse button and\r\n"
+"The map can be turned by holding the left mouse button and\n"
 "                        dragging within the frame. It is possible to zoom "
 "into the map by scrolling."
 msgstr ""
 "Die Karte kann mittels Halten der linken Maus-Taste gedreht werden.\r\n"
 "Mittels Scrollen kann in die Karte gezoomt werden."
 
-#: views/flowdetail.html:181
+#: views/flowdetail.html:194
 msgid ""
 "The second chart shows differences between the money flow compared to the "
 "previous quarter. The highest and lowest value is highlighted. If available, "
@@ -812,7 +844,7 @@ msgstr "Tirol"
 msgid "Undetermined"
 msgstr "Unbestimmt"
 
-#: views/flowdetail.html:134
+#: views/flowdetail.html:147
 msgid "Unpredictable Event"
 msgstr "Nicht vorhersehbares Event"
 
@@ -911,12 +943,12 @@ msgstr ""
 msgid "last"
 msgstr "Letzte"
 
-#: controllers/flowController.js:426 controllers/flowDetailController.js:161
+#: controllers/flowController.js:426 controllers/flowDetailController.js:189
 #: controllers/topEntriesController.js:275
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:425 controllers/flowDetailController.js:160
+#: controllers/flowController.js:425 controllers/flowDetailController.js:188
 #: controllers/topEntriesController.js:274
 msgid "previous"
 msgstr "vorherige"
