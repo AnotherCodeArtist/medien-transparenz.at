@@ -79,10 +79,11 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         $scope.regions = []
         addedregions = []
         for event in $scope.events
+            event.selected = true;
             if addedregions.indexOf(event.region) is -1
                 $scope.regions.push {
                     name: event.region
-                    selected: false
+                    selected: true
                 }
                 addedregions.push event.region
 
@@ -103,7 +104,7 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         for tag in res.data
             tags.push {
                 name: tag,
-                selected: false
+                selected: true
             }
         $scope.tags = tags
 
