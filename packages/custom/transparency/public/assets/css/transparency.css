@@ -90,7 +90,8 @@ div.sankeyChart {
 .label.year,
 .label.label-success,
 .label.label-default,
-.label.label-primary {
+.label.label-primary,
+.label.label-danger{
     text-shadow: none;
 }
 
@@ -103,28 +104,50 @@ a.label {
 }
 
 .predictable {
-    fill: blue;
+    fill: black;
 }
 
 .inpredictable {
-    fill: red;
+    fill: black;
 }
 
 .eventLine.predictable {
-    stroke: blue;
+    stroke: black;
 }
 
 .eventLine.inpredictable {
-    stroke: red;
+    stroke: black;
+}
+
+.labelToggle{
+    stroke-width: 1;
+    cursor: pointer;
+}
+
+.labelToggle.predictable {
+    stroke: black;
+}
+
+.labelToggle.inpredictable{
+    stroke: black;
 }
 
 .eventLine {
-    stroke-width: 1.5;
+    stroke-width: 3.5;
 }
 
 .eventText {
     font-size: 10px;
     text-anchor: middle;
+}
+
+.eventText.start
+{
+    text-anchor: end;
+}
+
+.eventText.end{
+    text-anchor: start;
 }
 
 .sankeyChart .node:hover {
@@ -250,7 +273,12 @@ span.label.year {
     padding-top: 50px;
     padding-left: 20px;
     margin-top: -20px;
+    margin-bottom: 20px;
     color: #ecf8ff;
+}
+
+.paddingBottom{
+    padding-bottom: 20px;
 }
 
 .page-header h1 {
@@ -521,3 +549,4 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
     padding-right: 0
 }
+

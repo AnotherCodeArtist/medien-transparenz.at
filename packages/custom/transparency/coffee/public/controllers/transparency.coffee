@@ -8,7 +8,9 @@ angular.module 'mean.transparency'
           name: 'transparency'
 
      stateName = "index"
-     fieldsToStore = ['slider','periods','typesText']
+     fieldsToStore = ['slider','periods','typesText', 'orgTypes']
+
+     $scope.showSettings = true
 
      $scope.$on 'isoChanged', (event, data) ->
           $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
@@ -49,7 +51,7 @@ angular.module 'mean.transparency'
           params.to = $scope.periods[$scope.slider.to/5].period
           types = (v.type for v in $scope.typesText when v.checked)
           (params.pType = types) if types.length > 0
-          params.orgTypes = $scope.orgTypes if $scope.orgTypes.length > 0
+          params.orgTypes = (o.value for o in $scope.orgTypes when o.selected)
           #TEST #params.orgTypes = ["city", "chamber"]
           params
 
@@ -73,6 +75,7 @@ angular.module 'mean.transparency'
 
      translate = ->
           $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
+          $scope.orgTypes.forEach (o) -> o.name = gettextCatalog.getString(o.value)
 
      $scope.$on 'gettextLanguageChanged', translate
 
@@ -80,14 +83,12 @@ angular.module 'mean.transparency'
           if toState.name isnt 'map'
                TPAService.saveState stateName,fieldsToStore,$scope
 
-     registerWatchers = -> $scope.$watch('typesText',change,true)
+     registerWatchers = () ->
+          $scope.$watch('typesText',change,true)
+          $scope.$watch('orgTypes',change,true)
 
 
      savedState = sessionStorage.getItem stateName
-     orgTypePromise = TPAService.organisationTypes()
-     orgTypePromise.then (res) ->
-        for orgTypeObject in res.data
-            $scope.orgTypes.push orgTypeObject.type
 
      if savedState
           TPAService.restoreState stateName, fieldsToStore, $scope
@@ -101,6 +102,10 @@ angular.module 'mean.transparency'
                     step:5
                     floor:0
                     onEnd: -> change(1,2)
+          orgTypePromise = TPAService.organisationTypes()
+          orgTypePromise.then (res) ->
+               for orgTypeObject in res.data
+                    $scope.orgTypes.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type, selected: true)
 
           pP = TPAService.periods()
           pP.then (res) ->

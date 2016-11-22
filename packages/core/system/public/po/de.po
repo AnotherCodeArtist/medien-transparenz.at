@@ -12,6 +12,12 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: views/index.html:64
+msgid ""
+"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.checked\">{{oType}}"
+msgstr ""
+"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.checked\">{{oType}}"
+
 #: views/about.html:2
 msgid "About Us"
 msgstr "Über uns"
@@ -24,11 +30,15 @@ msgstr "Aktiv"
 msgid "Add member to group"
 msgstr "Gruppenteilnehmer hinzufügen"
 
+#: views/impress.html:21
+msgid "After winning a"
+msgstr "Nach Erhalt einer"
+
 #: views/uploadOrganisation.html:48
 msgid "Agency"
 msgstr "Amt"
 
-#: views/impress.html:22
+#: views/impress.html:27
 msgid ""
 "All Data that is published via this site it taken from the quarterly reports "
 "published by KommAustria. It was then semi-automatically\n"
@@ -39,7 +49,7 @@ msgstr ""
 "Anschließend wurden dann die offensichtlichsten Fehler halbautomatisch "
 "korrigiert. Dies erfolgte unter Verwendung von "
 
-#: views/impress.html:24
+#: views/impress.html:29
 msgid ""
 "Although this was meant to significantly improve the data qualtity it could "
 "have also introduced some errors"
@@ -47,12 +57,12 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:436 controllers/flowController.js:56
+#: controllers/flowController.js:452 controllers/flowController.js:68
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr "Betrag"
 
-#: views/index.html:15
+#: views/index.html:16
 msgid ""
 "An Overview of Public Money spent on Media-Cooperations and -Funding in "
 "Austria"
@@ -108,11 +118,11 @@ msgstr ""
 "Organisationen am meisten ausgeben\n"
 " und welche Medien davon am stärksten profitieren."
 
-#: views/upload.html:30 views/uploadOrganisation.html:106
+#: views/upload.html:30 views/uploadOrganisation.html:110
 msgid "Attention"
 msgstr "Achtung"
 
-#: controllers/eventsController.js:46
+#: controllers/eventsController.js:51
 msgid "Austria"
 msgstr "Österreich"
 
@@ -120,7 +130,11 @@ msgstr "Österreich"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: controllers/eventsController.js:67
+#: views/flowdetail.html:139
+msgid "Begin of Event"
+msgstr "Beginn des Events"
+
+#: controllers/eventsController.js:72
 msgid "Burgenland"
 msgstr "Burgenland"
 
@@ -128,7 +142,7 @@ msgstr "Burgenland"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: controllers/eventsController.js:73
+#: controllers/eventsController.js:78
 msgid "Carinthia"
 msgstr "Kärnten"
 
@@ -140,11 +154,12 @@ msgstr "Kammer"
 msgid "City"
 msgstr "Stadt"
 
-#: controllers/topEntriesController.js:104
+#: controllers/topEntriesController.js:105 directives/sankeyDirective.js:68
+#: directives/sankeyDirective.js:94
 msgid "Click for Details"
 msgstr "Klicken Sie für mehr Details"
 
-#: views/top.html:64
+#: views/top.html:104
 msgid ""
 "Click on a segment of the pie chart to get more information on a particular "
 "organization"
@@ -172,8 +187,8 @@ msgstr "Löschen"
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:416 controllers/flowDetailController.js:105
-#: controllers/topEntriesController.js:240
+#: controllers/flowController.js:432 controllers/flowDetailController.js:164
+#: controllers/topEntriesController.js:281
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -197,7 +212,11 @@ msgstr "Gruppe aktivieren"
 msgid "End date"
 msgstr "Enddatum"
 
-#: controllers/flowController.js:37
+#: views/flowdetail.html:143
+msgid "End of Event"
+msgstr "Ende des Events"
+
+#: controllers/flowController.js:49 controllers/topEntriesController.js:163
 msgid "End tour"
 msgstr "Tour beenden"
 
@@ -211,7 +230,7 @@ msgstr "Einträge gefunden"
 msgid "Entries stored"
 msgstr "Einträge gespeichert"
 
-#: views/uploadOrganisation.html:108 views/uploadOrganisation.html:40
+#: views/uploadOrganisation.html:112 views/uploadOrganisation.html:40
 msgid "Entries without known federal state in Austria"
 msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 
@@ -219,11 +238,11 @@ msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 msgid "Error"
 msgstr "Fehler"
 
-#: views/impress.html:25
+#: views/impress.html:30
 msgid "Exclusion of Liability"
 msgstr "Haftungsausschluss"
 
-#: views/impress.html:26
+#: views/impress.html:31
 msgid ""
 "FH Joanneum Gesellschaft mbH is not liable for the correctness of data "
 "provided by KommAustria. FH Joanneum Gesellschaft mbH stores and processes "
@@ -239,7 +258,7 @@ msgstr ""
 "Unterbrechung des Dienstes (z. B. in Fällen von Server-Ausfallzeit), "
 "Datenfehler, falsche Darstellung von Daten oder Softwarefehler."
 
-#: views/list.html:12 views/top.html:49
+#: views/list.html:12 views/top.html:80
 msgid "Federal State"
 msgstr "Bundesland"
 
@@ -247,7 +266,7 @@ msgstr "Bundesland"
 msgid "Federal state"
 msgstr "Bundesland"
 
-#: views/flow.html:39 views/index.html:27 views/top.html:19
+#: views/flow.html:44 views/index.html:43 views/top.html:35
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
@@ -303,7 +322,7 @@ msgstr "Eigentümer der Gruppe"
 msgid "Group type"
 msgstr "Gruppentyp"
 
-#: views/grouping.html:3 views/top.html:25
+#: views/grouping.html:3 views/top.html:44
 msgid "Grouping"
 msgstr "Gruppierung"
 
@@ -339,7 +358,7 @@ msgstr ""
 "bzw. ob bestimmte Medien derartige\n"
 "Zahlungen erhalten, verwenden Sie am besten unsere Suche"
 
-#: views/uploadOrganisation.html:100
+#: views/uploadOrganisation.html:104
 msgid "Ignored"
 msgstr "Ignoriert"
 
@@ -369,6 +388,18 @@ msgstr ""
 msgid "It is possible to show the chart for a specific federal state."
 msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
 
+#: views/flowdetail.html:156
+msgid "Labels hidden"
+msgstr "Labels nicht sichtbar"
+
+#: views/flowdetail.html:152
+msgid "Labels visible"
+msgstr "Labels sichtbar"
+
+#: views/flowdetail.html:127
+msgid "Legend"
+msgstr "Legende"
+
 #: views/about.html:32
 msgid ""
 "Let's see how organisations distribute their money and where media companies "
@@ -389,7 +420,7 @@ msgstr "Organisationen"
 msgid "Loading Data to Update Diagram ..."
 msgstr "Daten werden geladen und das Diagramm vorbereitet ..."
 
-#: controllers/eventsController.js:61
+#: controllers/eventsController.js:66
 msgid "Lower Austria"
 msgstr "Niederösterreich"
 
@@ -397,13 +428,13 @@ msgstr "Niederösterreich"
 msgid "Manage events"
 msgstr "Events verwalten"
 
-#: controllers/flowController.js:118 controllers/flowController.js:234
-#: controllers/flowController.js:506 controllers/flowDetailController.js:9
+#: controllers/flowController.js:130 controllers/flowController.js:246
+#: controllers/flowController.js:522 controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 msgid "Media"
 msgstr "Medien"
 
-#: views/index.html:14
+#: views/index.html:15
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
@@ -415,7 +446,7 @@ msgstr "Ministerium"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views/flow.html:41 views/index.html:29 views/top.html:21
+#: views/index.html:46
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
@@ -435,11 +466,11 @@ msgstr "Museum"
 msgid "Nationwide"
 msgstr "Bundesweit"
 
-#: controllers/flowController.js:34
+#: controllers/flowController.js:46 controllers/topEntriesController.js:160
 msgid "Next info"
 msgstr "Nächste Info"
 
-#: controllers/groupingController.js:28
+#: controllers/eventsController.js:21 controllers/groupingController.js:28
 msgid "No"
 msgstr "Nein"
 
@@ -473,12 +504,20 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: controllers/flowController.js:507 controllers/flowDetailController.js:10
-#: controllers/groupingController.js:21 views/uploadOrganisation.html:112
+#: views/flowdetail.html:148
+msgid "One-day Event"
+msgstr "Eintägiges Event"
+
+#: controllers/flowController.js:523 controllers/flowDetailController.js:10
+#: controllers/groupingController.js:21 views/uploadOrganisation.html:116
 msgid "Organisation"
 msgstr "Organisation"
 
-#: controllers/flowController.js:119 controllers/flowController.js:235
+#: views/index.html:61
+msgid "Organisation Types"
+msgstr "Organisationstypen"
+
+#: controllers/flowController.js:131 controllers/flowController.js:247
 msgid "Organisations"
 msgstr "Organisationen"
 
@@ -486,32 +525,29 @@ msgstr "Organisationen"
 msgid "Organisations not from Austria"
 msgstr "Organisationen außerhalb Österreichs"
 
-#: views/uploadOrganisation.html:48 views/uploadOrganisation.html:52
-#: views/uploadOrganisation.html:56 views/uploadOrganisation.html:60
-#: views/uploadOrganisation.html:64 views/uploadOrganisation.html:68
-#: views/uploadOrganisation.html:72 views/uploadOrganisation.html:76
-#: views/uploadOrganisation.html:80 views/uploadOrganisation.html:84
-#: views/uploadOrganisation.html:88 views/uploadOrganisation.html:92
+#: views/uploadOrganisation.html:100 views/uploadOrganisation.html:48
+#: views/uploadOrganisation.html:52 views/uploadOrganisation.html:56
+#: views/uploadOrganisation.html:60 views/uploadOrganisation.html:64
+#: views/uploadOrganisation.html:68 views/uploadOrganisation.html:72
+#: views/uploadOrganisation.html:76 views/uploadOrganisation.html:80
+#: views/uploadOrganisation.html:84 views/uploadOrganisation.html:88
+#: views/uploadOrganisation.html:92 views/uploadOrganisation.html:96
 msgid "Organisations with organisation type"
 msgstr "Organisationen mit Organisationstyp"
-
-#: views/uploadOrganisation.html:96
-msgid "Organisations with undetermined organisation type"
-msgstr "Organisationen mit nicht definiertem Organisationstyp"
 
 #: views/upload.html:31
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:100
 msgid "Other media"
 msgstr "Andere Medien"
 
-#: directives/sankeyDirective.js:95
+#: directives/sankeyDirective.js:100
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
-#: controllers/topEntriesController.js:98
+#: controllers/topEntriesController.js:99
 msgid "Others"
 msgstr "Andere"
 
@@ -523,15 +559,15 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:430
+#: controllers/flowController.js:446
 msgid "Payer"
 msgstr "Zahler"
 
-#: controllers/flowController.js:55 controllers/flowDetailController.js:11
+#: controllers/flowController.js:67 controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:46 views/index.html:32 views/top.html:41
+#: views/flow.html:53 views/index.html:50 views/top.html:67
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
@@ -551,7 +587,7 @@ msgstr "Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Payments by Transfer Type"
 msgstr "Zahlungen nach Zahlungstyp"
 
-#: controllers/flowController.js:25
+#: controllers/flowController.js:37
 msgid ""
 "Per default the top spender based on your chosen payment types and period is "
 "selected."
@@ -559,15 +595,15 @@ msgstr ""
 "Standardmäßig wird automatisch der größte Zahler basierend auf Ihrer "
 "Zahlungstyp- und Zeitraumauswahl selektiert"
 
-#: views/flow.html:33 views/index.html:24 views/top.html:16
+#: views/flow.html:34 views/index.html:37 views/top.html:23
 msgid "Periods"
 msgstr "Zeitraum"
 
-#: views/flow.html:86
+#: views/flow.html:96
 msgid "Please select at least one organisation or media."
 msgstr "Bitte wählen sie zumindest eine Organisation oder ein Medium aus."
 
-#: views/uploadOrganisation.html:92
+#: views/uploadOrganisation.html:96
 msgid "Policy-relevant"
 msgstr "Politiknah"
 
@@ -575,7 +611,11 @@ msgstr "Politiknah"
 msgid "Predictable"
 msgstr "Vorhersehbar"
 
-#: controllers/flowController.js:35
+#: views/flowdetail.html:131
+msgid "Predictable Event"
+msgstr "Vorhersehbares Event"
+
+#: controllers/flowController.js:47 controllers/topEntriesController.js:161
 msgid "Previous info"
 msgstr "Vorherige Info"
 
@@ -583,8 +623,8 @@ msgstr "Vorherige Info"
 msgid "Quarter"
 msgstr "Quartal"
 
-#: controllers/flowController.js:430 controllers/topEntriesController.js:134
-#: controllers/topEntriesController.js:212
+#: controllers/flowController.js:446 controllers/topEntriesController.js:173
+#: controllers/topEntriesController.js:252
 msgid "Recipient"
 msgstr "Empfänger"
 
@@ -604,7 +644,7 @@ msgstr "Zurücksetzen"
 msgid "Results of the Upload"
 msgstr "Ergebnis des Uploads"
 
-#: controllers/eventsController.js:55
+#: controllers/eventsController.js:60
 msgid "Salzburg"
 msgstr "Salzburg"
 
@@ -616,33 +656,46 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
+#: views/flowdetail.html:66
+msgid "Select Events"
+msgstr "Events auswählen"
+
+#: views/flowdetail.html:106
+msgid "Select by Region"
+msgstr "Nach Region auswählen"
+
+#: views/flowdetail.html:88
+msgid "Select by Tag"
+msgstr "Nach Tag auswählen"
+
 #: controllers/topEntriesController.js:154
 msgid "Select the numbers of elements in the pie chart"
 msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 
-#: views/flow.html:19 views/top.html:7
+#: views/flow.html:19 views/flowdetail.html:54 views/index.html:27
+#: views/top.html:12
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:415 controllers/flowDetailController.js:104
-#: controllers/topEntriesController.js:239
+#: controllers/flowController.js:431 controllers/flowDetailController.js:163
+#: controllers/topEntriesController.js:280
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
-#: controllers/flowController.js:36
+#: controllers/flowController.js:48 controllers/topEntriesController.js:162
 msgid "Skip info"
 msgstr "Info überspringen"
 
-#: views/impress.html:21
+#: views/impress.html:26
 msgid "Source of Data"
 msgstr "Datenherkunft"
 
-#: controllers/topEntriesController.js:131
-#: controllers/topEntriesController.js:211
+#: controllers/topEntriesController.js:170
+#: controllers/topEntriesController.js:251
 msgid "Spender"
 msgstr "Zahler"
 
-#: views/top.html:31
+#: views/top.html:52
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
@@ -650,15 +703,15 @@ msgstr "Zahler/Empfänger"
 msgid "Start date"
 msgstr "Startdatum"
 
-#: controllers/eventsController.js:70
+#: controllers/eventsController.js:75
 msgid "Styria"
 msgstr "Steiermark"
 
-#: views/flow.html:124
+#: views/flow.html:134
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
-#: views/flowdetail.html:55
+#: views/flowdetail.html:167
 msgid ""
 "The first chart on that page shows the flow of money over the available "
 "period of time. The highest and the lowest value is highlighted. In case of "
@@ -668,15 +721,16 @@ msgstr ""
 "der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
 "verfügbar, so werden diese angezeigt."
 
-#: views/index.html:42
+#: views\index.html:75
 msgid ""
-"The map can be turned by holding the left mouse button and dragging within "
-"the frame. It is possible to zoom into the map by scrolling."
+"The map can be turned by holding the left mouse button and\r\n"
+"                        dragging within the frame. It is possible to zoom "
+"into the map by scrolling."
 msgstr ""
-"Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
-"werden. Mittels Scrollen kann in die Karte gezoomt werden."
+"Die Karte kann mittels Halten der linken Maus-Taste gedreht werden.\r\n"
+"Mittels Scrollen kann in die Karte gezoomt werden."
 
-#: views/flowdetail.html:69
+#: views/flowdetail.html:181
 msgid ""
 "The second chart shows differences between the money flow compared to the "
 "previous quarter. The highest and lowest value is highlighted. If available, "
@@ -698,7 +752,7 @@ msgstr ""
 "Damit möchte diese Web-Seite dazu beitragen, Open Government Initiativen in "
 "Österreich populärer zu machen"
 
-#: controllers/flowController.js:28
+#: controllers/flowController.js:40
 msgid ""
 "To discover the flow in detail just click on the flow between an "
 "organisation and a media entry."
@@ -706,7 +760,7 @@ msgstr ""
 "Um den Geldfluss im Detail zu entdecken, klicken Sie auf den Geldfluss "
 "zwischen Organisation und Medium."
 
-#: views/top.html:55
+#: views/top.html:92
 msgid "Top"
 msgstr "Top"
 
@@ -714,11 +768,11 @@ msgstr "Top"
 msgid "Top Player"
 msgstr "Spitzenwerte"
 
-#: views/top.html:3
+#: views/top.html:9
 msgid "Top Spenders and Recipients"
 msgstr "Spitzenzahler und -Empfänger"
 
-#: views/overview.html:28 views/top.html:66
+#: views/overview.html:28 views/top.html:106
 msgid "Total"
 msgstr "Total"
 
@@ -750,9 +804,17 @@ msgstr ""
 msgid "Type"
 msgstr "Typ"
 
-#: controllers/eventsController.js:52
+#: controllers/eventsController.js:57
 msgid "Tyrol"
 msgstr "Tirol"
+
+#: views/uploadOrganisation.html:100
+msgid "Undetermined"
+msgstr "Unbestimmt"
+
+#: views/flowdetail.html:134
+msgid "Unpredictable Event"
+msgstr "Nicht vorhersehbares Event"
 
 #: views/upload.html:3
 msgid "Upload new Media Transparency Report"
@@ -766,11 +828,11 @@ msgstr "Neue Liste der Organisationen hochladen"
 msgid "Upload new zip-code list"
 msgstr "Neue Liste der Postleitzahlen hochladen"
 
-#: controllers/eventsController.js:58
+#: controllers/eventsController.js:63
 msgid "Upper Austria"
 msgstr "Oberösterreich"
 
-#: controllers/eventsController.js:64
+#: controllers/eventsController.js:69
 msgid "Vienna"
 msgstr "Wien"
 
@@ -779,7 +841,7 @@ msgstr "Wien"
 msgid "View details »"
 msgstr "Details anzeigen »"
 
-#: controllers/eventsController.js:49
+#: controllers/eventsController.js:54
 msgid "Vorarlberg"
 msgstr "Vorarlberg"
 
@@ -791,7 +853,7 @@ msgstr "Wohin das Geld fließt?"
 msgid "Who's involved?"
 msgstr "Wer ist dabei?"
 
-#: views/top.html:28
+#: controllers/topEntriesController.js:142
 msgid ""
 "With groupings enabled single transfers will be taken together (e.g. to show "
 "umbrella organisations)"
@@ -803,18 +865,18 @@ msgstr ""
 msgid "Within federal state"
 msgstr "Innerhalb des Bundeslandes"
 
-#: controllers/groupingController.js:26
+#: controllers/eventsController.js:19 controllers/groupingController.js:26
 msgid "Yes"
 msgstr "Ja"
 
-#: controllers/flowController.js:22
+#: controllers/flowController.js:34
 msgid ""
 "You can add media to the flow too. Click on the rectangular box for details."
 msgstr ""
 "Sie können auch Medien zum Diagramm hinzufügen. Klicken Sie auf das Rechteck "
 "für mehr Details."
 
-#: controllers/flowController.js:19
+#: controllers/flowController.js:31
 msgid ""
 "You can add organisations to the flow. Go into detail by clicking on the "
 "rectangular box."
@@ -822,7 +884,7 @@ msgstr ""
 "Sie können weitere Organisationen zum Diagramm hinzufügen. Klicken Sie auf "
 "das Rechteck für mehr Details."
 
-#: views/flow.html:81
+#: views/flow.html:91
 msgid ""
 "Your are currently viewing the details of {{org.name}} together with a text "
 "filter. This limits the results! Please consider clearing the filter to see "
@@ -832,44 +894,63 @@ msgstr ""
 "Filter aktiviert. Dies limitiert die Anzeige. Löschen Sie den Eintrag im "
 "Filter-Feld um alle Zahlungen zu sehen."
 
-#: controllers/flowController.js:411 controllers/topEntriesController.js:235
+#: controllers/flowController.js:427 controllers/topEntriesController.js:276
 msgid "first"
 msgstr "Erste"
 
-#: controllers/flowController.js:412 controllers/topEntriesController.js:236
+#: views/impress.html:21
+msgid ""
+"grant for the year 2015, the site developed further. With the help of the "
+"following students new features were added:"
+msgstr ""
+"Förderung im Jahr 2015, konnte sich die Seite weiterentwickeln. Neue "
+"Features konnten implementiert werden. Dies war durch die Mitarbeit der "
+"folgenden Studierenden möglich:"
+
+#: controllers/flowController.js:428 controllers/topEntriesController.js:277
 msgid "last"
 msgstr "Letzte"
 
-#: controllers/flowController.js:410 controllers/flowDetailController.js:102
-#: controllers/topEntriesController.js:234
+#: controllers/flowController.js:426 controllers/flowDetailController.js:161
+#: controllers/topEntriesController.js:275
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:409 controllers/flowDetailController.js:101
-#: controllers/topEntriesController.js:233
+#: controllers/flowController.js:425 controllers/flowDetailController.js:160
+#: controllers/topEntriesController.js:274
 msgid "previous"
 msgstr "vorherige"
 
-#: controllers/flowController.js:414 controllers/topEntriesController.js:238
+#: controllers/flowController.js:430 controllers/topEntriesController.js:279
 msgid "search"
 msgstr "Suche"
 
-#: views/uploadOrganisation.html:113
+#: views/uploadOrganisation.html:117
 msgid "zip-code"
 msgstr "Postleitzahl"
 
-#: views/top.html:45
+#: views/top.html:74
 msgid "{{pType.text}}"
 msgstr "{{pType.text}}"
 
-#: controllers/flowController.js:422
+#: controllers/flowController.js:438
 msgid "§2 MedKF-TG (Media Cooperations)"
 msgstr "§2 MedKF-TG (Medien-Kooperationen)"
 
-#: controllers/flowController.js:426
+#: controllers/flowController.js:442
 msgid "§31 ORF-G (Charges)"
 msgstr "§31 ORF-G (Gebühren)"
 
-#: controllers/flowController.js:424
+#: controllers/flowController.js:440
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#~ msgid "Organisations with undetermined organisation type"
+#~ msgstr "Organisationen mit nicht definiertem Organisationstyp"
+
+#~ msgid ""
+#~ "The map can be turned by holding the left mouse button and dragging "
+#~ "within the frame. It is possible to zoom into the map by scrolling."
+#~ msgstr ""
+#~ "Die Karte kann mittels Halten und Ziehen der linken Maustaste gedreht "
+#~ "werden. Mittels Scrollen kann in die Karte gezoomt werden."
