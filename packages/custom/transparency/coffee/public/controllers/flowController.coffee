@@ -107,6 +107,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.mediaLabel = gettextCatalog.getString 'Media'
     $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+    $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+    $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
 
     parameters = ->
         params = {}
@@ -376,6 +378,23 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $rootScope.$on '$stateChangeStart', (event, toState)->
         if toState.name isnt 'home'
             TPAService.saveState stateName,fieldsToStore, $scope
+            
+    setServerSideGroups = () ->
+        TPAService.getGroupings {type: 'org'}
+        .then (res, err) ->
+            if (err)
+                console.error err
+                return
+            $scope.allOrganisationGroups = res.data
+        TPAService.getGroupings {type: 'media'}
+        .then (res, err) ->
+            if (err)
+                console.error err
+                return
+            $scope.allMediaGroups = res.data
+            
+    setGroups = () ->
+        setServerSideGroups()        
 
     $q.all([pP]).then (res) ->
         stateParamsExist = false
@@ -398,6 +417,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         .then (res) ->
             $scope.mediaLabel = gettextCatalog.getString('Media')
             $scope.organisationLabel = gettextCatalog.getString('Organisation')
+            $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+            $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
             $scope.allOrganisations = res.data.org.map (o) ->
                 {
                     name: o.name,
@@ -406,12 +427,98 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 {
                     name: m.name,
                 }
+            setGroups()
 
 
         $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
             if not $scope.isDetails
                 update()
             $scope.isDetails = false;
+
+        handleRemovingOrgGroup = (newValue, oldValue) ->
+            index = 0
+            while (index < newValue.length and oldValue[index].name isnt newValue[index].name)
+                index++
+            for member in oldValue[index].members
+                $scope.organisationsInSelectedGroups.splice $scope.organisationsInSelectedGroups.indexOf(member), 1
+
+        handleAddingOrgGroup = (newValue, oldValue) ->
+            $scope.badMembers = []
+            if typeof $scope.organisationsInSelectedGroups is 'undefined'
+                $scope.organisationsInSelectedGroups = []
+            else
+                for member in newValue[newValue.length - 1].members
+                    if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
+                        $scope.badMembers.push member
+
+            if $scope.badMembers.length isnt 0
+                $scope.selectedOrganisationGroups = oldValue
+                return
+
+            selectedOrganisations = $scope.selectedOrganisations.map (org) ->
+                org.name
+            for member in newValue[newValue.length - 1].members
+                $scope.organisationsInSelectedGroups.push member
+                if selectedOrganisations.indexOf(member) is -1
+                    for organisation in $scope.allOrganisations
+                        if organisation.name is member
+                            $scope.selectedOrganisations.push organisation
+
+        selectedOrganisationGroupsChanged = (newValue, oldValue) ->
+            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+            if newLength is oldLength
+                return
+
+            if newLength < oldLength
+                handleRemovingOrgGroup(newValue, oldValue)
+                return
+
+            handleAddingOrgGroup(newValue, oldValue)
+
+        handleRemovingMediaGroup = (newValue, oldValue) ->
+            index = 0
+            while (index < newValue.length and oldValue[index].name isnt newValue[index].name)
+                index++
+            for member in oldValue[index].members
+                $scope.mediaInSelectedGroups.splice $scope.mediaInSelectedGroups.indexOf(member), 1
+
+        handleAddingMediaGroups = (newValue, oldValue) ->
+            $scope.badMembers = []
+            if typeof $scope.mediaInSelectedGroups is 'undefined'
+                $scope.mediaInSelectedGroups = []
+            else
+                for member in newValue[newValue.length - 1].members
+                    if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
+                        $scope.badMembers.push member
+            if $scope.badMembers.length isnt 0
+                $scope.selectedMediaGroups = oldValue
+                return
+
+            selectedMedia = $scope.selectedMedia.map (media) ->
+                media.name
+            for member in newValue[newValue.length - 1].members
+                $scope.mediaInSelectedGroups.push member
+                if selectedMedia.indexOf(member) is -1
+                    for media in $scope.allMedia
+                        if media.name is member
+                            $scope.selectedMedia.push media
+
+        selectedMediaGroupsChanged = (newValue, oldValue) ->
+            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+            if newLength is oldLength
+                return
+
+            if newLength < oldLength
+                handleRemovingMediaGroup(newValue, oldValue)
+                return
+
+            handleAddingMediaGroups(newValue, oldValue)
+
+        $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
+        $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
+
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)

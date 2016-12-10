@@ -121,6 +121,39 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        <span>{{organisationGroupLabel}}:</span>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allOrganisationGroups track by item.name"
+                                   ng-model="selectedOrganisationGroups"
+                                   multiple
+                                   placeholder="{{organisationsLabel}}"
+                                   id="multiselectOrgGroup"
+                        >
+
+                        </oi-select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>{{mediaGroupLabel}}:</span>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allMediaGroups track by item.name"
+                                   ng-model="selectedMediaGroups"
+                                   multiple
+                                   placeholder="{{mediaLabel}}"
+                                   id="multiselectMediaGroup"
+                        ></oi-select>
+                    </div>
+                </div>
+                <div class="row" ng-hide="badMembers == null || badMembers.length === 0">
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        The group can not be selected since it contains members, which are included in already selected groups.
+                        <ul>
+                            <li ng-repeat="badMember in badMembers">{{badMember}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
                         <div data-tpa-sankey data="flows" id="mychart"
                              prog="progress" node-click="showDetails" link-click="showFlowDetails">
