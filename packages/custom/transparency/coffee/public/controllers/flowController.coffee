@@ -457,12 +457,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
             selectedOrganisations = $scope.selectedOrganisations.map (org) ->
                 org.name
+            newSelectedOrganisations = $scope.selectedOrganisations.slice()
             for member in newValue[newValue.length - 1].members
                 $scope.organisationsInSelectedGroups.push member
                 if selectedOrganisations.indexOf(member) is -1
                     for organisation in $scope.allOrganisations
                         if organisation.name is member
-                            $scope.selectedOrganisations.push organisation
+                            newSelectedOrganisations.push organisation
+            $scope.selectedOrganisations = newSelectedOrganisations
+            return
 
         selectedOrganisationGroupsChanged = (newValue, oldValue) ->
             newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
@@ -472,9 +475,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
             if newLength < oldLength
                 handleRemovingOrgGroup(newValue, oldValue)
-                return
-
-            handleAddingOrgGroup(newValue, oldValue)
+            else
+                handleAddingOrgGroup(newValue, oldValue)
+            change(2,1)
 
         handleRemovingMediaGroup = (newValue, oldValue) ->
             index = 0
@@ -497,24 +500,26 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
             selectedMedia = $scope.selectedMedia.map (media) ->
                 media.name
+            newSelectedMedia = $scope.selectedMedia.slice()
             for member in newValue[newValue.length - 1].members
                 $scope.mediaInSelectedGroups.push member
                 if selectedMedia.indexOf(member) is -1
                     for media in $scope.allMedia
                         if media.name is member
-                            $scope.selectedMedia.push media
+                            newSelectedMedia.push media
+            $scope.selectedMedia = newSelectedMedia
+            return
 
         selectedMediaGroupsChanged = (newValue, oldValue) ->
             newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
             oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
             if newLength is oldLength
                 return
-
             if newLength < oldLength
                 handleRemovingMediaGroup(newValue, oldValue)
-                return
-
-            handleAddingMediaGroups(newValue, oldValue)
+            else
+                handleAddingMediaGroups(newValue, oldValue)
+            change(2,1)
 
         $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
         $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
