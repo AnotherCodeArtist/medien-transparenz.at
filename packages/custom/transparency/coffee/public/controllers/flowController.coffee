@@ -128,6 +128,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     # init the introOptions and call the method
     $scope.IntroOptions = null;
     setIntroOptions()
+    $scope.badMembers = [];
 
     toArray = (value) ->
         if typeof value is 'string'
@@ -532,6 +533,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if not $scope.isDetails
                 update()
             $scope.isDetails = false;
+            $scope.badMembers = []
 
         selectedMediaChanged = (newValue, oldValue) ->
             if newValue.length < oldValue.length
@@ -544,6 +546,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if not $scope.isDetails
                 update()
             $scope.isDetails = false;
+            $scope.badMembers = []
 
         $scope.$watch 'selectedMedia', selectedMediaChanged, true
         $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
@@ -560,14 +563,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if typeof $scope.organisationsInSelectedGroups is 'undefined'
                 $scope.organisationsInSelectedGroups = []
             else
+                selectedMemberNames = (selected.name for selected in $scope.selectedOrganisations)
                 for member in newValue[newValue.length - 1].members
-                    if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
+                    if member in selectedMemberNames
                         $scope.badMembers.push member
-
-            if $scope.badMembers.length isnt 0
-                $scope.selectedOrganisationGroups = oldValue
-                return
-
+                        $scope.selectedOrganisationGroups = oldValue
+                        return
             selectedOrganisations = $scope.selectedOrganisations.map (org) ->
                 org.name
             newSelectedOrganisations = $scope.selectedOrganisations.slice()
@@ -604,13 +605,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if typeof $scope.mediaInSelectedGroups is 'undefined'
                 $scope.mediaInSelectedGroups = []
             else
+                selectedMemberNames = (selected.name for selected in $scope.selectedMedia)
                 for member in newValue[newValue.length - 1].members
-                    if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
+                    if member in selectedMemberNames
                         $scope.badMembers.push member
-            if $scope.badMembers.length isnt 0
-                $scope.selectedMediaGroups = oldValue
-                return
-
+                        $scope.selectedMediaGroups = oldValue
+                        return
             selectedMedia = $scope.selectedMedia.map (media) ->
                 media.name
             newSelectedMedia = $scope.selectedMedia.slice()
