@@ -146,28 +146,28 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <form>
+                        <form name="localOrgGroupForm">
                             <span translate>Group all groupless organisations:</span>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input class="form-control" type="text" required/>
+                                    <input class="form-control" type="text" ng-model="localOrgGroupName" required/>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary" translate>Create new local group</button>
+                                    <button type="submit" ng-disabled="localOrgGroupForm.$invalid" class="btn btn-primary" ng-click="createLocalOrgGroup()"" translate>Create new local group</button>
                                 </div>
                             </div>
                         </form>
                     </div>
 
                     <div class="col-md-6">
-                        <form>
+                        <form name="localMediaGroupForm">
                             <span translate>Group all groupless media:</span>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input class="form-control" type="text" required/>
+                                    <input class="form-control" type="text" ng-model="localMediaGroupName" required/>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary" translate>Create new local group</button>
+                                    <button type="submit" ng-disabled="localMediaGroupForm.$invalid" class="btn btn-primary" ng-click="createLocalMediaGroup()" translate>Create new local group</button>
                                 </div>
                             </div>
                         </form>
