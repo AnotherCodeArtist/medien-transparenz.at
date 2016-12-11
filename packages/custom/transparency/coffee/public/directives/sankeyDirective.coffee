@@ -78,11 +78,17 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                     d.source.name = gettextCatalog.getString(d.source.name)
                 else if d.target.name is 'Other media'
                     d.target.name = gettextCatalog.getString(d.target.name)
-                div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})
+                if (d.source.type is "o" and d.target.type is "m")
+                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})
                             <div><i class="fa fa-bar-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
                          """)
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px")
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px")
+                else
+                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})""")
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px")
+
             .on "mouseout", (d) ->
                 div.transition()
                 .duration(500)

@@ -195,7 +195,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
-        console.log(node);
         if (node.source.type is "o" and node.target.type is "m")
             $state.go(
                 'showflowdetail'
