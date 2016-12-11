@@ -7,7 +7,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups', 'selectedMediaGroups']
     $scope.init = 'init';
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
