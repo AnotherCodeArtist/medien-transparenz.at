@@ -222,7 +222,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
         #console.log "Starting update: " + Date.now()
         startLoading()
-        if $scope.selectedOrganisations or $scope.selectedMedia
+        if ($scope.selectedOrganisations and $scope.selectedOrganisations.length > 0) or ($scope.selectedMedia and $scope.selectedMedia.length > 0)
             TPAService.filteredflows(parameters())
             .then (res) ->
                 stopLoading()
@@ -274,6 +274,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.maxExceeded = 0
         $scope.flows = data
 
+    createLink = (source, target, value, type) ->
+        {
+            source: source
+            target: target
+            value: value
+            type: type
+        }
+
+
     buildNodes = (data) ->
         nodes = []
         links = []
@@ -283,6 +292,31 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         sum = 0
 
         data.forEach (entry) ->
+            entryOrgGroup = ""
+            entryMediaGroup = ""
+
+            if $scope.selectedOrganisationGroups
+                for orgGroup in $scope.selectedOrganisationGroups
+                    if orgGroup.members.indexOf(entry.organisation) isnt -1
+                        entryOrgGroup = orgGroup.name
+
+            if $scope.selectedMediaGroups
+                for mediaGroup in $scope.selectedMediaGroups
+                    if mediaGroup.members.indexOf(entry.media) isnt -1
+                        entryMediaGroup = mediaGroup.name
+
+            if entryOrgGroup isnt "" and not nodeMap["og_" + entryOrgGroup]
+                nodeMap["og_" + entryOrgGroup] =
+                    index: nodesNum
+                    type: 'og'
+                nodesNum++
+
+            if entryMediaGroup isnt "" and not nodeMap["mg_" + entryMediaGroup]
+                nodeMap["mg_" + entryMediaGroup] =
+                    index: nodesNum
+                    type: 'mg'
+                nodesNum++
+
             if not nodeMap[entry.organisation]?
                 nodeMap[entry.organisation] =
                     index: nodesNum
@@ -294,13 +328,72 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     index: nodesNum
                     type: 'm'
                 nodesNum++
-            links.push(
-                source: nodeMap[entry.organisation].index
-                target: nodeMap[entry.media].index
-                value: entry.amount
-                type: entry.transferType
-            )
-            sum += entry.amount
+            if entryOrgGroup is "" and entryMediaGroup is ""
+                links.push(createLink(nodeMap[entry.organisation].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else if entryOrgGroup isnt "" and entryMediaGroup is ""
+                link1 = null
+                link2 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["og_" + entryOrgGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["og_" + entryOrgGroup].index and link.target is nodeMap[entry.media].index
+                        link2 = link
+                    if link1 isnt null and link2 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["og_" + entryOrgGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["og_" + entryOrgGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else if entryOrgGroup is "" and entryMediaGroup isnt ""
+                link1 = null
+                link2 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["mg_" + entryMediaGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["mg_" + entryMediaGroup].index and link.target is nodeMap[entry.media].index
+                        link2 = link
+                    if link1 isnt null and link2 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["mg_" + entryMediaGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["mg_" + entryMediaGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else
+                link1 = null
+                link2 = null
+                link3 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["og_" + entryOrgGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["og_" + entryOrgGroup].index and link.target is nodeMap["mg_" + entryMediaGroup].index
+                        link2 = link
+                    else if link.source is nodeMap["mg_" + entryMediaGroup].index and link.target is nodeMap[entry.media].index
+                        link3 = link
+                    if link1 isnt null and link2 isnt null and link3 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["og_" + entryOrgGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["og_" + entryOrgGroup].index, nodeMap["mg_" + entryMediaGroup].index, entry.amount, entry.transferType))
+                if link3 isnt null
+                    link3.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["mg_" + entryMediaGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+
+
+                sum += entry.amount
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
@@ -429,11 +522,32 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 }
             setGroups()
 
-
-        $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
+        selectedOrganisationsChanged = (newValue, oldValue) ->
+            if newValue.length < oldValue.length
+                index = 0
+                while index < newValue.length and newValue[index].name is oldValue[index].name
+                    index++
+                if $scope.organisationsInSelectedGroups.indexOf(oldValue[index].name) isnt -1
+                    $scope.selectedOrganisations = oldValue
+                    $scope.deselectionNotAllowed = oldValue[index].name
             if not $scope.isDetails
                 update()
             $scope.isDetails = false;
+
+        selectedMediaChanged = (newValue, oldValue) ->
+            if newValue.length < oldValue.length
+                index = 0
+                while index < newValue.length and newValue[index].name is oldValue[index].name
+                    index++
+                if $scope.mediaInSelectedGroups.indexOf(oldValue[index].name) isnt -1
+                    $scope.selectedMedia = oldValue
+                    $scope.deselectionNotAllowed = oldValue[index].name
+            if not $scope.isDetails
+                update()
+            $scope.isDetails = false;
+
+        $scope.$watch 'selectedMedia', selectedMediaChanged, true
+        $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
 
         handleRemovingOrgGroup = (newValue, oldValue) ->
             index = 0
