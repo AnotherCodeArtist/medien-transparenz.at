@@ -129,6 +129,10 @@
                                    multiple
                                    placeholder="{{organisationsLabel}}"
                                    id="multiselectOrgGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
                         >
 
                         </oi-select>
@@ -141,6 +145,10 @@
                                    multiple
                                    placeholder="{{mediaLabel}}"
                                    id="multiselectMediaGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
                         ></oi-select>
                     </div>
                 </div>
@@ -180,6 +188,12 @@
                         <ul>
                             <li ng-repeat="badMember in badMembers">{{badMember}}</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="row" ng-show="localGroupError && localGroupError !== ''">
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        {{localGroupError}}
                     </div>
                 </div>
                 <div class="row">
