@@ -202,6 +202,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+        $scope.organisationGroupLabel = gettextCatalog.getString 'Organisation Group'
+        $scope.mediaGroupLabel = gettextCatalog.getString 'Media Group'
         setIntroOptions()
 
 
