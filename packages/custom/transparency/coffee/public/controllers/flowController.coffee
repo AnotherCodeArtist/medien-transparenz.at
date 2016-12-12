@@ -55,6 +55,18 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     intro: gettextCatalog.getString 'You can add media to the flow too. Click on the rectangular box for details.'
                 },
                 {
+                    element: document.querySelector('#multiselectOrgGroup')
+                    intro: gettextCatalog.getString 'It is possible to select predefined groups for organisations. The entries of the group will be loaded and displayed automatically.'
+                },
+                {
+                    element: document.querySelector('#multiselectMediaGroup')
+                    intro: gettextCatalog.getString 'It is possible to select predefined groups for media. The entries of the group will be loaded and displayed automatically.'
+                },
+                {
+                    element: document.querySelector('#customGroups')
+                    intro: gettextCatalog.getString 'Based on your selection, you can create custom groups for all non-grouped organisations or media.'
+                },
+                {
                     element: document.querySelector('#sankeyRow')
                     intro: gettextCatalog.getString 'Per default the top spender based on your chosen payment types and period is selected.'
                 },

@@ -122,7 +122,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <span>{{organisationGroupLabel}}:</span>
+                        <span>{{organisationGroupLabel}}:</span> <sup><a href ng-click="FlowIntro(6);">?</a></sup>
                         <oi-select class="multiselectDropdown"
                                    oi-options="item.name for item in allOrganisationGroups track by item.name"
                                    ng-model="selectedOrganisationGroups"
@@ -138,7 +138,7 @@
                         </oi-select>
                     </div>
                     <div class="col-md-6">
-                        <span>{{mediaGroupLabel}}:</span>
+                        <span>{{mediaGroupLabel}}:</span> <sup><a href ng-click="FlowIntro(7);">?</a></sup>
                         <oi-select class="multiselectDropdown"
                                    oi-options="item.name for item in allMediaGroups track by item.name"
                                    ng-model="selectedMediaGroups"
@@ -152,16 +152,19 @@
                         ></oi-select>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="customGroups">
                     <div class="col-md-6">
                         <form name="localOrgGroupForm">
-                            <span translate>Group all groupless organisations:</span>
+                            <span translate>Group all non-grouped organisations:</span> <sup><a href
+                                                                                                ng-click="FlowIntro(8);">?</a></sup>
                             <div class="row">
                                 <div class="col-md-6">
                                     <input class="form-control" type="text" ng-model="localOrgGroupName" required/>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" ng-disabled="localOrgGroupForm.$invalid" class="btn btn-primary" ng-click="createLocalOrgGroup()"" translate>Create new local group</button>
+                                    <button type="submit" ng-disabled="localOrgGroupForm.$invalid"
+                                            class="btn btn-primary" ng-click="createLocalOrgGroup()">
+                                        <span translate>Create new local group</span></button>
                                 </div>
                             </div>
                         </form>
@@ -169,13 +172,17 @@
 
                     <div class="col-md-6">
                         <form name="localMediaGroupForm">
-                            <span translate>Group all groupless media:</span>
+                            <span translate>Group all non-grouped media:</span> <sup><a href
+                                                                                        ng-click="FlowIntro(8);">?</a></sup>
                             <div class="row">
                                 <div class="col-md-6">
                                     <input class="form-control" type="text" ng-model="localMediaGroupName" required/>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" ng-disabled="localMediaGroupForm.$invalid" class="btn btn-primary" ng-click="createLocalMediaGroup()" translate>Create new local group</button>
+                                    <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
+                                            class="btn btn-primary" ng-click="createLocalMediaGroup()">
+                                    <span translate>Create new local group
+                                    </span></button>
                                 </div>
                             </div>
                         </form>
