@@ -184,7 +184,7 @@
                 <div class="row" ng-hide="badMembers == null || badMembers.length === 0">
                     <div class="alert alert-danger col-md-12" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        The group can not be selected since it contains members, which are included in already selected groups.
+                        <span translate>The group can not be selected since it contains members, which are included in already selected groups.</span>
                         <ul>
                             <li ng-repeat="badMember in badMembers">{{badMember}}</li>
                         </ul>
