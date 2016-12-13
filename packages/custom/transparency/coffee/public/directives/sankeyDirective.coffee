@@ -146,7 +146,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             if $scope.nodeClick
                 #$scope.nodeClick( name: "test", type: "o")
                 node.on 'click', (d)->
-                    if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations')
+                    if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations') and not d.name.includes('OG: ') and not d.name.includes('NG: ')
                         angular.element(".tooltip").css("opacity", 0)
                         $scope.nodeClick()(d)
 
