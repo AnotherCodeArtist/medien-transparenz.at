@@ -39,7 +39,7 @@ msgid "Although this was meant to significantly improve the data qualtity it cou
 msgstr ""
 
 #: controllers/flowController.js:105
-#: controllers/flowController.js:610
+#: controllers/flowController.js:615
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr ""
@@ -130,17 +130,17 @@ msgid "Create"
 msgstr ""
 
 #: views/flow.html:167
-#: views/flow.html:183
+#: views/flow.html:184
 msgid "Create new local group"
 msgstr ""
 
-#: controllers/flowController.js:892
-#: controllers/flowController.js:926
+#: controllers/flowController.js:897
+#: controllers/flowController.js:931
 msgid "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 
-#: controllers/flowController.js:879
-#: controllers/flowController.js:913
+#: controllers/flowController.js:884
+#: controllers/flowController.js:918
 msgid "Custom group could not be created since an local group with an equal name already exists"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers/flowController.js:590
+#: controllers/flowController.js:595
 #: controllers/flowDetailController.js:192
 #: controllers/topEntriesController.js:281
 msgid "Display _MENU_ records"
@@ -403,19 +403,24 @@ msgstr ""
 
 #: controllers/flowController.js:167
 #: controllers/flowController.js:285
-#: controllers/flowController.js:702
+#: controllers/flowController.js:707
 #: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:23
 msgid "Media"
 msgstr ""
 
 #: controllers/flowController.js:170
-#: controllers/flowController.js:705
+#: controllers/flowController.js:288
+#: controllers/flowController.js:710
 msgid "Media Group"
 msgstr ""
 
 #: views/index.html:15
 msgid "Media Transparency Austria"
+msgstr ""
+
+#: views/flow.html:179
+msgid "Media group name"
 msgstr ""
 
 #: views/uploadOrganisation.html:84
@@ -492,7 +497,7 @@ msgstr ""
 msgid "One-day Event"
 msgstr ""
 
-#: controllers/flowController.js:703
+#: controllers/flowController.js:708
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:21
 #: views/uploadOrganisation.html:116
@@ -500,12 +505,17 @@ msgid "Organisation"
 msgstr ""
 
 #: controllers/flowController.js:169
-#: controllers/flowController.js:704
+#: controllers/flowController.js:287
+#: controllers/flowController.js:709
 msgid "Organisation Group"
 msgstr ""
 
 #: views/index.html:61
 msgid "Organisation Types"
+msgstr ""
+
+#: views/flow.html:162
+msgid "Organisation group name"
 msgstr ""
 
 #: controllers/flowController.js:168
@@ -558,7 +568,7 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: controllers/flowController.js:604
+#: controllers/flowController.js:609
 msgid "Payer"
 msgstr ""
 
@@ -626,7 +636,7 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/flowController.js:604
+#: controllers/flowController.js:609
 #: controllers/topEntriesController.js:173
 #: controllers/topEntriesController.js:252
 msgid "Recipient"
@@ -688,7 +698,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:589
+#: controllers/flowController.js:594
 #: controllers/flowDetailController.js:191
 #: controllers/topEntriesController.js:280
 msgid "Showing page _PAGE_ of _PAGES_"
@@ -722,7 +732,7 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:216
+#: views/flow.html:217
 msgid "Tabular Representation"
 msgstr ""
 
@@ -730,7 +740,7 @@ msgstr ""
 msgid "The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized."
 msgstr ""
 
-#: views/flow.html:193
+#: views/flow.html:194
 msgid "The group can not be selected since it contains members, which are included in already selected groups."
 msgstr ""
 
@@ -798,7 +808,7 @@ msgstr ""
 msgid "Transfers are divided in different payment types. Select the types to display."
 msgstr ""
 
-#: controllers/flowController.js:604
+#: controllers/flowController.js:609
 #: views/grouping.html:16
 msgid "Type"
 msgstr ""
@@ -885,7 +895,7 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: controllers/flowController.js:585
+#: controllers/flowController.js:590
 #: controllers/topEntriesController.js:276
 msgid "first"
 msgstr ""
@@ -894,18 +904,18 @@ msgstr ""
 msgid "grant for the year 2015, the site developed further. With the help of the following students new features were added:"
 msgstr ""
 
-#: controllers/flowController.js:586
+#: controllers/flowController.js:591
 #: controllers/topEntriesController.js:277
 msgid "last"
 msgstr ""
 
-#: controllers/flowController.js:584
+#: controllers/flowController.js:589
 #: controllers/flowDetailController.js:189
 #: controllers/topEntriesController.js:275
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:583
+#: controllers/flowController.js:588
 #: controllers/flowDetailController.js:188
 #: controllers/topEntriesController.js:274
 msgid "previous"
@@ -916,7 +926,7 @@ msgstr ""
 msgid "public"
 msgstr ""
 
-#: controllers/flowController.js:588
+#: controllers/flowController.js:593
 #: controllers/topEntriesController.js:279
 msgid "search"
 msgstr ""
@@ -929,14 +939,14 @@ msgstr ""
 msgid "{{pType.text}}"
 msgstr ""
 
-#: controllers/flowController.js:596
+#: controllers/flowController.js:601
 msgid "§2 MedKF-TG (Media Cooperations)"
 msgstr ""
 
-#: controllers/flowController.js:600
+#: controllers/flowController.js:605
 msgid "§31 ORF-G (Charges)"
 msgstr ""
 
-#: controllers/flowController.js:598
+#: controllers/flowController.js:603
 msgid "§4 MedKF-TG (Funding)"
 msgstr ""
