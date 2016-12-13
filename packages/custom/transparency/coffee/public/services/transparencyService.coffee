@@ -95,18 +95,18 @@ class TPAService
                 s) , JSON.parse savedState
 
     getLocalGroups: (type) ->
-        groups = sessionStorage.getItem type
+        groups = localStorage.getItem type
         if not groups
             groups = []
         else
             JSON.parse groups
 
     saveLocalGroup: (group) ->
-        groups = JSON.parse(sessionStorage.getItem group.type)
+        groups = JSON.parse(localStorage.getItem group.type)
         if not groups
             groups = []
         groups.push group
-        sessionStorage.setItem group.type, JSON.stringify groups
+        localStorage.setItem group.type, JSON.stringify groups
 
     years: ->
         @$http.get 'api/transparency/years'

@@ -100,6 +100,12 @@ Transparency.register(function(app, auth, database) {
     menu: 'main'
   });
 
+  Transparency.menus.add({
+    title: 'Search',
+    link: 'search',
+    roles: ['authenticated', 'anonymous'],
+    menu: 'main'
+  });
 
   Transparency.aggregateAsset('css', 'transparency.css');
   Transparency.aggregateAsset('css', '../lib/datatables.net-bs/css/dataTables.bootstrap.css');
