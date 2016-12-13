@@ -843,6 +843,7 @@ module.exports = (Transparency) ->
                 _id:
                     name: "$#{nameField}"
                     type: orgType
+                    organisationType: '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"
@@ -853,6 +854,7 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
+                organisationType: '$_id.organisationType'
 
             $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
             if not federalState

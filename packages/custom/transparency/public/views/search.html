@@ -14,8 +14,8 @@
 
         <div ng-show="result">
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" ng-click="orgCollapse = !orgCollapse"><span translate>Hits for Organisations</span> <span
-                        class="badge badge-important">{{result.org.length}}</span></a>
+                <div class="panel-heading"><a href="#" ng-click="orgCollapse = !orgCollapse"><span translate>Hits for Organisations</span>
+                    <span class="badge badge-important">{{result.org.length}}</span></a>
                     <a href="#" class="btn pull-right" ng-click="orgCollapse = !orgCollapse"><i
                             class="glyphicon {{!orgCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
                 </div>
@@ -23,14 +23,15 @@
                     <ul ng-repeat="org in result.org">
                         <li>
                             <a ui-sref="showflow({name: org.name, to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: 'org'})">{{org.name}}</a>
-                            <span class="label label-primary year" ng-repeat="year in org.years.sort().reverse()">{{year}}</span> <span
-                                class="pull-right badge">&euro; {{org.total | number:2}}</span></li>
+                            <span class="label label-default">{{org.organisationType|translate}}</span>
+                            <span class="label label-primary year" ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
+                            <span class="pull-right badge">&euro; {{org.total | number:2}}</span></li>
                     </ul>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" ng-click="mediaCollapse = !mediaCollapse"><span translate>Hits for Media</span> <span
-                        class="badge badge-important">{{result.media.length}}</span></a>
+                <div class="panel-heading"><a href="#" ng-click="mediaCollapse = !mediaCollapse"><span translate>Hits for Media</span>
+                    <span class="badge badge-important">{{result.media.length}}</span></a>
                     <a href="#" class="btn pull-right" ng-click="mediaCollapse = !mediaCollapse"><i
                             class="glyphicon {{!mediaCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
                 </div>
@@ -38,8 +39,8 @@
                     <ul ng-repeat="media in result.media">
                         <li>
                             <a ui-sref="showflow({name: media.name,to: lastInYear(media.years[0]),from: firstInYear(media.years[media.years.length-1]),pTypes: '2,4,31', orgType: 'media'})">{{media.name}}</a>
-                            <span class="label label-primary year" ng-repeat="year in media.years.sort().reverse()">{{year}}</span> <span
-                                class="pull-right badge">&euro; {{media.total | number:2}}</span></li>
+                            <span class="label label-primary year" ng-repeat="year in media.years.sort().reverse()">{{year}}</span>
+                            <span class="pull-right badge">&euro; {{media.total | number:2}}</span></li>
                     </ul>
                 </div>
             </div>
