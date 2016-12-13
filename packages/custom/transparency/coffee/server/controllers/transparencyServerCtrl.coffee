@@ -890,10 +890,12 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
+                organisationType: '$_id.organisationType'
             group =
                 _id:
                     name: "$#{nameField}"
                     type: orgType
+                    organisationType : '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"
