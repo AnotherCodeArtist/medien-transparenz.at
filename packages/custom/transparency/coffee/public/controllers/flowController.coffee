@@ -294,7 +294,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.error = res.data
                 #console.log "resolve dataPromise after exception"
                 dataPromise.resolve()
-
+        else
+            stopLoading()
+            $scope.error = "nothing selected"
 
     checkMaxLength = (data) ->
         ###if data.nodes.length > $scope.maxNodes
