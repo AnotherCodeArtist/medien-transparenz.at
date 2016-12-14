@@ -212,6 +212,10 @@ msgstr ""
 msgid "Delete"
 msgstr "Löschen"
 
+#: controllers/listControllers.js:254 controllers/listControllers.js:67
+msgid "Determine the number of results per page."
+msgstr "Bestimmen Sie die Anzahl der Einträge pro Seite."
+
 #: controllers/groupingController.js:58
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
@@ -246,6 +250,7 @@ msgid "End of Event"
 msgstr "Ende des Events"
 
 #: controllers/flowController.js:86 controllers/flowDetailController.js:114
+#: controllers/listControllers.js:269 controllers/listControllers.js:82
 #: controllers/topEntriesController.js:163
 msgid "End tour"
 msgstr "Tour beenden"
@@ -303,7 +308,7 @@ msgstr ""
 "Unterbrechung des Dienstes (z. B. in Fällen von Server-Ausfallzeit), "
 "Datenfehler, falsche Darstellung von Daten oder Softwarefehler."
 
-#: views/list.html:12 views/top.html:80
+#: views/list.html:27 views/top.html:80
 msgid "Federal State"
 msgstr "Bundesland"
 
@@ -318,6 +323,10 @@ msgstr "Zeitspanne fixieren"
 #: controllers/flowController.js:53 controllers/topEntriesController.js:139
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr "Zeitspanne fixieren. Damit ist es möglich den Bereich festzusetzen."
+
+#: controllers/listControllers.js:257 controllers/listControllers.js:70
+msgid "Flip through the results here."
+msgstr "Blättern Sie hier durch die Ergebnisse."
 
 #: views/flowdetail.html:12
 msgid "Flow in detail"
@@ -379,7 +388,7 @@ msgstr "Gruppentyp"
 msgid "Grouping"
 msgstr "Gruppierung"
 
-#: views/search.html:32
+#: views/search.html:33
 msgid "Hits for Media"
 msgstr "Treffer für Medien"
 
@@ -390,6 +399,42 @@ msgstr "Treffer für Organisationen"
 #: views/impress.html:13
 msgid "How this web-site came into being"
 msgstr "Wie diese Seite entstand"
+
+#: controllers/listControllers.js:260
+msgid ""
+"If there are results available, you can discover them with the list. If "
+"there are years next to the entry, the entry was part of a transfer within "
+"this year. On the right side the sum of the transfers was calculated."
+msgstr ""
+"Falls Ergebnisse vorhanden sind, können Sie diese in dieser Liste sehen. "
+"Wenn Jahresangaben neben dem Eintrag angezeigt werden, wurden Transfers in "
+"diesen Jahren gefunden. Rechts wird die Summe aller Transfers dieses "
+"Eintrages angezeigt."
+
+#: controllers/listControllers.js:73
+msgid ""
+"If there are results available, you can discover them with the list. If "
+"there are years next to the entry, the entry was part of a transfer within "
+"this year. On the right side the sum of the transfers was calculated. The "
+"organisation type is shown, if available."
+msgstr ""
+"Falls Ergebnisse vorhanden sind, können Sie diese in dieser Liste sehen. "
+"Wenn Jahresangaben neben dem Eintrag angezeigt werden, wurden Transfers in "
+"diesen Jahren gefunden. Rechts wird die Summe aller Transfers dieses "
+"Eintrages angezeigt. Falls vorhanden, wird der Organisationstyp angezeigt. "
+
+#: controllers/listControllers.js:251
+msgid "If you are interested in a specific media, you can search for it."
+msgstr ""
+"Wenn Sie an einem bestimmten Medium interessiert sind, können Sie hier "
+"danach suchen."
+
+#: controllers/listControllers.js:61
+msgid ""
+"If you are interested in a specific organisation, you can search for it."
+msgstr ""
+"Wenn Sie an einer bestimmten Organisation interessiert sind, können Sie hier "
+"danach suchen."
 
 #: views/about.html:40
 msgid ""
@@ -484,11 +529,11 @@ msgstr ""
 "Finden Sie heraus, wie Organisationen Ihre Mittel für Medienarbeit "
 "verteilen, und woraus sich Medien in diesem Kontext finanzieren"
 
-#: controllers/listControllers.js:188 controllers/listControllers.js:317
+#: controllers/listControllers.js:216 controllers/listControllers.js:370
 msgid "List of Media Companies"
 msgstr "Medien"
 
-#: controllers/listControllers.js:178 controllers/listControllers.js:8
+#: controllers/listControllers.js:205 controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr "Organisationen"
 
@@ -552,6 +597,7 @@ msgid "Nationwide"
 msgstr "Bundesweit"
 
 #: controllers/flowController.js:83 controllers/flowDetailController.js:111
+#: controllers/listControllers.js:266 controllers/listControllers.js:79
 #: controllers/topEntriesController.js:160
 msgid "Next info"
 msgstr "Nächste Info"
@@ -560,11 +606,11 @@ msgstr "Nächste Info"
 msgid "No"
 msgstr "Nein"
 
-#: views/list.html:30
+#: views/list.html:46
 msgid "No entries found!"
 msgstr "Keine Einträge gefunden"
 
-#: views/grouping.html:5 views/list.html:18
+#: views/grouping.html:5 views/list.html:34
 msgid "Number of Entries"
 msgstr "Anzahl der Einträge"
 
@@ -711,6 +757,7 @@ msgid "Predictable Event"
 msgstr "Vorhersehbares Event"
 
 #: controllers/flowController.js:84 controllers/flowDetailController.js:112
+#: controllers/listControllers.js:267 controllers/listControllers.js:80
 #: controllers/topEntriesController.js:161
 msgid "Previous info"
 msgstr "Vorherige Info"
@@ -779,6 +826,7 @@ msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
 #: controllers/flowController.js:85 controllers/flowDetailController.js:113
+#: controllers/listControllers.js:268 controllers/listControllers.js:81
 #: controllers/topEntriesController.js:162
 msgid "Skip info"
 msgstr "Info überspringen"
@@ -839,6 +887,11 @@ msgid ""
 msgstr ""
 "Die Karte kann mittels Halten der linken Maus-Taste gedreht werden.\n"
 "Mittels Scrollen kann in die Karte gezoomt werden."
+
+#: controllers/listControllers.js:64
+msgid "The search can be limited to a specific federal state."
+msgstr ""
+"Es ist möglich, die Suche mit einem bestimmten Bundesland einzuschränken."
 
 #: views/flowdetail.html:193
 msgid ""

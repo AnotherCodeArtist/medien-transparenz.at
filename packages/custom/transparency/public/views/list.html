@@ -1,54 +1,70 @@
 <section class="container">
-    <h1>{{title}}</h1>
-    <div class="text-center query bg-primary">
-        <div class="btn-group">
-            <input id="searchinput" placeholder="Filter"
-                   ng-model="name" type="search" class="searchinput form-control">
-            <span id="searchclear" ng-click="name=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
-        </div>
-    </div>
+
     <div class="row">
-        <div class="pull-right">
-            <label data-ng-show="orgType=='org'"><span translate>Federal State</span>
-                <select data-ng-model="selectedFederalState" class="btn btn-default"
-                        ng-options="state.name for state in federalStates track by state.iso"
-                        data-ng-show="orgType=='org'">
-                    <option value="">-</option>
-                </select>
-            </label>
-            <label><span translate>Number of Entries</span>
-                <select data-ng-model="size" class="btn btn-default" ng-options="size for size in sizes"></select>
-            </label>
-
-        </div>
-    </div>
-    <div class="alert alert-danger" ng-show="error">
-        {{error}}
-    </div>
-
-    <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-        boundary-links="true"></ul>
-    <div class="alert alert-info" translate="translate" ng-show="count === 0">No entries found!</div>
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="org in items">
-            <div class="row">
-                <div class="col-sm-10">
-                    <a ui-sref="showflow({name: org.name,to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
-                    <span class="label label-default" data-ng-show="orgType=='org'">{{org.organisationType|translate}}</span>
-                    <span class="label label-primary year"
-                          ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
+        <div class="col-md-12">
+            <div ng-intro-options="IntroOptions" ng-intro-method="ListIntro" ng-intro-autostart="false">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" aria-label="?" data-ng-click="ListIntro()">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </button>
                 </div>
-                <div class="col-sm-2">
-                    <span class="badge">&euro;
-                        {{org.total.toLocaleString(language,{minimumFractionDigits:2,maximumFractionDigits:2})}}</span>
+            </div>
+            <h1>{{title}}</h1>
+
+            <div class="text-center query bg-primary">
+                <div class="btn-group">
+                    <input id="searchinput" placeholder="Filter"
+                           ng-model="name" type="search" class="searchinput form-control">
+                    <span id="searchclear" ng-click="name=''"
+                          class="searchclear glyphicon glyphicon-remove-circle"></span>
                 </div>
             </div>
 
-        </li>
-    </ul>
+        </div>
 
-    <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-        boundary-links="true"></ul>
-    <div style="clear:both;"><br></div>
+        <div class="row">
+            <div class="pull-right">
+                <label data-ng-show="orgType=='org'"><span translate>Federal State</span>
+                    <select data-ng-model="selectedFederalState" class="btn btn-default"
+                            ng-options="state.name for state in federalStates track by state.iso"
+                            data-ng-show="orgType=='org'" id="fedStateSelection">
+                        <option value="">-</option>
+                    </select>
+                </label>
+                <label><span translate>Number of Entries</span>
+                    <select data-ng-model="size" class="btn btn-default" ng-options="size for size in sizes"
+                            id="pageSize"></select>
+                </label>
+
+            </div>
+        </div>
+        <div class="alert alert-danger" ng-show="error">
+            {{error}}
+        </div>
+
+        <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+            boundary-links="true" id="pageSelection"></ul>
+        <div class="alert alert-info" translate="translate" ng-show="count === 0">No entries found!</div>
+        <ul class="list-group" id="searchEntry">
+            <li class="list-group-item" ng-repeat="org in items">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <a ui-sref="showflow({name: org.name,to: lastInYear(org.years[0]),from: firstInYear(org.years[org.years.length-1]),pTypes: '2,4,31', orgType: '{{orgType}}'} )">{{org.name}}</a>
+                        <span class="label label-default" data-ng-show="orgType=='org'">{{org.organisationType|translate}}</span>
+                        <span class="label label-primary year"
+                              ng-repeat="year in org.years.sort().reverse()">{{year}}</span>
+                    </div>
+                    <div class="col-sm-2">
+                    <span class="badge">&euro;
+                        {{org.total.toLocaleString(language,{minimumFractionDigits:2,maximumFractionDigits:2})}}</span>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+
+        <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+            boundary-links="true"></ul>
+        <div style="clear:both;"><br></div>
 
 </section>

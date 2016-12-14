@@ -21,7 +21,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     #remove Austria
     if $scope.federalStates.length is 10
         $scope.federalStates.pop()
-
+    $scope.IntroOptions = null
     $scope.selectedFederalState = {}
     $scope.orgType = "org"
     $scope.searchResult = []
@@ -29,6 +29,38 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     TPAService.restoreState stateId, fieldsToRestore, $scope
     page = $scope.page
     $timeout (-> $scope.page=page),100
+
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#searchinput')
+                    intro: gettextCatalog.getString 'If you are interested in a specific organisation, you can search for it.'
+                },
+                {
+                    element: document.querySelector('#fedStateSelection')
+                    intro: gettextCatalog.getString 'The search can be limited to a specific federal state.'
+                }, {
+                    element: document.querySelector('#pageSize')
+                    intro: gettextCatalog.getString 'Determine the number of results per page.'
+                },
+                {
+                    element: document.querySelector('#pageSelection')
+                    intro: gettextCatalog.getString 'Flip through the results here.'
+                },
+                {
+                    element: document.querySelector('#searchEntry')
+                    intro: gettextCatalog.getString 'If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated. The organisation type is shown, if available.'
+                }
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
     updateCount = ->
         searchObject =
             orgType: $scope.orgType
@@ -38,6 +70,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
             $scope.count = res.data
         prom.catch (err) -> $scope.error = "Could not load Organizations: #{err.data}"
     update = ->
+        setIntroOptions()
         if $scope.name.length > 2
             updatePage()
         else
@@ -113,6 +146,7 @@ app.controller 'ListOrgCtrl', ($scope,TPAService,$q,$interval,$state,$stateParam
     translate = ->
         $scope.title=gettextCatalog.getString "List of Organisations"
         $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
+        setIntroOptions()
 
     $scope.$on 'gettextLanguageChanged', translate
 
@@ -135,15 +169,47 @@ app.controller 'ListMediaCtrl', ($scope,TPAService,$q,$interval,$state,$statePar
     $scope.orgType = "media"
     $scope.searchResult = []
     $scope.filterResult = []
+    $scope.IntroOptions = null
+
     TPAService.restoreState stateId, fieldsToRestore, $scope
     page = $scope.page
     $timeout (-> $scope.page=page),100
+
+    setIntroOptions = ->
+        $scope.IntroOptions =
+            steps: [
+                {
+                    element: document.querySelector('#searchinput')
+                    intro: gettextCatalog.getString 'If you are interested in a specific media, you can search for it.'
+                },
+                 {
+                    element: document.querySelector('#pageSize')
+                    intro: gettextCatalog.getString 'Determine the number of results per page.'
+                },
+                {
+                    element: document.querySelector('#pageSelection')
+                    intro: gettextCatalog.getString 'Flip through the results here.'
+                },
+                {
+                    element: document.querySelector('#searchEntry')
+                    intro: gettextCatalog.getString 'If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated.'
+                }
+            ]
+            showStepNumbers: false
+            exitOnOverlayClick: true
+            exitOnEsc: true
+            nextLabel: gettextCatalog.getString 'Next info'
+            prevLabel: gettextCatalog.getString 'Previous info'
+            skipLabel: gettextCatalog.getString 'Skip info'
+            doneLabel: gettextCatalog.getString 'End tour'
+
     updateCount = ->
         prom = TPAService.count orgType: $scope.orgType
         prom.then (res) ->
             $scope.count = res.data
         prom.catch (err) -> $scope.error = "Could not load Media: #{err.data}"
     update = ->
+        setIntroOptions()
         if $scope.name.length > 2
             updatePage()
         else
@@ -205,5 +271,6 @@ app.controller 'ListMediaCtrl', ($scope,TPAService,$q,$interval,$state,$statePar
 
     translate = ->
         $scope.title=gettextCatalog.getString "List of Media Companies"
+        setIntroOptions()
 
     $scope.$on 'gettextLanguageChanged', translate

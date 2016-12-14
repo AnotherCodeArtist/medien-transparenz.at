@@ -148,6 +148,11 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: controllers/listControllers.js:254
+#: controllers/listControllers.js:67
+msgid "Determine the number of results per page."
+msgstr ""
+
 #: controllers/groupingController.js:58
 msgid "Disable Group"
 msgstr ""
@@ -187,6 +192,8 @@ msgstr ""
 
 #: controllers/flowController.js:86
 #: controllers/flowDetailController.js:114
+#: controllers/listControllers.js:269
+#: controllers/listControllers.js:82
 #: controllers/topEntriesController.js:163
 msgid "End tour"
 msgstr ""
@@ -231,7 +238,7 @@ msgid ""
 "        We are not liable for the interruption of service (eg. in cases of server down-time), data-errors, incorrect representation of data or software errors."
 msgstr ""
 
-#: views/list.html:12
+#: views/list.html:27
 #: views/top.html:80
 msgid "Federal State"
 msgstr ""
@@ -249,6 +256,11 @@ msgstr ""
 #: controllers/flowController.js:53
 #: controllers/topEntriesController.js:139
 msgid "Fix slider range. With that it is possible to keep the range constant."
+msgstr ""
+
+#: controllers/listControllers.js:257
+#: controllers/listControllers.js:70
+msgid "Flip through the results here."
 msgstr ""
 
 #: views/flowdetail.html:12
@@ -305,7 +317,7 @@ msgstr ""
 msgid "Grouping"
 msgstr ""
 
-#: views/search.html:32
+#: views/search.html:33
 msgid "Hits for Media"
 msgstr ""
 
@@ -315,6 +327,22 @@ msgstr ""
 
 #: views/impress.html:13
 msgid "How this web-site came into being"
+msgstr ""
+
+#: controllers/listControllers.js:260
+msgid "If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated."
+msgstr ""
+
+#: controllers/listControllers.js:73
+msgid "If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated. The organisation type is shown, if available."
+msgstr ""
+
+#: controllers/listControllers.js:251
+msgid "If you are interested in a specific media, you can search for it."
+msgstr ""
+
+#: controllers/listControllers.js:61
+msgid "If you are interested in a specific organisation, you can search for it."
 msgstr ""
 
 #: views/about.html:40
@@ -378,12 +406,12 @@ msgstr ""
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
-#: controllers/listControllers.js:188
-#: controllers/listControllers.js:317
+#: controllers/listControllers.js:216
+#: controllers/listControllers.js:370
 msgid "List of Media Companies"
 msgstr ""
 
-#: controllers/listControllers.js:178
+#: controllers/listControllers.js:205
 #: controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr ""
@@ -455,6 +483,8 @@ msgstr ""
 
 #: controllers/flowController.js:83
 #: controllers/flowDetailController.js:111
+#: controllers/listControllers.js:266
+#: controllers/listControllers.js:79
 #: controllers/topEntriesController.js:160
 msgid "Next info"
 msgstr ""
@@ -464,12 +494,12 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: views/list.html:30
+#: views/list.html:46
 msgid "No entries found!"
 msgstr ""
 
 #: views/grouping.html:5
-#: views/list.html:18
+#: views/list.html:34
 msgid "Number of Entries"
 msgstr ""
 
@@ -628,6 +658,8 @@ msgstr ""
 
 #: controllers/flowController.js:84
 #: controllers/flowDetailController.js:112
+#: controllers/listControllers.js:267
+#: controllers/listControllers.js:80
 #: controllers/topEntriesController.js:161
 msgid "Previous info"
 msgstr ""
@@ -706,6 +738,8 @@ msgstr ""
 
 #: controllers/flowController.js:85
 #: controllers/flowDetailController.js:113
+#: controllers/listControllers.js:268
+#: controllers/listControllers.js:81
 #: controllers/topEntriesController.js:162
 msgid "Skip info"
 msgstr ""
@@ -752,6 +786,10 @@ msgstr ""
 msgid ""
 "The map can be turned by holding the left mouse button and\n"
 "                        dragging within the frame. It is possible to zoom into the map by scrolling."
+msgstr ""
+
+#: controllers/listControllers.js:64
+msgid "The search can be limited to a specific federal state."
 msgstr ""
 
 #: views/flowdetail.html:193
