@@ -22,51 +22,48 @@
     </div>
     <div class="row paddingBottom">
         <section class="container">
-                <div class="panel panel-default" id="mapSettings">
-                    <div class="panel-heading">
-                        <span translate>Settings</span>
-                        <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
-                        ><i
-                                class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-                    </div>
-                    <div class="panel-body" uib-collapse="!showSettings">
+            <div class="panel panel-default" id="mapSettings">
+                <div class="panel-heading">
+                    <span translate>Settings</span>
+                    <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings">
+                        <i class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                </div>
+                <div class="panel-body" uib-collapse="!showSettings">
 
-                        <div class="col-sm-12 col-lg-12" style="padding-top: 50px; padding-bottom: 50px">
-                            <div class="col-sm-6 col-lg-6">
-                                <strong>
-                                    <div translate>Periods</div>
-                                </strong>
-                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
-                                          rz-slider-options="slider.options"></rzslider>
-                                <div class="checkbox">
-                                    <label><input id="fixRange" type="checkbox"
-                                                  ng-model="slider.options.draggableRangeOnly"/><span
-                                            translate>Fix slider range</span></label>
-                                </div>
-                                <p class="small text-info" translate>Move the sliders to define a range</p>
+                    <div class="col-sm-12 col-lg-12" style="padding-top: 50px; padding-bottom: 50px">
+                        <div class="col-sm-6 col-lg-6">
+                            <strong>
+                                <div translate>Periods</div>
+                            </strong>
+                            <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                      rz-slider-options="slider.options"></rzslider>
+                            <div class="checkbox">
+                                <label><input id="fixRange" type="checkbox"
+                                              ng-model="slider.options.draggableRangeOnly"/><span
+                                        translate>Fix slider range</span></label>
                             </div>
-                            <div class="col-sm-6 col-lg-6">
-                                <strong>
-                                    <div translate>Payment Types</div>
-                                </strong>
-                                <div class="checkbox" data-ng-repeat="pType in typesText">
-                                    <label>
-                                        <input type="checkbox" name="pType"
-                                               ng-model="pType.checked"/>{{pType.text}}
-                                    </label>
-                                </div>
+                            <p class="small text-info" translate>Move the sliders to define a range</p>
+                        </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <strong>
+                                <div translate>Payment Types</div>
+                            </strong>
+                            <div class="checkbox" data-ng-repeat="pType in typesText">
+                                <label>
+                                    <input type="checkbox" name="pType"
+                                           ng-model="pType.checked"/>{{pType.text}}
+                                </label>
                             </div>
-                            <div class="col-sm-6 col-lg-6">
-                                <strong>
-                                    <div translate>Organisation Types</div>
-                                </strong>
-                                <div class="checkbox" data-ng-repeat="oType in orgTypes track by oType.value">
-                                    <label translate>
-                                        <input type="checkbox" name="oType"
-                                                ng-model="oType.selected" />{{oType.name}}
-                                    </label>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <multiselect class="input-xlarge multiselect" ng-model="test"
+                                         options="p.value as p.name for p in orgTypes"
+                                         header="{{'Organisation Types'|translate}}"
+                                         selected-header="{{'options selected'|translate}}"
+                                         multiple="true"
+                                         enable-filter="false">
+                            </multiselect>
+                            <h1>{{test}}</h1>
                         </div>
                     </div>
                 </div>
@@ -75,6 +72,7 @@
                     <p class="small text-info" translate>The map can be turned by holding the left mouse button and
                         dragging within the frame. It is possible to zoom into the map by scrolling.</p>
                 </div>
+            </div>
         </section>
     </div>
 </div>
