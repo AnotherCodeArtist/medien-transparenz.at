@@ -8,10 +8,9 @@ angular.module 'mean.transparency'
           name: 'transparency'
 
      stateName = "index"
-     fieldsToStore = ['slider','periods','typesText', 'orgTypes']
+     fieldsToStore = ['slider','periods','typesText', 'orgTypes', 'orgTypeSelection']
 
      $scope.showSettings = true
-     $scope.test = {}
 
      $scope.$on 'isoChanged', (event, data) ->
           $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
@@ -52,7 +51,7 @@ angular.module 'mean.transparency'
           params.to = $scope.periods[$scope.slider.to/5].period
           types = (v.type for v in $scope.typesText when v.checked)
           (params.pType = types) if types.length > 0
-          params.orgTypes = (o.value for o in $scope.orgTypes when o.selected)
+          params.orgTypes = (o.value for o in $scope.orgTypes when o.value in $scope.orgTypeSelection)
           #TEST #params.orgTypes = ["city", "chamber"]
           params
 
@@ -62,6 +61,7 @@ angular.module 'mean.transparency'
                $scope.mapData = res.data
 
      $scope.orgTypes = []
+     $scope.orgTypeSelection = []
      $scope.mapData = {}
      $scope.periods = []
      $scope.slider =
@@ -87,6 +87,7 @@ angular.module 'mean.transparency'
      registerWatchers = () ->
           $scope.$watch('typesText',change,true)
           $scope.$watch('orgTypes',change,true)
+          $scope.$watch('orgTypeSelection',change,true)
 
 
      savedState = sessionStorage.getItem stateName
@@ -106,7 +107,8 @@ angular.module 'mean.transparency'
           orgTypePromise = TPAService.organisationTypes()
           orgTypePromise.then (res) ->
                for orgTypeObject in res.data
-                    $scope.orgTypes.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type, selected: true)
+                    $scope.orgTypes.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type)
+                    $scope.orgTypeSelection.push(orgTypeObject.type)
 
           pP = TPAService.periods()
           pP.then (res) ->
