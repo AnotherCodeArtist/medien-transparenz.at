@@ -4,10 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: views/index.html:64
-msgid "<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.selected\">{{oType.name}}"
-msgstr ""
-
 #: views/about.html:2
 msgid "About Us"
 msgstr ""
@@ -148,7 +144,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: controllers/listControllers.js:254
+#: controllers/listControllers.js:258
 #: controllers/listControllers.js:67
 msgid "Determine the number of results per page."
 msgstr ""
@@ -192,7 +188,7 @@ msgstr ""
 
 #: controllers/flowController.js:86
 #: controllers/flowDetailController.js:114
-#: controllers/listControllers.js:269
+#: controllers/listControllers.js:273
 #: controllers/listControllers.js:82
 #: controllers/topEntriesController.js:163
 msgid "End tour"
@@ -248,7 +244,7 @@ msgid "Federal state"
 msgstr ""
 
 #: views/flow.html:44
-#: views/index.html:43
+#: views/index.html:42
 #: views/top.html:35
 msgid "Fix slider range"
 msgstr ""
@@ -258,7 +254,7 @@ msgstr ""
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr ""
 
-#: controllers/listControllers.js:257
+#: controllers/listControllers.js:261
 #: controllers/listControllers.js:70
 msgid "Flip through the results here."
 msgstr ""
@@ -329,7 +325,7 @@ msgstr ""
 msgid "How this web-site came into being"
 msgstr ""
 
-#: controllers/listControllers.js:260
+#: controllers/listControllers.js:264
 msgid "If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated."
 msgstr ""
 
@@ -337,7 +333,7 @@ msgstr ""
 msgid "If there are results available, you can discover them with the list. If there are years next to the entry, the entry was part of a transfer within this year. On the right side the sum of the transfers was calculated. The organisation type is shown, if available."
 msgstr ""
 
-#: controllers/listControllers.js:251
+#: controllers/listControllers.js:255
 msgid "If you are interested in a specific media, you can search for it."
 msgstr ""
 
@@ -406,12 +402,12 @@ msgstr ""
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
-#: controllers/listControllers.js:216
-#: controllers/listControllers.js:370
+#: controllers/listControllers.js:220
+#: controllers/listControllers.js:377
 msgid "List of Media Companies"
 msgstr ""
 
-#: controllers/listControllers.js:205
+#: controllers/listControllers.js:209
 #: controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr ""
@@ -460,7 +456,7 @@ msgstr ""
 msgid "Money Flow"
 msgstr ""
 
-#: views/index.html:46
+#: views/index.html:45
 msgid "Move the sliders to define a range"
 msgstr ""
 
@@ -483,7 +479,7 @@ msgstr ""
 
 #: controllers/flowController.js:83
 #: controllers/flowDetailController.js:111
-#: controllers/listControllers.js:266
+#: controllers/listControllers.js:270
 #: controllers/listControllers.js:79
 #: controllers/topEntriesController.js:160
 msgid "Next info"
@@ -494,7 +490,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: views/list.html:46
+#: views/list.html:47
 msgid "No entries found!"
 msgstr ""
 
@@ -540,7 +536,8 @@ msgstr ""
 msgid "Organisation Group"
 msgstr ""
 
-#: views/index.html:61
+#: views/index.html:60
+#: views/index.html:64
 msgid "Organisation Types"
 msgstr ""
 
@@ -608,7 +605,7 @@ msgid "Payment Type"
 msgstr ""
 
 #: views/flow.html:53
-#: views/index.html:50
+#: views/index.html:49
 #: views/top.html:67
 msgid "Payment Types"
 msgstr ""
@@ -634,7 +631,7 @@ msgid "Per default the top spender based on your chosen payment types and period
 msgstr ""
 
 #: views/flow.html:34
-#: views/index.html:37
+#: views/index.html:36
 #: views/top.html:23
 msgid "Periods"
 msgstr ""
@@ -658,7 +655,7 @@ msgstr ""
 
 #: controllers/flowController.js:84
 #: controllers/flowDetailController.js:112
-#: controllers/listControllers.js:267
+#: controllers/listControllers.js:271
 #: controllers/listControllers.js:80
 #: controllers/topEntriesController.js:161
 msgid "Previous info"
@@ -738,7 +735,7 @@ msgstr ""
 
 #: controllers/flowController.js:85
 #: controllers/flowDetailController.js:113
-#: controllers/listControllers.js:268
+#: controllers/listControllers.js:272
 #: controllers/listControllers.js:81
 #: controllers/topEntriesController.js:162
 msgid "Skip info"
@@ -782,7 +779,7 @@ msgstr ""
 msgid "The legend describes the possible icons used for the charts."
 msgstr ""
 
-#: views/index.html:75
+#: views/index.html:74
 msgid ""
 "The map can be turned by holding the left mouse button and\n"
 "                        dragging within the frame. It is possible to zoom into the map by scrolling."
@@ -931,6 +928,10 @@ msgstr ""
 #: controllers/flowController.js:12
 #: controllers/flowController.js:26
 msgid "custom"
+msgstr ""
+
+#: views/index.html:65
+msgid "elements selected"
 msgstr ""
 
 #: controllers/flowController.js:590
