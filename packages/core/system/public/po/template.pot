@@ -102,13 +102,13 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: controllers/topEntriesController.js:105
+#: controllers/topEntriesController.js:108
 #: directives/sankeyDirective.js:69
 #: directives/sankeyDirective.js:98
 msgid "Click for Details"
 msgstr ""
 
-#: views/top.html:104
+#: views/top.html:117
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
@@ -155,11 +155,11 @@ msgstr ""
 
 #: controllers/flowController.js:595
 #: controllers/flowDetailController.js:192
-#: controllers/topEntriesController.js:281
+#: controllers/topEntriesController.js:310
 msgid "Display _MENU_ records"
 msgstr ""
 
-#: controllers/topEntriesController.js:145
+#: controllers/topEntriesController.js:151
 msgid "Display top spender or top recipient"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 #: controllers/flowDetailController.js:114
 #: controllers/listControllers.js:273
 #: controllers/listControllers.js:82
-#: controllers/topEntriesController.js:163
+#: controllers/topEntriesController.js:169
 msgid "End tour"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgid ""
 msgstr ""
 
 #: views/list.html:27
-#: views/top.html:80
+#: views/top.html:92
 msgid "Federal State"
 msgstr ""
 
@@ -245,12 +245,12 @@ msgstr ""
 
 #: views/flow.html:44
 #: views/index.html:42
-#: views/top.html:35
+#: views/top.html:34
 msgid "Fix slider range"
 msgstr ""
 
 #: controllers/flowController.js:53
-#: controllers/topEntriesController.js:139
+#: controllers/topEntriesController.js:142
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr ""
 
@@ -309,7 +309,7 @@ msgid "Group type"
 msgstr ""
 
 #: views/grouping.html:3
-#: views/top.html:44
+#: views/top.html:43
 msgid "Grouping"
 msgstr ""
 
@@ -366,8 +366,12 @@ msgid "It all started with computer programming project as part of one our cours
 msgstr ""
 
 #: controllers/flowController.js:47
-#: controllers/topEntriesController.js:133
+#: controllers/topEntriesController.js:136
 msgid "It is possible to customize the pie chart. To do so, use the settings."
+msgstr ""
+
+#: controllers/topEntriesController.js:148
+msgid "It is possible to narrow down the results to specific organisation types"
 msgstr ""
 
 #: controllers/flowController.js:68
@@ -382,7 +386,7 @@ msgstr ""
 msgid "It is possible to show specific events. Per default, all events are selected."
 msgstr ""
 
-#: controllers/topEntriesController.js:151
+#: controllers/topEntriesController.js:157
 msgid "It is possible to show the chart for a specific federal state."
 msgstr ""
 
@@ -461,7 +465,7 @@ msgid "Move the sliders to define a range"
 msgstr ""
 
 #: controllers/flowController.js:50
-#: controllers/topEntriesController.js:136
+#: controllers/topEntriesController.js:139
 msgid "Move the sliders to define a range."
 msgstr ""
 
@@ -481,7 +485,7 @@ msgstr ""
 #: controllers/flowDetailController.js:111
 #: controllers/listControllers.js:270
 #: controllers/listControllers.js:79
-#: controllers/topEntriesController.js:160
+#: controllers/topEntriesController.js:166
 msgid "Next info"
 msgstr ""
 
@@ -538,6 +542,8 @@ msgstr ""
 
 #: views/index.html:60
 #: views/index.html:64
+#: views/top.html:50
+#: views/top.html:55
 msgid "Organisation Types"
 msgstr ""
 
@@ -583,7 +589,7 @@ msgstr ""
 msgid "Other organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:99
+#: controllers/topEntriesController.js:102
 msgid "Others"
 msgstr ""
 
@@ -606,7 +612,7 @@ msgstr ""
 
 #: views/flow.html:53
 #: views/index.html:49
-#: views/top.html:67
+#: views/top.html:79
 msgid "Payment Types"
 msgstr ""
 
@@ -632,7 +638,7 @@ msgstr ""
 
 #: views/flow.html:34
 #: views/index.html:36
-#: views/top.html:23
+#: views/top.html:22
 msgid "Periods"
 msgstr ""
 
@@ -657,7 +663,7 @@ msgstr ""
 #: controllers/flowDetailController.js:112
 #: controllers/listControllers.js:271
 #: controllers/listControllers.js:80
-#: controllers/topEntriesController.js:161
+#: controllers/topEntriesController.js:167
 msgid "Previous info"
 msgstr ""
 
@@ -666,8 +672,8 @@ msgid "Quarter"
 msgstr ""
 
 #: controllers/flowController.js:609
-#: controllers/topEntriesController.js:173
-#: controllers/topEntriesController.js:252
+#: controllers/topEntriesController.js:179
+#: controllers/topEntriesController.js:278
 msgid "Recipient"
 msgstr ""
 
@@ -716,7 +722,7 @@ msgstr ""
 msgid "Select by Tag"
 msgstr ""
 
-#: controllers/topEntriesController.js:154
+#: controllers/topEntriesController.js:160
 msgid "Select the numbers of elements in the pie chart"
 msgstr ""
 
@@ -729,7 +735,7 @@ msgstr ""
 
 #: controllers/flowController.js:594
 #: controllers/flowDetailController.js:191
-#: controllers/topEntriesController.js:280
+#: controllers/topEntriesController.js:309
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -737,7 +743,7 @@ msgstr ""
 #: controllers/flowDetailController.js:113
 #: controllers/listControllers.js:272
 #: controllers/listControllers.js:81
-#: controllers/topEntriesController.js:162
+#: controllers/topEntriesController.js:168
 msgid "Skip info"
 msgstr ""
 
@@ -745,12 +751,12 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:170
-#: controllers/topEntriesController.js:251
+#: controllers/topEntriesController.js:176
+#: controllers/topEntriesController.js:277
 msgid "Spender"
 msgstr ""
 
-#: views/top.html:52
+#: views/top.html:64
 msgid "Spender/Recipient"
 msgstr ""
 
@@ -805,7 +811,7 @@ msgstr ""
 msgid "To discover the flow in detail just click on the flow between an organisation and a media entry."
 msgstr ""
 
-#: views/top.html:92
+#: views/top.html:105
 msgid "Top"
 msgstr ""
 
@@ -818,7 +824,7 @@ msgid "Top Spenders and Recipients"
 msgstr ""
 
 #: views/overview.html:28
-#: views/top.html:106
+#: views/top.html:119
 msgid "Total"
 msgstr ""
 
@@ -839,7 +845,7 @@ msgid "Total amount of all entries"
 msgstr ""
 
 #: controllers/flowController.js:56
-#: controllers/topEntriesController.js:148
+#: controllers/topEntriesController.js:154
 msgid "Transfers are divided in different payment types. Select the types to display."
 msgstr ""
 
@@ -900,7 +906,7 @@ msgstr ""
 msgid "Who's involved?"
 msgstr ""
 
-#: controllers/topEntriesController.js:142
+#: controllers/topEntriesController.js:145
 msgid "With groupings enabled single transfers will be taken together (e.g. to show umbrella organisations)"
 msgstr ""
 
@@ -931,11 +937,12 @@ msgid "custom"
 msgstr ""
 
 #: views/index.html:65
+#: views/top.html:56
 msgid "elements selected"
 msgstr ""
 
 #: controllers/flowController.js:590
-#: controllers/topEntriesController.js:276
+#: controllers/topEntriesController.js:305
 msgid "first"
 msgstr ""
 
@@ -944,19 +951,19 @@ msgid "grant for the year 2015, the site developed further. With the help of the
 msgstr ""
 
 #: controllers/flowController.js:591
-#: controllers/topEntriesController.js:277
+#: controllers/topEntriesController.js:306
 msgid "last"
 msgstr ""
 
 #: controllers/flowController.js:589
 #: controllers/flowDetailController.js:189
-#: controllers/topEntriesController.js:275
+#: controllers/topEntriesController.js:304
 msgid "next"
 msgstr ""
 
 #: controllers/flowController.js:588
 #: controllers/flowDetailController.js:188
-#: controllers/topEntriesController.js:274
+#: controllers/topEntriesController.js:303
 msgid "previous"
 msgstr ""
 
@@ -966,7 +973,7 @@ msgid "public"
 msgstr ""
 
 #: controllers/flowController.js:593
-#: controllers/topEntriesController.js:279
+#: controllers/topEntriesController.js:308
 msgid "search"
 msgstr ""
 
@@ -974,7 +981,7 @@ msgstr ""
 msgid "zip-code"
 msgstr ""
 
-#: views/top.html:74
+#: views/top.html:86
 msgid "{{pType.text}}"
 msgstr ""
 
