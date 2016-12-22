@@ -15,7 +15,7 @@ angular.module 'mean.transparency'
      $scope.$on 'isoChanged', (event, data) ->
           $scope.federalState = gettextCatalog.getString(TPAService.staticData('findOneFederalState', data.iso)
           .name)
-          $scope.sum = d3.format(",.0f")(data.sum) + " €"
+          $scope.sum = data.sum.toLocaleString($rootScope.language,{minimumFractionDigits:0,maximumFractionDigits:0})+" €"
           $scope.percent = d3.format(",.2f")(data.percent) + "%"
           $scope.$digest()
           return
