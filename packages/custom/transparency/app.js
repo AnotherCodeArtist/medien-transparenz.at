@@ -119,6 +119,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('css', '../lib/ng-tags-input/ng-tags-input.bootstrap.min.css', {weight:-4});
   Transparency.aggregateAsset('css', '../lib/oi.select/dist/select.min.css');
   Transparency.aggregateAsset('css', '../lib/intro.js/minified/introjs.min.css');
+  Transparency.aggregateAsset('css', '../lib/angular-directives-general/demo/multiselect/style.css');
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/intro.js/intro.js',{weight:-5});
@@ -150,6 +151,8 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/oi.select/dist/select-tpls.js',{global:true});
   //Transparency.aggregateAsset('js', '../lib/intro.js/minified/intro.min.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/angular-intro.js/src/angular-intro.js',{weight:-1});
+  Transparency.aggregateAsset('js', '../lib/angular-animate/angular-animate.js',{global:true});
+  Transparency.aggregateAsset('js', '../lib/angular-directives-general/src/multiselect.js',{global:true, weight:-10});
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
@@ -173,5 +176,5 @@ Transparency.register(function(app, auth, database) {
     });
     */
   //Transparency.angularDependencies(['angularFileUpload','datatables','gettext']);
-  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','datatables.bootstrap','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize',  'angular-intro']);  return Transparency;
+  Transparency.angularDependencies(['gettext','ngFileUpload','nvd3','datatables','ui.bootstrap','datatables.buttons','datatables.bootstrap','rzModule','ngTagsInput', 'oi.select', 'ui.select', 'ngSanitize',  'angular-intro',  'ngAnimate', 'long2know']);  return Transparency;
 });

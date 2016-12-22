@@ -744,6 +744,8 @@ module.exports = (Transparency) ->
         paymentTypes = req.query.pType or ['2']
         paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
         limitOfResults = parseInt(req.query.x or '10')
+        orgCategories = req.query.orgCategories if req.query.orgCategories
+        orgCategories = [orgCategories] if orgCategories not instanceof Array and req.query.orgCategories
         query = {}
         project =
             organisation: '$_id.organisation'
@@ -756,6 +758,9 @@ module.exports = (Transparency) ->
                 parseInt(e)
         if federalState?
             query.federalState = federalState
+        if orgCategories?
+            query.organisationType =
+                $in: orgCategories
         group =
             _id:
                 organisation: if orgType is 'org' then '$organisation' else '$media',
@@ -843,6 +848,7 @@ module.exports = (Transparency) ->
                 _id:
                     name: "$#{nameField}"
                     type: orgType
+                    organisationType: '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"
@@ -853,6 +859,7 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
+                organisationType: '$_id.organisationType'
 
             $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
             if not federalState
@@ -890,10 +897,12 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
+                organisationType: '$_id.organisationType'
             group =
                 _id:
                     name: "$#{nameField}"
                     type: orgType
+                    organisationType : '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"

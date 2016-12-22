@@ -9,16 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: views/index.html:64
-msgid ""
-"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.selected\">{{oType."
-"name}}"
-msgstr ""
-"<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.selected\">{{oType."
-"name}}"
 
 #: views/about.html:2
 msgid "About Us"
@@ -164,12 +156,12 @@ msgstr "Kammer"
 msgid "City"
 msgstr "Stadt"
 
-#: controllers/topEntriesController.js:105 directives/sankeyDirective.js:69
+#: controllers/topEntriesController.js:108 directives/sankeyDirective.js:69
 #: directives/sankeyDirective.js:98
 msgid "Click for Details"
 msgstr "Klicken Sie für mehr Details"
 
-#: views/top.html:104
+#: views/top.html:117
 msgid ""
 "Click on a segment of the pie chart to get more information on a particular "
 "organization"
@@ -212,16 +204,20 @@ msgstr ""
 msgid "Delete"
 msgstr "Löschen"
 
+#: controllers/listControllers.js:258 controllers/listControllers.js:67
+msgid "Determine the number of results per page."
+msgstr "Bestimmen Sie die Anzahl der Einträge pro Seite."
+
 #: controllers/groupingController.js:58
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
 #: controllers/flowController.js:595 controllers/flowDetailController.js:192
-#: controllers/topEntriesController.js:281
+#: controllers/topEntriesController.js:310
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
-#: controllers/topEntriesController.js:145
+#: controllers/topEntriesController.js:151
 msgid "Display top spender or top recipient"
 msgstr "Wählen Sie zwischen Spitzenzahler und Spitzenempfänger aus"
 
@@ -246,7 +242,8 @@ msgid "End of Event"
 msgstr "Ende des Events"
 
 #: controllers/flowController.js:86 controllers/flowDetailController.js:114
-#: controllers/topEntriesController.js:163
+#: controllers/listControllers.js:273 controllers/listControllers.js:82
+#: controllers/topEntriesController.js:169
 msgid "End tour"
 msgstr "Tour beenden"
 
@@ -303,7 +300,7 @@ msgstr ""
 "Unterbrechung des Dienstes (z. B. in Fällen von Server-Ausfallzeit), "
 "Datenfehler, falsche Darstellung von Daten oder Softwarefehler."
 
-#: views/list.html:12 views/top.html:80
+#: views/list.html:27 views/top.html:92
 msgid "Federal State"
 msgstr "Bundesland"
 
@@ -311,13 +308,17 @@ msgstr "Bundesland"
 msgid "Federal state"
 msgstr "Bundesland"
 
-#: views/flow.html:44 views/index.html:43 views/top.html:35
+#: views/flow.html:44 views/index.html:42 views/top.html:34
 msgid "Fix slider range"
 msgstr "Zeitspanne fixieren"
 
-#: controllers/flowController.js:53 controllers/topEntriesController.js:139
+#: controllers/flowController.js:53 controllers/topEntriesController.js:142
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr "Zeitspanne fixieren. Damit ist es möglich den Bereich festzusetzen."
+
+#: controllers/listControllers.js:261 controllers/listControllers.js:70
+msgid "Flip through the results here."
+msgstr "Blättern Sie hier durch die Ergebnisse."
 
 #: views/flowdetail.html:12
 msgid "Flow in detail"
@@ -375,11 +376,11 @@ msgstr "Eigentümer der Gruppe"
 msgid "Group type"
 msgstr "Gruppentyp"
 
-#: views/grouping.html:3 views/top.html:44
+#: views/grouping.html:3 views/top.html:43
 msgid "Grouping"
 msgstr "Gruppierung"
 
-#: views/search.html:32
+#: views/search.html:33
 msgid "Hits for Media"
 msgstr "Treffer für Medien"
 
@@ -390,6 +391,42 @@ msgstr "Treffer für Organisationen"
 #: views/impress.html:13
 msgid "How this web-site came into being"
 msgstr "Wie diese Seite entstand"
+
+#: controllers/listControllers.js:264
+msgid ""
+"If there are results available, you can discover them with the list. If "
+"there are years next to the entry, the entry was part of a transfer within "
+"this year. On the right side the sum of the transfers was calculated."
+msgstr ""
+"Falls Ergebnisse vorhanden sind, können Sie diese in dieser Liste sehen. "
+"Wenn Jahresangaben neben dem Eintrag angezeigt werden, wurden Transfers in "
+"diesen Jahren gefunden. Rechts wird die Summe aller Transfers dieses "
+"Eintrages angezeigt."
+
+#: controllers/listControllers.js:73
+msgid ""
+"If there are results available, you can discover them with the list. If "
+"there are years next to the entry, the entry was part of a transfer within "
+"this year. On the right side the sum of the transfers was calculated. The "
+"organisation type is shown, if available."
+msgstr ""
+"Falls Ergebnisse vorhanden sind, können Sie diese in dieser Liste sehen. "
+"Wenn Jahresangaben neben dem Eintrag angezeigt werden, wurden Transfers in "
+"diesen Jahren gefunden. Rechts wird die Summe aller Transfers dieses "
+"Eintrages angezeigt. Falls vorhanden, wird der Organisationstyp angezeigt. "
+
+#: controllers/listControllers.js:255
+msgid "If you are interested in a specific media, you can search for it."
+msgstr ""
+"Wenn Sie an einem bestimmten Medium interessiert sind, können Sie hier "
+"danach suchen."
+
+#: controllers/listControllers.js:61
+msgid ""
+"If you are interested in a specific organisation, you can search for it."
+msgstr ""
+"Wenn Sie an einer bestimmten Organisation interessiert sind, können Sie hier "
+"danach suchen."
 
 #: views/about.html:40
 msgid ""
@@ -431,11 +468,18 @@ msgstr ""
 "Alles begann mit einem Programmierprojekt in einer Lehrveranstaltung. Dabei "
 "wurde ein erster Prototyp von folgenden Studierenden entwickelt:"
 
-#: controllers/flowController.js:47 controllers/topEntriesController.js:133
+#: controllers/flowController.js:47 controllers/topEntriesController.js:136
 msgid "It is possible to customize the pie chart. To do so, use the settings."
 msgstr ""
 "Sie können die Eigenschaften des Diagrammes verändern. Nutzen Sie dafür die "
 "Einstellungen."
+
+#: controllers/topEntriesController.js:148
+msgid ""
+"It is possible to narrow down the results to specific organisation types"
+msgstr ""
+"Es ist möglich, die Ergebnisse auf bestimmte Organisationstypen "
+"einzuschränken"
 
 #: controllers/flowController.js:68
 msgid ""
@@ -460,7 +504,7 @@ msgstr ""
 "Es ist möglich, bestimmte Events anzuzeigen. Standardmäßig sind alle Events "
 "ausgewählt."
 
-#: controllers/topEntriesController.js:151
+#: controllers/topEntriesController.js:157
 msgid "It is possible to show the chart for a specific federal state."
 msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
 
@@ -484,11 +528,11 @@ msgstr ""
 "Finden Sie heraus, wie Organisationen Ihre Mittel für Medienarbeit "
 "verteilen, und woraus sich Medien in diesem Kontext finanzieren"
 
-#: controllers/listControllers.js:188 controllers/listControllers.js:317
+#: controllers/listControllers.js:220 controllers/listControllers.js:377
 msgid "List of Media Companies"
 msgstr "Medien"
 
-#: controllers/listControllers.js:178 controllers/listControllers.js:8
+#: controllers/listControllers.js:209 controllers/listControllers.js:8
 msgid "List of Organisations"
 msgstr "Organisationen"
 
@@ -531,11 +575,11 @@ msgstr "Ministerium"
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
 
-#: views/index.html:46
+#: views/index.html:45
 msgid "Move the sliders to define a range"
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern"
 
-#: controllers/flowController.js:50 controllers/topEntriesController.js:136
+#: controllers/flowController.js:50 controllers/topEntriesController.js:139
 msgid "Move the sliders to define a range."
 msgstr "Bewegen Sie die blauen Marker um den Zeitraum zu verändern."
 
@@ -552,7 +596,8 @@ msgid "Nationwide"
 msgstr "Bundesweit"
 
 #: controllers/flowController.js:83 controllers/flowDetailController.js:111
-#: controllers/topEntriesController.js:160
+#: controllers/listControllers.js:270 controllers/listControllers.js:79
+#: controllers/topEntriesController.js:166
 msgid "Next info"
 msgstr "Nächste Info"
 
@@ -560,11 +605,11 @@ msgstr "Nächste Info"
 msgid "No"
 msgstr "Nein"
 
-#: views/list.html:30
+#: views/list.html:47
 msgid "No entries found!"
 msgstr "Keine Einträge gefunden"
 
-#: views/grouping.html:5 views/list.html:18
+#: views/grouping.html:5 views/list.html:34
 msgid "Number of Entries"
 msgstr "Anzahl der Einträge"
 
@@ -604,7 +649,7 @@ msgstr "Organisation"
 msgid "Organisation Group"
 msgstr "Organisationsgruppe"
 
-#: views/index.html:61
+#: views/index.html:60 views/index.html:64 views/top.html:50 views/top.html:55
 msgid "Organisation Types"
 msgstr "Organisationstypen"
 
@@ -642,7 +687,7 @@ msgstr "Andere Medien"
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
-#: controllers/topEntriesController.js:99
+#: controllers/topEntriesController.js:102
 msgid "Others"
 msgstr "Andere"
 
@@ -662,7 +707,7 @@ msgstr "Zahler"
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:53 views/index.html:50 views/top.html:67
+#: views/flow.html:53 views/index.html:49 views/top.html:79
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
@@ -690,7 +735,7 @@ msgstr ""
 "Standardmäßig wird automatisch der größte Zahler basierend auf Ihrer "
 "Zahlungstyp- und Zeitraumauswahl selektiert"
 
-#: views/flow.html:34 views/index.html:37 views/top.html:23
+#: views/flow.html:34 views/index.html:36 views/top.html:22
 msgid "Periods"
 msgstr "Zeitraum"
 
@@ -711,7 +756,8 @@ msgid "Predictable Event"
 msgstr "Vorhersehbares Event"
 
 #: controllers/flowController.js:84 controllers/flowDetailController.js:112
-#: controllers/topEntriesController.js:161
+#: controllers/listControllers.js:271 controllers/listControllers.js:80
+#: controllers/topEntriesController.js:167
 msgid "Previous info"
 msgstr "Vorherige Info"
 
@@ -719,8 +765,8 @@ msgstr "Vorherige Info"
 msgid "Quarter"
 msgstr "Quartal"
 
-#: controllers/flowController.js:609 controllers/topEntriesController.js:173
-#: controllers/topEntriesController.js:252
+#: controllers/flowController.js:609 controllers/topEntriesController.js:179
+#: controllers/topEntriesController.js:278
 msgid "Recipient"
 msgstr "Empfänger"
 
@@ -764,7 +810,7 @@ msgstr "Nach Region auswählen"
 msgid "Select by Tag"
 msgstr "Nach Tag auswählen"
 
-#: controllers/topEntriesController.js:154
+#: controllers/topEntriesController.js:160
 msgid "Select the numbers of elements in the pie chart"
 msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 
@@ -774,12 +820,13 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: controllers/flowController.js:594 controllers/flowDetailController.js:191
-#: controllers/topEntriesController.js:280
+#: controllers/topEntriesController.js:309
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
 #: controllers/flowController.js:85 controllers/flowDetailController.js:113
-#: controllers/topEntriesController.js:162
+#: controllers/listControllers.js:272 controllers/listControllers.js:81
+#: controllers/topEntriesController.js:168
 msgid "Skip info"
 msgstr "Info überspringen"
 
@@ -787,12 +834,12 @@ msgstr "Info überspringen"
 msgid "Source of Data"
 msgstr "Datenherkunft"
 
-#: controllers/topEntriesController.js:170
-#: controllers/topEntriesController.js:251
+#: controllers/topEntriesController.js:176
+#: controllers/topEntriesController.js:277
 msgid "Spender"
 msgstr "Zahler"
 
-#: views/top.html:52
+#: views/top.html:64
 msgid "Spender/Recipient"
 msgstr "Zahler/Empfänger"
 
@@ -831,7 +878,7 @@ msgid "The legend describes the possible icons used for the charts."
 msgstr ""
 "Die Legende beschreibt Symbole, die in den Diagrammen vorkommen können."
 
-#: views/index.html:75
+#: views/index.html:74
 msgid ""
 "The map can be turned by holding the left mouse button and\n"
 "                        dragging within the frame. It is possible to zoom "
@@ -839,6 +886,11 @@ msgid ""
 msgstr ""
 "Die Karte kann mittels Halten der linken Maus-Taste gedreht werden.\n"
 "Mittels Scrollen kann in die Karte gezoomt werden."
+
+#: controllers/listControllers.js:64
+msgid "The search can be limited to a specific federal state."
+msgstr ""
+"Es ist möglich, die Suche mit einem bestimmten Bundesland einzuschränken."
 
 #: views/flowdetail.html:193
 msgid ""
@@ -870,7 +922,7 @@ msgstr ""
 "Um den Geldfluss im Detail zu entdecken, klicken Sie auf den Geldfluss "
 "zwischen Organisation und Medium."
 
-#: views/top.html:92
+#: views/top.html:105
 msgid "Top"
 msgstr "Top"
 
@@ -882,7 +934,7 @@ msgstr "Spitzenwerte"
 msgid "Top Spenders and Recipients"
 msgstr "Spitzenzahler und -Empfänger"
 
-#: views/overview.html:28 views/top.html:106
+#: views/overview.html:28 views/top.html:119
 msgid "Total"
 msgstr "Total"
 
@@ -902,7 +954,7 @@ msgstr "Summe der Zahlungen gemäß §4 MedKF-TG (Förderungen)"
 msgid "Total amount of all entries"
 msgstr "Summe aller Zahlungen"
 
-#: controllers/flowController.js:56 controllers/topEntriesController.js:148
+#: controllers/flowController.js:56 controllers/topEntriesController.js:154
 msgid ""
 "Transfers are divided in different payment types. Select the types to "
 "display."
@@ -963,7 +1015,7 @@ msgstr "Wohin das Geld fließt?"
 msgid "Who's involved?"
 msgstr "Wer ist dabei?"
 
-#: controllers/topEntriesController.js:142
+#: controllers/topEntriesController.js:145
 msgid ""
 "With groupings enabled single transfers will be taken together (e.g. to show "
 "umbrella organisations)"
@@ -1008,7 +1060,11 @@ msgstr ""
 msgid "custom"
 msgstr "Benutzerdefiniert"
 
-#: controllers/flowController.js:590 controllers/topEntriesController.js:276
+#: views/index.html:65 views/top.html:56
+msgid "elements selected"
+msgstr "Elemente ausgewählt"
+
+#: controllers/flowController.js:590 controllers/topEntriesController.js:305
 msgid "first"
 msgstr "Erste"
 
@@ -1021,17 +1077,17 @@ msgstr ""
 "Features konnten implementiert werden. Dies war durch die Mitarbeit der "
 "folgenden Studierenden möglich:"
 
-#: controllers/flowController.js:591 controllers/topEntriesController.js:277
+#: controllers/flowController.js:591 controllers/topEntriesController.js:306
 msgid "last"
 msgstr "Letzte"
 
 #: controllers/flowController.js:589 controllers/flowDetailController.js:189
-#: controllers/topEntriesController.js:275
+#: controllers/topEntriesController.js:304
 msgid "next"
 msgstr "nächste"
 
 #: controllers/flowController.js:588 controllers/flowDetailController.js:188
-#: controllers/topEntriesController.js:274
+#: controllers/topEntriesController.js:303
 msgid "previous"
 msgstr "vorherige"
 
@@ -1039,7 +1095,7 @@ msgstr "vorherige"
 msgid "public"
 msgstr "Öffentliich"
 
-#: controllers/flowController.js:593 controllers/topEntriesController.js:279
+#: controllers/flowController.js:593 controllers/topEntriesController.js:308
 msgid "search"
 msgstr "Suche"
 
@@ -1047,7 +1103,7 @@ msgstr "Suche"
 msgid "zip-code"
 msgstr "Postleitzahl"
 
-#: views/top.html:74
+#: views/top.html:86
 msgid "{{pType.text}}"
 msgstr "{{pType.text}}"
 
@@ -1062,6 +1118,13 @@ msgstr "§31 ORF-G (Gebühren)"
 #: controllers/flowController.js:603
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#~ msgid ""
+#~ "<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.selected"
+#~ "\">{{oType.name}}"
+#~ msgstr ""
+#~ "<input type=\"checkbox\" name=\"oType\" ng-model=\"oType.selected"
+#~ "\">{{oType.name}}"
 
 #~ msgid "Organisations with undetermined organisation type"
 #~ msgstr "Organisationen mit nicht definiertem Organisationstyp"

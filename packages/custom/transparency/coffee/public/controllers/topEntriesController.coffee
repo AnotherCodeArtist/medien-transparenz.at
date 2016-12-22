@@ -9,7 +9,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.td.dtInstance = {}
     params = {}
     stateName = "topState"
-    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings']
+    fieldsToStore = ['slider','periods','orgTypes','typesText','rank','orgType', 'selectedFederalState', 'includeGroupings', 'selectedOrgCategories']
     $scope.periods = []
     $scope.slider =
         from: 0
@@ -33,6 +33,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.$watch('rank', change, true)
         $scope.$watch('selectedFederalState', change, true)
         $scope.$watch('includeGroupings', change, true)
+        $scope.$watch('selectedOrgCategories', change, true)
 
 
     #construct the query parameters
@@ -46,10 +47,12 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         (params.pType = types) if types.length > 0
         params.x = $scope.rank
         params.orgType = $scope.orgType
+        params.orgCategories = $scope.selectedOrgCategories
         params
 
     $scope.total = -> if $scope.top then $scope.top.all.toLocaleString() else "0"
     $scope.IntroOptions = null;
+    $scope.selectedOrgCategories = [];
 
     buildPieModel = ->
         $scope.pieData = []
@@ -104,6 +107,10 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
                     intro: gettextCatalog.getString 'With groupings enabled single transfers will be taken together (e.g. to show umbrella organisations)'
                 },
                 {
+                    element: document.querySelector('#orgTypesSelection')
+                    intro: gettextCatalog.getString 'It is possible to narrow down the results to specific organisation types'
+                },
+                {
                     element: document.querySelector('#spenderRecipient')
                     intro: gettextCatalog.getString 'Display top spender or top recipient'
                 },
@@ -135,6 +142,13 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             {name: gettextCatalog.getString('Spender'), value: 'org'},
             {name: gettextCatalog.getString('Recipient'), value: 'media'}
         ]
+        $scope.orgCategories = []
+        orgTypePromise = TPAService.organisationTypes()
+        orgTypePromise.then (res) ->
+            for orgTypeObject in res.data
+                $scope.orgCategories.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type)
+                $scope.selectedOrgCategories.push(orgTypeObject.type) if $scope.selectedOrgCategories.length is 0
+
         setIntroOptions()
         #Federal states selection
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
@@ -173,6 +187,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         $scope.orgTypes[1].name = gettextCatalog.getString('Recipient')
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.federalStates.forEach (state) -> state.name = gettextCatalog.getString state.value
+        $scope.orgCategories.forEach (cat) -> cat.name = gettextCatalog.getString cat.value
         setIntroOptions()
 
     $scope.$on 'gettextLanguageChanged', translate

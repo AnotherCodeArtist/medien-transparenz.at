@@ -11,8 +11,7 @@
                 <div class="panel-heading">
                     <span translate>Settings</span>
                     <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
-                    ><i
-                            class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                    ><i class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
                 </div>
                 <div class="panel-body" uib-collapse="!showSettings">
 
@@ -46,10 +45,23 @@
                                     <sup><a href ng-click="TopIntro(3);">?</a></sup>
                                 </div>
                             </div>
+                            <div id="orgTypesSelection">
+                                <strong>
+                                    <span translate>Organisation Types</span> <sup><a href ng-click="TopIntro(4);">?</a></sup>
+                                </strong>
+
+                                <multiselect class="input-xlarge multiselect" ng-model="selectedOrgCategories"
+                                             options="p.value as p.name for p in orgCategories"
+                                             header="{{'Organisation Types'|translate}}"
+                                             selected-header="{{'elements selected'|translate}}"
+                                             multiple="true"
+                                             enable-filter="false">
+                                </multiselect>
+                            </div>
                         </div>
                         <div class="col-sm-2 col-lg-2" id="spenderRecipient">
                             <strong>
-                                <div><span translate>Spender/Recipient</span> <sup><a href ng-click="TopIntro(4);">?</a></sup>
+                                <div><span translate>Spender/Recipient</span> <sup><a href ng-click="TopIntro(5);">?</a></sup>
                                 </div>
                             </strong>
 
@@ -64,7 +76,7 @@
                         <div class="col-sm-5 col-lg-5">
                             <div id="paymentTypes">
                                 <strong>
-                                    <div><span translate>Payment Types</span> <sup><a href ng-click="TopIntro(5);">?</a></sup>
+                                    <div><span translate>Payment Types</span> <sup><a href ng-click="TopIntro(6);">?</a></sup>
                                     </div>
                                 </strong>
 
@@ -77,7 +89,7 @@
                             </div>
                             <div id="fedStateSelection">
                                 <strong>
-                                    <div><span translate>Federal State</span> <sup><a href ng-click="TopIntro(6);">?</a></sup>
+                                    <div><span translate>Federal State</span> <sup><a href ng-click="TopIntro(7);">?</a></sup>
                                     </div>
                                 </strong>
                                 <select ng-model="selectedFederalState"
@@ -86,10 +98,11 @@
                                     <option value="">-</option>
                                 </select>
                             </div>
+
                         </div>
                         <div class="col-sm-1 col-lg-1">
                             <div id="rank">
-                                <div><span translate>Top</span> <sup><a href ng-click="TopIntro(7);">?</a></sup>
+                                <div><span translate>Top</span> <sup><a href ng-click="TopIntro(8);">?</a></sup>
                                 </div>
 
                                 <select data-ng-model="rank"
