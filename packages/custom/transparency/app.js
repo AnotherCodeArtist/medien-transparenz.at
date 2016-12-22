@@ -123,7 +123,7 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/intro.js/intro.js',{weight:-5});
-  Transparency.aggregateAsset('js', '../lib/nvd3/build/nv.d3.js',{weight:-3});
+  Transparency.aggregateAsset('js', '../lib/nvd3/build/nv.d3.js',{global:true,weight:-3});
   Transparency.aggregateAsset('js', '../lib/three.js/three.js',{global:true, weight:-8});
   Transparency.aggregateAsset('js', '../lib/topojson/topojson.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/jszip/dist/jszip.js',{weight:-4});
