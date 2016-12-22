@@ -105,7 +105,7 @@ angular.module 'mean.transparency'
                     floor:0
                     onEnd: -> change(1,2)
           orgTypePromise = TPAService.organisationTypes()
-          orgTypePromise.then (res) ->
+          .then (res) ->
                for orgTypeObject in res.data
                     $scope.orgTypes.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type)
                     $scope.orgTypeSelection.push(orgTypeObject.type)
@@ -122,4 +122,5 @@ angular.module 'mean.transparency'
                $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
                $scope.typesText[0].checked = true
                registerWatchers()
-               update()
+          q.all([pP,orgTypePromise])
+               .then => update()

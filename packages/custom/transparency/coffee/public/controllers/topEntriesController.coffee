@@ -144,11 +144,9 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         ]
         $scope.orgCategories = []
         orgTypePromise = TPAService.organisationTypes()
-        orgTypePromise.then (res) ->
+        .then (res) ->
             for orgTypeObject in res.data
                 $scope.orgCategories.push(name: gettextCatalog.getString(orgTypeObject.type), value: orgTypeObject.type)
-                $scope.selectedOrgCategories.push(orgTypeObject.type) if $scope.selectedOrgCategories.length is 0
-
         setIntroOptions()
         #Federal states selection
         $scope.federalStates  =  (name: gettextCatalog.getString(state.value), value: state.value, iso: state.iso for state in TPAService.staticData 'federal')
@@ -158,7 +156,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
         savedState = sessionStorage.getItem 'topState'
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
-            update()
+            orgTypePromise.then( => update())
             registerWatches()
         else
             pY = TPAService.years()
@@ -178,7 +176,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             $scope.selectedFederalState = {}
             $scope.orgType = $scope.orgTypes[0].value
             $scope.includeGroupings = false
-            $q.all([pY, pP]).then (res) ->
+            $q.all([pY, pP, orgTypePromise]).then (res) ->
+                $scope.selectedOrgCategories.push(orgTypeObject.value) for orgTypeObject in $scope.orgCategories
                 update()
                 registerWatches()
 
