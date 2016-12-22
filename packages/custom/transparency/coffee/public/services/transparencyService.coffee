@@ -94,6 +94,20 @@ class TPAService
                     $scope[f] = s[f]
                 s) , JSON.parse savedState
 
+    getLocalGroups: (type) ->
+        groups = localStorage.getItem type
+        if not groups
+            groups = []
+        else
+            JSON.parse groups
+
+    saveLocalGroup: (group) ->
+        groups = JSON.parse(localStorage.getItem group.type)
+        if not groups
+            groups = []
+        groups.push group
+        localStorage.setItem group.type, JSON.stringify groups
+
     years: ->
         @$http.get 'api/transparency/years'
 

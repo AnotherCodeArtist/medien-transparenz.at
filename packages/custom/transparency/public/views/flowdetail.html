@@ -13,6 +13,13 @@
                         ng-click="goToTarget()">{{target}}</a>
                 </h2>
             </div>
+            <div ng-intro-options="IntroOptions" ng-intro-method="FlowDetailIntro" ng-intro-autostart="false">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" aria-label="?" data-ng-click="FlowDetailIntro()">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </div>
         <style>
             /* tell the SVG path to be a thin blue line without any area fill */
@@ -62,7 +69,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" id="eventsSelection">
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro();">?</a></sup></p>
                                         <h3 class="panel-title" translate>Select Events</h3>
                                     </div>
                                     <div class="panel-body">
@@ -84,7 +92,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" id="tagSelection">
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(1);">?</a></sup></p>
+
                                         <h3 class="panel-title" translate>Select by Tag</h3>
                                     </div>
                                     <div class="panel-body">
@@ -102,7 +112,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" id="regionSelection">
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(2);">?</a></sup></p>
                                         <h3 class="panel-title" translate>Select by Region</h3>
                                     </div>
                                     <div class="panel-body">
@@ -123,7 +134,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" id="flowDetailLegend">
+                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(3);">?</a></sup></p>
                                 <h3 class="panel-title" translate>Legend</h3>
                             </div>
                             <div class="panel-body">

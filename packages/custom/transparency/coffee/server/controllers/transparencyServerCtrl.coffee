@@ -1108,6 +1108,9 @@ module.exports = (Transparency) ->
             page = parseInt req.query.page or "0"
             size = parseInt req.query.size or "50"
 
+        if req.query.type?
+            query.type = req.query.type
+
         Grouping
         .find(query)
         .sort('name')

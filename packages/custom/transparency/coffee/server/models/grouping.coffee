@@ -25,6 +25,10 @@ GroupingSchema = new Schema
     isActive:
         type: Boolean
         required: true
+    serverside:
+        type: Boolean
+        required: true
+        default: true
 
 
 GroupingSchema.path('type').validate(

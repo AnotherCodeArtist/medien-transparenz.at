@@ -2,12 +2,30 @@
 
 app = angular.module 'mean.transparency'
 
+app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
+    (label, query, item, options, element) ->
+        if typeof item.region is "undefined"
+            html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        else
+            html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        $sce.trustAsHtml(html)
+])
+
+app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
+    (label, query, item, options, element) ->
+        if typeof item.region is "undefined"
+            html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label
+        else
+            html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name
+        $sce.trustAsHtml(html)
+])
+
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia']
+    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups', 'selectedMediaGroups']
     $scope.init = 'init';
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
@@ -35,6 +53,18 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 {
                     element: document.querySelector('#multiselectMedia')
                     intro: gettextCatalog.getString 'You can add media to the flow too. Click on the rectangular box for details.'
+                },
+                {
+                    element: document.querySelector('#multiselectOrgGroup')
+                    intro: gettextCatalog.getString 'It is possible to select predefined groups for organisations. The entries of the group will be loaded and displayed automatically.'
+                },
+                {
+                    element: document.querySelector('#multiselectMediaGroup')
+                    intro: gettextCatalog.getString 'It is possible to select predefined groups for media. The entries of the group will be loaded and displayed automatically.'
+                },
+                {
+                    element: document.querySelector('#customGroups')
+                    intro: gettextCatalog.getString 'Based on your selection, you can create custom groups for all non-grouped organisations or media.'
                 },
                 {
                     element: document.querySelector('#sankeyRow')
@@ -107,6 +137,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.mediaLabel = gettextCatalog.getString 'Media'
     $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+    $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+    $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
 
     parameters = ->
         params = {}
@@ -170,6 +202,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
         $scope.mediaLabel = gettextCatalog.getString 'Media'
         $scope.organisationsLabel = gettextCatalog.getString 'Organisations'
+        $scope.organisationGroupLabel = gettextCatalog.getString 'Organisation Group'
+        $scope.mediaGroupLabel = gettextCatalog.getString 'Media Group'
         setIntroOptions()
 
 
@@ -193,7 +227,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
-        console.log(node);
         if (node.source.type is "o" and node.target.type is "m")
             $state.go(
                 'showflowdetail'
@@ -220,7 +253,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
         #console.log "Starting update: " + Date.now()
         startLoading()
-        if $scope.selectedOrganisations or $scope.selectedMedia
+        if ($scope.selectedOrganisations and $scope.selectedOrganisations.length > 0) or ($scope.selectedMedia and $scope.selectedMedia.length > 0)
             TPAService.filteredflows(parameters())
             .then (res) ->
                 stopLoading()
@@ -261,7 +294,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.error = res.data
                 #console.log "resolve dataPromise after exception"
                 dataPromise.resolve()
-
+        else
+            stopLoading()
+            $scope.error = "nothing selected"
 
     checkMaxLength = (data) ->
         ###if data.nodes.length > $scope.maxNodes
@@ -272,6 +307,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.maxExceeded = 0
         $scope.flows = data
 
+    createLink = (source, target, value, type) ->
+        {
+            source: source
+            target: target
+            value: value
+            type: type
+        }
+
+
     buildNodes = (data) ->
         nodes = []
         links = []
@@ -281,6 +325,31 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         sum = 0
 
         data.forEach (entry) ->
+            entryOrgGroup = ""
+            entryMediaGroup = ""
+
+            if $scope.selectedOrganisationGroups
+                for orgGroup in $scope.selectedOrganisationGroups
+                    if orgGroup.members.indexOf(entry.organisation) isnt -1
+                        entryOrgGroup = orgGroup.name
+
+            if $scope.selectedMediaGroups
+                for mediaGroup in $scope.selectedMediaGroups
+                    if mediaGroup.members.indexOf(entry.media) isnt -1
+                        entryMediaGroup = mediaGroup.name
+
+            if entryOrgGroup isnt "" and not nodeMap["OG: " + entryOrgGroup]
+                nodeMap["OG: " + entryOrgGroup] =
+                    index: nodesNum
+                    type: 'og'
+                nodesNum++
+
+            if entryMediaGroup isnt "" and not nodeMap["MG: " + entryMediaGroup]
+                nodeMap["MG: " + entryMediaGroup] =
+                    index: nodesNum
+                    type: 'mg'
+                nodesNum++
+
             if not nodeMap[entry.organisation]?
                 nodeMap[entry.organisation] =
                     index: nodesNum
@@ -292,13 +361,72 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     index: nodesNum
                     type: 'm'
                 nodesNum++
-            links.push(
-                source: nodeMap[entry.organisation].index
-                target: nodeMap[entry.media].index
-                value: entry.amount
-                type: entry.transferType
-            )
-            sum += entry.amount
+            if entryOrgGroup is "" and entryMediaGroup is ""
+                links.push(createLink(nodeMap[entry.organisation].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else if entryOrgGroup isnt "" and entryMediaGroup is ""
+                link1 = null
+                link2 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["OG: " + entryOrgGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["OG: " + entryOrgGroup].index and link.target is nodeMap[entry.media].index
+                        link2 = link
+                    if link1 isnt null and link2 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["OG: " + entryOrgGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["OG: " + entryOrgGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else if entryOrgGroup is "" and entryMediaGroup isnt ""
+                link1 = null
+                link2 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["MG: " + entryMediaGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["MG: " + entryMediaGroup].index and link.target is nodeMap[entry.media].index
+                        link2 = link
+                    if link1 isnt null and link2 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["MG: " + entryMediaGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["MG: " + entryMediaGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+            else
+                link1 = null
+                link2 = null
+                link3 = null
+                for link in links
+                    if link.source is nodeMap[entry.organisation].index and link.target is nodeMap["OG: " + entryOrgGroup].index
+                        link1 = link
+                    else if link.source is nodeMap["OG: " + entryOrgGroup].index and link.target is nodeMap["MG: " + entryMediaGroup].index
+                        link2 = link
+                    else if link.source is nodeMap["MG: " + entryMediaGroup].index and link.target is nodeMap[entry.media].index
+                        link3 = link
+                    if link1 isnt null and link2 isnt null and link3 isnt null
+                        break
+                if link1 isnt null
+                    link1.value += entry.amount
+                else
+                    links.push(createLink(nodeMap[entry.organisation].index, nodeMap["OG: " + entryOrgGroup].index, entry.amount, entry.transferType))
+                if link2 isnt null
+                    link2.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["OG: " + entryOrgGroup].index, nodeMap["MG: " + entryMediaGroup].index, entry.amount, entry.transferType))
+                if link3 isnt null
+                    link3.value += entry.amount
+                else
+                    links.push(createLink(nodeMap["MG: " + entryMediaGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
+
+
+                sum += entry.amount
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
@@ -377,6 +505,20 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if toState.name isnt 'home'
             TPAService.saveState stateName,fieldsToStore, $scope
 
+    setGroups = () ->
+        TPAService.getGroupings {type: 'org'}
+        .then (res, err) ->
+            if (err)
+                console.error err
+                return
+            $scope.allOrganisationGroups = res.data.concat(TPAService.getLocalGroups("org"))
+        TPAService.getGroupings {type: 'media'}
+        .then (res, err) ->
+            if (err)
+                console.error err
+                return
+            $scope.allMediaGroups = res.data.concat(TPAService.getLocalGroups("media"))
+
     $q.all([pP]).then (res) ->
         stateParamsExist = false
         if $state.params
@@ -393,11 +535,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             startLoading()
             $scope.selectedOrganisations = [];
             $scope.selectedMedia = [];
+            $scope.selectedMediaGroups = []
+            $scope.selectedOrganisationGroups = []
             stopLoading()
         TPAService.search({name: '   '})
         .then (res) ->
             $scope.mediaLabel = gettextCatalog.getString('Media')
             $scope.organisationLabel = gettextCatalog.getString('Organisation')
+            $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+            $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
             $scope.allOrganisations = res.data.org.map (o) ->
                 {
                     name: o.name,
@@ -406,12 +552,168 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 {
                     name: m.name,
                 }
+            setGroups()
 
-
-        $scope.$watchGroup ['selectedOrganisations', 'selectedMedia' ], (newValue, oldValue) ->
+        selectedOrganisationsChanged = (newValue, oldValue) ->
+            if newValue.length < oldValue.length
+                index = 0
+                while index < newValue.length and newValue[index].name is oldValue[index].name
+                    index++
+                if $scope.organisationsInSelectedGroups.indexOf(oldValue[index].name) isnt -1
+                    $scope.selectedOrganisations = oldValue
+                    $scope.deselectionNotAllowed = oldValue[index].name
             if not $scope.isDetails
                 update()
             $scope.isDetails = false;
+
+        selectedMediaChanged = (newValue, oldValue) ->
+            if newValue.length < oldValue.length
+                index = 0
+                while index < newValue.length and newValue[index].name is oldValue[index].name
+                    index++
+                if $scope.mediaInSelectedGroups.indexOf(oldValue[index].name) isnt -1
+                    $scope.selectedMedia = oldValue
+                    $scope.deselectionNotAllowed = oldValue[index].name
+            if not $scope.isDetails
+                update()
+            $scope.isDetails = false;
+
+        $scope.$watch 'selectedMedia', selectedMediaChanged, true
+        $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
+
+        handleRemovingOrgGroup = (newValue) ->
+            newOrganisationsInSelectedGroups = []
+            for orgGroup in newValue
+                newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
+            $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
+
+        handleAddingOrgGroup = (newValue, oldValue) ->
+            $scope.badMembers = []
+            if $scope.organisationsInSelectedGroups.length > 0
+                for member in newValue[newValue.length - 1].members
+                    if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
+                        $scope.badMembers.push member
+
+            if $scope.badMembers.length isnt 0
+                $scope.selectedOrganisationGroups = oldValue
+                return
+
+            selectedOrganisations = $scope.selectedOrganisations.map (org) ->
+                org.name
+            newSelectedOrganisations = $scope.selectedOrganisations.slice()
+            for member in newValue[newValue.length - 1].members
+                $scope.organisationsInSelectedGroups.push member
+                if selectedOrganisations.indexOf(member) is -1
+                    for organisation in $scope.allOrganisations
+                        if organisation.name is member
+                            newSelectedOrganisations.push organisation
+            $scope.selectedOrganisations = newSelectedOrganisations
+            return
+
+        selectedOrganisationGroupsChanged = (newValue, oldValue) ->
+            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+            if newLength is oldLength
+                return
+
+            if newLength < oldLength
+                handleRemovingOrgGroup(newValue)
+            else
+                handleAddingOrgGroup(newValue, oldValue)
+            change(2,1)
+
+        handleRemovingMediaGroup = (newValue, oldValue) ->
+            newMediaInSelectedGroups = []
+            for mediaGroup in newValue
+                newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
+            $scope.mediaInSelectedGroups = newMediaInSelectedGroups
+
+        handleAddingMediaGroups = (newValue, oldValue) ->
+            $scope.badMembers = []
+            if $scope.mediaInSelectedGroups.length > 0
+                for member in newValue[newValue.length - 1].members
+                    if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
+                        $scope.badMembers.push member
+            if $scope.badMembers.length isnt 0
+                $scope.selectedMediaGroups = oldValue
+                return
+
+            selectedMedia = $scope.selectedMedia.map (media) ->
+                media.name
+            newSelectedMedia = $scope.selectedMedia.slice()
+            for member in newValue[newValue.length - 1].members
+                $scope.mediaInSelectedGroups.push member
+                if selectedMedia.indexOf(member) is -1
+                    for media in $scope.allMedia
+                        if media.name is member
+                            newSelectedMedia.push media
+            $scope.selectedMedia = newSelectedMedia
+            return
+
+        selectedMediaGroupsChanged = (newValue, oldValue) ->
+            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+            if newLength is oldLength
+                return
+            if newLength < oldLength
+                handleRemovingMediaGroup(newValue)
+            else
+                handleAddingMediaGroups(newValue, oldValue)
+            change(2,1)
+
+        $scope.createLocalOrgGroup = () ->
+            members = []
+            for localgroup in TPAService.getLocalGroups "org"
+                if localgroup.name is $scope.localOrgGroupName
+                    $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
+                    break
+                    return
+            for org in $scope.selectedOrganisations
+                if $scope.organisationsInSelectedGroups.indexOf(org.name) is -1
+                    members.push org.name
+            if members.length is 0
+                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+                return
+            $scope.localGroupError = ""
+            group = {
+                type: "org"
+                members: members
+                name: $scope.localOrgGroupName
+            }
+            TPAService.saveLocalGroup group
+            $scope.allOrganisationGroups.push group
+            $scope.selectedOrganisationGroups = $scope.selectedOrganisationGroups.concat [group]
+            $scope.localOrgGroupName = ""
+
+        $scope.createLocalMediaGroup = () ->
+            members = []
+            for localgroup in TPAService.getLocalGroups "media"
+                if localgroup.name is $scope.localMediaGroupName
+                    $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
+                    break
+                    return
+            for media in $scope.selectedMedia
+                if $scope.mediaInSelectedGroups.indexOf(media.name) is -1
+                    members.push media.name
+            if members.length is 0
+                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+                return
+            $scope.localGroupError = ""
+            group = {
+                type: "media"
+                members: members
+                name: $scope.localMediaGroupName
+            }
+            TPAService.saveLocalGroup group
+            $scope.allMediaGroups.push group
+            $scope.selectedMediaGroups = $scope.selectedMediaGroups.concat [group]
+            $scope.localMediaGroupName = ""
+
+        $scope.organisationsInSelectedGroups = []
+        $scope.mediaInSelectedGroups = []
+        $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
+        $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
+
 
         #$scope.$watch('slider.from',change,true)
         #$scope.$watch('slider.to',change,true)

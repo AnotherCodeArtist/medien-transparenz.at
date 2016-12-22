@@ -121,6 +121,89 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        <span>{{organisationGroupLabel}}:</span> <sup><a href ng-click="FlowIntro(6);">?</a></sup>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allOrganisationGroups track by item.name"
+                                   ng-model="selectedOrganisationGroups"
+                                   multiple
+                                   placeholder="{{organisationsLabel}}"
+                                   id="multiselectOrgGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
+                        >
+
+                        </oi-select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>{{mediaGroupLabel}}:</span> <sup><a href ng-click="FlowIntro(7);">?</a></sup>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allMediaGroups track by item.name"
+                                   ng-model="selectedMediaGroups"
+                                   multiple
+                                   placeholder="{{mediaLabel}}"
+                                   id="multiselectMediaGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
+                        ></oi-select>
+                    </div>
+                </div>
+                <div class="row" id="customGroups">
+                    <div class="col-md-6">
+                        <form name="localOrgGroupForm">
+                            <span translate>Group all non-grouped organisations:</span> <sup><a href
+                                                                                                ng-click="FlowIntro(8);">?</a></sup>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" ng-model="localOrgGroupName" placeholder="{{'Organisation group name'|translate}}" required/>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" ng-disabled="localOrgGroupForm.$invalid"
+                                            class="btn btn-primary" ng-click="createLocalOrgGroup()">
+                                        <span translate>Create new local group</span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form name="localMediaGroupForm">
+                            <span translate>Group all non-grouped media:</span> <sup><a href
+                                                                                        ng-click="FlowIntro(8);">?</a></sup>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" ng-model="localMediaGroupName" placeholder="{{'Media group name'|translate}}" required/>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
+                                            class="btn btn-primary" ng-click="createLocalMediaGroup()">
+                                    <span translate>Create new local group
+                                    </span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row" ng-hide="badMembers == null || badMembers.length === 0">
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span translate>The group can not be selected since it contains members, which are included in already selected groups.</span>
+                        <ul>
+                            <li ng-repeat="badMember in badMembers">{{badMember}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" ng-show="localGroupError && localGroupError !== ''">
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        {{localGroupError}}
+                    </div>
+                </div>
+                <div class="row">
                     <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
                         <div data-tpa-sankey data="flows" id="mychart"
                              prog="progress" node-click="showDetails" link-click="showFlowDetails">
