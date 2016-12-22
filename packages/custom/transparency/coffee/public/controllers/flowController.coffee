@@ -567,6 +567,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.isDetails = false;
 
         selectedMediaChanged = (newValue, oldValue) ->
+            if newValue == oldValue then return
             if newValue.length < oldValue.length
                 index = 0
                 while index < newValue.length and newValue[index].name is oldValue[index].name
