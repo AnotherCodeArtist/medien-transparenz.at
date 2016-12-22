@@ -2,7 +2,7 @@
 
 #* jshint -W098 *#
 angular.module 'mean.transparency'
-.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state, $rootScope) ->
+.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state, $rootScope, $q) ->
      $scope.global = Global
      $scope.package =
           name: 'transparency'
@@ -122,5 +122,5 @@ angular.module 'mean.transparency'
                $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
                $scope.typesText[0].checked = true
                registerWatchers()
-          q.all([pP,orgTypePromise])
+          $q.all([pP,orgTypePromise])
                .then => update()

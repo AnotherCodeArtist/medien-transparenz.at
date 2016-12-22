@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: views/about.html:2
@@ -183,7 +183,7 @@ msgstr "Anlegen"
 
 #: views/flow.html:167 views/flow.html:184
 msgid "Create new local group"
-msgstr "Neue benutzerdefinierte Gruppe erstellen"
+msgstr "Neue Gruppe anlegen"
 
 #: controllers/flowController.js:897 controllers/flowController.js:931
 msgid ""
