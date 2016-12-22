@@ -70,6 +70,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             #    .text (d) -> d.source.name + " → " + d.target.name + "\n" + format(d.value)
 
             link.on "mouseover", (d) ->
+                div.style('display','block')
                 div.transition()
                 .duration(200)
                 .style("opacity", .9)
@@ -100,6 +101,8 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             #make sure that all labels are invisible once the page is left    
             $rootScope.$on '$stateChangeStart', (stateEvent,toState,toParams,fromState,fromParams) ->
                 div.style("opacity",0)
+                if toState.name isnt 'showflow'
+                    div.remove()
 
 
             node = svg.append("g")
@@ -126,13 +129,14 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
 
             #Append tooltip
             node.on "mouseover", (d) ->
+                div.style('display','block')
                 div.transition()
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip node')
                 if d.name is 'Other organisations' or d.name is 'Other media'
                     d.name = gettextCatalog.getString(d.name)
-                div.html("""<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>#{(formatNumber(d.value/$scope.data.sum*100))}%
+                div.html("""<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}
                         <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
                          """)
                 .style("left", (d3.event.pageX) + "px")
@@ -147,7 +151,8 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 #$scope.nodeClick( name: "test", type: "o")
                 node.on 'click', (d)->
                     if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations') and not d.name.includes('OG: ') and not d.name.includes('NG: ')
-                        angular.element(".tooltip").css("opacity", 0)
+                        div.html("")
+                        div.style('display','none')
                         $scope.nodeClick()(d)
 
             node.append("text")
