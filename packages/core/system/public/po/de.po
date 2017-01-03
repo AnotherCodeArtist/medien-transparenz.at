@@ -156,8 +156,8 @@ msgstr "Kammer"
 msgid "City"
 msgstr "Stadt"
 
-#: controllers/topEntriesController.js:108 directives/sankeyDirective.js:69
-#: directives/sankeyDirective.js:98
+#: controllers/topEntriesController.js:108 directives/sankeyDirective.js:103
+#: directives/sankeyDirective.js:70
 msgid "Click for Details"
 msgstr "Klicken Sie für mehr Details"
 
@@ -181,18 +181,18 @@ msgstr "Ansprechpartner"
 msgid "Create"
 msgstr "Anlegen"
 
-#: views/flow.html:167 views/flow.html:184
+#: views/flow.html:169 views/flow.html:186
 msgid "Create new local group"
 msgstr "Neue Gruppe anlegen"
 
-#: controllers/flowController.js:897 controllers/flowController.js:931
+#: controllers/flowController.js:900 controllers/flowController.js:934
 msgid ""
 "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 "Benutzerdefinierte Gruppe kann nicht erstellt werden, da keine Einträge "
 "nicht bereits einer Gruppe zugeordnet sind."
 
-#: controllers/flowController.js:884 controllers/flowController.js:918
+#: controllers/flowController.js:887 controllers/flowController.js:921
 msgid ""
 "Custom group could not be created since an local group with an equal name "
 "already exists"
@@ -213,7 +213,7 @@ msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
 #: controllers/flowController.js:595 controllers/flowDetailController.js:192
-#: controllers/topEntriesController.js:310
+#: controllers/topEntriesController.js:314
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
 
@@ -348,11 +348,11 @@ msgstr ""
 "Kooperationen und Förderungen fließt. Sie werden sehen, es geht dabei um "
 "eine Menge (Steuer-)Geld"
 
-#: views/flow.html:175
+#: views/flow.html:177
 msgid "Group all non-grouped media:"
 msgstr "Nicht gruppierte Medien gruppieren:"
 
-#: views/flow.html:158
+#: views/flow.html:160
 msgid "Group all non-grouped organisations:"
 msgstr "Nicht gruppierte Organisationen gruppieren:"
 
@@ -563,7 +563,7 @@ msgstr "Mediengruppe"
 msgid "Media Transparency Austria"
 msgstr "Medientransparenz Austria"
 
-#: views/flow.html:179
+#: views/flow.html:181
 msgid "Media group name"
 msgstr "Name der Mediengruppe"
 
@@ -653,7 +653,7 @@ msgstr "Organisationsgruppe"
 msgid "Organisation Types"
 msgstr "Organisationstypen"
 
-#: views/flow.html:162
+#: views/flow.html:164
 msgid "Organisation group name"
 msgstr "Name der Organisationsgruppe"
 
@@ -679,11 +679,11 @@ msgstr "Organisationen mit Organisationstyp"
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
 
-#: directives/sankeyDirective.js:104
+#: directives/sankeyDirective.js:109
 msgid "Other media"
 msgstr "Andere Medien"
 
-#: directives/sankeyDirective.js:104
+#: directives/sankeyDirective.js:109
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
@@ -766,7 +766,7 @@ msgid "Quarter"
 msgstr "Quartal"
 
 #: controllers/flowController.js:609 controllers/topEntriesController.js:179
-#: controllers/topEntriesController.js:278
+#: controllers/topEntriesController.js:282
 msgid "Recipient"
 msgstr "Empfänger"
 
@@ -794,9 +794,13 @@ msgstr "Salzburg"
 msgid "Save"
 msgstr "Speichern"
 
-#: views/search.html:8
+#: public/views/header.html:58 views/search.html:8
 msgid "Search"
 msgstr "Suchen"
+
+#: public/views/header.html:56
+msgid "Search for organisation or media"
+msgstr "Nach Organisation oder Medium suchen"
 
 #: views/flowdetail.html:74
 msgid "Select Events"
@@ -820,7 +824,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: controllers/flowController.js:594 controllers/flowDetailController.js:191
-#: controllers/topEntriesController.js:309
+#: controllers/topEntriesController.js:313
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
@@ -835,7 +839,7 @@ msgid "Source of Data"
 msgstr "Datenherkunft"
 
 #: controllers/topEntriesController.js:176
-#: controllers/topEntriesController.js:277
+#: controllers/topEntriesController.js:281
 msgid "Spender"
 msgstr "Zahler"
 
@@ -851,7 +855,7 @@ msgstr "Startdatum"
 msgid "Styria"
 msgstr "Steiermark"
 
-#: views/flow.html:217
+#: views/flow.html:219
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
@@ -865,7 +869,7 @@ msgstr ""
 "der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
 "verfügbar, so werden diese angezeigt."
 
-#: views/flow.html:194
+#: views/flow.html:196
 msgid ""
 "The group can not be selected since it contains members, which are included "
 "in already selected groups."
@@ -1064,7 +1068,7 @@ msgstr "Benutzerdefiniert"
 msgid "elements selected"
 msgstr "Elemente ausgewählt"
 
-#: controllers/flowController.js:590 controllers/topEntriesController.js:305
+#: controllers/flowController.js:590 controllers/topEntriesController.js:309
 msgid "first"
 msgstr "Erste"
 
@@ -1077,17 +1081,17 @@ msgstr ""
 "Features konnten implementiert werden. Dies war durch die Mitarbeit der "
 "folgenden Studierenden möglich:"
 
-#: controllers/flowController.js:591 controllers/topEntriesController.js:306
+#: controllers/flowController.js:591 controllers/topEntriesController.js:310
 msgid "last"
 msgstr "Letzte"
 
 #: controllers/flowController.js:589 controllers/flowDetailController.js:189
-#: controllers/topEntriesController.js:304
+#: controllers/topEntriesController.js:308
 msgid "next"
 msgstr "nächste"
 
 #: controllers/flowController.js:588 controllers/flowDetailController.js:188
-#: controllers/topEntriesController.js:303
+#: controllers/topEntriesController.js:307
 msgid "previous"
 msgstr "vorherige"
 
@@ -1095,7 +1099,7 @@ msgstr "vorherige"
 msgid "public"
 msgstr "Öffentliich"
 
-#: controllers/flowController.js:593 controllers/topEntriesController.js:308
+#: controllers/flowController.js:593 controllers/topEntriesController.js:312
 msgid "search"
 msgstr "Suche"
 
