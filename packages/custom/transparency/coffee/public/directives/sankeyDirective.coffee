@@ -43,7 +43,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
 
 
 
-        updateDiagram = (oldValue,newValue)->
+        updateDiagram = ()->
             svg.selectAll("g").remove()
             height = Math.max 500, $scope.data.nodes.length*20
             h = height + margin.top + margin.bottom
@@ -78,7 +78,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                     d.source.name = gettextCatalog.getString(d.source.name)
                 else if d.target.name is 'Other media'
                     d.target.name = gettextCatalog.getString(d.target.name)
-                if (d.source.type is "o" and d.target.type is "m")
+                if (d.source.type is "o" and d.target.type is "m" and d.source.name isnt gettextCatalog.getString("Other organisations") and d.target.name isnt gettextCatalog.getString("Other media"))
                     div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})
                             <div><i class="fa fa-bar-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
                          """)
@@ -89,16 +89,17 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px")
 
-            .on "mouseout", (d) ->
+            .on "mouseout", () ->
                 div.transition()
                 .duration(500)
                 .style("opacity", 0)
             .on "click", (d) ->
-                $scope.linkClick()(d)
+                if d.source.name isnt gettextCatalog.getString("Other organisations") and d.target.name isnt gettextCatalog.getString("Other media")
+                    $scope.linkClick()(d)
 
 
             #make sure that all labels are invisible once the page is left    
-            $rootScope.$on '$stateChangeStart', (stateEvent,toState,toParams,fromState,fromParams) ->
+            $rootScope.$on '$stateChangeStart', () ->
                 div.style("opacity",0)
 
 
@@ -137,7 +138,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                          """)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
-            .on "mouseout", (d) ->
+            .on "mouseout", () ->
                 div.transition()
                 .duration(500)
                 .style("opacity", 0)
@@ -166,26 +167,13 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
 
-            dragmove = (d) ->
-                d3.select(this)
-                .attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")")
-                sankey.relayout()
-                link.attr("d", path)
-
-
-        #$scope.$watch 'data', updateDiagram, true
         $scope.$watch 'data', updateDiagram
-
-        #$scope.$root.$on '$stateChangeStart', -> alert "GO"
 
 
 app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
     restrict: 'E'
     scope:
         data: '='
-        #height: '='
-        #width: '='
-        #id: '='
         showXAxis: '='
         showYAxis: '='
         tooltips: '='
@@ -194,20 +182,16 @@ app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
     link: ($scope,element,attrs) ->
         setAttribute = (attributeName,defaultValue) ->
             if angular.isDefined($scope[attributeName]) then $scope[attributeName] else defaultValue
-        #width = (attrs.width or 600)
-        #height = (attrs.height or 600)
         if not attrs.id
             attrs.id = 'tpaMultiBar'
             element.attr 'id', 'tpaMultiBar'
         svg = angular.element "svg"
         svg.attr 'id', attrs.id+'svg'
-        #svg.attr("width", width)
-        #svg.attr("height", height)
         element.attr 'id',attrs.id
         $compile(svg)($scope)
         element.append(svg)
         svg = d3.select('#'+attrs.id+'svg')
-        updateDiagram = (oldValue,newValue)->
+        updateDiagram = ()->
             svg.selectAll("g").remove()
             dummy =
                 [
@@ -221,15 +205,8 @@ app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
                 .rotateLabels(setAttribute 'rotateLabels',0)
                 .showControls(setAttribute 'showControls',false)
                 .groupSpacing(0.1)
-                #.showLabels(true)
-                #.showLegend(setAttribute 'showLegend',true)
-                #chart.tooltipContent $scope.tooltipFn() if angular.isDefined $scope.tooltipFn
-                #svg.datum($scope.data)
                 svg.datum(dummy)
                 .call(chart)
-                #d3.selectAll('.nv-slice')
-                #.on 'click', (e) ->
-                #    nv.tooltip.cleanup()
                 chart
         $scope.$watch 'data', updateDiagram, true
 
@@ -246,15 +223,11 @@ app.directive 'tpaPieChart', [ ->
         goFn: '&?'
         preventClickFn: '='
     link: ($scope,element,attrs) ->
-        #width = (attrs.width or 600)
-        #height = (attrs.height or 600)
         if not attrs.id
             element.attr 'id', 'tpaSankey'
         svg = d3.select('#' + element.attr 'id')
         .append('svg')
-        #svg.attr("width", width)
-        #svg.attr("height", height)
-        updateDiagram = (oldValue,newValue)->
+        updateDiagram = ()->
             svg.selectAll("g").remove()
             nv.addGraph ->
                 chart = nv.models.pieChart()
