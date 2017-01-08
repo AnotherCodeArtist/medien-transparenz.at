@@ -103,8 +103,8 @@ msgid "City"
 msgstr ""
 
 #: controllers/topEntriesController.js:108
-#: directives/sankeyDirective.js:69
-#: directives/sankeyDirective.js:98
+#: directives/sankeyDirective.js:103
+#: directives/sankeyDirective.js:70
 msgid "Click for Details"
 msgstr ""
 
@@ -125,18 +125,18 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: views/flow.html:167
-#: views/flow.html:184
+#: views/flow.html:169
+#: views/flow.html:186
 msgid "Create new local group"
 msgstr ""
 
-#: controllers/flowController.js:897
-#: controllers/flowController.js:931
+#: controllers/flowController.js:900
+#: controllers/flowController.js:934
 msgid "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 
-#: controllers/flowController.js:884
-#: controllers/flowController.js:918
+#: controllers/flowController.js:887
+#: controllers/flowController.js:921
 msgid "Custom group could not be created since an local group with an equal name already exists"
 msgstr ""
 
@@ -155,7 +155,7 @@ msgstr ""
 
 #: controllers/flowController.js:595
 #: controllers/flowDetailController.js:192
-#: controllers/topEntriesController.js:310
+#: controllers/topEntriesController.js:314
 msgid "Display _MENU_ records"
 msgstr ""
 
@@ -279,11 +279,11 @@ msgstr ""
 msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
-#: views/flow.html:175
+#: views/flow.html:177
 msgid "Group all non-grouped media:"
 msgstr ""
 
-#: views/flow.html:158
+#: views/flow.html:160
 msgid "Group all non-grouped organisations:"
 msgstr ""
 
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Media Transparency Austria"
 msgstr ""
 
-#: views/flow.html:179
+#: views/flow.html:181
 msgid "Media group name"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 msgid "Organisation Types"
 msgstr ""
 
-#: views/flow.html:162
+#: views/flow.html:164
 msgid "Organisation group name"
 msgstr ""
 
@@ -581,11 +581,11 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: directives/sankeyDirective.js:104
+#: directives/sankeyDirective.js:109
 msgid "Other media"
 msgstr ""
 
-#: directives/sankeyDirective.js:104
+#: directives/sankeyDirective.js:109
 msgid "Other organisations"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 
 #: controllers/flowController.js:609
 #: controllers/topEntriesController.js:179
-#: controllers/topEntriesController.js:278
+#: controllers/topEntriesController.js:282
 msgid "Recipient"
 msgstr ""
 
@@ -706,8 +706,13 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: public/views/header.html:58
 #: views/search.html:8
 msgid "Search"
+msgstr ""
+
+#: public/views/header.html:56
+msgid "Search for organisation or media"
 msgstr ""
 
 #: views/flowdetail.html:74
@@ -735,7 +740,7 @@ msgstr ""
 
 #: controllers/flowController.js:594
 #: controllers/flowDetailController.js:191
-#: controllers/topEntriesController.js:309
+#: controllers/topEntriesController.js:313
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -752,7 +757,7 @@ msgid "Source of Data"
 msgstr ""
 
 #: controllers/topEntriesController.js:176
-#: controllers/topEntriesController.js:277
+#: controllers/topEntriesController.js:281
 msgid "Spender"
 msgstr ""
 
@@ -769,7 +774,7 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:217
+#: views/flow.html:219
 msgid "Tabular Representation"
 msgstr ""
 
@@ -777,7 +782,7 @@ msgstr ""
 msgid "The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized."
 msgstr ""
 
-#: views/flow.html:194
+#: views/flow.html:196
 msgid "The group can not be selected since it contains members, which are included in already selected groups."
 msgstr ""
 
@@ -942,7 +947,7 @@ msgid "elements selected"
 msgstr ""
 
 #: controllers/flowController.js:590
-#: controllers/topEntriesController.js:305
+#: controllers/topEntriesController.js:309
 msgid "first"
 msgstr ""
 
@@ -951,19 +956,19 @@ msgid "grant for the year 2015, the site developed further. With the help of the
 msgstr ""
 
 #: controllers/flowController.js:591
-#: controllers/topEntriesController.js:306
+#: controllers/topEntriesController.js:310
 msgid "last"
 msgstr ""
 
 #: controllers/flowController.js:589
 #: controllers/flowDetailController.js:189
-#: controllers/topEntriesController.js:304
+#: controllers/topEntriesController.js:308
 msgid "next"
 msgstr ""
 
 #: controllers/flowController.js:588
 #: controllers/flowDetailController.js:188
-#: controllers/topEntriesController.js:303
+#: controllers/topEntriesController.js:307
 msgid "previous"
 msgstr ""
 
@@ -973,7 +978,7 @@ msgid "public"
 msgstr ""
 
 #: controllers/flowController.js:593
-#: controllers/topEntriesController.js:308
+#: controllers/topEntriesController.js:312
 msgid "search"
 msgstr ""
 
