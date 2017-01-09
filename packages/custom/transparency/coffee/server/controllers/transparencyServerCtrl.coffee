@@ -848,7 +848,6 @@ module.exports = (Transparency) ->
                 _id:
                     name: "$#{nameField}"
                     type: orgType
-                    organisationType: '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"
@@ -859,7 +858,9 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
-                organisationType: '$_id.organisationType'
+            if orgType is 'org'
+                group._id.organisationType = '$organisationType'
+                project.organisationType =  '$_id.organisationType'
 
             $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
             if not federalState
@@ -897,16 +898,19 @@ module.exports = (Transparency) ->
                 years: 1
                 total: 1
                 transferTypes: 1
-                organisationType: '$_id.organisationType'
             group =
                 _id:
                     name: "$#{nameField}"
                     type: orgType
-                    organisationType : '$organisationType'
                 years:
                     $addToSet: "$year"
                 total: $sum: "$amount"
                 transferTypes: $addToSet: "$transferType"
+
+            if orgType is 'org'
+                group._id.organisationType= '$organisationType'
+                project.organisationType =  '$_id.organisationType'
+
             Transfer.aggregate($match: query)
             .group(group)
             .project(project)

@@ -538,7 +538,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.selectedMediaGroups = []
             $scope.selectedOrganisationGroups = []
             stopLoading()
-        TPAService.search({name: '   '})
+        TPAService.search({name: ' '})
         .then (res) ->
             $scope.mediaLabel = gettextCatalog.getString('Media')
             $scope.organisationLabel = gettextCatalog.getString('Organisation')
