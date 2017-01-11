@@ -138,11 +138,11 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 if d.name is 'Other organisations' or d.name is 'Other media'
                     d.name = gettextCatalog.getString(d.name)
 
-                html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}
+                html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>(#{formatNumber((d.value/$scope.data.sum)*100)}%)
                         <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>"""
 
                 if d.name is gettextCatalog.getString('Other organisations') or d.name is gettextCatalog.getString('Other media')
-                    html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}"""
+                    html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>(#{formatNumber((d.value/$scope.data.sum)*100)}%)"""
 
                 div.html(html)
                 div.style("left", (d3.event.pageX) + "px")

@@ -447,8 +447,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 else
                     links.push(createLink(nodeMap["MG: " + entryMediaGroup].index, nodeMap[entry.media].index, entry.amount, entry.transferType))
 
-
-                sum += entry.amount
+            sum += entry.amount
         nodes = Object.keys(nodeMap).map (k) -> name: k, type: nodeMap[k].type, addressData: nodeMap[k].addressData
         {nodes: nodes,links: links, sum: sum}
 
