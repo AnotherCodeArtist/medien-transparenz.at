@@ -137,11 +137,16 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .attr('class','tooltip node')
                 if d.name is 'Other organisations' or d.name is 'Other media'
                     d.name = gettextCatalog.getString(d.name)
-                div.html("""<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}
-                        <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
-                         """)
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px")
+
+                html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}
+                        <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>"""
+
+                if d.name is gettextCatalog.getString('Other organisations') or d.name is gettextCatalog.getString('Other media')
+                    html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}"""
+
+                div.html(html)
+                div.style("left", (d3.event.pageX) + "px")
+                div.style("top", (d3.event.pageY - 28) + "px")
             .on "mouseout", () ->
                 div.transition()
                 .duration(500)
@@ -151,7 +156,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             if $scope.nodeClick
                 #$scope.nodeClick( name: "test", type: "o")
                 node.on 'click', (d)->
-                    if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations') and not d.name.includes('OG: ') and not d.name.includes('NG: ')
+                    if d.name isnt gettextCatalog.getString('Other media') and d.name isnt gettextCatalog.getString('Other organisations')
                         div.html("")
                         div.style('display','none')
                         $scope.nodeClick()(d)

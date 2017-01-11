@@ -212,18 +212,40 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.showDetails = (node) ->
         $scope.isDetails = true;
-        if node.type is 'o'
-            $scope.selectedOrganisations = [{name: node.name}]
-            $scope.selectedMedia = []
-        else
-            $scope.selectedMedia = [{name: node.name}]
-            $scope.selectedOrganisations = []
+        switch node.type
+            when 'o'
+                $scope.selectedMediaGroups = []
+                $scope.selectedOrganisationGroups = []
+                $scope.selectedOrganisations = [{name: node.name}]
+                $scope.selectedMedia = []
+            when 'm'
+                $scope.selectedMediaGroups = []
+                $scope.selectedOrganisationGroups = []
+                $scope.selectedMedia = [{name: node.name}]
+                $scope.selectedOrganisations = []
+            when 'og'
+                $scope.selectedMediaGroups = []
+                $scope.selectedOrganisationGroups = []
+                $scope.selectedMedia = []
+                $scope.selectedOrganisations = []
+                for orgGroup in $scope.allOrganisationGroups
+                    if 'OG: ' + orgGroup.name is node.name
+                        $scope.selectedOrganisationGroups = [orgGroup]
+                        break;
+            when 'mg'
+                $scope.selectedMediaGroups = []
+                $scope.selectedOrganisationGroups = []
+                $scope.selectedMedia = []
+                $scope.selectedOrganisations = []
+                for medGroup in $scope.allMediaGroups
+                    if 'MG: ' + medGroup.name is node.name
+                        $scope.selectedMediaGroups = [medGroup]
+                        break;
         ###
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
-        update()
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
@@ -579,8 +601,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 update()
             $scope.isDetails = false;
 
-        $scope.$watch 'selectedMedia', selectedMediaChanged, true
-        $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
 
         handleRemovingOrgGroup = (newValue) ->
             newOrganisationsInSelectedGroups = []
@@ -714,6 +734,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.mediaInSelectedGroups = []
         $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
         $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
+        $scope.$watch 'selectedMedia', selectedMediaChanged, true
+        $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
 
 
         #$scope.$watch('slider.from',change,true)
