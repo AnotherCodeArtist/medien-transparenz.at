@@ -230,8 +230,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.selectedOrganisations = []
                 for orgGroup in $scope.allOrganisationGroups
                     if 'OG: ' + orgGroup.name is node.name
-                        $scope.selectedOrganisationGroups = [orgGroup]
-                        break;
+                        $scope.selectedOrganisationGroups.push orgGroup
+                        for member in orgGroup.members
+                            $scope.selectedOrganisations.push {name: member}
+                break;
             when 'mg'
                 $scope.selectedMediaGroups = []
                 $scope.selectedOrganisationGroups = []
@@ -239,13 +241,16 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.selectedOrganisations = []
                 for medGroup in $scope.allMediaGroups
                     if 'MG: ' + medGroup.name is node.name
-                        $scope.selectedMediaGroups = [medGroup]
-                        break;
+                        $scope.selectedMediaGroups.push medGroup
+                        for member in medGroup.members
+                            $scope.selectedMedia.push {name: member}
+                break;
         ###
         $scope.org = {}
         $scope.org.name = node.name
         $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
         ###
+        update()
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
