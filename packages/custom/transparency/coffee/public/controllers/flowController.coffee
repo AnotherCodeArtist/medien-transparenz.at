@@ -39,7 +39,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText','selectedOrganisations','selectedMedia', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups', 'selectedMediaGroups']
+    fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups', 'selectedMediaGroups', 'selectedOrganisations','selectedMedia']
     $scope.init = 'init';
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
@@ -584,14 +584,16 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             $scope.organisationLabel = gettextCatalog.getString('Organisation')
             $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
             $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
-            $scope.allOrganisations = res.data.org.map (o) ->
-                {
-                    name: o.name,
-                }
-            $scope.allMedia = res.data.media.map (m) ->
-                {
-                    name: m.name,
-                }
+            if typeof $scope.allOrganisations is 'undefined' or $scope.allOrganisations.length is 0
+                $scope.allOrganisations = res.data.org.map (o) ->
+                    {
+                        name: o.name,
+                    }
+            if typeof $scope.allMedia is 'undefined' or $scope.allMedia.length is 0
+                $scope.allMedia = res.data.media.map (m) ->
+                    {
+                        name: m.name,
+                    }
             setGroups()
 
         selectedOrganisationsChanged = (newValue, oldValue) ->
