@@ -20,6 +20,20 @@ app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) -
         $sce.trustAsHtml(html)
 ])
 
+
+app.filter('groupFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
+    (label, query, item, options, element) ->
+        console.log item
+        if typeof item.group is "undefined" or item.group is ""
+            html = label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        else
+            labelClass = "label-danger"
+            if item.groupType is "custom"
+                labelClass = "label-primary"
+            html = '<span class="label ' + labelClass + '">' + item.group + '</span> ' + label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        $sce.trustAsHtml(html)
+])
+
 app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
     #console.log "initialize dataPromise"
@@ -610,6 +624,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             newOrganisationsInSelectedGroups = []
             for orgGroup in newValue
                 newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
+            for org in $scope.allOrganisations
+                if newOrganisationsInSelectedGroups.indexOf(org.name) is -1
+                    org.group = ""
+                    org.groupType = ""
             $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
 
         handleAddingOrgGroup = (newValue, oldValue) ->
@@ -628,9 +646,14 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             newSelectedOrganisations = $scope.selectedOrganisations.slice()
             for member in newValue[newValue.length - 1].members
                 $scope.organisationsInSelectedGroups.push member
-                if selectedOrganisations.indexOf(member) is -1
-                    for organisation in $scope.allOrganisations
-                        if organisation.name is member
+                for organisation in $scope.allOrganisations
+                    if organisation.name is member
+                        organisation.group = newValue[newValue.length - 1].name
+                        if (typeof newValue[newValue.length - 1].region is 'undefined')
+                            organisation.groupType = "custom"
+                        else
+                            organisation.groupType = "public"
+                        if selectedOrganisations.indexOf(member) is -1
                             newSelectedOrganisations.push organisation
             $scope.selectedOrganisations = newSelectedOrganisations
             return
@@ -651,6 +674,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             newMediaInSelectedGroups = []
             for mediaGroup in newValue
                 newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
+            for media in $scope.allMedia
+                if newMediaInSelectedGroups.indexOf(media.name) is -1
+                    media.group = ""
+                    media.groupType = ""
             $scope.mediaInSelectedGroups = newMediaInSelectedGroups
 
         handleAddingMediaGroups = (newValue, oldValue) ->
@@ -668,9 +695,14 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             newSelectedMedia = $scope.selectedMedia.slice()
             for member in newValue[newValue.length - 1].members
                 $scope.mediaInSelectedGroups.push member
-                if selectedMedia.indexOf(member) is -1
-                    for media in $scope.allMedia
-                        if media.name is member
+                for media in $scope.allMedia
+                    if media.name is member
+                        media.group = newValue[newValue.length - 1].name
+                        if (typeof newValue[newValue.length - 1].region is 'undefined')
+                            media.groupType = "custom"
+                        else
+                            media.groupType = "public"
+                        if selectedMedia.indexOf(member) is -1
                             newSelectedMedia.push media
             $scope.selectedMedia = newSelectedMedia
             return
@@ -736,6 +768,28 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
         $scope.organisationsInSelectedGroups = []
         $scope.mediaInSelectedGroups = []
+
+        $scope.$watch 'allOrganisations', () ->
+            if typeof $scope.allOrganisations isnt 'undefined' and $scope.allOrganisations.length > 0
+                newSelectedOrganisations = []
+                for org in $scope.selectedOrganisations
+                    for org2 in $scope.allOrganisations
+                        if org2.name is org.name
+                            newSelectedOrganisations.push org2
+
+                $scope.selectedOrganisations = newSelectedOrganisations
+        , true
+        $scope.$watch 'allMedia', () ->
+            if typeof $scope.allMedia isnt 'undefined' and $scope.allMedia.length > 0
+                newSelectedMedia = []
+                for media in $scope.selectedMedia
+                    for media2 in $scope.allMedia
+                        if media.name is media2.name
+                            newSelectedMedia.push media2
+
+                $scope.selectedMedia = newSelectedMedia
+        , true
+
         $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
         $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
         $scope.$watch 'selectedMedia', selectedMediaChanged, true
