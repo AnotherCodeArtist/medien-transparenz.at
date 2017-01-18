@@ -71,6 +71,9 @@ angular.module 'mean.transparency'
         url: '/search'
         templateUrl: 'transparency/views/search.html'
         controller: 'SearchCtrl'
+        params: {
+            searchterm: ''
+        }
     $stateProvider.state 'listOrgs',
         url: '/organisations?orgType&page&size'
         templateUrl: 'transparency/views/list.html'
