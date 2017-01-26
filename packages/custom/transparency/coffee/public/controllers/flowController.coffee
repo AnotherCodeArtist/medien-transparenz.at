@@ -614,6 +614,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     return true
         return false
 
+    $scope.loadMedia = (name) ->
+        console.log(name)
+        if name.length >= 3 then
+            $scope.selectedMedia.filter((m)-> name in m.name)
+        else []
+
     #Initialize form data either by loading a saved state or by fetching data from the server
     initialize = ->
         deferred = $q.defer()
