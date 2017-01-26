@@ -100,7 +100,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
 
 
             #make sure that all labels are invisible once the page is left    
-            $rootScope.$on '$stateChangeStart', () ->
+            $rootScope.$on '$stateChangeStart', (eventState, toState,toParams,fromState,fromParams) ->
                 div.style("opacity",0)
                 if toState.name isnt 'showflow'
                     div.remove()

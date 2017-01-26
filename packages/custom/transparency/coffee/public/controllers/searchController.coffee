@@ -24,12 +24,11 @@ app.controller 'SearchCtrl',['$scope','TPAService','$q','$interval','$state','$s
     $scope.lastInYear = (year) -> $scope.periods.filter((p) -> p.year == year)[0].period.toString()
     TPAService.periods().then (res) ->
         $scope.periods = res.data
-
-    if $stateParams.searchterm
-        $scope.name = $stateParams.searchterm
-        $scope.search()
-    else
-        TPAService.restoreState itemId, fieldsToStore, $scope
+        if $stateParams.searchterm
+            $scope.name = $stateParams.searchterm
+            $scope.search()
+        else
+            TPAService.restoreState itemId, fieldsToStore, $scope
 
     $scope.$watch 'result',store
     $scope.$watch 'orgCollapse',store

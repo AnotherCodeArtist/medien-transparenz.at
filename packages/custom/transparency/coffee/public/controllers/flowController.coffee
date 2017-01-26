@@ -34,13 +34,25 @@ app.filter('groupFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
         $sce.trustAsHtml(html)
 ])
 
-app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout',
-($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout) ->
+app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gettextCatalog', '$filter','DTOptionsBuilder','DTColumnBuilder', '$rootScope', '$timeout','$uibModal'
+($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout,$uibModal) ->
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     stateName = "flowState"
-    fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups', 'selectedMediaGroups', 'selectedOrganisations','selectedMedia']
+    fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups',
+        'selectedMediaGroups', 'selectedOrganisations','selectedMedia',
+        'allOrganisationGroups','allMediaGroups']
     $scope.init = 'init';
+    $scope.mediaLabel = gettextCatalog.getString('Media')
+    $scope.organisationLabel = gettextCatalog.getString('Organisation')
+    $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+    $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
+    clearFields = ->
+        $scope.selectedOrganisations = []
+        $scope.selectedMedia = []
+        $scope.selectedMediaGroups = []
+        $scope.selectedOrganisationGroups = []
+    clearFields()
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
         $scope.IntroOptions =
@@ -128,9 +140,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         console.log "Progress: " + $scope.progress
     flowData = []
     nodeMap = {}
-    pP = TPAService.periods()
-    pP.then (res) ->
-        $scope.periods = res.data.reverse()
+    initSlider = ->
         $scope.slider =
             from: ($scope.periods.length - 1)*5
             to: ($scope.periods.length - 1)*5
@@ -141,7 +151,38 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 onEnd: -> change(1,2)
                 translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
                 draggableRangeOnly: false
-        $scope.fixedRange = false
+        if not $scope.fixedRange? then $scope.fixedRange = false
+    #Load all available periods
+    loadPeriods = () =>
+        deferred = $q.defer()
+        TPAService.periods()
+        .then (res) ->
+            $scope.periods = res.data.reverse()
+            initSlider()
+            deferred.resolve()
+        deferred.promise
+    #(Pre-)load all organisation and media names
+    loadAllNames = () ->
+        deferred = $q.defer();
+        TPAService.search({name: ' '})
+        .then (res) ->
+            $scope.mediaLabel = gettextCatalog.getString('Media')
+            $scope.organisationLabel = gettextCatalog.getString('Organisation')
+            $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
+            $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
+            if typeof $scope.allOrganisations is 'undefined' or $scope.allOrganisations.length is 0
+                $scope.allOrganisations = res.data.org.map (o) ->
+                    {
+                        name: o.name,
+                    }
+            if typeof $scope.allMedia is 'undefined' or $scope.allMedia.length is 0
+                $scope.allMedia = res.data.media.map (m) ->
+                    {
+                        name: m.name,
+                    }
+            deferred.resolve()
+        deferred.promise
+
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
@@ -181,36 +222,37 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
+        deferred = $q.defer()
+        $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
+        $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
+        if $state.params.pTypes?
+            pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
+            t.checked = t.type in pTypes for t in $scope.typesText
         #$scope.org = {} if $state.params.name or $state.params.orgType
-         if $state.params.name
+        if $state.params.name
             if $state.params.orgType is 'org'
                 $scope.selectedOrganisations = [{name: $state.params.name}]
             else if $state.params.orgType is 'media'
                 $scope.selectedMedia = [{name: $state.params.name}]
+            deferred.resolve()
          # Load grouping
-         else if  $state.params.grouping
-             groupingMembers = []
+        else if  $state.params.grouping
              # Load grouping by name
              TPAService.getGroupingMembers({name: $state.params.grouping})
              .then (res) ->
                  if res.data[0].members
-                     for member in res.data[0].members
-                         #create entry used by controller
-                         groupingMembers.push {name: member}
                      #save group members for selection
                      if res.data[0].type is 'org'
-                        $scope.selectedOrganisations = groupingMembers
+                        $scope.selectedOrganisations = res.data[0].members.map((m) -> m.name)
                      else if res.data[0].type is 'media'
-                         $scope.selectedMedia = groupingMembers
+                         $scope.selectedMedia = res.data[0].members.map((m) -> m.name)
+                 deferred.resolve()
              .catch (err) ->
                  console.log err
+                 deferred.reject()
+        deferred.promise
+        #$scope.org.orgType = $state.params.orgType if $state.params.orgType
 
-         #$scope.org.orgType = $state.params.orgType if $state.params.orgType
-         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
-         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
-         if $state.params.pTypes?
-            pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
-            t.checked = t.type in pTypes for t in $scope.typesText
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type
@@ -545,260 +587,282 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if toState.name isnt 'home'
             TPAService.saveState stateName,fieldsToStore, $scope
 
-    setGroups = () ->
-        TPAService.getGroupings {type: 'org'}
-        .then (res, err) ->
+    loadGroups = () ->
+        orgGroupsPromise = TPAService.getGroupings {type: 'org'}
+        orgGroupsPromise.then (res, err) ->
             if (err)
                 console.error err
                 return
             $scope.allOrganisationGroups = res.data.concat(TPAService.getLocalGroups("org"))
-        TPAService.getGroupings {type: 'media'}
-        .then (res, err) ->
+        mediaGroupsPromise = TPAService.getGroupings {type: 'media'}
+        mediaGroupsPromise.then (res, err) ->
             if (err)
                 console.error err
                 return
             $scope.allMediaGroups = res.data.concat(TPAService.getLocalGroups("media"))
+        $q.all([orgGroupsPromise,mediaGroupsPromise])
 
-    $q.all([pP]).then (res) ->
-        stateParamsExist = false
+    #start initialization
+
+
+    savedState = sessionStorage.getItem stateName
+
+    stateParamsExist = () ->
         if $state.params
             for k,v of $state.params
                 if typeof v isnt 'undefined'
-                    stateParamsExist = true
+                    return true
+        return false
 
-        savedState = sessionStorage.getItem stateName
-        if stateParamsExist
-            checkForStateParams()
-        else if savedState
+    #Initialize form data either by loading a saved state or by fetching data from the server
+    initialize = ->
+        deferred = $q.defer()
+        if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
+            initSlider()
+            stopLoading()
+            deferred.resolve()
         else
             startLoading()
-            $scope.selectedOrganisations = [];
-            $scope.selectedMedia = [];
-            $scope.selectedMediaGroups = []
-            $scope.selectedOrganisationGroups = []
-            stopLoading()
-        TPAService.search({name: ' '})
-        .then (res) ->
-            $scope.mediaLabel = gettextCatalog.getString('Media')
-            $scope.organisationLabel = gettextCatalog.getString('Organisation')
-            $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
-            $scope.mediaGroupLabel = gettextCatalog.getString('Media Group')
-            if typeof $scope.allOrganisations is 'undefined' or $scope.allOrganisations.length is 0
-                $scope.allOrganisations = res.data.org.map (o) ->
-                    {
-                        name: o.name,
-                    }
-            if typeof $scope.allMedia is 'undefined' or $scope.allMedia.length is 0
-                $scope.allMedia = res.data.media.map (m) ->
-                    {
-                        name: m.name,
-                    }
-            setGroups()
-
-        selectedOrganisationsChanged = (newValue, oldValue) ->
-            if newValue.length < oldValue.length
-                index = 0
-                while index < newValue.length and newValue[index].name is oldValue[index].name
-                    index++
-                if $scope.organisationsInSelectedGroups.indexOf(oldValue[index].name) isnt -1
-                    $scope.selectedOrganisations = oldValue
-                    $scope.deselectionNotAllowed = oldValue[index].name
-            if not $scope.isDetails
-                update()
-            $scope.isDetails = false;
-
-        selectedMediaChanged = (newValue, oldValue) ->
-            if newValue == oldValue then return
-            if newValue.length < oldValue.length
-                index = 0
-                while index < newValue.length and newValue[index].name is oldValue[index].name
-                    index++
-                if $scope.mediaInSelectedGroups.indexOf(oldValue[index].name) isnt -1
-                    $scope.selectedMedia = oldValue
-                    $scope.deselectionNotAllowed = oldValue[index].name
-            if not $scope.isDetails
-                update()
-            $scope.isDetails = false;
+            $q.all([loadPeriods(),loadAllNames(),loadGroups()])
+            .then () ->
+                stopLoading()
+                if not stateParamsExist()
+                    #no defined state so start loading default data
+                    update()
+                deferred.resolve()
+        deferred.promise
 
 
-        handleRemovingOrgGroup = (newValue) ->
-            newOrganisationsInSelectedGroups = []
-            for orgGroup in newValue
-                newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
-            for org in $scope.allOrganisations
-                if newOrganisationsInSelectedGroups.indexOf(org.name) is -1
-                    org.group = ""
-                    org.groupType = ""
-            $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
+    initialize()
+    .then ->
+        if stateParamsExist()
+            clearFields()
+            checkForStateParams()
+                .then update
+        else update()
 
-        handleAddingOrgGroup = (newValue, oldValue) ->
-            $scope.badMembers = []
-            if $scope.organisationsInSelectedGroups.length > 0
-                for member in newValue[newValue.length - 1].members
-                    if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
-                        $scope.badMembers.push member
 
-            if $scope.badMembers.length isnt 0
-                $scope.selectedOrganisationGroups = oldValue
+    dialogText =
+
+    showDialog = (text) ->
+        $uibModal.open(
+            {
+                template: """
+                    <div class="source-list-modal">
+                        <div class="modal-header">
+                            <h3 class="modal-title">
+                                Info
+                            </h3>
+
+                        </div>
+                        <div class="modal-body">
+                            <p>#{text}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="controls">
+                                <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                """
+                controller: ($scope, $uibModalInstance) ->
+                    $scope.close = -> $uibModalInstance.close()
+                size: 'sm'
+            })
+
+    selectedOrganisationsChanged = (newValue, oldValue) ->
+        return if newValue is oldValue
+        if newValue.length < oldValue.length
+            removedElement = oldValue.filter((o) -> o not in newValue)[0]
+            if removedElement.name in $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+                $scope.selectedOrganisations = oldValue
+                $scope.deselectionNotAllowed = oldValue.name
+                showDialog gettextCatalog.getString "You cannot remove this Organisation since it belongs to a selected group. Remove the group first"
                 return
+        if not $scope.isDetails
+            update()
+        $scope.isDetails = false;
 
-            selectedOrganisations = $scope.selectedOrganisations.map (org) ->
-                org.name
-            newSelectedOrganisations = $scope.selectedOrganisations.slice()
+    selectedMediaChanged = (newValue, oldValue) ->
+        if newValue == oldValue then return
+        if newValue.length < oldValue.length
+            removedElement = oldValue.filter((o) -> o not in newValue)[0]
+            if removedElement.name in $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+                $scope.selectedMedia = oldValue
+                $scope.deselectionNotAllowed = oldValue.name
+                showDialog gettextCatalog.getString "You cannot remove this Media since it belongs to a selected group. Remove the group first"
+                return
+        if not $scope.isDetails
+            update()
+        $scope.isDetails = false;
+
+
+    handleRemovingOrgGroup = (newValue) ->
+        newOrganisationsInSelectedGroups = []
+        for orgGroup in newValue
+            newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
+        for org in $scope.allOrganisations
+            if newOrganisationsInSelectedGroups.indexOf(org.name) is -1
+                org.group = ""
+                org.groupType = ""
+        $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
+
+    handleAddingOrgGroup = (newValue, oldValue) ->
+        $scope.badMembers = []
+        if $scope.organisationsInSelectedGroups.length > 0
             for member in newValue[newValue.length - 1].members
-                $scope.organisationsInSelectedGroups.push member
-                for organisation in $scope.allOrganisations
-                    if organisation.name is member
-                        organisation.group = newValue[newValue.length - 1].name
-                        if (typeof newValue[newValue.length - 1].region is 'undefined')
-                            organisation.groupType = "custom"
-                        else
-                            organisation.groupType = "public"
-                        if selectedOrganisations.indexOf(member) is -1
-                            newSelectedOrganisations.push organisation
-            $scope.selectedOrganisations = newSelectedOrganisations
+                if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
+                    $scope.badMembers.push member
+
+        if $scope.badMembers.length isnt 0
+            $scope.selectedOrganisationGroups = oldValue
             return
 
-        selectedOrganisationGroupsChanged = (newValue, oldValue) ->
-            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
-            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
-            if newLength is oldLength
-                return
+        selectedOrganisations = $scope.selectedOrganisations.map (org) ->
+            org.name
+        newSelectedOrganisations = $scope.selectedOrganisations.slice()
+        for member in newValue[newValue.length - 1].members
+            $scope.organisationsInSelectedGroups.push member
+            for organisation in $scope.allOrganisations
+                if organisation.name is member
+                    organisation.group = newValue[newValue.length - 1].name
+                    if (typeof newValue[newValue.length - 1].region is 'undefined')
+                        organisation.groupType = "custom"
+                    else
+                        organisation.groupType = "public"
+                    if selectedOrganisations.indexOf(member) is -1
+                        newSelectedOrganisations.push organisation
+        $scope.selectedOrganisations = newSelectedOrganisations
+        return
 
-            if newLength < oldLength
-                handleRemovingOrgGroup(newValue)
-            else
-                handleAddingOrgGroup(newValue, oldValue)
-            change(2,1)
+    selectedOrganisationGroupsChanged = (newValue, oldValue) ->
+        return if newValue is oldValue
+        newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+        oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+        if newLength < oldLength
+            handleRemovingOrgGroup(newValue)
+        else
+            handleAddingOrgGroup(newValue, oldValue)
+        change(2,1)
 
-        handleRemovingMediaGroup = (newValue, oldValue) ->
-            newMediaInSelectedGroups = []
-            for mediaGroup in newValue
-                newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
+    handleRemovingMediaGroup = (newValue, oldValue) ->
+        return if newValue is oldValue
+        newMediaInSelectedGroups = []
+        for mediaGroup in newValue
+            newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
+        for media in $scope.allMedia
+            if newMediaInSelectedGroups.indexOf(media.name) is -1
+                media.group = ""
+                media.groupType = ""
+        $scope.mediaInSelectedGroups = newMediaInSelectedGroups
+
+    handleAddingMediaGroups = (newValue, oldValue) ->
+        return if newValue is oldValue
+        $scope.badMembers = []
+        if $scope.mediaInSelectedGroups.length > 0
+            for member in newValue[newValue.length - 1].members
+                if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
+                    $scope.badMembers.push member
+        if $scope.badMembers.length isnt 0
+            $scope.selectedMediaGroups = oldValue
+            return
+
+        selectedMedia = $scope.selectedMedia.map (media) ->
+            media.name
+        newSelectedMedia = $scope.selectedMedia.slice()
+        for member in newValue[newValue.length - 1].members
+            $scope.mediaInSelectedGroups.push member
             for media in $scope.allMedia
-                if newMediaInSelectedGroups.indexOf(media.name) is -1
-                    media.group = ""
-                    media.groupType = ""
-            $scope.mediaInSelectedGroups = newMediaInSelectedGroups
+                if media.name is member
+                    media.group = newValue[newValue.length - 1].name
+                    if (typeof newValue[newValue.length - 1].region is 'undefined')
+                        media.groupType = "custom"
+                    else
+                        media.groupType = "public"
+                    if selectedMedia.indexOf(member) is -1
+                        newSelectedMedia.push media
+        $scope.selectedMedia = newSelectedMedia
+        return
 
-        handleAddingMediaGroups = (newValue, oldValue) ->
-            $scope.badMembers = []
-            if $scope.mediaInSelectedGroups.length > 0
-                for member in newValue[newValue.length - 1].members
-                    if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
-                        $scope.badMembers.push member
-            if $scope.badMembers.length isnt 0
-                $scope.selectedMediaGroups = oldValue
+    selectedMediaGroupsChanged = (newValue, oldValue) ->
+        return if newValue is oldValue
+        newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+        oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+        if newLength < oldLength
+            handleRemovingMediaGroup(newValue)
+        else
+            handleAddingMediaGroups(newValue, oldValue)
+        change(2,1)
+
+    $scope.createLocalOrgGroup = () ->
+        members = []
+        for localgroup in TPAService.getLocalGroups "org"
+            if localgroup.name is $scope.localOrgGroupName
+                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
+                break
                 return
-
-            selectedMedia = $scope.selectedMedia.map (media) ->
-                media.name
-            newSelectedMedia = $scope.selectedMedia.slice()
-            for member in newValue[newValue.length - 1].members
-                $scope.mediaInSelectedGroups.push member
-                for media in $scope.allMedia
-                    if media.name is member
-                        media.group = newValue[newValue.length - 1].name
-                        if (typeof newValue[newValue.length - 1].region is 'undefined')
-                            media.groupType = "custom"
-                        else
-                            media.groupType = "public"
-                        if selectedMedia.indexOf(member) is -1
-                            newSelectedMedia.push media
-            $scope.selectedMedia = newSelectedMedia
+        for org in $scope.selectedOrganisations
+            if $scope.organisationsInSelectedGroups.indexOf(org.name) is -1
+                members.push org.name
+        if members.length is 0
+            $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
             return
+        $scope.localGroupError = ""
+        group = {
+            type: "org"
+            members: members
+            name: $scope.localOrgGroupName
+        }
+        TPAService.saveLocalGroup group
+        $scope.allOrganisationGroups.push group
+        $scope.selectedOrganisationGroups = $scope.selectedOrganisationGroups.concat [group]
+        $scope.localOrgGroupName = ""
 
-        selectedMediaGroupsChanged = (newValue, oldValue) ->
-            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
-            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
-            if newLength is oldLength
+    $scope.createLocalMediaGroup = () ->
+        members = []
+        for localgroup in TPAService.getLocalGroups "media"
+            if localgroup.name is $scope.localMediaGroupName
+                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
+                break
                 return
-            if newLength < oldLength
-                handleRemovingMediaGroup(newValue)
-            else
-                handleAddingMediaGroups(newValue, oldValue)
-            change(2,1)
+        for media in $scope.selectedMedia
+            if $scope.mediaInSelectedGroups.indexOf(media.name) is -1
+                members.push media.name
+        if members.length is 0
+            $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+            return
+        $scope.localGroupError = ""
+        group = {
+            type: "media"
+            members: members
+            name: $scope.localMediaGroupName
+        }
+        TPAService.saveLocalGroup group
+        $scope.allMediaGroups.push group
+        $scope.selectedMediaGroups = $scope.selectedMediaGroups.concat [group]
+        $scope.localMediaGroupName = ""
 
-        $scope.createLocalOrgGroup = () ->
-            members = []
-            for localgroup in TPAService.getLocalGroups "org"
-                if localgroup.name is $scope.localOrgGroupName
-                    $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-                    break
-                    return
-            for org in $scope.selectedOrganisations
-                if $scope.organisationsInSelectedGroups.indexOf(org.name) is -1
-                    members.push org.name
-            if members.length is 0
-                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
-                return
-            $scope.localGroupError = ""
-            group = {
-                type: "org"
-                members: members
-                name: $scope.localOrgGroupName
-            }
-            TPAService.saveLocalGroup group
-            $scope.allOrganisationGroups.push group
-            $scope.selectedOrganisationGroups = $scope.selectedOrganisationGroups.concat [group]
-            $scope.localOrgGroupName = ""
-
-        $scope.createLocalMediaGroup = () ->
-            members = []
-            for localgroup in TPAService.getLocalGroups "media"
-                if localgroup.name is $scope.localMediaGroupName
-                    $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-                    break
-                    return
-            for media in $scope.selectedMedia
-                if $scope.mediaInSelectedGroups.indexOf(media.name) is -1
-                    members.push media.name
-            if members.length is 0
-                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
-                return
-            $scope.localGroupError = ""
-            group = {
-                type: "media"
-                members: members
-                name: $scope.localMediaGroupName
-            }
-            TPAService.saveLocalGroup group
-            $scope.allMediaGroups.push group
-            $scope.selectedMediaGroups = $scope.selectedMediaGroups.concat [group]
-            $scope.localMediaGroupName = ""
-
-        $scope.organisationsInSelectedGroups = []
-        $scope.mediaInSelectedGroups = []
-
-        $scope.$watch 'allOrganisations', () ->
-            if typeof $scope.allOrganisations isnt 'undefined' and $scope.allOrganisations.length > 0
-                newSelectedOrganisations = []
-                for org in $scope.selectedOrganisations
-                    for org2 in $scope.allOrganisations
-                        if org2.name is org.name
-                            newSelectedOrganisations.push org2
-
-                $scope.selectedOrganisations = newSelectedOrganisations
-        , true
-        $scope.$watch 'allMedia', () ->
-            if typeof $scope.allMedia isnt 'undefined' and $scope.allMedia.length > 0
-                newSelectedMedia = []
-                for media in $scope.selectedMedia
-                    for media2 in $scope.allMedia
-                        if media.name is media2.name
-                            newSelectedMedia.push media2
-
-                $scope.selectedMedia = newSelectedMedia
-        , true
-
-        $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
-        $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
-        $scope.$watch 'selectedMedia', selectedMediaChanged, true
-        $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
+    $scope.organisationsInSelectedGroups = []
+    $scope.mediaInSelectedGroups = []
+    ###
+    $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
+        return if newValue is oldValue
+        if typeof $scope.allOrganisations isnt 'undefined' and $scope.allOrganisations.length > 0
+            $scope.selectedOrganisations = $scope.allOrganisations.filter((o) -> o.name in $scope.selectedOrganisations)
+    , true
+    $scope.$watch 'selectedMedia', (newValue, oldValue) ->
+        return if newValue is oldValue
+            $scope.selectedMedia = $scope.allMedia.filter((m) -> m.name in $scope.selectedMedia)
+    , true
+    ###
+    $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
+    $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
+    $scope.$watch 'selectedMedia', selectedMediaChanged, true
+    $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
 
 
-        #$scope.$watch('slider.from',change,true)
-        #$scope.$watch('slider.to',change,true)
-        $scope.$watch('typesText',change,true)
+    #$scope.$watch('slider.from',change,true)
+    #$scope.$watch('slider.to',change,true)
+    $scope.$watch('typesText',change,true)
 ]
