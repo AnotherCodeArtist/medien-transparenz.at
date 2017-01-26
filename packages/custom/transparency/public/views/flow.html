@@ -100,7 +100,7 @@
                     <div class="col-md-6 col-xs-12">
                         <span>{{organisationsLabel}}:</span><a href ng-click="FlowIntro(4);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                         <oi-select class="multiselectDropdown"
-                                   oi-options="item.name for item in allOrganisations track by item.name"
+                                   oi-options="item.name for item in loadOrganisations($query)"
                                    ng-model="selectedOrganisations"
                                    multiple
                                    placeholder="{{organisationsLabel}}"

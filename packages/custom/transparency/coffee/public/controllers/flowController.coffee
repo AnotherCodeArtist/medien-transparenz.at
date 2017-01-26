@@ -614,11 +614,25 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     return true
         return false
 
+    #Lazy loading of media for multi selection box
+
+    mediaList = []
     $scope.loadMedia = (name) ->
-        console.log(name)
-        if name.length >= 3 then
-            $scope.selectedMedia.filter((m)-> name in m.name)
-        else []
+        if name.length >= 3
+            if mediaList.length == 0
+                mediaList = $scope.allMedia.filter((m)-> m.name.toLowerCase().indexOf(name.toLowerCase()) > -1)
+        else
+            mediaList = []
+        mediaList
+
+    organisationList = []
+    #Lazy loading of organisation for multi selection box
+    $scope.loadOrganisations = (name) ->
+        if name.length >= 3
+            if organisationList.length == 0
+                organisationList = $scope.allOrganisations.filter((m)-> m.name.toLowerCase().indexOf(name.toLowerCase()) > -1)
+        else organisationList = []
+        organisationList
 
     #Initialize form data either by loading a saved state or by fetching data from the server
     initialize = ->
@@ -680,7 +694,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     selectedOrganisationsChanged = (newValue, oldValue) ->
         return if newValue is oldValue
         if newValue.length < oldValue.length
-            removedElement = oldValue.filter((o) -> o not in newValue)[0]
+            removedElement = oldValue.filter((o) -> o.name not in newValue.map((v)->v.name))[0]
             if removedElement.name in $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
                 $scope.selectedOrganisations = oldValue
                 $scope.deselectionNotAllowed = oldValue.name
@@ -693,7 +707,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     selectedMediaChanged = (newValue, oldValue) ->
         if newValue == oldValue then return
         if newValue.length < oldValue.length
-            removedElement = oldValue.filter((o) -> o not in newValue)[0]
+            removedElement = oldValue.filter((o) -> o.name not in newValue.map((v)->v.name))[0]
             if removedElement.name in $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
                 $scope.selectedMedia = oldValue
                 $scope.deselectionNotAllowed = oldValue.name
