@@ -23,7 +23,7 @@ app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) -
 
 app.filter('groupFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-        console.log item
+        #console.log item
         if typeof item.group is "undefined" or item.group is ""
             html = label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         else
@@ -42,7 +42,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups',
         'selectedMediaGroups', 'selectedOrganisations','selectedMedia',
         'allOrganisationGroups','allMediaGroups']
-    $scope.init = 'init';
+    $scope.init = 'init'
+    typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
     $scope.mediaLabel = gettextCatalog.getString('Media')
     $scope.organisationLabel = gettextCatalog.getString('Organisation')
     $scope.organisationGroupLabel = gettextCatalog.getString('Organisation Group')
@@ -141,16 +142,16 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     flowData = []
     nodeMap = {}
     initSlider = ->
-        $scope.slider =
-            from: ($scope.periods.length - 1)*5
-            to: ($scope.periods.length - 1)*5
-            options:
-                ceil: ($scope.periods.length - 1)*5
-                step:5
-                floor:0
-                onEnd: -> change(1,2)
-                translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-                draggableRangeOnly: false
+        if not $scope.slider? then $scope.slider = {}
+        $scope.slider.options =
+            ceil: ($scope.periods.length - 1)*5
+            step:5
+            floor:0
+            onEnd: -> change(1,2)
+            translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
+            draggableRangeOnly: false
+        $scope.slider.from =  ($scope.periods.length - 1)*5 if (not $scope.slider.from?) or isNaN($scope.slider.from)
+        $scope.slider.to = ($scope.periods.length - 1)*5 if not $scope.slider.to?
         if not $scope.fixedRange? then $scope.fixedRange = false
     #Load all available periods
     loadPeriods = () =>
@@ -222,9 +223,27 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        deferred = $q.defer()
+        compareWith = (param) ->
+            (value) ->
+                if typeIsArray param then value.name in param else value.name is param
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
+        if $state.params.media?
+            $scope.selectedMedia = $scope.allMedia.filter(compareWith($state.params.media))
+        if $state.params.organisations?
+            $scope.selectedOrganisations = $scope.allOrganisations.filter(compareWith($state.params.organisations))
+        if $state.params.orgGrp?
+            $scope.selectedOrganisationGroups = $scope.allOrganisationGroups.filter(compareWith($state.params.orgGrp))
+            members = $scope.selectedOrganisationGroups.map((g)->g.members.map((m)->{name:m,group:g.name,groupType:if g.serverside then 'public' else 'custom'})).reduce(((a,b)->a.concat(b)),[])
+            memberNames = members.map((o)->o.name)
+            $scope.selectedOrganisations = $scope.selectedOrganisations.filter((o)->o.name not in memberNames)
+            .concat(members)
+        if $state.params.mediaGrp?
+            $scope.selectedMediaGroups = $scope.allMediaGroups.filter(compareWith($state.params.mediaGrp))
+            members = $scope.selectedMediaGroups.map((g)->g.members.map((m)->{name:m,group:g.name,groupType:if g.serverside then 'public' else 'custom'})).reduce(((a,b)->a.concat(b)),[])
+            memberNames = members.map((o)->o.name)
+            $scope.selectedMedia = $scope.selectedMedia.filter((o)->o.name not in memberNames)
+                .concat(members)
         if $state.params.pTypes?
             pTypes = toArray($state.params.pTypes).map (v) -> parseInt v
             t.checked = t.type in pTypes for t in $scope.typesText
@@ -234,24 +253,18 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.selectedOrganisations = [{name: $state.params.name}]
             else if $state.params.orgType is 'media'
                 $scope.selectedMedia = [{name: $state.params.name}]
-            deferred.resolve()
          # Load grouping
         else if  $state.params.grouping
              # Load grouping by name
-             TPAService.getGroupingMembers({name: $state.params.grouping})
-             .then (res) ->
-                 if res.data[0].members
-                     #save group members for selection
-                     if res.data[0].type is 'org'
-                        $scope.selectedOrganisations = res.data[0].members.map((m) -> m.name)
-                     else if res.data[0].type is 'media'
-                         $scope.selectedMedia = res.data[0].members.map((m) -> m.name)
-                 deferred.resolve()
-             .catch (err) ->
-                 console.log err
-                 deferred.reject()
-        deferred.promise
-        #$scope.org.orgType = $state.params.orgType if $state.params.orgType
+             mediaGroup = $scope.allMediaGroups.filter((g)->g.name is $state.params.grouping)
+             orgGroup = $scope.allOrganisationGroups.filter((g)->g.name is $state.params.grouping)
+             if mediaGroup.length > 0
+                 $scope.selectedMediaGroup = mediaGroup[0]
+                 $scope.selectedMedia = mediaGroup.members.map((m) -> m.name)
+             else if orgGroup.length > 0
+                 $scope.selectedOrganisations = orgGroup.members.map((m) -> m.name)
+                 $scope.selectedOrganionsationGroups = orgGroup[0]
+
 
 
     translate = ->
@@ -265,48 +278,44 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.$on 'gettextLanguageChanged', translate
 
+    #Updates the browser's address bar without causing the controller to be reloaded
+    #this allows to bookmark the page in every state
+    updateURL = ->
+        $state.transitionTo('showflow',{
+            from: $scope.periods[$scope.slider.from/5].period
+            to: $scope.periods[$scope.slider.to/5].period
+            media: $scope.selectedMedia.map((m)->m.name)
+            organisations: $scope.selectedOrganisations.map((o)->o.name)
+            mediaGrp: $scope.selectedMediaGroups.map((g)->g.name)
+            orgGrp: $scope.selectedOrganisationGroups.map((g)->g.name)
+            pTypes: (v.type for v in $scope.typesText when v.checked)
+        },{notify:false})
 
     $scope.showDetails = (node) ->
+        selectionTypes =
+            o: 'org'
+            m: 'media'
+            mg: 'mediaGrp'
+            og: 'orgGrp'
         $scope.isDetails = true;
+        $scope.selectedMediaGroups = []
+        $scope.selectedOrganisationGroups = []
+        $scope.selectedMedia = []
+        $scope.selectedOrganisations = []
         switch node.type
             when 'o'
-                $scope.selectedMediaGroups = []
-                $scope.selectedOrganisationGroups = []
                 $scope.selectedOrganisations = [{name: node.name}]
-                $scope.selectedMedia = []
             when 'm'
-                $scope.selectedMediaGroups = []
-                $scope.selectedOrganisationGroups = []
                 $scope.selectedMedia = [{name: node.name}]
-                $scope.selectedOrganisations = []
             when 'og'
-                $scope.selectedMediaGroups = []
-                $scope.selectedOrganisationGroups = []
-                $scope.selectedMedia = []
-                $scope.selectedOrganisations = []
-                for orgGroup in $scope.allOrganisationGroups
-                    if 'OG: ' + orgGroup.name is node.name
-                        $scope.selectedOrganisationGroups.push orgGroup
-                        for member in orgGroup.members
-                            $scope.selectedOrganisations.push {name: member}
-                break;
+                $scope.selectedOrganisationGroups = $scope.allOrganisationGroups.filter((g)->g.name is node.name.substring(4))
+                $scope.selectedOrganisations = $scope.selectedOrganisationGroups
+                .map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
             when 'mg'
-                $scope.selectedMediaGroups = []
-                $scope.selectedOrganisationGroups = []
-                $scope.selectedMedia = []
-                $scope.selectedOrganisations = []
-                for medGroup in $scope.allMediaGroups
-                    if 'MG: ' + medGroup.name is node.name
-                        $scope.selectedMediaGroups.push medGroup
-                        for member in medGroup.members
-                            $scope.selectedMedia.push {name: member}
-                break;
-        ###
-        $scope.org = {}
-        $scope.org.name = node.name
-        $scope.org.orgType = if node.type is 'o' then 'org' else 'media'
-        ###
-        update()
+                $scope.selectedMediaGroups = $scope.allMediaGroups.filter((g)->g.name is node.name.substring(4))
+                $scope.selectedMedia = $scope.selectedMediaGroups
+                .map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+        updateURL()
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
@@ -351,7 +360,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.flowData = flowData
                 if dataPromise.promise.$$state.status == 1
                     dataPromise = $q.defer()
-                    $scope.dtInstance.reloadData()
+                    if $scope.dtInstance.reloadData
+                        $scope.dtInstance.reloadData()
                 dataPromise.resolve()
                 $scope.flows = buildNodes filterData flowData
                 #checkMaxLength(data)
@@ -563,25 +573,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     change = (oldValue,newValue) ->
-        console.log "Change: " + Date.now()
+        #console.log "Change: " + Date.now()
         if (oldValue isnt newValue)
             dataPromise = $q.defer()
             $scope.dtInstance.reloadData()
+            updateURL()
             update()
 
-    filterThreshold = "NoValue"
-    $scope.$watch 'filter', (newValue,oldValue) ->
-        return if newValue is oldValue
-        if $scope.error and newValue.length >= 3
-            $scope.error = null
-            update()
-            filterThreshold = newValue
-        else
-            if newValue.indexOf(filterThreshold) is 0
-                $scope.flows = (buildNodes filterData flowData)
-            else if newValue.length >= 3 or (newValue.length < 3 and oldValue.length >= 3)
-                update()
-                filterThreshold = newValue
 
     $rootScope.$on '$stateChangeStart', (event, toState)->
         if toState.name isnt 'home'
@@ -659,8 +657,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         if stateParamsExist()
             clearFields()
             checkForStateParams()
-                .then update
-        else update()
+        update()
 
 
     dialogText =
@@ -701,6 +698,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 showDialog gettextCatalog.getString "You cannot remove this Organisation since it belongs to a selected group. Remove the group first"
                 return
         if not $scope.isDetails
+            updateURL()
             update()
         $scope.isDetails = false;
 
@@ -714,6 +712,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 showDialog gettextCatalog.getString "You cannot remove this Media since it belongs to a selected group. Remove the group first"
                 return
         if not $scope.isDetails
+            updateURL()
             update()
         $scope.isDetails = false;
 
