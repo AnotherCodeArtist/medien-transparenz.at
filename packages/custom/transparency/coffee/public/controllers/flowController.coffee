@@ -4,8 +4,9 @@ app = angular.module 'mean.transparency'
 
 app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
+        console.log "searchFilter"+item.name
         if typeof item.region is "undefined"
-            html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+            html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         else
             html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         $sce.trustAsHtml(html)
@@ -13,7 +14,8 @@ app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
 
 app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-        if typeof item.region is "undefined"
+        console.log "dropdownFilter"+item.name
+        if not item.region?
             html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label
         else
             html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name
@@ -23,7 +25,7 @@ app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) -
 
 app.filter('groupFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-        #console.log item
+
         if typeof item.group is "undefined" or item.group is ""
             html = label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         else
@@ -129,6 +131,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.loading = true
     $scope.progress = 20
     $scope.showSettings = true
+    $scope.selectionSettings = true
     #$scope.org = null
     $scope.isDetails = false
     window.scrollTo 0, 0
@@ -280,7 +283,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     #Updates the browser's address bar without causing the controller to be reloaded
     #this allows to bookmark the page in every state
-    updateURL = ->
+    updateURL = (reload = false)->
         $state.transitionTo('showflow',{
             from: $scope.periods[$scope.slider.from/5].period
             to: $scope.periods[$scope.slider.to/5].period
@@ -289,7 +292,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             mediaGrp: $scope.selectedMediaGroups.map((g)->g.name)
             orgGrp: $scope.selectedOrganisationGroups.map((g)->g.name)
             pTypes: (v.type for v in $scope.typesText when v.checked)
-        },{notify:false})
+        },{notify:reload, reload: reload})
 
     $scope.showDetails = (node) ->
         selectionTypes =
@@ -315,7 +318,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 $scope.selectedMediaGroups = $scope.allMediaGroups.filter((g)->g.name is node.name.substring(4))
                 $scope.selectedMedia = $scope.selectedMediaGroups
                 .map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
-        updateURL()
+        updateURL(true)
         window.scrollTo 0,0
 
     $scope.showFlowDetails = (node) ->
@@ -575,8 +578,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     change = (oldValue,newValue) ->
         #console.log "Change: " + Date.now()
         if (oldValue isnt newValue)
-            dataPromise = $q.defer()
-            $scope.dtInstance.reloadData()
+            if $scope.dtInstance.reloadData
+                dataPromise = $q.defer()
+                $scope.dtInstance.reloadData()
             updateURL()
             update()
 
@@ -637,6 +641,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         deferred = $q.defer()
         if savedState
             TPAService.restoreState stateName, fieldsToStore, $scope
+            $scope.allOrganisations.forEach((o)->o.group="";o.groupType="")
+            $scope.allMedia.forEach((o)->o.group="";o.groupType="")
             initSlider()
             stopLoading()
             deferred.resolve()
@@ -669,7 +675,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     <div class="source-list-modal">
                         <div class="modal-header">
                             <h3 class="modal-title">
-                                Info
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Info
                             </h3>
 
                         </div>
@@ -716,8 +722,23 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             update()
         $scope.isDetails = false;
 
+    #Since it is possible to have local and public groups with the same name
+    #we need to be able to distinguish them
+    normalizeGrpName = (v)->"#{if v.serverside then "S:" else ""}#{v.name}"
 
-    handleRemovingOrgGroup = (newValue) ->
+    handleRemovingOrgGroup = (newValue,oldValue) ->
+        return if newValue is oldValue
+        remainingGroupNames = newValue.map(normalizeGrpName)
+        removedGroup = oldValue.filter((v)->normalizeGrpName(v) not in remainingGroupNames)[0]
+        $scope.selectedOrganisations.filter((v)->v.name in removedGroup.members)
+            .forEach((v)->v.group="";v.groupType="")
+        $scope.selectedOrganisations = $scope.selectedOrganisations.filter((v)->
+            v.name not in removedGroup.members
+        )
+        #TODO remove if refactored everywhere
+        $scope.organisationsInSelectedGroups =
+            $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+        ###
         newOrganisationsInSelectedGroups = []
         for orgGroup in newValue
             newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
@@ -726,6 +747,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 org.group = ""
                 org.groupType = ""
         $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
+        ###
 
     handleAddingOrgGroup = (newValue, oldValue) ->
         $scope.badMembers = []
@@ -760,13 +782,25 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
         oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
         if newLength < oldLength
-            handleRemovingOrgGroup(newValue)
+            handleRemovingOrgGroup(newValue, oldValue)
         else
             handleAddingOrgGroup(newValue, oldValue)
-        change(2,1)
+        #change(2,1)
 
     handleRemovingMediaGroup = (newValue, oldValue) ->
         return if newValue is oldValue
+        remainingGroupNames = newValue.map(normalizeGrpName)
+        removedGroup = oldValue.filter((v)->normalizeGrpName(v) not in remainingGroupNames)[0]
+        $scope.selectedMedia.filter((v)->v.name in removedGroup.members)
+            .forEach((v)->v.group="";v.groupType="")
+        $scope.selectedMedia = $scope.selectedMedia.filter((v)->
+            v.name not in removedGroup.members
+        )
+        #TODO remove if refactored everywhere
+        $scope.mediaInSelectedGroups =
+            $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+
+        ###
         newMediaInSelectedGroups = []
         for mediaGroup in newValue
             newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
@@ -775,6 +809,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 media.group = ""
                 media.groupType = ""
         $scope.mediaInSelectedGroups = newMediaInSelectedGroups
+        ###
 
     handleAddingMediaGroups = (newValue, oldValue) ->
         return if newValue is oldValue
@@ -809,58 +844,53 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
         oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
         if newLength < oldLength
-            handleRemovingMediaGroup(newValue)
+            handleRemovingMediaGroup(newValue, oldValue)
         else
             handleAddingMediaGroups(newValue, oldValue)
-        change(2,1)
+        #change(2,1)
 
     $scope.createLocalOrgGroup = () ->
-        members = []
-        for localgroup in TPAService.getLocalGroups "org"
-            if localgroup.name is $scope.localOrgGroupName
-                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-                break
-                return
-        for org in $scope.selectedOrganisations
-            if $scope.organisationsInSelectedGroups.indexOf(org.name) is -1
-                members.push org.name
-        if members.length is 0
-            $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+        if $scope.localOrgGroupName in TPAService.getLocalGroups("org").map((g)->g.name)
+            showDialog gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
             return
-        $scope.localGroupError = ""
+        groupedOrganisations = $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
+        newMembers = $scope.selectedOrganisations.filter((o)->o.name not in groupedOrganisations)
+        if newMembers.length is 0
+            showDialog gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+            return
         group = {
             type: "org"
-            members: members
+            members: newMembers.map((m)->m.name)
             name: $scope.localOrgGroupName
         }
         TPAService.saveLocalGroup group
         $scope.allOrganisationGroups.push group
         $scope.selectedOrganisationGroups = $scope.selectedOrganisationGroups.concat [group]
+        newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
+        TPAService.saveState stateName,fieldsToStore, $scope
         $scope.localOrgGroupName = ""
 
     $scope.createLocalMediaGroup = () ->
-        members = []
-        for localgroup in TPAService.getLocalGroups "media"
-            if localgroup.name is $scope.localMediaGroupName
-                $scope.localGroupError = gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-                break
-                return
-        for media in $scope.selectedMedia
-            if $scope.mediaInSelectedGroups.indexOf(media.name) is -1
-                members.push media.name
-        if members.length is 0
-            $scope.localGroupError = gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+        if $scope.localMediaGroupName in TPAService.getLocalGroups("media").map((g)->g.name)
+            showDialog gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
             return
-        $scope.localGroupError = ""
+        members = []
+        groupedMedia = $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
+        newMembers = $scope.selectedMedia.filter((o)->o.name not in groupedMedia)
+        if newMembers.length is 0
+            showDialog gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
+            return
         group = {
             type: "media"
-            members: members
+            members: newMembers.map((m)->m.name)
             name: $scope.localMediaGroupName
         }
         TPAService.saveLocalGroup group
         $scope.allMediaGroups.push group
         $scope.selectedMediaGroups = $scope.selectedMediaGroups.concat [group]
+        newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
         $scope.localMediaGroupName = ""
+        TPAService.saveState stateName,fieldsToStore, $scope
 
     $scope.organisationsInSelectedGroups = []
     $scope.mediaInSelectedGroups = []
@@ -879,7 +909,6 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
     $scope.$watch 'selectedMedia', selectedMediaChanged, true
     $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
-
 
     #$scope.$watch('slider.from',change,true)
     #$scope.$watch('slider.to',change,true)

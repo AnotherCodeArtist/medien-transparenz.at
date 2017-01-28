@@ -10,6 +10,24 @@
     margin-right: auto;
 }
 
+g text.og_icon {
+    font-family: FontAwesome;
+}
+
+
+
+.modal-header h3 {
+    color: #3c3c3c;
+}
+
+.modal-header h3 i {
+    padding-right: 0.3em;
+}
+
+.modal-header {
+    background-color: #ffffcc;
+}
+
 div.chartToolTip h3 {
     font-size: 90%;
 }
@@ -613,4 +631,6 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
     .collapsing {
         overflow: hidden!important;
     }
+
+
 }

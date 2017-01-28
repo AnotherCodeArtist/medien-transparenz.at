@@ -137,8 +137,8 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                 .attr('class','tooltip node')
                 if d.name is 'Other organisations' or d.name is 'Other media'
                     d.name = gettextCatalog.getString(d.name)
-
-                html = """<i class="fa #{if d.type is 'o' then 'fa-credit-card' else 'fa-newspaper-o'}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>(#{formatNumber((d.value/$scope.data.sum)*100)}%)
+                icons = {o:'fa-credit-card',m:'fa-newspaper-o',og:'fa-sitemap',mg:'fa-object-group'}
+                html = """<i class="fa #{icons[d.type]}" aria-hidden="true"></i> #{d.name}<br/>#{format(d.value)}<br/>(#{formatNumber((d.value/$scope.data.sum)*100)}%)
                         <div><i class="fa fa-line-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>"""
 
                 if d.name is gettextCatalog.getString('Other organisations') or d.name is gettextCatalog.getString('Other media')
