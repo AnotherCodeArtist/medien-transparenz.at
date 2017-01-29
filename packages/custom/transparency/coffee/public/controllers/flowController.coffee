@@ -4,7 +4,7 @@ app = angular.module 'mean.transparency'
 
 app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-        console.log "searchFilter"+item.name
+        #console.log "searchFilter"+item.name
         if typeof item.region is "undefined"
             html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         else
@@ -14,7 +14,7 @@ app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
 
 app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-        console.log "dropdownFilter"+item.name
+        #console.log "dropdownFilter"+item.name
         if not item.region?
             html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label
         else
@@ -25,7 +25,7 @@ app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) -
 
 app.filter('groupFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
-
+        #console.log "groupFilter"+item.name
         if typeof item.group is "undefined" or item.group is ""
             html = label + '<span class="close select-search-list-item_selection-remove">&times;</span>'
         else
@@ -40,6 +40,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 ($scope,TPAService,$q,$interval,$state,gettextCatalog, $filter,DTOptionsBuilder,DTColumnBuilder,$rootScope, $timeout,$uibModal) ->
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
+    forcedChange = false
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups',
         'selectedMediaGroups', 'selectedOrganisations','selectedMedia',
@@ -224,11 +225,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         else
             value
 
+    compareWith = (param) ->
+        (value) ->
+            if typeIsArray param then normalizeGrpName(value) in param else normalizeGrpName(value) is param
+
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        compareWith = (param) ->
-            (value) ->
-                if typeIsArray param then value.name in param else value.name is param
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
         if $state.params.media?
@@ -289,8 +291,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             to: $scope.periods[$scope.slider.to/5].period
             media: $scope.selectedMedia.map((m)->m.name)
             organisations: $scope.selectedOrganisations.map((o)->o.name)
-            mediaGrp: $scope.selectedMediaGroups.map((g)->g.name)
-            orgGrp: $scope.selectedOrganisationGroups.map((g)->g.name)
+            mediaGrp: $scope.selectedMediaGroups.map(normalizeGrpName)
+            orgGrp: $scope.selectedOrganisationGroups.map(normalizeGrpName)
             pTypes: (v.type for v in $scope.typesText when v.checked)
         },{notify:reload, reload: reload})
 
@@ -694,223 +696,124 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 size: 'sm'
             })
 
-    selectedOrganisationsChanged = (newValue, oldValue) ->
+    selectionChanged = (config) -> (newValue, oldValue) ->
         return if newValue is oldValue
         if newValue.length < oldValue.length
             removedElement = oldValue.filter((o) -> o.name not in newValue.map((v)->v.name))[0]
-            if removedElement.name in $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
-                $scope.selectedOrganisations = oldValue
-                $scope.deselectionNotAllowed = oldValue.name
-                showDialog gettextCatalog.getString "You cannot remove this Organisation since it belongs to a selected group. Remove the group first"
+            if removedElement.name in config.selectedGroups().map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
+                config.setSelected(oldValue)
+                showDialog config.removeMsg
                 return
         if not $scope.isDetails
             updateURL()
             update()
         $scope.isDetails = false;
 
-    selectedMediaChanged = (newValue, oldValue) ->
-        if newValue == oldValue then return
-        if newValue.length < oldValue.length
-            removedElement = oldValue.filter((o) -> o.name not in newValue.map((v)->v.name))[0]
-            if removedElement.name in $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
-                $scope.selectedMedia = oldValue
-                $scope.deselectionNotAllowed = oldValue.name
-                showDialog gettextCatalog.getString "You cannot remove this Media since it belongs to a selected group. Remove the group first"
-                return
-        if not $scope.isDetails
-            updateURL()
-            update()
-        $scope.isDetails = false;
 
     #Since it is possible to have local and public groups with the same name
     #we need to be able to distinguish them
     normalizeGrpName = (v)->"#{if v.serverside then "S:" else ""}#{v.name}"
 
-    handleRemovingOrgGroup = (newValue,oldValue) ->
+    handleRemovingGroup = (config) -> (newValue,oldValue) ->
         return if newValue is oldValue
         remainingGroupNames = newValue.map(normalizeGrpName)
         removedGroup = oldValue.filter((v)->normalizeGrpName(v) not in remainingGroupNames)[0]
-        $scope.selectedOrganisations.filter((v)->v.name in removedGroup.members)
+        config.selected().filter((v)->v.name in removedGroup.members)
             .forEach((v)->v.group="";v.groupType="")
-        $scope.selectedOrganisations = $scope.selectedOrganisations.filter((v)->
+        config.setSelected(config.selected().filter((v)->
             v.name not in removedGroup.members
-        )
+        ))
         #TODO remove if refactored everywhere
         $scope.organisationsInSelectedGroups =
             $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
-        ###
-        newOrganisationsInSelectedGroups = []
-        for orgGroup in newValue
-            newOrganisationsInSelectedGroups = newOrganisationsInSelectedGroups.concat orgGroup.members
-        for org in $scope.allOrganisations
-            if newOrganisationsInSelectedGroups.indexOf(org.name) is -1
-                org.group = ""
-                org.groupType = ""
-        $scope.organisationsInSelectedGroups = newOrganisationsInSelectedGroups
-        ###
 
-    handleAddingOrgGroup = (newValue, oldValue) ->
-        $scope.badMembers = []
-        if $scope.organisationsInSelectedGroups.length > 0
-            for member in newValue[newValue.length - 1].members
-                if $scope.organisationsInSelectedGroups.indexOf(member) isnt -1
-                    $scope.badMembers.push member
 
-        if $scope.badMembers.length isnt 0
-            $scope.selectedOrganisationGroups = oldValue
+    #config access to properties
+    properties =
+        org:
+            all: ()->$scope.allOrganisations
+            allGroups: ()->$scope.allOrganisationGroups
+            selected: ()->$scope.selectedOrganisations
+            selectedGroups: ()->$scope.selectedOrganisationGroups
+            setSelected: (s) -> $scope.selectedOrganisations = s
+            setSelectedGroups: (s) -> $scope.selectedOrganisationGroups = s
+            localGroupName: () -> $scope.localOrgGroupName
+            setLocalGroupName: (s)->$scope.localOrgGroupName=s
+            type:'org'
+            removeMsg: gettextCatalog.getString "You cannot remove this Organisation since it belongs to a selected group. Remove the group instead."
+        media:
+            all: ()->$scope.allMedia
+            allGroups: ()->$scope.allMediaGroups
+            selected: ()->$scope.selectedMedia
+            selectedGroups: ()->$scope.selectedMediaGroups
+            setSelected: (s) -> $scope.selectedMedia = s
+            setSelectedGroups: (s) -> $scope.selectedMediaGroups = s
+            localGroupName: ()-> $scope.localMediaGroupName
+            setLocalGroupName: (s)->$scope.localMediaGroupName=s
+            type:'media'
+            removeMsg: gettextCatalog.getString "You cannot remove this Media since it belongs to a selected group. Remove the group instead"
+
+    handleAddingGroup = (config) -> (newValue, oldValue) ->
+        selectedMembers = oldValue.map((v)->v.members).reduce(((a,b)->a.concat(b)),[])
+        oldGroupNames = oldValue.map(normalizeGrpName)
+        newGroup = newValue.filter((v)->normalizeGrpName(v) not in oldGroupNames)[0]
+        if newGroup.members.filter((v)->v in selectedMembers).length > 0
+            showDialog gettextCatalog.getString """
+                You cannot add this group, since some of its members are also members of already selected
+                groups. This is not allowed. So please remove the other group first
+            """
+            config.setSelectedGroups(oldValue)
+            forcedChange = true
             return
+        membersToAdd = newGroup.members
+            .map((m)->{name:m,group:newGroup.name,groupType:if newGroup.serverside then 'public' else 'custom'})
+        membersOutsideNewGroup = config.selected().filter((v)->v.name not in newGroup.members)
+        config.setSelected(membersOutsideNewGroup.concat(membersToAdd))
+        console.log JSON.stringify config.selected()
 
-        selectedOrganisations = $scope.selectedOrganisations.map (org) ->
-            org.name
-        newSelectedOrganisations = $scope.selectedOrganisations.slice()
-        for member in newValue[newValue.length - 1].members
-            $scope.organisationsInSelectedGroups.push member
-            for organisation in $scope.allOrganisations
-                if organisation.name is member
-                    organisation.group = newValue[newValue.length - 1].name
-                    if (typeof newValue[newValue.length - 1].region is 'undefined')
-                        organisation.groupType = "custom"
-                    else
-                        organisation.groupType = "public"
-                    if selectedOrganisations.indexOf(member) is -1
-                        newSelectedOrganisations.push organisation
-        $scope.selectedOrganisations = newSelectedOrganisations
-        return
+    selectedGroupsChanged = (config) -> (newValue, oldValue) ->
+            return if newValue is oldValue
+            if forcedChange
+                forcedChange = false
+                return
+            newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
+            oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
+            if newLength < oldLength
+                handleRemovingGroup(config)(newValue, oldValue)
+            else
+                handleAddingGroup(config)(newValue, oldValue)
 
-    selectedOrganisationGroupsChanged = (newValue, oldValue) ->
-        return if newValue is oldValue
-        newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
-        oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
-        if newLength < oldLength
-            handleRemovingOrgGroup(newValue, oldValue)
-        else
-            handleAddingOrgGroup(newValue, oldValue)
-        #change(2,1)
-
-    handleRemovingMediaGroup = (newValue, oldValue) ->
-        return if newValue is oldValue
-        remainingGroupNames = newValue.map(normalizeGrpName)
-        removedGroup = oldValue.filter((v)->normalizeGrpName(v) not in remainingGroupNames)[0]
-        $scope.selectedMedia.filter((v)->v.name in removedGroup.members)
-            .forEach((v)->v.group="";v.groupType="")
-        $scope.selectedMedia = $scope.selectedMedia.filter((v)->
-            v.name not in removedGroup.members
-        )
-        #TODO remove if refactored everywhere
-        $scope.mediaInSelectedGroups =
-            $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
-
-        ###
-        newMediaInSelectedGroups = []
-        for mediaGroup in newValue
-            newMediaInSelectedGroups = newMediaInSelectedGroups.concat mediaGroup.members
-        for media in $scope.allMedia
-            if newMediaInSelectedGroups.indexOf(media.name) is -1
-                media.group = ""
-                media.groupType = ""
-        $scope.mediaInSelectedGroups = newMediaInSelectedGroups
-        ###
-
-    handleAddingMediaGroups = (newValue, oldValue) ->
-        return if newValue is oldValue
-        $scope.badMembers = []
-        if $scope.mediaInSelectedGroups.length > 0
-            for member in newValue[newValue.length - 1].members
-                if $scope.mediaInSelectedGroups.indexOf(member) isnt -1
-                    $scope.badMembers.push member
-        if $scope.badMembers.length isnt 0
-            $scope.selectedMediaGroups = oldValue
-            return
-
-        selectedMedia = $scope.selectedMedia.map (media) ->
-            media.name
-        newSelectedMedia = $scope.selectedMedia.slice()
-        for member in newValue[newValue.length - 1].members
-            $scope.mediaInSelectedGroups.push member
-            for media in $scope.allMedia
-                if media.name is member
-                    media.group = newValue[newValue.length - 1].name
-                    if (typeof newValue[newValue.length - 1].region is 'undefined')
-                        media.groupType = "custom"
-                    else
-                        media.groupType = "public"
-                    if selectedMedia.indexOf(member) is -1
-                        newSelectedMedia.push media
-        $scope.selectedMedia = newSelectedMedia
-        return
-
-    selectedMediaGroupsChanged = (newValue, oldValue) ->
-        return if newValue is oldValue
-        newLength = if (typeof newValue isnt 'undefined') then newValue.length else 0
-        oldLength = if (typeof oldValue isnt 'undefined') then oldValue.length else 0
-        if newLength < oldLength
-            handleRemovingMediaGroup(newValue, oldValue)
-        else
-            handleAddingMediaGroups(newValue, oldValue)
-        #change(2,1)
-
-    $scope.createLocalOrgGroup = () ->
-        if $scope.localOrgGroupName in TPAService.getLocalGroups("org").map((g)->g.name)
+    createLocalGroup = (config) -> () ->
+        if config.localGroupName in TPAService.getLocalGroups(config.type).map((g)->g.name)
             showDialog gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
             return
-        groupedOrganisations = $scope.selectedOrganisationGroups.map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
-        newMembers = $scope.selectedOrganisations.filter((o)->o.name not in groupedOrganisations)
+        groupedOrganisations = config.selectedGroups().map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
+        newMembers = config.selected().filter((o)->o.name not in groupedOrganisations)
         if newMembers.length is 0
             showDialog gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
             return
         group = {
-            type: "org"
+            type: config.type
             members: newMembers.map((m)->m.name)
-            name: $scope.localOrgGroupName
+            name: config.localGroupName()
         }
         TPAService.saveLocalGroup group
-        $scope.allOrganisationGroups.push group
-        $scope.selectedOrganisationGroups = $scope.selectedOrganisationGroups.concat [group]
+        config.allGroups().push group
+        config.setSelectedGroups(config.selectedGroups().concat [group])
         newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
         TPAService.saveState stateName,fieldsToStore, $scope
-        $scope.localOrgGroupName = ""
+        config.setLocalGroupName("")
 
-    $scope.createLocalMediaGroup = () ->
-        if $scope.localMediaGroupName in TPAService.getLocalGroups("media").map((g)->g.name)
-            showDialog gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-            return
-        members = []
-        groupedMedia = $scope.selectedMediaGroups.map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
-        newMembers = $scope.selectedMedia.filter((o)->o.name not in groupedMedia)
-        if newMembers.length is 0
-            showDialog gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
-            return
-        group = {
-            type: "media"
-            members: newMembers.map((m)->m.name)
-            name: $scope.localMediaGroupName
-        }
-        TPAService.saveLocalGroup group
-        $scope.allMediaGroups.push group
-        $scope.selectedMediaGroups = $scope.selectedMediaGroups.concat [group]
-        newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
-        $scope.localMediaGroupName = ""
-        TPAService.saveState stateName,fieldsToStore, $scope
+
+    $scope.createLocalOrgGroup = createLocalGroup(properties.org)
+
+    $scope.createLocalMediaGroup = createLocalGroup(properties.media)
 
     $scope.organisationsInSelectedGroups = []
     $scope.mediaInSelectedGroups = []
-    ###
-    $scope.$watch 'selectedOrganisations', (newValue, oldValue) ->
-        return if newValue is oldValue
-        if typeof $scope.allOrganisations isnt 'undefined' and $scope.allOrganisations.length > 0
-            $scope.selectedOrganisations = $scope.allOrganisations.filter((o) -> o.name in $scope.selectedOrganisations)
-    , true
-    $scope.$watch 'selectedMedia', (newValue, oldValue) ->
-        return if newValue is oldValue
-            $scope.selectedMedia = $scope.allMedia.filter((m) -> m.name in $scope.selectedMedia)
-    , true
-    ###
-    $scope.$watch 'selectedOrganisationGroups', selectedOrganisationGroupsChanged, true
-    $scope.$watch 'selectedMediaGroups', selectedMediaGroupsChanged, true
-    $scope.$watch 'selectedMedia', selectedMediaChanged, true
-    $scope.$watch 'selectedOrganisations', selectedOrganisationsChanged, true
-
-    #$scope.$watch('slider.from',change,true)
-    #$scope.$watch('slider.to',change,true)
+    $scope.$watch 'selectedOrganisationGroups', selectedGroupsChanged(properties.org), true
+    $scope.$watch 'selectedMediaGroups', selectedGroupsChanged(properties.media), true
+    $scope.$watch 'selectedMedia', selectionChanged(properties.media), true
+    $scope.$watch 'selectedOrganisations', selectionChanged(properties.org), true
     $scope.$watch('typesText',change,true)
 ]
