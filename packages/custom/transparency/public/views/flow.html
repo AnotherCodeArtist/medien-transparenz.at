@@ -116,7 +116,7 @@
                                        oi-options="item.name for item in loadOrganisations($query)"
                                        ng-model="selectedOrganisations"
                                        multiple
-                                       placeholder="{{organisationsLabel}}"
+                                       placeholder="{{'Type a Name'|translate}}"
                                        id="multiselectOrg"
                                        oi-select-options="{
                                         searchFilter: 'groupFilter'
@@ -132,7 +132,7 @@
                                        oi-options="item.name for item in loadMedia($query)"
                                        ng-model="selectedMedia"
                                        multiple
-                                       placeholder="{{mediaLabel}}"
+                                       placeholder="{{'Type a Name'|translate}}"
                                        id="multiselectMedia"
                                        oi-select-options="{
                                         searchFilter: 'groupFilter'
@@ -148,7 +148,7 @@
                                        oi-options="item.name for item in allOrganisationGroups track by item.name"
                                        ng-model="selectedOrganisationGroups"
                                        multiple
-                                       placeholder="{{organisationsLabel}}"
+                                       placeholder="{{'Select a Group'|translate}}"
                                        id="multiselectOrgGroup"
                                        oi-select-options="{
                                         dropdownFilter: 'dropdownFilter',
@@ -165,7 +165,7 @@
                                        oi-options="item.name for item in allMediaGroups track by item.name"
                                        ng-model="selectedMediaGroups"
                                        multiple
-                                       placeholder="{{mediaLabel}}"
+                                       placeholder="{{'Select a Group'|translate}}"
                                        id="multiselectMediaGroup"
                                        oi-select-options="{
                                         dropdownFilter: 'dropdownFilter',

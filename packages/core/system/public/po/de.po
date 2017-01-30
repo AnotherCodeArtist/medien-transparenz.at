@@ -185,14 +185,14 @@ msgstr "Anlegen"
 msgid "Create new local group"
 msgstr "Neue Gruppe anlegen"
 
-#: controllers/flowController.js:1195
+#: controllers/flowController.js:1137
 msgid ""
 "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 "Benutzerdefinierte Gruppe kann nicht erstellt werden, da keine Einträge "
 "nicht bereits einer Gruppe zugeordnet sind."
 
-#: controllers/flowController.js:1182
+#: controllers/flowController.js:1124
 msgid ""
 "Custom group could not be created since an local group with an equal name "
 "already exists"
@@ -805,17 +805,17 @@ msgstr "Salzburg"
 msgid "Save"
 msgstr "Speichern"
 
-#: views/search.html:8
+#: public/views/header.html:69 views/search.html:8
 msgid "Search"
 msgstr "Suchen"
-
-#: public/views/header.html:69
-msgid "Search for organisation or media"
-msgstr "Nach Organisation oder Medium suchen"
 
 #: views/flowdetail.html:74
 msgid "Select Events"
 msgstr "Events auswählen"
+
+#: views/flow.html:151 views/flow.html:168
+msgid "Select a Group"
+msgstr "Wählen Sie eine Gruppe aus"
 
 #: views/flowdetail.html:117
 msgid "Select by Region"
@@ -977,6 +977,10 @@ msgstr ""
 msgid "Type"
 msgstr "Typ"
 
+#: views/flow.html:119 views/flow.html:135
+msgid "Type a Name"
+msgstr "Geben Sie einen Namen ein"
+
 #: controllers/eventsController.js:57
 msgid "Tyrol"
 msgstr "Tirol"
@@ -1057,7 +1061,7 @@ msgstr ""
 "Sie können weitere Organisationen zum Diagramm hinzufügen. Klicken Sie auf "
 "das Rechteck für mehr Details."
 
-#: controllers/flowController.js:1137
+#: controllers/flowController.js:1079
 msgid ""
 "You cannot add this group, since some of its members are also members of "
 "already selected\n"
@@ -1067,7 +1071,7 @@ msgstr ""
 "dieser Gruppe auch Mitglieder anderer, bereits ausgewählter Gruppen sind. "
 "Bitte entfernen Sie zuerst diese andere Gruppe aus der Auswahl."
 
-#: controllers/flowController.js:1021 controllers/flowController.js:1118
+#: controllers/flowController.js:1060
 msgid ""
 "You cannot remove this Media since it belongs to a selected group. Remove "
 "the group instead"
@@ -1075,7 +1079,7 @@ msgstr ""
 "Sie können dieses Medium nicht entfernen, da es Mitglied einer ausgewählten "
 "Gruppe ist. Entfernen Sie stattdessen die Gruppe."
 
-#: controllers/flowController.js:1090 controllers/flowController.js:992
+#: controllers/flowController.js:1032
 msgid ""
 "You cannot remove this Organisation since it belongs to a selected group. "
 "Remove the group instead."
@@ -1155,6 +1159,9 @@ msgstr "§31 ORF-G (Gebühren)"
 #: controllers/flowController.js:793
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#~ msgid "Search for organisation or media"
+#~ msgstr "Nach Organisation oder Medium suchen"
 
 #~ msgid ""
 #~ "The group can not be selected since it contains members, which are "

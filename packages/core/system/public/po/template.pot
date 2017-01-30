@@ -130,11 +130,11 @@ msgstr ""
 msgid "Create new local group"
 msgstr ""
 
-#: controllers/flowController.js:1195
+#: controllers/flowController.js:1137
 msgid "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 
-#: controllers/flowController.js:1182
+#: controllers/flowController.js:1124
 msgid "Custom group could not be created since an local group with an equal name already exists"
 msgstr ""
 
@@ -730,6 +730,11 @@ msgstr ""
 msgid "Select Events"
 msgstr ""
 
+#: views/flow.html:151
+#: views/flow.html:168
+msgid "Select a Group"
+msgstr ""
+
 #: views/flowdetail.html:117
 msgid "Select by Region"
 msgstr ""
@@ -870,6 +875,11 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+#: views/flow.html:119
+#: views/flow.html:135
+msgid "Type a Name"
+msgstr ""
+
 #: controllers/eventsController.js:57
 msgid "Tyrol"
 msgstr ""
@@ -943,19 +953,17 @@ msgstr ""
 msgid "You can add organisations to the flow. Go into detail by clicking on the rectangular box."
 msgstr ""
 
-#: controllers/flowController.js:1137
+#: controllers/flowController.js:1079
 msgid ""
 "You cannot add this group, since some of its members are also members of already selected\n"
 "groups. This is not allowed. So please remove the other group first"
 msgstr ""
 
-#: controllers/flowController.js:1021
-#: controllers/flowController.js:1118
+#: controllers/flowController.js:1060
 msgid "You cannot remove this Media since it belongs to a selected group. Remove the group instead"
 msgstr ""
 
-#: controllers/flowController.js:1090
-#: controllers/flowController.js:992
+#: controllers/flowController.js:1032
 msgid "You cannot remove this Organisation since it belongs to a selected group. Remove the group instead."
 msgstr ""
 
