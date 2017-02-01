@@ -94,6 +94,9 @@ class TPAService
                     $scope[f] = s[f]
                 s) , JSON.parse savedState
 
+    clearState: ->
+        ['flowState','index','topState'].forEach((state)->sessionStorage.removeItem(state))
+
     getLocalGroups: (type) ->
         groups = localStorage.getItem type
         if not groups
@@ -107,6 +110,22 @@ class TPAService
             groups = []
         groups.push group
         localStorage.setItem group.type, JSON.stringify groups
+
+    updateLocalGroup: (group) ->
+        groups = JSON.parse(localStorage.getItem group.type)
+        if not groups
+            groups = []
+        groups = groups.filter((g)->g.name isnt group.name)
+        groups.push(group)
+        localStorage.setItem(group.type, JSON.stringify(groups))
+
+    removeLocalGroup: (group) ->
+        groups = JSON.parse(localStorage.getItem group.type)
+        if not groups
+            groups = []
+        localStorage.setItem(group.type, JSON.stringify(
+            groups.filter((g)->g.name isnt group.name))
+        )
 
     years: ->
         @$http.get 'api/transparency/years'
@@ -144,11 +163,14 @@ class TPAService
             when 'federal'
                 federalStates
             when 'findOneFederalState'
+                federalStates.filter((s)->s.iso is data)[0]
+                ###
                 result = null
                 for federalState in federalStates
                     if federalState.iso is data
                         result = federalState
                 result
+                ###
 
 
 app = angular.module 'mean.transparency'

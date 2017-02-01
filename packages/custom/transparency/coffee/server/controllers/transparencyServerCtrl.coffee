@@ -860,8 +860,9 @@ module.exports = (Transparency) ->
                 transferTypes: 1
             if orgType is 'org'
                 group._id.organisationType = '$organisationType'
+                group._id.federalState = '$federalState'
                 project.organisationType =  '$_id.organisationType'
-
+                project.federalState = '$_id.federalState'
             $or = name.split(' ').reduce ((a,n)-> q={};a.push buildRegex(nameField,n);a) ,[]
             if not federalState
                     query = $or: $or

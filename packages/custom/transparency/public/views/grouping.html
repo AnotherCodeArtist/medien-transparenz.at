@@ -1,86 +1,114 @@
 <section class="container">
     <div data-ng-controller="GroupingController">
         <h1 translate>Grouping</h1>
-        <div class="pull-right">
-            <label><span translate>Number of Entries</span>
-                <select data-ng-model="size" class="btn btn-default" data-ng-options="size for size in sizes"></select>
-            </label>
+        <div  class="alert alert-info" role="alert" data-ng-show="groupings.length === 0">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <span translate>You do not have any groups yet.
+                By combining organisations or media to groups you can aggregate their transfers on the <a href="/showflow">payment flow page</a>.</span>
         </div>
-        <div class="alert alert-danger" data-ng-show="error">{{error}}</div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th translate>
-                    Type
-                </th>
-                <th translate>
-                    Region
-                </th>
-                <th translate>
-                    Owner
-                </th>
-                <th translate>
-                    Active
-                </th>
-                <th translate>
-                    Edit
-                </th>
-                <th translate>
-                    Remove
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="grouping in groupings">
-                <td>{{grouping.name}}</td>
-                <td>{{grouping.type}}</td>
-                <td>{{grouping.region}}</td>
-                <td>{{grouping.owner}}</td>
-                <td>{{grouping.isActive}}</td>
-                <td>
-                    <button data-ng-click="editGrouping(grouping._id)" class="btn btn-info">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </button>
-                </td>
-                <td>
-                    <button data-ng-click="removeGrouping(grouping._id, grouping.name)" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
-                        boundary-links="true"></ul>
+        <div ng-show="groupings.length > 0">
+            <div class="pull-right">
+                <label><span translate>Number of Entries</span>
+                    <select data-ng-model="size" class="btn btn-default"
+                            data-ng-options="size for size in sizes"></select>
+                </label>
+            </div>
+            <div class="alert alert-danger" data-ng-show="error">{{error}}</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th translate>
+                        Type
+                    </th>
+                    <th translate>
+                        Region
+                    </th>
+                    <th translate>
+                        Owner
+                    </th>
+                    <th translate>
+                        Active
+                    </th>
+                    <th translate>
+                        Edit
+                    </th>
+                    <th translate>
+                        Remove
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="grouping in groupings">
+                    <td>{{grouping.name}}</td>
+                    <td>{{grouping.typeText}}</td>
+                    <td>{{grouping.regionText}}</td>
+                    <td>{{grouping.owner}}</td>
+                    <td>{{grouping.isActiveText}}</td>
+                    <td>
+                        <button data-ng-click="editGrouping(grouping)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button data-ng-click="removeGrouping(grouping)" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Count: {{count}}</p>
+            <ul uib-pagination ng-model="page" total-items="count" items-per-page="size" max-size="10"
+                boundary-links="true"></ul>
+        </div>
+        <div>
+            <button class="btn btn-default" type="button" data-ng-click="newGroup()">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span translate>New Group</span>
+            </button>
+        </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <form name="groupingForm">
-                    <div class="form-group">
-                        <label for="groupName">Name</label>
-                        <input data-ng-model="group.name" type="text" class="form-control" id="groupName"
-                               placeholder="Name" required>
-                    </div>
+                <form name="groupingForm" novalidate>
                     <div class="form-group">
                         <label for="groupTypeOrg" translate>Group type</label><br/>
-                        <input type="radio" data-ng-model="group.type" value="org" id="groupTypeOrg"/>
+                        <input type="radio" data-ng-model="group.type" value="org" id="groupTypeOrg" data-ng-disabled="edit"/>
                         {{translate_GroupTypeOrg}}
-                        <input type="radio" data-ng-model="group.type" value="media" id="groupTypeMedia"/>
+                        <input type="radio" data-ng-model="group.type" value="media" id="groupTypeMedia"  data-ng-disabled="edit"/>
                         {{translate_GroupTypeMedia}}
                     </div>
                     <div class="form-group">
-                        <label for="ownerSelection" data-ng-show="group.type" translate>Group owner</label><br/>
-                        <ui-select data-ng-model="group.selectedGroupOwner" theme="bootstrap" data-ng-show="group.type"
-                                   id="ownerSelection">
-                            <ui-select-match placeholder="{{translate_selectionOwnerPlaceholder}}">
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="option in selection | filter: $select.search">
-                                <div data-ng-bind-html="option.name | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
+                        <label for="groupName">Name</label>
+                        <input data-ng-model="group.name" type="text" class="form-control" id="groupName" autocomplete="off"
+                               placeholder="Name" required unique-group-name-in="organisations()" name="groupName">
+
+                    </div>
+                    <div data-ng-show="groupingForm.groupName.$error.uniqueGroupName" >
+                        <span class="alert alert-danger" translate>A group with this name already exists!</span>
+                    </div>
+
+                    <!-- REMOVE -->
+                    <!--
+                    <p>Owner: {{group.selectedGroupOwner}}</p>
+                    <p>Members: {{group.members}}</p>
+                    <p>Region: {{group.region}}</p>
+                    -->
+                    <div class="form-group">
+                        <label for="ownerSelection" data-ng-show="group.type" translate>Group owner (Optional)</label><br/>
+                        <oi-select class="selector"
+                                   oi-options="item.name for item in loadOptions($query)"
+                                   ng-model="group.selectedGroupOwner"
+                                   single
+                                   placeholder="{{'Type a Name'|translate}}"
+                                   id="ownerSelection"
+                                   oi-select-options="{
+                                        searchFilter: 'groupFilter'
+                                    }"
+                        >
+                        </oi-select>
                         <button data-ng-click="resetOwner()" data-ng-show="group.type" class="btn btn-default"
                                 translate>Reset
                         </button>
@@ -88,37 +116,43 @@
                     <div class="form-group">
                         <label for="membersSelection"
                                data-ng-show="group.type">{{translate_selectionMember}}</label><br/>
-                        <ui-select data-ng-model="group.selectedMember" theme="bootstrap" data-ng-show="group.type"
-                                   id="membersSelection">
-                            <ui-select-match placeholder="{{translate_selectionMember}}">
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="option in selection | filter: $select.search">
-                                <div data-ng-bind-html="option.name | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in loadOptions($query)"
+                                   ng-model="group.members"
+                                   multiple
+                                   placeholder="{{'Type a Name'|translate}}"
+                                   id="membersSelection"
+                                   oi-select-options="{
+                                        searchFilter: 'groupFilter'
+                                    }"
+                        >
+                        </oi-select>
+
                     </div>
                     <div class="form-group" data-ng-show="group.members.length>0 && group.type == 'org' ">
                         <label for="groupRegion" translate>Region</label><br/>
-                        <input type="radio" data-ng-model="group.region" value="AT" id="groupRegion"/>
+                        <input type="radio" data-ng-model="group.scope" value="national" id="groupRegion"/>
                         {{translate_Nationwide}}
 
-                        <input type="radio" data-ng-model="group.region" value="AT-9" id="groupRegionFederal"
+                        <input type="radio" data-ng-model="group.scope" value="federal" id="groupRegionFederal"
                                data-ng-disabled="!enableFederalSelection"/>
-                        {{translate_withinFederalState}}
+                        <span translate>Within federal state ({{group2Federalstate(group.region)}})</span>
                     </div>
 
                     <div class="form-group" data-ng-show="group.members.length>0">
                         <label for="enableGroup" translate>Enable Group</label><br/>
-                        <input type="radio" data-ng-model="group.isActive" id="enableGroup" data-ng-value="true"/>
+                        <input type="radio" data-ng-model="group.isActive" id="enableGroup"
+                               data-ng-value="true"/>
                         {{translate_EnableGroup}}
-                        <input type="radio" data-ng-model="group.isActive" id="disableGroup" data-ng-value="false"/>
+                        <input type="radio" data-ng-model="group.isActive" id="disableGroup"
+                               data-ng-value="false"/>
                         {{translate_DisableGroup}}
                     </div>
 
                     <button data-ng-click="cancel()" class="btn btn-default" translate>Cancel</button>
                     <button data-ng-disabled="groupingForm.$invalid ||group.members.length == 0 || !group.region"
-                            data-ng-click="createGroup()" data-ng-show="!edit" type="submit" class="btn btn-primary"
+                            data-ng-click="createGroup()" data-ng-show="!edit" type="submit"
+                            class="btn btn-primary"
                             translate>Create
                     </button>
                     <button data-ng-disabled="groupingForm.$invalid ||group.members.length == 0 || !group.region"
@@ -128,30 +162,10 @@
 
                 </form>
 
-                <div class="table-responsive" data-ng-show="group.members.length>0">
-                    <table class="table table-condensed">
-                        <caption translate>Group members</caption>
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th translate class="pull-right">Remove</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="member in group.members track by $index">
-                            <td>
-                                {{member.name}}
-                            </td>
-                            <td class="pull-right">
-                                <button data-ng-click="removeGroupMember($index)" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </section>

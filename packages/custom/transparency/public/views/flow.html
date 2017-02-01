@@ -12,7 +12,7 @@
                 </button>
             </div>
             <h1 translate>Money Flow</h1>
-
+            <!--p>Org-Groups: {{allOrganisationGroups}}</p-->
 
             <div class="panel panel-default" id="flowSettings">
                 <div class="panel-heading">
@@ -181,14 +181,24 @@
                                 <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
                                                                     aria-hidden="true"></i></a>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <input class="form-control" type="text" ng-model="localOrgGroupName"
                                                placeholder="{{'Organisation group name'|translate}}" required/>
                                     </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" ng-disabled="localOrgGroupForm.$invalid"
-                                                class="btn btn-primary" ng-click="createLocalOrgGroup()">
-                                            <span translate>Create new local group</span></button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" ng-disabled="localOrgGroupForm.$invalid"
+                                                    class="btn btn-primary" ng-click="createLocalOrgGroup()">
+                                                <i class="fa fa-object-group" aria-hidden="true"></i></i>&nbsp;<span
+                                                    translate>Create new local group</span>
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-default" ng-click="editLocalGroups()">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
+                                                    translate>Edit</span></button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -200,46 +210,55 @@
                                 <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
                                                                     aria-hidden="true"></i></a>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <input class="form-control" type="text" ng-model="localMediaGroupName"
                                                placeholder="{{'Media group name'|translate}}" required/>
                                     </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
-                                                class="btn btn-primary" ng-click="createLocalMediaGroup()">
-                                    <span translate>Create new local group
-                                    </span></button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
+                                                    class="btn btn-primary" ng-click="createLocalMediaGroup()">
+                                                <i class="fa fa-object-group" aria-hidden="true"></i>&nbsp;<span translate>Create new local group</span>
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-default" ng-click="editLocalGroups()">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
+                                                    translate>Edit</span></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
-                    </div>
-                    <div class="row" ng-show="localGroupError && localGroupError !== ''">
-                        <div class="alert alert-danger col-md-12" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            {{localGroupError}}
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
-                    <div data-tpa-sankey data="flows" id="mychart"
-                         prog="progress" node-click="showDetails" link-click="showFlowDetails">
-
+                <div class="row" ng-show="localGroupError && localGroupError !== ''">
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        {{localGroupError}}
                     </div>
                 </div>
-
-            </div>
-            <div class="row" data-ng-show="flowData.length>0">
-                <h4 translate>Tabular Representation</h4>
-                <div class="table-responsive">
-                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"
-                           class="table table-striped"></table>
-                </div>
-                <br/><br/><br/><br/>
             </div>
         </div>
+        <div class="row">
+            <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
+                <div data-tpa-sankey data="flows" id="mychart"
+                     prog="progress" node-click="showDetails" link-click="showFlowDetails">
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row" data-ng-show="flowData.length>0">
+            <h4 translate>Tabular Representation</h4>
+            <div class="table-responsive">
+                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"
+                       class="table table-striped"></table>
+            </div>
+            <br/><br/><br/><br/>
+        </div>
+    </div>
     </div>
     <br/>
 </section>

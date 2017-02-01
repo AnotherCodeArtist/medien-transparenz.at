@@ -35,10 +35,13 @@ angular.module 'mean.transparency'
         resolve:
             loggedin: checkLoggedIn
     $stateProvider.state 'grouping',
-        url: '/transparency/grouping'
+        url: '/transparency/grouping?mode'
         templateUrl: 'transparency/views/grouping.html'
         resolve:
             loggedin: checkLoggedIn
+    $stateProvider.state 'groupingLocal',
+        url: '/groupingLocal'
+        templateUrl: 'transparency/views/grouping.html'
     #State for the upload of the organisation-address-data
     $stateProvider.state 'add_organisation',
         url: '/transparency/addOrganisation'

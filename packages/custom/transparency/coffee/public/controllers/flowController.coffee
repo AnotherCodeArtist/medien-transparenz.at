@@ -5,20 +5,23 @@ app = angular.module 'mean.transparency'
 app.filter('searchFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
         #console.log "searchFilter"+item.name
-        if typeof item.region is "undefined"
-            html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
-        else
-            html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name + '<span class="close select-search-list-item_selection-remove">&times;</span>'
+        html = """<span class="label #{if item.groupType is 'public' then 'label-danger' else 'label-primary'}">
+            #{gettextCatalog.getString(item.groupType)}</span>#{item.name}
+            <span class="close select-search-list-item_selection-remove">&times;</span>"""
         $sce.trustAsHtml(html)
 ])
 
 app.filter('dropdownFilter', ['$sce', 'gettextCatalog', ($sce, gettextCatalog) ->
     (label, query, item, options, element) ->
         #console.log "dropdownFilter"+item.name
+        html = """<span class="label #{if item.groupType is 'public' then 'label-danger' else 'label-primary'}">
+            #{gettextCatalog.getString(item.groupType)}</span>&nbsp;#{item.name}<span class="close select-search-list-item_selection-remove">&times;</span>"""
+        ###
         if not item.region?
             html = '<span class="label label-primary">' + gettextCatalog.getString('custom') + '</span> ' + label
         else
             html = '<span class="label label-danger">' + gettextCatalog.getString('public') + '</span> ' + item.name
+        ###
         $sce.trustAsHtml(html)
 ])
 
@@ -339,6 +342,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         else
             data
 
+    $scope.editLocalGroups = () -> $state.go('groupingLocal')
 
     update = ->
         if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'
@@ -597,13 +601,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if (err)
                 console.error err
                 return
-            $scope.allOrganisationGroups = res.data.concat(TPAService.getLocalGroups("org"))
+            $scope.allOrganisationGroups = res.data.map((g)->g.groupType='public';g)
+                .concat(TPAService.getLocalGroups("org").map((g)->g.groupType='custom';g))
         mediaGroupsPromise = TPAService.getGroupings {type: 'media'}
         mediaGroupsPromise.then (res, err) ->
             if (err)
                 console.error err
                 return
-            $scope.allMediaGroups = res.data.concat(TPAService.getLocalGroups("media"))
+            $scope.allMediaGroups = res.data.map((g)->g.groupType='public';g)
+                .concat(TPAService.getLocalGroups("media").map((g)->g.groupType='custom';g))
         $q.all([orgGroupsPromise,mediaGroupsPromise])
 
     #start initialization
@@ -796,8 +802,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             type: config.type
             members: newMembers.map((m)->m.name)
             name: config.localGroupName()
+            region: 'AT'
         }
         TPAService.saveLocalGroup group
+        group.groupType = 'custom'
         config.allGroups().push group
         config.setSelectedGroups(config.selectedGroups().concat [group])
         newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
