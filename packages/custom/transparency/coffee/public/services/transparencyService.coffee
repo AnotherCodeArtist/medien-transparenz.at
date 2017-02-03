@@ -9,7 +9,7 @@ getNumericDate = (date) ->
     date.getFullYear() + day/365
 
 class TPAService
-    constructor: (@$http) ->
+    constructor: (@$http,@$rootScope) ->
 
     search: (query) ->
         @$http.get 'api/transparency/search', params: query
@@ -96,6 +96,7 @@ class TPAService
 
     clearState: ->
         ['flowState','index','topState'].forEach((state)->sessionStorage.removeItem(state))
+        @$rootScope.$broadcast('groupsChanged')
 
     getLocalGroups: (type) ->
         groups = localStorage.getItem type
@@ -174,4 +175,4 @@ class TPAService
 
 
 app = angular.module 'mean.transparency'
-app.service 'TPAService', ["$http", TPAService]
+app.service 'TPAService', ["$http","$rootScope", TPAService]

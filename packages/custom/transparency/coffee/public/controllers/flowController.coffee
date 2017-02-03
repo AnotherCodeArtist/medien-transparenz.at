@@ -44,6 +44,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     forcedChange = false
+    gettextCatalog.getString("custom")
+    gettextCatalog.getString("public")
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups',
         'selectedMediaGroups', 'selectedOrganisations','selectedMedia',
@@ -343,6 +345,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             data
 
     $scope.editLocalGroups = () -> $state.go('groupingLocal')
+    $rootScope.$on('groupsChanged', -> loadGroups().then(->console.log("====UPDATED====")))
 
     update = ->
         if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'

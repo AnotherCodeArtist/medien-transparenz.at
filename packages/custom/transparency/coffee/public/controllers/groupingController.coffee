@@ -1,7 +1,7 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','$q','$state', ($scope, TPAService, gettextCatalog, $q, $state) ->
+app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','$q','$state','$rootScope', ($scope, TPAService, gettextCatalog, $q, $state,$rootScope) ->
     countGroupings = ->
         if mode is 'public'
             p = TPAService.countGroupings {}
@@ -158,7 +158,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
             $scope.group.scope = "national"
     $scope.group2Federalstate = (group) ->
         if group?
-            console.log "group2Federalstate: #{group}"
+            #console.log "group2Federalstate: #{group}"
             gettextCatalog.getString(TPAService.staticData('findOneFederalState', group).name)
         else ""
 
@@ -205,7 +205,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
             resetGroup()
             countGroupings()
             listGroupings()
-        TPAService.clearState()
+        $rootScope.$broadcast('groupsChanged')
 
     getAll = (type) ->
         switch type
@@ -245,7 +245,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
                 TPAService.removeLocalGroup(group)
                 countGroupings()
                 listGroupings()
-            TPAService.clearState()
+            $rootScope.$broadcast('groupsChanged')
 
 
 
@@ -263,7 +263,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
             TPAService.updateLocalGroup(groupToGrouping($scope.group))
             resetGroup()
             listGroupings()
-        TPAService.clearState()
+        $rootScope.$broadcast('groupsChanged')
 
 
     $scope.page =  1
