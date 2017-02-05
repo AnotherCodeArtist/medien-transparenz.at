@@ -8,10 +8,44 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h1 translate>Money Flow</h1>
-                <h2><span translate>Flow in detail</span>: <a ng-click="goToSource()">{{source}}</a> &rArr; <a
-                        ng-click="goToTarget()">{{target}}</a>
-                </h2>
+                <h1 translate>Money Flow over time</h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div  class="panel panel-default">
+                    <div class="panel-heading"><strong translate>From</strong></div>
+                    <div class="panel-body">
+                        <ul ng-hide="source.length > 0">
+                            <li translate>All other Organisations</li>
+                        </ul>
+                        <ul ng-repeat="item in source">
+                            <li>{{item}} <span ng-show="sourceGrp" class="label label-primary">{{sourceGrp}}</span></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div  class="panel panel-default">
+                    <div class="panel-heading"><strong translate>To</strong></div>
+                    <div class="panel-body">
+                        <ul ng-hide="target.length > 0">
+                            <li translate>All other Media</li>
+                        </ul>
+                        <ul ng-repeat="item in target">
+                            <li>{{item}} <span ng-show="targetGrp" class="label label-primary">{{targetGrp}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div  class="panel panel-default">
+                    <div class="panel-heading"><strong translate>Payment Types</strong></div>
+                    <div class="panel-body">
+                        <ul ng-repeat="pType in pTypes">
+                            <li>{{getExplanation(pType)}}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div ng-intro-options="IntroOptions" ng-intro-method="FlowDetailIntro" ng-intro-autostart="false">
                 <div class="pull-right">
@@ -83,7 +117,8 @@
                                                 > {{event.name}}
                                             </label>
                                             <span><span class="label label-danger">{{event.region}}</span></span>
-                                            <span ng-repeat="tag in event.tags"><span class="label label-primary">{{tag}}</span> </span>
+                                            <span ng-repeat="tag in event.tags"><span
+                                                    class="label label-primary">{{tag}}</span> </span>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +128,8 @@
                             <div class="col-md-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading" id="tagSelection">
-                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(1);">?</a></sup></p>
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(1);">?</a></sup>
+                                        </p>
 
                                         <h3 class="panel-title" translate>Select by Tag</h3>
                                     </div>
@@ -113,7 +149,8 @@
                             <div class="col-md-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading" id="regionSelection">
-                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(2);">?</a></sup></p>
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(2);">?</a></sup>
+                                        </p>
                                         <h3 class="panel-title" translate>Select by Region</h3>
                                     </div>
                                     <div class="panel-body">

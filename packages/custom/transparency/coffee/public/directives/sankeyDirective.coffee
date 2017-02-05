@@ -61,7 +61,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
                     .selectAll(".link")
                     .data($scope.data.links)
                     .enter().append("path")
-                    .attr("class", (d) -> "link paragraph#{d.type}")
+                    .attr("class", (d) -> "link paragraph#{d.type} #{d.linkType}")
                     .attr("d", path)
                     .style("stroke-width", (d) -> Math.max(1, d.dy))
                     .sort( (a, b) -> b.dy - a.dy )
@@ -69,24 +69,28 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             #link.append("title")
             #    .text (d) -> d.source.name + " → " + d.target.name + "\n" + format(d.value)
 
+            getDetails = (d) ->
+                Object.keys(d.details).filter((k)->d.details[k]>0).map((v)->
+                  """<div>#{formatNumber(d.details[v])} (§#{v})</div>"""
+                ).reduce(((a,b)->a+b),"")
+
             link.on "mouseover", (d) ->
                 div.style('display','block')
                 div.transition()
                 .duration(200)
                 .style("opacity", .9)
                 .attr('class','tooltip link')
-                if d.source.name is 'Other organisations' or
+                if d.linkType is "others"
+                    div.attr('class','tooltip link nolink')
                     d.source.name = gettextCatalog.getString(d.source.name)
-                else if d.target.name is 'Other media'
-                    d.target.name = gettextCatalog.getString(d.target.name)
-                if (d.source.type is "o" and d.target.type is "m" and d.source.name isnt gettextCatalog.getString("Other organisations") and d.target.name isnt gettextCatalog.getString("Other media"))
-                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})
+                if d.linkType isnt "others"
+                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{getDetails(d)}
                             <div><i class="fa fa-bar-chart" aria-hidden="true"></i> #{gettextCatalog.getString('Click for Details')}</div>
                          """)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px")
                 else
-                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{(formatNumber(d.value))} (§#{d.type})""")
+                    div.html("""#{d.source.name} (#{formatNumber((d.value/d.source.value)*100)}%) → #{d.target.name} (#{formatNumber((d.value/d.target.value)*100)}%)<br/>#{getDetails(d)}""")
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px")
 

@@ -61,6 +61,7 @@ Transparency.register(function(app, auth, database) {
     roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
+  /*
   Transparency.menus.add({
     title: 'Organisations',
     link: 'listOrgs',
@@ -74,6 +75,7 @@ Transparency.register(function(app, auth, database) {
     roles: ['authenticated', 'anonymous'],
     menu: 'main'
   });
+  */
   Transparency.menus.add({
     title: 'Events',
     link: 'events',

@@ -567,15 +567,15 @@ module.exports = (Transparency) ->
 
     flowdetail: (req, res) ->
         try
-            paymentTypes = req.query.pType or ['2']
+            paymentTypes = req.query.pTypes or ['2']
             paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
-            source = req.query.source
-            target = req.query.target
+            source = req.query.source or []
+            target = req.query.target or []
+            source = [source] if source not instanceof Array
+            target = [target] if target not instanceof Array
             query = {}
-            query.organisation = source;
-            query.media = target;
-
-
+            if source.length > 0 then query.organisation = $in: source;
+            if target.length > 0 then query.media = $in: target;
             (query.transferType =
                 $in: paymentTypes.map (e)->
                     parseInt(e)) if paymentTypes.length > 0
@@ -628,12 +628,18 @@ module.exports = (Transparency) ->
 
     annualcomparison: (req, res) ->
         try
-            source = req.query.source
-            target = req.query.target
-
+            paymentTypes = req.query.pTypes or ['2']
+            paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
+            source = req.query.source or []
+            target = req.query.target or []
+            source = [source] if source not instanceof Array
+            target = [target] if target not instanceof Array
             query = {}
-            query.organisation = source;
-            query.media = target;
+            if source.length > 0 then query.organisation = $in: source;
+            if target.length > 0 then query.media = $in: target;
+            (query.transferType =
+                $in: paymentTypes.map (e)->
+                    parseInt(e)) if paymentTypes.length > 0
 
             years = []
 

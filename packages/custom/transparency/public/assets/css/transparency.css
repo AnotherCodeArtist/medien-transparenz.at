@@ -78,8 +78,22 @@ footer {
     cursor: pointer;
 }
 
+.link.others {
+    cursor: default;
+}
+
 .link.paragraph2 {
     stroke: crimson;
+}
+
+.link.paragraph24 {
+    stroke: crimson;
+    stroke-dasharray: 10,3;
+
+}
+
+.link {
+    background-color: #00b3ee;
 }
 
 .link.paragraph4 {
@@ -88,6 +102,10 @@ footer {
 
 .link.paragraph31 {
     stroke: deepskyblue;
+}
+
+.link.others {
+    cursor: default;
 }
 
 .link:hover {

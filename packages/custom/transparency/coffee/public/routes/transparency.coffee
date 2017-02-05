@@ -62,7 +62,7 @@ angular.module 'mean.transparency'
         templateUrl: 'transparency/views/flow.html'
         #controller: 'FlowCtrl'
     $stateProvider.state 'showflowdetail',
-        url: "/showflowdetail?source&target"
+        url: "/showflowdetail?source&target&pTypes&sourceGrp&targetGrp&sourceType&targetType"
         templateUrl: 'transparency/views/flowdetail.html'
     $stateProvider.state 'imprint',
         url: "/imprint"

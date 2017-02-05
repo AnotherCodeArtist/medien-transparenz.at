@@ -62,7 +62,13 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
         params = {}
         params.source = $scope.source
         params.target = $scope.target
+        if $state.params.pTypes then params.pTypes = $state.params.pTypes
         params
+
+    $scope.getExplanation = (paymentType) -> switch paymentType
+        when "2" then gettextCatalog.getString('§2 MedKF-TG (Media Cooperations)')
+        when "4" then gettextCatalog.getString('§4 MedKF-TG (Funding)')
+        when "31" then gettextCatalog.getString('§31 ORF-G (Charges)')
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withButtons(
         [
@@ -154,8 +160,15 @@ app.controller 'FlowDetailCtrl',['$scope','TPAService','$q','$interval','$state'
 
     #check for parameters in the URL so that this view can be bookmarked
     checkForStateParams = ->
-        $scope.source = $state.params.source
-        $scope.target = $state.params.target
+        $scope.source = $state.params.source or []
+        $scope.target = $state.params.target or []
+        $scope.pTypes = $state.params.pTypes
+        $scope.source = [$scope.source] if $scope.source not instanceof Array
+        $scope.target = [$scope.target] if $scope.target not instanceof Array
+        $scope.sourceType = $state.params.sourceType
+        $scope.targetType = $state.params.targetType
+        $scope.sourceGrp = $state.params.sourceGrp
+        $scope.targetGrp = $state.params.targetGrp
 
     translate = ->
         $scope.typesText.forEach (t) -> t.text = gettextCatalog.getString TPAService.decodeType t.type

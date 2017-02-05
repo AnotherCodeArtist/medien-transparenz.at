@@ -48,6 +48,14 @@ msgstr ""
 "Anschließend wurden dann die offensichtlichsten Fehler halbautomatisch "
 "korrigiert. Dies erfolgte unter Verwendung von "
 
+#: views/flowdetail.html:32
+msgid "All other Media"
+msgstr "Alle anderen Medien"
+
+#: views/flowdetail.html:18
+msgid "All other Organisations"
+msgstr "Alle anderen Organisationen"
+
 #: views/impress.html:29
 msgid ""
 "Although this was meant to significantly improve the data qualtity it could "
@@ -56,7 +64,7 @@ msgstr ""
 "Obwohl das Ziel dieser Nachbearbeitung eine verbesserte Datenqualität ist, "
 "kann es dadurch aber auch zu zusätzlichen Fehlern kommen."
 
-#: controllers/flowController.js:139 controllers/flowController.js:814
+#: controllers/flowController.js:139 controllers/flowController.js:783
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr "Betrag"
@@ -137,7 +145,7 @@ msgstr ""
 "Basierend auf Ihrer Auswahl, können Sie benutzerdefinierte Gruppen für alle "
 "nicht gruppierten Organisationen oder Medien erstellen."
 
-#: views/flowdetail.html:151
+#: views/flowdetail.html:188
 msgid "Begin of Event"
 msgstr "Beginn des Events"
 
@@ -161,8 +169,8 @@ msgstr "Kammer"
 msgid "City"
 msgstr "Stadt"
 
-#: controllers/topEntriesController.js:108 directives/sankeyDirective.js:112
-#: directives/sankeyDirective.js:70
+#: controllers/topEntriesController.js:108 directives/sankeyDirective.js:120
+#: directives/sankeyDirective.js:78
 msgid "Click for Details"
 msgstr "Klicken Sie für mehr Details"
 
@@ -190,7 +198,7 @@ msgstr "Anlegen"
 msgid "Create new local group"
 msgstr "Neue Gruppe anlegen"
 
-#: controllers/flowController.js:1158
+#: controllers/flowController.js:1126
 msgid ""
 "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
@@ -199,7 +207,7 @@ msgstr ""
 "Gruppe gehören. Fügen Sie oben zunächst die gewünschten Organisationen/"
 "Medien hinzu und wiederholen Sie die Aktion."
 
-#: controllers/flowController.js:1145
+#: controllers/flowController.js:1113
 msgid ""
 "Custom group could not be created since an local group with an equal name "
 "already exists"
@@ -219,7 +227,7 @@ msgstr "Bestimmen Sie die Anzahl der Einträge pro Seite."
 msgid "Disable Group"
 msgstr "Gruppe dekativieren"
 
-#: controllers/flowController.js:794 controllers/flowDetailController.js:192
+#: controllers/flowController.js:763 controllers/flowDetailController.js:205
 #: controllers/topEntriesController.js:314
 msgid "Display _MENU_ records"
 msgstr "Zeige _MENU_ Einträge"
@@ -245,11 +253,11 @@ msgstr "Gruppe aktivieren"
 msgid "End date"
 msgstr "Enddatum"
 
-#: views/flowdetail.html:155
+#: views/flowdetail.html:192
 msgid "End of Event"
 msgstr "Ende des Events"
 
-#: controllers/flowController.js:120 controllers/flowDetailController.js:114
+#: controllers/flowController.js:120 controllers/flowDetailController.js:127
 #: controllers/listControllers.js:273 controllers/listControllers.js:82
 #: controllers/topEntriesController.js:169
 msgid "End tour"
@@ -277,7 +285,7 @@ msgstr "Datensätze ohne bekanntes Bundesland in Österreich"
 msgid "Error"
 msgstr "Fehler"
 
-#: controllers/flowDetailController.js:102
+#: controllers/flowDetailController.js:115
 msgid ""
 "Events are connected to regions. To show events from a specific region, use "
 "this option."
@@ -285,7 +293,7 @@ msgstr ""
 "Events sind Regionen zugewiesen. Um Events von bestimmten Regionen "
 "anzuzeigen, benutzen Sie diese Option."
 
-#: controllers/flowDetailController.js:99
+#: controllers/flowDetailController.js:112
 msgid ""
 "Events can be related to tags. To select specific tags, use this option."
 msgstr ""
@@ -332,13 +340,13 @@ msgstr "Zeitspanne fixieren. Damit ist es möglich den Bereich festzusetzen."
 msgid "Flip through the results here."
 msgstr "Blättern Sie hier durch die Ergebnisse."
 
-#: views/flowdetail.html:12
-msgid "Flow in detail"
-msgstr "Zahlungsfluss im Detail"
-
 #: views/uploadOrganisation.html:76
 msgid "Foundation"
 msgstr "Stiftung"
+
+#: views/flowdetail.html:15
+msgid "From"
+msgstr "Von"
 
 #: views/uploadOrganisation.html:80
 msgid "Fund"
@@ -513,7 +521,7 @@ msgstr ""
 "Es ist möglich bereits vorhandene Organisationsgruppen auszuwählen. Die "
 "Einträge dieser Gruppe werden automatisch geladen und angezeigt."
 
-#: controllers/flowDetailController.js:96
+#: controllers/flowDetailController.js:109
 msgid ""
 "It is possible to show specific events. Per default, all events are selected."
 msgstr ""
@@ -524,15 +532,15 @@ msgstr ""
 msgid "It is possible to show the chart for a specific federal state."
 msgstr "Es ist möglich, das Diagramm für ein bestimmtes Bundesland anzuzeigen."
 
-#: views/flowdetail.html:168
+#: views/flowdetail.html:205
 msgid "Labels hidden"
 msgstr "Labels nicht sichtbar"
 
-#: views/flowdetail.html:164
+#: views/flowdetail.html:201
 msgid "Labels visible"
 msgstr "Labels sichtbar"
 
-#: views/flowdetail.html:139
+#: views/flowdetail.html:176
 msgid "Legend"
 msgstr "Legende"
 
@@ -589,9 +597,13 @@ msgstr "Name der Mediengruppe"
 msgid "Ministry"
 msgstr "Ministerium"
 
-#: views/flow.html:14 views/flowdetail.html:11
+#: views/flow.html:14
 msgid "Money Flow"
 msgstr "Zahlungsflüsse"
+
+#: views/flowdetail.html:11
+msgid "Money Flow over time"
+msgstr "Zahlungsflüsse über die Zeit"
 
 #: views/index.html:45
 msgid "Move the sliders to define a range"
@@ -617,7 +629,7 @@ msgstr "Bundesweit"
 msgid "New Group"
 msgstr "Neue Gruppe"
 
-#: controllers/flowController.js:117 controllers/flowDetailController.js:111
+#: controllers/flowController.js:117 controllers/flowDetailController.js:124
 #: controllers/listControllers.js:270 controllers/listControllers.js:79
 #: controllers/topEntriesController.js:166
 msgid "Next info"
@@ -657,7 +669,7 @@ msgstr "Anzahl der Einträge"
 msgid "Number of non-emtpy entries"
 msgstr "Anzahl der Meldungen (ohne Leermeldungen)"
 
-#: views/flowdetail.html:160
+#: views/flowdetail.html:197
 msgid "One-day Event"
 msgstr "Eintägiges Event"
 
@@ -703,13 +715,13 @@ msgstr "Organisationen mit Organisationstyp"
 msgid "Organisations with unknown address-data"
 msgstr "Organisationen mit nicht bekannten Adressdaten"
 
-#: directives/sankeyDirective.js:113 directives/sankeyDirective.js:124
-#: directives/sankeyDirective.js:69 directives/sankeyDirective.js:77
+#: directives/sankeyDirective.js:121 directives/sankeyDirective.js:132
+#: directives/sankeyDirective.js:85
 msgid "Other media"
 msgstr "Andere Medien"
 
-#: directives/sankeyDirective.js:113 directives/sankeyDirective.js:124
-#: directives/sankeyDirective.js:69 directives/sankeyDirective.js:77
+#: directives/sankeyDirective.js:121 directives/sankeyDirective.js:132
+#: directives/sankeyDirective.js:85
 msgid "Other organisations"
 msgstr "Andere Organisationen"
 
@@ -725,7 +737,7 @@ msgstr "Übersicht"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: controllers/flowController.js:808
+#: controllers/flowController.js:777
 msgid "Payer"
 msgstr "Zahler"
 
@@ -733,7 +745,8 @@ msgstr "Zahler"
 msgid "Payment Type"
 msgstr "Zahlungstyp"
 
-#: views/flow.html:54 views/index.html:49 views/top.html:81
+#: views/flow.html:54 views/flowdetail.html:42 views/index.html:49
+#: views/top.html:81
 msgid "Payment Types"
 msgstr "Zahlungstypen"
 
@@ -777,11 +790,11 @@ msgstr "Politiknah"
 msgid "Predictable"
 msgstr "Vorhersehbar"
 
-#: views/flowdetail.html:143
+#: views/flowdetail.html:180
 msgid "Predictable Event"
 msgstr "Vorhersehbares Event"
 
-#: controllers/flowController.js:118 controllers/flowDetailController.js:112
+#: controllers/flowController.js:118 controllers/flowDetailController.js:125
 #: controllers/listControllers.js:271 controllers/listControllers.js:80
 #: controllers/topEntriesController.js:167
 msgid "Previous info"
@@ -791,7 +804,7 @@ msgstr "Vorherige Info"
 msgid "Quarter"
 msgstr "Quartal"
 
-#: controllers/flowController.js:808 controllers/topEntriesController.js:179
+#: controllers/flowController.js:777 controllers/topEntriesController.js:179
 #: controllers/topEntriesController.js:282
 msgid "Recipient"
 msgstr "Empfänger"
@@ -824,7 +837,7 @@ msgstr "Speichern"
 msgid "Search"
 msgstr "Suchen"
 
-#: views/flowdetail.html:74
+#: views/flowdetail.html:108
 msgid "Select Events"
 msgstr "Events auswählen"
 
@@ -832,11 +845,11 @@ msgstr "Events auswählen"
 msgid "Select a Group"
 msgstr "Wählen Sie eine Gruppe aus"
 
-#: views/flowdetail.html:117
+#: views/flowdetail.html:154
 msgid "Select by Region"
 msgstr "Nach Region auswählen"
 
-#: views/flowdetail.html:98
+#: views/flowdetail.html:134
 msgid "Select by Tag"
 msgstr "Nach Tag auswählen"
 
@@ -848,17 +861,17 @@ msgstr "Bestimmen Sie die Anzahl der Elemente im Diagramm"
 msgid "Selections"
 msgstr "Auswahl"
 
-#: views/flow.html:19 views/flowdetail.html:61 views/index.html:27
+#: views/flow.html:19 views/flowdetail.html:95 views/index.html:27
 #: views/top.html:12
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: controllers/flowController.js:793 controllers/flowDetailController.js:191
+#: controllers/flowController.js:762 controllers/flowDetailController.js:204
 #: controllers/topEntriesController.js:313
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr "Zeige Seite _PAGE_ von _PAGES_"
 
-#: controllers/flowController.js:119 controllers/flowDetailController.js:113
+#: controllers/flowController.js:119 controllers/flowDetailController.js:126
 #: controllers/listControllers.js:272 controllers/listControllers.js:81
 #: controllers/topEntriesController.js:168
 msgid "Skip info"
@@ -889,7 +902,7 @@ msgstr "Steiermark"
 msgid "Tabular Representation"
 msgstr "Tabellendarstellungen"
 
-#: views/flowdetail.html:179
+#: views/flowdetail.html:216
 msgid ""
 "The first chart on that page shows the flow of money over the available "
 "period of time. The highest and the lowest value is highlighted. In case of "
@@ -899,7 +912,7 @@ msgstr ""
 "der niedrigste Wert ist hervorgehoben. Sind Ereignisse in einem Quartal "
 "verfügbar, so werden diese angezeigt."
 
-#: controllers/flowDetailController.js:105
+#: controllers/flowDetailController.js:118
 msgid "The legend describes the possible icons used for the charts."
 msgstr ""
 "Die Legende beschreibt Symbole, die in den Diagrammen vorkommen können."
@@ -918,7 +931,7 @@ msgid "The search can be limited to a specific federal state."
 msgstr ""
 "Es ist möglich, die Suche mit einem bestimmten Bundesland einzuschränken."
 
-#: views/flowdetail.html:193
+#: views/flowdetail.html:230
 msgid ""
 "The second chart shows differences between the money flow compared to the "
 "previous quarter. The highest and lowest value is highlighted. If available, "
@@ -939,6 +952,10 @@ msgid ""
 msgstr ""
 "Damit möchte diese Web-Seite dazu beitragen, Open Government Initiativen in "
 "Österreich populärer zu machen"
+
+#: views/flowdetail.html:29
+msgid "To"
+msgstr "An"
 
 #: controllers/flowController.js:111
 msgid ""
@@ -988,7 +1005,7 @@ msgstr ""
 "Transfers sind in verschiedenen Zahlungstypen unterteilt. Treffen Sie eine "
 "Auswahl."
 
-#: controllers/flowController.js:808 views/grouping.html:23
+#: controllers/flowController.js:777 views/grouping.html:23
 msgid "Type"
 msgstr "Typ"
 
@@ -1005,7 +1022,7 @@ msgstr "Tirol"
 msgid "Undetermined"
 msgstr "Unbestimmt"
 
-#: views/flowdetail.html:146
+#: views/flowdetail.html:183
 msgid "Unpredictable Event"
 msgstr "Nicht vorhersehbares Event"
 
@@ -1082,7 +1099,7 @@ msgstr ""
 "Sie können weitere Organisationen zum Diagramm hinzufügen. Klicken Sie auf "
 "das Rechteck für mehr Details."
 
-#: controllers/flowController.js:1100
+#: controllers/flowController.js:1069
 msgid ""
 "You cannot add this group, since some of its members are also members of "
 "already selected\n"
@@ -1092,7 +1109,7 @@ msgstr ""
 "dieser Gruppe auch Mitglieder anderer, bereits ausgewählter Gruppen sind. "
 "Bitte entfernen Sie zuerst diese andere Gruppe aus der Auswahl."
 
-#: controllers/flowController.js:1081
+#: controllers/flowController.js:1050
 msgid ""
 "You cannot remove this Media since it belongs to a selected group. Remove "
 "the group instead"
@@ -1100,7 +1117,7 @@ msgstr ""
 "Sie können dieses Medium nicht entfernen, da es Mitglied einer ausgewählten "
 "Gruppe ist. Entfernen Sie stattdessen die Gruppe."
 
-#: controllers/flowController.js:1053
+#: controllers/flowController.js:1022
 msgid ""
 "You cannot remove this Organisation since it belongs to a selected group. "
 "Remove the group instead."
@@ -1137,7 +1154,7 @@ msgstr "Benutzerdefiniert"
 msgid "elements selected"
 msgstr "Elemente ausgewählt"
 
-#: controllers/flowController.js:789 controllers/topEntriesController.js:309
+#: controllers/flowController.js:758 controllers/topEntriesController.js:309
 msgid "first"
 msgstr "Erste"
 
@@ -1150,16 +1167,16 @@ msgstr ""
 "Features konnten implementiert werden. Dies war durch die Mitarbeit der "
 "folgenden Studierenden möglich:"
 
-#: controllers/flowController.js:790 controllers/topEntriesController.js:310
+#: controllers/flowController.js:759 controllers/topEntriesController.js:310
 msgid "last"
 msgstr "Letzte"
 
-#: controllers/flowController.js:788 controllers/flowDetailController.js:189
+#: controllers/flowController.js:757 controllers/flowDetailController.js:202
 #: controllers/topEntriesController.js:308
 msgid "next"
 msgstr "nächste"
 
-#: controllers/flowController.js:787 controllers/flowDetailController.js:188
+#: controllers/flowController.js:756 controllers/flowDetailController.js:201
 #: controllers/topEntriesController.js:307
 msgid "previous"
 msgstr "vorherige"
@@ -1168,7 +1185,7 @@ msgstr "vorherige"
 msgid "public"
 msgstr "Öffentliich"
 
-#: controllers/flowController.js:792 controllers/topEntriesController.js:312
+#: controllers/flowController.js:761 controllers/topEntriesController.js:312
 msgid "search"
 msgstr "Suche"
 
@@ -1180,17 +1197,20 @@ msgstr "Postleitzahl"
 msgid "{{pType.text}}"
 msgstr "{{pType.text}}"
 
-#: controllers/flowController.js:800
+#: controllers/flowController.js:769 controllers/flowDetailController.js:96
 msgid "§2 MedKF-TG (Media Cooperations)"
 msgstr "§2 MedKF-TG (Medien-Kooperationen)"
 
-#: controllers/flowController.js:804
+#: controllers/flowController.js:773 controllers/flowDetailController.js:100
 msgid "§31 ORF-G (Charges)"
 msgstr "§31 ORF-G (Gebühren)"
 
-#: controllers/flowController.js:802
+#: controllers/flowController.js:771 controllers/flowDetailController.js:98
 msgid "§4 MedKF-TG (Funding)"
 msgstr "§4 MedKF-TG (Förderungen)"
+
+#~ msgid "Flow in detail"
+#~ msgstr "Zahlungsfluss im Detail"
 
 #~ msgid "Group members"
 #~ msgstr "Gruppenteilnehmer"
