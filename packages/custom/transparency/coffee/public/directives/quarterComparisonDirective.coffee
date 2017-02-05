@@ -86,7 +86,7 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - (Number($scope.data[0].key) + $scope.data[0].values[0].x)) / 0.25)
                     x = margin.left
-                    x += (bars[index].transform.animVal[0].matrix.e)
+                    x += (bars[index].transform.animVal.getItem(0).matrix.e)
                     x += (bars[index].firstChild.width.animVal.value * ((((numericDate - (Number($scope.data[0].key) + $scope.data[0].values[0].x))/0.25)%1)))
                     drawLine(id, x, y1, y2, className)
                     drawToggleLabel id, x, y1 - margin.top + 60, className

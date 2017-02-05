@@ -116,7 +116,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     #calculate containing bar
                     index = Math.floor((numericDate - $scope.data.data.values[0][0]) / 0.25)
                     x = margin.left
-                    x += (bars[index].transform.animVal[0].matrix.e)
+                    x += (bars[index].transform.animVal.getItem(0).matrix.e)
                     x += (bars[index].firstChild.width.animVal.value * (((numericDate - $scope.data.data.values[0][0])/0.25)%1))
                     drawLine(id, x, y1, y2, className)
                     drawToggleLabel id, x, y1 - margin.top + 60, className
@@ -130,7 +130,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                     if !groupOfBars or groupOfBars.length is 0 or groupOfBars[0].length is 0
                          return
                     y1 = margin.top
-                    y2 = margin.top + groupOfBars[0][0].transform.animVal[0].matrix.f + groupOfBars[0][0].firstChild.height.animVal.value
+                    y2 = margin.top + groupOfBars[0][0].transform.animVal.getItem(0).matrix.f + groupOfBars[0][0].firstChild.height.animVal.value
 
                     for event in events
                          className = "predictable"
