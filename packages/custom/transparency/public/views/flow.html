@@ -220,7 +220,8 @@
                                         <div class="btn-group" role="group">
                                             <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
                                                     class="btn btn-primary" ng-click="createLocalMediaGroup()">
-                                                <i class="fa fa-object-group" aria-hidden="true"></i>&nbsp;<span translate>Create new local group</span>
+                                                <i class="fa fa-object-group" aria-hidden="true"></i>&nbsp;<span
+                                                    translate>Create new local group</span>
                                             </button>
                                             <button type="button"
                                                     class="btn btn-default" ng-click="editLocalGroups()">
@@ -241,15 +242,48 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="sankeyChart col-md-12 col-sm-12 col-xs-12">
-                <div data-tpa-sankey data="flows" id="mychart"
-                     prog="progress" node-click="showDetails" link-click="showFlowDetails">
-
+        <uib-tabset active="active">
+            <uib-tab index="0" heading="{{'Money Flow' | translate}}">
+                <div class="row">
+                    <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div data-tpa-sankey data="flows" id="mychart" width="500px"
+                             prog="progress" node-click="showDetails" link-click="showFlowDetails">
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </uib-tab>
+            <uib-tab index="1" heading="{{'Timeline' | translate}}">
+                <div class="row">
+                    <div class="alert alert-info col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>
+                    </div>
+                </div>
 
-        </div>
+                <div class="row">
+                    <div class="timeline col-md-12">
+                        <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()"
+                             events="events"></div>
+                        <svg id="timeline"></svg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="alert alert-info col-md-12" role="alert">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span translate>The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown.</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="quartercomparison col-md-12">
+                        <div tpa-quartercomparison data="annualComparisonData" get-current-language="getCurrentLanguage()"
+                             events="events"></div>
+                        <svg id="quarterComparison"></svg>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+
         <div class="row" data-ng-show="flowData.length>0">
             <h4 translate>Tabular Representation</h4>
             <div class="table-responsive">

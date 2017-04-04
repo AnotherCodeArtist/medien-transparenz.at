@@ -193,6 +193,33 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             deferred.resolve()
         deferred.promise
 
+    loadEvents = () ->
+        deferred = $q.defer();
+        TPAService.getEvents().then (res)->
+            $scope.events = res.data.map(event -> event.selected=true;event)
+            $scope.regions = []
+            addedregions = []
+            for event in $scope.events
+                #event.selected = true;
+                if addedregions.indexOf(event.region) is -1
+                    $scope.regions.push {
+                        name: event.region
+                        selected: true
+                    }
+                    addedregions.push event.region
+            deferred.resolve(res)
+        deferred
+
+    loadEventTags = () ->
+        deferred = $q.defer();
+        TPAService.getEventTags().then (res) ->
+            $scope.tags = res.data.map((tag)-> {name: tag, selected:true} )
+            deferred.resolve(res)
+        deferred
+
+    $scope.updateEvents = () ->
+    $scope.$broadcast 'updateEvents'
+
     types = [2,4,31]
     $scope.typesText = (type:type,text: gettextCatalog.getString(TPAService.decodeType(type)),checked:false for type in types)
     $scope.typesText[0].checked = true
@@ -605,7 +632,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             deferred.resolve()
         else
             startLoading()
-            $q.all([loadPeriods(),loadAllNames(),loadGroups()])
+            $q.all([loadPeriods(),loadAllNames(),loadGroups(),loadEvents(),loadEventTags()])
             .then () ->
                 stopLoading()
                 if not stateParamsExist()
@@ -613,6 +640,17 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                     update()
                 deferred.resolve()
         deferred.promise
+
+    $scope.toggleRegion = (region) ->
+        for event in $scope.events
+            if event.region is region.name
+                event.selected = region.selected
+        $scope.updateEvents()
+
+    $scope.toggleTag = (tag) ->
+        for event in $scope.events
+            if event.tags.indexOf(tag.name) isnt -1
+                event.selected = tag.selected
 
 
     initialize()

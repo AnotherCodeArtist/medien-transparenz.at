@@ -49,6 +49,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             h = height + margin.top + margin.bottom
             svg.attr('height',h)
             svg.attr("style", "height: " + h + "px;")
+            width = Math.round element.width()*0.8;
             sankey
                 .nodes($scope.data.nodes)
                 .links($scope.data.links)
