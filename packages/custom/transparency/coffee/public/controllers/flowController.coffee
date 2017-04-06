@@ -49,7 +49,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     stateName = "flowState"
     fieldsToStore = ['slider','periods','typesText', 'allOrganisations', 'allMedia', 'selectedOrganisationGroups',
         'selectedMediaGroups', 'selectedOrganisations','selectedMedia',
-        'allOrganisationGroups','allMediaGroups']
+        'allOrganisationGroups','allMediaGroups','events','tags','regions']
     $scope.init = 'init'
     typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
     $scope.mediaLabel = gettextCatalog.getString('Media')
@@ -119,6 +119,12 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             doneLabel: gettextCatalog.getString 'End tour'
 
 
+    $scope.timelineOpened = ->
+        $rootScope.$broadcast "updateTimeline"
+
+    $scope.flowOpened = ->
+        $timeout((-> $rootScope.$broadcast "updateFlow"), 100)
+
     startLoading = ->
         try
             $interval.cancel timer if timer isnt null
@@ -136,8 +142,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.filter =''
     $scope.loading = true
     $scope.progress = 20
-    $scope.showSettings = true
-    $scope.selectionSettings = true
+    $scope.showSettings = false
+    $scope.selectionSettings = false
     #$scope.org = null
     $scope.isDetails = false
     window.scrollTo 0, 0
@@ -196,7 +202,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     loadEvents = () ->
         deferred = $q.defer();
         TPAService.getEvents().then (res)->
-            $scope.events = res.data.map(event -> event.selected=true;event)
+            $scope.events = res.data.map((event) -> event.selected=true;event)
             $scope.regions = []
             addedregions = []
             for event in $scope.events
@@ -244,6 +250,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             params.media = $scope.selectedMedia.map (media) -> media.name
         if $scope.selectedOrganisations and $scope.selectedOrganisations.length > 0
             params.organisations = $scope.selectedOrganisations.map (org) -> org.name
+        params
+
+
+    parametersTimeline = ->
+        params = {}
+        params.source = $scope.selectedOrganisations.map (org) -> org.name
+        params.target = $scope.selectedMedia.map (media) -> media.name
+        types = (v.type for v in $scope.typesText when v.checked)
+        (params.pType = types) if types.length > 0
         params
 
 
@@ -385,6 +400,48 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.editLocalGroups = () -> $state.go('groupingLocal')
     $rootScope.$on('groupsChanged', -> loadGroups())
 
+    loadFlowData = ->
+        TPAService.filteredflows(parameters())
+        .then (res) ->
+            stopLoading()
+            #console.log "Got result from Server: " + Date.now()
+            $scope.error = null
+            flowData = res.data
+            for flowDatum in flowData
+                if flowDatum.organisation is 'Other organisations'
+                    flowDatum.organisation = gettextCatalog.getString flowDatum.organisation
+                    flowDatum.otherOrgs = "oo"
+                if flowDatum.media is 'Other media'
+                    flowDatum.media = gettextCatalog.getString flowDatum.media
+                    flowDatum.otherMedia = "om"
+            $scope.flowData = flowData
+            if dataPromise.promise.$$state.status == 1
+                dataPromise = $q.defer()
+                if $scope.dtInstance.reloadData
+                    $scope.dtInstance.reloadData()
+            dataPromise.resolve()
+            $scope.flows = buildNodes filterData flowData
+            #checkMaxLength(data)
+        .catch (res) ->
+            stopLoading()
+            $scope.flowData = []
+            $scope.flows = nodes:[],links:[]
+            $scope.error = res.data
+            #console.log "resolve dataPromise after exception"
+            dataPromise.resolve()
+
+    loadTimeLineDataAbsolute = ->
+        deferred = $q.defer()
+        TPAService.flowdetail(parametersTimeline())
+        .then (res) ->
+            $scope.data = res.data
+
+
+    loadTimeLineDataRelative = ->
+        TPAService.annualcomparison parametersTimeline()
+        .then (res) ->
+            $scope.annualComparisonData = res.data
+
     update = ->
         if (!$scope.selectedOrganisations or $scope.selectedOrganisations.length is 0) and (!$scope.selectedMedia or $scope.selectedMedia.length is 0) and !$state.params.grouping and  $scope.init is 'init'
             $scope.init = 'preselected'
@@ -396,49 +453,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         #console.log "Starting update: " + Date.now()
         startLoading()
         if ($scope.selectedOrganisations and $scope.selectedOrganisations.length > 0) or ($scope.selectedMedia and $scope.selectedMedia.length > 0)
-            TPAService.filteredflows(parameters())
-            .then (res) ->
-                stopLoading()
-                #console.log "Got result from Server: " + Date.now()
-                $scope.error = null
-                flowData = res.data
-                for flowDatum in flowData
-                    if flowDatum.organisation is 'Other organisations'
-                        flowDatum.organisation = gettextCatalog.getString flowDatum.organisation
-                        flowDatum.otherOrgs = "oo"
-                    if flowDatum.media is 'Other media'
-                        flowDatum.media = gettextCatalog.getString flowDatum.media
-                        flowDatum.otherMedia = "om"
-                $scope.flowData = flowData
-                if dataPromise.promise.$$state.status == 1
-                    dataPromise = $q.defer()
-                    if $scope.dtInstance.reloadData
-                        $scope.dtInstance.reloadData()
-                dataPromise.resolve()
-                $scope.flows = buildNodes filterData flowData
-                #checkMaxLength(data)
-                #console.log "Updated Data Model: " + Date.now()
-                ###
-                if $scope.selectedOrganisations.length is 1 and $scope.selectedMedia.length is 0
-                    $scope.org = {
-                        name: $scope.selectedOrganisations[0].name
-                        orgType: 'org'
-                    }
-                else if $scope.selectedOrganisations.length is 0 and $scope.selectedMedia.length is 1
-                    $scope.org = {
-                        name: $scope.selectedMedia[0].name
-                        orgType: 'media'
-                    }
-                else
-                    $scope.org = null
-                ###
-            .catch (res) ->
-                stopLoading()
-                $scope.flowData = []
-                $scope.flows = nodes:[],links:[]
-                $scope.error = res.data
-                #console.log "resolve dataPromise after exception"
-                dataPromise.resolve()
+            $q.all([loadFlowData(),loadTimeLineDataAbsolute(),loadTimeLineDataRelative()])
+            .then stopLoading
         else
             stopLoading()
             $scope.error = "nothing selected"

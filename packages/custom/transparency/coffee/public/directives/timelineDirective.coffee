@@ -49,7 +49,8 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                               result[0].values.push {
                                    label: label,
                                    value: transfer[1],
-                                   color: color
+                                   color: color,
+                                   class: 'theBar'
                               }
                     result
 
@@ -176,3 +177,4 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
           $scope.$watch 'data', updateDiagram, true
           $scope.$watch 'events', updateDiagram, true
           $scope.$on 'updateEvents', updateDiagram
+          $scope.$on "updateTimeline", updateDiagram

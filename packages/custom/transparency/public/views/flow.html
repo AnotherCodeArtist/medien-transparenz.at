@@ -243,7 +243,8 @@
             </div>
         </div>
         <uib-tabset active="active">
-            <uib-tab index="0" heading="{{'Money Flow' | translate}}">
+            <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
+
                 <div class="row">
                     <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div data-tpa-sankey data="flows" id="mychart" width="500px"
@@ -252,7 +253,127 @@
                     </div>
                 </div>
             </uib-tab>
-            <uib-tab index="1" heading="{{'Timeline' | translate}}">
+            <uib-tab index="1" heading="{{'Timeline' | translate}}" select="timelineOpened()">
+                <div class="row panel panel-default" id="flowDetailSettings">
+                    <div class="panel-heading">
+                        <span translate>Settings</span>
+                        <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
+                        ><i
+                                class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                    </div>
+                    <div class="panel-body" uib-collapse="!showSettings">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="eventsSelection">
+                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro();">?</a></sup></p>
+                                                <h3 class="panel-title" translate>Select Events</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="checkbox" ng-repeat="event in events">
+                                                    <label>
+                                                        <input
+                                                                type="checkbox"
+                                                                ng-model="event.selected"
+                                                                ng-click="updateEvents()"
+                                                        > {{event.name}}
+                                                    </label>
+                                                    <span><span class="label label-danger">{{event.region}}</span></span>
+                                                    <span ng-repeat="tag in event.tags"><span
+                                                            class="label label-primary">{{tag}}</span> </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="tagSelection">
+                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(1);">?</a></sup>
+                                                </p>
+
+                                                <h3 class="panel-title" translate>Select by Tag</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="checkbox">
+                                                    <label ng-repeat="tag in tags track by tag.name" ng-click="toggleTag(tag)">
+                                                        <input
+                                                                type="checkbox"
+                                                                ng-model="tag.selected"
+                                                        >
+                                                        <span><span class="label label-primary">{{tag.name}}</span> </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="regionSelection">
+                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(2);">?</a></sup>
+                                                </p>
+                                                <h3 class="panel-title" translate>Select by Region</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="checkbox">
+                                                    <label ng-repeat="region in regions track by region.name"
+                                                           ng-click="toggleRegion(region)">
+                                                        <input
+                                                                type="checkbox"
+                                                                ng-model="region.selected"
+                                                        >
+                                                        <span><span class="label label-danger">{{region.name}}</span> </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" id="flowDetailLegend">
+                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(3);">?</a></sup></p>
+                                        <h3 class="panel-title" translate>Legend</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+                                            <span class="glyphicon glyphicon-time" aria-hidden="true">...</span><span translate>Predictable Event</span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-flash" aria-hidden="true">...</span><span
+                                                translate>Unpredictable Event</span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true">...</span>
+                                            <span translate>Begin of Event</span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true">...</span>
+                                            <span translate>End of Event</span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true">...</span>
+                                            <span translate>One-day Event</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-circle"></i>...
+                                            <span translate>Labels visible</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-circle-thin"></i>...
+                                            <span translate>Labels hidden</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="alert alert-info col-md-12" role="alert">
                         <span class="glyphicon glyphicon-info-sign"></span>

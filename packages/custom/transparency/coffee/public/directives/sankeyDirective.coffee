@@ -183,6 +183,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
             .attr("text-anchor", "start");
 
         $scope.$watch 'data', updateDiagram
+        $scope.$on "updateFlow", updateDiagram
 
 
 app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
@@ -224,6 +225,7 @@ app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
                 .call(chart)
                 chart
         $scope.$watch 'data', updateDiagram, true
+
 
 ]
 

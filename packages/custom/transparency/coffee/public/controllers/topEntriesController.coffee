@@ -19,7 +19,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             floor:0
             onEnd: -> change(1,2)
             translate: (value) -> $scope.periods.map((p) -> "#{p.year}/Q#{p.quarter}")[value/5]
-    $scope.showSettings = true
+    $scope.showSettings = false
     $scope.ranks = [3, 5, 10, 15, 20]
     $scope.rank = 10
     $scope.pieData = []

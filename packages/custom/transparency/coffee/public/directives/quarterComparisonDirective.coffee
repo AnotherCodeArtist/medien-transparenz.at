@@ -184,3 +184,5 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
 
           $scope.$watch 'data', updateDiagram, true
           $scope.$watch 'events', updateDiagram, true
+          $scope.$on "updateTimeline", updateDiagram
+
