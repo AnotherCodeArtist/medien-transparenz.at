@@ -1,8 +1,8 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder'
-($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder) ->
+app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder','$anchorScroll'
+($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder,$anchorScroll) ->
     tc = this
     dataPromise = $q.defer()
     $scope.td = {}
@@ -25,7 +25,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.pieData = []
     window.scrollTo 0, 0
 
+    $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+    $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
 
+    $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
+    $scope.selectedOrgType = -> if $scope.orgType is "org" then "Payer" else "Receiver"
     # register watches to update chart when changes occur
     registerWatches = ->
         $scope.$watch('typesText', change, true)
@@ -53,6 +57,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.total = -> if $scope.top then $scope.top.all.toLocaleString() else "0"
     $scope.IntroOptions = null;
     $scope.selectedOrgCategories = [];
+
+    $scope.goto = (l)-> $anchorScroll(l)
 
     buildPieModel = ->
         $scope.pieData = []
@@ -173,7 +179,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             $scope.typesText = (type: type, text: gettextCatalog.getString( TPAService.decodeType(type) ), checked: false for type in types)
             $scope.typesText[0].checked = true
             #Variables for the selection of federalState
-            $scope.selectedFederalState = {}
+            $scope.selectedFederalState = null
             $scope.orgType = $scope.orgTypes[0].value
             $scope.includeGroupings = false
             $q.all([pY, pP, orgTypePromise]).then (res) ->
@@ -235,6 +241,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $rootScope.$on '$stateChangeStart', (event,toState) ->
         if toState.name isnt "top"
             TPAService.saveState stateName,fieldsToStore, $scope
+
+    $scope.selectedFederalStateName =  ->
+        if $scope.selectedFederalState
+          $scope.federalStates.filter( (v)->v.iso==$scope.selectedFederalState.iso)[0].name
+        else gettextCatalog.getString('Austria')
 
     #navigate to some other page
     $scope.go = (d) ->

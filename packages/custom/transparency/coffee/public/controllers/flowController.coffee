@@ -62,6 +62,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.selectedMediaGroups = []
         $scope.selectedOrganisationGroups = []
     clearFields()
+
+    $scope.showTable = false
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
         $scope.IntroOptions =
@@ -120,7 +122,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     $scope.timelineOpened = ->
-        $rootScope.$broadcast "updateTimeline"
+        $timeout((-> $rootScope.$broadcast "updateTimeline"), 100)
 
     $scope.flowOpened = ->
         $timeout((-> $rootScope.$broadcast "updateFlow"), 100)

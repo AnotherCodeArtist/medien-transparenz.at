@@ -1,4 +1,15 @@
 
+.tpaLegend {
+    float: right;
+    padding: 1em;
+}
+
+.tpaLegend .header {
+    font-size: 200%;
+    color: #00b3ee;
+    font-weight: bold;
+}
+
 .linegraph path {
     stroke: steelblue;
     stroke-width: 1;
@@ -75,11 +86,40 @@ div.nvtooltip {
     box-shadow: 5px 5px 5px #333;
 }
 
+.pie .nv-slice {
+    cursor: pointer;
+}
+
 div.pie,
 div.bar {
     /*width: 600px;*/
     margin-left: auto;
     margin-right: auto;
+}
+
+a.setting-btn {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.setting-btn:hover, a.setting-btn:visited {
+    text-decoration: none;
+}
+
+.hint {
+    text-align: center;
+    color: #0e0e0e;
+}
+
+.pie, .diagrams {
+    border: 3px solid #999999;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-radius: 20px;
+}
+
+.diagrams {
+    padding-top: 1em;
 }
 
 .pie svg.nvd3-svg {

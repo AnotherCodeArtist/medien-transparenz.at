@@ -184,6 +184,7 @@ app.directive 'tpaSankey', ($rootScope, gettextCatalog) ->
 
         $scope.$watch 'data', updateDiagram
         $scope.$on "updateFlow", updateDiagram
+        window.onresize = updateDiagram
 
 
 app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
@@ -229,7 +230,7 @@ app.directive 'tpaMultiBarChart',[ '$compile', ($compile) ->
 
 ]
 
-app.directive 'tpaPieChart', [ ->
+app.directive 'tpaPieChart', [ ($window) ->
     restrict: 'E'
     scope:
         data: '='
@@ -264,6 +265,8 @@ app.directive 'tpaPieChart', [ ->
                     d3.selectAll('div.nvtooltip').remove()
                     $scope.goFn()(e)
                 chart
+        window.onresize = updateDiagram
         $scope.$watch 'data', updateDiagram, true
+
 
 ]

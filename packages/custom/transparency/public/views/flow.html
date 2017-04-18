@@ -14,67 +14,6 @@
             <h1 translate>Money Flow</h1>
             <!--p>Org-Groups: {{allOrganisationGroups}}</p-->
 
-            <div class="panel panel-default" id="flowSettings">
-                <div class="panel-heading">
-                    <span translate>Settings</span>
-                    <a href="#" class="pull-right btn" title="hide/show"
-                       ng-click="showSettings = !showSettings"><i
-                            class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-                </div>
-                <div style="display: none">
-                    <p translate="translate">Payments according to §2 MedKF-TG (Media Cooperations)</p>
-                    <p translate="translate">Payments according to §4 MedKF-TG (Funding)</p>
-                    <p translate="translate">Payments according to §31 ORF-G (Charges)</p>
-                </div>
-                <div class="panel-body" uib-collapse="!showSettings">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <div id="flowSlider">
-                                <strong>
-                                    <div><span translate>Periods</span>
-                                        <a href ng-click="FlowIntro(1);"><i class="fa fa-info-circle"
-                                                                            aria-hidden="true"></i></a>
-                                    </div>
-                                </strong>
-                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
-                                          rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
-                            </div>
-                            <div id="fixSliderRange">
-                                <div class="checkbox">
-                                    <label><input id="fixRange" type="checkbox"
-                                                  ng-model="slider.options.draggableRangeOnly"/><span
-                                            translate>Fix slider range</span></label>
-                                    <a href ng-click="FlowIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <div id="paymentTypes">
-                                <strong>
-                                    <div><span translate>Payment Types</span>
-                                        <a href ng-click="FlowIntro(3);"><i class="fa fa-info-circle"
-                                                                            aria-hidden="true"></i></a>
-                                    </div>
-                                </strong>
-                            </div>
-                            <div class="checkbox" data-ng-repeat="pType in typesText">
-                                <label>
-                                    <input type="checkbox" name="pType"
-                                           ng-model="pType.checked"/>{{pType.text}}
-                                </label>
-                            </div>
-
-                        </div>
-                        <!--div class="col-sm3 col-lg-3">
-                            <strong><div translate>Federal State</div></strong>
-                           <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
-                               <option value="">-</option>
-                           </select>
-                        </div-->
-                    </div>
-
-                </div>
-            </div>
             <!--<div ng-show="org">
                 <h3><a href="#" class="label label-success" ng-click="clearDetails()">{{org.name}} <span class="glyphicon glyphicon-remove-circle"></span></a></h3>
             </div>
@@ -85,333 +24,424 @@
                     <span id="searchclear" ng-click="filter=''" class="searchclear glyphicon glyphicon-remove-circle"></span>
                 </div>
             </div-->
-            <br/>
-            <div class="panel panel-default" id="selectionSettings">
-                <div class="panel-heading">
-                    <span translate>Selections</span>
-                    <a href="#" class="pull-right btn" title="hide/show"
-                       ng-click="selectionSettings = !selectionSettings"><i
-                            class="glyphicon {{selectionSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-                </div>
-                <div class="panel-body" uib-collapse="!selectionSettings">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-12">
-                            <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
-                                <span class="glyphicon glyphicon-exclamation-sign"></span>
-                                <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
-                            </div>
 
-                            <div ng-show="error" class="alert alert-warning" role="alert">
-                                <span class="glyphicon glyphicon-exclamation-sign"></span>
-                                <span translate>Please select at least one organisation or media.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="sankeyRow">
-                        <div class="col-md-6 col-xs-12">
-                            <span>{{organisationsLabel}}:</span><a href ng-click="FlowIntro(4);"><i
-                                class="fa fa-info-circle"
-                                aria-hidden="true"></i></a>
-                            <oi-select class="multiselectDropdown"
-                                       oi-options="item.name for item in loadOrganisations($query)"
-                                       ng-model="selectedOrganisations"
-                                       multiple
-                                       placeholder="{{'Type a Name'|translate}}"
-                                       id="multiselectOrg"
-                                       oi-select-options="{
-                                        searchFilter: 'groupFilter'
-                                    }"
-                            >
-
-                            </oi-select>
-                        </div>
-                        <div class="col-md-6 col-xs-12">
-                            <span>{{mediaLabel}}:</span><a href ng-click="FlowIntro(5);"><i class="fa fa-info-circle"
-                                                                                            aria-hidden="true"></i></a>
-                            <oi-select class="multiselectDropdown"
-                                       oi-options="item.name for item in loadMedia($query)"
-                                       ng-model="selectedMedia"
-                                       multiple
-                                       placeholder="{{'Type a Name'|translate}}"
-                                       id="multiselectMedia"
-                                       oi-select-options="{
-                                        searchFilter: 'groupFilter'
-                                    }"
-                            ></oi-select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                            <span>{{organisationGroupLabel}}:</span>
-                            <a href ng-click="FlowIntro(6);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <oi-select class="multiselectDropdown"
-                                       oi-options="item.name for item in allOrganisationGroups track by item.name"
-                                       ng-model="selectedOrganisationGroups"
-                                       multiple
-                                       placeholder="{{'Select a Group'|translate}}"
-                                       id="multiselectOrgGroup"
-                                       oi-select-options="{
-                                        dropdownFilter: 'dropdownFilter',
-                                        searchFilter: 'searchFilter'
-                                    }"
-                            >
-
-                            </oi-select>
-                        </div>
-                        <div class="col-md-6 col-xs-12">
-                            <span>{{mediaGroupLabel}}:</span>
-                            <a href ng-click="FlowIntro(7);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <oi-select class="multiselectDropdown"
-                                       oi-options="item.name for item in allMediaGroups track by item.name"
-                                       ng-model="selectedMediaGroups"
-                                       multiple
-                                       placeholder="{{'Select a Group'|translate}}"
-                                       id="multiselectMediaGroup"
-                                       oi-select-options="{
-                                        dropdownFilter: 'dropdownFilter',
-                                        searchFilter: 'searchFilter'
-                                    }"
-                            ></oi-select>
-                        </div>
-                    </div>
-                    <div class="row" id="customGroups">
-                        <div class="col-md-6">
-                            <form name="localOrgGroupForm">
-                                <span translate>Group all non-grouped organisations:</span>
-                                <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
-                                                                    aria-hidden="true"></i></a>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input class="form-control" type="text" ng-model="localOrgGroupName"
-                                               placeholder="{{'Organisation group name'|translate}}" required/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="btn-group" role="group">
-                                            <button type="button" ng-disabled="localOrgGroupForm.$invalid"
-                                                    class="btn btn-primary" ng-click="createLocalOrgGroup()">
-                                                <i class="fa fa-object-group" aria-hidden="true"></i></i>&nbsp;<span
-                                                    translate>Create new local group</span>
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-default" ng-click="editLocalGroups()">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
-                                                    translate>Edit</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="col-md-6">
-                            <form name="localMediaGroupForm">
-                                <span translate>Group all non-grouped media:</span>
-                                <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
-                                                                    aria-hidden="true"></i></a>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input class="form-control" type="text" ng-model="localMediaGroupName"
-                                               placeholder="{{'Media group name'|translate}}" required/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="btn-group" role="group">
-                                            <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
-                                                    class="btn btn-primary" ng-click="createLocalMediaGroup()">
-                                                <i class="fa fa-object-group" aria-hidden="true"></i>&nbsp;<span
-                                                    translate>Create new local group</span>
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-default" ng-click="editLocalGroups()">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
-                                                    translate>Edit</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row" ng-show="localGroupError && localGroupError !== ''">
-                    <div class="alert alert-danger col-md-12" role="alert">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        {{localGroupError}}
-                    </div>
-                </div>
-            </div>
         </div>
-        <uib-tabset active="active">
-            <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
+        <div class="diagrams">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
 
-                <div class="row">
-                    <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div data-tpa-sankey data="flows" id="mychart" width="500px"
-                             prog="progress" node-click="showDetails" link-click="showFlowDetails">
+                    <div class="row">
+                        <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div data-tpa-sankey data="flows" id="mychart" width="500px"
+                                 prog="progress" node-click="showDetails" link-click="showFlowDetails">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </uib-tab>
-            <uib-tab index="1" heading="{{'Timeline' | translate}}" select="timelineOpened()">
-                <div class="row panel panel-default" id="flowDetailSettings">
-                    <div class="panel-heading">
-                        <span translate>Settings</span>
-                        <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
-                        ><i
-                                class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-                    </div>
-                    <div class="panel-body" uib-collapse="!showSettings">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="eventsSelection">
-                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro();">?</a></sup></p>
-                                                <h3 class="panel-title" translate>Select Events</h3>
+                </uib-tab>
+                <uib-tab index="1" heading="{{'Timeline' | translate}}" select="timelineOpened()">
+                    <div class="panel panel-default" id="flowDetailSettings">
+                        <div class="panel-heading">
+                            <span translate>Settings</span>
+                            <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
+                            ><i
+                                    class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+                        </div>
+                        <div class="panel-body" uib-collapse="!showSettings">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="eventsSelection">
+                                                    <p class="pull-right"><sup><a href
+                                                                                  ng-click="FlowDetailIntro();">?</a></sup>
+                                                    </p>
+                                                    <h3 class="panel-title" translate>Select Events</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="checkbox" ng-repeat="event in events">
+                                                        <label>
+                                                            <input
+                                                                    type="checkbox"
+                                                                    ng-model="event.selected"
+                                                                    ng-click="updateEvents()"
+                                                            > {{event.name}}
+                                                        </label>
+                                                        <span><span
+                                                                class="label label-danger">{{event.region}}</span></span>
+                                                        <span ng-repeat="tag in event.tags"><span
+                                                                class="label label-primary">{{tag}}</span> </span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="panel-body">
-                                                <div class="checkbox" ng-repeat="event in events">
-                                                    <label>
-                                                        <input
-                                                                type="checkbox"
-                                                                ng-model="event.selected"
-                                                                ng-click="updateEvents()"
-                                                        > {{event.name}}
-                                                    </label>
-                                                    <span><span class="label label-danger">{{event.region}}</span></span>
-                                                    <span ng-repeat="tag in event.tags"><span
-                                                            class="label label-primary">{{tag}}</span> </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="tagSelection">
+                                                    <p class="pull-right"><sup><a href
+                                                                                  ng-click="FlowDetailIntro(1);">?</a></sup>
+                                                    </p>
+
+                                                    <h3 class="panel-title" translate>Select by Tag</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="checkbox">
+                                                        <label ng-repeat="tag in tags track by tag.name"
+                                                               ng-click="toggleTag(tag)">
+                                                            <input
+                                                                    type="checkbox"
+                                                                    ng-model="tag.selected"
+                                                            >
+                                                            <span><span class="label label-primary">{{tag.name}}</span> </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="regionSelection">
+                                                    <p class="pull-right"><sup><a href
+                                                                                  ng-click="FlowDetailIntro(2);">?</a></sup>
+                                                    </p>
+                                                    <h3 class="panel-title" translate>Select by Region</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="checkbox">
+                                                        <label ng-repeat="region in regions track by region.name"
+                                                               ng-click="toggleRegion(region)">
+                                                            <input
+                                                                    type="checkbox"
+                                                                    ng-model="region.selected"
+                                                            >
+                                                            <span><span
+                                                                    class="label label-danger">{{region.name}}</span> </span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="tagSelection">
-                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(1);">?</a></sup>
-                                                </p>
-
-                                                <h3 class="panel-title" translate>Select by Tag</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="checkbox">
-                                                    <label ng-repeat="tag in tags track by tag.name" ng-click="toggleTag(tag)">
-                                                        <input
-                                                                type="checkbox"
-                                                                ng-model="tag.selected"
-                                                        >
-                                                        <span><span class="label label-primary">{{tag.name}}</span> </span>
-                                                    </label>
-                                                </div>
-                                            </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" id="flowDetailLegend">
+                                            <p class="pull-right"><sup><a href
+                                                                          ng-click="FlowDetailIntro(3);">?</a></sup></p>
+                                            <h3 class="panel-title" translate>Legend</h3>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="regionSelection">
-                                                <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(2);">?</a></sup>
-                                                </p>
-                                                <h3 class="panel-title" translate>Select by Region</h3>
+                                        <div class="panel-body">
+                                            <div>
+                                                <span class="glyphicon glyphicon-time"
+                                                      aria-hidden="true">...</span><span
+                                                    translate>Predictable Event</span>
                                             </div>
-                                            <div class="panel-body">
-                                                <div class="checkbox">
-                                                    <label ng-repeat="region in regions track by region.name"
-                                                           ng-click="toggleRegion(region)">
-                                                        <input
-                                                                type="checkbox"
-                                                                ng-model="region.selected"
-                                                        >
-                                                        <span><span class="label label-danger">{{region.name}}</span> </span>
-                                                    </label>
-                                                </div>
+                                            <div>
+                                                <span class="glyphicon glyphicon-flash"
+                                                      aria-hidden="true">...</span><span
+                                                    translate>Unpredictable Event</span>
+                                            </div>
+                                            <div>
+                                                <span class="glyphicon glyphicon-step-forward"
+                                                      aria-hidden="true">...</span>
+                                                <span translate>Begin of Event</span>
+                                            </div>
+                                            <div>
+                                                <span class="glyphicon glyphicon-step-backward"
+                                                      aria-hidden="true">...</span>
+                                                <span translate>End of Event</span>
+                                            </div>
+                                            <div>
+                                                <span class="glyphicon glyphicon-step-forward"
+                                                      aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-step-backward"
+                                                      aria-hidden="true">...</span>
+                                                <span translate>One-day Event</span>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-circle"></i>...
+                                                <span translate>Labels visible</span>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-circle-thin"></i>...
+                                                <span translate>Labels hidden</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" id="flowDetailLegend">
-                                        <p class="pull-right"><sup><a href ng-click="FlowDetailIntro(3);">?</a></sup></p>
-                                        <h3 class="panel-title" translate>Legend</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div>
-                                            <span class="glyphicon glyphicon-time" aria-hidden="true">...</span><span translate>Predictable Event</span>
-                                        </div>
-                                        <div>
-                                            <span class="glyphicon glyphicon-flash" aria-hidden="true">...</span><span
-                                                translate>Unpredictable Event</span>
-                                        </div>
-                                        <div>
-                                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true">...</span>
-                                            <span translate>Begin of Event</span>
-                                        </div>
-                                        <div>
-                                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true">...</span>
-                                            <span translate>End of Event</span>
-                                        </div>
-                                        <div>
-                                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true">...</span>
-                                            <span translate>One-day Event</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa fa-circle"></i>...
-                                            <span translate>Labels visible</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa fa-circle-thin"></i>...
-                                            <span translate>Labels hidden</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="alert alert-info col-md-12" role="alert">
+
+                    <div class="alert alert-info" role="alert">
                         <span class="glyphicon glyphicon-info-sign"></span>
                         <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="timeline col-md-12">
-                        <div tpa-timeline data="data" id="graph" class="aGraph" get-current-language="getCurrentLanguage()"
-                             events="events"></div>
-                        <svg id="timeline"></svg>
+
+                    <div class="row">
+                        <div class="timeline col-md-12">
+                            <div tpa-timeline data="data" id="graph" class="aGraph"
+                                 get-current-language="getCurrentLanguage()"
+                                 events="events"></div>
+                            <svg id="timeline"></svg>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="alert alert-info col-md-12" role="alert">
+
+                    <div class="alert alert-info " role="alert">
                         <span class="glyphicon glyphicon-info-sign"></span>
                         <span translate>The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown.</span>
                     </div>
-                </div>
-                <div class="row">
 
-                    <div class="quartercomparison col-md-12">
-                        <div tpa-quartercomparison data="annualComparisonData" get-current-language="getCurrentLanguage()"
-                             events="events"></div>
-                        <svg id="quarterComparison"></svg>
+                    <div class="row">
+
+                        <div class="quartercomparison col-md-12">
+                            <div tpa-quartercomparison data="annualComparisonData"
+                                 get-current-language="getCurrentLanguage()"
+                                 events="events"></div>
+                            <svg id="quarterComparison"></svg>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+
+        <div class="panel panel-default" id="flowSettings">
+            <div class="panel-heading">
+                <span translate>Settings</span>
+                <a href="#" class="pull-right btn" title="hide/show"
+                   ng-click="showSettings = !showSettings"><i
+                        class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+            </div>
+            <div style="display: none">
+                <p translate="translate">Payments according to §2 MedKF-TG (Media Cooperations)</p>
+                <p translate="translate">Payments according to §4 MedKF-TG (Funding)</p>
+                <p translate="translate">Payments according to §31 ORF-G (Charges)</p>
+            </div>
+            <div class="panel-body" uib-collapse="!showSettings">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div id="flowSlider">
+                            <strong>
+                                <div><span translate>Periods</span>
+                                    <a href ng-click="FlowIntro(1);"><i class="fa fa-info-circle"
+                                                                        aria-hidden="true"></i></a>
+                                </div>
+                            </strong>
+                            <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                      rz-slider-options="slider.options" ng-hide="fixedRange"></rzslider>
+                        </div>
+                        <div id="fixSliderRange">
+                            <div class="checkbox">
+                                <label><input id="fixRange" type="checkbox"
+                                              ng-model="slider.options.draggableRangeOnly"/><span
+                                        translate>Fix slider range</span></label>
+                                <a href ng-click="FlowIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div id="paymentTypes">
+                            <strong>
+                                <div><span translate>Payment Types</span>
+                                    <a href ng-click="FlowIntro(3);"><i class="fa fa-info-circle"
+                                                                        aria-hidden="true"></i></a>
+                                </div>
+                            </strong>
+                        </div>
+                        <div class="checkbox" data-ng-repeat="pType in typesText">
+                            <label>
+                                <input type="checkbox" name="pType"
+                                       ng-model="pType.checked"/>{{pType.text}}
+                            </label>
+                        </div>
+
+                    </div>
+                    <!--div class="col-sm3 col-lg-3">
+                        <strong><div translate>Federal State</div></strong>
+                       <select ng-model="selectedFederalState" ng-options="state.name for state in federalStates track by state.iso" name="federalStateSelect" id="federalStateSelect" >
+                           <option value="">-</option>
+                       </select>
+                    </div-->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-default" id="selectionSettings">
+            <div class="panel-heading">
+                <span translate>Selections</span>
+                <a href="#" class="pull-right btn" title="hide/show"
+                   ng-click="selectionSettings = !selectionSettings"><i
+                        class="glyphicon {{selectionSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+            </div>
+            <div class="panel-body" uib-collapse="!selectionSettings">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <div ng-show="org.name && filter.length>=3" class="alert alert-warning" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <span translate>Your are currently viewing the details of {{org.name}} together with a text filter. This limits the results! Please consider clearing the filter to see all money transfers of this organisation.</span>
+                        </div>
+
+                        <div ng-show="error" class="alert alert-warning" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <span translate>Please select at least one organisation or media.</span>
+                        </div>
                     </div>
                 </div>
-            </uib-tab>
-        </uib-tabset>
+                <div class="row" id="sankeyRow">
+                    <div class="col-md-6 col-xs-12">
+                        <span>{{organisationsLabel}}:</span><a href ng-click="FlowIntro(4);"><i
+                            class="fa fa-info-circle"
+                            aria-hidden="true"></i></a>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in loadOrganisations($query)"
+                                   ng-model="selectedOrganisations"
+                                   multiple
+                                   placeholder="{{'Type a Name'|translate}}"
+                                   id="multiselectOrg"
+                                   oi-select-options="{
+                                        searchFilter: 'groupFilter'
+                                    }"
+                        >
 
-        <div class="row" data-ng-show="flowData.length>0">
-            <h4 translate>Tabular Representation</h4>
-            <div class="table-responsive">
-                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"
-                       class="table table-striped"></table>
+                        </oi-select>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <span>{{mediaLabel}}:</span><a href ng-click="FlowIntro(5);"><i class="fa fa-info-circle"
+                                                                                        aria-hidden="true"></i></a>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in loadMedia($query)"
+                                   ng-model="selectedMedia"
+                                   multiple
+                                   placeholder="{{'Type a Name'|translate}}"
+                                   id="multiselectMedia"
+                                   oi-select-options="{
+                                        searchFilter: 'groupFilter'
+                                    }"
+                        ></oi-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <span>{{organisationGroupLabel}}:</span>
+                        <a href ng-click="FlowIntro(6);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allOrganisationGroups track by item.name"
+                                   ng-model="selectedOrganisationGroups"
+                                   multiple
+                                   placeholder="{{'Select a Group'|translate}}"
+                                   id="multiselectOrgGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
+                        >
+
+                        </oi-select>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <span>{{mediaGroupLabel}}:</span>
+                        <a href ng-click="FlowIntro(7);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <oi-select class="multiselectDropdown"
+                                   oi-options="item.name for item in allMediaGroups track by item.name"
+                                   ng-model="selectedMediaGroups"
+                                   multiple
+                                   placeholder="{{'Select a Group'|translate}}"
+                                   id="multiselectMediaGroup"
+                                   oi-select-options="{
+                                        dropdownFilter: 'dropdownFilter',
+                                        searchFilter: 'searchFilter'
+                                    }"
+                        ></oi-select>
+                    </div>
+                </div>
+                <div class="row" id="customGroups">
+                    <div class="col-md-6">
+                        <form name="localOrgGroupForm">
+                            <span translate>Group all non-grouped organisations:</span>
+                            <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
+                                                                aria-hidden="true"></i></a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" ng-model="localOrgGroupName"
+                                           placeholder="{{'Organisation group name'|translate}}" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" ng-disabled="localOrgGroupForm.$invalid"
+                                                class="btn btn-primary" ng-click="createLocalOrgGroup()">
+                                            <i class="fa fa-object-group" aria-hidden="true"></i></i>&nbsp;<span
+                                                translate>Create new local group</span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-default" ng-click="editLocalGroups()">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
+                                                translate>Edit</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form name="localMediaGroupForm">
+                            <span translate>Group all non-grouped media:</span>
+                            <a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
+                                                                aria-hidden="true"></i></a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" ng-model="localMediaGroupName"
+                                           placeholder="{{'Media group name'|translate}}" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" ng-disabled="localMediaGroupForm.$invalid"
+                                                class="btn btn-primary" ng-click="createLocalMediaGroup()">
+                                            <i class="fa fa-object-group" aria-hidden="true"></i>&nbsp;<span
+                                                translate>Create new local group</span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-default" ng-click="editLocalGroups()">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
+                                                translate>Edit</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                </div>
             </div>
-            <br/><br/><br/><br/>
+            <div class="row" ng-show="localGroupError && localGroupError !== ''">
+                <div class="alert alert-danger col-md-12" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    {{localGroupError}}
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default" id="tabularData">
+            <div class="panel-heading">
+                <span translate>Tabular Data</span>
+                <a href="#" class="pull-right btn" title="hide/show" ng-click="showTable = !showTable"
+                ><i class="glyphicon {{showTable ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
+            </div>
+            <div class="panel-body" uib-collapse="!showTable">
+                <div class="row" data-ng-show="flowData.length>0">
+                    <h4 translate>Tabular Representation</h4>
+                    <div class="table-responsive">
+                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"
+                               class="table table-striped"></table>
+                    </div>
+                    <br/><br/><br/><br/>
+                </div>
+            </div>
         </div>
     </div>
     </div>

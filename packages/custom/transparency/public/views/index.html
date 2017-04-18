@@ -1,4 +1,5 @@
 <div class="container" data-ng-controller="TransparencyController">
+
     <div id="toolTip" class="panel panel-default" style="position: fixed; display: none; z-index: 5">
         <div class="panel-heading">
             <h3 class="panel-title">{{federalState}}</h3>
@@ -20,9 +21,38 @@
             </div>
         </section>
     </div>
+    <div>
+        <h2 translate>
+            Background
+        </h2>
+
+        <p translate>
+            As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising,
+            the Austrian Parliament has released the so called Media Transparency Act ("Bundesverfassungsgesetz über die
+            Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines
+            periodischen Mediums und das KommAustria-Gesetz") in 2011. This regulation requires certain organizations to
+            quarterly report on their spending in advertising and funding of media cooperations. Reported data is
+            published by the <a href="http://www.rtr.at"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site
+            tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get
+            the information relevant to them out of it.
+        </p>
+
+        <p translate>
+            Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian</p>
+        <p><a href="/imprint" translate>Imprint</a></p>
+        <hr/>
+    </div>
     <div class="row paddingBottom">
         <section class="container">
             <div class="panel panel-default" id="mapSettings">
+
+
+                <div class="panel panel-default col-sm-12 col-lg-12">
+                    <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
+                    <p class="small text-info" translate>The map can be turned by holding the left mouse button and
+                        dragging within the frame. It is possible to zoom into the map by scrolling.</p>
+                </div>
+
                 <div class="panel-heading">
                     <span translate>Settings</span>
                     <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings">
@@ -69,11 +99,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default col-sm-12 col-lg-12">
-                    <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
-                    <p class="small text-info" translate>The map can be turned by holding the left mouse button and
-                        dragging within the frame. It is possible to zoom into the map by scrolling.</p>
-                </div>
+
             </div>
         </section>
     </div>

@@ -46,29 +46,37 @@ msgstr ""
 msgid "Although this was meant to significantly improve the data qualtity it could have also introduced some errors"
 msgstr ""
 
-#: controllers/flowController.js:139
-#: controllers/flowController.js:783
+#: controllers/flowController.js:147
+#: controllers/flowController.js:859
 #: controllers/flowDetailController.js:12
 msgid "Amount"
 msgstr ""
 
-#: views/index.html:16
+#: views/index.html:37
 msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
 msgstr ""
 
-#: views/about.html:46
+#: views/about.html:35
 msgid "Are they involved?"
 msgstr ""
 
-#: views/about.html:7
-msgid "As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising, the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to quarterly report on their spending in advertising and funding of media cooperations. Reported data is published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get the information relevant to them out of it."
+#: views/index.html:7
+msgid ""
+"As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising,\n"
+"            the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die\n"
+"            Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines\n"
+"            periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to\n"
+"            quarterly report on their spending in advertising and funding of media cooperations. Reported data is\n"
+"            published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site\n"
+"            tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get\n"
+"            the information relevant to them out of it."
 msgstr ""
 
 #: views/uploadOrganisation.html:52
 msgid "Association"
 msgstr ""
 
-#: views/about.html:25
+#: views/about.html:14
 msgid "At a single glance checkout which organisations are the biggest spenders and which media companies benefit most from public money spent on advertising our by receiving public funding."
 msgstr ""
 
@@ -81,7 +89,7 @@ msgstr ""
 msgid "Austria"
 msgstr ""
 
-#: views/about.html:3
+#: views/index.html:3
 msgid "Background"
 msgstr ""
 
@@ -89,7 +97,8 @@ msgstr ""
 msgid "Based on your selection, you can create custom groups for all non-grouped organisations or media."
 msgstr ""
 
-#: views/flowdetail.html:188
+#: views/flow.html:352
+#: views/flowdetail.html:156
 msgid "Begin of Event"
 msgstr ""
 
@@ -115,8 +124,8 @@ msgid "City"
 msgstr ""
 
 #: controllers/topEntriesController.js:108
-#: directives/sankeyDirective.js:120
-#: directives/sankeyDirective.js:78
+#: directives/sankeyDirective.js:121
+#: directives/sankeyDirective.js:79
 msgid "Click for Details"
 msgstr ""
 
@@ -142,11 +151,11 @@ msgstr ""
 msgid "Create new local group"
 msgstr ""
 
-#: controllers/flowController.js:1126
+#: controllers/flowController.js:1227
 msgid "Custom group could not be created because there are no ungrouped entries."
 msgstr ""
 
-#: controllers/flowController.js:1113
+#: controllers/flowController.js:1214
 msgid "Custom group could not be created since an local group with an equal name already exists"
 msgstr ""
 
@@ -163,7 +172,7 @@ msgstr ""
 msgid "Disable Group"
 msgstr ""
 
-#: controllers/flowController.js:763
+#: controllers/flowController.js:839
 #: controllers/flowDetailController.js:205
 #: controllers/topEntriesController.js:314
 msgid "Display _MENU_ records"
@@ -175,7 +184,7 @@ msgstr ""
 
 #: views/events.html:25
 #: views/flow.html:199
-#: views/flow.html:227
+#: views/flow.html:228
 #: views/grouping.html:35
 msgid "Edit"
 msgstr ""
@@ -194,7 +203,8 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
-#: views/flowdetail.html:192
+#: views/flow.html:356
+#: views/flowdetail.html:160
 msgid "End of Event"
 msgstr ""
 
@@ -260,7 +270,7 @@ msgid "Federal state"
 msgstr ""
 
 #: views/flow.html:45
-#: views/index.html:42
+#: views/index.html:63
 #: views/top.html:35
 msgid "Fix slider range"
 msgstr ""
@@ -287,7 +297,7 @@ msgstr ""
 msgid "Fund"
 msgstr ""
 
-#: views/about.html:60
+#: views/about.html:49
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 
@@ -295,7 +305,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: views/about.html:18
+#: views/about.html:7
 msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
@@ -360,11 +370,11 @@ msgstr ""
 msgid "If you are interested in a specific organisation, you can search for it."
 msgstr ""
 
-#: views/about.html:40
+#: views/about.html:29
 msgid "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, check out our lists!"
 msgstr ""
 
-#: views/about.html:47
+#: views/about.html:36
 msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
 msgstr ""
 
@@ -376,7 +386,7 @@ msgstr ""
 msgid "Impress"
 msgstr ""
 
-#: views/about.html:13
+#: views/index.html:20
 msgid "Imprint"
 msgstr ""
 
@@ -409,19 +419,22 @@ msgstr ""
 msgid "It is possible to show the chart for a specific federal state."
 msgstr ""
 
-#: views/flowdetail.html:205
+#: views/flow.html:369
+#: views/flowdetail.html:173
 msgid "Labels hidden"
 msgstr ""
 
-#: views/flowdetail.html:201
+#: views/flow.html:365
+#: views/flowdetail.html:169
 msgid "Labels visible"
 msgstr ""
 
-#: views/flowdetail.html:176
+#: views/flow.html:340
+#: views/flowdetail.html:144
 msgid "Legend"
 msgstr ""
 
-#: views/about.html:32
+#: views/about.html:21
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
@@ -448,9 +461,9 @@ msgstr ""
 msgid "Manage events"
 msgstr ""
 
-#: controllers/flowController.js:206
-#: controllers/flowController.js:247
-#: controllers/flowController.js:416
+#: controllers/flowController.js:214
+#: controllers/flowController.js:297
+#: controllers/flowController.js:492
 #: controllers/flowController.js:65
 #: controllers/flowDetailController.js:9
 #: controllers/groupingController.js:49
@@ -458,15 +471,15 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: controllers/flowController.js:209
-#: controllers/flowController.js:250
-#: controllers/flowController.js:419
+#: controllers/flowController.js:217
+#: controllers/flowController.js:300
+#: controllers/flowController.js:495
 #: controllers/flowController.js:68
 #: controllers/groupingController.js:52
 msgid "Media Group"
 msgstr ""
 
-#: views/index.html:15
+#: views/index.html:36
 msgid "Media Transparency Austria"
 msgstr ""
 
@@ -479,6 +492,7 @@ msgid "Ministry"
 msgstr ""
 
 #: views/flow.html:14
+#: views/flow.html:246
 msgid "Money Flow"
 msgstr ""
 
@@ -486,7 +500,7 @@ msgstr ""
 msgid "Money Flow over time"
 msgstr ""
 
-#: views/index.html:45
+#: views/index.html:66
 msgid "Move the sliders to define a range"
 msgstr ""
 
@@ -553,11 +567,12 @@ msgstr ""
 msgid "Number of non-emtpy entries"
 msgstr ""
 
-#: views/flowdetail.html:197
+#: views/flow.html:361
+#: views/flowdetail.html:165
 msgid "One-day Event"
 msgstr ""
 
-#: controllers/flowController.js:207
+#: controllers/flowController.js:215
 #: controllers/flowController.js:66
 #: controllers/flowDetailController.js:10
 #: controllers/groupingController.js:50
@@ -566,16 +581,16 @@ msgstr ""
 msgid "Organisation"
 msgstr ""
 
-#: controllers/flowController.js:208
-#: controllers/flowController.js:249
-#: controllers/flowController.js:418
+#: controllers/flowController.js:216
+#: controllers/flowController.js:299
+#: controllers/flowController.js:494
 #: controllers/flowController.js:67
 #: controllers/groupingController.js:51
 msgid "Organisation Group"
 msgstr ""
 
-#: views/index.html:60
-#: views/index.html:64
+#: views/index.html:81
+#: views/index.html:85
 #: views/top.html:51
 #: views/top.html:57
 msgid "Organisation Types"
@@ -585,8 +600,8 @@ msgstr ""
 msgid "Organisation group name"
 msgstr ""
 
-#: controllers/flowController.js:248
-#: controllers/flowController.js:417
+#: controllers/flowController.js:298
+#: controllers/flowController.js:493
 msgid "Organisations"
 msgstr ""
 
@@ -615,15 +630,15 @@ msgstr ""
 msgid "Organisations with unknown address-data"
 msgstr ""
 
-#: directives/sankeyDirective.js:121
-#: directives/sankeyDirective.js:132
-#: directives/sankeyDirective.js:85
+#: directives/sankeyDirective.js:122
+#: directives/sankeyDirective.js:133
+#: directives/sankeyDirective.js:86
 msgid "Other media"
 msgstr ""
 
-#: directives/sankeyDirective.js:121
-#: directives/sankeyDirective.js:132
-#: directives/sankeyDirective.js:85
+#: directives/sankeyDirective.js:122
+#: directives/sankeyDirective.js:133
+#: directives/sankeyDirective.js:86
 msgid "Other organisations"
 msgstr ""
 
@@ -631,7 +646,7 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
-#: views/about.html:17
+#: views/about.html:6
 msgid "Overview"
 msgstr ""
 
@@ -639,18 +654,18 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: controllers/flowController.js:777
+#: controllers/flowController.js:853
 msgid "Payer"
 msgstr ""
 
-#: controllers/flowController.js:138
+#: controllers/flowController.js:146
 #: controllers/flowDetailController.js:11
 msgid "Payment Type"
 msgstr ""
 
 #: views/flow.html:54
 #: views/flowdetail.html:42
-#: views/index.html:49
+#: views/index.html:70
 #: views/top.html:81
 msgid "Payment Types"
 msgstr ""
@@ -676,7 +691,7 @@ msgid "Per default the top spender based on your chosen payment types and period
 msgstr ""
 
 #: views/flow.html:34
-#: views/index.html:36
+#: views/index.html:57
 msgid "Periods"
 msgstr ""
 
@@ -693,7 +708,8 @@ msgstr ""
 msgid "Predictable"
 msgstr ""
 
-#: views/flowdetail.html:180
+#: views/flow.html:344
+#: views/flowdetail.html:148
 msgid "Predictable Event"
 msgstr ""
 
@@ -709,7 +725,7 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
-#: controllers/flowController.js:777
+#: controllers/flowController.js:853
 #: controllers/topEntriesController.js:179
 #: controllers/topEntriesController.js:282
 msgid "Recipient"
@@ -748,7 +764,8 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: views/flowdetail.html:108
+#: views/flow.html:272
+#: views/flowdetail.html:76
 msgid "Select Events"
 msgstr ""
 
@@ -757,11 +774,13 @@ msgstr ""
 msgid "Select a Group"
 msgstr ""
 
-#: views/flowdetail.html:154
+#: views/flow.html:318
+#: views/flowdetail.html:122
 msgid "Select by Region"
 msgstr ""
 
-#: views/flowdetail.html:134
+#: views/flow.html:298
+#: views/flowdetail.html:102
 msgid "Select by Tag"
 msgstr ""
 
@@ -774,13 +793,14 @@ msgid "Selections"
 msgstr ""
 
 #: views/flow.html:19
-#: views/flowdetail.html:95
-#: views/index.html:27
+#: views/flow.html:259
+#: views/flowdetail.html:63
+#: views/index.html:48
 #: views/top.html:12
 msgid "Settings"
 msgstr ""
 
-#: controllers/flowController.js:762
+#: controllers/flowController.js:838
 #: controllers/flowDetailController.js:204
 #: controllers/topEntriesController.js:313
 msgid "Showing page _PAGE_ of _PAGES_"
@@ -816,11 +836,12 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:254
+#: views/flow.html:409
 msgid "Tabular Representation"
 msgstr ""
 
-#: views/flowdetail.html:216
+#: views/flow.html:380
+#: views/flowdetail.html:184
 msgid "The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized."
 msgstr ""
 
@@ -828,7 +849,7 @@ msgstr ""
 msgid "The legend describes the possible icons used for the charts."
 msgstr ""
 
-#: views/index.html:74
+#: views/index.html:95
 msgid ""
 "The map can be turned by holding the left mouse button and\n"
 "                        dragging within the frame. It is possible to zoom into the map by scrolling."
@@ -838,7 +859,8 @@ msgstr ""
 msgid "The search can be limited to a specific federal state."
 msgstr ""
 
-#: views/flowdetail.html:230
+#: views/flow.html:394
+#: views/flowdetail.html:198
 msgid "The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown."
 msgstr ""
 
@@ -846,8 +868,12 @@ msgstr ""
 msgid "This solution was the basis for the now available site"
 msgstr ""
 
-#: views/about.html:11
+#: views/index.html:18
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
+msgstr ""
+
+#: views/flow.html:256
+msgid "Timeline"
 msgstr ""
 
 #: views/flowdetail.html:29
@@ -862,7 +888,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: views/about.html:24
+#: views/about.html:13
 msgid "Top Player"
 msgstr ""
 
@@ -896,7 +922,7 @@ msgstr ""
 msgid "Transfers are divided in different payment types. Select the types to display."
 msgstr ""
 
-#: controllers/flowController.js:777
+#: controllers/flowController.js:853
 #: views/grouping.html:23
 msgid "Type"
 msgstr ""
@@ -916,7 +942,8 @@ msgstr ""
 msgid "Undetermined"
 msgstr ""
 
-#: views/flowdetail.html:183
+#: views/flow.html:347
+#: views/flowdetail.html:151
 msgid "Unpredictable Event"
 msgstr ""
 
@@ -940,11 +967,11 @@ msgstr ""
 msgid "Vienna"
 msgstr ""
 
-#: views/about.html:21
-#: views/about.html:28
-#: views/about.html:35
-#: views/about.html:43
-#: views/about.html:50
+#: views/about.html:10
+#: views/about.html:17
+#: views/about.html:24
+#: views/about.html:32
+#: views/about.html:39
 msgid "View details »"
 msgstr ""
 
@@ -952,11 +979,11 @@ msgstr ""
 msgid "Vorarlberg"
 msgstr ""
 
-#: views/about.html:31
+#: views/about.html:20
 msgid "Where the money flows?"
 msgstr ""
 
-#: views/about.html:39
+#: views/about.html:28
 msgid "Who's involved?"
 msgstr ""
 
@@ -985,17 +1012,17 @@ msgstr ""
 msgid "You can add organisations to the flow. Go into detail by clicking on the rectangular box."
 msgstr ""
 
-#: controllers/flowController.js:1069
+#: controllers/flowController.js:1170
 msgid ""
 "You cannot add this group, since some of its members are also members of already selected\n"
 "groups. This is not allowed. So please remove the other group first"
 msgstr ""
 
-#: controllers/flowController.js:1050
+#: controllers/flowController.js:1151
 msgid "You cannot remove this Media since it belongs to a selected group. Remove the group instead"
 msgstr ""
 
-#: controllers/flowController.js:1022
+#: controllers/flowController.js:1123
 msgid "You cannot remove this Organisation since it belongs to a selected group. Remove the group instead."
 msgstr ""
 
@@ -1013,12 +1040,12 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: views/index.html:65
+#: views/index.html:86
 #: views/top.html:58
 msgid "elements selected"
 msgstr ""
 
-#: controllers/flowController.js:758
+#: controllers/flowController.js:834
 #: controllers/topEntriesController.js:309
 msgid "first"
 msgstr ""
@@ -1027,18 +1054,18 @@ msgstr ""
 msgid "grant for the year 2015, the site developed further. With the help of the following students new features were added:"
 msgstr ""
 
-#: controllers/flowController.js:759
+#: controllers/flowController.js:835
 #: controllers/topEntriesController.js:310
 msgid "last"
 msgstr ""
 
-#: controllers/flowController.js:757
+#: controllers/flowController.js:833
 #: controllers/flowDetailController.js:202
 #: controllers/topEntriesController.js:308
 msgid "next"
 msgstr ""
 
-#: controllers/flowController.js:756
+#: controllers/flowController.js:832
 #: controllers/flowDetailController.js:201
 #: controllers/topEntriesController.js:307
 msgid "previous"
@@ -1048,7 +1075,7 @@ msgstr ""
 msgid "public"
 msgstr ""
 
-#: controllers/flowController.js:761
+#: controllers/flowController.js:837
 #: controllers/topEntriesController.js:312
 msgid "search"
 msgstr ""
@@ -1061,17 +1088,17 @@ msgstr ""
 msgid "{{pType.text}}"
 msgstr ""
 
-#: controllers/flowController.js:769
+#: controllers/flowController.js:845
 #: controllers/flowDetailController.js:96
 msgid "§2 MedKF-TG (Media Cooperations)"
 msgstr ""
 
-#: controllers/flowController.js:773
+#: controllers/flowController.js:849
 #: controllers/flowDetailController.js:100
 msgid "§31 ORF-G (Charges)"
 msgstr ""
 
-#: controllers/flowController.js:771
+#: controllers/flowController.js:847
 #: controllers/flowDetailController.js:98
 msgid "§4 MedKF-TG (Funding)"
 msgstr ""
