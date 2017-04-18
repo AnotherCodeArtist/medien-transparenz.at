@@ -27,6 +27,39 @@
 
         </div>
         <div class="diagrams">
+            <div class="row flowLegend">
+                <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12 legendLeft">
+                    <h4 translate>Payers</h4>
+                    <div>
+                         <div ng-repeat="org in selectedOrgsWithoutGroups()">
+                             <i class="fa fa-credit-card" aria-hidden="true"></i> {{org.name}}
+                        </div>
+                        <div ng-repeat="group in selectedOrganisationGroups"
+                             uib-popover-html="groupMembersToHTML(group)"
+                             popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
+                            <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span class="badge">{{group.members.length}}</span>
+                        </div>
+                    </div>
+                    <a ng-click="showSelectPayers()" class="setting-btn">
+                        <i class="fa fa-sliders" aria-hidden="true"></i>
+                        <span translate>change selection</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12  legendRight">
+                    <h4 translate>Beneficiaries</h4>
+                    <div>
+                        <div ng-repeat="org in selectedMediaWithoutGroups()">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i> {{org.name}}
+                        </div>
+                        <div ng-repeat="group in selectedMediaGroups"
+                             uib-popover-html="groupMembersToHTML(group)"
+                             popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
+                            <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span class="badge">{{group.members.length}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <uib-tabset active="active">
                 <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
 

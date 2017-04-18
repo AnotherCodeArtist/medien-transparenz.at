@@ -16,6 +16,18 @@
     fill: none;
 }
 
+.flowLegend .legendLeft , .flowLegend .legendRight{
+    padding-left: 25px;
+}
+
+.flowLegend .legendLeft .tpa-group{
+    cursor: pointer;
+}
+
+.flowLegend {
+  margin-bottom: 1em;
+}
+
 .axis {
     shape-rendering: crispEdges;
 }
@@ -74,7 +86,7 @@ g text.og_icon {
 }
 
 .modal-header {
-    background-color: #ffffcc;
+    /*background-color: #ffffcc;*/
 }
 
 div.chartToolTip h3 {

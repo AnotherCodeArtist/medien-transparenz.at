@@ -63,6 +63,18 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         $scope.selectedOrganisationGroups = []
     clearFields()
 
+
+    $scope.selectedOrgsWithoutGroups = ->
+        orgsInGroups = $scope.selectedOrganisationGroups.reduce ((acc,val)->acc.concat(val.members)),[]
+        $scope.selectedOrganisations.filter ((org)-> org.name not in orgsInGroups)
+
+    $scope.selectedMediaWithoutGroups = ->
+        mediaInGroups = $scope.selectedMediaGroups.reduce ((acc,val)->acc.concat(val.members)),[]
+        $scope.selectedMedia.filter ((org)-> org.name not in mediaInGroups)
+
+    $scope.groupMembersToHTML = (group) ->
+        (group.members.reduce ((acc,val)->acc+"<li>"+val+"</li>"),"<ul>")+"</ul>"
+
     $scope.showTable = false
     # Method for setting the intro-options (e.g. after translations)
     setIntroOptions = ->
@@ -679,7 +691,78 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         update()
 
 
-    dialogText =
+    selectOrgText = """
+         <div class="source-list-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Select Payers</span>
+                </h3>
+
+            </div>
+            <div class="modal-body">
+              <div>
+                <p>Here!{{selectedOrganisationGroups}}</p>
+                <span>{{organisationsLabel}}:</span><a href ng-click="FlowIntro(4);"><i
+                            class="fa fa-info-circle"
+                            aria-hidden="true"></i></a>
+                <oi-select class="multiselectDropdown"
+                           oi-options="item.name for item in loadOrganisations($query)"
+                           ng-model="selectedOrganisationsLocal"
+                           multiple
+                           placeholder="{{'Type a Name'|translate}}"
+                           id="multiselectOrgDialog"
+                           oi-select-options="{
+                                searchFilter: 'groupFilter'
+                            }"
+                >
+                </oi-select>
+                </div>
+                <div>
+                    <span>{{organisationGroupLabel}}:</span>
+                    <a href ng-click="FlowIntro(6);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    <oi-select class="multiselectDropdown"
+                               oi-options="item.name for item in allOrganisationGroups track by item.name"
+                               ng-model="selectedOrganisationGroupsLocal"
+                               multiple
+                               placeholder="{{'Select a Group'|translate}}"
+                               id="multiselectOrgGroup"
+                               oi-select-options="{
+                                    dropdownFilter: 'dropdownFilter',
+                                    searchFilter: 'searchFilter'
+                                }"
+                    >
+
+                    </oi-select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="controls">
+                    <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+                </div>
+            </div>
+         </div>
+    """
+
+    $scope.showSelectPayers = ->
+        $uibModal.open(
+            template: selectOrgText
+            scope: $scope
+            controller: ($scope, $uibModalInstance) ->
+                $scope.close = ->
+                    #$scope.$parent.selectedOrganisations = $scope.selectedOrganisationsLocal
+                    $scope.$parent.selectedOrganisationGroups = $scope.selectedOrganisationGroupsLocal
+                    $uibModalInstance.close()
+                updateOrgs = (newvalue,oldvalue) ->
+                    return if oldvalue is newvalue
+                    if newvalue.length > oldvalue.length
+                        $scope.$parent.selectedOrganisations.push(newvalue[newvalue.length-1])
+
+                    console.log JSON.stringify(oldvalue) + " NEW -> " + JSON.stringify(newvalue)
+                $scope.selectedOrganisationGroupsLocal = $scope.selectedOrganisationGroups
+                $scope.selectedOrganisationsLocal = $scope.selectedOrgsWithoutGroups()
+                $scope.$watch 'selectedOrganisationsLocal', updateOrgs, true
+            size: 'lg'
+        )
 
     showDialog = (text) ->
         $uibModal.open(
