@@ -15,6 +15,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
             deferred.promise
     $scope.allMedia = []
     $scope.allOrganisations = []
+    $scope.showForm = false
     mode = if $state.current.name is 'gouping' then 'global' else 'local'
     #mode = if $state.params.mode is 'local' then 'local' else 'global'
     #mode = 'local'
@@ -105,7 +106,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
 
 
     resetGroup = ->
-        $scope.group = {type:'media',isActive:false,scope:'national'}
+        $scope.group = {type:'media',isActive:true,scope:'national'}
         $scope.selection = {}
         $scope.group.members = []
         $scope.group.isActive = true;
@@ -186,8 +187,11 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
 
     $scope.cancel = ->
         resetGroup()
+        $scope.showForm = false
 
-    $scope.newGroup = resetGroup
+    $scope.newGroup = ->
+        resetGroup()
+        $scope.showForm = true
 
     #save group
     $scope.createGroup = ->
@@ -198,6 +202,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
                     resetGroup()
                     countGroupings()
                     listGroupings()
+                    $scope.showForm = false
             )
             .catch (err) -> $scope.error = err
         else
@@ -205,6 +210,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
             resetGroup()
             countGroupings()
             listGroupings()
+            $scope.showForm = false
         $rootScope.$broadcast('groupsChanged')
 
     getAll = (type) ->
@@ -217,6 +223,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
 
     # edit grouping
     $scope.editGrouping = (currentGroup) ->
+        $scope.showForm = true
         $scope.edit = true
         $scope.groupingID = currentGroup.id
         $scope.group.members = getAll(currentGroup.type).filter((m)->m.name in currentGroup.members)
@@ -231,6 +238,7 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
 
     #Remove grouping
     $scope.removeGrouping = (group) ->
+        $scope.showForm = false
         deleteString = gettextCatalog.getString("Delete")
         if confirm(deleteString + "? " + group.name)
             if mode is "global"
@@ -257,12 +265,14 @@ app.controller 'GroupingController', ['$scope', 'TPAService', 'gettextCatalog','
                 (updated) ->
                     resetGroup()
                     listGroupings()
+                    $scope.showForm = false
             )
             .catch (err) -> $scope.error = err
         else
             TPAService.updateLocalGroup(groupToGrouping($scope.group))
             resetGroup()
             listGroupings()
+            $scope.showForm = false
         $rootScope.$broadcast('groupsChanged')
 
 

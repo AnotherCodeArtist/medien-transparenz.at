@@ -64,9 +64,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     clearFields()
 
 
-    $scope.selectedOrgsWithoutGroups = ->
-        orgsInGroups = $scope.selectedOrganisationGroups.reduce ((acc,val)->acc.concat(val.members)),[]
-        $scope.selectedOrganisations.filter ((org)-> org.name not in orgsInGroups)
+    $scope.selectedItemsWithoutGroups = (selected,groups) ->
+        orgsInGroups = groups.reduce ((acc,val)->acc.concat(val.members)),[]
+        selected.filter ((org)-> org.name not in orgsInGroups)
 
     $scope.selectedMediaWithoutGroups = ->
         mediaInGroups = $scope.selectedMediaGroups.reduce ((acc,val)->acc.concat(val.members)),[]
@@ -682,6 +682,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             if event.tags.indexOf(tag.name) isnt -1
                 event.selected = tag.selected
 
+    $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
+    $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+    $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
 
     initialize()
     .then ->
@@ -690,78 +693,67 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             checkForStateParams()
         update()
 
+    $scope.showSelectPayers = -> showSelectDialog(properties.org)
+    $scope.showSelectBeneficiaries = -> showSelectDialog(properties.media)
 
-    selectOrgText = """
-         <div class="source-list-modal">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Select Payers</span>
-                </h3>
-
-            </div>
-            <div class="modal-body">
-              <div>
-                <p>Here!{{selectedOrganisationGroups}}</p>
-                <span>{{organisationsLabel}}:</span><a href ng-click="FlowIntro(4);"><i
-                            class="fa fa-info-circle"
-                            aria-hidden="true"></i></a>
-                <oi-select class="multiselectDropdown"
-                           oi-options="item.name for item in loadOrganisations($query)"
-                           ng-model="selectedOrganisationsLocal"
-                           multiple
-                           placeholder="{{'Type a Name'|translate}}"
-                           id="multiselectOrgDialog"
-                           oi-select-options="{
-                                searchFilter: 'groupFilter'
-                            }"
-                >
-                </oi-select>
-                </div>
-                <div>
-                    <span>{{organisationGroupLabel}}:</span>
-                    <a href ng-click="FlowIntro(6);"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                    <oi-select class="multiselectDropdown"
-                               oi-options="item.name for item in allOrganisationGroups track by item.name"
-                               ng-model="selectedOrganisationGroupsLocal"
-                               multiple
-                               placeholder="{{'Select a Group'|translate}}"
-                               id="multiselectOrgGroup"
-                               oi-select-options="{
-                                    dropdownFilter: 'dropdownFilter',
-                                    searchFilter: 'searchFilter'
-                                }"
-                    >
-
-                    </oi-select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="controls">
-                    <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
-                </div>
-            </div>
-         </div>
-    """
-
-    $scope.showSelectPayers = ->
+    showSelectDialog = (config) ->
+        parent = $scope
         $uibModal.open(
-            template: selectOrgText
+            #template: selectOrgText
+            templateUrl: 'transparency/views/selectItemsDialog.html'
             scope: $scope
             controller: ($scope, $uibModalInstance) ->
                 $scope.close = ->
-                    #$scope.$parent.selectedOrganisations = $scope.selectedOrganisationsLocal
-                    $scope.$parent.selectedOrganisationGroups = $scope.selectedOrganisationGroupsLocal
+                    config.setSelectedGroups $scope.selectedGroupsLocal
                     $uibModalInstance.close()
-                updateOrgs = (newvalue,oldvalue) ->
+                updateItems = (newvalue,oldvalue) ->
                     return if oldvalue is newvalue
                     if newvalue.length > oldvalue.length
-                        $scope.$parent.selectedOrganisations.push(newvalue[newvalue.length-1])
-
-                    console.log JSON.stringify(oldvalue) + " NEW -> " + JSON.stringify(newvalue)
-                $scope.selectedOrganisationGroupsLocal = $scope.selectedOrganisationGroups
-                $scope.selectedOrganisationsLocal = $scope.selectedOrgsWithoutGroups()
-                $scope.$watch 'selectedOrganisationsLocal', updateOrgs, true
+                        selected = config.selected()
+                        selected.push(newvalue[newvalue.length-1])
+                        config.setSelected(selected)
+                    else
+                        newNames = newvalue.map (v)->v.name
+                        removedItems = oldvalue.filter((v)-> v.name not in newNames).map((v)->v.name)
+                        config.setSelected(config.selected().filter ((v)-> v.name not in removedItems))
+                $scope.createGroup = ->
+                    group = config.createLocalGroup()($scope.localGroupName)
+                    if group
+                        $scope.selectedGroupsLocal.push(group)
+                        $uibModalInstance.close()
+                $scope.localGroups = config.allGroups().filter (v)->v.groupType is 'custom'
+                $scope.allGroups = config.allGroups()
+                $scope.items = config.items()
+                $scope.labels = config.labels
+                $scope.selectedGroupsLocal = config.selectedGroups()
+                $scope.selectedLocal = parent.selectedItemsWithoutGroups(config.selected(),config.selectedGroups())
+                $scope.$watch 'selectedLocal', updateItems, true
+                $scope.addGroup = true
             size: 'lg'
+        )
+
+    $scope.showSettingsDialog = ->
+        parent = $scope
+        $uibModal.open(
+            templateUrl: 'transparency/views/flowSettingsDialog.html'
+            scope: $scope
+            size: 'lg'
+            controller: ($scope, $uibModalInstance) ->
+                $scope.close = ->
+                    $uibModalInstance.close()
+                current = $scope.slider.options.draggableRangeOnly
+                $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 100
+                $timeout (-> $scope.slider.options.draggableRangeOnly = current), 120
+        )
+
+    $scope.showEventSelectionDialog = ->
+        $uibModal.open(
+            templateUrl: 'transparency/views/selectEventsDialog.html'
+            scope: $scope
+            size: 'lg'
+            controller: ($scope, $uibModalInstance) ->
+                $scope.close = ->
+                    $uibModalInstance.close()
         )
 
     showDialog = (text) ->
@@ -825,6 +817,9 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #config access to properties
     properties =
         org:
+            labels:
+                item: "Please select your Payers"
+                title: "Select Payers"
             all: ()->$scope.allOrganisations
             allGroups: ()->$scope.allOrganisationGroups
             selected: ()->$scope.selectedOrganisations
@@ -834,8 +829,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             localGroupName: () -> $scope.localOrgGroupName
             setLocalGroupName: (s)->$scope.localOrgGroupName=s
             type:'org'
+            createLocalGroup: -> $scope.createLocalOrgGroup
+            items: -> $scope.loadOrganisations
             removeMsg: gettextCatalog.getString "You cannot remove this Organisation since it belongs to a selected group. Remove the group instead."
         media:
+            labels:
+                item: "Please select your Beneficiaries"
+                title: "Select Beneficiaries"
             all: ()->$scope.allMedia
             allGroups: ()->$scope.allMediaGroups
             selected: ()->$scope.selectedMedia
@@ -845,6 +845,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             localGroupName: ()-> $scope.localMediaGroupName
             setLocalGroupName: (s)->$scope.localMediaGroupName=s
             type:'media'
+            createLocalGroup: -> $scope.createLocalMediaGroup
+            items: -> $scope.loadMedia
             removeMsg: gettextCatalog.getString "You cannot remove this Media since it belongs to a selected group. Remove the group instead"
 
     handleAddingGroup = (config) -> (newValue, oldValue) ->
@@ -876,19 +878,20 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             else
                 handleAddingGroup(config)(newValue, oldValue)
 
-    createLocalGroup = (config) -> () ->
-        if config.localGroupName in TPAService.getLocalGroups(config.type).map((g)->g.name)
+    createLocalGroup = (config) -> (name) ->
+        localGroupName = name || config.localGroupName
+        if localGroupName in TPAService.getLocalGroups(config.type).map((g)->g.name)
             showDialog gettextCatalog.getString "Custom group could not be created since an local group with an equal name already exists"
-            return
+            return null
         groupedOrganisations = config.selectedGroups().map((g)->g.members).reduce(((a,b)->a.concat(b)),[])
         newMembers = config.selected().filter((o)->o.name not in groupedOrganisations)
         if newMembers.length is 0
             showDialog gettextCatalog.getString "Custom group could not be created because there are no ungrouped entries."
-            return
+            return null
         group = {
             type: config.type
             members: newMembers.map((m)->m.name)
-            name: config.localGroupName()
+            name: localGroupName
             region: 'AT'
         }
         TPAService.saveLocalGroup group
@@ -898,6 +901,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         newMembers.forEach((m)->m.group=group.name;m.groupType='custom')
         TPAService.saveState stateName,fieldsToStore, $scope
         config.setLocalGroupName("")
+        group
 
 
     $scope.createLocalOrgGroup = createLocalGroup(properties.org)

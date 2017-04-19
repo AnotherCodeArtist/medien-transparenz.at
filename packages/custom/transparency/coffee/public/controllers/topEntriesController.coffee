@@ -29,7 +29,7 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
 
     $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
-    $scope.selectedOrgType = -> if $scope.orgType is "org" then "Payer" else "Receiver"
+    $scope.selectedOrgType = -> if $scope.orgType is "org" then "Payers" else "Beneficiaries"
     # register watches to update chart when changes occur
     registerWatches = ->
         $scope.$watch('typesText', change, true)

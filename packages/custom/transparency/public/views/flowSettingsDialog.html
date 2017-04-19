@@ -1,0 +1,54 @@
+<div class="source-list-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Select Events</span>
+        </h3>
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="flowSlider">
+                    <strong>
+                        <div><span translate>Timeframe</span>
+                            <!--a href ng-click="FlowIntro(1);"><i class="fa fa-info-circle"
+                                                                aria-hidden="true"></i></a-->
+                        </div>
+                    </strong>
+                    <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                              rz-slider-options="slider.options"></rzslider>
+                </div>
+                <div id="fixSliderRange">
+                    <div class="checkbox">
+                        <label><input id="fixRange" type="checkbox"
+                                      ng-model="slider.options.draggableRangeOnly"/><span
+                                translate>Fix slider range</span></label>
+                        <!--a href ng-click="FlowIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="paymentTypes">
+                    <strong>
+                        <div><span translate>Payment Types</span>
+                            <!--a href ng-click="FlowIntro(3);"><i class="fa fa-info-circle"
+                                                                aria-hidden="true"></i></a-->
+                        </div>
+                    </strong>
+                </div>
+                <div class="checkbox" data-ng-repeat="pType in typesText">
+                    <label>
+                        <input type="checkbox" name="pType"
+                               ng-model="pType.checked"/>{{pType.text}}
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+        </div>
+    </div>
+</div>

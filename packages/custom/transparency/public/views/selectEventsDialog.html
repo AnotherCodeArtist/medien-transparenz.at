@@ -1,0 +1,78 @@
+<div class="source-list-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Change Settings</span>
+        </h3>
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="eventsSelection">
+                        <h3 class="panel-title" translate>Select Events</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox" ng-repeat="event in events">
+                            <label>
+                                <input
+                                        type="checkbox"
+                                        ng-model="event.selected"
+                                        ng-click="updateEvents()"
+                                > {{event.name}}
+                            </label>
+                            <span><span
+                                    class="label label-danger">{{event.region}}</span></span>
+                            <span ng-repeat="tag in event.tags"><span
+                                    class="label label-primary">{{tag}}</span> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="tagSelection">
+                        <h3 class="panel-title" translate>Select by Tag</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label ng-repeat="tag in tags track by tag.name"
+                                   ng-click="toggleTag(tag)">
+                                <input
+                                        type="checkbox"
+                                        ng-model="tag.selected"
+                                >
+                                <span><span class="label label-primary">{{tag.name}}</span> </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="regionSelection">
+                        <h3 class="panel-title" translate>Select by Region</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label ng-repeat="region in regions track by region.name"
+                                   ng-click="toggleRegion(region)">
+                                <input
+                                        type="checkbox"
+                                        ng-model="region.selected"
+                                >
+                                <span><span
+                                        class="label label-danger">{{region.name}}</span> </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+        </div>
+    </div>
+</div>

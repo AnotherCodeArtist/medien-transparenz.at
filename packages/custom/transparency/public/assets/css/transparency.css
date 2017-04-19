@@ -123,6 +123,32 @@ a.setting-btn:hover, a.setting-btn:visited {
     color: #0e0e0e;
 }
 
+.selectEvents {
+    padding-right: 1em;
+    padding-top: 1em;
+}
+
+.timelineLegend {
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+.settings {
+    padding-top: 1em;
+}
+
+.caption {
+    color: #656D78;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 2em;
+}
+
+.newGroupForm {
+    border: 1px solid #999999;
+    padding: 0.5em;
+}
+
 .pie, .diagrams {
     border: 3px solid #999999;
     margin-bottom: 1em;

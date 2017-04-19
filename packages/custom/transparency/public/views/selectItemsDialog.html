@@ -1,0 +1,83 @@
+<div class="source-list-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span>{{labels.title | translate}}</span>
+        </h3>
+
+    </div>
+    <div class="modal-body">
+        <div>
+            <span >{{labels.item | translate}}</span><!--a href ng-click="FlowIntro(4);"><i
+                class="fa fa-info-circle"
+                aria-hidden="true"></i></a-->
+            <oi-select class="multiselectDropdown"
+                       oi-options="item.name for item in items($query)"
+                       ng-model="selectedLocal"
+                       multiple
+                       placeholder="{{'Type a Name'|translate}}"
+                       id="multiselectItemDialog"
+                       oi-select-options="{
+                                    searchFilter: 'groupFilter'
+                                }"
+            >
+            </oi-select>
+        </div>
+        <div ng-show="selectedLocal.length>1">
+            <a translate ng-click="addGroup=!addGroup">Would you like to create a new group with the items above?</a>
+            <div class="newGroupForm" uib-collapse="addGroup">
+                <form name="localGroupForm">
+                    <br/>
+                    <span translate>Create a new group with the items above</span>
+                    <!--a href ng-click="FlowIntro(8);"><i class="fa fa-info-circle"
+                                                        aria-hidden="true"></i></a-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" ng-model="localGroupName"
+                                   placeholder="{{'Name of the new group'|translate}}" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group" role="group">
+                                <button type="button" ng-disabled="localGroupForm.$invalid"
+                                        class="btn btn-primary" ng-click="createGroup()">
+                                    <i class="fa fa-object-group" aria-hidden="true"></i></i>&nbsp;<span
+                                        translate>Create new local group</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <br/>
+            <span translation>Select existing groups</span>
+            <!--a href ng-click="FlowIntro(6);"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+            <oi-select class="multiselectDropdown"
+                       oi-options="item.name for item in allGroups track by item.name"
+                       ng-model="selectedGroupsLocal"
+                       multiple
+                       placeholder="{{'Select a Group'|translate}}"
+                       id="multiselectGroup"
+                       oi-select-options="{
+                                    dropdownFilter: 'dropdownFilter',
+                                    searchFilter: 'searchFilter'
+                                }"
+            >
+            </oi-select>
+        </div>
+        <div ng-show="localGroups.length>0">
+            <button type="button"
+                    class="btn btn-default" ng-click="editLocalGroups()">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<span
+                    translate>Modify existing groups</span>
+            </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+        </div>
+    </div>
+</div>
