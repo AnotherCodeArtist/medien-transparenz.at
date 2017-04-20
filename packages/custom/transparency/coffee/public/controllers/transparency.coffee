@@ -40,6 +40,9 @@ angular.module 'mean.transparency'
                inherit: false
                reload: true
 
+     $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+     $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+
      change = (oldValue,newValue) ->
           console.log "Change: " + Date.now()
           update() if (oldValue isnt newValue)
@@ -88,6 +91,8 @@ angular.module 'mean.transparency'
           $scope.$watch('typesText',change,true)
           $scope.$watch('orgTypes',change,true)
           $scope.$watch('orgTypeSelection',change,true)
+
+     $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
 
 
      savedState = sessionStorage.getItem stateName

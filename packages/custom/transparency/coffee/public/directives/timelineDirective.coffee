@@ -7,6 +7,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
           data: '='
           events: '='
           getCurrentLanguage: '&'
+          barClick: '&'
      link: ($scope,element,attrs) ->
           margin = {top: 75, right: 100, bottom: 75, left: 100}
 
@@ -145,7 +146,7 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                               drawEventGuideline event._id, event.numericEndDate, new Date(event.endDate), groupOfBars[0], className, event.name, y1, y2, "end"
 
 
-               nv.addGraph () ->
+               nv.addGraph (->
                     d3.select(".timeline svg").selectAll(".event").remove()
                     chart = nv.models.discreteBarChart()
                     .x((d) ->
@@ -173,6 +174,11 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
 
                          drawEvents(events)
                     chart
+               ), ->
+                    if $scope.barClick
+                         d3.selectAll(".discreteBar").on 'click' , (src) ->
+                              d3.selectAll(".nvtooltip").style("opacity", 0)
+                              $scope.barClick() src
 
           $scope.$watch 'data', updateDiagram, true
           $scope.$watch 'events', updateDiagram, true

@@ -7,6 +7,7 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
           data: '='
           events: '='
           getCurrentLanguage: '&'
+          barClick: '&'
      link: ($scope,element,attrs) ->
           updateDiagram = (oldValue, newValue) ->
                margin = {top: 75, right: 100, bottom: 75, left: 100}
@@ -152,7 +153,7 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
 
 
 
-               nv.addGraph () ->
+               nv.addGraph ( ->
                     d3.select(".quartercomparison svg").selectAll(".event").remove()
                     chart = nv.models.discreteBarChart()
                     .x((d) ->
@@ -181,6 +182,11 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
 
                          drawEvents(events)
                     chart
+               ), ->
+                    if $scope.barClick
+                         d3.selectAll(".discreteBar").on 'click' , (src) ->
+                              d3.selectAll(".nvtooltip").style("opacity", 0)
+                              $scope.barClick() src
 
           $scope.$watch 'data', updateDiagram, true
           $scope.$watch 'events', updateDiagram, true

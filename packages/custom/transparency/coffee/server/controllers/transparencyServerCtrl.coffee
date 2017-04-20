@@ -252,7 +252,7 @@ handleGroupings = (groupings, transfers, limit) ->
     for grouping in groupings
         groupingTransfersAmount = (transfer.total for transfer in transfersWithGrouping when transfer.organisation in grouping.members)
         groupingTransfersNames = (transfer.organisation  for transfer in transfersWithGrouping when transfer.organisation in grouping.members)
-        groupingTotalAmount = groupingTransfersAmount.reduce (total, sum) -> total + sum
+        groupingTotalAmount = groupingTransfersAmount.reduce ((total, sum) -> total + sum),0
         #console.log("Grouping " + grouping.name + " with the member(s):"
         #JSON.stringify(grouping.members)+ " has the sum of " + groupingTotalAmount+ "("+ groupingTransfersAmount.length+" transfer(s))")
         #remove ALL transfers (filter) from results

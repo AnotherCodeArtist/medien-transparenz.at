@@ -42,15 +42,28 @@
         <p><a href="/imprint" translate>Imprint</a></p>
         <hr/>
     </div>
+    <div class="diagrams map">
+        <div class="tpaLegend">
+            <div><span translate>Total</span>: {{total()}} €</div>
+            <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
+            <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG </div>
+            <a ng-click="showSettings=true;goto('settingsBoxMap')" class="setting-btn">
+                <i class="fa fa-sliders" aria-hidden="true"></i>
+                <span translate>change settings</span>
+            </a>
+        </div>
+        <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
+        <p class=" caption small text-info" translate>The map can be turned by holding the left mouse button and
+            dragging within the frame. It is possible to zoom into the map by scrolling.</p>
+    </div>
+
     <div class="row paddingBottom">
         <section class="container">
             <div class="panel panel-default" id="mapSettings">
 
 
                 <div class="panel panel-default col-sm-12 col-lg-12">
-                    <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
-                    <p class="small text-info" translate>The map can be turned by holding the left mouse button and
-                        dragging within the frame. It is possible to zoom into the map by scrolling.</p>
+
                 </div>
 
                 <div class="panel-heading">
@@ -101,6 +114,9 @@
                 </div>
 
             </div>
+
         </section>
+        <a id="settingsBoxMap"></a>
     </div>
+
 </div>

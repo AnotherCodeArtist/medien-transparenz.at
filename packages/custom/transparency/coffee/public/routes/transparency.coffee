@@ -58,7 +58,7 @@ angular.module 'mean.transparency'
         url: "/top"
         templateUrl: 'transparency/views/top.html'
     $stateProvider.state 'showflow',
-        url: "/showflow?name&grouping&orgType&from&to&pTypes&fedState&media&organisations&orgGrp&mediaGrp"
+        url: "/showflow?name&grouping&orgType&from&to&pTypes&fedState&media&organisations&orgGrp&mediaGrp&flow"
         templateUrl: 'transparency/views/flow.html'
         #controller: 'FlowCtrl'
     $stateProvider.state 'showflowdetail',

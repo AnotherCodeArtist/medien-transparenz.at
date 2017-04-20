@@ -44,6 +44,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     #console.log "initialize dataPromise"
     dataPromise = $q.defer()
     forcedChange = false
+    $scope.flowTab = true
+    $scope.activeTab = 0
     gettextCatalog.getString("custom")
     gettextCatalog.getString("public")
     stateName = "flowState"
@@ -134,10 +136,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
 
     $scope.timelineOpened = ->
+        $scope.flowTab = false
         $timeout((-> $rootScope.$broadcast "updateTimeline"), 100)
 
     $scope.flowOpened = ->
+        $scope.flowTab = true
         $timeout((-> $rootScope.$broadcast "updateFlow"), 100)
+        current = $scope.slider.options.draggableRangeOnly
+        $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 90
+        $timeout (-> $scope.slider.options.draggableRangeOnly = current), 95
 
     startLoading = ->
         try
@@ -294,6 +301,8 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     checkForStateParams = ->
         $scope.slider.from = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.from)*5 if $state.params.from
         $scope.slider.to = $scope.periods.map((p) -> p.period).indexOf(parseInt $state.params.to)*5 if $state.params.to
+        $scope.flowTab = ($state.params.flow || "true") is "true"
+        $scope.activeTab = if $scope.flowTab then 0 else 1
         if $state.params.media?
             $scope.selectedMedia = $scope.allMedia.filter(compareWith($state.params.media))
         if $state.params.organisations?
@@ -355,6 +364,7 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             mediaGrp: $scope.selectedMediaGroups.map(normalizeGrpName)
             orgGrp: $scope.selectedOrganisationGroups.map(normalizeGrpName)
             pTypes: (v.type for v in $scope.typesText when v.checked)
+            flow: $scope.flowTab
         },{notify:reload, reload: reload})
 
     $scope.showDetails = (node) ->
@@ -374,34 +384,40 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
             when 'm'
                 $scope.selectedMedia = [{name: node.name}]
             when 'og'
-                $scope.selectedOrganisationGroups = $scope.allOrganisationGroups.filter((g)->g.name is node.name.substring(4))
+                $scope.selectedOrganisationGroups = $scope.allOrganisationGroups.filter((g)->g.name is node.name)
                 $scope.selectedOrganisations = $scope.selectedOrganisationGroups
                 .map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
             when 'mg'
-                $scope.selectedMediaGroups = $scope.allMediaGroups.filter((g)->g.name is node.name.substring(4))
+                $scope.selectedMediaGroups = $scope.allMediaGroups.filter((g)->g.name is node.name)
                 $scope.selectedMedia = $scope.selectedMediaGroups
                 .map((g)->g.members).reduce(((a,b) -> a.concat(b)),[])
         updateURL(true)
         window.scrollTo 0,0
+        $scope.flowTab = true
+
 
     $scope.showFlowDetails = (link) ->
-        params = pTypes: (v.type for v in $scope.typesText when v.checked)
-        params.targeType = link.target.type
-        params.sourceType = link.source.type
-        if link.source.type is "o"
-            params.source = link.source.name
-        if link.source.type is "og"
-            params.source = $scope.selectedOrganisationGroups.filter((g)->g.name is link.source.name)[0].members
-        if link.source.type in ["og","mg"]
-            params.sourceGrp = link.source.name
-        if link.target.type in ["og","mg"]
-            params.targetGrp = link.target.name
+        $scope.isDetails = true;
+        $scope.selectedMediaGroups = []
+        $scope.selectedOrganisationGroups = []
+        $scope.selectedMedia = []
+        $scope.selectedOrganisations = []
+        switch link.source.type
+            when 'o'
+                $scope.selectedOrganisations = [name: link.source.name]
+            when 'og'
+                $scope.selectedOrganisations = link.source.targetLinks.map (l)->{name: l.source.name}
+                $scope.selectedOrganisationGroups = $scope.allOrganisationGroups.filter((g)->g.name is link.source.name)
         switch link.target.type
-            when 'm'
-                params.target = link.target.name
             when 'mg'
-                params.target = $scope.selectedMediaGroups.filter((g)->g.name is link.target.name)[0].members
-        $state.go('showflowdetail',params)
+                $scope.selectedMedia = link.target.sourceLinks.map (l)->{name: l.target.name}
+                $scope.selectedMediaGroups = $scope.allMediaGroups.filter((g)->g.name is link.target.name)
+            when 'm'
+                $scope.selectedMedia = [name: link.target.name]
+        $scope.flowTab = false
+        updateURL(true)
+        window.scrollTo 0,0
+
 
 
     filterData = (data) ->
@@ -903,6 +919,13 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
         config.setLocalGroupName("")
         group
 
+
+    $scope.barClicked = (src) ->
+        quarter = $scope.periods.map((v)->"#{v.year}/Q#{v.quarter}").indexOf(src.label)
+        $scope.slider.to = quarter*5
+        $scope.slider.from = quarter*5
+        $scope.flowTab = true
+        updateURL(true)
 
     $scope.createLocalOrgGroup = createLocalGroup(properties.org)
 
