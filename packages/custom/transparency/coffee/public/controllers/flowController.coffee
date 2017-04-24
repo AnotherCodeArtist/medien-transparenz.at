@@ -142,9 +142,10 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
     $scope.flowOpened = ->
         $scope.flowTab = true
         $timeout((-> $rootScope.$broadcast "updateFlow"), 100)
-        current = $scope.slider.options.draggableRangeOnly
-        $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 90
-        $timeout (-> $scope.slider.options.draggableRangeOnly = current), 95
+        if $scope.slider
+            current = $scope.slider.options.draggableRangeOnly
+            $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 90
+            $timeout (-> $scope.slider.options.draggableRangeOnly = current), 95
 
     startLoading = ->
         try
@@ -699,8 +700,15 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
                 event.selected = tag.selected
 
     $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
-    $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
-    $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+    $scope.getFrom = ->
+        if $scope.periods.length > 0
+            "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+        else ""
+    $scope.getTo = ->
+        if $scope.periods.length > 0
+            "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+        else
+            ""
 
     initialize()
     .then ->

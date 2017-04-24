@@ -25,8 +25,14 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.pieData = []
     window.scrollTo 0, 0
 
-    $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
-    $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+    $scope.getFrom = ->
+        if $scope.periods.length > 0
+            "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+        else ""
+    $scope.getTo = ->
+        if $scope.periods.length > 0
+            "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+        else ""
 
     $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
     $scope.selectedOrgType = -> if $scope.orgType is "org" then "Payers" else "Beneficiaries"
