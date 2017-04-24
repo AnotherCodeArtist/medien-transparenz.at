@@ -22,7 +22,7 @@
             </div-->
 
         </div>
-        <p>{{slider | json}}</p>
+
         <div class="diagrams">
             <div class="row flowLegend">
                 <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12 legendLeft">
@@ -61,6 +61,7 @@
                     </a>
                 </div>
                 <div class="settings col-lg-12 col-md-12 col-sm-12 col-xs-12 legendLeft">
+                    <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
                     <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG</div>
                     <div>
                     </div>
@@ -81,9 +82,9 @@
                                 </div>
                             </strong>
                         </div>
-                        <div class="row">
+                        <div class="row" ng-show="slider.to">
 
-                            <div id="flowSlider" class="col-sm-12 col-md-9 col-lg-9">
+                            <div id="flowSlider" class="col-sm-12 col-md-9 col-lg-9" >
 
                                 <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
                                           rz-slider-options="slider.options"></rzslider>
