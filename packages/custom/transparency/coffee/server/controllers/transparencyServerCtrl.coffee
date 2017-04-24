@@ -567,7 +567,7 @@ module.exports = (Transparency) ->
 
     flowdetail: (req, res) ->
         try
-            paymentTypes = req.query.pTypes or ['2']
+            paymentTypes = req.query.pType or ['2']
             paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
             source = req.query.source or []
             target = req.query.target or []
@@ -628,7 +628,7 @@ module.exports = (Transparency) ->
 
     annualcomparison: (req, res) ->
         try
-            paymentTypes = req.query.pTypes or ['2']
+            paymentTypes = req.query.pType or ['2']
             paymentTypes = [paymentTypes] if paymentTypes not instanceof Array
             source = req.query.source or []
             target = req.query.target or []

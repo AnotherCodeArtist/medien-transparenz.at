@@ -3,17 +3,14 @@
         <div ng-intro-options="IntroOptions" ng-intro-method="TopIntro" ng-intro-autostart="false">
 
             <h1 translate>Top Spenders and Recipients</h1>
-
-
-
             <div class="pie">
                 <div class="tpaLegend">
                     <div class="header">{{selectedFederalStateName()}}</div>
                     <div><span translate>Total</span>: {{total()}} €</div>
                     <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
                     <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG </div>
-                    <div>Top {{rank}} {{selectedOrgType()}}</div>
-                    <a ng-click="showSettings=true;goto('settingsBox')" class="setting-btn">
+                    <div>Top {{rank}} {{selectedOrgType()|translate}}</div>
+                    <a ng-click="showSettingsDialog()" class="setting-btn">
                         <i class="fa fa-sliders" aria-hidden="true"></i>
                         <span translate>change settings</span>
                     </a>
@@ -30,122 +27,6 @@
                 </div>
             </div>
 
-            <div class="panel panel-default" id="topSettings">
-
-                <div class="panel-heading">
-                    <span translate>Settings</span>
-                    <a href="#" class="pull-right btn" title="hide/show" ng-click="showSettings = !showSettings"
-                    ><i class="glyphicon {{showSettings ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
-                </div>
-                <div class="panel-body" uib-collapse="!showSettings">
-
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-6">
-                            <div id="topSlider">
-                                <strong>
-                                    <div>
-                                        <a href ng-click="TopIntro(1)"><i class="fa fa-info-circle"
-                                                                          aria-hidden="true"></i></a>
-                                    </div>
-                                </strong>
-
-
-                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
-                                          rz-slider-options="slider.options"></rzslider>
-                            </div>
-
-                            <div id="fixSliderRange">
-                                <div class="checkbox">
-                                    <label><input id="fixRange" type="checkbox"
-                                                  ng-model="slider.options.draggableRangeOnly"/><span
-                                            translate>Fix slider range</span></label>
-                                    <a href ng-click="TopIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <div id="grouping">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" data-ng-model="includeGroupings">
-                                        <strong><span translate>Grouping</span></strong>
-                                    </label>
-                                    <a href ng-click="TopIntro(3)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <div id="orgTypesSelection">
-                                <strong>
-                                    <span translate>Organisation Types</span>
-                                    <a href ng-click="TopIntro(4)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </strong>
-
-                                <multiselect class="input-xlarge multiselect" ng-model="selectedOrgCategories"
-                                             options="p.value as p.name for p in orgCategories"
-                                             header="{{'Organisation Types'|translate}}"
-                                             selected-header="{{'elements selected'|translate}}"
-                                             multiple="true"
-                                             enable-filter="false">
-                                </multiselect>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 col-lg-2" id="spenderRecipient">
-                            <strong>
-                                <div><span translate>Spender/Recipient</span> <a href ng-click="TopIntro(5)"><i
-                                        class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </div>
-                            </strong>
-
-                            <div class="radio" data-ng-repeat="orgType in orgTypes">
-                                <label>
-                                    <input type="radio" id="{{orgType.value}}" name="t"
-                                           ng-model="$parent.orgType" ng-value="orgType.value"/>
-                                    <span>{{orgType.name}}</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 col-lg-5">
-                            <div id="paymentTypes">
-                                <strong>
-                                    <div><span translate>Payment Types</span>
-                                        <a href ng-click="TopIntro(6)"><i class="fa fa-info-circle"
-                                                                          aria-hidden="true"></i></a>
-                                    </div>
-                                </strong>
-
-                                <div class="checkbox" data-ng-repeat="pType in typesText">
-                                    <label>
-                                        <input type="checkbox" name="pType"
-                                               ng-model="pType.checked"/><span translate>{{pType.text}}</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="fedStateSelection">
-                                <strong>
-                                    <div><span translate>Federal State</span>
-                                        <a href ng-click="TopIntro(7)"><i class="fa fa-info-circle"
-                                                                          aria-hidden="true"></i></a>
-                                    </div>
-                                </strong>
-                                <select ng-model="selectedFederalState"
-                                        ng-options="state.name for state in federalStates track by state.iso"
-                                        name="federalStateSelect" id="federalStateSelect">
-                                    <option value="">-</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-1 col-lg-1">
-                            <div id="rank">
-                                <div><span translate>Top</span>
-                                    <a href ng-click="TopIntro(8)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                </div>
-
-                                <select data-ng-model="rank"
-                                        ng-options="rank for rank in ranks"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a id="settingsBox"></a>
-            </div>
             <div class="panel panel-default" id="tabularData">
                 <div class="panel-heading">
                     <span translate>Tabular Data</span>

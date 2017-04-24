@@ -1,0 +1,53 @@
+<div class="source-list-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Change Settings</span>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <strong>
+                    <div translate>Periods</div>
+                </strong>
+                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                          rz-slider-options="slider.options"></rzslider>
+                <div class="checkbox">
+                    <label><input id="fixRange" type="checkbox"
+                                  ng-model="slider.options.draggableRangeOnly"/><span
+                            translate>Fix slider range</span></label>
+                </div>
+                <p class="small text-info" translate>Move the sliders to define a range</p>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <strong>
+                    <div translate>Payment Types</div>
+                </strong>
+                <div class="checkbox" data-ng-repeat="pType in typesText">
+                    <label>
+                        <input type="checkbox" name="pType"
+                               ng-model="pType.checked"/>{{pType.text}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <strong>
+                    <div translate>Organisation Types</div>
+                </strong>
+                <multiselect class="input-xlarge multiselect" ng-model="orgTypeSelection"
+                             options="p.value as p.name for p in orgTypes"
+                             header="{{'Organisation Types'|translate}}"
+                             selected-header="{{'elements selected'|translate}}"
+                             multiple="true"
+                             enable-filter="false">
+                </multiselect>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+        </div>
+    </div>
+</div>

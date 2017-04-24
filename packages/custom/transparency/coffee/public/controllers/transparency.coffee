@@ -2,7 +2,7 @@
 
 #* jshint -W098 *#
 angular.module 'mean.transparency'
-.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state, $rootScope, $q) ->
+.controller 'TransparencyController', ($scope, Global, Transparency, TPAService, gettextCatalog, $state, $rootScope, $q, $uibModal, $timeout ) ->
      $scope.global = Global
      $scope.package =
           name: 'transparency'
@@ -40,6 +40,24 @@ angular.module 'mean.transparency'
                inherit: false
                reload: true
 
+     $scope.showSettingsDialog = ->
+         parent = $scope
+         $uibModal.open(
+              templateUrl: 'transparency/views/mapSettingsDialog.html'
+              scope: $scope
+              size: 'lg'
+              controller: ($scope, $uibModalInstance) ->
+                   $scope.close = ->
+                        $scope.$parent.orgTypeSelection = $scope.orgTypeSelection
+                        $uibModalInstance.close()
+                   current = $scope.slider.options.draggableRangeOnly
+                   $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 100
+                   $timeout (-> $scope.slider.options.draggableRangeOnly = current), 120
+         )
+
+     $scope.getTotal = ->
+          $scope.mapData.reduce(((acc,val)->acc+val.amount), 0).toLocaleString()
+
      $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
      $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
 
@@ -65,7 +83,7 @@ angular.module 'mean.transparency'
 
      $scope.orgTypes = []
      $scope.orgTypeSelection = []
-     $scope.mapData = {}
+     $scope.mapData = []
      $scope.periods = []
      $scope.slider =
           from: 0

@@ -1,8 +1,8 @@
 'use strict'
 app = angular.module 'mean.transparency'
 
-app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder','$anchorScroll'
-($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder,$anchorScroll) ->
+app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettextCatalog','$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'DTColumnBuilder','$uibModal','$timeout'
+($scope, TPAService, $q, $state, gettextCatalog, $rootScope, DTOptionsBuilder, DTColumnDefBuilder,DTColumnBuilder, $uibModal, $timeout) ->
     tc = this
     dataPromise = $q.defer()
     $scope.td = {}
@@ -59,6 +59,22 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     $scope.selectedOrgCategories = [];
 
     $scope.goto = (l)-> $anchorScroll(l)
+
+    $scope.showSettingsDialog = ->
+        parent = $scope
+        $uibModal.open(
+            templateUrl: 'transparency/views/topSettingsDialog.html'
+            scope: $scope
+            size: 'lg'
+            controller: ($scope, $uibModalInstance) ->
+                $scope.close = ->
+                    $scope.$parent.orgType = $scope.orgType
+                    $scope.$parent.selectedOrgCategories = $scope.selectedOrgCategories
+                    $uibModalInstance.close()
+                current = $scope.slider.options.draggableRangeOnly
+                $timeout (-> $scope.slider.options.draggableRangeOnly = !current), 100
+                $timeout (-> $scope.slider.options.draggableRangeOnly = current), 120
+        )
 
     buildPieModel = ->
         $scope.pieData = []
@@ -256,7 +272,8 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
             {
                 name: d.data.key if not d.data.isGrouping
                 orgType: $scope.orgType
-                grouping: groupName if d.data.isGrouping
+                mediaGrp: "S:#{groupName}" if $scope.orgType is 'media' and d.data.isGrouping
+                orgGrp: "S:#{groupName}" if $scope.orgType is 'org' and d.data.isGrouping
                 from: $scope.periods[$scope.slider.from/5].period
                 to: $scope.periods[$scope.slider.to/5].period
                 fedState: $scope.selectedFederalState.iso if $scope.selectedFederalState

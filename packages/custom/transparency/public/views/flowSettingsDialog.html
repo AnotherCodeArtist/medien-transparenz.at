@@ -1,9 +1,13 @@
 <div class="source-list-modal">
     <div class="modal-header">
         <h3 class="modal-title">
-            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Select Events</span>
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Change Settings</span>
         </h3>
-
+        <div style="display: none">
+            <p translate>Payments according to §2 MedKF-TG (Media Cooperations)</p>
+            <p translate>Payments according to §4 MedKF-TG (Funding)</p>
+            <p translate>Payments according to §31 ORF-G (Charges)</p>
+        </div>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -17,6 +21,8 @@
                     </strong>
                     <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
                               rz-slider-options="slider.options"></rzslider>
+                    <p class="small text-info" translate=""><span class="ng-scope">Bewegen Sie die blauen Marker um den Zeitraum zu verändern</span>
+                    </p>
                 </div>
                 <div id="fixSliderRange">
                     <div class="checkbox">
@@ -39,7 +45,7 @@
                 <div class="checkbox" data-ng-repeat="pType in typesText">
                     <label>
                         <input type="checkbox" name="pType"
-                               ng-model="pType.checked"/>{{pType.text}}
+                               ng-model="pType.checked"/>{{pType.text | translate}}
                     </label>
                 </div>
 

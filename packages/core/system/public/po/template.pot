@@ -4,6 +4,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: views/flowSettingsDialog.html:24
+#: views/topSettingsDialog.html:13
+msgid "<span class=\"ng-scope\">Bewegen Sie die blauen Marker um den Zeitraum zu verändern</span>"
+msgstr ""
+
 #: views/grouping.html:89
 msgid "A group with this name already exists!"
 msgstr ""
@@ -56,27 +61,23 @@ msgstr ""
 msgid "An Overview of Public Money spent on Media-Cooperations and -Funding in Austria"
 msgstr ""
 
-#: views/about.html:35
-msgid "Are they involved?"
-msgstr ""
-
-#: views/index.html:29
+#: views/about.html:10
 msgid ""
 "As a consequence of ongoing discussions about potential misuse of tax-payers' money spent in advertising,\n"
-"            the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die\n"
-"            Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines\n"
-"            periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to\n"
-"            quarterly report on their spending in advertising and funding of media cooperations. Reported data is\n"
-"            published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site\n"
-"            tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get\n"
-"            the information relevant to them out of it."
+"                the Austrian Parliament has released the so called Media Transparency Act (\"Bundesverfassungsgesetz über die\n"
+"                Transparenz von Medienkooperationen sowie von Werbeaufträgen und Förderungen an Medieninhaber eines\n"
+"                periodischen Mediums und das KommAustria-Gesetz\") in 2011. This regulation requires certain organizations to\n"
+"                quarterly report on their spending in advertising and funding of media cooperations. Reported data is\n"
+"                published by the <a href=\"http://www.rtr.at\"> Rundfunk und Telekom Regulierungs GesmbH</a>. This web-site\n"
+"                tries to provide an easy-to-use interface to this very data so that all interested citizens are able to get\n"
+"                the information relevant to them out of it."
 msgstr ""
 
 #: views/uploadOrganisation.html:52
 msgid "Association"
 msgstr ""
 
-#: views/about.html:14
+#: views/about.html:35
 msgid "At a single glance checkout which organisations are the biggest spenders and which media companies benefit most from public money spent on advertising our by receiving public funding."
 msgstr ""
 
@@ -86,11 +87,11 @@ msgid "Attention"
 msgstr ""
 
 #: controllers/eventsController.js:51
-#: controllers/topEntriesController.js:374
+#: controllers/topEntriesController.js:398
 msgid "Austria"
 msgstr ""
 
-#: views/index.html:25
+#: views/about.html:6
 msgid "Background"
 msgstr ""
 
@@ -103,7 +104,7 @@ msgstr ""
 msgid "Begin of Event"
 msgstr ""
 
-#: views/flow.html:50
+#: views/flow.html:46
 msgid "Beneficiaries"
 msgstr ""
 
@@ -124,7 +125,9 @@ msgstr ""
 msgid "Chamber"
 msgstr ""
 
-#: views/selectEventsDialog.html:4
+#: views/flowSettingsDialog.html:4
+#: views/mapSettingsDialog.html:4
+#: views/topSettingsDialog.html:4
 msgid "Change Settings"
 msgstr ""
 
@@ -132,17 +135,17 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: controllers/topEntriesController.js:131
+#: controllers/topEntriesController.js:155
 #: directives/sankeyDirective.js:121
 #: directives/sankeyDirective.js:79
 msgid "Click for Details"
 msgstr ""
 
-#: views/top.html:33
+#: views/top.html:26
 msgid "Click on a segment of the pie chart to get more information on a particular organization"
 msgstr ""
 
-#: views/flow.html:114
+#: views/flow.html:110
 msgid "Click on the elements of the chart to find out more!"
 msgstr ""
 
@@ -190,11 +193,11 @@ msgstr ""
 
 #: controllers/flowController.js:886
 #: controllers/flowDetailController.js:205
-#: controllers/topEntriesController.js:337
+#: controllers/topEntriesController.js:361
 msgid "Display _MENU_ records"
 msgstr ""
 
-#: controllers/topEntriesController.js:174
+#: controllers/topEntriesController.js:198
 msgid "Display top spender or top recipient"
 msgstr ""
 
@@ -226,7 +229,7 @@ msgstr ""
 #: controllers/flowDetailController.js:127
 #: controllers/listControllers.js:273
 #: controllers/listControllers.js:82
-#: controllers/topEntriesController.js:192
+#: controllers/topEntriesController.js:216
 msgid "End tour"
 msgstr ""
 
@@ -275,7 +278,7 @@ msgid ""
 msgstr ""
 
 #: views/list.html:27
-#: views/top.html:126
+#: views/topSettingsDialog.html:81
 msgid "Federal State"
 msgstr ""
 
@@ -283,15 +286,15 @@ msgstr ""
 msgid "Federal state"
 msgstr ""
 
-#: views/flow.html:97
-#: views/flowSettingsDialog.html:24
-#: views/index.html:72
-#: views/top.html:64
+#: views/flow.html:93
+#: views/flowSettingsDialog.html:30
+#: views/mapSettingsDialog.html:17
+#: views/topSettingsDialog.html:19
 msgid "Fix slider range"
 msgstr ""
 
 #: controllers/flowController.js:115
-#: controllers/topEntriesController.js:165
+#: controllers/topEntriesController.js:189
 msgid "Fix slider range. With that it is possible to keep the range constant."
 msgstr ""
 
@@ -312,7 +315,7 @@ msgstr ""
 msgid "Fund"
 msgstr ""
 
-#: views/about.html:49
+#: views/about.html:56
 msgid "Further development of this Site is sponsored by netidee"
 msgstr ""
 
@@ -320,7 +323,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: views/about.html:7
+#: views/about.html:28
 msgid "Get an overview of how much money is actually spent every single quarter of the year. The statistics is split up in media cooperation and funding. You'll see this involves a lot of tay-payers' money!"
 msgstr ""
 
@@ -345,11 +348,11 @@ msgid "Group type"
 msgstr ""
 
 #: views/grouping.html:3
-#: views/top.html:73
+#: views/topSettingsDialog.html:28
 msgid "Grouping"
 msgstr ""
 
-#: views/flow.html:163
+#: views/flow.html:159
 msgid ""
 "Here we see the differences between every quarter and its corresponding quarter in the previous quarter.\n"
 "                                    This helps to identify significant changes, since spending usually follows an annual pattern.\n"
@@ -384,14 +387,6 @@ msgstr ""
 msgid "If you are interested in a specific organisation, you can search for it."
 msgstr ""
 
-#: views/about.html:29
-msgid "If you just want to see which <a ui-sref=\"listOrgs\">organizations</a> and <a ui-sref=\"listMedia\">media companies</a> are involved in this reporting, check out our lists!"
-msgstr ""
-
-#: views/about.html:36
-msgid "If you want to figure out whether some company or media cooperation is listed in these reports better use our search!"
-msgstr ""
-
 #: views/uploadOrganisation.html:104
 msgid "Ignored"
 msgstr ""
@@ -400,7 +395,7 @@ msgstr ""
 msgid "Impress"
 msgstr ""
 
-#: views/index.html:42
+#: views/about.html:23
 msgid "Imprint"
 msgstr ""
 
@@ -409,11 +404,11 @@ msgid "It all started with computer programming project as part of one our cours
 msgstr ""
 
 #: controllers/flowController.js:109
-#: controllers/topEntriesController.js:159
+#: controllers/topEntriesController.js:183
 msgid "It is possible to customize the pie chart. To do so, use the settings."
 msgstr ""
 
-#: controllers/topEntriesController.js:171
+#: controllers/topEntriesController.js:195
 msgid "It is possible to narrow down the results to specific organisation types"
 msgstr ""
 
@@ -429,7 +424,7 @@ msgstr ""
 msgid "It is possible to show specific events. Per default, all events are selected."
 msgstr ""
 
-#: controllers/topEntriesController.js:180
+#: controllers/topEntriesController.js:204
 msgid "It is possible to show the chart for a specific federal state."
 msgstr ""
 
@@ -453,7 +448,7 @@ msgstr ""
 msgid "Legend"
 msgstr ""
 
-#: views/about.html:21
+#: views/about.html:42
 msgid "Let's see how organisations distribute their money and where media companies get their money from! Use the filter to see what you are interested in."
 msgstr ""
 
@@ -510,8 +505,8 @@ msgstr ""
 msgid "Modify existing groups"
 msgstr ""
 
-#: views/flow.html:14
-#: views/flow.html:77
+#: views/flow.html:10
+#: views/flow.html:73
 msgid "Money Flow"
 msgstr ""
 
@@ -519,12 +514,12 @@ msgstr ""
 msgid "Money Flow over time"
 msgstr ""
 
-#: views/index.html:75
+#: views/mapSettingsDialog.html:20
 msgid "Move the sliders to define a range"
 msgstr ""
 
 #: controllers/flowController.js:112
-#: controllers/topEntriesController.js:162
+#: controllers/topEntriesController.js:186
 msgid "Move the sliders to define a range."
 msgstr ""
 
@@ -552,7 +547,7 @@ msgstr ""
 #: controllers/flowDetailController.js:124
 #: controllers/listControllers.js:270
 #: controllers/listControllers.js:79
-#: controllers/topEntriesController.js:189
+#: controllers/topEntriesController.js:213
 msgid "Next info"
 msgstr ""
 
@@ -612,10 +607,10 @@ msgstr ""
 msgid "Organisation Group"
 msgstr ""
 
-#: views/index.html:90
-#: views/index.html:94
-#: views/top.html:80
-#: views/top.html:86
+#: views/mapSettingsDialog.html:35
+#: views/mapSettingsDialog.html:39
+#: views/topSettingsDialog.html:35
+#: views/topSettingsDialog.html:41
 msgid "Organisation Types"
 msgstr ""
 
@@ -661,11 +656,11 @@ msgstr ""
 msgid "Other organisations"
 msgstr ""
 
-#: controllers/topEntriesController.js:125
+#: controllers/topEntriesController.js:149
 msgid "Others"
 msgstr ""
 
-#: views/about.html:6
+#: views/about.html:27
 msgid "Overview"
 msgstr ""
 
@@ -677,7 +672,7 @@ msgstr ""
 msgid "Payer"
 msgstr ""
 
-#: views/flow.html:32
+#: views/flow.html:28
 msgid "Payers"
 msgstr ""
 
@@ -686,11 +681,23 @@ msgstr ""
 msgid "Payment Type"
 msgstr ""
 
-#: views/flowSettingsDialog.html:33
+#: views/flowSettingsDialog.html:39
 #: views/flowdetail.html:42
-#: views/index.html:79
-#: views/top.html:111
+#: views/mapSettingsDialog.html:24
+#: views/topSettingsDialog.html:66
 msgid "Payment Types"
+msgstr ""
+
+#: views/flowSettingsDialog.html:7
+msgid "Payments according to §2 MedKF-TG (Media Cooperations)"
+msgstr ""
+
+#: views/flowSettingsDialog.html:9
+msgid "Payments according to §31 ORF-G (Charges)"
+msgstr ""
+
+#: views/flowSettingsDialog.html:8
+msgid "Payments according to §4 MedKF-TG (Funding)"
 msgstr ""
 
 #: views/overview.html:6
@@ -701,7 +708,7 @@ msgstr ""
 msgid "Per default the top spender based on your chosen payment types and period is selected."
 msgstr ""
 
-#: views/index.html:66
+#: views/mapSettingsDialog.html:11
 msgid "Periods"
 msgstr ""
 
@@ -731,7 +738,7 @@ msgstr ""
 #: controllers/flowDetailController.js:125
 #: controllers/listControllers.js:271
 #: controllers/listControllers.js:80
-#: controllers/topEntriesController.js:190
+#: controllers/topEntriesController.js:214
 msgid "Previous info"
 msgstr ""
 
@@ -740,8 +747,8 @@ msgid "Quarter"
 msgstr ""
 
 #: controllers/flowController.js:900
-#: controllers/topEntriesController.js:202
-#: controllers/topEntriesController.js:305
+#: controllers/topEntriesController.js:226
+#: controllers/topEntriesController.js:329
 msgid "Recipient"
 msgstr ""
 
@@ -782,9 +789,9 @@ msgstr ""
 msgid "Select Beneficiaries"
 msgstr ""
 
-#: views/flowSettingsDialog.html:4
 #: views/flowdetail.html:76
 #: views/selectEventsDialog.html:13
+#: views/selectEventsDialog.html:4
 msgid "Select Events"
 msgstr ""
 
@@ -806,24 +813,22 @@ msgstr ""
 msgid "Select by Tag"
 msgstr ""
 
-#: views/flow.html:149
-#: views/flow.html:167
+#: views/flow.html:145
+#: views/flow.html:163
 msgid "Select events"
 msgstr ""
 
-#: controllers/topEntriesController.js:183
+#: controllers/topEntriesController.js:207
 msgid "Select the numbers of elements in the pie chart"
 msgstr ""
 
 #: views/flowdetail.html:63
-#: views/index.html:57
-#: views/top.html:40
 msgid "Settings"
 msgstr ""
 
 #: controllers/flowController.js:885
 #: controllers/flowDetailController.js:204
-#: controllers/topEntriesController.js:336
+#: controllers/topEntriesController.js:360
 msgid "Showing page _PAGE_ of _PAGES_"
 msgstr ""
 
@@ -831,7 +836,7 @@ msgstr ""
 #: controllers/flowDetailController.js:126
 #: controllers/listControllers.js:272
 #: controllers/listControllers.js:81
-#: controllers/topEntriesController.js:191
+#: controllers/topEntriesController.js:215
 msgid "Skip info"
 msgstr ""
 
@@ -839,13 +844,17 @@ msgstr ""
 msgid "Source of Data"
 msgstr ""
 
-#: controllers/topEntriesController.js:199
-#: controllers/topEntriesController.js:304
+#: controllers/topEntriesController.js:223
+#: controllers/topEntriesController.js:328
 msgid "Spender"
 msgstr ""
 
-#: views/top.html:95
+#: views/topSettingsDialog.html:50
 msgid "Spender/Recipient"
+msgstr ""
+
+#: views/index.html:25
+msgid "Spending per Province"
 msgstr ""
 
 #: views/events.html:10
@@ -857,12 +866,12 @@ msgstr ""
 msgid "Styria"
 msgstr ""
 
-#: views/flow.html:177
-#: views/top.html:155
+#: views/flow.html:173
+#: views/top.html:32
 msgid "Tabular Data"
 msgstr ""
 
-#: views/flow.html:183
+#: views/flow.html:179
 msgid "Tabular Representation"
 msgstr ""
 
@@ -874,10 +883,10 @@ msgstr ""
 msgid "The legend describes the possible icons used for the charts."
 msgstr ""
 
-#: views/index.html:52
+#: views/index.html:36
 msgid ""
 "The map can be turned by holding the left mouse button and\n"
-"                        dragging within the frame. It is possible to zoom into the map by scrolling."
+"            dragging within the frame. It is possible to zoom into the map by scrolling."
 msgstr ""
 
 #: controllers/listControllers.js:64
@@ -888,7 +897,7 @@ msgstr ""
 msgid "The second chart shows differences between the money flow compared to the previous quarter. The highest and lowest value is highlighted. If available, events are shown."
 msgstr ""
 
-#: views/flow.html:146
+#: views/flow.html:142
 msgid ""
 "The total amount of money going from payer(s) to beneficiarie(s) per quarter.\n"
 "                                    The highest and the lowest values are highlighted. In case of events during a quarter, they are shown as well:"
@@ -898,16 +907,16 @@ msgstr ""
 msgid "This solution was the basis for the now available site"
 msgstr ""
 
-#: views/index.html:40
+#: views/about.html:21
 msgid "Thus, this web-site wants to contribute to making Open Government Data more popular in Austrian"
 msgstr ""
 
-#: views/flow.html:81
-#: views/flowSettingsDialog.html:13
+#: views/flow.html:77
+#: views/flowSettingsDialog.html:17
 msgid "Timeframe"
 msgstr ""
 
-#: views/flow.html:117
+#: views/flow.html:113
 msgid "Timeline"
 msgstr ""
 
@@ -919,20 +928,21 @@ msgstr ""
 msgid "To discover the flow in detail just click on the flow between an organisation and a media entry."
 msgstr ""
 
-#: views/top.html:141
+#: views/topSettingsDialog.html:96
 msgid "Top"
 msgstr ""
 
-#: views/about.html:13
+#: views/about.html:34
 msgid "Top Player"
 msgstr ""
 
-#: views/top.html:9
+#: views/top.html:5
 msgid "Top Spenders and Recipients"
 msgstr ""
 
+#: views/index.html:28
 #: views/overview.html:28
-#: views/top.html:16
+#: views/top.html:9
 msgid "Total"
 msgstr ""
 
@@ -953,7 +963,7 @@ msgid "Total amount of all entries"
 msgstr ""
 
 #: controllers/flowController.js:118
-#: controllers/topEntriesController.js:177
+#: controllers/topEntriesController.js:201
 msgid "Transfers are divided in different payment types. Select the types to display."
 msgstr ""
 
@@ -1001,11 +1011,9 @@ msgstr ""
 msgid "Vienna"
 msgstr ""
 
-#: views/about.html:10
-#: views/about.html:17
-#: views/about.html:24
-#: views/about.html:32
-#: views/about.html:39
+#: views/about.html:31
+#: views/about.html:38
+#: views/about.html:45
 msgid "View details »"
 msgstr ""
 
@@ -1013,15 +1021,11 @@ msgstr ""
 msgid "Vorarlberg"
 msgstr ""
 
-#: views/about.html:20
+#: views/about.html:41
 msgid "Where the money flows?"
 msgstr ""
 
-#: views/about.html:28
-msgid "Who's involved?"
-msgstr ""
-
-#: controllers/topEntriesController.js:168
+#: controllers/topEntriesController.js:192
 msgid "With groupings enabled single transfers will be taken together (e.g. to show umbrella organisations)"
 msgstr ""
 
@@ -1070,13 +1074,14 @@ msgid ""
 "                By combining organisations or media to groups you can aggregate their transfers on the <a href=\"/showflow\">payment flow page</a>."
 msgstr ""
 
-#: views/flow.html:45
-#: views/flow.html:63
+#: views/flow.html:41
+#: views/flow.html:59
 msgid "change selection"
 msgstr ""
 
-#: views/flow.html:72
-#: views/top.html:22
+#: views/flow.html:68
+#: views/index.html:33
+#: views/top.html:15
 msgid "change settings"
 msgstr ""
 
@@ -1084,17 +1089,18 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: views/index.html:95
-#: views/top.html:87
+#: views/mapSettingsDialog.html:40
+#: views/topSettingsDialog.html:42
 msgid "elements selected"
 msgstr ""
 
 #: controllers/flowController.js:881
-#: controllers/topEntriesController.js:332
+#: controllers/topEntriesController.js:356
 msgid "first"
 msgstr ""
 
-#: views/top.html:17
+#: views/index.html:29
+#: views/top.html:10
 msgid "from"
 msgstr ""
 
@@ -1103,19 +1109,19 @@ msgid "grant for the year 2015, the site developed further. With the help of the
 msgstr ""
 
 #: controllers/flowController.js:882
-#: controllers/topEntriesController.js:333
+#: controllers/topEntriesController.js:357
 msgid "last"
 msgstr ""
 
 #: controllers/flowController.js:880
 #: controllers/flowDetailController.js:202
-#: controllers/topEntriesController.js:331
+#: controllers/topEntriesController.js:355
 msgid "next"
 msgstr ""
 
 #: controllers/flowController.js:879
 #: controllers/flowDetailController.js:201
-#: controllers/topEntriesController.js:330
+#: controllers/topEntriesController.js:354
 msgid "previous"
 msgstr ""
 
@@ -1124,19 +1130,20 @@ msgid "public"
 msgstr ""
 
 #: controllers/flowController.js:884
-#: controllers/topEntriesController.js:335
+#: controllers/topEntriesController.js:359
 msgid "search"
 msgstr ""
 
-#: views/flow.html:125
+#: views/flow.html:121
 msgid "select events"
 msgstr ""
 
-#: views/flow.html:133
+#: views/flow.html:129
 msgid "show legend"
 msgstr ""
 
-#: views/top.html:17
+#: views/index.html:29
+#: views/top.html:10
 msgid "to"
 msgstr ""
 
@@ -1144,7 +1151,7 @@ msgstr ""
 msgid "zip-code"
 msgstr ""
 
-#: views/top.html:120
+#: views/topSettingsDialog.html:75
 msgid "{{pType.text}}"
 msgstr ""
 

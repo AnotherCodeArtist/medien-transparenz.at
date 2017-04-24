@@ -1,0 +1,112 @@
+<div class="source-list-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<span translate>Change Settings</span>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6 col-lg-6">
+                <div id="topSlider">
+                    <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                              rz-slider-options="slider.options"></rzslider>
+                    <p class="small text-info" translate=""><span class="ng-scope">Bewegen Sie die blauen Marker um den Zeitraum zu verändern</span></p>
+                </div>
+
+                <div id="fixSliderRange">
+                    <div class="checkbox">
+                        <label><input id="fixRange" type="checkbox"
+                                      ng-model="slider.options.draggableRangeOnly"/><span
+                                translate>Fix slider range</span></label>
+                        <!--a href ng-click="TopIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                    </div>
+                </div>
+                <div id="grouping">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-ng-model="$parent.includeGroupings">
+                            <strong><span translate>Grouping</span></strong>
+                        </label>
+                        <!--a href ng-click="TopIntro(3)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                    </div>
+                </div>
+                <div id="orgTypesSelection">
+                    <strong>
+                        <span translate>Organisation Types</span>
+                        <!--a href ng-click="TopIntro(4)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                    </strong>
+
+                    <multiselect class="input-xlarge multiselect" ng-model="selectedOrgCategories"
+                                 options="p.value as p.name for p in orgCategories"
+                                 header="{{'Organisation Types'|translate}}"
+                                 selected-header="{{'elements selected'|translate}}"
+                                 multiple="true"
+                                 enable-filter="false">
+                    </multiselect>
+                </div>
+            </div>
+            <div class="col-sm-2 col-lg-2" id="spenderRecipient">
+                <strong>
+                    <div><span translate>Spender/Recipient</span> <!--a href ng-click="TopIntro(5)"><i
+                            class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                    </div>
+                </strong>
+
+                <div class="radio" data-ng-repeat="orgType in $parent.orgTypes">
+                    <label>
+                        <input type="radio" id="{{orgType.value}}" name="t"
+                               ng-model="$parent.orgType" ng-value="orgType.value"/>
+                        <span>{{orgType.name}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-5 col-lg-5">
+                <div id="paymentTypes">
+                    <strong>
+                        <div><span translate>Payment Types</span>
+                            <!--a href ng-click="TopIntro(6)"><i class="fa fa-info-circle"
+                                                              aria-hidden="true"></i></a-->
+                        </div>
+                    </strong>
+
+                    <div class="checkbox" data-ng-repeat="pType in $parent.typesText">
+                        <label>
+                            <input type="checkbox" name="pType"
+                                   ng-model="pType.checked"/><span translate>{{pType.text}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="fedStateSelection">
+                    <strong>
+                        <div><span translate>Federal State</span>
+                            <!--a href ng-click="TopIntro(7)"><i class="fa fa-info-circle"
+                                                              aria-hidden="true"></i></a-->
+                        </div>
+                    </strong>
+                    <select ng-model="$parent.selectedFederalState"
+                            ng-options="state.name for state in $parent.federalStates track by state.iso"
+                            name="federalStateSelect" id="federalStateSelect">
+                        <option value="">-</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-sm-1 col-lg-1">
+                <div id="rank">
+                    <div><span translate>Top</span>
+                        <a href ng-click="TopIntro(8)"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    </div>
+
+                    <select data-ng-model="$parent.rank"
+                            ng-options="rank for rank in ranks"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+        </div>
+    </div>
+</div>
