@@ -701,11 +701,11 @@ app.controller 'FlowCtrl',['$scope','TPAService','$q','$interval','$state','gett
 
     $scope.selectedTypes = -> $scope.typesText.filter((t) -> t.checked).map (t) -> t.type
     $scope.getFrom = ->
-        if $scope.periods.length > 0
+        if $scope.periods && $scope.periods.length > 0
             "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
         else ""
     $scope.getTo = ->
-        if $scope.periods.length > 0
+        if $scope.periods && $scope.periods.length > 0
             "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
         else
             ""

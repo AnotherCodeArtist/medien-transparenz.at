@@ -58,8 +58,14 @@ angular.module 'mean.transparency'
      $scope.getTotal = ->
           $scope.mapData.reduce(((acc,val)->acc+val.amount), 0).toLocaleString()
 
-     $scope.getFrom = -> "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
-     $scope.getTo = -> "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+     $scope.getFrom = ->
+         if $scope.periods && $scope.periods.length > 0
+              "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
+         else ""
+     $scope.getTo = ->
+         if $scope.periods && $scope.periods.length > 0
+              "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
+         else ""
 
      change = (oldValue,newValue) ->
           console.log "Change: " + Date.now()

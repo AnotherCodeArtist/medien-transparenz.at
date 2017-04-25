@@ -26,11 +26,11 @@ app.controller 'TopEntriesCtrl', ['$scope', 'TPAService', '$q', '$state','gettex
     window.scrollTo 0, 0
 
     $scope.getFrom = ->
-        if $scope.periods.length > 0
+        if $scope.periods && $scope.periods.length > 0
             "Q#{$scope.periods[$scope.slider.from/5].quarter}/#{$scope.periods[$scope.slider.from/5].year}"
         else ""
     $scope.getTo = ->
-        if $scope.periods.length > 0
+        if $scope.periods && $scope.periods.length > 0
             "Q#{$scope.periods[$scope.slider.to/5].quarter}/#{$scope.periods[$scope.slider.to/5].year}"
         else ""
 
