@@ -7,7 +7,7 @@
                 </div>
             </div>
 
-            <h1 translate>Money Flow</h1>
+
             <!--p>Org-Groups: {{allOrganisationGroups}}</p-->
 
             <!--<div ng-show="org">
@@ -22,153 +22,157 @@
             </div-->
 
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" translate>Money Flow</div>
 
-        <div class="diagrams">
-            <div class="row flowLegend">
-                <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12 legendLeft">
-                    <h4 translate>Payers</h4>
-                    <div>
-                        <div ng-repeat="org in selectedItemsWithoutGroups(selectedOrganisations,selectedOrganisationGroups)">
-                            <i class="fa fa-credit-card" aria-hidden="true"></i> {{org.name}}
-                        </div>
-                        <div ng-repeat="group in selectedOrganisationGroups"
-                             uib-popover-html="groupMembersToHTML(group)"
-                             popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
-                            <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span class="badge">{{group.members.length}}</span>
-                        </div>
-                    </div>
-                    <a ng-click="showSelectPayers()" class="setting-btn">
-                        <i class="fa fa-sliders" aria-hidden="true"></i>
-                        <span translate>change selection</span>
-                    </a>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12  legendRight">
-                    <h4 translate>Beneficiaries</h4>
-                    <div>
-                        <div ng-repeat="org in selectedMediaWithoutGroups()">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{org.name}}
-                        </div>
-                        <div ng-repeat="group in selectedMediaGroups"
-                             uib-popover-html="groupMembersToHTML(group)"
-                             popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
-                            <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span class="badge">{{group.members.length}}</span>
-                        </div>
-                    </div>
-                    <a ng-click="showSelectBeneficiaries()" class="setting-btn">
-                        <i class="fa fa-sliders" aria-hidden="true"></i>
-                        <span translate>change selection</span>
-                    </a>
-                </div>
-                <div class="settings col-lg-12 col-md-12 col-sm-12 col-xs-12 legendLeft">
-                    <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
-                    <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG</div>
-                    <div>
-                    </div>
-                    <a ng-click="showSettingsDialog()" class="setting-btn">
-                        <i class="fa fa-sliders" aria-hidden="true"></i>
-                        <span translate>change settings</span>
-                    </a>
-                </div>
-            </div>
-            <uib-tabset active="activeTab">
-                <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
-                    <div class="timeframeSelection">
+                <div class="row flowLegend">
+                    <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12 legendLeft">
+                        <h4 translate>Payers</h4>
                         <div>
-                            <strong>
-                                <div><span translate>Timeframe</span>
-                                    <!--a href ng-click="FlowIntro(1);"><i class="fa fa-info-circle"
-                                                                        aria-hidden="true"></i></a-->
-                                </div>
-                            </strong>
-                        </div>
-                        <div class="row" ng-show="slider.to">
-
-                            <div id="flowSlider" class="col-sm-12 col-md-9 col-lg-9" >
-
-                                <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
-                                          rz-slider-options="slider.options"></rzslider>
+                            <div ng-repeat="org in selectedItemsWithoutGroups(selectedOrganisations,selectedOrganisationGroups)">
+                                <i class="fa fa-credit-card" aria-hidden="true"></i> {{org.name}}
                             </div>
-                            <div id="fixSliderRange" class="col-sm-12 col-md-3 col-lg-3">
-                                <div class="checkbox">
-                                    <label><input id="fixRange" type="checkbox"
-                                                  ng-model="slider.options.draggableRangeOnly"/><span
-                                            translate>Fix slider range</span></label>
-                                    <!--a href ng-click="FlowIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
-                                </div>
+                            <div ng-repeat="group in selectedOrganisationGroups"
+                                 uib-popover-html="groupMembersToHTML(group)"
+                                 popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
+                                <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span
+                                    class="badge">{{group.members.length}}</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div data-tpa-sankey data="flows" id="mychart" width="500px"
-                                 prog="progress" node-click="showDetails" link-click="showFlowDetails">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        <span translate>Click on the elements of the chart to find out more!</span>
-                    </div>
-                </uib-tab>
-                <uib-tab index="1" heading="{{'Timeline' | translate}}" select="timelineOpened()">
-                    <!--div class="alert alert-info" role="alert">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>
-                    </div-->
-                    <div class="pull-right selectEvents">
-                        <a ng-click="showEventSelectionDialog()" class="setting-btn">
+                        <a ng-click="showSelectPayers()" class="setting-btn">
                             <i class="fa fa-sliders" aria-hidden="true"></i>
-                            <span translate>select events</span>
-                        </a>
-                    </div>
-                    <div class="timelineLegend">
-                        <div>
-                            <a uib-popover-template="'transparency/views/flowLegend.html'"
-                               popover-placement="bottom-left" popover-trigger="'mouseenter'">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                <span translate>show legend</span></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="timeline col-md-12">
-                            <div tpa-timeline data="data" id="graph" class="aGraph"
-                                 get-current-language="getCurrentLanguage()" bar-click="barClicked"
-                                 events="events"></div>
-                            <svg id="timeline"></svg>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        <span translate>The total amount of money going from payer(s) to beneficiarie(s) per quarter.
-                                    The highest and the lowest values are highlighted. In case of events during a quarter, they are shown as well: </span>
-                        <a ng-click="showEventSelectionDialog()" class="setting-btn">
-                            <span translate>Select events</span>
+                            <span translate>change selection</span>
                         </a>
                     </div>
 
-                    <div class="row">
-                        <div class="quartercomparison col-md-12">
-                            <div tpa-quartercomparison data="annualComparisonData"
-                                 get-current-language="getCurrentLanguage()" bar-click="barClicked"
-                                 events="events"></div>
-                            <svg id="quarterComparison"></svg>
+                    <div class="col-lg-6 col-md-6 col col-sm-12 col-xs-12  legendRight">
+                        <h4 translate>Beneficiaries</h4>
+                        <div>
+                            <div ng-repeat="org in selectedMediaWithoutGroups()">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{org.name}}
+                            </div>
+                            <div ng-repeat="group in selectedMediaGroups"
+                                 uib-popover-html="groupMembersToHTML(group)"
+                                 popover-placement="bottom-left" popover-trigger="'mouseenter'" class="tpa-group">
+                                <i class="fa fa-object-group" aria-hidden="true"></i> {{group.name}} <span
+                                    class="badge">{{group.members.length}}</span>
+                            </div>
                         </div>
+                        <a ng-click="showSelectBeneficiaries()" class="setting-btn">
+                            <i class="fa fa-sliders" aria-hidden="true"></i>
+                            <span translate>change selection</span>
+                        </a>
                     </div>
-                    <div class="caption">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        <span translate>Here we see the differences between every quarter and its corresponding quarter in the previous quarter.
+                    <div class="settings col-lg-12 col-md-12 col-sm-12 col-xs-12 legendLeft">
+                        <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}
+                        </div>
+                        <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG</div>
+                        <div>
+                        </div>
+                        <a ng-click="showSettingsDialog()" class="setting-btn">
+                            <i class="fa fa-sliders" aria-hidden="true"></i>
+                            <span translate>change settings</span>
+                        </a>
+                    </div>
+                </div>
+                <uib-tabset active="activeTab">
+                    <uib-tab index="0" heading="{{'Money Flow' | translate}}" select="flowOpened()">
+                        <div class="timeframeSelection">
+                            <div>
+                                <strong>
+                                    <div><span translate>Timeframe</span>
+                                        <!--a href ng-click="FlowIntro(1);"><i class="fa fa-info-circle"
+                                                                            aria-hidden="true"></i></a-->
+                                    </div>
+                                </strong>
+                            </div>
+                            <div class="row" ng-show="slider.to">
+
+                                <div id="flowSlider" class="col-sm-12 col-md-9 col-lg-9">
+
+                                    <rzslider rz-slider-model="slider.from" rz-slider-high="slider.to"
+                                              rz-slider-options="slider.options"></rzslider>
+                                </div>
+                                <div id="fixSliderRange" class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="checkbox">
+                                        <label><input id="fixRange" type="checkbox"
+                                                      ng-model="slider.options.draggableRangeOnly"/><span
+                                                translate>Fix slider range</span></label>
+                                        <!--a href ng-click="FlowIntro(2)"><i class="fa fa-info-circle" aria-hidden="true"></i></a-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="sankeyChart col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div data-tpa-sankey data="flows" id="mychart" width="500px"
+                                     prog="progress" node-click="showDetails" link-click="showFlowDetails">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            <span translate>Click on the elements of the chart to find out more!</span>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="{{'Timeline' | translate}}" select="timelineOpened()">
+                        <!--div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            <span translate>The first chart on that page shows the flow of money over the available period of time. The highest and the lowest value is highlighted. In case of events during a quarter, the events are emphasized.</span>
+                        </div-->
+                        <div class="pull-right selectEvents">
+                            <a ng-click="showEventSelectionDialog()" class="setting-btn">
+                                <i class="fa fa-sliders" aria-hidden="true"></i>
+                                <span translate>select events</span>
+                            </a>
+                        </div>
+                        <div class="timelineLegend">
+                            <div>
+                                <a uib-popover-template="'transparency/views/flowLegend.html'"
+                                   popover-placement="bottom-left" popover-trigger="'mouseenter'">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    <span translate>show legend</span></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="timeline col-md-12">
+                                <div tpa-timeline data="data" id="graph" class="aGraph"
+                                     get-current-language="getCurrentLanguage()" bar-click="barClicked"
+                                     events="events"></div>
+                                <svg id="timeline"></svg>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            <span translate>The total amount of money going from payer(s) to beneficiarie(s) per quarter.
+                                    The highest and the lowest values are highlighted. In case of events during a quarter, they are shown as well: </span>
+                            <a ng-click="showEventSelectionDialog()" class="setting-btn">
+                                <span translate>Select events</span>
+                            </a>
+                        </div>
+
+                        <div class="row">
+                            <div class="quartercomparison col-md-12">
+                                <div tpa-quartercomparison data="annualComparisonData"
+                                     get-current-language="getCurrentLanguage()" bar-click="barClicked"
+                                     events="events"></div>
+                                <svg id="quarterComparison"></svg>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            <span translate>Here we see the differences between every quarter and its corresponding quarter in the previous quarter.
                                     This helps to identify significant changes, since spending usually follows an annual pattern.
                                     The highest and lowest values are highlighted. If available, events are shown:</span>
-                        <a ng-click="showEventSelectionDialog()" class="setting-btn">
-                            <span translate>Select events</span>
-                        </a>
-                    </div>
-                </uib-tab>
-            </uib-tabset>
-        </div>
+                            <a ng-click="showEventSelectionDialog()" class="setting-btn">
+                                <span translate>Select events</span>
+                            </a>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
 
+        </div>
 
         <div class="panel panel-default" id="tabularData">
             <div class="panel-heading">

@@ -13,22 +13,22 @@
         <section class="container">
             <div class="intro">
                 <div class="page-header">
-                    <img src="/transparency/assets/img/Logo_oben.png" />
-
-                        <p class="hidden-xs"><br/><span translate>An Overview of Public Money spent on Media-Cooperations and -Funding in Austria</span>
-                        </p>
 
                 </div>
             </div>
         </section>
     </div>
 
-    <h2 translate>Spending per Province</h2>
-    <div class="diagrams map">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span translate>Spending per Province</span>
+        </div>
+
         <div class="tpaLegend">
             <div><span translate>Total</span>: {{getTotal()}} €</div>
-            <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
-            <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG </div>
+            <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}
+            </div>
+            <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG</div>
             <a ng-click="showSettingsDialog()" class="setting-btn">
                 <i class="fa fa-sliders" aria-hidden="true"></i>
                 <span translate>change settings</span>
@@ -37,8 +37,9 @@
         <p class=" caption small text-info" translate>The map can be turned by holding the left mouse button and
             dragging within the frame. It is possible to zoom into the map by scrolling.</p>
         <div class="austrianMap" austrian-map="austrian-map" data="mapData" id="webgl"></div>
+        <br/>
+        <br/>
     </div>
-    <br/>
-    <br/>
+
 
 </div>

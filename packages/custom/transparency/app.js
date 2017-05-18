@@ -122,6 +122,8 @@ Transparency.register(function(app, auth, database) {
   Transparency.aggregateAsset('css', '../lib/oi.select/dist/select.min.css');
   Transparency.aggregateAsset('css', '../lib/intro.js/minified/introjs.min.css');
   Transparency.aggregateAsset('css', '../lib/angular-directives-general/demo/multiselect/style.css');
+  Transparency.aggregateAsset('css', 'bootstrap6.css');
+  Transparency.aggregateAsset('css', 'stylesheet_overwrite.css',{weight:10});
   Transparency.aggregateAsset('js', '../lib/ng-file-upload/ng-file-upload.js',{weight:-5});
   Transparency.aggregateAsset('js', '../lib/d3/d3.js',{weight:-4});
   Transparency.aggregateAsset('js', '../lib/intro.js/intro.js',{weight:-5});

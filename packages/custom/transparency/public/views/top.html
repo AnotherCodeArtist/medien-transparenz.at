@@ -1,32 +1,33 @@
 <section class="container">
     <div data-ng-controller="TopEntriesCtrl as topCtrl">
         <div ng-intro-options="IntroOptions" ng-intro-method="TopIntro" ng-intro-autostart="false">
-
-            <h1 translate>Top Spenders and Recipients</h1>
-            <div class="pie">
-                <div class="tpaLegend">
-                    <div class="header">{{selectedFederalStateName()}}</div>
-                    <div><span translate>Total</span>: {{total()}} €</div>
-                    <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}</div>
-                    <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG </div>
-                    <div>Top {{rank}} {{selectedOrgType()|translate}}</div>
-                    <a ng-click="showSettingsDialog()" class="setting-btn">
-                        <i class="fa fa-sliders" aria-hidden="true"></i>
-                        <span translate>change settings</span>
-                    </a>
-                </div>
-                <tpa-pie-chart id="myPie" data="pieData"
-                               x="x" y="y" show-legend="false"
-                               tooltip-fn="toolTipContentFunction"
-                               go-fn="go"
-                               prevent-click-fn="preventClickForOthers"
-                ></tpa-pie-chart>
-                <div ng-hide="error" class="hint">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                    <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
+            <div class="panel panel-default">
+                <div class="panel-heading" translate>Top Spenders and Recipients</div>
+                <div class="pie">
+                    <div class="tpaLegend">
+                        <div class="header">{{selectedFederalStateName()}}</div>
+                        <div><span translate>Total</span>: {{total()}} €</div>
+                        <div><span translate>from </span>&nbsp;{{getFrom()}}&nbsp;<span translate>to </span>&nbsp;{{getTo()}}
+                        </div>
+                        <div ng-repeat="t in selectedTypes()">§{{t}} MedKF-TG</div>
+                        <div>Top {{rank}} {{selectedOrgType()|translate}}</div>
+                        <a ng-click="showSettingsDialog()" class="setting-btn">
+                            <i class="fa fa-sliders" aria-hidden="true"></i>
+                            <span translate>change settings</span>
+                        </a>
+                    </div>
+                    <tpa-pie-chart id="myPie" data="pieData"
+                                   x="x" y="y" show-legend="false"
+                                   tooltip-fn="toolTipContentFunction"
+                                   go-fn="go"
+                                   prevent-click-fn="preventClickForOthers"
+                    ></tpa-pie-chart>
+                    <div ng-hide="error" class="hint">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span translate>Click on a segment of the pie chart to get more information on a particular organization</span>
+                    </div>
                 </div>
             </div>
-
             <div class="panel panel-default" id="tabularData">
                 <div class="panel-heading">
                     <span translate>Tabular Data</span>
