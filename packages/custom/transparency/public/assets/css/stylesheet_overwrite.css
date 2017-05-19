@@ -27,7 +27,7 @@
     border-color: #f4f4f4;
     margin-bottom: 10px;
     margin-top: 0px;
-    background-image: url(../media/Header_small.png);
+    background-image: url(/transparency/assets/media/Header_small.png);
     background-color: white;
     background-repeat: no-repeat;
     background-size:500px;
@@ -53,7 +53,7 @@
     border-color: #f4f4f4;
     margin-bottom: 10px;
     margin-top: 0;
-    background-image: url(../media/Header_small.png);
+    background-image: url(/transparency/assets/media/Header_small.png);
     background-color: white;
     background-repeat: no-repeat;
     background-size:500px;
@@ -74,7 +74,7 @@
     border-color: #f4f4f4;
     margin-bottom: 10px;
     
-    background-image: url(../media/Header_small.png);
+    background-image: url(/transparency/assets/media/Header_small.png);
     
     background-repeat: no-repeat;
     background-size:80%;
@@ -99,7 +99,7 @@
     border-color: #f4f4f4;
     margin-bottom: 10px;
     /*margin-top: -30px;*/
-    background-image: url(../media/Header.png);
+    background-image: url(/transparency/assets/media/Header.png);
     background-color: white;
     background-repeat: no-repeat;
     background-size:80%;
@@ -122,7 +122,7 @@
     margin-bottom: 10px;
     margin-top: 0px;
     border-color: #f4f4f4;
-    background-image: url(../media/Header.png);
+    background-image: url(/transparency/assets/media/Header.png);
     background-color: white;
     background-repeat: no-repeat;
     background-size:80%;
