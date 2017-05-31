@@ -5,39 +5,39 @@
     background-image: -webkit-radial-gradient(10% 0, farthest-side ellipse, #bdd1e9   20%, #ddd);
     background-image: -moz-radial-gradient(10% 0, farthest-side ellipse,  #bdd1e9   20%, #ddd);
     background-attachment: fixed, fixed;
-    
+
 }
 .content{
     margin-top: 60px;
 }
 .page-header {
-  padding-bottom: 0px;
-  margin: 0px 0 0px;
-  border-bottom-style: none;
-  color:antiquewhite;
+    padding-bottom: 0px;
+    margin: 0px 0 0px;
+    border-bottom-style: none;
+    color:antiquewhite;
 }
 
 
 @media (min-width: 250px) {
-.intro {
-    padding-top: 40px;
-    height: 85px;
-    width: auto;
-    border-radius: 0 0 15px 15px;
-    border-color: #f4f4f4;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    background-image: url(/transparency/assets/media/Header_small.png);
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size:500px;
+    .intro {
+        padding-top: 40px;
+        height: 85px;
+        width: auto;
+        border-radius: 0 0 15px 15px;
+        border-color: #f4f4f4;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        background-image: url(/transparency/assets/media/Header_small.png);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size:500px;
     }
     .well{
         font-size: 15pt;
-        
+
     }
     .panel-heading {
-       font-size: 10pt;
+        font-size: 10pt;
     }
     td{
         font-size: 8pt;
@@ -46,67 +46,67 @@
 }
 
 @media (min-width: 500px) {
-.intro {
-    height: 85px;
-    width: auto;
-    border-radius: 0 0 15px 15px;
-    border-color: #f4f4f4;
-    margin-bottom: 10px;
-    margin-top: 0;
-    background-image: url(/transparency/assets/media/Header_small.png);
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size:500px;
+    .intro {
+        height: 85px;
+        width: auto;
+        border-radius: 0 0 15px 15px;
+        border-color: #f4f4f4;
+        margin-bottom: 10px;
+        margin-top: 0;
+        background-image: url(/transparency/assets/media/Header_small.png);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size:500px;
     }
     td{
         font-size: 9pt;
     }
-    
+
 }
 
 
 @media (min-width: 768px) {
-.intro {
-    padding-top: 40px;
-    height: 90px;
-    width: auto;
-    border-radius: 0 0 15px 15px;
-    border-color: #f4f4f4;
-    margin-bottom: 10px;
-    
-    background-image: url(/transparency/assets/media/Header_small.png);
-    
-    background-repeat: no-repeat;
-    background-size:80%;
-        
-    
+    .intro {
+        padding-top: 40px;
+        height: 90px;
+        width: auto;
+        border-radius: 0 0 15px 15px;
+        border-color: #f4f4f4;
+        margin-bottom: 10px;
+
+        background-image: url(/transparency/assets/media/Header_small.png);
+
+        background-repeat: no-repeat;
+        background-size:80%;
+
+
     }
     .well{
         font-size: 20pt;
     }
     .panel-heading {
-       font-size: 15pt;
+        font-size: 15pt;
     }
 }
 
 
 @media (min-width: 992px) {
-.intro {
-    padding-top: 40px;
-    height: 120px;
-    width: auto;
-    border-radius: 0 0 15px 15px;
-    border-color: #f4f4f4;
-    margin-bottom: 10px;
-    /*margin-top: -30px;*/
-    background-image: url(/transparency/assets/media/Header.png);
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size:80%;
-    
+    .intro {
+        padding-top: 40px;
+        height: 120px;
+        width: auto;
+        border-radius: 0 0 15px 15px;
+        border-color: #f4f4f4;
+        margin-bottom: 10px;
+        /*margin-top: -30px;*/
+        background-image: url(/transparency/assets/media/Header.png);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size:80%;
+
     }
     .panel-heading {
-       font-size: 15pt;
+        font-size: 15pt;
     }
     td{
         font-size: 10pt;
@@ -114,22 +114,22 @@
 }
 
 @media (min-width: 1200px){
-   .intro {
-    padding-top: 10px;
-    height: 140px;
-    width: auto;
-    border-radius: 0 0 15px 15px;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    border-color: #f4f4f4;
-    background-image: url(/transparency/assets/media/Header.png);
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size:80%;
-    
-    } 
+    .intro {
+        padding-top: 10px;
+        height: 140px;
+        width: auto;
+        border-radius: 0 0 15px 15px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        border-color: #f4f4f4;
+        background-image: url(/transparency/assets/media/Header.png);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size:80%;
+
+    }
     .panel-heading {
-       font-size: 20pt;
+        font-size: 20pt;
     }
 }
 
@@ -137,7 +137,7 @@
     color:antiquewhite;
 }
 .navbar-inverse .navbar-nav > li > a {
-     color:antiquewhite;
+    color:antiquewhite;
 }
 
 .panel {
@@ -165,11 +165,11 @@
 section.container{
     padding-top: px;
     padding-left: 0px !important;
-    
+
 }
 .intro{
-        padding-left: 0px !important;
-    }
+    padding-left: 0px !important;
+}
 .icon {
     width: 40px;
     height: 40px;
@@ -191,5 +191,21 @@ section.container{
 .row {
     margin-left: 0;
     margin-right: 0;
-    margin:0;
+
+}
+.btn-default{
+    border-width: 1px !important;
+}
+li.btn{
+    background-color: rgb(102, 183, 55);
+}
+a.pull-right.btn{
+    color: white;
+}
+.panel-heading.isCollapsed{
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.badge{
+    background-color: rgb(102, 183, 55);
 }
