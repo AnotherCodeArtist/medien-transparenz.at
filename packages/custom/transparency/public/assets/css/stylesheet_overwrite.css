@@ -191,5 +191,21 @@ section.container{
 .row {
     margin-left: 0;
     margin-right: 0;
-    margin:0;
+
+}
+.btn-default{
+   border-width: 1px !important;
+}
+li.btn{
+    background-color: rgb(102, 183, 55);
+}
+a.pull-right.btn{
+    color: white;
+}
+.panel-heading.isCollapsed{
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.badge{
+    background-color: rgb(102, 183, 55);
 }
