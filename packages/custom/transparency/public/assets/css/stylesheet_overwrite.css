@@ -133,6 +133,9 @@
     }
 }
 
+div.intro{
+    margin-right: 15px;
+}
 .navbar-inverse .navbar-brand  {
     color:antiquewhite;
 }
