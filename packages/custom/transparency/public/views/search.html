@@ -15,7 +15,7 @@
 
         <div ng-show="result">
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" ng-click="orgCollapse = !orgCollapse"><span translate>Hits for Organisations</span>
+                <div class="panel-heading {{orgCollapse ? 'isNotCollapsed':'isCollapsed'}}"><a href="#" ng-click="orgCollapse = !orgCollapse"><span translate>Hits for Organisations</span>
                     <span class="badge badge-important">{{result.org.length}}</span></a>
                     <a href="#" class="btn pull-right" ng-click="orgCollapse = !orgCollapse"><i
                             class="glyphicon {{!orgCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" ng-click="mediaCollapse = !mediaCollapse"><span translate>Hits for Media</span>
+                <div class="panel-heading {{mediaCollapse ? 'isNotCollapsed':'isCollapsed'}}"><a href="#" ng-click="mediaCollapse = !mediaCollapse"><span translate>Hits for Media</span>
                     <span class="badge badge-important">{{result.media.length}}</span></a>
                     <a href="#" class="btn pull-right" ng-click="mediaCollapse = !mediaCollapse"><i
                             class="glyphicon {{!mediaCollapse ? 'glyphicon-chevron-up':'glyphicon-chevron-down'}}"></i></a>
