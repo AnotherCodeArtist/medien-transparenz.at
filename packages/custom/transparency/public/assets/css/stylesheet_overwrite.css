@@ -219,6 +219,10 @@ span.label.label-primary{
 .panel-heading a{
     color: antiquewhite;
 }
+.btn-default{
+    color: darkgreen;
+}
+
 button.btn.btn-default{
     border-width: 1px;
 
