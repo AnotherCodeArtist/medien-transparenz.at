@@ -193,3 +193,38 @@ section.container{
     margin-right: 0;
     margin:0;
 }
+
+div.panel-heading.isCollapsed{
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+}
+.badge{
+    background-color: white;
+}
+span.badge{
+    background-color: antiquewhite !important;
+}
+
+span.label.label-default{
+    background-color: lightgrey;
+    color: black;
+    font-weight: normal;
+    font-size: small;
+}
+span.label.label-primary{
+    font-weight: normal;
+    font-size: small;
+    
+}
+.panel-heading a{
+    color: antiquewhite;
+}
+button.btn.btn-default{
+    border-width: 1px;
+
+}
+
+a.btn.btn-default{
+    border-width: 0px;
+    color: antiquewhite;
+}
