@@ -6,7 +6,7 @@ import * as http from 'https';
 import * as fs from 'fs';
 import * as iconv from 'iconv-lite';
 
-const quarter = 20164;
+const quarter = 20171;
 
 const previousQuarter = (quarter) => {
   let pq = quarter-1;
@@ -18,7 +18,7 @@ const previousQuarter = (quarter) => {
 
 
 const download = () => http.get(
-    "https://data.rtr.at/api/v1/tables/MedKFTGBekanntgabe.json?quartal=" + quarter + "&size=0",
+    "https://data.rtr.at/api/v1/tables/MedKFTGBekanntgabe.json?quartal=" + quarter + "&leermeldung=0&page=0&size=0",
     res => {
         let rawData = "";
         res.on('data', (chunk) => {rawData += chunk});
