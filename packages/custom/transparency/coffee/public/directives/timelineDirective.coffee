@@ -41,17 +41,18 @@ app.directive 'tpaTimeline', ($rootScope, $window) ->
                               if (str.indexOf '.') is -1
                                    label += "/Q1"
 
-                              color = "steelblue"
+                              color = "#0084F4"
                               if (transfer[1] is min)
-                                   color = "lightgreen"
-                              else if (transfer[1] is max)
-                                   color = "lightcoral"
+                                   color = "green"
+                              if (transfer[1] is max)
+                                   color = "red"
+                              #color = "red"
 
                               result[0].values.push {
                                    label: label,
                                    value: transfer[1],
                                    color: color,
-                                   class: 'theBar'
+                                   class: "theBar"
                               }
                     result
 

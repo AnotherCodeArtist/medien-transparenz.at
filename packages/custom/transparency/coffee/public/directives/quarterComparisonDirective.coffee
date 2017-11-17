@@ -50,11 +50,11 @@ app.directive 'tpaQuartercomparison', ($rootScope, $window) ->
                                         }
                                    else
                                         difference = valueQuarter - valuePreviousQuarter
-                                        color = 'steelblue'
+                                        color = '#0084F4'
                                         if difference is min
-                                             color = 'lightgreen'
-                                        else if difference is max
-                                             color = 'lightcoral'
+                                             color = 'green'
+                                        if difference is max
+                                             color = 'red'
                                         result[0].values.push {
                                              label: $scope.data[i].key + "/Q" + quarter
                                              value: difference
