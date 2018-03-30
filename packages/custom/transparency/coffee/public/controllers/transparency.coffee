@@ -6,6 +6,7 @@ angular.module 'mean.transparency'
      $scope.global = Global
      $scope.package =
           name: 'transparency'
+     $scope.typesText = []
 
      stateName = "index"
      fieldsToStore = ['slider','periods','typesText', 'orgTypes', 'orgTypeSelection']
