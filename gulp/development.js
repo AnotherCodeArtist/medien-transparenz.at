@@ -103,7 +103,7 @@ gulp.task('devServe', ['env:development'], function () {
       '**/.bower-*',
       '**/tests'
     ],
-    nodeArgs: ['--debug'],
+    nodeArgs: ['--inspect'],
     stdout: false
   }).on('readable', function() {
     this.stdout.on('data', function(chunk) {
