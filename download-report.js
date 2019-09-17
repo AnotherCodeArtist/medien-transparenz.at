@@ -6,7 +6,7 @@ import * as http from 'https';
 import * as fs from 'fs';
 import * as iconv from 'iconv-lite';
 
-const quarter = 20191;
+const quarter = 20192;
 
 const previousQuarter = (quarter) => {
   let pq = quarter-1;
