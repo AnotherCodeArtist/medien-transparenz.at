@@ -184,7 +184,7 @@ lineToTransfer = (line, feedback) ->
     #console.log "Result: #{m} for line #{line}"
     if m
         transfer = new Transfer()
-        transfer.organisation = m[1].replace '""','"'
+        transfer.organisation = m[1].replace /""/g,'"'
         transfer.year = parseInt m[2]
         transfer.quarter = parseInt m[3]
         transfer.transferType = parseInt m[4]
