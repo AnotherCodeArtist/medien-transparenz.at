@@ -1,5 +1,7 @@
 # medien-transparenz.at
 
+**DEPRICATED**: Please see [https://gitlab.com/medientransparenz/medien-transparenz.at](https://gitlab.com/medientransparenz/medien-transparenz.at) for the latest version of this software.
+
 This is the repository of the web-site [www.medien-transparenz.at](www.medien-transparenz.at). The goal of this platform is to 
 interactively visualize publicly available data records that are quarterly published by [KommAustria](https://www.rtr.at/en/rtr/OrganeKommAustria).
 Therefore this project is one example of Open Government Data Applications in Austria
